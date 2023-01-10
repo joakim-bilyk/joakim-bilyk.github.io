@@ -1,0 +1,101 @@
+---
+title: "Homework (QRM)"
+output:
+  html_document:
+    toc: false
+    toc_float: true
+---
+
+# Introduction
+
+# Weeks {.tabset}
+
+## Week 1
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Introduction; risk factors and loss distributions; coherent risk measures: MFE Ch. 2.
+ * VaR and expected shortfall: MFE Ch. 2, particularly Sec. 2.3. (For discussion of confidence bounds, see HL notes.)
+
+### Theory
+
+### Exercises
+
+## Week 2
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Var-Cov method, simulation, importance sampling and bootstrap. For the Var-Cov method, see MFE Sec. 9.2. For importance sampling and bootstrap, see the supplementary reading in Absalon.
+ * Extreme value theory: MFE Ch. 5 or alternative reading in HL (suggested for this part).
+
+### Theory
+
+### Exercises
+
+## Week 3
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Spherical and elliptical distributions: MFE Sec. 6.3.
+ * Spherical and elliptical distributions, cont.; introduction to copulas.
+
+### Theory
+
+### Exercises
+
+## Week 4
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Copulas: MFE Sec. 7.1-7.5 (Sklar's theorem, Frechet bounds).
+ * Copulas cont. (Transformations; examples; Archimedean copulas).
+
+### Theory
+
+### Exercises
+
+## Week 5
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Copulas cont. (simulating Archimedean copulas, statistical methods, measures of dependence).
+ * Credit risk: the Merton model. MFE Ch. 10, particularly Sec. 10.3. [This lecture will only last two hours.]
+
+### Theory
+
+### Exercises
+
+## Week 6
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Portfolio credit risk: MFE Ch. 11, specifically Sections 11.1-11.3.
+ * Portfolio credit risk, cont. [This lecture will only last two hours.]
+
+### Theory
+
+### Exercises
+
+## Week 7
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Intro. to operational risk. Stochastic processes in risk management: stochastic models for operational risk; financial time series models. Connections to non-life insurance models and estimates (last lecture).
+
+### Theory
+
+### Exercises

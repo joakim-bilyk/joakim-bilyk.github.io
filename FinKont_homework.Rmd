@@ -1,0 +1,173 @@
+---
+title: "Homework (FinKont)"
+output:
+  html_document:
+    toc: false
+    toc_float: true
+    code_folding: hide
+---
+
+```{r, include=FALSE, results = 'hide'}
+library(ggplot2)
+library(dplyr)
+```
+
+
+# Introduction
+
+# Weeks {.tabset}
+
+## Week 1
+
+### Material
+
+  * Brownian motion (Chapter 4.1)
+  * Conditional expectation (Appendix B.5) 
+  * Filtration (Appendix B.3 and Chapter 4.2)
+  * Martingales (Appendix C.1 and Chapter 4.4)
+  * Introduction (Chapter 1)
+  * Discrete time models (Chapter 2 and 3)
+
+### Theory
+
+>**Definition 4.1.** *(Brownian motion)* A stochastic process $W$ is called a **Brownian motion** or **Wiener process** if the following conditions hold
+>
+> 1. $W_0=0$.
+> 2. The process $W$ has independent increments, i.e. if $r<s\le t< u$ then $W_u-W_t$ and $W_s-W_r$ are independent random variables.
+> 3. For $s<t$ the random variable $W_t-W_s$ has the Gaussian distribution $\mathcal{N}(0,t-s)$.
+> 4. $W$ has continuous trajectories i.e. $s\mapsto W(s;\omega)$ i continuous for all $\omega \in\Omega$.
+
+```{r}
+#Example of trajectory for BM
+set.seed(1)
+t <- 0:1000
+N <- rnorm(
+  n = length(t)-1, #initial value = 0
+  mean = 0, #incements mean = 0
+  sd = sqrt(t[2:length(t)] - t[1:(length(t)-1)]) #increment sd = sqrt(t-s)
+)
+W <- c(0,cumsum(N))
+```
+```{r,echo=FALSE,out.width= "50%", out.extra='style="float:right; padding:10px"',include=TRUE}
+data.frame(t = t, W = W) %>%
+  ggplot() +
+  geom_line(aes(x=t,y=W)) +
+  labs(title = "Realisation of a Brownian motion") +
+  theme_bw() +
+  theme(axis.text = element_text(size = 15),
+        title = element_text(size = 18))
+```
+
+### Exercises
+
+**Probability exercises**
+
+Let $(W(t))_{t\ge}$ be a Brownian motion (Björk, Definition 4.1).
+
+**Exercise 1.** Show that the following processes also are Brownian motions.
+
+ i. $(-W(t))_{t\ge 0}$ (symmetry)
+ ii. For any $s\ge 0$, $(W(t+s)-W(s))_{t\ge 0}$ (time-homogeneity).
+ iii. For every $c>0$, $(cW(t/c^2))_{t\ge 0}$ (scaling).
+
+<details>
+<summary>**Solutions (i).**</summary>
+
+By assumption $W$ is a Brownian motion and so it follows that
+
+$$
+-W_0=-1\cdot 0=0.
+$$
+
+Furthermore, for $r<s\le t< u$ it holds that $W_u-W_t$ and $W_s-W_r$ is independent. By transformation invariance of the independence property $-(W_u-W_t)$ and $-(W_s-W_r)$ is independent.
+
+</details>
+<details>
+<summary>**Solutions (ii).**</summary>
+
+
+
+</details>
+<details>
+<summary>**Solutions (iii).**</summary>
+
+
+
+</details>
+
+## Week 2
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Var-Cov method, simulation, importance sampling and bootstrap. For the Var-Cov method, see MFE Sec. 9.2. For importance sampling and bootstrap, see the supplementary reading in Absalon.
+ * Extreme value theory: MFE Ch. 5 or alternative reading in HL (suggested for this part).
+
+### Theory
+
+### Exercises
+
+## Week 3
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Spherical and elliptical distributions: MFE Sec. 6.3.
+ * Spherical and elliptical distributions, cont.; introduction to copulas.
+
+### Theory
+
+### Exercises
+
+## Week 4
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Copulas: MFE Sec. 7.1-7.5 (Sklar's theorem, Frechet bounds).
+ * Copulas cont. (Transformations; examples; Archimedean copulas).
+
+### Theory
+
+### Exercises
+
+## Week 5
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Copulas cont. (simulating Archimedean copulas, statistical methods, measures of dependence).
+ * Credit risk: the Merton model. MFE Ch. 10, particularly Sec. 10.3. [This lecture will only last two hours.]
+
+### Theory
+
+### Exercises
+
+## Week 6
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Portfolio credit risk: MFE Ch. 11, specifically Sections 11.1-11.3.
+ * Portfolio credit risk, cont. [This lecture will only last two hours.]
+
+### Theory
+
+### Exercises
+
+## Week 7
+
+### Material
+
+MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
+
+ * Intro. to operational risk. Stochastic processes in risk management: stochastic models for operational risk; financial time series models. Connections to non-life insurance models and estimates (last lecture).
+
+### Theory
+
+### Exercises

@@ -1,0 +1,39 @@
+name: "candidate-cources-actuarial-math"
+output_dir: docs
+navbar:
+  title: "Candidate Cources"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Life insurance"
+      menu:
+        - text: "Stochastic Processes in life-insurance (StokLiv)"
+          href: stok_liv.html
+        - text: "Continuous finance (FinKont)"
+          menu:
+            - text: "Main"
+              href: FinKont_main.html
+            - text: "Homework"
+              href: FinKont_homework.html
+            - text: "Exam preparation"
+              href: FinKont_examprep.html
+    - text: "Non-life insurance"
+      menu:
+        - text: "Stochastic processes in non-life-insurance (StokSkade)"
+          href: stok_skade.html
+        - text: "Quantitative risk management (QRM)"
+          menu:
+            - text: "Main"
+              href: QRM_main.html
+            - text: "Projects"
+              href: QRM_projects.html
+            - text: "Homework"
+              href: QRM_homework.html
+            - text: "Exam preparation"
+              href: QRM_examprep.html
+output:
+  html_document:
+    theme: cosmo
+    css: style.css
+    include:
+      after_body: footer.html

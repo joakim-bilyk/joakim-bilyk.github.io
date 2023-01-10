@@ -1,0 +1,16 @@
+---
+title: "Continuous finance (FinKont)"
+output: html_document
+---
+
+# Introduction
+
+# Material
+
+Arbitrage Theory in Continuous Time (Fourth edition)  by Thomas Björk, Oxford University Press (2019).
+
+<iframe src=
+"pdf/FinKont_book.pdf" 
+                width="800" 
+                height="1100">
+</iframe>

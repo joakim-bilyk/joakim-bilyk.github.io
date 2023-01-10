@@ -1,0 +1,74 @@
+blockquote{
+  padding: .75em .5em .75em 1em;
+  background: aliceblue;
+  border-left: 0.5em solid lightslategray;
+  font-size: medium;
+}
+
+blockquote::before {
+  display: block;
+  height: 0;
+  content: "!"; /**/
+  margin-left: -.95em; /*-.95em*/
+  font: italic 400%/1 Open Serif,Georgia,"Times New Roman", serif;
+  color: gray;
+}
+
+/* for nested paragraphs in block quotes */
+blockquote p {
+  display: inline;
+}
+
+.math {
+  font-size: small;
+}
+
+h1 {
+  font-weight: bold;
+  color: black;
+}
+
+h2 {
+  font-weight: bold;
+  color: black;
+}
+
+h3 {
+  font-weight: bold;
+  color: black;
+}
+
+.btn {
+  color: black;
+  background: aliceblue;
+  border: 2px solid lightslategray;
+  transition-duration: 0.25s;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: lightslategray;
+  border: 2px solid lightslategray;
+  color: white;
+}
+
+details {
+  background: floralwhite;
+  border-left: 0.5em solid burlywood;
+  padding: .5em .5em .5em 1em;
+}
+details > summary {
+  cursor: pointer;
+}
+details.math {
+  color:red;
+}
+
+.main-container {
+  padding-bottom: 150px; /*footer height*/
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
