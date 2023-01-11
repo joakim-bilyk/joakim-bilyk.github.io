@@ -18,9 +18,20 @@ blockquote::before {
 blockquote p {
   display: inline;
 }
-
+p {
+  font-size: medium;
+}
 .math {
-  font-size: small;
+  font-size: medium;
+}
+
+.math.inline img {
+  height: 18px;
+}
+.math.center {
+  height: 25px;
+  display: table;
+  margin: 0 auto;
 }
 
 h1 {
@@ -59,9 +70,6 @@ details {
 }
 details > summary {
   cursor: pointer;
-}
-details.math {
-  color:red;
 }
 
 .main-container {

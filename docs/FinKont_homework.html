@@ -365,7 +365,7 @@ variables.</li>
 <li>For <span class="math inline">\(s&lt;t\)</span> the random variable
 <span class="math inline">\(W_t-W_s\)</span> has the Gaussian
 distribution <span
-class="math inline">\(\mathcal{N}(0,t-s)\)</span>.</li>
+class="math inline"><img src="https://math.now.sh?inline=\mathcal{N}(0,t-s)" /></span>.</li>
 <li><span class="math inline">\(W\)</span> has continuous trajectories
 i.e. <span class="math inline">\(s\mapsto W(s;\omega)\)</span> i
 continuous for all <span class="math inline">\(\omega
@@ -411,14 +411,52 @@ motion and so it follows that</p>
 <p>Furthermore, for <span class="math inline">\(r&lt;s\le t&lt;
 u\)</span> it holds that <span class="math inline">\(W_u-W_t\)</span>
 and <span class="math inline">\(W_s-W_r\)</span> is independent. By
-transformation invariance of the independence property <span
-class="math inline">\(-(W_u-W_t)\)</span> and <span
-class="math inline">\(-(W_s-W_r)\)</span> is independent.</p>
+seperate transformations the independence property is preserved and
+<span class="math inline">\(-(W_u-W_t)\)</span> and <span
+class="math inline">\(-(W_s-W_r)\)</span> is independent. Next, for a
+normal distributed random variable <span
+class="math inline">\(N\sim\)</span><span
+class="math inline"><img src="https://math.now.sh?inline=N\sim\mathcal{N}(\mu,\sigma^2)"/></span>
+it holds, that for a scaler <span
+class="math inline">\(c\in\mathbb{R}\)</span> we have <span
+class="math inline"><img src="https://math.now.sh?inline=c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)" /></span>.
+Then obviously;</p>
+<p><span
+class="math center"><img src="https://math.now.sh?inline=-(W_t)=(-1)W_t\stackrel{d}{=}\mathcal{N}((-1)\cdot0,(-1)^2(t-s))\stackrel{d}{=}\mathcal{N}( 0,t-s)."/></span></p>
+<p>Lastly, let <span class="math inline">\(\omega \in \Omega\)</span>
+and consider the sample path <span class="math inline">\(s\mapsto
+(-W_s)(\omega)\)</span>. Clearly for two continuous functions <span
+class="math inline">\(f\)</span> and <span
+class="math inline">\(g\)</span> it holds that <span
+class="math inline">\((g\circ f)\)</span> is continuous. Then with <span
+class="math inline">\(g(x)=-x\)</span> and <span
+class="math inline">\(f(t)=W_t(\omega)\)</span> <span
+class="math inline">\((-W_t)=(g\circ W)(t)\)</span> is also
+continuous.</p>
 </details>
 <details>
 <summary>
 <strong>Solutions (ii).</strong>
 </summary>
+<p>Much like the previous exercise we define a new process and show the
+properties hold. Let <span class="math inline">\(s\ge 0\)</span> be
+chosen arbitrary. Now define <span
+class="math inline">\(X_t=W(t+s)-W(s)\)</span>.</p>
+<p>First, we let <span class="math inline">\(t=0\)</span> and see</p>
+<p><span class="math display">\[X_0 =
+W(0+s)-W(s)=W(s)-W(s)=0.\]</span></p>
+<p>Secondly, we have that for <span
+class="math inline">\(r&lt;u\)</span>:</p>
+<p><span
+class="math display">\[X_u-X_r=W(u+s)-W(s)-(W(r+s)-W(s))=W(u+s)-W(r+s)\sim
+N(0,u+s-(r+s))=N(0,u-r).\]</span></p>
+<p>and since for <span class="math inline">\(r&lt;u\le k&lt;l\)</span>
+the translation <span class="math inline">\(r+s&lt;u+s\le
+k+s&lt;l+s\)</span> still holds and <span
+class="math inline">\(X_l-X_k=W(l+s)-W(k+s)\)</span> and <span
+class="math inline">\(X_u-X_r=W(u+s)-W(k+s)\)</span> are
+independent.</p>
+<p>Lastly,</p>
 </details>
 <details>
 <summary>

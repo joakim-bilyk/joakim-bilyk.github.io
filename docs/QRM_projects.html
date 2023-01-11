@@ -455,7 +455,8 @@ VaR_0.99</code></pre>
 <pre><code>## [1] 243.9653</code></pre>
 <pre class="r"><code>hist(L_prime[L_prime&gt;-1000], breaks = 10000)</code></pre>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<pre class="r"><code>#Look page 80 for R_i,j; rho_tau is given in problem-text, and diag is just 1 since X is continous hence the probabilities are 1 and 0 
+<pre class="r"><code>#Look page 80 for R_i,j; rho_tau is given in problem-text, and diag is just 1
+#since X is continous hence the probabilities are 1 and 0 
 #(look formula section 8.5)</code></pre>
 </div>
 <div id="b-clayton-copula" class="section level3">
@@ -497,6 +498,14 @@ VaR_0.99</code></pre>
 <pre><code>## [1] 182.0593</code></pre>
 <pre class="r"><code>hist(L_prime, breaks = 10000)</code></pre>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><span class="math inline">\(VaR\)</span> and <span
+class="math inline">\(ES\)</span> are radically different for the two
+copulas. This could be the case, since the Clayton copula is an
+archemedian copula. This matters, since an elliptical copula has radial
+symmetry, and thus cant distinguish the dependence between high losses
+and high gains like the Clayton copula can. Moreover, as in general,
+these 2 copulas have different dependence structure, and thus will
+generate different sizes of returns.</p>
 </div>
 </div>
 <div id="problem-2" class="section level2">
@@ -541,13 +550,33 @@ multivariate t-distribution with <span class="math display">\[
 0.0001911 &amp; 0.0001194\\
 0.0001194 &amp; 0.0001142
 \end{bmatrix}.
-\]</span></p>
+\]</span> by example 9.1 for the t-distribution with 4 degrees of
+freedom. The following is simulated vs emperical data;</p>
+<pre class="r"><code>mu1 &lt;- mean(dax_returns[,2])
+mu2 &lt;- mean(bmw_returns[,2])
+mu &lt;- c(mu1,mu2)
+sigma &lt;- matrix(
+  c(var(dax_returns[,2]),
+    cov(dax_returns[,2],bmw_returns[,2]),
+    cov(dax_returns[,2],bmw_returns[,2]),
+    var(bmw_returns[,2])),
+  nrow = 2
+)
+
+library(mvtnorm)
+n &lt;- 1700
+X &lt;- rmvt(n,sigma=1/2*sigma, df=4) + matrix(c(rep(mu[1],n),rep(mu[2],n)),ncol = 2)
+
+library(ggplot2)
+sim_dat = data.frame(x1 = bmw_returns[,2], y1 = dax_returns[,2], x2 = X[,2], y2 = X[,1])
+ggplot(sim_dat) + geom_point(aes(x = x1, y=y1)) + geom_point(aes(x = x2, y=y2), col = &quot;red&quot;)</code></pre>
+<p><img src="QRM_projects_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Simulating from this multivariate distribution we are now able to
 calculate the losses using the formula on page 8 in HL. Doing this we
 can calculate value at risk and expected shortfall as per usual and we
 get;</p>
 <p><span class="math display">\[
-VaR_{0.99}\approx8.55, \hspace{30pt} ES_{0.99}\approx11.74
+VaR_{0.99}\approx6.023, \hspace{30pt} ES_{0.99}\approx8.33
 \]</span></p>
 <pre class="r"><code>mu &lt;- c(mu1,mu2)
 cov(dax_returns[,2],bmw_returns[,2])</code></pre>
@@ -556,7 +585,13 @@ cov(dax_returns[,2],bmw_returns[,2])</code></pre>
 <pre><code>## [1] 0.0001141866</code></pre>
 <pre class="r"><code>var(bmw_returns[,2])</code></pre>
 <pre><code>## [1] 0.0001910575</code></pre>
-<pre class="r"><code>sigma &lt;- matrix(c(cov(dax_returns[,2],bmw_returns[,2]), var(dax_returns[,2]),cov(dax_returns[,2],bmw_returns[,2]), var(bmw_returns[,2])), nrow = 2)
+<pre class="r"><code>sigma &lt;- matrix(
+  c(cov(dax_returns[,2],bmw_returns[,2]),
+    var(dax_returns[,2]),
+    cov(dax_returns[,2],bmw_returns[,2]),
+    var(bmw_returns[,2])),
+  nrow = 2
+)
 S_n &lt;- 100
 
 dax_returns[,3] &lt;- -S_n*(exp(dax_returns[,2]) - 1)
@@ -612,14 +647,15 @@ class="math inline">\(VaR_{0.99}\)</span> as the following:</p>
 VaR_{0.99}=-w^T\cdot m+\sqrt{w^T\Sigma w}\cdot \Phi^{-1}(0.99)
 \]</span></p>
 <p>We compute that <span class="math inline">\(VaR_{0.99}\)</span> is
-5.37. Which is significantly smaller than the estimate computed in the
-previous problem. This might be because the estimate <span
+5.37. Which is smaller than the estimate computed in the previous
+problem. This might be because the estimate <span
 class="math inline">\(e^X\approx 1+x\)</span> underestimates our losses.
-As discussed in the previous problem the t-distribution fits best to the
-data, which is also a problem, since we assume a normal distribution in
-the standard variance-covariance model. The normal distribution has
-lighter tails than the t distribution. This means the model might not
-catch the extreme events very well leading to a more moderate <span
+A bigger problem might be that as discussed in the previous problem the
+t-distribution fits best to the data. Since we assume a normal
+distribution in the standard variance-covariance model the quantile is
+too small. The normal distribution has lighter tails than the t
+distribution. This means the model might not catch the extreme events
+very well leading to a more moderate <span
 class="math inline">\(VaR\)</span> estimate.</p>
 <pre class="r"><code>n &lt;- 1700 # nrow(bmw_returns) = nrow(dax_returns) = 1700
 
@@ -754,10 +790,11 @@ class="math inline">\(b=(b_1,b_2,b_3)=(1,1,1)\)</span> and <span
 class="math inline">\(a=(a_1,a_2,a_3)=(0.4,0.4,0.4)\)</span> and see
 that the 3 dimensional version of condition (B3) in HL def 10.1
 yields;</p>
-<p><span class="math display">\[
-    \tilde{C}(a_1,a_2,b_3)-\tilde{C}(a_1,a_2,a_3)+\tilde{C}(a_1,b_2,a_3)+\tilde{C}(b_1,a_2,a_3)+\tilde{C}(b_1,b_2,b_3)
+<p><span class="math display">\[\begin{align*}
+    \tilde{C}(a_1,a_2,b_3)-\tilde{C}(a_1,a_2,a_3)+\tilde{C}(a_1,b_2,a_3)+\tilde{C}(b_1,a_2,a_3)\\
+    +\tilde{C}(b_1,b_2,b_3)
     -\tilde{C}(b_1,b_2,a_3)-\tilde{C}(b_1,a_2,b_3)-\tilde{C}(a_1,b_2,b_3)\\=0.4^2-0+0+0+1-0.4-0.4-0.4&lt;0
-\]</span></p>
+\end{align*}\]</span></p>
 <p>Hence since we have found points in the 3-dim space a and b, where
 <span class="math inline">\(a_i&lt;b_i\)</span> and the combinations are
 not greater than or equal to 0, <span
@@ -772,11 +809,11 @@ class="math inline">\(C_{12},C_{13}\hspace{5pt}\text{and}\hspace{5pt}
 C_{23}\)</span>). One can easily see that if i suggest the copula <span
 class="math inline">\(C(u_1,u_2,u_3)=u_1u_2u_3[1+\delta(1-u_2)(1-u_3)]\)</span>
 this will have the right marginals since;</p>
-<p><span class="math display">\[
+<p><span class="math display">\[\begin{align*}
     \frac{dC}{du_1}=u_2u_3[1+\delta(1-u_2)(1-u_3)]=C_{23}(u_2,u_3)\\
     \frac{dC}{du_2}=u_1u_3[1+\delta(1-1)(1-u_3)]=u_1u_3=C_{13}(u_1,u_3)\\
     \frac{dC}{du_3}=u_1u_2[1+\delta(1-u_2)(1-1)]=u_1u_2=C_{12}(u_1,u_2)
-\]</span></p>
+\end{align*}\]</span></p>
 <p>And since all the 2-dim marginals are copulas, C must be a copula
 itself. Futhermore, we can find the C from above by using nested
 copulas. For instance ponder on <span
@@ -1069,8 +1106,8 @@ such</p>
 class="math inline">\(a=\frac{1}{n}VaR_\alpha\)</span>. Our objektive is
 then to find a suitable solution to the equation:</p>
 <p><span class="math display">\[
-\alpha =\mathbf{P}\left\{L_n&gt;na\right\}\approx
-e^{-n\Lambda^*(a)},\hspace{20pt} \Lambda^*(a)=\xi_{sup}(a)\cdot
+\alpha =\mathbf{P}\left\{L_n\leq na\right\}\approx
+1-e^{-n\Lambda^*(a)},\hspace{20pt} \Lambda^*(a)=\xi_{sup}(a)\cdot
 a-\Lambda(\xi_{sup}(a)),
 \]</span></p>
 <p>which in turn will give an estimate of <span
@@ -1093,8 +1130,11 @@ that <span class="math inline">\(((\Lambda^{*})^{-1}\circ
 VaR_\alpha =na=n(\Lambda^{*})^{-1}\left(-\frac{1}{n}\log(\alpha)\right).
 \]</span></p>
 <p>However since <span class="math inline">\(\Lambda^*\)</span> is
-convex it and continuous is does not have an inverse. We see that the
-derivative is given by</p>
+convex and continuous it is does not have an inverse. This expression is
+however numerical solvable for small <span
+class="math inline">\(\alpha&gt;0\)</span>.</p>
+<div style="page-break-after: always;"></div>
+<p>We see that the derivative is given by</p>
 <p><span class="math display">\[
 \frac{\partial}{\partial
 a}\Lambda^*(a)=a-\frac{p\theta}{(\theta-\xi_{sup}(a))((1-p)(\theta-\xi_{sup}(a))+p\theta)}\xi&#39;_{sup}(a)
