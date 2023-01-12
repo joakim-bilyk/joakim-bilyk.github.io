@@ -1,0 +1,46 @@
+---
+title: "Homework (FinKont)"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+```{r, include=FALSE, results = 'hide'}
+library(ggplot2)
+library(dplyr)
+#rmarkdown::render(input = "FinKont_homework.Rmd", output_format = "pdf_document")
+```
+
+## Stochastic processes
+
+### Brownian Motion
+
+>**Brownian motion** *(Bjork, def. 4.1)*  A stochastic process $W$ is called a **Brownian motion** or **Wiener process** if the following conditions hold
+>
+> 1. <img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.
+> 2. The process <img class="math inline"  src="https://math.vercel.app?inline=W"/> has independent increments, i.e. if <img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/> then <img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/> and <img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/> are independent random variables.
+> 3. For <img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the random variable <img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/> has the Gaussian distribution <img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.
+> 4. <img class="math inline"  src="https://math.vercel.app?inline=W"/> has continuous trajectories i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/> i continuous for all <img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.
+
+```{r}
+#Example of trajectory for BM
+set.seed(1)
+t <- 0:1000
+N <- rnorm(
+  n = length(t)-1, #initial value = 0
+  mean = 0, #incements mean = 0
+  sd = sqrt(t[2:length(t)] - t[1:(length(t)-1)]) #increment sd = sqrt(t-s)
+)
+W <- c(0,cumsum(N))
+```
+```{r,echo=FALSE,out.width= "50%", out.extra='style="float:right; padding:10px"',include=TRUE}
+data.frame(t = t, W = W) %>%
+  ggplot() +
+  geom_line(aes(x=t,y=W)) +
+  labs(title = "Realisation of a Brownian motion") +
+  theme_bw() +
+  theme(axis.text = element_text(size = 15),
+        title = element_text(size = 18))
+```

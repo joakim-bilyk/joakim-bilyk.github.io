@@ -2,7 +2,7 @@ blockquote{
   padding: .75em .5em .75em 1em;
   background: aliceblue;
   border-left: 0.5em solid lightslategray;
-  font-size: medium;
+  font-size: 18px;
 }
 
 blockquote::before {
@@ -19,17 +19,25 @@ blockquote p {
   display: inline;
 }
 p {
-  font-size: medium;
-}
-.math {
-  font-size: medium;
+  font-size: 18px;
 }
 
-.math.inline img {
-  height: 18px;
+@font-face {
+  font-family: "Computer Modern";
+  src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
+}
+.math {
+  font-size: 16px;
+  font-family: "Computer Modern", sans-serif;
+  font-style: italic;
+}
+
+.math.inline {
+  height: 100%;
+  width:auto;
 }
 .math.center {
-  height: 25px;
+  height: auto;
   display: table;
   margin: 0 auto;
 }
@@ -74,6 +82,14 @@ details > summary {
 
 .main-container {
   padding-bottom: 150px; /*footer height*/
+}
+
+ul {
+  font-size: 18px;
+}
+
+ol {
+  font-size: 18px;
 }
 
 html {

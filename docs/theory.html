@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
@@ -224,6 +227,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -231,6 +297,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -249,6 +325,9 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="theory.html">Theory</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -330,46 +409,37 @@ $(document).ready(function () {
 </div>
 
 
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-</div>
-<div id="weeks" class="section level1 tabset">
-<h1 class="tabset">Weeks</h1>
-<div id="week-1" class="section level2">
-<h2>Week 1</h2>
-<div id="material" class="section level3">
-<h3>Material</h3>
-<ul>
-<li>Brownian motion (Chapter 4.1)</li>
-<li>Conditional expectation (Appendix B.5)</li>
-<li>Filtration (Appendix B.3 and Chapter 4.2)</li>
-<li>Martingales (Appendix C.1 and Chapter 4.4)</li>
-<li>Introduction (Chapter 1)</li>
-<li>Discrete time models (Chapter 2 and 3)</li>
-</ul>
-</div>
-<div id="theory" class="section level3">
-<h3>Theory</h3>
+<div id="stochastic-processes" class="section level2">
+<h2>Stochastic processes</h2>
+<div id="brownian-motion" class="section level3">
+<h3>Brownian Motion</h3>
 <blockquote>
-<p><strong>Definition 4.1.</strong> <em>(Brownian motion)</em> A
+<p><strong>Brownian motion</strong> <em>(Bjork, def. 4.1)</em> A
 stochastic process <span class="math inline">\(W\)</span> is called a
 <strong>Brownian motion</strong> or <strong>Wiener process</strong> if
 the following conditions hold</p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(W_0=0\)</span>.</li>
-<li>The process <span class="math inline">\(W\)</span> has independent
-increments, i.e. if <span class="math inline">\(r&lt;s\le t&lt;
-u\)</span> then <span class="math inline">\(W_u-W_t\)</span> and <span
-class="math inline">\(W_s-W_r\)</span> are independent random
-variables.</li>
-<li>For <span class="math inline">\(s&lt;t\)</span> the random variable
-<span class="math inline">\(W_t-W_s\)</span> has the Gaussian
-distribution <span
-class="math inline"><img src="https://math.now.sh?inline=\mathcal{N}(0,t-s)" /></span>.</li>
-<li><span class="math inline">\(W\)</span> has continuous trajectories
-i.e. <span class="math inline">\(s\mapsto W(s;\omega)\)</span> i
-continuous for all <span class="math inline">\(\omega
-\in\Omega\)</span>.</li>
+<li><img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.</li>
+<li>The process
+<img class="math inline"  src="https://math.vercel.app?inline=W"/> has
+independent increments, i.e. if
+<img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/>
+then
+<img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/>
+and
+<img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/>
+are independent random variables.</li>
+<li>For
+<img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the
+random variable
+<img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/>
+has the Gaussian distribution
+<img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.</li>
+<li><img class="math inline"  src="https://math.vercel.app?inline=W"/>
+has continuous trajectories
+i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/>
+i continuous for all
+<img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.</li>
 </ol>
 </blockquote>
 <pre class="r"><code>#Example of trajectory for BM
@@ -381,207 +451,7 @@ N &lt;- rnorm(
   sd = sqrt(t[2:length(t)] - t[1:(length(t)-1)]) #increment sd = sqrt(t-s)
 )
 W &lt;- c(0,cumsum(N))</code></pre>
-<p><img src="FinKont_homework_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="float:right; padding:10px" /></p>
-</div>
-<div id="exercises" class="section level3">
-<h3>Exercises</h3>
-<p><strong>Probability exercises</strong></p>
-<p>Let <span class="math inline">\((W(t))_{t\ge}\)</span> be a Brownian
-motion (Björk, Definition 4.1).</p>
-<p><strong>Exercise 1.</strong> Show that the following processes also
-are Brownian motions.</p>
-<ol style="list-style-type: lower-roman">
-<li><span class="math inline">\((-W(t))_{t\ge 0}\)</span>
-(symmetry)</li>
-<li>For any <span class="math inline">\(s\ge 0\)</span>, <span
-class="math inline">\((W(t+s)-W(s))_{t\ge 0}\)</span>
-(time-homogeneity).</li>
-<li>For every <span class="math inline">\(c&gt;0\)</span>, <span
-class="math inline">\((cW(t/c^2))_{t\ge 0}\)</span> (scaling).</li>
-</ol>
-<details>
-<summary>
-<strong>Solutions (i).</strong>
-</summary>
-<p>By assumption <span class="math inline">\(W\)</span> is a Brownian
-motion and so it follows that</p>
-<p><span class="math display">\[
--W_0=-1\cdot 0=0.
-\]</span></p>
-<p>Furthermore, for <span class="math inline">\(r&lt;s\le t&lt;
-u\)</span> it holds that <span class="math inline">\(W_u-W_t\)</span>
-and <span class="math inline">\(W_s-W_r\)</span> is independent. By
-seperate transformations the independence property is preserved and
-<span class="math inline">\(-(W_u-W_t)\)</span> and <span
-class="math inline">\(-(W_s-W_r)\)</span> is independent. Next, for a
-normal distributed random variable <span
-class="math inline">\(N\sim\)</span><span
-class="math inline"><img src="https://math.now.sh?inline=N\sim\mathcal{N}(\mu,\sigma^2)"/></span>
-it holds, that for a scaler <span
-class="math inline">\(c\in\mathbb{R}\)</span> we have <span
-class="math inline"><img src="https://math.now.sh?inline=c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)" /></span>.
-Then obviously;</p>
-<p><span
-class="math center"><img src="https://math.now.sh?inline=-(W_t)=(-1)W_t\stackrel{d}{=}\mathcal{N}((-1)\cdot0,(-1)^2(t-s))\stackrel{d}{=}\mathcal{N}( 0,t-s)."/></span></p>
-<p>Lastly, let <span class="math inline">\(\omega \in \Omega\)</span>
-and consider the sample path <span class="math inline">\(s\mapsto
-(-W_s)(\omega)\)</span>. Clearly for two continuous functions <span
-class="math inline">\(f\)</span> and <span
-class="math inline">\(g\)</span> it holds that <span
-class="math inline">\((g\circ f)\)</span> is continuous. Then with <span
-class="math inline">\(g(x)=-x\)</span> and <span
-class="math inline">\(f(t)=W_t(\omega)\)</span> <span
-class="math inline">\((-W_t)=(g\circ W)(t)\)</span> is also
-continuous.</p>
-</details>
-<details>
-<summary>
-<strong>Solutions (ii).</strong>
-</summary>
-<p>Much like the previous exercise we define a new process and show the
-properties hold. Let <span class="math inline">\(s\ge 0\)</span> be
-chosen arbitrary. Now define <span
-class="math inline">\(X_t=W(t+s)-W(s)\)</span>.</p>
-<p>First, we let <span class="math inline">\(t=0\)</span> and see</p>
-<p><span class="math display">\[X_0 =
-W(0+s)-W(s)=W(s)-W(s)=0.\]</span></p>
-<p>Secondly, we have that for <span
-class="math inline">\(r&lt;u\)</span>:</p>
-<p><span
-class="math display">\[X_u-X_r=W(u+s)-W(s)-(W(r+s)-W(s))=W(u+s)-W(r+s)\sim
-N(0,u+s-(r+s))=N(0,u-r).\]</span></p>
-<p>and since for <span class="math inline">\(r&lt;u\le k&lt;l\)</span>
-the translation <span class="math inline">\(r+s&lt;u+s\le
-k+s&lt;l+s\)</span> still holds and <span
-class="math inline">\(X_l-X_k=W(l+s)-W(k+s)\)</span> and <span
-class="math inline">\(X_u-X_r=W(u+s)-W(k+s)\)</span> are
-independent.</p>
-<p>Lastly,</p>
-</details>
-<details>
-<summary>
-<strong>Solutions (iii).</strong>
-</summary>
-</details>
-</div>
-</div>
-<div id="week-2" class="section level2">
-<h2>Week 2</h2>
-<div id="material-1" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Var-Cov method, simulation, importance sampling and bootstrap. For
-the Var-Cov method, see MFE Sec. 9.2. For importance sampling and
-bootstrap, see the supplementary reading in Absalon.</li>
-<li>Extreme value theory: MFE Ch. 5 or alternative reading in HL
-(suggested for this part).</li>
-</ul>
-</div>
-<div id="theory-1" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-1" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-3" class="section level2">
-<h2>Week 3</h2>
-<div id="material-2" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Spherical and elliptical distributions: MFE Sec. 6.3.</li>
-<li>Spherical and elliptical distributions, cont.; introduction to
-copulas.</li>
-</ul>
-</div>
-<div id="theory-2" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-2" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-4" class="section level2">
-<h2>Week 4</h2>
-<div id="material-3" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Copulas: MFE Sec. 7.1-7.5 (Sklar’s theorem, Frechet bounds).</li>
-<li>Copulas cont. (Transformations; examples; Archimedean copulas).</li>
-</ul>
-</div>
-<div id="theory-3" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-3" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-5" class="section level2">
-<h2>Week 5</h2>
-<div id="material-4" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Copulas cont. (simulating Archimedean copulas, statistical methods,
-measures of dependence).</li>
-<li>Credit risk: the Merton model. MFE Ch. 10, particularly Sec. 10.3.
-[This lecture will only last two hours.]</li>
-</ul>
-</div>
-<div id="theory-4" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-4" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-6" class="section level2">
-<h2>Week 6</h2>
-<div id="material-5" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Portfolio credit risk: MFE Ch. 11, specifically Sections
-11.1-11.3.</li>
-<li>Portfolio credit risk, cont. [This lecture will only last two
-hours.]</li>
-</ul>
-</div>
-<div id="theory-5" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-5" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-7" class="section level2">
-<h2>Week 7</h2>
-<div id="material-6" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Intro. to operational risk. Stochastic processes in risk management:
-stochastic models for operational risk; financial time series models.
-Connections to non-life insurance models and estimates (last
-lecture).</li>
-</ul>
-</div>
-<div id="theory-6" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-6" class="section level3">
-<h3>Exercises</h3>
-</div>
+<p><img src="theory_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="float:right; padding:10px" /></p>
 </div>
 </div>
 
@@ -636,6 +506,8 @@ https://github.com/rstudio/rmarkdown/issues/1761
 -->
 
 
+</div>
+</div>
 
 </div>
 
@@ -673,6 +545,35 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
