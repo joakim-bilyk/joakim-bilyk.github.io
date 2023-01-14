@@ -1,16 +1,65 @@
-blockquote{
+
+.def {
   padding: .75em .5em .75em 1em;
   background: aliceblue;
   border-left: 0.5em solid lightslategray;
   font-size: 18px;
 }
 
-blockquote::before {
+.def::before {
   display: block;
   height: 0;
-  content: "!"; /**/
-  margin-left: -.95em; /*-.95em*/
-  font: italic 400%/1 Open Serif,Georgia,"Times New Roman", serif;
+  content: "def"; /**/
+  margin-left: -2.5em; /*-.95em*/
+  font: italic 200%/1 Open Serif,Georgia,"Times New Roman", serif;
+  color: gray;
+}
+
+.prop {
+  padding: .75em .5em .75em 1em;
+  background: Seashell;
+  border-left: 0.5em solid IndianRed;
+  font-size: 18px;
+}
+
+.prop::before {
+  display: block;
+  height: 0;
+  content: "prop"; /**/
+  margin-left: -3em; /*-.95em*/
+  font: italic 200%/1 Open Serif,Georgia,"Times New Roman", serif;
+  color: gray;
+}
+
+.thm {
+  padding: .75em .5em .75em 1em;
+  background: MistyRose;
+  border-left: 0.5em solid Maroon;
+  font-size: 18px;
+}
+
+.thm::before {
+  display: block;
+  height: 0;
+  content: "thm"; /**/
+  margin-left: -3em; /*-.95em*/
+  font: italic 200%/1 Open Serif,Georgia,"Times New Roman", serif;
+  color: gray;
+}
+
+.lem {
+  padding: .75em .5em .75em 1em;
+  background: LavenderBlush;
+  border-left: 0.5em solid Maroon;
+  font-size: 18px;
+}
+
+.lem::before {
+  display: block;
+  height: 0;
+  content: "lem"; /**/
+  margin-left: -3em; /*-.95em*/
+  font: italic 200%/1 Open Serif,Georgia,"Times New Roman", serif;
   color: gray;
 }
 
@@ -95,4 +144,9 @@ ol {
 html {
   position: relative;
   min-height: 100%;
+}
+
+iframe {
+  width: 100%;
+  height: 200%;
 }

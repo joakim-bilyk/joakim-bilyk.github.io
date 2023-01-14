@@ -31,12 +31,14 @@ library(dplyr)
 
 ### Theory
 
->**Definition 4.1.** *(Brownian motion)* A stochastic process $W$ is called a **Brownian motion** or **Wiener process** if the following conditions hold
->
-> 1. <img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.
-> 2. The process <img class="math inline"  src="https://math.vercel.app?inline=W"/> has independent increments, i.e. if <img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/> then <img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/> and <img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/> are independent random variables.
-> 3. For <img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the random variable <img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/> has the Gaussian distribution <img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.
-> 4. <img class="math inline"  src="https://math.vercel.app?inline=W"/> has continuous trajectories i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/> i continuous for all <img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.
+<blockquote class = "def">
+**Definition 4.1.** *(Brownian motion)* A stochastic process $W$ is called a **Brownian motion** or **Wiener process** if the following conditions hold
+
+ 1. <img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.
+ 2. The process <img class="math inline"  src="https://math.vercel.app?inline=W"/> has independent increments, i.e. if <img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/> then <img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/> and <img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/> are independent random variables.
+ 3. For <img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the random variable <img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/> has the Gaussian distribution <img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.
+ 4. <img class="math inline"  src="https://math.vercel.app?inline=W"/> has continuous trajectories i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/> i continuous for all <img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.
+</blockquote>
 
 ```{r}
 #Example of trajectory for BM
@@ -58,6 +60,16 @@ data.frame(t = t, W = W) %>%
   theme(axis.text = element_text(size = 15),
         title = element_text(size = 18))
 ```
+
+<blockquote class = "def">
+
+**Definition C.1.** Let $M_t$ be a stochastic process defined on a background space <img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/>. Let <img src="https://math.vercel.app?inline=(\mathcal{F}_t)_{t\ge 0}"/> be a filtration. If $M_t$ is adapted to the filtration <img src="https://math.vercel.app?inline=\mathcal{F}_t"/>, $E\vert M_t\vert <\infty$ and
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=M_s"/></span>
+
+holds for any $t>s$ we say that $M_t$ is a martingale.
+
+</blockquote>
 
 ### Exercises
 
@@ -126,13 +138,15 @@ Where we use the properties of scaling a normal distributed random variable i.e.
 
 &nbsp;
 
->**Proposition B.37.** Let <img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/> be a given probability space, let <img src="https://math.vercel.app?inline=\mathcal{G}"/> be a sub-sigma-algebra of <img src="https://math.vercel.app?inline=\mathcal{F}"/>, and let $X$ be a square integrable random variable.
->Consider the problem of minimizing
-><span class="math center"><img src="https://math.vercel.app?from=E\left[(X-Z)^2\right]"/></span>
->where $Z$ is allowed to vary over the class of all square integrable <img src="https://math.vercel.app?inline=\mathcal{G}"/> measurable random variables. The optimal solution <img src="https://math.vercel.app?inline=\hat{Z}"/> is then given by.
-><span class="math center"><img src="https://math.vercel.app?from=\hat{Z}=E[X\vert\mathcal{G}]."/></span>
+<blockquote class = "prop">
+**Proposition B.37.** Let <img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/> be a given probability space, let <img src="https://math.vercel.app?inline=\mathcal{G}"/> be a sub-sigma-algebra of <img src="https://math.vercel.app?inline=\mathcal{F}"/>, and let $X$ be a square integrable random variable.
+Consider the problem of minimizing
+<span class="math center"><img src="https://math.vercel.app?from=E\left[(X-Z)^2\right]"/></span>
+where $Z$ is allowed to vary over the class of all square integrable <img src="https://math.vercel.app?inline=\mathcal{G}"/> measurable random variables. The optimal solution <img src="https://math.vercel.app?inline=\hat{Z}"/> is then given by.
+<span class="math center"><img src="https://math.vercel.app?from=\hat{Z}=E[X\vert\mathcal{G}]."/></span>
+</blockquote>
 
-**Exercise B.11.** *(Bjork)* Prove proposition B.37 by going along the following lines.
+**Exercise 2.** *(Bjork, exercise B.11.)* Prove proposition B.37 by going along the following lines.
 
   a. Prove that the "estimation error" <img src="https://math.vercel.app?inline=X-E[X\vert\mathcal{G}]"/> is orthogonal to <img src="https://math.vercel.app?inline=L^2(\Omega,\mathcal{G},P)"/> in the sence that for any <img src="https://math.vercel.app?inline=Z\in L^2(\Omega,\mathcal{G},P)"/> we have
   <span class="math center"><img src="https://math.vercel.app?from=E[Z\cdot(X-E[X\vert\mathcal{G}])]=0"/></span>
@@ -143,17 +157,171 @@ Where we use the properties of scaling a normal distributed random variable i.e.
 <details>
 <summary>**Solution (a).**</summary>
 
+Let <img src="https://math.vercel.app?inline=X\in L^2(\Omega,\mathcal{F},P):=F"/> be a random variable. Now consider an arbitrary <img src="https://math.vercel.app?inline=Z\in L^2(\Omega,\mathcal{G},P):=G"/>. Recall that <img src="https://math.vercel.app?inline= \mathcal{G}\subset \mathcal{F}"/> and so $X$ is also in $G$, as it is bothe square integrable and <img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable. Then
 
+<span class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right]."/></span>
+
+Then by using the law of total expectation and secondly that $Z$ is <img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right]."/></span>
+
+Combining the two equations gives the desired result.
 
 </details>
 <details>
 <summary>**Solution (b).**</summary>
+
+Obviously, we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=X-Z=X-Z%2BE[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])%2B(E[X\vert\mathcal{G}]-Z)."/></span>
+
+Then squaring the terms gives
+
+<span class="math center"><img src="https://math.vercel.app?from=(X-Z)^2=(X-E[X\vert\mathcal{G}])^2%2B(E[X\vert\mathcal{G}]-Z)^2%2B2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)"/></span>
+
+Taking expectation on each side and using linearity of the expectation we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]%2B2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right]."/></span>
+
+We can now use that <img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]-Z"/> is <img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable with the above result on the last term.
+
+<span class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]."/></span>
+
+Now since $X$ is given the term <img src="https://math.vercel.app?inline=E\left[(X-E[X\vert\mathcal{G}])^2\right]"/> is simply a constant not depending on the choice og $Z$. The optimal choice of $Z$ is then <img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]"/> since this minimizes the second term. The statement is then proved.
+
+</details>
+
+&nbsp;
+
+**Exercise 3.** Discuss the following theory/results of Moment generating functions (Laplace transform).
+
+Let $X$ be a random variable with distribution function $F(x)=P(X\le x)$ and $Y$ be a random variable with distribution function $G(y)=P(Y\le y)$.
+
+<blockquote class = "def">
+**Definition.** The moment generating function or Laplace transform of $X$ is
+
+<span class="math center"><img src="https://math.vercel.app?from=\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)"/></span>
+
+provided the expectation is finite for $\vert\lambda\vert<h$ for some $h>0$.
+</blockquote>
+
+The MGF uniquely determine the distribution of a random variable, due to the following result.
+
+<blockquote class = "thm">
+**Theorem 1.** *(Uniqueness)* If $\psi_X(\lambda)=\psi_Y(\lambda)$ when $\vert\lambda\vert<h$ for some $h>0$, then $X$ and $Y$ has the same distribution, that is, $F=G$.
+</blockquote>
+
+There is also the following result of independence for Moment generating functions.
+
+<blockquote class = "thm">
+**Theorem 1.** *(Independence)* If 
+
+<span class="math center"><img src="https://math.vercel.app?from=E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)"/></span>
+
+for $\vert\lambda_i\vert<h$ for $i=1,2$ for some $h>0$, then $X$ and $Y$ are independent random variables.
+</blockquote>
+
+**Example.** Recall that the Moment generating function of a normal (Gaussian) distribution is given by
+
+<span class="math center"><img src="https://math.vercel.app?from=\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\exp\left(\lambda \mu %2B \frac{\lambda^2}{2}\sigma^2\right)"/></span>
+
+where $X$ is normally distributed with mean $\mu$ and variance $\sigma^2$ and <img src="https://math.vercel.app?inline=\lambda\in\mathbb{R}"/> is a constant. Since a Brownian motion $W(t)$ is normally distributed with zero mean and variance $t$, we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=E[\exp(\lambda W(t))]=\exp\left(\frac{\lambda^2}{2}t\right)."/></span>
+
+<details>
+<summary>**Discussion.**</summary>
 
 
 
 </details>
 
 &nbsp;
+
+**Exercise 4.** *(Bjork, exercise C.8.(a-c))* Let $W$ be a Brownian motion. Notice that for the natural filtration <img src="https://math.vercel.app?inline=\mathcal{F}_s=\sigma(W_t\vert t\le s)"/> $W_t-W_s$ is independent of <img src="https://math.vercel.app?inline=\mathcal{F}_s"/>.
+
+  a. Show that $W_t$ is a martingale.
+  b. Show that $W^2_t-t$ is a martingale.
+  c. Show that $\exp(\lambda W_t-\frac{\lambda^2}{2}t)$ is a martingale.
+
+<details>
+<summary>**Solution (a).**</summary>
+
+We show that for the natural filtration that $W_t$ is a martingale. This include showing integrability and the martingale property. For the first we note that for a normal distributed random variable with mean 0 we have
+
+<span class="math center"><img src="https://math.vercel.app?from=E[\vert N\vert]=\int_{-\infty}^\infty \vert x\vert dF_N(x)=2\int_{0}^\infty xdF_N(x)"/></span>
+
+since the distribution is symmetric. Substituting the distribution function $\Phi(x)=P(N\le x)$ in we see that
+
+<span class="math center"><img src="https://math.vercel.app?from=E[\vert N\vert]=2\int_{0}^\infty xd\Phi(x)=2\int_{0}^\infty x\frac{1}{\sqrt{2\pi\sigma^2}}e^{-x^2/(2\sigma^2)}dx=(*)"/></span>
+
+by substituting $u=x^2/(2\sigma^2)$ ($x=\sqrt{2\sigma^2u}$) we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=\frac{dx}{du}=\frac{1}{2}\sqrt{2\sigma^2u}2\sigma^2=(\sigma^2)^{3/2}\sqrt{2}u\iff dx=(\sigma^2)^{3/2}\sqrt{2}u\ du"/></span>
+
+hence
+
+<span class="math center"><img src="https://math.vercel.app?from=(*)=\frac{2}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{2\sigma^2u}e^{-u}(\sigma^2)^{3/2}\sqrt{2}u\ du=\frac{2\sqrt{2\sigma^2}(\sigma^2)^{3/2}\sqrt{2}}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{u}e^{-u}u\ du."/></span>
+
+This then simplify to
+
+<span class="math center"><img src="https://math.vercel.app?from=(*)=\frac{(2\sigma^2)^{3/2}}{\sqrt{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=(2\sigma^2)^{1/2}\sqrt{\frac{2\sigma^2}{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=\sqrt{\frac{2\sigma^2}{\pi}}<\infty."/></span>
+
+(Obviously the above is not derived correctly, but the end expression is valid, source: [link](https://arxiv.org/pdf/1402.3559.pdf)) However since
+
+<span class="math center"><img src="https://math.vercel.app?from=W_t=W_t-0=W_t-W_0\sim\mathcal{N}(0,t)"/></span>
+
+we have that <img src="https://math.vercel.app?inline=E\vert W_t\vert<\infty"/> as desired.
+
+Next, we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=E[W_t\vert \mathcal{F}_s]=E[W_t-W_s\vert\mathcal{F}_s]+W_s=0%2BW_s=W_s."/></span>
+
+In the above we used that $W_t-W_s$ is <img src="https://math.vercel.app?inline=\mathcal{F}_s"/>-measurable with mean 0. Then it follows that $W_t$ is a martingale.
+
+</details>
+<details>
+<summary>**Solution (b).**</summary>
+
+Let <img src="https://math.vercel.app?inline=M_t=W_t^2-t"/>. First, we observe that two measurable functions composed is still a measurable function. Hence we know that $M_t$ is measurable wrt. the filtration since $W_t$ is measurable and $w\mapsto w^2+t$ is measurable. Secondly, we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=E[\vert W_t^2-t\vert]\le E\vert W_t^2\vert %2BE\vert t\vert=t%2Bt=2t<\infty"/></span>
+
+where we use the triangle inequality. Thirdly, for the martingale property we have that for $t>s$:
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=E[W_t^2-t\vert \mathcal{F}_s]=E[W_t^2%2BW_s^2-2W_tW_s-W_s^2%2B2W_tW_s-t\vert \mathcal{F}_s]"/></span>
+
+which by linearity and independence of increments to the filtration gives
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=E[(W_t-W_s)^2-W_s^2%2B2W_tW_s-t\vert \mathcal{F}_s]=t-s-t%2BE[2W_tW_s-W_s^2\vert \mathcal{F}_s]"/></span>
+
+However since $W_s$ is measurable wrt. the filtration at time $s$ the above is
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=2W_sE[W_t\vert \mathcal{F}_s]-W_s^2-s=2W_s^2-W_s^2-s=W_s^2-s=M_s."/></span>
+
+Since from (a) we know that $W_t$ is a martingale. Then we arrive at the desired result.
+
+</details>
+<details>
+<summary>**Solution (c).**</summary>
+
+Let <img src="https://math.vercel.app?inline=M_t=\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)"/>. First, by composition of measurable functions $M_t$ is <img src="https://math.vercel.app?inline=\mathcal{F}_t"/>-measurable. Secondly, we have using the MGF for a normal distributed random variable:
+
+<span class="math center"><img src="https://math.vercel.app?from=E\vert M_t=E\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\le E\left(\exp\left(\lambda W_t\right)\right)=\exp\left(\frac{\lambda^2}{2}t\right)<\infty."/></span>
+
+Thirdly, we consider
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert\mathcal{F}_s]=E\left.\left[\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(-\frac{\lambda^2}{2}t\right)E\left.\left[\left(\exp\left(\lambda W_t\right)\right)\right\vert\mathcal{F}_s\right]."/></span>
+
+By adding and subtracting $W_s$ in the exponent we get
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert\mathcal{F}_s]=\exp\left(-\frac{\lambda^2}{2}t\right)E\left.\left[\left(\exp\left(\lambda (W_t-W_s)%2B\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(-\frac{\lambda^2}{2}t\right)\exp\left(\frac{\lambda^2}{2}(t-s)\right)E\left.\left[\left(\exp\left(\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]."/></span>
+
+Using that <img src="https://math.vercel.app?inline=E\left.\left[\left(\exp\left(\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(\lambda W_s\right)"/> and combining the exponents gives the desired:
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert\mathcal{F}_s]=\exp\left(\lambda W_s-\frac{\lambda^2}{2}s\right)=M_s."/></span>
+
+</details>
 
 ## Week 2 
 

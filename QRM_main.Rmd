@@ -10,42 +10,22 @@ output:
 
 Beneeth is the course syllabus.
 
-<iframe src=
-"pdf/QRM_syllabus.pdf" 
-                width="800" 
-                height="1000">
-</iframe>
+<iframe src="pdf/QRM_syllabus.pdf"></iframe>
 
 # Material
 
 *Quantitative Risk Management: Concepts, Techniques and Tools* (second edition) by Alexander J. McNeil and others, Princeton University Press (2015).
 
-<iframe src=
-"pdf/QRM_book.pdf" 
-                width="800" 
-                height="1000">
-</iframe>
+<iframe src="pdf/QRM_book.pdf"></iframe>
 
 *Mathematical Modeling and Statistical Methods for Risk Management* (Lecture Notes) by Henrik Hult and Filip Lindskog (2007).
 
-<iframe src=
-"pdf/QRM_book_HL.pdf" 
-                width="800" 
-                height="1000">
-</iframe>
+<iframe src="pdf/QRM_book_HL.pdf"></iframe>
 
 *Importance Sampling*.
 
-<iframe src=
-"pdf/QRM_supplement_importance_sampling.pdf" 
-                width="800" 
-                height="1000">
-</iframe>
+<iframe src="pdf/QRM_supplement_importance_sampling.pdf"></iframe>
 
 *Importance Sampling for Monte Carlo Estimation Of Quantiles* (paper) by Peter W. Glynn, Stanford University.
 
-<iframe src=
-"pdf/QRM_supplement_importance_sampling_quantiles.pdf" 
-                width="800" 
-                height="1000">
-</iframe>
+<iframe src="pdf/QRM_supplement_importance_sampling_quantiles.pdf"></iframe>

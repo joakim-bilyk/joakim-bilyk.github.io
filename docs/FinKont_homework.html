@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Homework (FinKont)</title>
+
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Candidate Cources</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="theory.html">Theory</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Life insurance
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="stok_liv.html">Stochastic Processes in life-insurance (StokLiv)</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Continuous finance (FinKont)</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="FinKont_main.html">Main</a>
+        </li>
+        <li>
+          <a href="FinKont_homework.html">Homework</a>
+        </li>
+        <li>
+          <a href="FinKont_examprep.html">Exam preparation</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Non-life insurance
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="stok_skade.html">Stochastic processes in non-life-insurance (StokSkade)</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quantitative risk management (QRM)</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="QRM_main.html">Main</a>
+        </li>
+        <li>
+          <a href="QRM_projects.html">Projects</a>
+        </li>
+        <li>
+          <a href="QRM_homework.html">Homework</a>
+        </li>
+        <li>
+          <a href="QRM_examprep.html">Exam preparation</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Homework (FinKont)</h1>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+</div>
+<div id="weeks" class="section level1 tabset">
+<h1 class="tabset">Weeks</h1>
+<div id="week-1" class="section level2">
+<h2>Week 1</h2>
+<div id="material" class="section level3">
+<h3>Material</h3>
+<ul>
+<li>Brownian motion (Chapter 4.1)</li>
+<li>Conditional expectation (Appendix B.5)</li>
+<li>Filtration (Appendix B.3 and Chapter 4.2)</li>
+<li>Martingales (Appendix C.1 and Chapter 4.4)</li>
+<li>Introduction (Chapter 1)</li>
+<li>Discrete time models (Chapter 2 and 3)</li>
+</ul>
+</div>
+<div id="theory" class="section level3">
+<h3>Theory</h3>
+<blockquote class="def">
+<p><strong>Definition 4.1.</strong> <em>(Brownian motion)</em> A
+stochastic process <span class="math inline">\(W\)</span> is called a
+<strong>Brownian motion</strong> or <strong>Wiener process</strong> if
+the following conditions hold</p>
+<ol style="list-style-type: decimal">
+<li><img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.</li>
+<li>The process
+<img class="math inline"  src="https://math.vercel.app?inline=W"/> has
+independent increments, i.e. if
+<img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/>
+then
+<img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/>
+and
+<img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/>
+are independent random variables.</li>
+<li>For
+<img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the
+random variable
+<img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/>
+has the Gaussian distribution
+<img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.</li>
+<li><img class="math inline"  src="https://math.vercel.app?inline=W"/>
+has continuous trajectories
+i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/>
+i continuous for all
+<img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.</li>
+</ol>
+</blockquote>
+<pre class="r"><code>#Example of trajectory for BM
+set.seed(1)
+t &lt;- 0:1000
+N &lt;- rnorm(
+  n = length(t)-1, #initial value = 0
+  mean = 0, #incements mean = 0
+  sd = sqrt(t[2:length(t)] - t[1:(length(t)-1)]) #increment sd = sqrt(t-s)
+)
+W &lt;- c(0,cumsum(N))</code></pre>
+<p><img src="FinKont_homework_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="float:right; padding:10px" /></p>
+<blockquote class="def">
+<p><strong>Definition C.1.</strong> Let <span
+class="math inline">\(M_t\)</span> be a stochastic process defined on a
+background space
+<img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/>. Let
+<img src="https://math.vercel.app?inline=(\mathcal{F}_t)_{t\ge 0}"/> be
+a filtration. If <span class="math inline">\(M_t\)</span> is adapted to
+the filtration
+<img src="https://math.vercel.app?inline=\mathcal{F}_t"/>, <span
+class="math inline">\(E\vert M_t\vert &lt;\infty\)</span> and</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=M_s"/></span></p>
+<p>holds for any <span class="math inline">\(t&gt;s\)</span> we say that
+<span class="math inline">\(M_t\)</span> is a martingale.</p>
+</blockquote>
+</div>
+<div id="exercises" class="section level3">
+<h3>Exercises</h3>
+<p><strong>Probability exercises</strong></p>
+<p>Let
+<img class="math inline" src="https://math.vercel.app?inline=(W(t))_{t\ge}"/>
+be a Brownian motion (Björk, Definition 4.1).</p>
+<p><strong>Exercise 1.</strong> Show that the following processes also
+are Brownian motions.</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\((-W(t))_{t\ge 0}\)</span>
+(symmetry)</li>
+<li>For any <span class="math inline">\(s\ge 0\)</span>, <span
+class="math inline">\((W(t+s)-W(s))_{t\ge 0}\)</span>
+(time-homogeneity).</li>
+<li>For every <span class="math inline">\(c&gt;0\)</span>, <span
+class="math inline">\((cW(t/c^2))_{t\ge 0}\)</span> (scaling).</li>
+</ol>
+<details>
+<summary>
+<strong>Solution (i).</strong>
+</summary>
+<p>By assumption <span class="math inline">\(W\)</span> is a Brownian
+motion and so it follows that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=-W_0=-1\cdot0=0."/></span></p>
+<p>Furthermore, for <span class="math inline">\(r&lt;s\le t&lt;
+u\)</span> it holds that <span class="math inline">\(W_u-W_t\)</span>
+and <span class="math inline">\(W_s-W_r\)</span> is independent. By
+seperate transformations the independence property is preserved and
+<span class="math inline">\(-(W_u-W_t)\)</span> and <span
+class="math inline">\(-(W_s-W_r)\)</span> is independent. Next, for a
+normal distributed random variable
+<img class="math inline"  src="https://math.now.sh?inline=N\sim\mathcal{N}(\mu,\sigma^2)"/>
+it holds, that for a scaler <span
+class="math inline">\(c\in\mathbb{R}\)</span> we have
+<img class="math inline"  src="https://math.vercel.app?inline=c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)" />.
+Then obviously;</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=-(W_t)=(-1)W_t\stackrel{d}{=}\mathcal{N}((-1)\cdot0,(-1)^2(t-s))\stackrel{d}{=}\mathcal{N}( 0,t-s)."/></span></p>
+<p>Lastly, let <span class="math inline">\(\omega \in \Omega\)</span>
+and consider the sample path
+<img src="https://math.vercel.app?inline=s\mapsto (-W_s)(\omega)"/>.
+Clearly for two continuous functions <span
+class="math inline">\(f\)</span> and <span
+class="math inline">\(g\)</span> it holds that
+<img src="https://math.vercel.app?inline=(g\circ f)"/> is continuous.
+Then with <span class="math inline">\(g(f)=-f\)</span> and
+<img src="https://math.vercel.app?inline=f(t)=W_t(\omega)"/>$ it follows
+that <img src="https://math.vercel.app?inline=(-W_t)=(g\circ W)(t)"/> is
+also continuous.</p>
+</details>
+<details>
+<summary>
+<strong>Solution (ii).</strong>
+</summary>
+<p>Much like the previous exercise we define a new process and show the
+properties hold. Let <span class="math inline">\(s\ge 0\)</span> be
+chosen arbitrary. Now define <span
+class="math inline">\(X_t=W(t+s)-W(s)\)</span>.</p>
+<p>First, we let <span class="math inline">\(t=0\)</span> and see</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=X_0=W(0+s)-W(s)=W(s)-W(s)=0."/></span></p>
+<p>Secondly, we have that for <span
+class="math inline">\(r&lt;u\)</span>:</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=X_u-X_r=W(u+s)-W(s)-(W(r+s)-W(s))=W(u+s)-W(r+s)\sim \mathcal{N}(0,u+s-(r+s))=\mathcal{N}(0,u-r)."/></span></p>
+<p>and since for <span class="math inline">\(r&lt;u\le k&lt;l\)</span>
+the translation <span class="math inline">\(r+s&lt;u+s\le
+k+s&lt;l+s\)</span> still holds and <span
+class="math inline">\(X_l-X_k=W(l+s)-W(k+s)\)</span> and <span
+class="math inline">\(X_u-X_r=W(u+s)-W(k+s)\)</span> are independent.
+Finally since <span class="math inline">\(W_t(\omega)\)</span> is
+continuous in <span class="math inline">\(t\)</span> hence the
+translation <span class="math inline">\(W_{t+s}\)</span> is continouos.
+Adding a constant yields a function that is also continuous, hence <span
+class="math inline">\(X_t\)</span> is continuous.</p>
+</details>
+<details>
+<summary>
+<strong>Solution (iii).</strong>
+</summary>
+<p>Let <span class="math inline">\(c&gt;0\)</span> be given. We show
+that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=X_t=cW\left(\frac{t}{c^2}\right)"/></span></p>
+<p>is a Brownian motion. We simply show the four properties. Let <span
+class="math inline">\(t=0\)</span> and notice</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=X_0=cW\left(\frac{0}{c^2}\right)=cW(0)=0."/></span></p>
+<p>The second property follows from seperate transformation and that for
+<span class="math inline">\(r&lt;u\le s&lt;t\)</span> we consider</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=X_u-X_r=c\left(W\left(\frac{u}{c^2}\right)-W\left(\frac{r}{c^2}\right)\right)\hspace{20pt}\text{and}\hspace{20pt}X_t-X_s=c\left(W\left(\frac{t}{c^2}\right)-W\left(\frac{s}{c^2}\right)\right)"/></span></p>
+<p>and since <span class="math inline">\(c,r,u,t,s&gt;0\)</span> we have
+the same order for the scaled version of <span
+class="math inline">\(r,u,t,s\)</span> and hence we have two independent
+RV scaled by <span class="math inline">\(c\)</span>. Then by seperate
+transformations the variables is still independent. Next for the third
+property:</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=X_t-X_s=c\left(W\left(\frac{t}{c^2}\right)-W\left(\frac{s}{c^2}\right)\right)\sim\mathcal{N}\left(c\cdot 0,c^2\left(\frac{t}{c^2}-\frac{s}{c^2}\right)\right)=\mathcal{N}(0,t-s)."/></span></p>
+<p>Where we use the properties of scaling a normal distributed random
+variable i.e. for <span class="math inline">\(c&gt;0\)</span> and
+<img class="math inline"  src="https://math.vercel.app?inline= N\sim\mathcal{N}(\mu,\sigma ^2)" />
+it follows that
+<img class="math inline"  src="https://math.vercel.app?inline=c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)" />.
+Finally, the forth property follows since <span
+class="math inline">\(g(f)=cf\)</span> is continuous and <span
+class="math inline">\(h(t)=t/c^2\)</span> is continuous, then for any
+continuous function <span class="math inline">\(f(s)\)</span> it follows
+that
+<img src="https://math.vercel.app?inline=(g \circ f\circ h)=g(f(h(t)))"/>
+is continuous.</p>
+</details>
+<p> </p>
+<blockquote class="prop">
+<strong>Proposition B.37.</strong> Let
+<img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/> be a
+given probability space, let
+<img src="https://math.vercel.app?inline=\mathcal{G}"/> be a
+sub-sigma-algebra of
+<img src="https://math.vercel.app?inline=\mathcal{F}"/>, and let <span
+class="math inline">\(X\)</span> be a square integrable random variable.
+Consider the problem of minimizing <span
+class="math center"><img src="https://math.vercel.app?from=E\left[(X-Z)^2\right]"/></span>
+where <span class="math inline">\(Z\)</span> is allowed to vary over the
+class of all square integrable
+<img src="https://math.vercel.app?inline=\mathcal{G}"/> measurable
+random variables. The optimal solution
+<img src="https://math.vercel.app?inline=\hat{Z}"/> is then given by.
+<span
+class="math center"><img src="https://math.vercel.app?from=\hat{Z}=E[X\vert\mathcal{G}]."/></span>
+</blockquote>
+<p><strong>Exercise 2.</strong> <em>(Bjork, exercise B.11.)</em> Prove
+proposition B.37 by going along the following lines.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Prove that the “estimation error”
+<img src="https://math.vercel.app?inline=X-E[X\vert\mathcal{G}]"/> is
+orthogonal to
+<img src="https://math.vercel.app?inline=L^2(\Omega,\mathcal{G},P)"/> in
+the sence that for any
+<img src="https://math.vercel.app?inline=Z\in L^2(\Omega,\mathcal{G},P)"/>
+we have <span
+class="math center"><img src="https://math.vercel.app?from=E[Z\cdot(X-E[X\vert\mathcal{G}])]=0"/></span></li>
+<li>Now prove the proposition by writing <span
+class="math center"><img src="https://math.vercel.app?from=X-Z=(X-E[X\vert\mathcal{G}])%2B(E[X\vert\mathcal{G}]-Z)"/></span>
+and use the result just proved.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution (a).</strong>
+</summary>
+<p>Let
+<img src="https://math.vercel.app?inline=X\in L^2(\Omega,\mathcal{F},P):=F"/>
+be a random variable. Now consider an arbitrary
+<img src="https://math.vercel.app?inline=Z\in L^2(\Omega,\mathcal{G},P):=G"/>.
+Recall that
+<img src="https://math.vercel.app?inline= \mathcal{G}\subset \mathcal{F}"/>
+and so <span class="math inline">\(X\)</span> is also in <span
+class="math inline">\(G\)</span>, as it is bothe square integrable and
+<img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable.
+Then</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right]."/></span></p>
+<p>Then by using the law of total expectation and secondly that <span
+class="math inline">\(Z\)</span> is
+<img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable we
+have that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right]."/></span></p>
+<p>Combining the two equations gives the desired result.</p>
+</details>
+<details>
+<summary>
+<strong>Solution (b).</strong>
+</summary>
+<p>Obviously, we have that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=X-Z=X-Z%2BE[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])%2B(E[X\vert\mathcal{G}]-Z)."/></span></p>
+<p>Then squaring the terms gives</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=(X-Z)^2=(X-E[X\vert\mathcal{G}])^2%2B(E[X\vert\mathcal{G}]-Z)^2%2B2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)"/></span></p>
+<p>Taking expectation on each side and using linearity of the
+expectation we have that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]%2B2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right]."/></span></p>
+<p>We can now use that
+<img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]-Z"/> is
+<img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable with
+the above result on the last term.</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]."/></span></p>
+<p>Now since <span class="math inline">\(X\)</span> is given the term
+<img src="https://math.vercel.app?inline=E\left[(X-E[X\vert\mathcal{G}])^2\right]"/>
+is simply a constant not depending on the choice og <span
+class="math inline">\(Z\)</span>. The optimal choice of <span
+class="math inline">\(Z\)</span> is then
+<img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]"/> since
+this minimizes the second term. The statement is then proved.</p>
+</details>
+<p> </p>
+<p><strong>Exercise 3.</strong> Discuss the following theory/results of
+Moment generating functions (Laplace transform).</p>
+<p>Let <span class="math inline">\(X\)</span> be a random variable with
+distribution function <span class="math inline">\(F(x)=P(X\le
+x)\)</span> and <span class="math inline">\(Y\)</span> be a random
+variable with distribution function <span
+class="math inline">\(G(y)=P(Y\le y)\)</span>.</p>
+<blockquote class="def">
+<p><strong>Definition.</strong> The moment generating function or
+Laplace transform of <span class="math inline">\(X\)</span> is</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)"/></span></p>
+provided the expectation is finite for <span
+class="math inline">\(\vert\lambda\vert&lt;h\)</span> for some <span
+class="math inline">\(h&gt;0\)</span>.
+</blockquote>
+<p>The MGF uniquely determine the distribution of a random variable, due
+to the following result.</p>
+<blockquote class="thm">
+<strong>Theorem 1.</strong> <em>(Uniqueness)</em> If <span
+class="math inline">\(\psi_X(\lambda)=\psi_Y(\lambda)\)</span> when
+<span class="math inline">\(\vert\lambda\vert&lt;h\)</span> for some
+<span class="math inline">\(h&gt;0\)</span>, then <span
+class="math inline">\(X\)</span> and <span
+class="math inline">\(Y\)</span> has the same distribution, that is,
+<span class="math inline">\(F=G\)</span>.
+</blockquote>
+<p>There is also the following result of independence for Moment
+generating functions.</p>
+<blockquote class="thm">
+<p><strong>Theorem 1.</strong> <em>(Independence)</em> If</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)"/></span></p>
+for <span class="math inline">\(\vert\lambda_i\vert&lt;h\)</span> for
+<span class="math inline">\(i=1,2\)</span> for some <span
+class="math inline">\(h&gt;0\)</span>, then <span
+class="math inline">\(X\)</span> and <span
+class="math inline">\(Y\)</span> are independent random variables.
+</blockquote>
+<p><strong>Example.</strong> Recall that the Moment generating function
+of a normal (Gaussian) distribution is given by</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\exp\left(\lambda \mu %2B \frac{\lambda^2}{2}\sigma^2\right)"/></span></p>
+<p>where <span class="math inline">\(X\)</span> is normally distributed
+with mean <span class="math inline">\(\mu\)</span> and variance <span
+class="math inline">\(\sigma^2\)</span> and
+<img src="https://math.vercel.app?inline=\lambda\in\mathbb{R}"/> is a
+constant. Since a Brownian motion <span
+class="math inline">\(W(t)\)</span> is normally distributed with zero
+mean and variance <span class="math inline">\(t\)</span>, we have
+that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[\exp(\lambda W(t))]=\exp\left(\frac{\lambda^2}{2}t\right)."/></span></p>
+<details>
+<summary>
+<strong>Discussion.</strong>
+</summary>
+</details>
+<p> </p>
+<p><strong>Exercise 4.</strong> <em>(Bjork, exercise C.8.(a-c))</em> Let
+<span class="math inline">\(W\)</span> be a Brownian motion. Notice that
+for the natural filtration
+<img src="https://math.vercel.app?inline=\mathcal{F}_s=\sigma(W_t\vert t\le s)"/>
+<span class="math inline">\(W_t-W_s\)</span> is independent of
+<img src="https://math.vercel.app?inline=\mathcal{F}_s"/>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(W_t\)</span> is a
+martingale.</li>
+<li>Show that <span class="math inline">\(W^2_t-t\)</span> is a
+martingale.</li>
+<li>Show that <span class="math inline">\(\exp(\lambda
+W_t-\frac{\lambda^2}{2}t)\)</span> is a martingale.</li>
+</ol>
+<details>
+<summary>
+<strong>Solution (a).</strong>
+</summary>
+<p>We show that for the natural filtration that <span
+class="math inline">\(W_t\)</span> is a martingale. This include showing
+integrability and the martingale property. For the first we note that
+for a normal distributed random variable with mean 0 we have</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[\vert N\vert]=\int_{-\infty}^\infty \vert x\vert dF_N(x)=2\int_{0}^\infty xdF_N(x)"/></span></p>
+<p>since the distribution is symmetric. Substituting the distribution
+function <span class="math inline">\(\Phi(x)=P(N\le x)\)</span> in we
+see that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[\vert N\vert]=2\int_{0}^\infty xd\Phi(x)=2\int_{0}^\infty x\frac{1}{\sqrt{2\pi\sigma^2}}e^{-x^2/(2\sigma^2)}dx=(*)"/></span></p>
+<p>by substituting <span
+class="math inline">\(u=x^2/(2\sigma^2)\)</span> (<span
+class="math inline">\(x=\sqrt{2\sigma^2u}\)</span>) we have that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=\frac{dx}{du}=\frac{1}{2}\sqrt{2\sigma^2u}2\sigma^2=(\sigma^2)^{3/2}\sqrt{2}u\iff dx=(\sigma^2)^{3/2}\sqrt{2}u\ du"/></span></p>
+<p>hence</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=(*)=\frac{2}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{2\sigma^2u}e^{-u}(\sigma^2)^{3/2}\sqrt{2}u\ du=\frac{2\sqrt{2\sigma^2}(\sigma^2)^{3/2}\sqrt{2}}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{u}e^{-u}u\ du."/></span></p>
+<p>This then simplify to</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=(*)=\frac{(2\sigma^2)^{3/2}}{\sqrt{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=(2\sigma^2)^{1/2}\sqrt{\frac{2\sigma^2}{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=\sqrt{\frac{2\sigma^2}{\pi}}<\infty."/></span></p>
+<p>(Obviously the above is not derived correctly, but the end expression
+is valid, source: <a
+href="https://arxiv.org/pdf/1402.3559.pdf">link</a>) However since</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=W_t=W_t-0=W_t-W_0\sim\mathcal{N}(0,t)"/></span></p>
+<p>we have that
+<img src="https://math.vercel.app?inline=E\vert W_t\vert<\infty"/> as
+desired.</p>
+<p>Next, we have that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[W_t\vert \mathcal{F}_s]=E[W_t-W_s\vert\mathcal{F}_s]+W_s=0%2BW_s=W_s."/></span></p>
+<p>In the above we used that <span
+class="math inline">\(W_t-W_s\)</span> is
+<img src="https://math.vercel.app?inline=\mathcal{F}_s"/>-measurable
+with mean 0. Then it follows that <span
+class="math inline">\(W_t\)</span> is a martingale.</p>
+</details>
+<details>
+<summary>
+<strong>Solution (b).</strong>
+</summary>
+<p>Let <img src="https://math.vercel.app?inline=M_t=W_t^2-t"/>. First,
+we observe that two measurable functions composed is still a measurable
+function. Hence we know that <span class="math inline">\(M_t\)</span> is
+measurable wrt. the filtration since <span
+class="math inline">\(W_t\)</span> is measurable and <span
+class="math inline">\(w\mapsto w^2+t\)</span> is measurable. Secondly,
+we have that</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[\vert W_t^2-t\vert]\le E\vert W_t^2\vert %2BE\vert t\vert=t%2Bt=2t<\infty"/></span></p>
+<p>where we use the triangle inequality. Thirdly, for the martingale
+property we have that for <span
+class="math inline">\(t&gt;s\)</span>:</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=E[W_t^2-t\vert \mathcal{F}_s]=E[W_t^2%2BW_s^2-2W_tW_s-W_s^2%2B2W_tW_s-t\vert \mathcal{F}_s]"/></span></p>
+<p>which by linearity and independence of increments to the filtration
+gives</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=E[(W_t-W_s)^2-W_s^2%2B2W_tW_s-t\vert \mathcal{F}_s]=t-s-t%2BE[2W_tW_s-W_s^2\vert \mathcal{F}_s]"/></span></p>
+<p>However since <span class="math inline">\(W_s\)</span> is measurable
+wrt. the filtration at time <span class="math inline">\(s\)</span> the
+above is</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=2W_sE[W_t\vert \mathcal{F}_s]-W_s^2-s=2W_s^2-W_s^2-s=W_s^2-s=M_s."/></span></p>
+<p>Since from (a) we know that <span class="math inline">\(W_t\)</span>
+is a martingale. Then we arrive at the desired result.</p>
+</details>
+<details>
+<summary>
+<strong>Solution (c).</strong>
+</summary>
+<p>Let
+<img src="https://math.vercel.app?inline=M_t=\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)"/>.
+First, by composition of measurable functions <span
+class="math inline">\(M_t\)</span> is
+<img src="https://math.vercel.app?inline=\mathcal{F}_t"/>-measurable.
+Secondly, we have using the MGF for a normal distributed random
+variable:</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E\vert M_t=E\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\le E\left(\exp\left(\lambda W_t\right)\right)=\exp\left(\frac{\lambda^2}{2}t\right)<\infty."/></span></p>
+<p>Thirdly, we consider</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[M_t\vert\mathcal{F}_s]=E\left.\left[\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(-\frac{\lambda^2}{2}t\right)E\left.\left[\left(\exp\left(\lambda W_t\right)\right)\right\vert\mathcal{F}_s\right]."/></span></p>
+<p>By adding and subtracting <span class="math inline">\(W_s\)</span> in
+the exponent we get</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[M_t\vert\mathcal{F}_s]=\exp\left(-\frac{\lambda^2}{2}t\right)E\left.\left[\left(\exp\left(\lambda (W_t-W_s)%2B\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(-\frac{\lambda^2}{2}t\right)\exp\left(\frac{\lambda^2}{2}(t-s)\right)E\left.\left[\left(\exp\left(\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]."/></span></p>
+<p>Using that
+<img src="https://math.vercel.app?inline=E\left.\left[\left(\exp\left(\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(\lambda W_s\right)"/>
+and combining the exponents gives the desired:</p>
+<p><span
+class="math center"><img src="https://math.vercel.app?from=E[M_t\vert\mathcal{F}_s]=\exp\left(\lambda W_s-\frac{\lambda^2}{2}s\right)=M_s."/></span></p>
+</details>
+</div>
+</div>
+<div id="week-2" class="section level2">
+<h2>Week 2</h2>
+<div id="material-1" class="section level3">
+<h3>Material</h3>
+<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
+refers to the notes by Hult and Lindskog posted on Absalon.</p>
+<ul>
+<li>Var-Cov method, simulation, importance sampling and bootstrap. For
+the Var-Cov method, see MFE Sec. 9.2. For importance sampling and
+bootstrap, see the supplementary reading in Absalon.</li>
+<li>Extreme value theory: MFE Ch. 5 or alternative reading in HL
+(suggested for this part).</li>
+</ul>
+</div>
+<div id="theory-1" class="section level3">
+<h3>Theory</h3>
+</div>
+<div id="exercises-1" class="section level3">
+<h3>Exercises</h3>
+</div>
+</div>
+<div id="week-3" class="section level2">
+<h2>Week 3</h2>
+<div id="material-2" class="section level3">
+<h3>Material</h3>
+<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
+refers to the notes by Hult and Lindskog posted on Absalon.</p>
+<ul>
+<li>Spherical and elliptical distributions: MFE Sec. 6.3.</li>
+<li>Spherical and elliptical distributions, cont.; introduction to
+copulas.</li>
+</ul>
+</div>
+<div id="theory-2" class="section level3">
+<h3>Theory</h3>
+</div>
+<div id="exercises-2" class="section level3">
+<h3>Exercises</h3>
+</div>
+</div>
+<div id="week-4" class="section level2">
+<h2>Week 4</h2>
+<div id="material-3" class="section level3">
+<h3>Material</h3>
+<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
+refers to the notes by Hult and Lindskog posted on Absalon.</p>
+<ul>
+<li>Copulas: MFE Sec. 7.1-7.5 (Sklar’s theorem, Frechet bounds).</li>
+<li>Copulas cont. (Transformations; examples; Archimedean copulas).</li>
+</ul>
+</div>
+<div id="theory-3" class="section level3">
+<h3>Theory</h3>
+</div>
+<div id="exercises-3" class="section level3">
+<h3>Exercises</h3>
+</div>
+</div>
+<div id="week-5" class="section level2">
+<h2>Week 5</h2>
+<div id="material-4" class="section level3">
+<h3>Material</h3>
+<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
+refers to the notes by Hult and Lindskog posted on Absalon.</p>
+<ul>
+<li>Copulas cont. (simulating Archimedean copulas, statistical methods,
+measures of dependence).</li>
+<li>Credit risk: the Merton model. MFE Ch. 10, particularly Sec. 10.3.
+[This lecture will only last two hours.]</li>
+</ul>
+</div>
+<div id="theory-4" class="section level3">
+<h3>Theory</h3>
+</div>
+<div id="exercises-4" class="section level3">
+<h3>Exercises</h3>
+</div>
+</div>
+<div id="week-6" class="section level2">
+<h2>Week 6</h2>
+<div id="material-5" class="section level3">
+<h3>Material</h3>
+<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
+refers to the notes by Hult and Lindskog posted on Absalon.</p>
+<ul>
+<li>Portfolio credit risk: MFE Ch. 11, specifically Sections
+11.1-11.3.</li>
+<li>Portfolio credit risk, cont. [This lecture will only last two
+hours.]</li>
+</ul>
+</div>
+<div id="theory-5" class="section level3">
+<h3>Theory</h3>
+</div>
+<div id="exercises-5" class="section level3">
+<h3>Exercises</h3>
+</div>
+</div>
+<div id="week-7" class="section level2">
+<h2>Week 7</h2>
+<div id="material-6" class="section level3">
+<h3>Material</h3>
+<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
+refers to the notes by Hult and Lindskog posted on Absalon.</p>
+<ul>
+<li>Intro. to operational risk. Stochastic processes in risk management:
+stochastic models for operational risk; financial time series models.
+Connections to non-life insurance models and estimates (last
+lecture).</li>
+</ul>
+</div>
+<div id="theory-6" class="section level3">
+<h3>Theory</h3>
+</div>
+<div id="exercises-6" class="section level3">
+<h3>Exercises</h3>
+</div>
+</div>
+</div>
+
+<style>
+  footer{
+    background: rgb(34,34,34);
+    width:100%;
+    height:150px; /*Same as main-container padding in bottom!!*/
+    position:absolute;
+    bottom:0;
+    left:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+footer h3{
+    font-size: 2.1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 3rem;
+    color:white;
+}
+footer p{
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+    color: #cacdd2;
+}
+</style>
+
+<script>
+$(function() {
+  $('.main-container').after($('footer'));
+})
+</script>
+
+
+<footer>
+
+<h3>Msc in Actuarial Mathematics</h3>
+<p>This website is made to organize the content of the education including preparement for exams and exercise classes.</p>
+</footer>
+
+<!--
+References:
+https://foolishdeveloper.com/simple-responsive-footer-design-using-html-and-css/
+https://stackoverflow.com/questions/7202427/make-footer-take-remianing-bottom-space-using-css
+https://github.com/rstudio/rmarkdown/issues/1761
+-->
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

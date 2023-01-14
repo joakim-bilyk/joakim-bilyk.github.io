@@ -13,16 +13,91 @@ library(dplyr)
 #rmarkdown::render(input = "FinKont_homework.Rmd", output_format = "pdf_document")
 ```
 
+## Random variables
+
+### Conditional expectation
+
+<blockquote class = "prop">
+**Proposition.** *(Bjork, B.37.) Let <img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/> be a given probability space, let <img src="https://math.vercel.app?inline=\mathcal{G}"/> be a sub-sigma-algebra of <img src="https://math.vercel.app?inline=\mathcal{F}"/>, and let $X$ be a square integrable random variable.
+Consider the problem of minimizing
+<span class="math center"><img src="https://math.vercel.app?from=E\left[(X-Z)^2\right]"/></span>
+where $Z$ is allowed to vary over the class of all square integrable <img src="https://math.vercel.app?inline=\mathcal{G}"/> measurable random variables. The optimal solution <img src="https://math.vercel.app?inline=\hat{Z}"/> is then given by.
+<span class="math center"><img src="https://math.vercel.app?from=\hat{Z}=E[X\vert\mathcal{G}]."/></span>
+</blockquote>
+
+<details>
+<summary>**Proof.**</summary>
+
+Let <img src="https://math.vercel.app?inline=X\in L^2(\Omega,\mathcal{F},P):=F"/> be a random variable. Now consider an arbitrary <img src="https://math.vercel.app?inline=Z\in L^2(\Omega,\mathcal{G},P):=G"/>. Recall that <img src="https://math.vercel.app?inline= \mathcal{G}\subset \mathcal{F}"/> and so $X$ is also in $G$, as it is bothe square integrable and <img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable. Then
+
+<span class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right]."/></span>
+
+Then by using the law of total expectation and secondly that $Z$ is <img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right]."/></span>
+
+Combining the two equations gives the desired result. Obviously, we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=X-Z=X-Z%2BE[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])%2B(E[X\vert\mathcal{G}]-Z)."/></span>
+
+Then squaring the terms gives
+
+<span class="math center"><img src="https://math.vercel.app?from=(X-Z)^2=(X-E[X\vert\mathcal{G}])^2%2B(E[X\vert\mathcal{G}]-Z)^2%2B2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)"/></span>
+
+Taking expectation on each side and using linearity of the expectation we have that
+
+<span class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]%2B2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right]."/></span>
+
+We can now use that <img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]-Z"/> is <img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable with the above result on the last term.
+
+<span class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]."/></span>
+
+Now since $X$ is given the term <img src="https://math.vercel.app?inline=E\left[(X-E[X\vert\mathcal{G}])^2\right]"/> is simply a constant not depending on the choice og $Z$. The optimal choice of $Z$ is then <img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]"/> since this minimizes the second term. The statement is then proved.
+
+</details>
+
+&nbsp;
+
+### Moment generating function/Laplace transform
+
+Let $X$ be a random variable with distribution function $F(x)=P(X\le x)$ and $Y$ be a random variable with distribution function $G(y)=P(Y\le y)$.
+
+<blockquote class = "def">
+**Definition.** The moment generating function or Laplace transform of $X$ is
+
+<span class="math center"><img src="https://math.vercel.app?from=\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)"/></span>
+
+provided the expectation is finite for $\vert\lambda\vert<h$ for some $h>0$.
+</blockquote>
+
+The MGF uniquely determine the distribution of a random variable, due to the following result.
+
+<blockquote class = "thm">
+**Theorem.** *(Uniqueness)* If $\psi_X(\lambda)=\psi_Y(\lambda)$ when $\vert\lambda\vert<h$ for some $h>0$, then $X$ and $Y$ has the same distribution, that is, $F=G$.
+</blockquote>
+
+There is also the following result of independence for Moment generating functions.
+
+<blockquote class = "thm">
+**Theorem.** *(Independence)* If 
+
+<span class="math center"><img src="https://math.vercel.app?from=E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)"/></span>
+
+for $\vert\lambda_i\vert<h$ for $i=1,2$ for some $h>0$, then $X$ and $Y$ are independent random variables.
+</blockquote>
+
 ## Stochastic processes
 
 ### Brownian Motion
 
->**Brownian motion** *(Bjork, def. 4.1)*  A stochastic process $W$ is called a **Brownian motion** or **Wiener process** if the following conditions hold
->
-> 1. <img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.
-> 2. The process <img class="math inline"  src="https://math.vercel.app?inline=W"/> has independent increments, i.e. if <img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/> then <img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/> and <img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/> are independent random variables.
-> 3. For <img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the random variable <img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/> has the Gaussian distribution <img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.
-> 4. <img class="math inline"  src="https://math.vercel.app?inline=W"/> has continuous trajectories i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/> i continuous for all <img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.
+<blockquote class = "def">
+**Definition.** *(Bjork, def. 4.1)* A stochastic process $W$ is called a **Brownian motion** or **Wiener process** if the following conditions hold
+
+ 1. <img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.
+ 2. The process <img class="math inline"  src="https://math.vercel.app?inline=W"/> has independent increments, i.e. if <img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/> then <img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/> and <img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/> are independent random variables.
+ 3. For <img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the random variable <img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/> has the Gaussian distribution <img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.
+ 4. <img class="math inline"  src="https://math.vercel.app?inline=W"/> has continuous trajectories i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/> i continuous for all <img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.
+</blockquote>
 
 ```{r}
 #Example of trajectory for BM
@@ -44,3 +119,15 @@ data.frame(t = t, W = W) %>%
   theme(axis.text = element_text(size = 15),
         title = element_text(size = 18))
 ```
+
+### Martingale
+
+<blockquote class = "def">
+
+**Definition.** Let $M_t$ be a stochastic process defined on a background space <img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/>. Let <img src="https://math.vercel.app?inline=(\mathcal{F}_t)_{t\ge 0}"/> be a filtration. If $M_t$ is adapted to the filtration <img src="https://math.vercel.app?inline=\mathcal{F}_t"/>, $E\vert M_t\vert <\infty$ and
+
+<span class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=M_s"/></span>
+
+holds for any $t>s$ we say that $M_t$ is a martingale.
+
+</blockquote>

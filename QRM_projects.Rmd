@@ -8,11 +8,7 @@ output:
 
 # Assignment 1
 
-<iframe src=
-"pdf/render/QRM-Assignment1.pdf" 
-                width="800" 
-                height="1100">
-</iframe>
+<iframe src="pdf/render/QRM-Assignment1.pdf"></iframe>
 
 # Assignment 2
 
@@ -24,11 +20,7 @@ rmarkdown::render(
 )
 ```
 
-<iframe src=
-"pdf/render/QRM-Assignment2.pdf" 
-                width="800" 
-                height="1100">
-</iframe>
+<iframe src="pdf/render/QRM-Assignment2.pdf"></iframe>
 
 ```{r,include=FALSE}
 library(kableExtra)

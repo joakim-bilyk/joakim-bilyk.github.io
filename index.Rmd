@@ -2,11 +2,4 @@
 title: "My Website"
 ---
 
-<form action="https://duckduckgo.com/?"
-  oninput="q.value=document.getElementById('search').value +' site:example.com'">
-    <input type="text" id="search" required=""/>
-    <input type="hidden" name="q"/>
-    <input type="submit" value="Search"/>
-</form>
-
 Hello, Website!
