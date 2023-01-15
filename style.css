@@ -103,6 +103,11 @@ h3 {
   font-weight: bold;
 }
 
+.sourceCode .r pre {
+  border-radius: 5px;
+  border: 2px solid gray;
+}
+
 .btn {
   color: black;
   background: aliceblue;
@@ -154,11 +159,29 @@ iframe {
 .dark-mode blockquote {
   color: black;
 }
+.dark-mode .def {
+  color: black;
+  background: LightSteelBlue;
+}
+.dark-mode .prop {
+  color: black;
+  background:#ECD9D9;
+}
+.dark-mode .lem {
+  color: black;
+  background:#ECD9D9;
+}
+.dark-mode .thm {
+  color: black;
+  background: #CBB2B1;
+}
 .dark-mode summary {
   color: black;
+  background: #DAD6CB;
 }
 .dark-mode details {
   color: black;
+  background: #DAD6CB;
 }
 
 .switch {
