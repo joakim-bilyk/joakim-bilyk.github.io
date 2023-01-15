@@ -1,11 +1,25 @@
-<div style="float: right;">
-  <p>Switch to dark mode
+<div class = "sticky-darkmode-toggle">
   <label class="switch">
   <input type="checkbox" onclick="myFunction()">
-  <span class="slider round"></span>
+  <span class="slider round">
+  </span>
   </label>
-  </p>
 </div>
+
+<script>
+$(function() {
+  $('.main-container').after($('.sticky-darkmode-toggle'));
+})
+</script>
+
+<style>
+
+.sticky-darkmode-toggle {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+}
+</style>
 
 <script>
 function myFunction() {
@@ -13,6 +27,7 @@ function myFunction() {
    element.classList.toggle("dark-mode");
 }
 </script>
+
 <script>
   (function () {
     var script = document.createElement("script");

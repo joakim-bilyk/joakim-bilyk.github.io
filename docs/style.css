@@ -183,7 +183,16 @@ iframe {
   color: black;
   background: #DAD6CB;
 }
-
+.dark-mode details {
+  color: black;
+  background: #DAD6CB;
+}
+.dark-mode #TOC {
+  color: black;
+}
+#TOC {
+  z-index:9999;
+}
 .switch {
   position: relative;
   display: inline-block;

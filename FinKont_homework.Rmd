@@ -1,11 +1,47 @@
 ---
 title: "Homework (FinKont)"
+author: "Joakim Bilyk"
+date: "`r Sys.Date()`"
+header-includes:
+   - \usepackage{wrapfig}
+   - \usepackage{graphics}
 output:
   html_document:
     toc: no
-    toc_float: yes
     code_folding: hide
+  pdf_document:
+    toc: yes
 ---
+
+```{r, setup,include=FALSE}
+if (knitr::is_latex_output()) {
+  knitr::opts_chunk$set(
+    fig.show = 'hide',
+    wrapf = TRUE
+  )
+} else {
+  knitr::opts_chunk$set(
+    out.extra = 'style="float:right; padding:10px"',
+    out.width= "50%"
+  )
+}
+library(knitr)
+knit_hooks$set(wrapf = function(before, options, envir) {
+  if (!before) {
+    output <- vector(mode = "character", length = options$fig.num + 1)
+
+    for (i in 1:options$fig.num) {
+      output[i] <- sprintf("\\includegraphics{%s}", fig_path(number = i))
+    }
+
+    output[i+1] <- "\\end{wrapfigure}"
+    output <- c("\\begin{wrapfigure}{R}{0.5\\textwidth}",output)
+    if (length(output)>= 3) {
+      return(paste(output, collapse = ""))
+    }
+  }
+})
+```
 
 ```{r, include=FALSE, results = 'hide'}
 library(ggplot2)
@@ -51,7 +87,7 @@ N <- rnorm(
 )
 W <- c(0,cumsum(N))
 ```
-```{r,echo=FALSE,out.width= "50%", out.extra='style="float:right; padding:10px"',include=TRUE}
+```{r,echo=FALSE,include=TRUE}
 data.frame(t = t, W = W) %>%
   ggplot() +
   geom_line(aes(x=t,y=W)) +
@@ -132,7 +168,7 @@ and since $c,r,u,t,s>0$ we have the same order for the scaled version of $r,u,t,
 
 $$X_t-X_s=c\left(W\left(\frac{t}{c^2}\right)-W\left(\frac{s}{c^2}\right)\right)\sim\mathcal{N}\left(c\cdot 0,c^2\left(\frac{t}{c^2}-\frac{s}{c^2}\right)\right)=\mathcal{N}(0,t-s).$$
 
-Where we use the properties of scaling a normal distributed random variable i.e. for $c>0$ and $ N\sim\mathcal{N}(\mu,\sigma ^2)$ it follows that $c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)$. Finally, the forth property follows since $g(f)=cf$ is continuous and $h(t)=t/c^2$ is continuous, then for any continuous function $f(s)$ it follows that $(g \circ f\circ h)=g(f(h(t)))$ is continuous.
+Where we use the properties of scaling a normal distributed random variable i.e. for $c>0$ and $N\sim\mathcal{N}(\mu,\sigma ^2)$ it follows that $c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)$. Finally, the forth property follows since $g(f)=cf$ is continuous and $h(t)=t/c^2$ is continuous, then for any continuous function $f(s)$ it follows that $(g \circ f\circ h)=g(f(h(t)))$ is continuous.
 
 </details>
 
@@ -157,7 +193,7 @@ $$\hat{Z}=E[X\vert\mathcal{G}].$$
 <details>
 <summary>**Solution (a).**</summary>
 
-Let $X\in L^2(\Omega,\mathcal{F},P)$ be a random variable. Now consider an arbitrary $Z\in L^2(\Omega,\mathcal{G},P)$. Recall that $ \mathcal{G}\subset \mathcal{F}$ and so $X$ is also in $Z\in L^2(\Omega,\mathcal{G},P)$, as it is bothe square integrable and $\mathcal{G}$-measurable. Then
+Let $X\in L^2(\Omega,\mathcal{F},P)$ be a random variable. Now consider an arbitrary $Z\in L^2(\Omega,\mathcal{G},P)$. Recall that $\mathcal{G}\subset \mathcal{F}$ and so $X$ is also in $Z\in L^2(\Omega,\mathcal{G},P)$, as it is bothe square integrable and $\mathcal{G}$-measurable. Then
 
 $$E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].$$
 

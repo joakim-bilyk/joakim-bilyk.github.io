@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Joakim Bilyk" />
 
+<meta name="date" content="2023-01-15" />
 
-<title>Homework (FinKont)</title>
+<title>Theory</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -36,14 +38,28 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<div style="float: right;">
-  <p>Switch to dark mode
+<div class = "sticky-darkmode-toggle">
   <label class="switch">
   <input type="checkbox" onclick="myFunction()">
-  <span class="slider round"></span>
+  <span class="slider round">
+  </span>
   </label>
-  </p>
 </div>
+
+<script>
+$(function() {
+  $('.main-container').after($('.sticky-darkmode-toggle'));
+})
+</script>
+
+<style>
+
+.sticky-darkmode-toggle {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+}
+</style>
 
 <script>
 function myFunction() {
@@ -51,6 +67,7 @@ function myFunction() {
    element.classList.toggle("dark-mode");
 }
 </script>
+
 <script>
   (function () {
     var script = document.createElement("script");
@@ -458,10 +475,16 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="theory.html">Theory</a>
+  <a href="theory.html">
+    <span class="fa fa-integral"></span>
+     
+    Theory
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-person"></span>
+     
     Life insurance
      
     <span class="caret"></span>
@@ -488,6 +511,8 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-house"></span>
+     
     Non-life insurance
      
     <span class="caret"></span>
@@ -517,7 +542,13 @@ div.tocify {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="pdf_renders.html">
+    <span class="fa fa-file"></span>
+     
+    PDF-renders
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -535,7 +566,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Homework (FinKont)</h1>
+<h1 class="title toc-ignore">Theory</h1>
+<h4 class="author">Joakim Bilyk</h4>
+<h4 class="date">2023-01-15</h4>
 
 </div>
 
@@ -545,75 +578,72 @@ div.tocify {
 <div id="conditional-expectation" class="section level3">
 <h3>Conditional expectation</h3>
 <blockquote class="prop">
-<strong>Proposition.</strong> *(Bjork, B.37.) Let
-<img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/> be a
-given probability space, let
-<img src="https://math.vercel.app?inline=\mathcal{G}"/> be a
-sub-sigma-algebra of
-<img src="https://math.vercel.app?inline=\mathcal{F}"/>, and let <span
+<strong>Proposition.</strong> *(Bjork, B.37.) Let <span
+class="math inline">\((\Omega,\mathcal{F},P)\)</span> be a given
+probability space, let <span class="math inline">\(\mathcal{G}\)</span>
+be a sub-sigma-algebra of <span
+class="math inline">\(\mathcal{F}\)</span>, and let <span
 class="math inline">\(X\)</span> be a square integrable random variable.
 Consider the problem of minimizing <span
-class="math center"><img src="https://math.vercel.app?from=E\left[(X-Z)^2\right]"/></span>
-where <span class="math inline">\(Z\)</span> is allowed to vary over the
-class of all square integrable
-<img src="https://math.vercel.app?inline=\mathcal{G}"/> measurable
-random variables. The optimal solution
-<img src="https://math.vercel.app?inline=\hat{Z}"/> is then given by.
-<span
-class="math center"><img src="https://math.vercel.app?from=\hat{Z}=E[X\vert\mathcal{G}]."/></span>
+class="math display">\[E\left[(X-Z)^2\right]\]</span> where <span
+class="math inline">\(Z\)</span> is allowed to vary over the class of
+all square integrable <span class="math inline">\(\mathcal{G}\)</span>
+measurable random variables. The optimal solution <span
+class="math inline">\(\hat{Z}\)</span> is then given by. <span
+class="math display">\[\hat{Z}=E[X\vert\mathcal{G}].\]</span>
 </blockquote>
 <details>
 <summary>
 <strong>Proof.</strong>
 </summary>
-<p>Let
-<img src="https://math.vercel.app?inline=X\in L^2(\Omega,\mathcal{F},P):=F"/>
-be a random variable. Now consider an arbitrary
-<img src="https://math.vercel.app?inline=Z\in L^2(\Omega,\mathcal{G},P):=G"/>.
-Recall that
-<img src="https://math.vercel.app?inline= \mathcal{G}\subset \mathcal{F}"/>
-and so <span class="math inline">\(X\)</span> is also in <span
-class="math inline">\(G\)</span>, as it is bothe square integrable and
-<img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable.
-Then</p>
+<p>Let <span class="math inline">\(X\in
+L^2(\Omega,\mathcal{F},P)\)</span> be a random variable. Now consider an
+arbitrary <span class="math inline">\(Z\in
+L^2(\Omega,\mathcal{G},P)\)</span>. Recall that <span
+class="math inline">\(\mathcal{G}\subset \mathcal{F}\)</span> and so
+<span class="math inline">\(X\)</span> is also in <span
+class="math inline">\(Z\in L^2(\Omega,\mathcal{G},P)\)</span>, as it is
+bothe square integrable and <span
+class="math inline">\(\mathcal{G}\)</span>-measurable. Then</p>
 <p><span
-class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right]."/></span></p>
+class="math display">\[E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot
+X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].\]</span></p>
 <p>Then by using the law of total expectation and secondly that <span
-class="math inline">\(Z\)</span> is
-<img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable we
-have that</p>
-<p><span
-class="math center"><img src="https://math.vercel.app?from=E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right]."/></span></p>
+class="math inline">\(Z\)</span> is <span
+class="math inline">\(\mathcal{G}\)</span>-measurable we have that</p>
+<p><span class="math display">\[E\left[Z\cdot X\right]=E\left[E[Z\cdot
+X\vert\mathcal{G}]\right]=E\left[Z\cdot E[
+X\vert\mathcal{G}]\right].\]</span></p>
 <p>Combining the two equations gives the desired result. Obviously, we
 have that</p>
 <p><span
-class="math center"><img src="https://math.vercel.app?from=X-Z=X-Z%2BE[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])%2B(E[X\vert\mathcal{G}]-Z)."/></span></p>
+class="math display">\[X-Z=X-Z+E[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])+(E[X\vert\mathcal{G}]-Z).\]</span></p>
 <p>Then squaring the terms gives</p>
 <p><span
-class="math center"><img src="https://math.vercel.app?from=(X-Z)^2=(X-E[X\vert\mathcal{G}])^2%2B(E[X\vert\mathcal{G}]-Z)^2%2B2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)"/></span></p>
+class="math display">\[(X-Z)^2=(X-E[X\vert\mathcal{G}])^2+(E[X\vert\mathcal{G}]-Z)^2+2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\]</span></p>
 <p>Taking expectation on each side and using linearity of the
 expectation we have that</p>
 <p><span
-class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]%2B2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right]."/></span></p>
-<p>We can now use that
-<img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]-Z"/> is
-<img src="https://math.vercel.app?inline=\mathcal{G}"/>-measurable with
-the above result on the last term.</p>
+class="math display">\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right]+2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right].\]</span></p>
+<p>We can now use that <span
+class="math inline">\(E[X\vert\mathcal{G}]-Z\)</span> is <span
+class="math inline">\(\mathcal{G}\)</span>-measurable with the above
+result on the last term.</p>
 <p><span
-class="math center"><img src="https://math.vercel.app?from=E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]%2BE\left[(E[X\vert\mathcal{G}]-Z)^2\right]."/></span></p>
+class="math display">\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right].\]</span></p>
 <p>Now since <span class="math inline">\(X\)</span> is given the term
-<img src="https://math.vercel.app?inline=E\left[(X-E[X\vert\mathcal{G}])^2\right]"/>
+<span
+class="math inline">\(E\left[(X-E[X\vert\mathcal{G}])^2\right]\)</span>
 is simply a constant not depending on the choice og <span
 class="math inline">\(Z\)</span>. The optimal choice of <span
-class="math inline">\(Z\)</span> is then
-<img src="https://math.vercel.app?inline=E[X\vert\mathcal{G}]"/> since
-this minimizes the second term. The statement is then proved.</p>
+class="math inline">\(Z\)</span> is then <span
+class="math inline">\(E[X\vert\mathcal{G}]\)</span> since this minimizes
+the second term. The statement is then proved.</p>
 </details>
 <p> </p>
 </div>
-<div id="moment-generating-functionlaplace-transform"
-class="section level3">
-<h3>Moment generating function/Laplace transform</h3>
+<div id="moment-generating-function" class="section level3">
+<h3>Moment generating function</h3>
 <p>Let <span class="math inline">\(X\)</span> be a random variable with
 distribution function <span class="math inline">\(F(x)=P(X\le
 x)\)</span> and <span class="math inline">\(Y\)</span> be a random
@@ -622,8 +652,8 @@ class="math inline">\(G(y)=P(Y\le y)\)</span>.</p>
 <blockquote class="def">
 <p><strong>Definition.</strong> The moment generating function or
 Laplace transform of <span class="math inline">\(X\)</span> is</p>
-<p><span
-class="math center"><img src="https://math.vercel.app?from=\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)"/></span></p>
+<p><span class="math display">\[\psi_X(\lambda)=E\left[e^{\lambda
+X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)\]</span></p>
 provided the expectation is finite for <span
 class="math inline">\(\vert\lambda\vert&lt;h\)</span> for some <span
 class="math inline">\(h&gt;0\)</span>.
@@ -644,7 +674,7 @@ generating functions.</p>
 <blockquote class="thm">
 <p><strong>Theorem.</strong> <em>(Independence)</em> If</p>
 <p><span
-class="math center"><img src="https://math.vercel.app?from=E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)"/></span></p>
+class="math display">\[E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)\]</span></p>
 for <span class="math inline">\(\vert\lambda_i\vert&lt;h\)</span> for
 <span class="math inline">\(i=1,2\)</span> for some <span
 class="math inline">\(h&gt;0\)</span>, then <span
@@ -663,27 +693,20 @@ process <span class="math inline">\(W\)</span> is called a
 <strong>Brownian motion</strong> or <strong>Wiener process</strong> if
 the following conditions hold</p>
 <ol style="list-style-type: decimal">
-<li><img class="math inline"  src="https://math.vercel.app?inline=W_0=0"/>.</li>
-<li>The process
-<img class="math inline"  src="https://math.vercel.app?inline=W"/> has
-independent increments, i.e. if
-<img class="math inline"  src="https://math.vercel.app?inline=r<s\le t< u"/>
-then
-<img class="math inline" src="https://math.vercel.app?inline=W_u-W_t"/>
-and
-<img class="math inline"  src="https://math.vercel.app?inline=W_s-W_r"/>
-are independent random variables.</li>
-<li>For
-<img class="math inline"  src="https://math.vercel.app?inline=s<t"/> the
-random variable
-<img class="math inline"  src="https://math.vercel.app?inline=W_t-W_s"/>
-has the Gaussian distribution
-<img class="math inline"  src="https://math.vercel.app?inline=\mathcal{N}(0,t-s)" />.</li>
-<li><img class="math inline"  src="https://math.vercel.app?inline=W"/>
-has continuous trajectories
-i.e. <img class="math inline"  src="https://math.vercel.app?inline=s\mapsto W(s;\omega)"/>
-i continuous for all
-<img class="math inline"  src="https://math.vercel.app?inline=\omega \in\Omega"/>.</li>
+<li><span class="math inline">\(W_0=0\)</span>.</li>
+<li>The process <span class="math inline">\(W\)</span> has independent
+increments, i.e. if <span class="math inline">\(r&lt;s\le t&lt;
+u\)</span> then <span class="math inline">\(W_u-W_t\)</span> and <span
+class="math inline">\(W_s-W_r\)</span> are independent random
+variables.</li>
+<li>For <span class="math inline">\(s&lt;t\)</span> the random variable
+<span class="math inline">\(W_t-W_s\)</span> has the Gaussian
+distribution <span
+class="math inline">\(\mathcal{N}(0,t-s)\)</span>.</li>
+<li><span class="math inline">\(W\)</span> has continuous trajectories
+i.e. <span class="math inline">\(s\mapsto W(s;\omega)\)</span> i
+continuous for all <span class="math inline">\(\omega
+\in\Omega\)</span>.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Example of trajectory for BM</span></span>
@@ -702,15 +725,14 @@ i continuous for all
 <blockquote class="def">
 <p><strong>Definition.</strong> Let <span
 class="math inline">\(M_t\)</span> be a stochastic process defined on a
-background space
-<img src="https://math.vercel.app?inline=(\Omega,\mathcal{F},P)"/>. Let
-<img src="https://math.vercel.app?inline=(\mathcal{F}_t)_{t\ge 0}"/> be
-a filtration. If <span class="math inline">\(M_t\)</span> is adapted to
-the filtration
-<img src="https://math.vercel.app?inline=\mathcal{F}_t"/>, <span
+background space <span
+class="math inline">\((\Omega,\mathcal{F},P)\)</span>. Let <span
+class="math inline">\((\mathcal{F}_t)_{t\ge 0}\)</span> be a filtration.
+If <span class="math inline">\(M_t\)</span> is adapted to the filtration
+<span class="math inline">\(\mathcal{F}_t\)</span>, <span
 class="math inline">\(E\vert M_t\vert &lt;\infty\)</span> and</p>
-<p><span
-class="math center"><img src="https://math.vercel.app?from=E[M_t\vert \mathcal{F}_s]=M_s"/></span></p>
+<p><span class="math display">\[E[M_t\vert
+\mathcal{F}_s]=M_s\]</span></p>
 <p>holds for any <span class="math inline">\(t&gt;s\)</span> we say that
 <span class="math inline">\(M_t\)</span> is a martingale.</p>
 </blockquote>

@@ -32,14 +32,28 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<div style="float: right;">
-  <p>Switch to dark mode
+<div class = "sticky-darkmode-toggle">
   <label class="switch">
   <input type="checkbox" onclick="myFunction()">
-  <span class="slider round"></span>
+  <span class="slider round">
+  </span>
   </label>
-  </p>
 </div>
+
+<script>
+$(function() {
+  $('.main-container').after($('.sticky-darkmode-toggle'));
+})
+</script>
+
+<style>
+
+.sticky-darkmode-toggle {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+}
+</style>
 
 <script>
 function myFunction() {
@@ -47,6 +61,7 @@ function myFunction() {
    element.classList.toggle("dark-mode");
 }
 </script>
+
 <script>
   (function () {
     var script = document.createElement("script");
@@ -264,10 +279,16 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="theory.html">Theory</a>
+  <a href="theory.html">
+    <span class="fa fa-integral"></span>
+     
+    Theory
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-person"></span>
+     
     Life insurance
      
     <span class="caret"></span>
@@ -294,6 +315,8 @@ $(document).ready(function () {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-house"></span>
+     
     Non-life insurance
      
     <span class="caret"></span>
@@ -323,7 +346,13 @@ $(document).ready(function () {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="pdf_renders.html">
+    <span class="fa fa-file"></span>
+     
+    PDF-renders
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -347,6 +376,7 @@ $(document).ready(function () {
 Oxford University Press (2019).</p>
 <iframe src="pdf/FinKont_book.pdf">
 </iframe>
+<p><a href="pdf/FinKont_book.pdf" download>Click to Download</a></p>
 </div>
 
 <style>

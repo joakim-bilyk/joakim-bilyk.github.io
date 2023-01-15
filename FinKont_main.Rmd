@@ -10,3 +10,5 @@ output: html_document
 Arbitrage Theory in Continuous Time (Fourth edition)  by Thomas Björk, Oxford University Press (2019).
 
 <iframe src="pdf/FinKont_book.pdf"></iframe>
+
+<a href="pdf/FinKont_book.pdf" download>Click to Download</a>

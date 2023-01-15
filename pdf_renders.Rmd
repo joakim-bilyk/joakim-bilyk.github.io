@@ -1,0 +1,96 @@
+---
+title: "PDF renders"
+author: "Joakim Bilyk"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+```{r, include = FALSE,eval = TRUE}
+options(knitr.duplicate.label = "allow")
+Rmds <- c("theory","FinKont_homework")
+for (dok in Rmds) {
+  rmarkdown::render(
+      paste0(dok,".Rmd"),
+      output_format = "pdf_document",
+      output_file = paste0(dok,".pdf"),
+      output_dir = "pdf/render"
+  )
+}
+```
+
+
+# Archive
+
+## Books
+
+### Continuous finance
+
+Arbitrage Theory in Continuous Time (Fourth edition)  by Thomas Björk, Oxford University Press (2019).
+
+<iframe src="pdf/FinKont_book.pdf"></iframe>
+
+<a href="pdf/FinKont_book.pdf" download>Click to Download</a>
+
+### Quantative risk management
+
+*Quantitative Risk Management: Concepts, Techniques and Tools* (second edition) by Alexander J. McNeil and others, Princeton University Press (2015).
+
+<iframe src="pdf/QRM_book.pdf"></iframe>
+
+<a href="pdf/QRM_book.pdf" download>Click to Download</a>
+
+&nbsp;
+
+*Mathematical Modeling and Statistical Methods for Risk Management* (Lecture Notes) by Henrik Hult and Filip Lindskog (2007).
+
+<iframe src="pdf/QRM_book_HL.pdf"></iframe>
+
+<a href="pdf/QRM_book_HL.pdf" download>Click to Download</a>
+
+&nbsp;
+
+*Importance Sampling*.
+
+<iframe src="pdf/QRM_supplement_importance_sampling.pdf"></iframe>
+
+<a href="pdf/QRM_supplement_importance_sampling.pdf" download>Click to Download</a>
+
+&nbsp;
+
+*Importance Sampling for Monte Carlo Estimation Of Quantiles* (paper) by Peter W. Glynn, Stanford University.
+
+<iframe src="pdf/QRM_supplement_importance_sampling_quantiles.pdf"></iframe>
+
+<a href="pdf/QRM_supplement_importance_sampling_quantiles.pdf" download>Click to Download</a>
+
+## Renders
+
+### Theory 
+
+<iframe src="pdf/render/theory.pdf"></iframe>
+
+<a href="pdf/render/theory.pdf" download>Click to Download</a>
+
+### Courses
+
+#### Continuous finance
+
+<iframe src="pdf/render/FinKont_homework.pdf"></iframe>
+
+<a href="pdf/render/FinKont_homework.pdf" download>Click to Download</a>
+
+#### Quantative risk management
+
+<iframe src="pdf/render/QRM-Assignment1.pdf"></iframe>
+
+<a href="pdf/render/QRM-Assignment1.pdf" download>Click to Download</a>
+
+&nbsp;
+
+<iframe src="pdf/render/QRM-Assignment2.pdf"></iframe>
+
+<a href="pdf/render/QRM-Assignment2.pdf" download>Click to Download</a>

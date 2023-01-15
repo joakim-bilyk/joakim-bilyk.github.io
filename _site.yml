@@ -8,7 +8,9 @@ navbar:
       icon: fa-home #https://fontawesome.com/icons
     - text: "Theory"
       href: theory.html
+      icon: fa-integral
     - text: "Life insurance"
+      icon: fa-person
       menu:
         - text: "Stochastic Processes in life-insurance (StokLiv)"
           href: stok_liv.html
@@ -21,6 +23,7 @@ navbar:
             - text: "Exam preparation"
               href: FinKont_examprep.html
     - text: "Non-life insurance"
+      icon: fa-house
       menu:
         - text: "Stochastic processes in non-life-insurance (StokSkade)"
           href: stok_skade.html
@@ -34,6 +37,10 @@ navbar:
               href: QRM_homework.html
             - text: "Exam preparation"
               href: QRM_examprep.html
+  right:
+    - text: "PDF-renders"
+      href: pdf_renders.html
+      icon: fa-file
 output:
   html_document:
     theme: cosmo
