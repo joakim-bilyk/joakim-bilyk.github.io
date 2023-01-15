@@ -1,0 +1,23 @@
+<div style="float: right;">
+  <p>Switch to dark mode
+  <label class="switch">
+  <input type="checkbox" onclick="myFunction()">
+  <span class="slider round"></span>
+  </label>
+  </p>
+</div>
+
+<script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>

@@ -33,8 +33,31 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<div style="float: right;">
+  <p>Switch to dark mode
+  <label class="switch">
+  <input type="checkbox" onclick="myFunction()">
+  <span class="slider round"></span>
+  </label>
+  </p>
+</div>
+
+<script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -45,18 +68,113 @@
   ul.task-list{list-style: none;}
     </style>
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; text-decoration: underline; } /* Error */
+code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
-
-
 
 
 
@@ -320,7 +438,11 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
 </li>
 <li>
   <a href="theory.html">Theory</a>
@@ -405,11 +527,11 @@ Management</h1>
 </div>
 <div id="assignment-2" class="section level1">
 <h1>Assignment 2</h1>
-<pre class="r"><code>rmarkdown::render(
-  &#39;QRM/QRM-Assignment2.Rmd&#39;,
-  output_file = &quot;QRM-Assignment2.pdf&quot;,
-  output_dir = &quot;pdf/render&quot;
-)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;QRM/QRM-Assignment2.Rmd&#39;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_file =</span> <span class="st">&quot;QRM-Assignment2.pdf&quot;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">&quot;pdf/render&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <iframe src="pdf/render/QRM-Assignment2.pdf">
 </iframe>
 <div id="problem-1" class="section level2">
@@ -427,40 +549,40 @@ we find the estimates to be;</p>
 <p><span class="math display">\[
 VaR_{0.99}(L)= 206.166  ,\hspace{30pt} ES_{0.99}(L)= 244.369
 \]</span></p>
-<pre class="r"><code>#We follow algorithm 10.1 to model the dependence structure of the ....
-R_ij &lt;-sin(pi*0.4/2)
-S &lt;- rep(R_ij,50*50)
-R &lt;- matrix(S, nrow = 50)
-diag(R) &lt;- sin(pi/2)
-
-#Now we have created R in algorithm
-
-A &lt;- chol(R)
-L &lt;-c()
-n &lt;- 100000
-
-for (i in 1:n) {
-  Z &lt;- rnorm(50,0,1)
-  X &lt;- A%*%Z
-  U &lt;- pnorm(X, mean = 0, sd=1)
-  X_j &lt;- 1/(100*sqrt(3))*qt(U, df=3)
-  L_j &lt;- -sum(100*(exp(X_j)-1))
-  L &lt;- c(L,L_j)
-}
-L_prime &lt;- sort(L, decreasing = T)
-
-bound &lt;- ceiling(n*(1-0.99)+1)
-ES_0.99 &lt;- sum(L_prime[1:bound])/bound
-VaR_0.99 &lt;- L_prime[bound]
-VaR_0.99</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We follow algorithm 10.1 to model the dependence structure of the ....</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>R_ij <span class="ot">&lt;-</span><span class="fu">sin</span>(pi<span class="sc">*</span><span class="fl">0.4</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">rep</span>(R_ij,<span class="dv">50</span><span class="sc">*</span><span class="dv">50</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">matrix</span>(S, <span class="at">nrow =</span> <span class="dv">50</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(R) <span class="ot">&lt;-</span> <span class="fu">sin</span>(pi<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we have created R in algorithm</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">chol</span>(R)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> A<span class="sc">%*%</span>Z</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  U <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(X, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  X_j <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">3</span>))<span class="sc">*</span><span class="fu">qt</span>(U, <span class="at">df=</span><span class="dv">3</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  L_j <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">sum</span>(<span class="dv">100</span><span class="sc">*</span>(<span class="fu">exp</span>(X_j)<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  L <span class="ot">&lt;-</span> <span class="fu">c</span>(L,L_j)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>L_prime <span class="ot">&lt;-</span> <span class="fu">sort</span>(L, <span class="at">decreasing =</span> T)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n<span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.99</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="fu">sum</span>(L_prime[<span class="dv">1</span><span class="sc">:</span>bound])<span class="sc">/</span>bound</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span> <span class="ot">&lt;-</span> L_prime[bound]</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span></span></code></pre></div>
 <pre><code>## [1] 207.1287</code></pre>
-<pre class="r"><code>ES_0.99</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span></span></code></pre></div>
 <pre><code>## [1] 243.9653</code></pre>
-<pre class="r"><code>hist(L_prime[L_prime&gt;-1000], breaks = 10000)</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(L_prime[L_prime<span class="sc">&gt;-</span><span class="dv">1000</span>], <span class="at">breaks =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<pre class="r"><code>#Look page 80 for R_i,j; rho_tau is given in problem-text, and diag is just 1
-#since X is continous hence the probabilities are 1 and 0 
-#(look formula section 8.5)</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Look page 80 for R_i,j; rho_tau is given in problem-text, and diag is just 1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#since X is continous hence the probabilities are 1 and 0 </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#(look formula section 8.5)</span></span></code></pre></div>
 </div>
 <div id="b-clayton-copula" class="section level3">
 <h3>(b) Clayton copula</h3>
@@ -475,31 +597,31 @@ estimate;</p>
 <p><span class="math display">\[
 VaR_{0.99}(L)= 120.930  ,\hspace{30pt} ES_{0.99}(L)= 181.634
 \]</span></p>
-<pre class="r"><code>#Follow algorithm 10.4 page 79 with theta defined on page 80.
-theta &lt;- 2*0.4/(1-0.4)
-
-#Now we have created R in algorithm
-L &lt;-c()
-n &lt;- 100000
-
-for (i in 1:n) {
-  X &lt;- rgamma(1,1/theta,1)
-  V &lt;- -log(runif(50,0,1))/X
-  U &lt;- (V+1)^(-1/theta)
-  X_j &lt;- 1/(100*sqrt(3))*qt(U, df=3)
-  L_j &lt;- -sum(100*(exp(X_j)-1))
-  L &lt;- c(L,L_j)
-}
-L_prime &lt;- sort(L, decreasing = T)
-
-bound &lt;- ceiling(n*(1-0.99)+1)
-ES_0.99 &lt;- sum(L_prime[1:bound])/bound
-VaR_0.99 &lt;- L_prime[bound]
-VaR_0.99</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Follow algorithm 10.4 page 79 with theta defined on page 80.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fl">0.4</span><span class="sc">/</span>(<span class="dv">1</span><span class="fl">-0.4</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we have created R in algorithm</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span>theta,<span class="dv">1</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="fu">runif</span>(<span class="dv">50</span>,<span class="dv">0</span>,<span class="dv">1</span>))<span class="sc">/</span>X</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  U <span class="ot">&lt;-</span> (V<span class="sc">+</span><span class="dv">1</span>)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>theta)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  X_j <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">3</span>))<span class="sc">*</span><span class="fu">qt</span>(U, <span class="at">df=</span><span class="dv">3</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  L_j <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">sum</span>(<span class="dv">100</span><span class="sc">*</span>(<span class="fu">exp</span>(X_j)<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  L <span class="ot">&lt;-</span> <span class="fu">c</span>(L,L_j)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>L_prime <span class="ot">&lt;-</span> <span class="fu">sort</span>(L, <span class="at">decreasing =</span> T)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n<span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.99</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="fu">sum</span>(L_prime[<span class="dv">1</span><span class="sc">:</span>bound])<span class="sc">/</span>bound</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span> <span class="ot">&lt;-</span> L_prime[bound]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span></span></code></pre></div>
 <pre><code>## [1] 118.9335</code></pre>
-<pre class="r"><code>ES_0.99</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span></span></code></pre></div>
 <pre><code>## [1] 182.0593</code></pre>
-<pre class="r"><code>hist(L_prime, breaks = 10000)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(L_prime, <span class="at">breaks =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p><span class="math inline">\(VaR\)</span> and <span
 class="math inline">\(ES\)</span> are radically different for the two
@@ -524,25 +646,25 @@ class="math inline">\(ES_{0.99}\)</span>.</h3>
 approximativly t-distributed with 4 degrees of freedome, we have
 likewise checked the bmw returns. Down below you can see the bmw returns
 in a qq-plot against the residuals for a t-distribution with 4 df;</p>
-<pre class="r"><code>library(dplyr)
-dax_returns &lt;- read.delim(&quot;data/dax_returns.txt&quot;,header = TRUE) %&gt;% as.data.frame()
-dax_returns[,2] &lt;- dax_returns[,1]
-dax_returns[,1] &lt;- 1:dim(dax_returns)[1]
-bmw_returns &lt;- read.delim(&quot;data/bmw_returns.txt&quot;,header = TRUE) %&gt;% as.data.frame()
-bmw_returns[,2] &lt;- bmw_returns[,1]
-bmw_returns[,1] &lt;- 1:dim(bmw_returns)[1]
-mu1 &lt;- mean(dax_returns[,2])
-mu2 &lt;- mean(bmw_returns[,2])
-plot(bmw_returns[,2], dax_returns[,2])</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dax_returns <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/dax_returns.txt&quot;</span>,<span class="at">header =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dax_returns[,<span class="dv">2</span>] <span class="ot">&lt;-</span> dax_returns[,<span class="dv">1</span>]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>dax_returns[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(dax_returns)[<span class="dv">1</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>bmw_returns <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/bmw_returns.txt&quot;</span>,<span class="at">header =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>bmw_returns[,<span class="dv">2</span>] <span class="ot">&lt;-</span> bmw_returns[,<span class="dv">1</span>]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>bmw_returns[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(bmw_returns)[<span class="dv">1</span>]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(dax_returns[,<span class="dv">2</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(bmw_returns[,<span class="dv">2</span>])</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bmw_returns[,<span class="dv">2</span>], dax_returns[,<span class="dv">2</span>])</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>plot(bmw_returns[,2]-mu2, dax_returns[,2]-mu1)</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bmw_returns[,<span class="dv">2</span>]<span class="sc">-</span>mu2, dax_returns[,<span class="dv">2</span>]<span class="sc">-</span>mu1)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
-<pre class="r"><code>library(ggplot2)
-ggplot(dax_returns, aes(sample = dax_returns[,2])) + stat_qq(distribution = qt, dparams = 4) +
-  stat_qq_line(distribution = qt, dparams = 4)</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dax_returns, <span class="fu">aes</span>(<span class="at">sample =</span> dax_returns[,<span class="dv">2</span>])) <span class="sc">+</span> <span class="fu">stat_qq</span>(<span class="at">distribution =</span> qt, <span class="at">dparams =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>(<span class="at">distribution =</span> qt, <span class="at">dparams =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
-<pre class="r"><code>ggplot(bmw_returns, aes(sample = bmw_returns[,2])) + stat_qq(distribution = qt, dparams = 4) +
-  stat_qq_line(distribution = qt, dparams = 4)</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bmw_returns, <span class="fu">aes</span>(<span class="at">sample =</span> bmw_returns[,<span class="dv">2</span>])) <span class="sc">+</span> <span class="fu">stat_qq</span>(<span class="at">distribution =</span> qt, <span class="at">dparams =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>(<span class="at">distribution =</span> qt, <span class="at">dparams =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-5-4.png" width="672" /></p>
 <p>Hence we are proposing the elliptical distribution to be the
 multivariate t-distribution with <span class="math display">\[
@@ -555,24 +677,24 @@ multivariate t-distribution with <span class="math display">\[
 \end{bmatrix}.
 \]</span> by example 9.1 for the t-distribution with 4 degrees of
 freedom. The following is simulated vs emperical data;</p>
-<pre class="r"><code>mu1 &lt;- mean(dax_returns[,2])
-mu2 &lt;- mean(bmw_returns[,2])
-mu &lt;- c(mu1,mu2)
-sigma &lt;- matrix(
-  c(var(dax_returns[,2]),
-    cov(dax_returns[,2],bmw_returns[,2]),
-    cov(dax_returns[,2],bmw_returns[,2]),
-    var(bmw_returns[,2])),
-  nrow = 2
-)
-
-library(mvtnorm)
-n &lt;- 1700
-X &lt;- rmvt(n,sigma=1/2*sigma, df=4) + matrix(c(rep(mu[1],n),rep(mu[2],n)),ncol = 2)
-
-library(ggplot2)
-sim_dat = data.frame(x1 = bmw_returns[,2], y1 = dax_returns[,2], x2 = X[,2], y2 = X[,1])
-ggplot(sim_dat) + geom_point(aes(x = x1, y=y1)) + geom_point(aes(x = x2, y=y2), col = &quot;red&quot;)</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(dax_returns[,<span class="dv">2</span>])</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(bmw_returns[,<span class="dv">2</span>])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(mu1,mu2)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">var</span>(dax_returns[,<span class="dv">2</span>]),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cov</span>(dax_returns[,<span class="dv">2</span>],bmw_returns[,<span class="dv">2</span>]),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cov</span>(dax_returns[,<span class="dv">2</span>],bmw_returns[,<span class="dv">2</span>]),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">var</span>(bmw_returns[,<span class="dv">2</span>])),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1700</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rmvt</span>(n,<span class="at">sigma=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span><span class="sc">*</span>sigma, <span class="at">df=</span><span class="dv">4</span>) <span class="sc">+</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">rep</span>(mu[<span class="dv">1</span>],n),<span class="fu">rep</span>(mu[<span class="dv">2</span>],n)),<span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x1 =</span> bmw_returns[,<span class="dv">2</span>], <span class="at">y1 =</span> dax_returns[,<span class="dv">2</span>], <span class="at">x2 =</span> X[,<span class="dv">2</span>], <span class="at">y2 =</span> X[,<span class="dv">1</span>])</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sim_dat) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y=</span>y1)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> x2, <span class="at">y=</span>y2), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Simulating from this multivariate distribution we are now able to
 calculate the losses using the formula on page 8 in HL. Doing this we
@@ -581,32 +703,32 @@ get;</p>
 <p><span class="math display">\[
 VaR_{0.99}\approx6.023, \hspace{30pt} ES_{0.99}\approx8.33
 \]</span></p>
-<pre class="r"><code>mu &lt;- c(mu1,mu2)
-cov(dax_returns[,2],bmw_returns[,2])</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(mu1,mu2)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(dax_returns[,<span class="dv">2</span>],bmw_returns[,<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] 0.0001194044</code></pre>
-<pre class="r"><code>var(dax_returns[,2])</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(dax_returns[,<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] 0.0001141866</code></pre>
-<pre class="r"><code>var(bmw_returns[,2])</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(bmw_returns[,<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] 0.0001910575</code></pre>
-<pre class="r"><code>sigma &lt;- matrix(
-  c(cov(dax_returns[,2],bmw_returns[,2]),
-    var(dax_returns[,2]),
-    cov(dax_returns[,2],bmw_returns[,2]),
-    var(bmw_returns[,2])),
-  nrow = 2
-)
-S_n &lt;- 100
-
-dax_returns[,3] &lt;- -S_n*(exp(dax_returns[,2]) - 1)
-dax_returns[,4] &lt;- sort(dax_returns[,3], decreasing = T)
-bmw_returns[,3] &lt;- -S_n*(exp(bmw_returns[,2]) - 1)
-bmw_returns[,4] &lt;- sort(bmw_returns[,3], decreasing = T)
-
-L &lt;- bmw_returns[,4]+dax_returns[,4]
-
-bound &lt;- (1700*(1-0.99)+1)
-ES_0.99 &lt;- sum(L[1:bound])/bound
-VaR_0.99 &lt;- L[bound]</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">cov</span>(dax_returns[,<span class="dv">2</span>],bmw_returns[,<span class="dv">2</span>]),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">var</span>(dax_returns[,<span class="dv">2</span>]),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cov</span>(dax_returns[,<span class="dv">2</span>],bmw_returns[,<span class="dv">2</span>]),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">var</span>(bmw_returns[,<span class="dv">2</span>])),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>S_n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>dax_returns[,<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>S_n<span class="sc">*</span>(<span class="fu">exp</span>(dax_returns[,<span class="dv">2</span>]) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>dax_returns[,<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">sort</span>(dax_returns[,<span class="dv">3</span>], <span class="at">decreasing =</span> T)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>bmw_returns[,<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>S_n<span class="sc">*</span>(<span class="fu">exp</span>(bmw_returns[,<span class="dv">2</span>]) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>bmw_returns[,<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">sort</span>(bmw_returns[,<span class="dv">3</span>], <span class="at">decreasing =</span> T)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> bmw_returns[,<span class="dv">4</span>]<span class="sc">+</span>dax_returns[,<span class="dv">4</span>]</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> (<span class="dv">1700</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.99</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="fu">sum</span>(L[<span class="dv">1</span><span class="sc">:</span>bound])<span class="sc">/</span>bound</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span> <span class="ot">&lt;-</span> L[bound]</span></code></pre></div>
 </div>
 <div
 id="b-now-use-the-standard-variance-covariance-method-to-compute-the-one-day-var_0.99.-how-do-your-two-estimates-compare"
@@ -660,24 +782,24 @@ too small. The normal distribution has lighter tails than the t
 distribution. This means the model might not catch the extreme events
 very well leading to a more moderate <span
 class="math inline">\(VaR\)</span> estimate.</p>
-<pre class="r"><code>n &lt;- 1700 # nrow(bmw_returns) = nrow(dax_returns) = 1700
-
-w &lt;- c(100,100)
-
-mu1 &lt;- 1/n * sum(bmw_returns[,2])
-mu2 &lt;- 1/n * sum(dax_returns[,2])
-mu &lt;- c(mu1,mu2)
-cov(dax_returns[,2],dax_returns[,2])</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1700</span> <span class="co"># nrow(bmw_returns) = nrow(dax_returns) = 1700</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">100</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n <span class="sc">*</span> <span class="fu">sum</span>(bmw_returns[,<span class="dv">2</span>])</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n <span class="sc">*</span> <span class="fu">sum</span>(dax_returns[,<span class="dv">2</span>])</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(mu1,mu2)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(dax_returns[,<span class="dv">2</span>],dax_returns[,<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] 0.0001141866</code></pre>
-<pre class="r"><code>Sigma11 &lt;- 1/(n-1) * sum((bmw_returns[,2] - mu1) * (bmw_returns[,2] - mu1))
-Sigma12 &lt;- 1/(n-1) * sum((bmw_returns[,2] - mu1) * (dax_returns[,2] - mu2))
-Sigma21 &lt;- 1/(n-1) * sum((dax_returns[,2] - mu2) * (bmw_returns[,2] - mu1))
-Sigma22 &lt;- 1/(n-1) * sum((dax_returns[,2] - mu2) * (dax_returns[,2] - mu2))
-
-Sigma &lt;- matrix(data = c(Sigma11,Sigma12,Sigma21,Sigma22), nrow = 2)
-
-VaR0.99 &lt;- - t(w)%*%mu + sqrt( t(w)%*%Sigma%*%w )*qnorm(0.99,0,1)
-VaR0.99</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Sigma11 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(n<span class="dv">-1</span>) <span class="sc">*</span> <span class="fu">sum</span>((bmw_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu1) <span class="sc">*</span> (bmw_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu1))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>Sigma12 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(n<span class="dv">-1</span>) <span class="sc">*</span> <span class="fu">sum</span>((bmw_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu1) <span class="sc">*</span> (dax_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu2))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>Sigma21 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(n<span class="dv">-1</span>) <span class="sc">*</span> <span class="fu">sum</span>((dax_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu2) <span class="sc">*</span> (bmw_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu1))</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>Sigma22 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(n<span class="dv">-1</span>) <span class="sc">*</span> <span class="fu">sum</span>((dax_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu2) <span class="sc">*</span> (dax_returns[,<span class="dv">2</span>] <span class="sc">-</span> mu2))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(Sigma11,Sigma12,Sigma21,Sigma22), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>VaR0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="fu">t</span>(w)<span class="sc">%*%</span>mu <span class="sc">+</span> <span class="fu">sqrt</span>( <span class="fu">t</span>(w)<span class="sc">%*%</span>Sigma<span class="sc">%*%</span>w )<span class="sc">*</span><span class="fu">qnorm</span>(<span class="fl">0.99</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>VaR0<span class="fl">.99</span></span></code></pre></div>
 <pre><code>##          [,1]
 ## [1,] 5.368659</code></pre>
 </div>

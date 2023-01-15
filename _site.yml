@@ -5,6 +5,7 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+      icon: fa-home #https://fontawesome.com/icons
     - text: "Theory"
       href: theory.html
     - text: "Life insurance"
@@ -36,6 +37,8 @@ navbar:
 output:
   html_document:
     theme: cosmo
+    highlight: breezedark
     css: style.css
     include:
+      in_header: header.html
       after_body: footer.html
