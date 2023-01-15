@@ -36,6 +36,7 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <div class = "sticky-darkmode-toggle">
@@ -90,6 +91,11 @@ function myFunction() {
 
 
 
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -447,6 +453,8 @@ div.tocify {
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
 </ul>
 </div>
 
@@ -534,6 +542,7 @@ Download</a></p>
 </div>
 </div>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUERGIHJlbmRlcnMiCmF1dGhvcjogIkpvYWtpbSBCaWx5ayIKZGF0ZTogImByIFN5cy5EYXRlKClgIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogeWVzCiAgICB0b2NfZmxvYXQ6IHllcwogICAgY29kZV9mb2xkaW5nOiBoaWRlCi0tLQoKYGBge3IsIGluY2x1ZGUgPSBGQUxTRSxldmFsID0gVFJVRX0Kb3B0aW9ucyhrbml0ci5kdXBsaWNhdGUubGFiZWwgPSAiYWxsb3ciKQpSbWRzIDwtIGMoInRoZW9yeSIsIkZpbktvbnRfaG9tZXdvcmsiKQpmb3IgKGRvayBpbiBSbWRzKSB7CiAgcm1hcmtkb3duOjpyZW5kZXIoCiAgICAgIHBhc3RlMChkb2ssIi5SbWQiKSwKICAgICAgb3V0cHV0X2Zvcm1hdCA9ICJwZGZfZG9jdW1lbnQiLAogICAgICBvdXRwdXRfZmlsZSA9IHBhc3RlMChkb2ssIi5wZGYiKSwKICAgICAgb3V0cHV0X2RpciA9ICJwZGYvcmVuZGVyIgogICkKfQpgYGAKCgojIEFyY2hpdmUKCiMjIEJvb2tzCgojIyMgQ29udGludW91cyBmaW5hbmNlCgpBcmJpdHJhZ2UgVGhlb3J5IGluIENvbnRpbnVvdXMgVGltZSAoRm91cnRoIGVkaXRpb24pICBieSBUaG9tYXMgQmrDtnJrLCBPeGZvcmQgVW5pdmVyc2l0eSBQcmVzcyAoMjAxOSkuCgo8aWZyYW1lIHNyYz0icGRmL0ZpbktvbnRfYm9vay5wZGYiPjwvaWZyYW1lPgoKPGEgaHJlZj0icGRmL0ZpbktvbnRfYm9vay5wZGYiIGRvd25sb2FkPkNsaWNrIHRvIERvd25sb2FkPC9hPgoKIyMjIFF1YW50YXRpdmUgcmlzayBtYW5hZ2VtZW50CgoqUXVhbnRpdGF0aXZlIFJpc2sgTWFuYWdlbWVudDogQ29uY2VwdHMsIFRlY2huaXF1ZXMgYW5kIFRvb2xzKiAoc2Vjb25kIGVkaXRpb24pIGJ5IEFsZXhhbmRlciBKLiBNY05laWwgYW5kIG90aGVycywgUHJpbmNldG9uIFVuaXZlcnNpdHkgUHJlc3MgKDIwMTUpLgoKPGlmcmFtZSBzcmM9InBkZi9RUk1fYm9vay5wZGYiPjwvaWZyYW1lPgoKPGEgaHJlZj0icGRmL1FSTV9ib29rLnBkZiIgZG93bmxvYWQ+Q2xpY2sgdG8gRG93bmxvYWQ8L2E+CgombmJzcDsKCipNYXRoZW1hdGljYWwgTW9kZWxpbmcgYW5kIFN0YXRpc3RpY2FsIE1ldGhvZHMgZm9yIFJpc2sgTWFuYWdlbWVudCogKExlY3R1cmUgTm90ZXMpIGJ5IEhlbnJpayBIdWx0IGFuZCBGaWxpcCBMaW5kc2tvZyAoMjAwNykuCgo8aWZyYW1lIHNyYz0icGRmL1FSTV9ib29rX0hMLnBkZiI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvUVJNX2Jvb2tfSEwucGRmIiBkb3dubG9hZD5DbGljayB0byBEb3dubG9hZDwvYT4KCiZuYnNwOwoKKkltcG9ydGFuY2UgU2FtcGxpbmcqLgoKPGlmcmFtZSBzcmM9InBkZi9RUk1fc3VwcGxlbWVudF9pbXBvcnRhbmNlX3NhbXBsaW5nLnBkZiI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvUVJNX3N1cHBsZW1lbnRfaW1wb3J0YW5jZV9zYW1wbGluZy5wZGYiIGRvd25sb2FkPkNsaWNrIHRvIERvd25sb2FkPC9hPgoKJm5ic3A7CgoqSW1wb3J0YW5jZSBTYW1wbGluZyBmb3IgTW9udGUgQ2FybG8gRXN0aW1hdGlvbiBPZiBRdWFudGlsZXMqIChwYXBlcikgYnkgUGV0ZXIgVy4gR2x5bm4sIFN0YW5mb3JkIFVuaXZlcnNpdHkuCgo8aWZyYW1lIHNyYz0icGRmL1FSTV9zdXBwbGVtZW50X2ltcG9ydGFuY2Vfc2FtcGxpbmdfcXVhbnRpbGVzLnBkZiI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvUVJNX3N1cHBsZW1lbnRfaW1wb3J0YW5jZV9zYW1wbGluZ19xdWFudGlsZXMucGRmIiBkb3dubG9hZD5DbGljayB0byBEb3dubG9hZDwvYT4KCiMjIFJlbmRlcnMKCiMjIyBUaGVvcnkgCgo8aWZyYW1lIHNyYz0icGRmL3JlbmRlci90aGVvcnkucGRmIj48L2lmcmFtZT4KCjxhIGhyZWY9InBkZi9yZW5kZXIvdGhlb3J5LnBkZiIgZG93bmxvYWQ+Q2xpY2sgdG8gRG93bmxvYWQ8L2E+CgojIyMgQ291cnNlcwoKIyMjIyBDb250aW51b3VzIGZpbmFuY2UKCjxpZnJhbWUgc3JjPSJwZGYvcmVuZGVyL0ZpbktvbnRfaG9tZXdvcmsucGRmIj48L2lmcmFtZT4KCjxhIGhyZWY9InBkZi9yZW5kZXIvRmluS29udF9ob21ld29yay5wZGYiIGRvd25sb2FkPkNsaWNrIHRvIERvd25sb2FkPC9hPgoKIyMjIyBRdWFudGF0aXZlIHJpc2sgbWFuYWdlbWVudAoKPGlmcmFtZSBzcmM9InBkZi9yZW5kZXIvUVJNLUFzc2lnbm1lbnQxLnBkZiI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvcmVuZGVyL1FSTS1Bc3NpZ25tZW50MS5wZGYiIGRvd25sb2FkPkNsaWNrIHRvIERvd25sb2FkPC9hPgoKJm5ic3A7Cgo8aWZyYW1lIHNyYz0icGRmL3JlbmRlci9RUk0tQXNzaWdubWVudDIucGRmIj48L2lmcmFtZT4KCjxhIGhyZWY9InBkZi9yZW5kZXIvUVJNLUFzc2lnbm1lbnQyLnBkZiIgZG93bmxvYWQ+Q2xpY2sgdG8gRG93bmxvYWQ8L2E+Cg==</div>
 <style>
   footer{
     background: rgb(34,34,34);
@@ -620,6 +629,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
+  window.initializeSourceEmbed("pdf_renders.Rmd");
   window.initializeCodeFolding("hide" === "show");
 });
 </script>

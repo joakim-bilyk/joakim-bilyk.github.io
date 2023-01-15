@@ -22,7 +22,7 @@ if (knitr::is_latex_output()) {
 } else {
   knitr::opts_chunk$set(
     out.extra = 'style="float:right; padding:10px"',
-    out.width= "50%"
+    out.width= "40%"
   )
 }
 library(knitr)
@@ -67,6 +67,16 @@ library(dplyr)
 
 ### Theory
 
+This week revolves around the theory of the Brownian motion and martingale processes. Other main topics are the binomial model and an introduction to financial derivatives. Financial derivatives is contingent on the outcome of a stochastic process at some future time $t=T$ and often is a function $\Phi$ of some assets price $S_t$. As such the derivative will give a stochastic payout, at time $t=T$ of the size $X_T=\Phi(S_T)$. Naturally we want to say something about the *fair* price of the derivative in the form of
+
+$$\Pi_t(X_T)=\mathbb{E}\left[\Phi(S_T)\ \vert\ \mathcal{F}_t\right],$$
+
+where $\mathcal{F}_t\subset\mathcal{F}$ is the available information at time $t$. We will by defualt intepret the times $t=0$ as *today* and $t=T$ as *tomorrow*. This indeed require some fundamental understanding of the behaviour of the asset price $S_t$. This lead us over to discussing the process in center of the *Black-Scholes* model: the Brownian motion.
+
+&nbsp;
+
+#### The Brownian motion
+
 <blockquote class = "def">
 **Definition 4.1.** *(Brownian motion)* A stochastic process $W$ is called a **Brownian motion** or **Wiener process** if the following conditions hold
 
@@ -97,15 +107,200 @@ data.frame(t = t, W = W) %>%
         title = element_text(size = 18))
 ```
 
+As one can see from the simulated sample path on the right, the Brownian motion is rather irratic. In fact, the process varies infinitely on any interval with length greater than 0. This gives some of the characteristics of the process including that: $W$ is continuous and $W$ is non-differential everywhere. This irratic behaviour is summed up in the theorem.
+
+
+<blockquote class = "thm">
+
+**Theorem 4.2.** A Brownian motions trajectory $t\mapsto W_t$ is with probability one nowhere differential, and it has locally infinite total variation.
+
+</blockquote>
+
+This may seem not that horrifying since we can observe the process at any time and conclude an increment $W_{t+\Delta t}-W_t$ for any $\Delta t>0$ but any integral constructed with $W_t$ as integrator becomes nonsensible. We will be studying processes on the form
+
+$$S_{t+\Delta t}-S_t=\mu(t,S_t)\Delta t+\sigma(t,S_t)\Delta W_t,\hspace{20pt}\Delta W_t=W_{t+\Delta t}-W_t.$$
+
+where $W_t$ is a standard Brownian motion and $\mu(t,S_t)$ is locally deterministic (velocity), that is $\mu(t,S_t)$ is deterministic on a small time interval. One could consider the dynamics of the process $S_t$ by studying the equation below as $\Delta t\to 0_+$
+
+$$\frac{S_{t+\Delta t}-S_t}{\Delta t}=\mu(t,S_t)+\sigma(t,S_t)\frac{W_{t+\Delta t}-W_t}{\Delta t}.$$
+
+The limit however is impossible to determine as $W_t$ is non-differentiable and as such $dS_t$ is not well-defined. From LivStok we know that the dynamics of $S_t$ is given by letting $\Delta t$ tend to 0 without dividing by it, that is
+
+$$
+dS_t=\mu(t,S_t)\ dt+\sigma(t,S_t)\ dW_t.
+$$
+
+Giving that $S_0$ is observable we could intepret the dynamics on the integral form
+
+$$
+S_t=S_0+\int_0^t\mu(s,S_s)\ ds+\int_0^t\sigma(s,S_s)\ dW_s,
+$$
+
+where the above integrals is Riemann-Stieltjes integral. This is however still at dead-end, since from theorem 4.2 we know that $W_t$ has unbounded variation on any interval. So **we cannot define $S_t$ for each $W$-trajectory seperately** we will despite this define another integral (the Ito integral) that in some other sense give a global solution to this integral. To this we will be considering a $L^2$-definition.
+
+&nbsp;
+
+#### Conditional expectation
+
+The theory of conditional expectation is well-known from courses on the bachelor. Because of this we will only summarise the most important results.
+
+We consider a background space $(\Omega,\mathcal{F},P)$ and a sub-sigma algebra $\mathcal{G}\subseteq \mathcal{F}$. We assume that some stochastic variable is $\mathcal{F}$-measurable, that is the mapping $X : (\Omega,\mathcal{F},P) \to (\mathbb{R},\mathbb{B},m)$ is $\mathcal{F}-\mathbb{B}$-measurable i.e. $\forall B\in\mathbb{B} : \{X\in B\}\in\mathcal{F}$. For some random variable $Z$ defined on the subspace $(\Omega,\mathcal{G},P)$, we say that $Z$ is the conditional expectation of $X$ given $\mathcal{G}$ if
+
+$$
+\forall G\in\mathcal{G} : \int_G Z(\omega)\ dP(\omega)=\int_G X(\omega)\ dP(\omega).
+$$
+
+This fact is summed up in the definition below.
+
+<blockquote class = "def">
+
+**Definition B.27.** *(Conditional expectation)* Let $(\Omega,\mathcal{F},P)$ be a probability space and $X$ a random variable in $L^1(\Omega,\mathcal{F},P)$ ($\vert X\vert$ is integrable). Let furthermore $\mathcal{G}$ be a sigma-algebra such that $\mathcal{G}\subseteq \mathcal{F}$. If $Z$ is a random variable with the properties that:
+
+  i. $Z$ is $\mathcal{G}$-measurable.
+  ii. For every $G\in\mathcal{G}$ it holds that
+  $$\int_G Z(\omega)\ dP(\omega)=\int_G X(\omega)\ dP(\omega).$$
+
+Then we say that $Z$ is the *conditional expectation of $X$ given the sigma-algebra $\mathcal{G}$*. In that case we denote $Z$ by the symbol $E[X\ \vert\ \mathcal{G}]$.
+
+</blockquote>
+
+We see that from the above it always holds that $X$ satisfies (ii). It does not, however, always hold that $X$ is $\mathcal{G}$-measurable. Given this fact it is not trivial that a random variable $E[X\ \vert\ \mathcal{G}]$ even exists. This nontriviality is fortunatly resolved by the Radon-Nikodym theorem.
+
+<blockquote class = "thm">
+
+**Theorem B.28.** *(Existance and uniqueness of Conditional expectation)* Let $(\Omega,\mathcal{F},P)$, $X$ and $\mathcal{G}$ be given as in the definition above. Then the following holds:
+
+  * There will always exist a random variable $Z$ satisfying conditions (i)-(ii) above.
+  * The variable $Z$ is unique, i.e. if both $Y$ and $Z$ satisfy (i)-(ii) then $Y=Z$ $P$-a.s.
+
+</blockquote>
+
+This result ensures that we may condition on any sigma-algebra for instance $\mathcal{G}=\sigma(Y)$ in that case we (pure notation) write
+
+$$
+E[X\ \vert\ \sigma(Y)]=E[X\ \vert\ Y],\hspace{20pt}\sigma(Y)=\sigma\left(\left\{ Y\in A,\ A\in\mathbb{B}\right\}\right).
+$$
+
+In the above $\sigma(Y)$ is simply the smallest sigma-algebra containing all the pre-images of $Y$, that is the smallest sigma-algebra making $Y$ measurable! Giving this foundation there are a few properties conditional expectation have which is rather useful (for instance the tower property).
+
+Below we assume: Let $(\Omega,\mathcal{F},P)$ be a probability space and $X,Y$ be random variables in $L^1(\Omega,\mathcal{F},P)$.
+
+<blockquote class = "prop">
+
+**Proposition B.29.** *(Monotinicity/Linearity of Conditional expectation)* The following holds:
+
+$$X\le Y\ \Rightarrow\ E[X\ \vert\ \mathcal{G}]\le E[Y\ \vert\ \mathcal{G}],\hspace{20pt}P-\text{a.s.}$$
+$$E[\alpha X + \beta Y\ \vert\ \mathcal{G}]=\alpha E[X\ \vert\ \mathcal{G}]+ \beta E[Y\ \vert\ \mathcal{G}],\hspace{20pt}\forall \alpha,\beta\in\mathbb{R}.$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.30.** *(Tower property)* Assume that it holds that $\mathcal{H}\subseteq\mathcal{G}\subseteq\mathcal{F}$. Then the following hold:
+
+$$E[E[X\vert \mathcal{G}]\vert\mathcal{H}]=E[X\vert \mathcal{H}],$$
+$$E[X]=E[E[X\vert \mathcal{G}]].$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.31.** Assume $X$ is $\mathcal{G}$ and that both $X,Y$ and $XY$ are in $L^1$ (only assuming $Y$ is $\mathcal{F}$-measurable), then
+
+$$E[X\vert\mathcal{G}]=X,\hspace{20pt}P-\text{a.s.}$$
+$$E[XY\vert\mathcal{G}]=XE[Y\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.32.** *(Jensen inequality)* Let $f:\mathbb{R}\to\mathbb{R}$ be a convex (measurable) function and assume $f(X)$ is in $L^1$. Then
+
+$$f(E[X\vert\mathcal{G}])\le E[f(X)\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}$$
+
+</blockquote>
+
+&nbsp;
+
+#### Filtrations
+
+Let $(\Omega,\mathcal{F},P)$ be a probability space. We define a filtration as an increasing famility of sub-sigma-algebras in the following definition.
+
+<blockquote class = "def">
+
+**Definition B.16.** *(Filtration)* Let $\mathbf{F}=(\mathcal{F}_t)_{t\ge 0}$ be an time indexed family of sub-sigma-algebras such that $F_s\subseteq F_t$ for $s\le t$ and $\mathcal{F}_t\subseteq \mathcal{F}$ for all $t\ge 0$. We may given this filtration define $\mathcal{F}_\infty$ as $\sigma\left(\bigcup_{t\ge 0}\mathcal{F}_t\right)$.
+
+</blockquote>
+
+Filtrations is widely used in stochastic processes, as they allow for the concept of knowledge/information. This is useful when considering mean-values of future states but in an increasing information setting. For this we introduce the term adapted processes.
+
+<blockquote class = "def">
+
+**Definition B.17.** *(Adapted process)* Let $(\mathcal{F}_t)_{t\ge 0}$ be a filtration on the probability space $(\mathcal{F}_t)_{t\ge 0}$. Furthermore, let $(X_t)_{t\ge 0}$ be a stochastic process on the same space. We say that $X_t$ is adapted to the filtration $\mathbf{F}$ if
+
+$$X_t\ \text{ is }\ \mathcal{F}_t-\text{measurable},\hspace{20pt}\forall t\ge 0.$$
+
+</blockquote>
+
+Obviously, we may introduce the **natural filtration** $\mathcal{F}^X_t$ given by the tragetory of the process $X_t$:
+
+$$\mathcal{F}^X_t=\sigma(\{X_s,\ s\le t\}).$$
+
+Indeed, $X_t$ is adapted to this filtration.
+
+&nbsp;
+
+#### Martingales
+
 <blockquote class = "def">
 
 **Definition C.1.** Let $M_t$ be a stochastic process defined on a background space $(\Omega,\mathcal{F},P)$. Let $(\mathcal{F}_t)_{t\ge 0}$ be a filtration. If $M_t$ is adapted to the filtration $\mathcal{F}_t$, $E\vert M_t\vert <\infty$ and
 
-$$E[M_t\vert \mathcal{F}_s]=M_s$$
+$$E[M_t\vert \mathcal{F}_s]=M_s,\hspace{20pt}P-\text{a.s.}$$
 
-holds for any $t>s$ we say that $M_t$ is a martingale.
+holds for any $t>s$ we say that $M_t$ is a martingale ($\mathbf{F}$-martingale). If the above has $\le$ or $\ge$ we say that $M_t$ is either a **submartingale** or **supermartingale** respectively.
 
 </blockquote>
+
+Naturally, this defintions may easily be extended to discrete models and we have the trivial equality:
+
+$$E[M_t-M_s\ \vert\ \mathcal{F}_s]=0.$$
+
+Martingales is useful, when proofing probalistic statements as the posses tractable properties. A useful technique often include the construction of the martingale
+
+$$M_t=E[X\ \vert\ \mathcal{F}_t].$$
+
+&nbsp;
+
+#### Discrete time models
+
+The study of this course is the **European call** option (and *put* option). This financial derivative is an agreement between two parties where the holder of the option has the right to *"exercise"* the derivative, at a future time $t=T$. Exercising means buying an asset at a certain agreed opon price-strike $K$. In the case of the put-option: the holder has the right (but not obligation) to sell the asset at the strike price $K$. As such the derivative has the payoff
+
+$$\text{Call}\ \text{option:}\hspace{10pt}\Phi(S_T)=(S_T-K)^+,\hspace{20pt}\text{Put}\ \text{option:}\hspace{10pt}\Phi(S_T)=(K-S_T)^+.$$
+
+Our objective is to understand when an arbitrage exist and to find the fair price of these derivative. The strategy in pricing is finding a replicating portfolio with the same payoff as the option (with probability one) and then price the derivative accordingly.
+
+##### Model description
+
+In the one-period model we consider the simplest possible market. We have two distinct times $t=0$ (today) and $t=1$ (tomorrow) and we may buy any portfolio as a mixture of bonds and one stock. We denote the bonds price by $B_t$ and the stocks price by $S_t$ and we assume the following:
+
+$$
+B_0=1,\ B_1=1+R,\hspace{20pt}S_0=s,\ S_1=\left\{\begin{matrix}s\cdot u, & with\ probability\ p_u.\\s\cdot d, & with\ probability\ p_d.\end{matrix}\right.
+$$
+
+We may introduce $Z$ as the random variable
+
+$$
+Z=u\cdot (I)+d\cdot (1-I),
+$$
+
+for an bernoulli variable $I$ with succes probability $p_u$. Naturally, we assume $d\le (1+R)\le u$ (this is imperative to ensure no arbitrage as we will see).
+
+##### Portfolios and arbirtage
+
+
+
+&nbsp;
 
 ### Exercises
 
@@ -366,10 +561,8 @@ $$E[M_t\vert\mathcal{F}_s]=\exp\left(\lambda W_s-\frac{\lambda^2}{2}s\right)=M_s
 
 ### Material
 
-MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
-
- * Var-Cov method, simulation, importance sampling and bootstrap. For the Var-Cov method, see MFE Sec. 9.2. For importance sampling and bootstrap, see the supplementary reading in Absalon.
- * Extreme value theory: MFE Ch. 5 or alternative reading in HL (suggested for this part).
+  * Stochastic integrals and Ito formula (Chapter 4 and Appendix C.2)
+  * Stochastic differential equations (Chapter 5.1-4)
 
 ### Theory
 
@@ -379,10 +572,9 @@ MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the no
 
 ### Material
 
-MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
-
- * Spherical and elliptical distributions: MFE Sec. 6.3.
- * Spherical and elliptical distributions, cont.; introduction to copulas.
+  * Partial differential equations (Chapter 5.5)
+  * Self-financing portfolios (Chapter 6)
+  * Black-Scholes PDE (classic approach) and risk neutral valuation (Chapter 7.1-5)
 
 ### Theory
 
@@ -392,10 +584,12 @@ MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the no
 
 ### Material
 
-MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
-
- * Copulas: MFE Sec. 7.1-7.5 (Sklar's theorem, Frechet bounds).
- * Copulas cont. (Transformations; examples; Archimedean copulas).
+  * Black-Scholes formula (Chapter 7.6, see also Remark to Black-Scholes formula)
+  * Completeness and hedging (Chapter 8)
+  * Put-call parity (Chapter 10.1)
+  * The Greeks (Chapter 10.2)
+  * Risk neutral valuation formula (Chapter 11.6) 
+  * Equivalent probability measures (Appendix A.11, B.6 and C.3) 
 
 ### Theory
 
@@ -405,10 +599,8 @@ MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the no
 
 ### Material
 
-MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
-
- * Copulas cont. (simulating Archimedean copulas, statistical methods, measures of dependence).
- * Credit risk: the Merton model. MFE Ch. 10, particularly Sec. 10.3. [This lecture will only last two hours.]
+  * Girsanov theorem (Chapter 12, see also Levy characterization of Brownian motion and proof of Girsanov)
+  * Martingale representation theorem (Chapter 12)
 
 ### Theory
 
@@ -418,10 +610,8 @@ MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the no
 
 ### Material
 
-MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
-
- * Portfolio credit risk: MFE Ch. 11, specifically Sections 11.1-11.3.
- * Portfolio credit risk, cont. [This lecture will only last two hours.]
+  * Black-Scholes model, martingale approach (Chapter 13)
+  * Multidimensional models (Chapter 14)
 
 ### Theory
 
@@ -431,9 +621,8 @@ MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the no
 
 ### Material
 
-MFE refers to the book by McNeil, Frey, and Embrechts, while HL refers to the notes by Hult and Lindskog posted on Absalon.
-
- * Intro. to operational risk. Stochastic processes in risk management: stochastic models for operational risk; financial time series models. Connections to non-life insurance models and estimates (last lecture).
+  * Pricing and proof of fundamental pricing theorem I and II (Chapter 11)
+  * Incomplete Markets (Chapter 9)
 
 ### Theory
 

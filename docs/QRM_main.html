@@ -33,6 +33,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <div class = "sticky-darkmode-toggle">
@@ -87,6 +89,11 @@ function myFunction() {
 
 
 
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -248,6 +255,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -436,6 +446,13 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Quantitative Risk Management (QRM)</h1>
@@ -480,6 +497,7 @@ to Download</a></p>
 to Download</a></p>
 </div>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUXVhbnRpdGF0aXZlIFJpc2sgTWFuYWdlbWVudCAoUVJNKSIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvY19mbG9hdDogdHJ1ZQotLS0KCiMgSW50cm9kdWN0aW9uCgpCZW5lZXRoIGlzIHRoZSBjb3Vyc2Ugc3lsbGFidXMuCgo8aWZyYW1lIHNyYz0icGRmL1FSTV9zeWxsYWJ1cy5wZGYiPjwvaWZyYW1lPgoKPGEgaHJlZj0icGRmL1FSTV9zeWxsYWJ1cy5wZGYiIGRvd25sb2FkPkNsaWNrIHRvIERvd25sb2FkPC9hPgoKIyBNYXRlcmlhbAoKKlF1YW50aXRhdGl2ZSBSaXNrIE1hbmFnZW1lbnQ6IENvbmNlcHRzLCBUZWNobmlxdWVzIGFuZCBUb29scyogKHNlY29uZCBlZGl0aW9uKSBieSBBbGV4YW5kZXIgSi4gTWNOZWlsIGFuZCBvdGhlcnMsIFByaW5jZXRvbiBVbml2ZXJzaXR5IFByZXNzICgyMDE1KS4KCjxpZnJhbWUgc3JjPSJwZGYvUVJNX2Jvb2sucGRmIj48L2lmcmFtZT4KCjxhIGhyZWY9InBkZi9RUk1fYm9vay5wZGYiIGRvd25sb2FkPkNsaWNrIHRvIERvd25sb2FkPC9hPgoKJm5ic3A7CgoqTWF0aGVtYXRpY2FsIE1vZGVsaW5nIGFuZCBTdGF0aXN0aWNhbCBNZXRob2RzIGZvciBSaXNrIE1hbmFnZW1lbnQqIChMZWN0dXJlIE5vdGVzKSBieSBIZW5yaWsgSHVsdCBhbmQgRmlsaXAgTGluZHNrb2cgKDIwMDcpLgoKPGlmcmFtZSBzcmM9InBkZi9RUk1fYm9va19ITC5wZGYiIGFsbG93ZnVsbHNjcmVlbj0iMSI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvUVJNX2Jvb2tfSEwucGRmIiBkb3dubG9hZD5DbGljayB0byBEb3dubG9hZDwvYT4KCiZuYnNwOwoKKkltcG9ydGFuY2UgU2FtcGxpbmcqLgoKPGlmcmFtZSBzcmM9InBkZi9RUk1fc3VwcGxlbWVudF9pbXBvcnRhbmNlX3NhbXBsaW5nLnBkZiI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvUVJNX3N1cHBsZW1lbnRfaW1wb3J0YW5jZV9zYW1wbGluZy5wZGYiIGRvd25sb2FkPkNsaWNrIHRvIERvd25sb2FkPC9hPgoKJm5ic3A7CgoqSW1wb3J0YW5jZSBTYW1wbGluZyBmb3IgTW9udGUgQ2FybG8gRXN0aW1hdGlvbiBPZiBRdWFudGlsZXMqIChwYXBlcikgYnkgUGV0ZXIgVy4gR2x5bm4sIFN0YW5mb3JkIFVuaXZlcnNpdHkuCgo8aWZyYW1lIHNyYz0icGRmL1FSTV9zdXBwbGVtZW50X2ltcG9ydGFuY2Vfc2FtcGxpbmdfcXVhbnRpbGVzLnBkZiI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvUVJNX3N1cHBsZW1lbnRfaW1wb3J0YW5jZV9zYW1wbGluZ19xdWFudGlsZXMucGRmIiBkb3dubG9hZD5DbGljayB0byBEb3dubG9hZDwvYT4K</div>
 <style>
   footer{
     background: rgb(34,34,34);
@@ -564,6 +582,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("QRM_main.Rmd");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

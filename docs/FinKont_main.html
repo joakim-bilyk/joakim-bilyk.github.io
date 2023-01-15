@@ -30,6 +30,8 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <div class = "sticky-darkmode-toggle">
@@ -84,6 +86,11 @@ function myFunction() {
 
 
 
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -245,6 +252,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -360,6 +370,13 @@ $(document).ready(function () {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Continuous finance (FinKont)</h1>
@@ -379,6 +396,7 @@ Oxford University Press (2019).</p>
 <p><a href="pdf/FinKont_book.pdf" download>Click to Download</a></p>
 </div>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ29udGludW91cyBmaW5hbmNlIChGaW5Lb250KSIKb3V0cHV0OiBodG1sX2RvY3VtZW50Ci0tLQoKIyBJbnRyb2R1Y3Rpb24KCiMgTWF0ZXJpYWwKCkFyYml0cmFnZSBUaGVvcnkgaW4gQ29udGludW91cyBUaW1lIChGb3VydGggZWRpdGlvbikgIGJ5IFRob21hcyBCasO2cmssIE94Zm9yZCBVbml2ZXJzaXR5IFByZXNzICgyMDE5KS4KCjxpZnJhbWUgc3JjPSJwZGYvRmluS29udF9ib29rLnBkZiI+PC9pZnJhbWU+Cgo8YSBocmVmPSJwZGYvRmluS29udF9ib29rLnBkZiIgZG93bmxvYWQ+Q2xpY2sgdG8gRG93bmxvYWQ8L2E+</div>
 <style>
   footer{
     background: rgb(34,34,34);
@@ -461,6 +479,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("FinKont_main.Rmd");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

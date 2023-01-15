@@ -30,6 +30,8 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <div class = "sticky-darkmode-toggle">
@@ -84,6 +86,11 @@ function myFunction() {
 
 
 
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -245,6 +252,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -359,6 +369,13 @@ $(document).ready(function () {
 </div><!--/.navbar -->
 
 <div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
 
 
 
@@ -512,6 +529,7 @@ lecture).</li>
 </div>
 </div>
 
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkhvbWV3b3JrIChRUk0pIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogZmFsc2UNCiAgICB0b2NfZmxvYXQ6IHRydWUNCi0tLQ0KDQoNCiMgSW50cm9kdWN0aW9uDQoNCiMgV2Vla3Mgey50YWJzZXR9DQoNCiMjIFdlZWsgMQ0KDQojIyMgTWF0ZXJpYWwNCg0KTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uDQoNCiAqIEludHJvZHVjdGlvbjsgcmlzayBmYWN0b3JzIGFuZCBsb3NzIGRpc3RyaWJ1dGlvbnM7IGNvaGVyZW50IHJpc2sgbWVhc3VyZXM6IE1GRSBDaC4gMi4NCiAqIFZhUiBhbmQgZXhwZWN0ZWQgc2hvcnRmYWxsOiBNRkUgQ2guIDIsIHBhcnRpY3VsYXJseSBTZWMuIDIuMy4gKEZvciBkaXNjdXNzaW9uIG9mIGNvbmZpZGVuY2UgYm91bmRzLCBzZWUgSEwgbm90ZXMuKQ0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayAyDQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogVmFyLUNvdiBtZXRob2QsIHNpbXVsYXRpb24sIGltcG9ydGFuY2Ugc2FtcGxpbmcgYW5kIGJvb3RzdHJhcC4gRm9yIHRoZSBWYXItQ292IG1ldGhvZCwgc2VlIE1GRSBTZWMuIDkuMi4gRm9yIGltcG9ydGFuY2Ugc2FtcGxpbmcgYW5kIGJvb3RzdHJhcCwgc2VlIHRoZSBzdXBwbGVtZW50YXJ5IHJlYWRpbmcgaW4gQWJzYWxvbi4NCiAqIEV4dHJlbWUgdmFsdWUgdGhlb3J5OiBNRkUgQ2guIDUgb3IgYWx0ZXJuYXRpdmUgcmVhZGluZyBpbiBITCAoc3VnZ2VzdGVkIGZvciB0aGlzIHBhcnQpLg0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayAzDQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogU3BoZXJpY2FsIGFuZCBlbGxpcHRpY2FsIGRpc3RyaWJ1dGlvbnM6IE1GRSBTZWMuIDYuMy4NCiAqIFNwaGVyaWNhbCBhbmQgZWxsaXB0aWNhbCBkaXN0cmlidXRpb25zLCBjb250LjsgaW50cm9kdWN0aW9uIHRvIGNvcHVsYXMuDQoNCiMjIyBUaGVvcnkNCg0KIyMjIEV4ZXJjaXNlcw0KDQojIyBXZWVrIDQNCg0KIyMjIE1hdGVyaWFsDQoNCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLg0KDQogKiBDb3B1bGFzOiBNRkUgU2VjLiA3LjEtNy41IChTa2xhcidzIHRoZW9yZW0sIEZyZWNoZXQgYm91bmRzKS4NCiAqIENvcHVsYXMgY29udC4gKFRyYW5zZm9ybWF0aW9uczsgZXhhbXBsZXM7IEFyY2hpbWVkZWFuIGNvcHVsYXMpLg0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayA1DQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogQ29wdWxhcyBjb250LiAoc2ltdWxhdGluZyBBcmNoaW1lZGVhbiBjb3B1bGFzLCBzdGF0aXN0aWNhbCBtZXRob2RzLCBtZWFzdXJlcyBvZiBkZXBlbmRlbmNlKS4NCiAqIENyZWRpdCByaXNrOiB0aGUgTWVydG9uIG1vZGVsLiBNRkUgQ2guIDEwLCBwYXJ0aWN1bGFybHkgU2VjLiAxMC4zLiBbVGhpcyBsZWN0dXJlIHdpbGwgb25seSBsYXN0IHR3byBob3Vycy5dDQoNCiMjIyBUaGVvcnkNCg0KIyMjIEV4ZXJjaXNlcw0KDQojIyBXZWVrIDYNCg0KIyMjIE1hdGVyaWFsDQoNCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLg0KDQogKiBQb3J0Zm9saW8gY3JlZGl0IHJpc2s6IE1GRSBDaC4gMTEsIHNwZWNpZmljYWxseSBTZWN0aW9ucyAxMS4xLTExLjMuDQogKiBQb3J0Zm9saW8gY3JlZGl0IHJpc2ssIGNvbnQuIFtUaGlzIGxlY3R1cmUgd2lsbCBvbmx5IGxhc3QgdHdvIGhvdXJzLl0NCg0KIyMjIFRoZW9yeQ0KDQojIyMgRXhlcmNpc2VzDQoNCiMjIFdlZWsgNw0KDQojIyMgTWF0ZXJpYWwNCg0KTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uDQoNCiAqIEludHJvLiB0byBvcGVyYXRpb25hbCByaXNrLiBTdG9jaGFzdGljIHByb2Nlc3NlcyBpbiByaXNrIG1hbmFnZW1lbnQ6IHN0b2NoYXN0aWMgbW9kZWxzIGZvciBvcGVyYXRpb25hbCByaXNrOyBmaW5hbmNpYWwgdGltZSBzZXJpZXMgbW9kZWxzLiBDb25uZWN0aW9ucyB0byBub24tbGlmZSBpbnN1cmFuY2UgbW9kZWxzIGFuZCBlc3RpbWF0ZXMgKGxhc3QgbGVjdHVyZSkuDQoNCiMjIyBUaGVvcnkNCg0KIyMjIEV4ZXJjaXNlcw0K</div>
 <style>
   footer{
     background: rgb(34,34,34);
@@ -594,6 +612,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("QRM_homework.Rmd");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

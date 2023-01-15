@@ -50,9 +50,116 @@ library(dplyr)
 #rmarkdown::render(input = "FinKont_homework.Rmd", output_format = "pdf_document")
 ```
 
+## Finance
+
+### Discrete time models
+
+The study of this course is the **European call** option (and *put* option). This financial derivative is an agreement between two parties where the holder of the option has the right to *"exercise"* the derivative, at a future time $t=T$. Exercising means buying an asset at a certain agreed opon price-strike $K$. In the case of the put-option: the holder has the right (but not obligation) to sell the asset at the strike price $K$. As such the derivative has the payoff
+
+$$\text{Call}\ \text{option:}\hspace{10pt}\Phi(S_T)=(S_T-K)^+,\hspace{20pt}\text{Put}\ \text{option:}\hspace{10pt}\Phi(S_T)=(K-S_T)^+.$$
+
+Our objective is to understand when an arbitrage exist and to find the fair price of these derivative. The strategy in pricing is finding a replicating portfolio with the same payoff as the option (with probability one) and then price the derivative accordingly.
+
+#### Model description
+
+In the one-period model we consider the simplest possible market. We have two distinct times $t=0$ (today) and $t=1$ (tomorrow) and we may buy any portfolio as a mixture of bonds and one stock. We denote the bonds price by $B_t$ and the stocks price by $S_t$ and we assume the following:
+
+$$
+B_0=1,\ B_1=1+R,\hspace{20pt}S_0=s,\ S_1=\left\{\begin{matrix}s\cdot u, & with\ probability\ p_u.\\s\cdot d, & with\ probability\ p_d.\end{matrix}\right.
+$$
+
+We may introduce $Z$ as the random variable
+
+$$
+Z=u\cdot (I)+d\cdot (1-I),
+$$
+
+for an bernoulli variable $I$ with succes probability $p_u$. Naturally, we assume $d\le (1+R)\le u$ (this is imperative to ensure no arbitrage as we will see).
+
+#### Portfolios and arbirtage
+
 ## Random variables
 
 ### Conditional expectation
+The theory of conditional expectation is well-known from courses on the bachelor. Because of this we will only summarise the most important results.
+
+We consider a background space $(\Omega,\mathcal{F},P)$ and a sub-sigma algebra $\mathcal{G}\subseteq \mathcal{F}$. We assume that some stochastic variable is $\mathcal{F}$-measurable, that is the mapping $X : (\Omega,\mathcal{F},P) \to (\mathbb{R},\mathbb{B},m)$ is $\mathcal{F}-\mathbb{B}$-measurable i.e. $\forall B\in\mathbb{B} : \{X\in B\}\in\mathcal{F}$. For some random variable $Z$ defined on the subspace $(\Omega,\mathcal{G},P)$, we say that $Z$ is the conditional expectation of $X$ given $\mathcal{G}$ if
+
+$$
+\forall G\in\mathcal{G} : \int_G Z(\omega)\ dP(\omega)=\int_G X(\omega)\ dP(\omega).
+$$
+
+This fact is summed up in the definition below.
+
+<blockquote class = "def">
+
+**Definition B.27.** *(Conditional expectation)* Let $(\Omega,\mathcal{F},P)$ be a probability space and $X$ a random variable in $L^1(\Omega,\mathcal{F},P)$ ($\vert X\vert$ is integrable). Let furthermore $\mathcal{G}$ be a sigma-algebra such that $\mathcal{G}\subseteq \mathcal{F}$. If $Z$ is a random variable with the properties that:
+
+  i. $Z$ is $\mathcal{G}$-measurable.
+  ii. For every $G\in\mathcal{G}$ it holds that
+  $$\int_G Z(\omega)\ dP(\omega)=\int_G X(\omega)\ dP(\omega).$$
+
+Then we say that $Z$ is the *conditional expectation of $X$ given the sigma-algebra $\mathcal{G}$*. In that case we denote $Z$ by the symbol $E[X\ \vert\ \mathcal{G}]$.
+
+</blockquote>
+
+We see that from the above it always holds that $X$ satisfies (ii). It does not, however, always hold that $X$ is $\mathcal{G}$-measurable. Given this fact it is not trivial that a random variable $E[X\ \vert\ \mathcal{G}]$ even exists. This nontriviality is fortunatly resolved by the Radon-Nikodym theorem.
+
+<blockquote class = "thm">
+
+**Theorem B.28.** *(Existance and uniqueness of Conditional expectation)* Let $(\Omega,\mathcal{F},P)$, $X$ and $\mathcal{G}$ be given as in the definition above. Then the following holds:
+
+  * There will always exist a random variable $Z$ satisfying conditions (i)-(ii) above.
+  * The variable $Z$ is unique, i.e. if both $Y$ and $Z$ satisfy (i)-(ii) then $Y=Z$ $P$-a.s.
+
+</blockquote>
+
+This result ensures that we may condition on any sigma-algebra for instance $\mathcal{G}=\sigma(Y)$ in that case we (pure notation) write
+
+$$
+E[X\ \vert\ \sigma(Y)]=E[X\ \vert\ Y],\hspace{20pt}\sigma(Y)=\sigma\left(\left\{ Y\in A,\ A\in\mathbb{B}\right\}\right).
+$$
+
+In the above $\sigma(Y)$ is simply the smallest sigma-algebra containing all the pre-images of $Y$, that is the smallest sigma-algebra making $Y$ measurable! Giving this foundation there are a few properties conditional expectation have which is rather useful (for instance the tower property).
+
+Below we assume: Let $(\Omega,\mathcal{F},P)$ be a probability space and $X,Y$ be random variables in $L^1(\Omega,\mathcal{F},P)$.
+
+<blockquote class = "prop">
+
+**Proposition B.29.** *(Monotinicity/Linearity of Conditional expectation)* The following holds:
+
+$$X\le Y\ \Rightarrow\ E[X\ \vert\ \mathcal{G}]\le E[Y\ \vert\ \mathcal{G}],\hspace{20pt}P-\text{a.s.}$$
+$$E[\alpha X + \beta Y\ \vert\ \mathcal{G}]=\alpha E[X\ \vert\ \mathcal{G}]+ \beta E[Y\ \vert\ \mathcal{G}],\hspace{20pt}\forall \alpha,\beta\in\mathbb{R}.$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.30.** *(Tower property)* Assume that it holds that $\mathcal{H}\subseteq\mathcal{G}\subseteq\mathcal{F}$. Then the following hold:
+
+$$E[E[X\vert \mathcal{G}]\vert\mathcal{H}]=E[X\vert \mathcal{H}],$$
+$$E[X]=E[E[X\vert \mathcal{G}]].$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.31.** Assume $X$ is $\mathcal{G}$ and that both $X,Y$ and $XY$ are in $L^1$ (only assuming $Y$ is $\mathcal{F}$-measurable), then
+
+$$E[X\vert\mathcal{G}]=X,\hspace{20pt}P-\text{a.s.}$$
+$$E[XY\vert\mathcal{G}]=XE[Y\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.32.** *(Jensen inequality)* Let $f:\mathbb{R}\to\mathbb{R}$ be a convex (measurable) function and assume $f(X)$ is in $L^1$. Then
+
+$$f(E[X\vert\mathcal{G}])\le E[f(X)\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}$$
+
+</blockquote>
+
+&nbsp;
 
 <blockquote class = "prop">
 **Proposition.** *(Bjork, B.37.) Let $(\Omega,\mathcal{F},P)$ be a given probability space, let $\mathcal{G}$ be a sub-sigma-algebra of $\mathcal{F}$, and let $X$ be a square integrable random variable.
@@ -157,14 +264,53 @@ data.frame(t = t, W = W) %>%
         title = element_text(size = 18))
 ```
 
+As one can see from the simulated sample path on the right, the Brownian motion is rather irratic. In fact, the process varies infinitely on any interval with length greater than 0. This gives some of the characteristics of the process including that: $W$ is continuous and $W$ is non-differential everywhere. This irratic behaviour is summed up in the theorem.
+
+
+<blockquote class = "thm">
+
+**Theorem 4.2.** A Brownian motions trajectory $t\mapsto W_t$ is with probability one nowhere differential, and it has locally infinite total variation.
+
+</blockquote>
+
+&nbsp;
+
+### Filtration
+
+Filtrations is widely used in stochastic processes, as they allow for the concept of knowledge/information. This is useful when considering mean-values of future states but in an increasing information setting. For this we introduce the term adapted processes.
+
+<blockquote class = "def">
+
+**Definition B.17.** *(Adapted process)* Let $(\mathcal{F}_t)_{t\ge 0}$ be a filtration on the probability space $(\mathcal{F}_t)_{t\ge 0}$. Furthermore, let $(X_t)_{t\ge 0}$ be a stochastic process on the same space. We say that $X_t$ is adapted to the filtration $\mathbf{F}$ if
+
+$$X_t\ \text{ is }\ \mathcal{F}_t-\text{measurable},\hspace{20pt}\forall t\ge 0.$$
+
+</blockquote>
+
+Obviously, we may introduce the **natural filtration** $\mathcal{F}^X_t$ given by the tragetory of the process $X_t$:
+
+$$\mathcal{F}^X_t=\sigma(\{X_s,\ s\le t\}).$$
+
+Indeed, $X_t$ is adapted to this filtration.
+
+&nbsp;
+
 ### Martingale
 
 <blockquote class = "def">
 
 **Definition.** Let $M_t$ be a stochastic process defined on a background space $(\Omega,\mathcal{F},P)$. Let $(\mathcal{F}_t)_{t\ge 0}$ be a filtration. If $M_t$ is adapted to the filtration $\mathcal{F}_t$, $E\vert M_t\vert <\infty$ and
 
-$$E[M_t\vert \mathcal{F}_s]=M_s$$
+$$E[M_t\vert \mathcal{F}_s]=M_s,\hspace{20pt}P-\text{a.s.}$$
 
-holds for any $t>s$ we say that $M_t$ is a martingale.
+holds for any $t>s$ we say that $M_t$ is a martingale ($\mathbf{F}$-martingale). If the above has $\le$ or $\ge$ we say that $M_t$ is either a **submartingale** or **supermartingale** respectively.
 
 </blockquote>
+
+Naturally, this defintions may easily be extended to discrete models and we have the trivial equality:
+
+$$E[M_t-M_s\ \vert\ \mathcal{F}_s]=0.$$
+
+Martingales is useful, when proofing probalistic statements as the posses tractable properties. A useful technique often include the construction of the martingale
+
+$$M_t=E[X\ \vert\ \mathcal{F}_t].$$

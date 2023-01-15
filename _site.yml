@@ -43,6 +43,7 @@ navbar:
       icon: fa-file
 output:
   html_document:
+    code_download: true
     theme: cosmo
     highlight: breezedark
     css: style.css

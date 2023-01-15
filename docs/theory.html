@@ -36,6 +36,7 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <div class = "sticky-darkmode-toggle">
@@ -204,6 +205,11 @@ code span.wa { color: #da4453; } /* Warning */
 </script>
 
 
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -561,6 +567,8 @@ div.tocify {
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
 </ul>
 </div>
 
@@ -573,10 +581,196 @@ div.tocify {
 </div>
 
 
+<div id="finance" class="section level2">
+<h2>Finance</h2>
+<div id="discrete-time-models" class="section level3">
+<h3>Discrete time models</h3>
+<p>The study of this course is the <strong>European call</strong> option
+(and <em>put</em> option). This financial derivative is an agreement
+between two parties where the holder of the option has the right to
+<em>“exercise”</em> the derivative, at a future time <span
+class="math inline">\(t=T\)</span>. Exercising means buying an asset at
+a certain agreed opon price-strike <span
+class="math inline">\(K\)</span>. In the case of the put-option: the
+holder has the right (but not obligation) to sell the asset at the
+strike price <span class="math inline">\(K\)</span>. As such the
+derivative has the payoff</p>
+<p><span class="math display">\[\text{Call}\
+\text{option:}\hspace{10pt}\Phi(S_T)=(S_T-K)^+,\hspace{20pt}\text{Put}\
+\text{option:}\hspace{10pt}\Phi(S_T)=(K-S_T)^+.\]</span></p>
+<p>Our objective is to understand when an arbitrage exist and to find
+the fair price of these derivative. The strategy in pricing is finding a
+replicating portfolio with the same payoff as the option (with
+probability one) and then price the derivative accordingly.</p>
+<div id="model-description" class="section level4">
+<h4>Model description</h4>
+<p>In the one-period model we consider the simplest possible market. We
+have two distinct times <span class="math inline">\(t=0\)</span> (today)
+and <span class="math inline">\(t=1\)</span> (tomorrow) and we may buy
+any portfolio as a mixture of bonds and one stock. We denote the bonds
+price by <span class="math inline">\(B_t\)</span> and the stocks price
+by <span class="math inline">\(S_t\)</span> and we assume the
+following:</p>
+<p><span class="math display">\[
+B_0=1,\ B_1=1+R,\hspace{20pt}S_0=s,\ S_1=\left\{\begin{matrix}s\cdot u,
+&amp; with\ probability\ p_u.\\s\cdot d, &amp; with\ probability\
+p_d.\end{matrix}\right.
+\]</span></p>
+<p>We may introduce <span class="math inline">\(Z\)</span> as the random
+variable</p>
+<p><span class="math display">\[
+Z=u\cdot (I)+d\cdot (1-I),
+\]</span></p>
+<p>for an bernoulli variable <span class="math inline">\(I\)</span> with
+succes probability <span class="math inline">\(p_u\)</span>. Naturally,
+we assume <span class="math inline">\(d\le (1+R)\le u\)</span> (this is
+imperative to ensure no arbitrage as we will see).</p>
+</div>
+<div id="portfolios-and-arbirtage" class="section level4">
+<h4>Portfolios and arbirtage</h4>
+</div>
+</div>
+</div>
 <div id="random-variables" class="section level2">
 <h2>Random variables</h2>
 <div id="conditional-expectation" class="section level3">
 <h3>Conditional expectation</h3>
+<p>The theory of conditional expectation is well-known from courses on
+the bachelor. Because of this we will only summarise the most important
+results.</p>
+<p>We consider a background space <span
+class="math inline">\((\Omega,\mathcal{F},P)\)</span> and a sub-sigma
+algebra <span class="math inline">\(\mathcal{G}\subseteq
+\mathcal{F}\)</span>. We assume that some stochastic variable is <span
+class="math inline">\(\mathcal{F}\)</span>-measurable, that is the
+mapping <span class="math inline">\(X : (\Omega,\mathcal{F},P) \to
+(\mathbb{R},\mathbb{B},m)\)</span> is <span
+class="math inline">\(\mathcal{F}-\mathbb{B}\)</span>-measurable
+i.e. <span class="math inline">\(\forall B\in\mathbb{B} : \{X\in
+B\}\in\mathcal{F}\)</span>. For some random variable <span
+class="math inline">\(Z\)</span> defined on the subspace <span
+class="math inline">\((\Omega,\mathcal{G},P)\)</span>, we say that <span
+class="math inline">\(Z\)</span> is the conditional expectation of <span
+class="math inline">\(X\)</span> given <span
+class="math inline">\(\mathcal{G}\)</span> if</p>
+<p><span class="math display">\[
+\forall G\in\mathcal{G} : \int_G Z(\omega)\ dP(\omega)=\int_G X(\omega)\
+dP(\omega).
+\]</span></p>
+<p>This fact is summed up in the definition below.</p>
+<blockquote class="def">
+<p><strong>Definition B.27.</strong> <em>(Conditional expectation)</em>
+Let <span class="math inline">\((\Omega,\mathcal{F},P)\)</span> be a
+probability space and <span class="math inline">\(X\)</span> a random
+variable in <span
+class="math inline">\(L^1(\Omega,\mathcal{F},P)\)</span> (<span
+class="math inline">\(\vert X\vert\)</span> is integrable). Let
+furthermore <span class="math inline">\(\mathcal{G}\)</span> be a
+sigma-algebra such that <span class="math inline">\(\mathcal{G}\subseteq
+\mathcal{F}\)</span>. If <span class="math inline">\(Z\)</span> is a
+random variable with the properties that:</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(Z\)</span> is <span
+class="math inline">\(\mathcal{G}\)</span>-measurable.</li>
+<li>For every <span class="math inline">\(G\in\mathcal{G}\)</span> it
+holds that <span class="math display">\[\int_G Z(\omega)\
+dP(\omega)=\int_G X(\omega)\ dP(\omega).\]</span></li>
+</ol>
+<p>Then we say that <span class="math inline">\(Z\)</span> is the
+<em>conditional expectation of <span class="math inline">\(X\)</span>
+given the sigma-algebra <span
+class="math inline">\(\mathcal{G}\)</span></em>. In that case we denote
+<span class="math inline">\(Z\)</span> by the symbol <span
+class="math inline">\(E[X\ \vert\ \mathcal{G}]\)</span>.</p>
+</blockquote>
+<p>We see that from the above it always holds that <span
+class="math inline">\(X\)</span> satisfies (ii). It does not, however,
+always hold that <span class="math inline">\(X\)</span> is <span
+class="math inline">\(\mathcal{G}\)</span>-measurable. Given this fact
+it is not trivial that a random variable <span
+class="math inline">\(E[X\ \vert\ \mathcal{G}]\)</span> even exists.
+This nontriviality is fortunatly resolved by the Radon-Nikodym
+theorem.</p>
+<blockquote class="thm">
+<p><strong>Theorem B.28.</strong> <em>(Existance and uniqueness of
+Conditional expectation)</em> Let <span
+class="math inline">\((\Omega,\mathcal{F},P)\)</span>, <span
+class="math inline">\(X\)</span> and <span
+class="math inline">\(\mathcal{G}\)</span> be given as in the definition
+above. Then the following holds:</p>
+<ul>
+<li>There will always exist a random variable <span
+class="math inline">\(Z\)</span> satisfying conditions (i)-(ii)
+above.</li>
+<li>The variable <span class="math inline">\(Z\)</span> is unique,
+i.e. if both <span class="math inline">\(Y\)</span> and <span
+class="math inline">\(Z\)</span> satisfy (i)-(ii) then <span
+class="math inline">\(Y=Z\)</span> <span
+class="math inline">\(P\)</span>-a.s.</li>
+</ul>
+</blockquote>
+<p>This result ensures that we may condition on any sigma-algebra for
+instance <span class="math inline">\(\mathcal{G}=\sigma(Y)\)</span> in
+that case we (pure notation) write</p>
+<p><span class="math display">\[
+E[X\ \vert\ \sigma(Y)]=E[X\ \vert\
+Y],\hspace{20pt}\sigma(Y)=\sigma\left(\left\{ Y\in A,\
+A\in\mathbb{B}\right\}\right).
+\]</span></p>
+<p>In the above <span class="math inline">\(\sigma(Y)\)</span> is simply
+the smallest sigma-algebra containing all the pre-images of <span
+class="math inline">\(Y\)</span>, that is the smallest sigma-algebra
+making <span class="math inline">\(Y\)</span> measurable! Giving this
+foundation there are a few properties conditional expectation have which
+is rather useful (for instance the tower property).</p>
+<p>Below we assume: Let <span
+class="math inline">\((\Omega,\mathcal{F},P)\)</span> be a probability
+space and <span class="math inline">\(X,Y\)</span> be random variables
+in <span class="math inline">\(L^1(\Omega,\mathcal{F},P)\)</span>.</p>
+<blockquote class="prop">
+<p><strong>Proposition B.29.</strong> <em>(Monotinicity/Linearity of
+Conditional expectation)</em> The following holds:</p>
+<p><span class="math display">\[X\le Y\ \Rightarrow\ E[X\ \vert\
+\mathcal{G}]\le E[Y\ \vert\
+\mathcal{G}],\hspace{20pt}P-\text{a.s.}\]</span> <span
+class="math display">\[E[\alpha X + \beta Y\ \vert\ \mathcal{G}]=\alpha
+E[X\ \vert\ \mathcal{G}]+ \beta E[Y\ \vert\
+\mathcal{G}],\hspace{20pt}\forall
+\alpha,\beta\in\mathbb{R}.\]</span></p>
+</blockquote>
+<blockquote class="prop">
+<p><strong>Proposition B.30.</strong> <em>(Tower property)</em> Assume
+that it holds that <span
+class="math inline">\(\mathcal{H}\subseteq\mathcal{G}\subseteq\mathcal{F}\)</span>.
+Then the following hold:</p>
+<p><span class="math display">\[E[E[X\vert
+\mathcal{G}]\vert\mathcal{H}]=E[X\vert \mathcal{H}],\]</span> <span
+class="math display">\[E[X]=E[E[X\vert \mathcal{G}]].\]</span></p>
+</blockquote>
+<blockquote class="prop">
+<p><strong>Proposition B.31.</strong> Assume <span
+class="math inline">\(X\)</span> is <span
+class="math inline">\(\mathcal{G}\)</span> and that both <span
+class="math inline">\(X,Y\)</span> and <span
+class="math inline">\(XY\)</span> are in <span
+class="math inline">\(L^1\)</span> (only assuming <span
+class="math inline">\(Y\)</span> is <span
+class="math inline">\(\mathcal{F}\)</span>-measurable), then</p>
+<p><span
+class="math display">\[E[X\vert\mathcal{G}]=X,\hspace{20pt}P-\text{a.s.}\]</span>
+<span
+class="math display">\[E[XY\vert\mathcal{G}]=XE[Y\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\]</span></p>
+</blockquote>
+<blockquote class="prop">
+<p><strong>Proposition B.32.</strong> <em>(Jensen inequality)</em> Let
+<span class="math inline">\(f:\mathbb{R}\to\mathbb{R}\)</span> be a
+convex (measurable) function and assume <span
+class="math inline">\(f(X)\)</span> is in <span
+class="math inline">\(L^1\)</span>. Then</p>
+<p><span class="math display">\[f(E[X\vert\mathcal{G}])\le
+E[f(X)\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\]</span></p>
+</blockquote>
+<p> </p>
 <blockquote class="prop">
 <strong>Proposition.</strong> *(Bjork, B.37.) Let <span
 class="math inline">\((\Omega,\mathcal{F},P)\)</span> be a given
@@ -719,6 +913,47 @@ continuous for all <span class="math inline">\(\omega
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">cumsum</span>(N))</span></code></pre></div>
 <p><img src="theory_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="float:right; padding:10px" /></p>
+<p>As one can see from the simulated sample path on the right, the
+Brownian motion is rather irratic. In fact, the process varies
+infinitely on any interval with length greater than 0. This gives some
+of the characteristics of the process including that: <span
+class="math inline">\(W\)</span> is continuous and <span
+class="math inline">\(W\)</span> is non-differential everywhere. This
+irratic behaviour is summed up in the theorem.</p>
+<blockquote class="thm">
+<p><strong>Theorem 4.2.</strong> A Brownian motions trajectory <span
+class="math inline">\(t\mapsto W_t\)</span> is with probability one
+nowhere differential, and it has locally infinite total variation.</p>
+</blockquote>
+<p> </p>
+</div>
+<div id="filtration" class="section level3">
+<h3>Filtration</h3>
+<p>Filtrations is widely used in stochastic processes, as they allow for
+the concept of knowledge/information. This is useful when considering
+mean-values of future states but in an increasing information setting.
+For this we introduce the term adapted processes.</p>
+<blockquote class="def">
+<p><strong>Definition B.17.</strong> <em>(Adapted process)</em> Let
+<span class="math inline">\((\mathcal{F}_t)_{t\ge 0}\)</span> be a
+filtration on the probability space <span
+class="math inline">\((\mathcal{F}_t)_{t\ge 0}\)</span>. Furthermore,
+let <span class="math inline">\((X_t)_{t\ge 0}\)</span> be a stochastic
+process on the same space. We say that <span
+class="math inline">\(X_t\)</span> is adapted to the filtration <span
+class="math inline">\(\mathbf{F}\)</span> if</p>
+<p><span class="math display">\[X_t\ \text{ is }\
+\mathcal{F}_t-\text{measurable},\hspace{20pt}\forall t\ge
+0.\]</span></p>
+</blockquote>
+<p>Obviously, we may introduce the <strong>natural filtration</strong>
+<span class="math inline">\(\mathcal{F}^X_t\)</span> given by the
+tragetory of the process <span class="math inline">\(X_t\)</span>:</p>
+<p><span class="math display">\[\mathcal{F}^X_t=\sigma(\{X_s,\ s\le
+t\}).\]</span></p>
+<p>Indeed, <span class="math inline">\(X_t\)</span> is adapted to this
+filtration.</p>
+<p> </p>
 </div>
 <div id="martingale" class="section level3">
 <h3>Martingale</h3>
@@ -732,13 +967,29 @@ If <span class="math inline">\(M_t\)</span> is adapted to the filtration
 <span class="math inline">\(\mathcal{F}_t\)</span>, <span
 class="math inline">\(E\vert M_t\vert &lt;\infty\)</span> and</p>
 <p><span class="math display">\[E[M_t\vert
-\mathcal{F}_s]=M_s\]</span></p>
+\mathcal{F}_s]=M_s,\hspace{20pt}P-\text{a.s.}\]</span></p>
 <p>holds for any <span class="math inline">\(t&gt;s\)</span> we say that
-<span class="math inline">\(M_t\)</span> is a martingale.</p>
+<span class="math inline">\(M_t\)</span> is a martingale (<span
+class="math inline">\(\mathbf{F}\)</span>-martingale). If the above has
+<span class="math inline">\(\le\)</span> or <span
+class="math inline">\(\ge\)</span> we say that <span
+class="math inline">\(M_t\)</span> is either a
+<strong>submartingale</strong> or <strong>supermartingale</strong>
+respectively.</p>
 </blockquote>
+<p>Naturally, this defintions may easily be extended to discrete models
+and we have the trivial equality:</p>
+<p><span class="math display">\[E[M_t-M_s\ \vert\
+\mathcal{F}_s]=0.\]</span></p>
+<p>Martingales is useful, when proofing probalistic statements as the
+posses tractable properties. A useful technique often include the
+construction of the martingale</p>
+<p><span class="math display">\[M_t=E[X\ \vert\
+\mathcal{F}_t].\]</span></p>
 </div>
 </div>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhlb3J5IgphdXRob3I6ICJKb2FraW0gQmlseWsiCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCIKaGVhZGVyLWluY2x1ZGVzOgogICAtIFx1c2VwYWNrYWdle3dyYXBmaWd9CiAgIC0gXHVzZXBhY2thZ2V7Z3JhcGhpY3N9Cm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB5ZXMKICAgIHRvY19mbG9hdDogeWVzCiAgICBjb2RlX2ZvbGRpbmc6IGhpZGUKICBwZGZfZG9jdW1lbnQ6CiAgICB0b2M6IHllcwotLS0KCmBgYHtyLCBzZXR1cCxpbmNsdWRlPUZBTFNFfQppZiAoa25pdHI6OmlzX2xhdGV4X291dHB1dCgpKSB7CiAga25pdHI6Om9wdHNfY2h1bmskc2V0KAogICAgZmlnLnNob3cgPSAnaGlkZScsCiAgICB3cmFwZiA9IFRSVUUKICApCn0gZWxzZSB7CiAga25pdHI6Om9wdHNfY2h1bmskc2V0KAogICAgb3V0LmV4dHJhID0gJ3N0eWxlPSJmbG9hdDpyaWdodDsgcGFkZGluZzoxMHB4IicsCiAgICBvdXQud2lkdGg9ICI1MCUiCiAgKQp9CmxpYnJhcnkoa25pdHIpCmtuaXRfaG9va3Mkc2V0KHdyYXBmID0gZnVuY3Rpb24oYmVmb3JlLCBvcHRpb25zLCBlbnZpcikgewogIGlmICghYmVmb3JlKSB7CiAgICBvdXRwdXQgPC0gdmVjdG9yKG1vZGUgPSAiY2hhcmFjdGVyIiwgbGVuZ3RoID0gb3B0aW9ucyRmaWcubnVtICsgMSkKCiAgICBmb3IgKGkgaW4gMTpvcHRpb25zJGZpZy5udW0pIHsKICAgICAgb3V0cHV0W2ldIDwtIHNwcmludGYoIlxcaW5jbHVkZWdyYXBoaWNzeyVzfSIsIGZpZ19wYXRoKG51bWJlciA9IGkpKQogICAgfQoKICAgIG91dHB1dFtpKzFdIDwtICJcXGVuZHt3cmFwZmlndXJlfSIKICAgIG91dHB1dCA8LSBjKCJcXGJlZ2lue3dyYXBmaWd1cmV9e1J9ezAuNVxcdGV4dHdpZHRofSIsb3V0cHV0KQogICAgaWYgKGxlbmd0aChvdXRwdXQpPj0gMykgewogICAgICByZXR1cm4ocGFzdGUob3V0cHV0LCBjb2xsYXBzZSA9ICIiKSkKICAgIH0KICB9Cn0pCmBgYAoKYGBge3IsIGluY2x1ZGU9RkFMU0UsIHJlc3VsdHMgPSAnaGlkZSd9CmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeShkcGx5cikKI3JtYXJrZG93bjo6cmVuZGVyKGlucHV0ID0gIkZpbktvbnRfaG9tZXdvcmsuUm1kIiwgb3V0cHV0X2Zvcm1hdCA9ICJwZGZfZG9jdW1lbnQiKQpgYGAKCiMjIEZpbmFuY2UKCiMjIyBEaXNjcmV0ZSB0aW1lIG1vZGVscwoKVGhlIHN0dWR5IG9mIHRoaXMgY291cnNlIGlzIHRoZSAqKkV1cm9wZWFuIGNhbGwqKiBvcHRpb24gKGFuZCAqcHV0KiBvcHRpb24pLiBUaGlzIGZpbmFuY2lhbCBkZXJpdmF0aXZlIGlzIGFuIGFncmVlbWVudCBiZXR3ZWVuIHR3byBwYXJ0aWVzIHdoZXJlIHRoZSBob2xkZXIgb2YgdGhlIG9wdGlvbiBoYXMgdGhlIHJpZ2h0IHRvICoiZXhlcmNpc2UiKiB0aGUgZGVyaXZhdGl2ZSwgYXQgYSBmdXR1cmUgdGltZSAkdD1UJC4gRXhlcmNpc2luZyBtZWFucyBidXlpbmcgYW4gYXNzZXQgYXQgYSBjZXJ0YWluIGFncmVlZCBvcG9uIHByaWNlLXN0cmlrZSAkSyQuIEluIHRoZSBjYXNlIG9mIHRoZSBwdXQtb3B0aW9uOiB0aGUgaG9sZGVyIGhhcyB0aGUgcmlnaHQgKGJ1dCBub3Qgb2JsaWdhdGlvbikgdG8gc2VsbCB0aGUgYXNzZXQgYXQgdGhlIHN0cmlrZSBwcmljZSAkSyQuIEFzIHN1Y2ggdGhlIGRlcml2YXRpdmUgaGFzIHRoZSBwYXlvZmYKCiQkXHRleHR7Q2FsbH1cIFx0ZXh0e29wdGlvbjp9XGhzcGFjZXsxMHB0fVxQaGkoU19UKT0oU19ULUspXissXGhzcGFjZXsyMHB0fVx0ZXh0e1B1dH1cIFx0ZXh0e29wdGlvbjp9XGhzcGFjZXsxMHB0fVxQaGkoU19UKT0oSy1TX1QpXisuJCQKCk91ciBvYmplY3RpdmUgaXMgdG8gdW5kZXJzdGFuZCB3aGVuIGFuIGFyYml0cmFnZSBleGlzdCBhbmQgdG8gZmluZCB0aGUgZmFpciBwcmljZSBvZiB0aGVzZSBkZXJpdmF0aXZlLiBUaGUgc3RyYXRlZ3kgaW4gcHJpY2luZyBpcyBmaW5kaW5nIGEgcmVwbGljYXRpbmcgcG9ydGZvbGlvIHdpdGggdGhlIHNhbWUgcGF5b2ZmIGFzIHRoZSBvcHRpb24gKHdpdGggcHJvYmFiaWxpdHkgb25lKSBhbmQgdGhlbiBwcmljZSB0aGUgZGVyaXZhdGl2ZSBhY2NvcmRpbmdseS4KCiMjIyMgTW9kZWwgZGVzY3JpcHRpb24KCkluIHRoZSBvbmUtcGVyaW9kIG1vZGVsIHdlIGNvbnNpZGVyIHRoZSBzaW1wbGVzdCBwb3NzaWJsZSBtYXJrZXQuIFdlIGhhdmUgdHdvIGRpc3RpbmN0IHRpbWVzICR0PTAkICh0b2RheSkgYW5kICR0PTEkICh0b21vcnJvdykgYW5kIHdlIG1heSBidXkgYW55IHBvcnRmb2xpbyBhcyBhIG1peHR1cmUgb2YgYm9uZHMgYW5kIG9uZSBzdG9jay4gV2UgZGVub3RlIHRoZSBib25kcyBwcmljZSBieSAkQl90JCBhbmQgdGhlIHN0b2NrcyBwcmljZSBieSAkU190JCBhbmQgd2UgYXNzdW1lIHRoZSBmb2xsb3dpbmc6CgokJApCXzA9MSxcIEJfMT0xK1IsXGhzcGFjZXsyMHB0fVNfMD1zLFwgU18xPVxsZWZ0XHtcYmVnaW57bWF0cml4fXNcY2RvdCB1LCAmIHdpdGhcIHByb2JhYmlsaXR5XCBwX3UuXFxzXGNkb3QgZCwgJiB3aXRoXCBwcm9iYWJpbGl0eVwgcF9kLlxlbmR7bWF0cml4fVxyaWdodC4KJCQKCldlIG1heSBpbnRyb2R1Y2UgJFokIGFzIHRoZSByYW5kb20gdmFyaWFibGUKCiQkClo9dVxjZG90IChJKStkXGNkb3QgKDEtSSksCiQkCgpmb3IgYW4gYmVybm91bGxpIHZhcmlhYmxlICRJJCB3aXRoIHN1Y2NlcyBwcm9iYWJpbGl0eSAkcF91JC4gTmF0dXJhbGx5LCB3ZSBhc3N1bWUgJGRcbGUgKDErUilcbGUgdSQgKHRoaXMgaXMgaW1wZXJhdGl2ZSB0byBlbnN1cmUgbm8gYXJiaXRyYWdlIGFzIHdlIHdpbGwgc2VlKS4KCiMjIyMgUG9ydGZvbGlvcyBhbmQgYXJiaXJ0YWdlCgojIyBSYW5kb20gdmFyaWFibGVzCgojIyMgQ29uZGl0aW9uYWwgZXhwZWN0YXRpb24KVGhlIHRoZW9yeSBvZiBjb25kaXRpb25hbCBleHBlY3RhdGlvbiBpcyB3ZWxsLWtub3duIGZyb20gY291cnNlcyBvbiB0aGUgYmFjaGVsb3IuIEJlY2F1c2Ugb2YgdGhpcyB3ZSB3aWxsIG9ubHkgc3VtbWFyaXNlIHRoZSBtb3N0IGltcG9ydGFudCByZXN1bHRzLgoKV2UgY29uc2lkZXIgYSBiYWNrZ3JvdW5kIHNwYWNlICQoXE9tZWdhLFxtYXRoY2Fse0Z9LFApJCBhbmQgYSBzdWItc2lnbWEgYWxnZWJyYSAkXG1hdGhjYWx7R31cc3Vic2V0ZXEgXG1hdGhjYWx7Rn0kLiBXZSBhc3N1bWUgdGhhdCBzb21lIHN0b2NoYXN0aWMgdmFyaWFibGUgaXMgJFxtYXRoY2Fse0Z9JC1tZWFzdXJhYmxlLCB0aGF0IGlzIHRoZSBtYXBwaW5nICRYIDogKFxPbWVnYSxcbWF0aGNhbHtGfSxQKSBcdG8gKFxtYXRoYmJ7Un0sXG1hdGhiYntCfSxtKSQgaXMgJFxtYXRoY2Fse0Z9LVxtYXRoYmJ7Qn0kLW1lYXN1cmFibGUgaS5lLiAkXGZvcmFsbCBCXGluXG1hdGhiYntCfSA6IFx7WFxpbiBCXH1caW5cbWF0aGNhbHtGfSQuIEZvciBzb21lIHJhbmRvbSB2YXJpYWJsZSAkWiQgZGVmaW5lZCBvbiB0aGUgc3Vic3BhY2UgJChcT21lZ2EsXG1hdGhjYWx7R30sUCkkLCB3ZSBzYXkgdGhhdCAkWiQgaXMgdGhlIGNvbmRpdGlvbmFsIGV4cGVjdGF0aW9uIG9mICRYJCBnaXZlbiAkXG1hdGhjYWx7R30kIGlmCgokJApcZm9yYWxsIEdcaW5cbWF0aGNhbHtHfSA6IFxpbnRfRyBaKFxvbWVnYSlcIGRQKFxvbWVnYSk9XGludF9HIFgoXG9tZWdhKVwgZFAoXG9tZWdhKS4KJCQKClRoaXMgZmFjdCBpcyBzdW1tZWQgdXAgaW4gdGhlIGRlZmluaXRpb24gYmVsb3cuCgo8YmxvY2txdW90ZSBjbGFzcyA9ICJkZWYiPgoKKipEZWZpbml0aW9uIEIuMjcuKiogKihDb25kaXRpb25hbCBleHBlY3RhdGlvbikqIExldCAkKFxPbWVnYSxcbWF0aGNhbHtGfSxQKSQgYmUgYSBwcm9iYWJpbGl0eSBzcGFjZSBhbmQgJFgkIGEgcmFuZG9tIHZhcmlhYmxlIGluICRMXjEoXE9tZWdhLFxtYXRoY2Fse0Z9LFApJCAoJFx2ZXJ0IFhcdmVydCQgaXMgaW50ZWdyYWJsZSkuIExldCBmdXJ0aGVybW9yZSAkXG1hdGhjYWx7R30kIGJlIGEgc2lnbWEtYWxnZWJyYSBzdWNoIHRoYXQgJFxtYXRoY2Fse0d9XHN1YnNldGVxIFxtYXRoY2Fse0Z9JC4gSWYgJFokIGlzIGEgcmFuZG9tIHZhcmlhYmxlIHdpdGggdGhlIHByb3BlcnRpZXMgdGhhdDoKCiAgaS4gJFokIGlzICRcbWF0aGNhbHtHfSQtbWVhc3VyYWJsZS4KICBpaS4gRm9yIGV2ZXJ5ICRHXGluXG1hdGhjYWx7R30kIGl0IGhvbGRzIHRoYXQKICAkJFxpbnRfRyBaKFxvbWVnYSlcIGRQKFxvbWVnYSk9XGludF9HIFgoXG9tZWdhKVwgZFAoXG9tZWdhKS4kJAoKVGhlbiB3ZSBzYXkgdGhhdCAkWiQgaXMgdGhlICpjb25kaXRpb25hbCBleHBlY3RhdGlvbiBvZiAkWCQgZ2l2ZW4gdGhlIHNpZ21hLWFsZ2VicmEgJFxtYXRoY2Fse0d9JCouIEluIHRoYXQgY2FzZSB3ZSBkZW5vdGUgJFokIGJ5IHRoZSBzeW1ib2wgJEVbWFwgXHZlcnRcIFxtYXRoY2Fse0d9XSQuCgo8L2Jsb2NrcXVvdGU+CgpXZSBzZWUgdGhhdCBmcm9tIHRoZSBhYm92ZSBpdCBhbHdheXMgaG9sZHMgdGhhdCAkWCQgc2F0aXNmaWVzIChpaSkuIEl0IGRvZXMgbm90LCBob3dldmVyLCBhbHdheXMgaG9sZCB0aGF0ICRYJCBpcyAkXG1hdGhjYWx7R30kLW1lYXN1cmFibGUuIEdpdmVuIHRoaXMgZmFjdCBpdCBpcyBub3QgdHJpdmlhbCB0aGF0IGEgcmFuZG9tIHZhcmlhYmxlICRFW1hcIFx2ZXJ0XCBcbWF0aGNhbHtHfV0kIGV2ZW4gZXhpc3RzLiBUaGlzIG5vbnRyaXZpYWxpdHkgaXMgZm9ydHVuYXRseSByZXNvbHZlZCBieSB0aGUgUmFkb24tTmlrb2R5bSB0aGVvcmVtLgoKPGJsb2NrcXVvdGUgY2xhc3MgPSAidGhtIj4KCioqVGhlb3JlbSBCLjI4LioqICooRXhpc3RhbmNlIGFuZCB1bmlxdWVuZXNzIG9mIENvbmRpdGlvbmFsIGV4cGVjdGF0aW9uKSogTGV0ICQoXE9tZWdhLFxtYXRoY2Fse0Z9LFApJCwgJFgkIGFuZCAkXG1hdGhjYWx7R30kIGJlIGdpdmVuIGFzIGluIHRoZSBkZWZpbml0aW9uIGFib3ZlLiBUaGVuIHRoZSBmb2xsb3dpbmcgaG9sZHM6CgogICogVGhlcmUgd2lsbCBhbHdheXMgZXhpc3QgYSByYW5kb20gdmFyaWFibGUgJFokIHNhdGlzZnlpbmcgY29uZGl0aW9ucyAoaSktKGlpKSBhYm92ZS4KICAqIFRoZSB2YXJpYWJsZSAkWiQgaXMgdW5pcXVlLCBpLmUuIGlmIGJvdGggJFkkIGFuZCAkWiQgc2F0aXNmeSAoaSktKGlpKSB0aGVuICRZPVokICRQJC1hLnMuCgo8L2Jsb2NrcXVvdGU+CgpUaGlzIHJlc3VsdCBlbnN1cmVzIHRoYXQgd2UgbWF5IGNvbmRpdGlvbiBvbiBhbnkgc2lnbWEtYWxnZWJyYSBmb3IgaW5zdGFuY2UgJFxtYXRoY2Fse0d9PVxzaWdtYShZKSQgaW4gdGhhdCBjYXNlIHdlIChwdXJlIG5vdGF0aW9uKSB3cml0ZQoKJCQKRVtYXCBcdmVydFwgXHNpZ21hKFkpXT1FW1hcIFx2ZXJ0XCBZXSxcaHNwYWNlezIwcHR9XHNpZ21hKFkpPVxzaWdtYVxsZWZ0KFxsZWZ0XHsgWVxpbiBBLFwgQVxpblxtYXRoYmJ7Qn1ccmlnaHRcfVxyaWdodCkuCiQkCgpJbiB0aGUgYWJvdmUgJFxzaWdtYShZKSQgaXMgc2ltcGx5IHRoZSBzbWFsbGVzdCBzaWdtYS1hbGdlYnJhIGNvbnRhaW5pbmcgYWxsIHRoZSBwcmUtaW1hZ2VzIG9mICRZJCwgdGhhdCBpcyB0aGUgc21hbGxlc3Qgc2lnbWEtYWxnZWJyYSBtYWtpbmcgJFkkIG1lYXN1cmFibGUhIEdpdmluZyB0aGlzIGZvdW5kYXRpb24gdGhlcmUgYXJlIGEgZmV3IHByb3BlcnRpZXMgY29uZGl0aW9uYWwgZXhwZWN0YXRpb24gaGF2ZSB3aGljaCBpcyByYXRoZXIgdXNlZnVsIChmb3IgaW5zdGFuY2UgdGhlIHRvd2VyIHByb3BlcnR5KS4KCkJlbG93IHdlIGFzc3VtZTogTGV0ICQoXE9tZWdhLFxtYXRoY2Fse0Z9LFApJCBiZSBhIHByb2JhYmlsaXR5IHNwYWNlIGFuZCAkWCxZJCBiZSByYW5kb20gdmFyaWFibGVzIGluICRMXjEoXE9tZWdhLFxtYXRoY2Fse0Z9LFApJC4KCjxibG9ja3F1b3RlIGNsYXNzID0gInByb3AiPgoKKipQcm9wb3NpdGlvbiBCLjI5LioqICooTW9ub3RpbmljaXR5L0xpbmVhcml0eSBvZiBDb25kaXRpb25hbCBleHBlY3RhdGlvbikqIFRoZSBmb2xsb3dpbmcgaG9sZHM6CgokJFhcbGUgWVwgXFJpZ2h0YXJyb3dcIEVbWFwgXHZlcnRcIFxtYXRoY2Fse0d9XVxsZSBFW1lcIFx2ZXJ0XCBcbWF0aGNhbHtHfV0sXGhzcGFjZXsyMHB0fVAtXHRleHR7YS5zLn0kJAokJEVbXGFscGhhIFggKyBcYmV0YSBZXCBcdmVydFwgXG1hdGhjYWx7R31dPVxhbHBoYSBFW1hcIFx2ZXJ0XCBcbWF0aGNhbHtHfV0rIFxiZXRhIEVbWVwgXHZlcnRcIFxtYXRoY2Fse0d9XSxcaHNwYWNlezIwcHR9XGZvcmFsbCBcYWxwaGEsXGJldGFcaW5cbWF0aGJie1J9LiQkCgo8L2Jsb2NrcXVvdGU+Cgo8YmxvY2txdW90ZSBjbGFzcyA9ICJwcm9wIj4KCioqUHJvcG9zaXRpb24gQi4zMC4qKiAqKFRvd2VyIHByb3BlcnR5KSogQXNzdW1lIHRoYXQgaXQgaG9sZHMgdGhhdCAkXG1hdGhjYWx7SH1cc3Vic2V0ZXFcbWF0aGNhbHtHfVxzdWJzZXRlcVxtYXRoY2Fse0Z9JC4gVGhlbiB0aGUgZm9sbG93aW5nIGhvbGQ6CgokJEVbRVtYXHZlcnQgXG1hdGhjYWx7R31dXHZlcnRcbWF0aGNhbHtIfV09RVtYXHZlcnQgXG1hdGhjYWx7SH1dLCQkCiQkRVtYXT1FW0VbWFx2ZXJ0IFxtYXRoY2Fse0d9XV0uJCQKCjwvYmxvY2txdW90ZT4KCjxibG9ja3F1b3RlIGNsYXNzID0gInByb3AiPgoKKipQcm9wb3NpdGlvbiBCLjMxLioqIEFzc3VtZSAkWCQgaXMgJFxtYXRoY2Fse0d9JCBhbmQgdGhhdCBib3RoICRYLFkkIGFuZCAkWFkkIGFyZSBpbiAkTF4xJCAob25seSBhc3N1bWluZyAkWSQgaXMgJFxtYXRoY2Fse0Z9JC1tZWFzdXJhYmxlKSwgdGhlbgoKJCRFW1hcdmVydFxtYXRoY2Fse0d9XT1YLFxoc3BhY2V7MjBwdH1QLVx0ZXh0e2Eucy59JCQKJCRFW1hZXHZlcnRcbWF0aGNhbHtHfV09WEVbWVx2ZXJ0XG1hdGhjYWx7R31dLFxoc3BhY2V7MjBwdH1QLVx0ZXh0e2Eucy59JCQKCjwvYmxvY2txdW90ZT4KCjxibG9ja3F1b3RlIGNsYXNzID0gInByb3AiPgoKKipQcm9wb3NpdGlvbiBCLjMyLioqICooSmVuc2VuIGluZXF1YWxpdHkpKiBMZXQgJGY6XG1hdGhiYntSfVx0b1xtYXRoYmJ7Un0kIGJlIGEgY29udmV4IChtZWFzdXJhYmxlKSBmdW5jdGlvbiBhbmQgYXNzdW1lICRmKFgpJCBpcyBpbiAkTF4xJC4gVGhlbgoKJCRmKEVbWFx2ZXJ0XG1hdGhjYWx7R31dKVxsZSBFW2YoWClcdmVydFxtYXRoY2Fse0d9XSxcaHNwYWNlezIwcHR9UC1cdGV4dHthLnMufSQkCgo8L2Jsb2NrcXVvdGU+CgombmJzcDsKCjxibG9ja3F1b3RlIGNsYXNzID0gInByb3AiPgoqKlByb3Bvc2l0aW9uLioqICooQmpvcmssIEIuMzcuKSBMZXQgJChcT21lZ2EsXG1hdGhjYWx7Rn0sUCkkIGJlIGEgZ2l2ZW4gcHJvYmFiaWxpdHkgc3BhY2UsIGxldCAkXG1hdGhjYWx7R30kIGJlIGEgc3ViLXNpZ21hLWFsZ2VicmEgb2YgJFxtYXRoY2Fse0Z9JCwgYW5kIGxldCAkWCQgYmUgYSBzcXVhcmUgaW50ZWdyYWJsZSByYW5kb20gdmFyaWFibGUuCkNvbnNpZGVyIHRoZSBwcm9ibGVtIG9mIG1pbmltaXppbmcKJCRFXGxlZnRbKFgtWileMlxyaWdodF0kJAp3aGVyZSAkWiQgaXMgYWxsb3dlZCB0byB2YXJ5IG92ZXIgdGhlIGNsYXNzIG9mIGFsbCBzcXVhcmUgaW50ZWdyYWJsZSAkXG1hdGhjYWx7R30kIG1lYXN1cmFibGUgcmFuZG9tIHZhcmlhYmxlcy4gVGhlIG9wdGltYWwgc29sdXRpb24gJFxoYXR7Wn0kIGlzIHRoZW4gZ2l2ZW4gYnkuCiQkXGhhdHtafT1FW1hcdmVydFxtYXRoY2Fse0d9XS4kJAo8L2Jsb2NrcXVvdGU+Cgo8ZGV0YWlscz4KPHN1bW1hcnk+KipQcm9vZi4qKjwvc3VtbWFyeT4KCkxldCAkWFxpbiBMXjIoXE9tZWdhLFxtYXRoY2Fse0Z9LFApJCBiZSBhIHJhbmRvbSB2YXJpYWJsZS4gTm93IGNvbnNpZGVyIGFuIGFyYml0cmFyeSAkWlxpbiBMXjIoXE9tZWdhLFxtYXRoY2Fse0d9LFApJC4gUmVjYWxsIHRoYXQgJFxtYXRoY2Fse0d9XHN1YnNldCBcbWF0aGNhbHtGfSQgYW5kIHNvICRYJCBpcyBhbHNvIGluICRaXGluIExeMihcT21lZ2EsXG1hdGhjYWx7R30sUCkkLCBhcyBpdCBpcyBib3RoZSBzcXVhcmUgaW50ZWdyYWJsZSBhbmQgJFxtYXRoY2Fse0d9JC1tZWFzdXJhYmxlLiBUaGVuCgokJEVcbGVmdFtaXGNkb3QoWC1FW1hcdmVydFxtYXRoY2Fse0d9XSlccmlnaHRdPUVcbGVmdFtaXGNkb3QgWFxyaWdodF0tRVxsZWZ0W1pcY2RvdCBFW1hcdmVydFxtYXRoY2Fse0d9XVxyaWdodF0uJCQKClRoZW4gYnkgdXNpbmcgdGhlIGxhdyBvZiB0b3RhbCBleHBlY3RhdGlvbiBhbmQgc2Vjb25kbHkgdGhhdCAkWiQgaXMgJFxtYXRoY2Fse0d9JC1tZWFzdXJhYmxlIHdlIGhhdmUgdGhhdAoKJCRFXGxlZnRbWlxjZG90IFhccmlnaHRdPUVcbGVmdFtFW1pcY2RvdCBYXHZlcnRcbWF0aGNhbHtHfV1ccmlnaHRdPUVcbGVmdFtaXGNkb3QgRVsgWFx2ZXJ0XG1hdGhjYWx7R31dXHJpZ2h0XS4kJAoKQ29tYmluaW5nIHRoZSB0d28gZXF1YXRpb25zIGdpdmVzIHRoZSBkZXNpcmVkIHJlc3VsdC4gT2J2aW91c2x5LCB3ZSBoYXZlIHRoYXQKCiQkWC1aPVgtWitFW1hcdmVydFxtYXRoY2Fse0d9XS1FW1hcdmVydFxtYXRoY2Fse0d9XT0oWC1FW1hcdmVydFxtYXRoY2Fse0d9XSkrKEVbWFx2ZXJ0XG1hdGhjYWx7R31dLVopLiQkCgpUaGVuIHNxdWFyaW5nIHRoZSB0ZXJtcyBnaXZlcwoKJCQoWC1aKV4yPShYLUVbWFx2ZXJ0XG1hdGhjYWx7R31dKV4yKyhFW1hcdmVydFxtYXRoY2Fse0d9XS1aKV4yKzIoWC1FW1hcdmVydFxtYXRoY2Fse0d9XSkoRVtYXHZlcnRcbWF0aGNhbHtHfV0tWikkJAoKVGFraW5nIGV4cGVjdGF0aW9uIG9uIGVhY2ggc2lkZSBhbmQgdXNpbmcgbGluZWFyaXR5IG9mIHRoZSBleHBlY3RhdGlvbiB3ZSBoYXZlIHRoYXQKCiQkRVsoWC1aKV4yXT1FXGxlZnRbKFgtRVtYXHZlcnRcbWF0aGNhbHtHfV0pXjJccmlnaHRdK0VcbGVmdFsoRVtYXHZlcnRcbWF0aGNhbHtHfV0tWileMlxyaWdodF0rMkVcbGVmdFsoWC1FW1hcdmVydFxtYXRoY2Fse0d9XSkoRVtYXHZlcnRcbWF0aGNhbHtHfV0tWilccmlnaHRdLiQkCgpXZSBjYW4gbm93IHVzZSB0aGF0ICRFW1hcdmVydFxtYXRoY2Fse0d9XS1aJCBpcyAkXG1hdGhjYWx7R30kLW1lYXN1cmFibGUgd2l0aCB0aGUgYWJvdmUgcmVzdWx0IG9uIHRoZSBsYXN0IHRlcm0uCgokJEVbKFgtWileMl09RVxsZWZ0WyhYLUVbWFx2ZXJ0XG1hdGhjYWx7R31dKV4yXHJpZ2h0XStFXGxlZnRbKEVbWFx2ZXJ0XG1hdGhjYWx7R31dLVopXjJccmlnaHRdLiQkCgpOb3cgc2luY2UgJFgkIGlzIGdpdmVuIHRoZSB0ZXJtICRFXGxlZnRbKFgtRVtYXHZlcnRcbWF0aGNhbHtHfV0pXjJccmlnaHRdJCBpcyBzaW1wbHkgYSBjb25zdGFudCBub3QgZGVwZW5kaW5nIG9uIHRoZSBjaG9pY2Ugb2cgJFokLiBUaGUgb3B0aW1hbCBjaG9pY2Ugb2YgJFokIGlzIHRoZW4gJEVbWFx2ZXJ0XG1hdGhjYWx7R31dJCBzaW5jZSB0aGlzIG1pbmltaXplcyB0aGUgc2Vjb25kIHRlcm0uIFRoZSBzdGF0ZW1lbnQgaXMgdGhlbiBwcm92ZWQuCgo8L2RldGFpbHM+CgombmJzcDsKCiMjIyBNb21lbnQgZ2VuZXJhdGluZyBmdW5jdGlvbgoKTGV0ICRYJCBiZSBhIHJhbmRvbSB2YXJpYWJsZSB3aXRoIGRpc3RyaWJ1dGlvbiBmdW5jdGlvbiAkRih4KT1QKFhcbGUgeCkkIGFuZCAkWSQgYmUgYSByYW5kb20gdmFyaWFibGUgd2l0aCBkaXN0cmlidXRpb24gZnVuY3Rpb24gJEcoeSk9UChZXGxlIHkpJC4KCjxibG9ja3F1b3RlIGNsYXNzID0gImRlZiI+CioqRGVmaW5pdGlvbi4qKiBUaGUgbW9tZW50IGdlbmVyYXRpbmcgZnVuY3Rpb24gb3IgTGFwbGFjZSB0cmFuc2Zvcm0gb2YgJFgkIGlzCgokJFxwc2lfWChcbGFtYmRhKT1FXGxlZnRbZV57XGxhbWJkYSBYfVxyaWdodF09XGludF97LVxpbmZ0eX1eXGluZnR5IGVee1xsYW1iZGEgeH1kRih4KSQkCgpwcm92aWRlZCB0aGUgZXhwZWN0YXRpb24gaXMgZmluaXRlIGZvciAkXHZlcnRcbGFtYmRhXHZlcnQ8aCQgZm9yIHNvbWUgJGg+MCQuCjwvYmxvY2txdW90ZT4KClRoZSBNR0YgdW5pcXVlbHkgZGV0ZXJtaW5lIHRoZSBkaXN0cmlidXRpb24gb2YgYSByYW5kb20gdmFyaWFibGUsIGR1ZSB0byB0aGUgZm9sbG93aW5nIHJlc3VsdC4KCjxibG9ja3F1b3RlIGNsYXNzID0gInRobSI+CioqVGhlb3JlbS4qKiAqKFVuaXF1ZW5lc3MpKiBJZiAkXHBzaV9YKFxsYW1iZGEpPVxwc2lfWShcbGFtYmRhKSQgd2hlbiAkXHZlcnRcbGFtYmRhXHZlcnQ8aCQgZm9yIHNvbWUgJGg+MCQsIHRoZW4gJFgkIGFuZCAkWSQgaGFzIHRoZSBzYW1lIGRpc3RyaWJ1dGlvbiwgdGhhdCBpcywgJEY9RyQuCjwvYmxvY2txdW90ZT4KClRoZXJlIGlzIGFsc28gdGhlIGZvbGxvd2luZyByZXN1bHQgb2YgaW5kZXBlbmRlbmNlIGZvciBNb21lbnQgZ2VuZXJhdGluZyBmdW5jdGlvbnMuCgo8YmxvY2txdW90ZSBjbGFzcyA9ICJ0aG0iPgoqKlRoZW9yZW0uKiogKihJbmRlcGVuZGVuY2UpKiBJZiAKCiQkRVxsZWZ0W2Vee1xsYW1iZGFfMVgrXGxhbWJkYV8yWX1ccmlnaHRdPVxwc2lfWChcbGFtYmRhXzEpXHBzaV9ZKFxsYW1iZGFfMikkJAoKZm9yICRcdmVydFxsYW1iZGFfaVx2ZXJ0PGgkIGZvciAkaT0xLDIkIGZvciBzb21lICRoPjAkLCB0aGVuICRYJCBhbmQgJFkkIGFyZSBpbmRlcGVuZGVudCByYW5kb20gdmFyaWFibGVzLgo8L2Jsb2NrcXVvdGU+CgojIyBTdG9jaGFzdGljIHByb2Nlc3NlcwoKIyMjIEJyb3duaWFuIE1vdGlvbgoKPGJsb2NrcXVvdGUgY2xhc3MgPSAiZGVmIj4KKipEZWZpbml0aW9uLioqICooQmpvcmssIGRlZi4gNC4xKSogQSBzdG9jaGFzdGljIHByb2Nlc3MgJFckIGlzIGNhbGxlZCBhICoqQnJvd25pYW4gbW90aW9uKiogb3IgKipXaWVuZXIgcHJvY2VzcyoqIGlmIHRoZSBmb2xsb3dpbmcgY29uZGl0aW9ucyBob2xkCgogMS4gJFdfMD0wJC4KIDIuIFRoZSBwcm9jZXNzICRXJCBoYXMgaW5kZXBlbmRlbnQgaW5jcmVtZW50cywgaS5lLiBpZiAkcjxzXGxlIHQ8IHUkIHRoZW4gJFdfdS1XX3QkIGFuZCAkV19zLVdfciQgYXJlIGluZGVwZW5kZW50IHJhbmRvbSB2YXJpYWJsZXMuCiAzLiBGb3IgJHM8dCQgdGhlIHJhbmRvbSB2YXJpYWJsZSAkV190LVdfcyQgaGFzIHRoZSBHYXVzc2lhbiBkaXN0cmlidXRpb24gJFxtYXRoY2Fse059KDAsdC1zKSQuCiA0LiAkVyQgaGFzIGNvbnRpbnVvdXMgdHJhamVjdG9yaWVzIGkuZS4gJHNcbWFwc3RvIFcocztcb21lZ2EpJCBpIGNvbnRpbnVvdXMgZm9yIGFsbCAkXG9tZWdhIFxpblxPbWVnYSQuCjwvYmxvY2txdW90ZT4KCmBgYHtyfQojRXhhbXBsZSBvZiB0cmFqZWN0b3J5IGZvciBCTQpzZXQuc2VlZCgxKQp0IDwtIDA6MTAwMApOIDwtIHJub3JtKAogIG4gPSBsZW5ndGgodCktMSwgI2luaXRpYWwgdmFsdWUgPSAwCiAgbWVhbiA9IDAsICNpbmNlbWVudHMgbWVhbiA9IDAKICBzZCA9IHNxcnQodFsyOmxlbmd0aCh0KV0gLSB0WzE6KGxlbmd0aCh0KS0xKV0pICNpbmNyZW1lbnQgc2QgPSBzcXJ0KHQtcykKKQpXIDwtIGMoMCxjdW1zdW0oTikpCmBgYApgYGB7cixlY2hvPUZBTFNFLGluY2x1ZGU9VFJVRX0KZGF0YS5mcmFtZSh0ID0gdCwgVyA9IFcpICU+JQogIGdncGxvdCgpICsKICBnZW9tX2xpbmUoYWVzKHg9dCx5PVcpKSArCiAgbGFicyh0aXRsZSA9ICJSZWFsaXNhdGlvbiBvZiBhIEJyb3duaWFuIG1vdGlvbiIpICsKICB0aGVtZV9idygpICsKICB0aGVtZShheGlzLnRleHQgPSBlbGVtZW50X3RleHQoc2l6ZSA9IDE1KSwKICAgICAgICB0aXRsZSA9IGVsZW1lbnRfdGV4dChzaXplID0gMTgpKQpgYGAKCkFzIG9uZSBjYW4gc2VlIGZyb20gdGhlIHNpbXVsYXRlZCBzYW1wbGUgcGF0aCBvbiB0aGUgcmlnaHQsIHRoZSBCcm93bmlhbiBtb3Rpb24gaXMgcmF0aGVyIGlycmF0aWMuIEluIGZhY3QsIHRoZSBwcm9jZXNzIHZhcmllcyBpbmZpbml0ZWx5IG9uIGFueSBpbnRlcnZhbCB3aXRoIGxlbmd0aCBncmVhdGVyIHRoYW4gMC4gVGhpcyBnaXZlcyBzb21lIG9mIHRoZSBjaGFyYWN0ZXJpc3RpY3Mgb2YgdGhlIHByb2Nlc3MgaW5jbHVkaW5nIHRoYXQ6ICRXJCBpcyBjb250aW51b3VzIGFuZCAkVyQgaXMgbm9uLWRpZmZlcmVudGlhbCBldmVyeXdoZXJlLiBUaGlzIGlycmF0aWMgYmVoYXZpb3VyIGlzIHN1bW1lZCB1cCBpbiB0aGUgdGhlb3JlbS4KCgo8YmxvY2txdW90ZSBjbGFzcyA9ICJ0aG0iPgoKKipUaGVvcmVtIDQuMi4qKiBBIEJyb3duaWFuIG1vdGlvbnMgdHJhamVjdG9yeSAkdFxtYXBzdG8gV190JCBpcyB3aXRoIHByb2JhYmlsaXR5IG9uZSBub3doZXJlIGRpZmZlcmVudGlhbCwgYW5kIGl0IGhhcyBsb2NhbGx5IGluZmluaXRlIHRvdGFsIHZhcmlhdGlvbi4KCjwvYmxvY2txdW90ZT4KCiZuYnNwOwoKIyMjIEZpbHRyYXRpb24KCkZpbHRyYXRpb25zIGlzIHdpZGVseSB1c2VkIGluIHN0b2NoYXN0aWMgcHJvY2Vzc2VzLCBhcyB0aGV5IGFsbG93IGZvciB0aGUgY29uY2VwdCBvZiBrbm93bGVkZ2UvaW5mb3JtYXRpb24uIFRoaXMgaXMgdXNlZnVsIHdoZW4gY29uc2lkZXJpbmcgbWVhbi12YWx1ZXMgb2YgZnV0dXJlIHN0YXRlcyBidXQgaW4gYW4gaW5jcmVhc2luZyBpbmZvcm1hdGlvbiBzZXR0aW5nLiBGb3IgdGhpcyB3ZSBpbnRyb2R1Y2UgdGhlIHRlcm0gYWRhcHRlZCBwcm9jZXNzZXMuCgo8YmxvY2txdW90ZSBjbGFzcyA9ICJkZWYiPgoKKipEZWZpbml0aW9uIEIuMTcuKiogKihBZGFwdGVkIHByb2Nlc3MpKiBMZXQgJChcbWF0aGNhbHtGfV90KV97dFxnZSAwfSQgYmUgYSBmaWx0cmF0aW9uIG9uIHRoZSBwcm9iYWJpbGl0eSBzcGFjZSAkKFxtYXRoY2Fse0Z9X3QpX3t0XGdlIDB9JC4gRnVydGhlcm1vcmUsIGxldCAkKFhfdClfe3RcZ2UgMH0kIGJlIGEgc3RvY2hhc3RpYyBwcm9jZXNzIG9uIHRoZSBzYW1lIHNwYWNlLiBXZSBzYXkgdGhhdCAkWF90JCBpcyBhZGFwdGVkIHRvIHRoZSBmaWx0cmF0aW9uICRcbWF0aGJme0Z9JCBpZgoKJCRYX3RcIFx0ZXh0eyBpcyB9XCBcbWF0aGNhbHtGfV90LVx0ZXh0e21lYXN1cmFibGV9LFxoc3BhY2V7MjBwdH1cZm9yYWxsIHRcZ2UgMC4kJAoKPC9ibG9ja3F1b3RlPgoKT2J2aW91c2x5LCB3ZSBtYXkgaW50cm9kdWNlIHRoZSAqKm5hdHVyYWwgZmlsdHJhdGlvbioqICRcbWF0aGNhbHtGfV5YX3QkIGdpdmVuIGJ5IHRoZSB0cmFnZXRvcnkgb2YgdGhlIHByb2Nlc3MgJFhfdCQ6CgokJFxtYXRoY2Fse0Z9XlhfdD1cc2lnbWEoXHtYX3MsXCBzXGxlIHRcfSkuJCQKCkluZGVlZCwgJFhfdCQgaXMgYWRhcHRlZCB0byB0aGlzIGZpbHRyYXRpb24uCgombmJzcDsKCiMjIyBNYXJ0aW5nYWxlCgo8YmxvY2txdW90ZSBjbGFzcyA9ICJkZWYiPgoKKipEZWZpbml0aW9uLioqIExldCAkTV90JCBiZSBhIHN0b2NoYXN0aWMgcHJvY2VzcyBkZWZpbmVkIG9uIGEgYmFja2dyb3VuZCBzcGFjZSAkKFxPbWVnYSxcbWF0aGNhbHtGfSxQKSQuIExldCAkKFxtYXRoY2Fse0Z9X3QpX3t0XGdlIDB9JCBiZSBhIGZpbHRyYXRpb24uIElmICRNX3QkIGlzIGFkYXB0ZWQgdG8gdGhlIGZpbHRyYXRpb24gJFxtYXRoY2Fse0Z9X3QkLCAkRVx2ZXJ0IE1fdFx2ZXJ0IDxcaW5mdHkkIGFuZAoKJCRFW01fdFx2ZXJ0IFxtYXRoY2Fse0Z9X3NdPU1fcyxcaHNwYWNlezIwcHR9UC1cdGV4dHthLnMufSQkCgpob2xkcyBmb3IgYW55ICR0PnMkIHdlIHNheSB0aGF0ICRNX3QkIGlzIGEgbWFydGluZ2FsZSAoJFxtYXRoYmZ7Rn0kLW1hcnRpbmdhbGUpLiBJZiB0aGUgYWJvdmUgaGFzICRcbGUkIG9yICRcZ2UkIHdlIHNheSB0aGF0ICRNX3QkIGlzIGVpdGhlciBhICoqc3VibWFydGluZ2FsZSoqIG9yICoqc3VwZXJtYXJ0aW5nYWxlKiogcmVzcGVjdGl2ZWx5LgoKPC9ibG9ja3F1b3RlPgoKTmF0dXJhbGx5LCB0aGlzIGRlZmludGlvbnMgbWF5IGVhc2lseSBiZSBleHRlbmRlZCB0byBkaXNjcmV0ZSBtb2RlbHMgYW5kIHdlIGhhdmUgdGhlIHRyaXZpYWwgZXF1YWxpdHk6CgokJEVbTV90LU1fc1wgXHZlcnRcIFxtYXRoY2Fse0Z9X3NdPTAuJCQKCk1hcnRpbmdhbGVzIGlzIHVzZWZ1bCwgd2hlbiBwcm9vZmluZyBwcm9iYWxpc3RpYyBzdGF0ZW1lbnRzIGFzIHRoZSBwb3NzZXMgdHJhY3RhYmxlIHByb3BlcnRpZXMuIEEgdXNlZnVsIHRlY2huaXF1ZSBvZnRlbiBpbmNsdWRlIHRoZSBjb25zdHJ1Y3Rpb24gb2YgdGhlIG1hcnRpbmdhbGUKCiQkTV90PUVbWFwgXHZlcnRcIFxtYXRoY2Fse0Z9X3RdLiQk</div>
 <style>
   footer{
     background: rgb(34,34,34);
@@ -825,6 +1076,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
+  window.initializeSourceEmbed("theory.Rmd");
   window.initializeCodeFolding("hide" === "show");
 });
 </script>
