@@ -67,6 +67,7 @@
 blockquote p {
   display: inline;
 }
+
 p {
   font-size: 18px;
 }
@@ -134,6 +135,7 @@ details {
   background: floralwhite;
   border-left: 0.5em solid burlywood;
   padding: .5em .5em .5em 1em;
+  margin-bottom: 1em;
 }
 details > summary {
   cursor: pointer;
@@ -259,4 +261,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+blockquote {
+  font-style: italic;
 }
