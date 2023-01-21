@@ -39,7 +39,7 @@ if (knitr::is_latex_output()) {
   knitr::knit_hooks$set(wrapf = function(before, options, envir) {})
   knitr::opts_chunk$set(
     out.extra = 'style="float:right; padding:10px"',
-    out.width= "40%"
+    out.width= "50%"
   )
 }
 ```
@@ -57,14 +57,16 @@ library(dplyr)
 
 ## Week 1
 
-### Material
+### Table of Contents
 
-  * Brownian motion (Chapter 4.1)
-  * Conditional expectation (Appendix B.5) 
-  * Filtration (Appendix B.3 and Chapter 4.2)
-  * Martingales (Appendix C.1 and Chapter 4.4)
-  * Introduction (Chapter 1)
-  * Discrete time models (Chapter 2 and 3)
+  * [Brownian motion (Chapter 4.1)](#the-brownian-motion)
+  * [Conditional expectation (Appendix B.5)](#conditional-expectation)
+  * [Filtration (Appendix B.3 and Chapter 4.2)](#filtrations)
+  * [Martingales (Appendix C.1 and Chapter 4.4)](#martingales)
+  * [Introduction (Chapter 1)](#discrete-time-models)
+  * [Discrete time models (Chapter 2 and 3)](#discrete-time-models)
+
+  * [Exercises](#exercises-week-1)
 
 ### Theory
 
@@ -104,8 +106,10 @@ data.frame(t = t, W = W) %>%
   geom_line(aes(x=t,y=W)) +
   labs(title = "Realisation of a Brownian motion") +
   theme_bw() +
-  theme(axis.text = element_text(size = 15),
-        title = element_text(size = 18))
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12),
+        title = element_text(size = 16),
+        plot.caption  = element_text(size = 10))
 ```
 
 As one can see from the simulated sample path on the right, the Brownian motion is rather irratic. In fact, the process varies infinitely on any interval with length greater than 0. This gives some of the characteristics of the process including that: $W$ is continuous and $W$ is non-differential everywhere. This irratic behaviour is summed up in the theorem.
@@ -780,8 +784,10 @@ data.frame(K = 0:ceiling(s*u**cap_t),
   labs(title = "Price of european call option",
        x = "Strike", y = "Price") +
   theme_bw() +
-  theme(axis.text = element_text(size = 15),
-        title = element_text(size = 18))
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12),
+        title = element_text(size = 16),
+        plot.caption  = element_text(size = 10))
 ```
 
 We follow an analog example as the one after proposition 2.24. Let $K=90$ and we see that
@@ -1068,7 +1074,7 @@ where $\mathbf{M}$ is a stochastic discount factor.
 
 &nbsp;
 
- ### Exercises
+### Exercises Week 1
 
 **Probability exercises**
 
@@ -1325,10 +1331,12 @@ $$E[M_t\vert\mathcal{F}_s]=\exp\left(\lambda W_s-\frac{\lambda^2}{2}s\right)=M_s
 
 ## Week 2 
 
-### Material
+### Table of Contents
 
-  * Stochastic integrals and Ito formula (Chapter 4 and Appendix C.2)
-  * Stochastic differential equations (Chapter 5.1-4)
+  * [Stochastic integrals and Ito formula (Chapter 4 and Appendix C.2)](#stochastic-integrals)
+  * [Stochastic differential equations (Chapter 5.1-4)](#stochastic-differential-equations)
+
+  * [Exercises](#exercises-week-2)
 
 ### Theory
 
@@ -1482,7 +1490,7 @@ We want to understand how transformation of such an integral behaves and therefo
 
 <blockquote class = "thm">
 
-**Thoerem 4.11.** Assume that the process $X$ has a stochastic differential form given by
+**Thoerem 4.11.** **(Ito's formula, one-dimensional)** Assume that the process $X$ has a stochastic differential form given by
 
 $$
 dX_t=\mu_t\ dt + \sigma_t\ dW_t,\tag{4.28}
@@ -1498,7 +1506,7 @@ $$
 
 <blockquote class = "prop">
 
-**Proposition 4.12.** With assumptions as in theorem 4.11, $df$ is given by
+**Proposition 4.12.** **(Ito's formula, one-dimensional)** With assumptions as in theorem 4.11, $df$ is given by
 
 $$
 df=\frac{\partial f}{\partial t}\ dt + \frac{\partial f}{\partial x}\ dX_t + \frac{1}{2}\frac{\partial^2 f}{\partial x^2}\ (dX_t)^2,\tag{4.31}
@@ -1558,7 +1566,7 @@ The dynamics is given in the multidimensional version of Ito's formula.
 
 <blockquote class = "thm">
 
-**Thoerem 4.19.** Let $X$ be given as above. Then the following holds:
+**Thoerem 4.19.** **(Ito's formula, multi-dimensional)** Let $X$ be given as above. Then the following holds:
 
   * The process $f(t,X_t)$ has the stochastisc differential given by
   $$
@@ -1712,7 +1720,7 @@ $$
 \nabla_xh(x)=\left[\frac{\partial h}{\partial x_1}(x),...,\frac{\partial h}{\partial x_n}(x)\right].
 $$
 
-### Exercises
+### Exercises Week 2
 
 **Exercise 1** *(Bjork 4.1)* Compute the stochastic differential $dZ_t$ when
 
@@ -2179,11 +2187,13 @@ Hence $X_t$ has mean not depending on the tragetory of the sister-process $Y_t$.
 
 ## Week 3
 
-### Material
+### Table of Contents
 
-  * Partial differential equations (Chapter 5.5)
-  * Self-financing portfolios (Chapter 6)
-  * Black-Scholes PDE (classic approach) and risk neutral valuation (Chapter 7.1-5)
+  * [Partial differential equations (Chapter 5.5)](#partial-differential-equations)
+  * [Self-financing portfolios (Chapter 6)](#self-financing-portfolios)
+  * [Black-Scholes PDE (classic approach) and risk neutral valuation (Chapter 7.1-5)](#black-scholes-pde)
+
+  * [Exercises](#exercises-week-3)
 
 ### Theory
 
@@ -2476,7 +2486,7 @@ Then the value process $V^h$ is given by $V^h=Z$, the pair $(h,c)$ is self-finan
 
 </blockquote>
 
-#### Black-Scholes PDE/Risk-neutral valuation
+#### Black-Scholes PDE
 
 The Black-Scholes model revolves arround SDE's as seen above. In this model we have two assets a risk free asset $B$ and a stochastic priced asset $S$. We therefore start by defining what we mean by a quote-on-qoute *risk free* asset.
 
@@ -2641,7 +2651,7 @@ $$
 
 </blockquote>
 
-### Exercises
+### Exercises Week 3
 
 **Exercise 1** *(Bjork 5.1)* Show that the scalar SDE
 
@@ -2885,18 +2895,22 @@ with $F(T,x,y)=xy$.
 
 ## Week 4
 
-### Material
+### Table of Contents
 
-  * Black-Scholes formula (Chapter 7.6, see also Remark to Black-Scholes formula)
-  * Completeness and hedging (Chapter 8)
-  * Put-call parity (Chapter 10.1)
-  * The Greeks (Chapter 10.2)
-  * Risk neutral valuation formula (Chapter 11.6) 
-  * Equivalent probability measures (Appendix A.11, B.6 and C.3) 
+  * [Black-Scholes formula (Chapter 7.6, see also Remark to Black-Scholes formula)](#black-scholes-formula)
+  * [Completeness and hedging (Chapter 8)](#completeness-and-hedging)
+  * [Put-call parity (Chapter 10.1)](#put-call-parity)
+  * [The Greeks (Chapter 10.2)](#the-greeks)
+  * [Risk neutral valuation formula (Chapter 11.6)](#risk-neutral-valuation-formula)
+  * [Equivalent probability measures (Appendix A.11, B.6 and C.3)](#equivalent-probability-measures)
 
+  * [Exercises](#exercises-week-4)
+  
 ### Theory
 
-```{r,echo=FALSE,include=FALSE}
+#### Black-Scholes formula
+
+```{r,echo=FALSE,include=TRUE,wrapF = TRUE}
 set.seed(10)
 mu <- 0.15
 sigma <- 0.35
@@ -2932,50 +2946,1166 @@ for (i in 2:length(t)){
   Prices[i,"W_B"] <- W_B
   Prices[i,"Phi"] <- max(S_t-K,0)
 }
-ggplot2::ggplot(data = Prices) + geom_line(aes(x=t,y=S), col = "black") + geom_line(aes(x=t,y=B),col = "blue") + geom_hline(yintercept = K, col = "red") +
-  labs(title = "Realisation of a Brownian motion") +
+p1 <- ggplot2::ggplot(data = Prices) + geom_line(aes(x=t,y=S), col = "black") + geom_line(aes(x=t,y=B),col = "blue") + geom_hline(yintercept = K, col = "red") +
+  labs(title = "Realisation of a Black-Scholes model",
+       y="S (black), B (blue), K (red)",
+       caption = "mu = 0.15, sigma = 0.35, T= 10 (N=10*1000)") +
   theme_bw() +
-  theme(axis.text = element_text(size = 15),
-        title = element_text(size = 18))
-ggplot2::ggplot(data = Prices)+ geom_line(aes(x=t,y=Pi), col = "red") +geom_line(aes(x=t,y=Value), col = "black") + geom_line(aes(x=t,y=Phi), col = "red") +
-  labs(title = "Realisation of a Brownian motion") +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12),
+        title = element_text(size = 16),
+        plot.caption  = element_text(size = 10))
+p2 <- ggplot2::ggplot(data = Prices)+ geom_line(aes(x=t,y=Pi), col = "red") +geom_line(aes(x=t,y=Value), col = "black") + geom_line(aes(x=t,y=Phi), col = "blue") +
+  labs(title = "Pricing and profit in Black-Scholes",
+       y="Pi (red), V^h (black), (S-K)^+ (blue)",
+       caption = "Price in red behind the value process of the replicating portfolio.") +
   theme_bw() +
-  theme(axis.text = element_text(size = 15),
-        title = element_text(size = 18))
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12),
+        title = element_text(size = 16),
+        plot.caption  = element_text(size = 10))
+ggpubr::ggarrange(p1,p2,nrow = 2)
 ```
 
+This chapter will center on deriving the famous Black-Scholes formula. We start by laying out the assumptions of the model. We have a market consiting of two assets: a stochastic prices asset $S$ and a risk free asset $B$. The prices processes have dynamics:
 
-### Exercises
+\begin{align*}
+dS_t&=\mu S_t\ dt+\sigma S_t\ dW_t,\\
+dB_t&=r B_t\ dt,
+\end{align*}
+
+where $S_0=s$ and $B_0=1$ (by assumption). Now from Feymann-Kac and the definition of arbitrage we know that a simple claim $\Phi(S_t)$ has the arbitrage free price given by the risk neutral valueation formula.
+
+$$
+F(t,s)=e^{-r(T-t)}E^Q_{t,s}[\Phi(S_T)],
+$$
+
+where $Q$ is a probability measure, namely a Martingale measure, such that the dynamics of $S$ under this measure is
+
+$$
+dS_t=r S_t\ dt+\sigma S_t\ dW^Q_t,
+$$
+
+with $W_t^Q$ being a Brownian motion wrt. to the probability measure $Q$ (not $P$). The above still has the initial condition $S_0=s$. Given these assumptions we may formulate the Black-Scholes formula.
+
+<blockquote class = "thm">
+
+**Theorem 7.13.** **(Black-Scholes formula)** The price of the european call option with strikeprice $K$ and maturity $T$ (contract function $\Phi(S_t)=\left( S_t - K\right)^+$) takes the form $\Pi_t=F(t,s)$, where
+
+$$
+F(t,s)=s N(d_1(t,s))-e^{-r(T-t)}KN(d_2(t,s)),\tag{7.52}
+$$
+
+where $N$ is the distribution-function for an $\mathcal{N}(0,1)$-distributed random variable and
+
+\begin{align*}
+d_1(t,s)&=\frac{1}{\sigma \sqrt{T-t}}\left(\log\left(\frac{s}{K}\right)+\left(r+\frac{1}{2}\sigma^2\right)(T-t)\right),\tag{7.53}\\
+d_2(t,s)&=d_1(t,s)-\sigma\sqrt{T-t}.\tag{7.54}
+\end{align*}
+
+</blockquote>
+
+<details>
+<summary>**Proof.**</summary>
+
+We let the market be given in terms of the price processes $S$ and $B$ with dynamics.
+
+\begin{align*}
+dS_t&=\mu S_t\ dt+\sigma S_t\ dW_t,\\
+dB_t&=r B_t\ dt,
+\end{align*}
+
+with $B_t=1$ and $S_t=s$. We assume that $\mu,\sigma, r$ are deterministic real numbers. Consider the contingent claim 
+
+$$
+\Phi(S_t)=\left( S_t - K\right)^+,
+$$
+
+that is the European call option. Let $Q$ be a martingale measure such that the dynamics of $S$ may be written as
+
+$$
+dS_t=r S_t\ dt+\sigma S_t\ dW^Q_t,
+$$
+
+then $S_t$ is clearly a GBM wrt. the measure $Q$. Therefore we know the solution given in terms of the increment of the Brownian motion $W^Q$ as follows
+
+$$
+S_u=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(u-t)+\sigma\left(W_u^Q-W_t^Q\right)\right\},
+$$
+
+for some initial condition $S_t=s$. From theorem 7.10 we know that the only pricing function which takes the form
+
+$$
+\Pi_t[\Phi(S_T)]=F(t,S_t),
+$$
+
+can only be consistent with the absence of arbitrage if $F$ is the solution the the boundary value problem
+
+\begin{align*}
+F_t(t,s)+rsF_s(t,s)+\frac{1}{2}s^2\sigma^2F_{ss}(t,s)-rF(t,s)&=0,\\
+F(T,s)&=\Phi(s).
+\end{align*}
+
+From Feymann-Kac we then know that the stochastic representation of such a solution take the form
+
+$$
+F(t,s)=e^{-r(T-t)}E_{t,s}^Q[\Phi(S_T)].
+$$
+
+Here the superscript refers to taking mean value with respect to the measure $Q$. This gives the solution to the pricing function
+
+$$
+F(t,s)=e^{-r(T-t)}\int \Phi(S_T)\ dQ.
+$$
+
+Under the measure $Q$ we have that for $u\ge t$:
+
+$$
+Z_u=\log (S_u/s)\sim \mathcal{N}\left(\left(r-\frac{1}{2}\sigma^2\right)(u-t),\sigma\sqrt{u-t}\right)
+$$
+
+Hence we may set $u=T$ and observe that
+
+\begin{align*}
+F(t,s)&=e^{-r(T-t)}\int_{-\infty}^\infty \Phi(se^z) f(z)\ dz\\
+&=e^{-r(T-t)}\int_{-\infty}^\infty (se^z-K)^+ f(z)\ dz\\
+&=e^{-r(T-t)}\int_{\log\left(\frac{K}{s}\right)}^{\infty} (se^z-K) f(z)\ dz\\
+&=e^{-r(T-t)}\left(s\int_{\log\left(\frac{K}{s}\right)}^{\infty} e^z f(z)\ dz-K\int_{\log\left(\frac{K}{s}\right)}^{\infty} f(z)\ dz\right),
+\end{align*}
+
+where we used that $f$ is the distribution function of a normal distributed random variable with mean $(r-\sigma^2/2)(T-t)$ and variance $\sigma\sqrt{T-t}$ and that
+
+$$
+(se^z-K)^+ \ge 0\iff se^z\ge K\iff z\ge \log\left(\frac{K}{s}\right)
+$$
+
+Using that the MGF of a $X\sim\mathcal{N}(\alpha, \beta^2)$ variable is
+
+$$
+E[e^{tX}]=e^{\alpha t+\frac{1}{2}\beta ^2t^2},
+$$
+
+and the shorthand $N(t)$ for the distribution function of the standard normal distribution, we have
+
+\begin{align*}
+F(t,s)&=e^{-r(T-t)}\left(sE\left[e^{Z_T}1_{Z_T\ge \log\left(\frac{K}{s}\right)}\right]-K P\left(Z_T\ge \log\left(\frac{K}{s}\right)\right)\right)\\
+&=e^{-r(T-t)}s\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\frac{1}{2}\sigma^2(T-t)\right\}E\left[1_{Z_T\ge \log\left(\frac{K}{s}\right)}\right]\\
+&-e^{-r(T-t)}K P\left(X\ge\frac{1}{\sigma\sqrt{T-t}}\left( \log\left(\frac{K}{s}\right)-(r-\sigma^2/2)(T-t)\right)\right)\\
+&=sE\left[1_{Z_T\ge \log\left(\frac{K}{s}\right)}\right]-e^{-r(T-t)}K P\left(X\le\frac{1}{\sigma\sqrt{T-t}}\left(\log\left(\frac{s}{K}\right)+(r-\sigma^2/2)(T-t)\right)\right)\\
+&=sN(d_1(s,t))-e^{-r(T-t)}K N\left(d_2(s,t)\right),
+\end{align*}
+
+as desired. $\blacksquare$
+
+</details>
+
+#### Completeness and Hedging
+
+We derived the pricing function of the european call option above and introduced the theory around boundary value problems and Feymann-Kac solution to the partial differential stochastic equation. Now we want to see if a portfolio exists such that it gives the payout $\Phi(S_T)$ with probability one.
+
+In order to do this, we return to the concept of hedge and replication.
+
+<blockquote class = "def">
+
+**Definition 8.1.** We say that a $T$-claim $\mathcal{X}$ can be **replicated**, alternatively the it is **reachable** or **hedgeable**, if there exists a self-financing portfolio $h$ such that
+
+$$
+V_T^h=\mathcal{X},\ P-\text{a.s.}\tag{8.1}
+$$
+
+In this case we say that $h$ is a **hedge** against $\mathcal{X}$. Alternatively, $h$ is called a **replicating** or **hedging** portfolio. If every contingent claim is reachable we say that the market is **complete**.
+
+</blockquote>
+
+If we can find a portfolio $h$ that reaches $\mathcal{X}$ in value over the time period $[t,T]$ it must mean, that holding the portfolio is equivalent with holding the contract itself. We therefore have the natural assumption that the price process must satisfie $\Pi_t[\mathcal{X}]=V_t^h$ for all $t\ge 0$. How this relates to the absence of arbitrage is given below.
+
+<blockquote class = "prop">
+
+**Proposition 8.2.** Suppose $\mathcal{X}$ is hedged using the portfolio $h$. Then the only price process $\Pi_t[\mathcal{X}]$ which is consistent with no arbitrage is given by $\Pi_t[\mathcal{X}]=V_t^h$. Furthermore, if $\mathcal{X}$ can be hedged by both $h$ and $g$ then $V_t^g=V_t^h$ for all $t$ with probability one.
+
+</blockquote>
+
+##### Completeness in Black-Scholes
+
+The Black-Scholes model will be investegated in the following. We start by stating the important theorem.
+
+<blockquote class = "thm">
+
+**Theorem 8.3.** Consider the Black-Scholes model given by
+
+\begin{align*}
+dS_t&=\mu(t,S_t) S_t\ dt+\sigma(t,S_t) S_t\ dW_t,\tag{8.2}\\
+dB_t&=r B_t\ dt,\tag{8.3}
+\end{align*}
+
+The model above is complete.
+
+</blockquote>
+
+The following lemma gives us replicability of a **simple** claim (which we will restrict ud to).
+
+<blockquote class = "lem">
+
+**Lemma 8.4.** Suppose that there exist an adapted process $V$ and an adapted process $w=[w^B,w^S]$ with $w^B_t+w^S_t=1$ for all $t\ge 0$, such that
+
+\begin{align*}
+dV_t&=V_t(w_t^Br+w_t^S\mu(t,S_t))\ dt+V_tw_t^S\sigma(t,S_t)\ dW_t,\\
+V_t&=\Phi(S_t).
+\end{align*}
+
+Then the claim $\mathcal{X}=\Phi(S_t)$ can be replicated using $w$ as the relative portfolio. The corresponding value process is given by the process $V$ and the absolute portfolio $h$ is given by
+
+$$
+h_t^B=\frac{w_t^B V_t}{B_t},\hspace{10pt} h_t^S=\frac{w_t^S V_t}{S_y}.
+$$
+
+</blockquote>
+
+Doing some heuristics we come up with some clever weights, which turns on to adhere to the boundary value problem formulated in the Black-Scholes equation. Given that the weights gives rise to the desired value process, we have succesfully found the portfolio weight (see lemma above).
+
+<blockquote class = "thm">
+
+**Theorem 8.5.** Consider the Black-Scholes model given in (8.3)-(8.4), and a simple contingent claim $\mathcal{X}=\Phi(S_t)$. Define $F$ as the solution to the boundary value problem
+
+\begin{align*}
+F_t(t,s)+rsF_s(t,s)+\frac{1}{2}s^2\sigma^2F_{ss}(t,s)-rF(t,s)&=0,\\
+F(T,s)&=\Phi(s).
+\end{align*}
+
+Then $\mathcal{X}$ can be replicated by the relative portfolio
+
+\begin{align*}
+w_t^B&=\frac{F(t,S_t)-S_tF_s(t,S_t)}{F(t,S_t)},\\
+w_t^S&=\frac{S_tF_s(t,S_t)}{F(t,S_t)}.
+\end{align*}
+
+The corresponding absolute portfolio is given by
+
+\begin{align*}
+h_t^B&=\frac{F(t,S_t)-S_tF_s(t,S_t)}{B_t},\\
+h_t^S&=F_s(t,S_t),
+\end{align*}
+
+and the value process $V^h$ is given by
+
+$$
+V^h_t=F(t,S_t).
+$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 8.6.** Consider the Black-Scholes model given in (8.3)-(8.4), and a contingent claim on the form $\mathcal{X}=\Phi(S_T,Z_T)$. We define the process $Z_t$ as
+
+$$
+Z_t=\int_0^tg(u,S_u)\ du,
+$$
+
+for some choice of the deterministic function $g$. Then $\mathcal{X}$ can be replicated using a relative portfolio given by
+
+\begin{align*}
+w_t^B&=\frac{F(t,S_t,Z_t)-S_tF_s(t,S_t,Z_t)}{F(t,S_t,Z_t)},\\
+w_t^S&=\frac{S_tF_s(t,S_t,Z_t)}{F(t,S_t,Z_t)}.
+\end{align*}
+
+where $F$ is the solution to the boundary value problem
+
+\begin{align*}
+F_t(t,s,z)+rsF_s(t,s,z)+\frac{1}{2}s^2\sigma^2F_{ss}(t,s,z)-rF(t,s,z)&=0,\\
+F(T,s,z)&=\Phi(s,z).
+\end{align*}
+
+The corresponding value process is given by $V_t=F(t,S_t,Z_t)$, and $F$ has the stochastic representation
+
+$$
+F(t,s,z)=e^{-r(T-t)}E^Q_{t,s,z}[\Phi(S_T,Z_T)],
+$$
+
+where the $Q$-dynamics are given by
+
+\begin{align*}
+dS_u&=rS_u\ du + S_u\sigma(u,S_u)\ dW^Q_u,\\
+S_t&=s,\\
+dZ_u&=g(u,S_u)\ du,\\
+Z_t&=z.
+\end{align*}
+
+</blockquote>
+
+##### Absence of Arbitrage
+
+In general we have conflicting forces when evaluating when a certain market is arbitrage free and/or complete. We have in simple terms the non-rigorous theorem below.
+
+<blockquote class = "thm">
+
+**Meta-theorem 8.3.1.** Let $N$ denote the number of underlying **traded** assets in the model **excluding** the risk free asset, and let $R$ denote the number of random sources driving the price system. Genericallly we then have the following statements.
+
+  * The model is arbitrage free if and only if $N\le R$.
+  * The model is complete if and only if $N\ge R$.
+  * The model is arbitrage free and complete if and only if $N=R$.
+
+</blockquote>
+
+#### Put-call Parity
+
+The notion of continuous rebalancing the replicating portfolio require leads to problems in the real world. Trading does cost some money (typical in fractions) and so contiuous balancing would make the portfolio go to 0 rather quickly. Why? The Brownian motion has unbounded variation and so we would have to sell and buy the portfolio uncountable many time in any interval and the shift in weight is not neglible. Because of this we would like to see which claims we can replicate by buying and holding a combination of assets and derivatives.
+
+<blockquote class = "prop">
+
+**Proposition 10.1.** Let $\Phi$ and $\Psi$ be contract functions for the $T$-claims $\mathcal{X}=\Phi(S_T)$ and $\mathcal{Y}=\Psi(S_T)$. Then for any real numbers $\alpha$ and $\beta$ we have the following price relation:
+
+$$
+\Pi_t[\alpha \Phi + \beta\Psi]=\alpha \Pi_t[\Phi]+\beta\Pi_t[\Psi].
+$$
+
+</blockquote>
+
+If we consider the basic contract functions
+
+\begin{align*}
+\Phi_S(x)=x,&\ \Phi_B(x)=1,\\
+\Phi_{C,K}(x)=(x-K)^+,&\ \Phi_{P,K}(x)=(K-x)^+.
+\end{align*}
+
+That is a contract paying (respectively): the price of one stock, 1 dollar, one european call and one european put both with strike $K$. It is clear that the following prices are
+
+\begin{align*}
+\Pi_t[\Phi_S]=S_t,&\ \Pi_t[\Phi_B]=e^{-r(T-t)},\\
+\Pi_t[\Phi_{C,K}]=c(t,S_t;K,T),&\ \Pi_t[\Phi_{P,K}]=p(t,S_t;K,T).
+\end{align*}
+
+Where $c(t,s,K,T,r,\sigma)$ and $p(t,s,K,T,r,\sigma)$ are the pricing function of the european call and put option. We see that we can replicate these payouts by: buying the stock today and selling at time $T$, buying a zero coupon $T$-bond with face value 1, buying the call and put option.
+
+Then we can by choosing $\alpha,\beta,\gamma_1,...,\gamma_n$ form a portfolio consisting of $\alpha$ stocks, $\beta$ $T$-bonds and $\gamma_i$ call options with maturity $T$ and strike $K_i$. The price is then a linear combination given the choice (se proposition 10.1).
+
+The put option is not includet in the above portfolio as we have the put-call parity below
+
+<blockquote class = "prop">
+
+**Proposition 10.2.** **(Put-call parity)** Consider a European call and a European put, both with strike $K$ and time of maturity $T$. Then we have the relation.
+
+$$
+p(t,s) = Ke^{-r(T-t)}+c(t,s)-s.
+$$
+
+In particular the put option can be replicated by a constant portfolio consisting of $K$ zero coupon $T$-bonds, a European call option and a single short position in the underlying stock.
+
+</blockquote>
+
+We now have the pleasing proposition given the class of claims we can reach with the buy-and-hold portfolio with $T$-bonds, stock and call options
+
+<blockquote class = "prop">
+
+**Proposition 10.3.** Fix an arbitrary continuous contract function $\Phi$ with compact support. Then the corresponding contract can be replicated with arbitrary precision (in sup-norm) using a constant portfolio consisting only of bonds, call options and the underlying stock.
+
+</blockquote>
+
+#### The Greeks
+
+When holding a portfolio we may denote the pricing function by $P(t,s)$. Here we only have one **underlying** asset with price process $S_t$. We now have two types of risk:
+
+  * Price changes in the underlying asset.
+  * Misspecifications in the model parameters.
+
+These two risk give rise to "the greeks" as defined below.
+
+<blockquote class = "def">
+
+**Definition 10.4.** The greeks of a portfolio is given by
+
+$$
+\Delta=\frac{\partial P}{\partial s},\ \Gamma=\frac{\partial^2 P}{\partial s^2},\ \rho=\frac{\partial P}{\partial r},\ \Theta=\frac{\partial P}{\partial t},\ \mathcal{V}=\frac{\partial P}{\partial s}.
+$$
+
+</blockquote>
+
+For the call option in particular we have the following derivatives.
+
+<blockquote class = "prop">
+
+**Proposition 10.5.** The greeks of a portfolio consisting of a single European call option with maturity $T$ and strike price $K$ have the following greeks ($\varphi$ denoting the density function of a $\mathcal{N}(0,1)$-variable):
+
+\begin{align*}
+\Delta&=N(d_1),\\
+\Gamma&=\frac{\varphi(d_1)}{s\sigma\sqrt{T-t}},\\
+\rho&=K(T-t)e^{-r(T-t)}N(d_2),\\
+\Theta&=-\frac{s\varphi(d_1)\sigma}{2\sqrt{T-t}}-rKe^{-r(T-t)}N(d_2),\\
+\mathcal{V}&=s\varphi(d_1)\sqrt{T-t}.
+\end{align*}
+
+</blockquote>
+
+#### Risk Neutral Valuation Formula
+
+We have the setting of a market consisting of the assets $S^0,...,S^N$ of $N+1$ assets. We consider the numeraire $S^0$ being a risk free asset. We introduce a price of contingent claim $X$, such that the extended market consisting of the price process of $X$ and the $N+1$ assets is arbitrage free. Alternatively, we can, equivalently, find a replicating portfolio $h$ such that $V^h_T=X$ with probability one.
+
+<blockquote class = "thm">
+
+**Theorem 11.18.** **(General Pricing Equation)** The arbitrage free price process for the $T$-claim $X$ is given by
+
+$$
+\Pi_t[X]=S_t^0E^Q\left[\left.\frac{X}{S^0_T}\right\vert \mathcal{F}_t\right],
+$$
+
+where $Q$ is the (not necessarily unique) martingale measure for the a priori given market $S^0,S^1,...,S^N$, with $S^0$ as the numeraire.
+
+</blockquote>
+
+If if we assume that the bank account takes the form
+
+$$
+S_t^0=S_0^0e^{-\int_0^tr(s)\ ds},
+$$
+
+where $r$ is the short rate, then we have the familier *risk neutral valuation formula*.
+
+<blockquote class = "thm">
+
+**Theorem 11.19.** **(Risk Neutral Valuation Formula)** Assuming the existance of a short rate, the pricing formula takes the form
+
+$$
+\Pi_t[X]=E^Q\left[\left.e^{-\int_0^Tr(s)\ ds}X\right\vert \mathcal{F}_t\right],
+$$
+
+where $Q$ is the (not necessarily unique) martingale measure with the bank account as the numeraire.
+
+</blockquote>
+
+<blockquote class = "def">
+
+**Definition 11.20.** A **zero coupon bond** with **maturity date** $T$, also called a $T$-bond, is a contract which guarantees the holder one dollar to be paid on the date $T$. The price at time $t$ of a bond with maturity date $T$ is denoted by $p(t,T)$.
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 11.21.** The price of a zero coupon $T$-bond is given by
+
+$$
+p(t,T)=E^Q\left[\left.e^{-\int_t^Tr(s)\ ds}\right\vert \mathcal{F}_t\right],
+$$
+
+and in particular we have $p(T,T)=1$ for all $T\ge 0$.
+
+</blockquote>
+
+#### Equivalent Probability Measures
+
+##### The Radon-Nikodym Theorem
+
+<blockquote class = "def">
+
+**Definition A.50.** Consider a measurable space $(X,\mathcal{F})$ on which there are defined two seperate measures $\mu$ and $\nu$:
+
+  * If, for all $A\in \mathcal{F}$, it holds that
+  $$
+  \mu(A)=0\ \Rightarrow\ \nu(A)=0,
+  $$
+  then $\nu$ is said to be **absolutely continuous** with respect to $\mu$ on $\mathcal{F}$ and we write this as $\nu < < \mu$.
+  * If we have both $\mu << \nu$ and $\nu << \mu$, then $\mu$ and $\nu$ said to be **equivalent** and we write $\mu\sim \nu$.
+  * If there exists two events, $A$ and $B$ such that:
+    
+    * $A\cup B=X$,
+    * $A\cap B=\emptyset$,
+    * $\mu(B)=0$, and $\nu(A)=0$,
+    
+    then $\nu$ and $\mu$ are said to be mutually **singular**, and we write $\mu\ \bot\ \nu$.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem A.52.** **(The Radon-Nikodym Theorem)** Consider the measure space $(X,\mathcal{F},\mu)$, where we assume that $\mu$ is finite, i.e. that $\mu(X)<\infty$. Let $\nu$ be a measure on $(X,\mathcal{F})$ such that $\nu <<\mu$ on $\mathcal{F}$. Then there exists a non-negative function $f : X\to \mathbb{R}$ such that:
+
+\begin{align*}
+&f\ \text{is}\ \mathcal{F}\text{-measurable}\\
+&\int_X f(x)\ d\mu(x)<\infty,\\
+&\nu(A)=\int_Af(x)\ d\mu(x),\ \text{for all}\ A\in \mathcal{F}.
+\end{align*}
+
+The function $f$ is called the **Radon-Nikodym derivative** of $\nu$ w.r.t. $\mu$. It is uniquely determined $\mu$-a.e. and we write
+
+$$
+f(x)=\frac{d\nu(x)}{d\mu(x)},
+$$
+
+or alternatively
+
+$$
+d\nu(x)=f(x)\ d\mu(x).
+$$
+
+</blockquote>
+
+##### EPM
+
+<blockquote class = "lem">
+
+**Lemma B.38.** For two probability measures $P$ and $Q$, the relation $P\sim Q$ on $\mathcal{F}$ holds if and only if $P(A)=1$ if and only if $Q(A)=1$ for all $A\in\mathcal{F}$.
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.39.** Assume that $Q << P$ on $\mathcal{F}$ and that $\mathcal{G}\subseteq \mathcal{F}$. Then the Radon-Nikodym derivatives $L^\mathcal{F}$ and $L^\mathcal{G}$ are related by
+
+$$
+L^\mathcal{G}=E^P[L^\mathcal{F}\ \vert\ \mathcal{G}].
+$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition B.41.** **(Bayes' Theorem)** Assume that $X$ is a random variable on $(\Omega, \mathcal{F},P)$, and let $Q$ be another probability measure on $(\Omega,\mathcal{F})$ the Radon-Nikodym derivative
+
+$$
+L=\frac{d Q}{dP}
+$$
+
+on $\mathcal{F}$. Assume that $X\in L^1(\Omega,\mathcal{F},Q)$ and $\mathcal{G}$ is a sigma-algebra with $\mathcal{G}\subseteq \mathcal{F}$. Then
+
+$$
+E^Q[X\ \vert\ \mathcal{G}]=\frac{E^P[L\cdot X\ \vert\ \mathcal{G}]}{E^P[L\ \vert\ \mathcal{G}]},\ Q-a.s.
+$$
+
+</blockquote>
+
+##### Likelihood processes
+
+<blockquote class = "prop">
+
+**Proposition C.12.** Consider a filtered probability space $(\Omega, \mathcal{F},P,\mathcal{F}_t)$ on a compact interval $[0,T]$. Suppose $L_T$ is some non-negative integrable random variable in $\mathcal{F}_T$. We can then define a new measure $Q$ on $\mathcal{F}_T$ by setting
+
+$$
+dQ=L_T\ dP
+$$
+
+on $\mathcal{F}_T$ and if $E^P[L_T]=1$ the measure $Q$ will also be a probability measure. The likelihood process $L$, defined by
+
+$$
+L_t=\frac{dQ}{dP},\ on\ \mathcal{F}_t,
+$$
+
+is a $(P,\mathcal{F}_t)$-martingale.
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition C.13.** A process $M$ is a $Q$-martingale if and only if the process $L\cdot M$ is a $P$-martingale.
+
+</blockquote>
+
+### Exercises week 4
 
 ## Week 5
 
-### Material
+### Table of Contents
 
-  * Girsanov theorem (Chapter 12, see also Levy characterization of Brownian motion and proof of Girsanov)
-  * Martingale representation theorem (Chapter 12)
+  * [Martingale representation theorem (Chapter 12)](#martingale-representation-theorem)
+  * [Girsanov theorem (Chapter 12, see also Levy characterization of Brownian motion and proof of Girsanov)](#girsanov-theorem)
+
+  * [Exercises](#exercises-week-5)
 
 ### Theory
 
-### Exercises
+
+#### Martingale representation theorem
+
+<blockquote class = "thm">
+
+**Theorem 12.1.** **(Representation of Brownian Functionals)** Let $W$ be a $d$ dimensional Brownian motions, and let $X$ be a random variable such that
+
+  * $X\in\mathcal{F}^W_T$,
+  * $E[\vert X\vert]<\infty$.
+
+Then there exist uniquely determined $\mathcal{F}^W_t$-adapted processes $h^1,...,h^d$, such that $X$ has the representation
+
+$$
+X=E[X]+\sum_{i=1}^d\int_0^Th^i_s\ dW_s^i.
+$$
+
+Under the additional assumption
+
+$$
+E[X^2]<\infty,
+$$
+
+then $h^1,...,h^d$ are in $\mathcal{L}^2$.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 12.2.** **(The Martingale Representation Theorem)** Let $W$ be a $d$ dimensional Brownian motions, and assume that the filtration $\mathbf{F}$ is defined as
+
+$$
+\mathcal{F}_t=\mathcal{F}^W_t,\hspace{20pt}t\in[0,T].
+$$
+
+Let $M$ be any $\mathcal{F}_t$-adapted martingale. Then there exist uniquely determined $\mathcal{F}_t$-adapted processes $h^1,...,h^d$ such that $M$ has the representation
+
+$$
+M_t=M_0+\sum_{i=1}^d\int_0^t h_s^i\ dW_s^i,\hspace{20pt}t\in[0,T].
+$$
+
+If the martingale $M$ is square integrable, then $h^1,...,h^d$ are in $\mathcal{L}^2$.
+
+</blockquote>
+
+#### Girsanov theorem
+
+<blockquote class = "thm">
+
+**Theorem 12.3.** **(The Girsanoc Theorem)** Let $W$ be a $d$ dimensional $P$-Brownian motion on $(\Omega,\mathcal{F},P,\mathbf{F})$ and let $\varphi$ be any $d$-dimensional adapted column vector process. Choose a fixed $T$ and define the process $L$ on $[0,T]$ by
+
+\begin{align*}
+dL_t&=\varphi^\top_t L_t\ dW_t,\\
+L_0&=1,
+\end{align*}
+
+i.e.
+
+$$
+L_t = \exp\left\{\int_0^t \varphi^\top_s\ dW_s - \frac{1}{2}\int_0^t \Vert\varphi_s\Vert ^2\ ds\right\}.
+$$
+
+Assume that
+
+$$
+E^P[L_T]=1,
+$$
+
+and define the new probability measure $Q$ on $\mathcal{F}_T$ by
+
+$$
+L_T=\frac{dQ}{dP},\hspace{15pt}on\ \mathcal{F}_T.
+$$
+
+Then
+
+$$
+dW_t=\varphi\ dt+dW_t^Q,
+$$
+
+where $W^Q$ is a $d$ dimensional $Q$-Brownian motion or equivalently
+
+$$
+W_t^Q=W_t-\int_0^t\varphi_s\ ds
+$$
+
+is a standard $Q$-Brownian motion.
+
+</blockquote>
+
+We will often refere to $\varphi$ as the **Girsanov kernel** of the measure transformation. Furthermore, we have written on component form above and the $L$ dynamics will have the form
+
+$$
+dL_t=L_t\sum_{i=1}^d\varphi^i_t\ dW_t^i,
+$$
+
+and $L$ will have the explicit form
+
+$$
+L_t=\exp\left\{\sum_{i=1}^d\int_0^t\varphi^i_s\ dW_s^i - \frac{1}{2}\int_0^d\sum_{i=1}^d(\varphi^i_s)^2\ ds\right\}.
+$$
+
+
+The conclusion of the Girsanov Theorem is thwn that we can write
+
+$$
+dW_t^i=\varphi_t^i\ dt+dW_t^{Q,i},
+$$
+
+for $i=1,...,d$ where $W_t^{Q,1},...,W_t^{Q,d}$ are independent standard Brownian motions under $Q$.
+
+<blockquote class = "def">
+
+**Definition 12.4.** For any Brownian motion $W$ and any kernel process $\varphi$, the **Doleans exponintial** process $\mathcal{E}$ is defined by
+
+$$
+\mathcal{E}(\varphi\bullet W)_t=\exp\left\{\int_0^t\varphi^\top_s\ dW_s -\frac{1}{2}\int_0^t\Vert \varphi\Vert^2_s\ ds\right\}.
+$$
+
+</blockquote>
+
+<blockquote class = "lem">
+
+**Lemma 12.5.** **(The Novikov Condition)** Assume that the Girsanov kernel $\varphi$ is such that
+
+$$
+E^P\left[e^{\frac{1}{2}\int_0^T\Vert \varphi_t\Vert^2\ dt}\right]<\infty.
+$$
+
+Then $L$ is a martingale and in particular $E^P[L_T]=1$.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 12.5.** **(The Converse of the Girsanov Theorem)** Let $W$ be a $d$-dimensional standard $P$-Brownian motion on $(\Omega,\mathcal{F},P,\mathbf{F})$ and assume that
+
+$$
+\mathcal{F}_t=\mathcal{F}^W_t,\ \forall t.
+$$
+
+Assume that there exists a probability measure $Q$ such that $Q<<P$ on $\mathcal{F}_T$. Then there exists an adapted process $\varphi$ such that the likelihood process $L$ has the dynamics
+
+\begin{align*}
+dL_t&=L_t\varphi^\top_t\ dW_t,\\
+L_0&=1.
+\end{align*}
+
+</blockquote>
+
+This gives us a recipe to tranform dynamics of Ito processes under the measure $Q$ as we may rewrite the dynamics of the Brownian motion. We therefore have for an Ito process $X$ with dynamics
+
+$$
+dX_t=\mu(t,X_t)X_t\ dt+\sigma(t,X_t) X_t\ dW_t,
+$$
+
+may be transformed under $Q$ as
+
+\begin{align*}
+dX_t&=\mu(t,X_t)X_t\ dt+\sigma(t,X_t) X_t\ dW_t\\
+&=\mu(t,X_t)X_t\ dt+\sigma(t,X_t) X_t\ (\varphi_t\ dt+dW_t^Q)\\
+&=\left(\mu(t,X_t) + \varphi_t\right) X_t\ dt + \sigma(t,X_t)X_t\ dW_t^Q.
+\end{align*}
+
+This may lead us into deducing that
+
+$$
+\mu(t,X_t)+\sigma(t,X_t)\varphi_t=r_t\iff\varphi_t=\frac{r_t-\mu(t,X_t)}{\sigma(t,X_t)}.
+$$
+
+### Exercises Week 5
 
 ## Week 6
 
-### Material
+### Table of Contents
 
-  * Black-Scholes model, martingale approach (Chapter 13)
-  * Multidimensional models (Chapter 14)
+  * [Black-Scholes model, martingale approach (Chapter 13)](#black-scholes-model-martingale-approach)
+  * [Multidimensional models (Chapter 14)](#multidimensional-models)
+
+  * [Exercises](#exercises-week-6)
 
 ### Theory
 
-### Exercises
+#### Black-Scholes model - martingale approach
+
+#### Multidimensional models
+
+### Exercises Week 6
 
 ## Week 7
 
-### Material
+### Table of Contents
 
-  * Pricing and proof of fundamental pricing theorem I and II (Chapter 11)
-  * Incomplete Markets (Chapter 9)
+  * [Pricing and proof of fundamental pricing theorem I and II (Chapter 11)](#fundamental-pricing-theorem-i-and-ii)
+  * [Incomplete Markets (Chapter 9)](#incomplete-markets)
+
+  * [Exercises](#exercises-week-7)
 
 ### Theory
 
-### Exercises
+#### Fundamental pricing theorem I and II
+
+We start by stating the following theorem.
+
+<blockquote class = "thm">
+
+**Theorem 11.1.** If at least on of the assets $S^1,...,S^N$ has diffusion term which is non-zero at all times, and if naive portfolio strategies are admitted, then the model admits arbitrage.
+
+</blockquote>
+
+We will go as follows. Derive the fundamental pricing theorem 1 and 2 in a setting with zero interest rate. Then we will extend the result in general by choosing a simple numeraire. We start by defining some basic notation.
+
+<blockquote class = "def">
+
+**Definition 11.2.** Define the process $h$ as
+
+$$
+h=[h^0,h^S]:=[h^0,h^1,...,h^N]
+$$
+
+We define the following.
+
+  * For a process $h$, its **value process** $V_t^h$ is defined by
+  $$
+  V_t^h=h^0_t\cdot 1+\sum_{i=1}^Nh_t^iS_t^i,
+  $$
+  or in compact form
+  $$
+  V_t^h=h_t^0\cdot 1 + h_t^S S_t
+  $$
+  * An adapted process $h^S$ is called **admissible** if there exists a non-negative real number $\alpha$ (which may depend on the choice of $h^S$) such that
+  $$
+  \int_0^th_u^SdS_u\ge -\alpha,
+  $$
+  for all $t\in[0,T]$. A process $h$, is called an **admissible portfolio** process if $h^S$ is admissible.
+  * An admissible portfolio is said to be **self-financing**, if
+  $$
+  V_t^h=V_0^h+\int_0^th_u^S\ dS_u,
+  $$
+  i.e. if
+  $$
+  dV_t^h=h_t^S\ dS_t.
+  $$
+
+</blockquote>
+
+<blockquote class = "lem">
+
+**Lemma 11.3.** For any adapted process $h^S$ satisfying the admissibility condition above, and for any real number $x$, there exists a unique adapted process $h^0$, such that:
+
+  * The process $h$ defined by $h=[h^0,h^S]$ is self-financing.
+  * The value process is given by
+  $$
+  V_t^h=x+\int_0^th_u^S\ dS_u.
+  $$
+
+In particular, the space $\mathcal{K}_0$ of portfolio values, reachable at time $T$ by means of a self-financing portfolio with zero initial cost is given by
+
+$$
+\mathcal{K}_0=\left\{\int_0^Th_t^S\ dS_u :\ h^S\ \text{is admissible}\right\}.
+$$
+
+</blockquote>
+
+<blockquote class = "def">
+
+**Definition 11.4.** A probability measure $Q$ on $\mathcal{F}_T$ is called **equivalent martingale measure** for the market model, the numeraire $S^0$, and the time interval $[0,T]$, if it has the following properties:
+
+  * $Q\sim P$ on $\mathcal{F}_T$, so $P$ and $Q$ are equivalent.
+  * All price processes $S^0,S^1,...,S^N$ are martingales under $Q$ on the time interval $[0,T]$.
+
+An equivalent martingale measure will often be referred to as just "a martingale measure" or as "an EMM". If $Q\sim P$ has the property that $S^0,S^1,...,S^N$ are local martingales, then $Q$ is called a **local martingale measure**.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.5.** **(The First Fundamental Theorem)** The model is arbitrage free "essentially" if and only if there existis a (local) martingale measure $Q$.
+
+</blockquote>
+
+<blockquote class = "def">
+
+**Definition 11.6.** With the notation above, we say that the model admits
+
+  * **No Arbitrage** (NA) if
+  $$
+  \mathcal{C}\cap L_+^\infty=\{0\},
+  $$
+  * **No Free Lunch with Vanishing Risk** (NFLVR) if
+  $$
+  \tilde{\mathcal{C}}\cap L_+^\infty=\{0\},
+  $$
+  where $\tilde{\mathcal{C}}$ denotes the closure of $\mathcal{C}$ in $L^\infty$.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.7.** **(Kreps-Yan Separation Theorem)** If $\mathcal{C}$ is weak* closed, and if
+
+$$
+\mathcal{C}\cap L_+^\infty=\{0\},
+$$
+
+then there exists a random variable $L\in L^1$ such that $L$ is $P$ almost surely strictly positive, and 
+$$
+E^P[L\cdot X]\le 0,
+$$
+
+for all $X\in\mathcal{C}$.
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 11.8.** If the asset price processes are uniformly bounded, then the condition NFLVR implies that $\mathcal{C}$ is weak* closed.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.9.** **(First Fundamental Theorem)** Assume that the asset price process $S$ is bounded. Then there exists an equivalent martingale measure if and only if the model satisfies NFLVR.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.10.** **(First Fundamental Theorem)** Assume that the asset price process $S$ is locally bounded. Then there exists an equivalent martingale measure if and only if the model satisfies NFLVR.
+
+</blockquote>
+
+**Assumption 11.4.1.** *We assume that *$S_t^0>0$ $P$*-a.s. for all *$t\ge 0$.
+
+<blockquote class = "def">
+
+**Definition 11.11.** The **normalized economy** (also referred to as the "Z-economy") is defined by the price vector process $Z$, where
+
+$$
+Z_t=\frac{S_t}{S_t^0}.
+$$
+
+</blockquote>
+
+<blockquote class = "def">
+
+**Definition 11.12.**
+
+  * A **portfolio stragegy** is any adapted $(N+1)$-dimensional process
+  $$
+  h_t=[h_t^0,h_t^1,...,h_t^N].
+  $$
+  * The **S-value process** $V_t^S$ corresponding to the portfolio $h$ is $h_tS_t$.
+  * The **Z-value process** $V_t^Z$ corresponding to the portfolio $h$ is $h_tZ_t$.
+  * A portfolio is said to be **admissible** if it is admissible as an $Z$ portfolio.
+  * An admissible portfolio is **S-self-balancing** if
+  $$
+  dV_t^S=\sum_{i=0}^Nh_t^i\ dS_t^i
+  $$
+  * An admissible portfolio is **Z-self-balancing** if
+  $$
+  dV_t^Z=\sum_{i=0}^Nh_t^i\ dZ_t^i.
+  $$
+
+</blockquote>
+
+<blockquote class = "lem">
+
+**Lemma 11.13.** **(Invariance Lemma)** With assumptions as above, the following hold.
+
+  i. A portfolio $h$ is S-self-financing if and only if it is Z-self-financing.
+  ii. The value processes $V^S$ and $V^Z$ are connected by
+  $$
+  V_t^Z=\frac{1}{S_t^0}\cdot V_t^S.
+  $$
+  iii. A claim $\mathcal{Y}$ is S-replical if and only if the claim
+  $$
+  \frac{\mathcal{Y}}{S_T^0}
+  $$
+  is Z-replicable.
+  iv. The model is S arbitrage free if and only if it is Z arbitrage free.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.14.** **(The First Fundamental Theorem)** Consider the market model $S^0,S^1,...,S^N$ where we assume that $S^0_t>0$, $P$-a.s. for all $t\ge 0$. Assume furthermore that $S^0,S^1,...,S^N$ are locally bounded. Then the followin conditions are equivalent:
+
+  * The model satisfies NFLVR.
+  * There exists a measure $Q\sim P$ such that the processes
+  $$
+  Z^0,Z^1,...,Z^N,
+  $$
+  are local martingales under $Q$.
+
+</blockquote>
+
+##### Completeness
+
+<blockquote class = "lem">
+
+**Lemma 11.15.** Consider a given $T$-claim $X$. Fix a martingale measure $Q$ and assume that the normalized claim $X/S^0_T$ is integrable. If the $Q$-martingale $M$, defined by
+
+$$
+M_t=E^Q\left[\left. \frac{X}{S^0_T}\right\vert \mathcal{F}_t\right],
+$$
+
+admits an integral representation of the form
+
+$$
+M_t=x+\sum_{i=1}^N\int_0^th_s^i\ dZ_s^i,
+$$
+
+then $X$ can be hedged in the S-economy. Furthermore, the replicating portfolio $(h^0,h^1,...,h^N)$ is given by the above for $h^i$, $i=1,...,N$ and $h_t^0=M_t-\sum_{i=1}^Nh_t^iZ_t^i$.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.16.** **(Jacod)** Let $\mathcal{M}$ denote the convex set of equivalent martingale measures. Then, for any fixed $Q\in\mathcal{M}$, the following statements are equivalent:
+
+  * Every $Q$ local martingale $M$ has dynamics of the form
+  $$
+  dM_t=\sum_{i=1}^Nh_s^i\ dZ_s^i.
+  $$
+  * $Q$ is an extremal point of $\mathcal{M}$.
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.17.** **(The Second Fundamental Theorem)** Assume that the market is arbitrage free and consider a fixed numeraire asset $S^0$. Then the market is complete if and onlt if the martingale measure $Q$, corresponding to the numeraire $S^0$, is unique.
+
+</blockquote>
+
+##### Stochastic Discount Factors
+
+<blockquote class = "def">
+
+**Definition 11.22.** Assume the existance of a short rate $r$. For any fixed martingale measure $Q$, let the likelihood process $L$ be defined by
+
+$$
+L_t=\frac{dQ}{dP},\ on\ \mathcal{F}_t.
+$$
+
+The **stochastic discount factor** (SDF) process $\mathbf{M}$, corresponding to $Q$, is defined as
+
+$$
+\mathbf{M}_t=e^{-\int_0^tr(s)\ ds}L_t\ \ \left(=\frac{1}{B_t}\cdot L_t\right).
+$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 11.23.** Assume absence of arbitrage. With notation as above, the following hold:
+
+  * For any sufficiently integrable $T$-claim $X$, the arbitrage free price is given by
+  $$
+  \Pi_t[X]=E^P\left[\left. \frac{\mathbf{M}_T}{\mathbf{M}_t} X \ \right\vert\ \mathcal{F}_t\right].
+  $$
+  * For any arbitrage free asset price process $S$ (derivative or underlying) the process $\mathbf{M}_tS_t$ is a (local) $P$-martingale.
+  * The $P$-dynamics of $\mathbf{M}$ are given by
+  $$
+  d\mathbf{M}_t=-r_t\mathbf{M}_t\ dt+\frac{1}{B_t}\ dL_t.
+  $$
+
+</blockquote>
+
+##### Summary
+
+<blockquote class = "thm">
+
+**Theorem 11.24.**
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 11.25.**
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 11.26.**
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 11.27.**
+
+</blockquote>
+
+#### Incomplete Markets
+
+We assume a market with a risk free asset and one risky assets with dynamics
+
+$$
+dX_t=\mu(t,X_t)\ dt+\sigma(t,X_t)\ dW_t.
+$$
+
+We want to find a unique price of a derivative on a functional form of the risky asset. We assume that we cannot invest in the asset representing the process $X_t$ and so we can solely write contracts based on the observation $X_T$. The problem here is that we can only short or long the risk free asset and so no derivative is replicable.
+
+The way we solve this problem is by having the market set the price of risk and universally price derivatives based on this given price process. We then have the assumptions
+
+**Assumption 9.2.1** We have the market given with the only investable asset $B$ with dynamics
+
+$$
+dB_t=rB_t\ dt.
+$$
+
+We furthermore, have an empirically observable stochastic process $X$ which is **not** the price process of any traded asset. The $P$-dynamics of $X$ is given by
+
+$$
+dX_t=\mu(t,X_t)\ dt+\sigma(t,X_t)\ dW_t.
+$$
+
+**Assumption 9.2.2** There is a liquid market for every contingent claim.
+
+**Assumption 9.2.3** We assume that
+
+  * There is a liquid, frictionless market for each of the contingent claims $\mathcal{Y}$ and $\mathcal{Z}$.
+  * The market prices of the claims are of the form
+  $$ \Pi_t[\mathcal{Y}] = F(t,X_t),$$
+  $$ \Pi_t[\mathcal{Z}] = G(t,X_t),$$
+  where $F$ and $G$ are smooth real valued function.
+
+From Ito's formula we have the dynamics
+
+\begin{align*}
+dF=\mu_F F\ dt+\sigma_F F\ dW,\\
+dG=\mu_G G\ dt+\sigma_G G\ dW.
+\end{align*}
+
+Where the processes $\mu_F$ and $\sigma_F$ are given by
+
+\begin{align*}
+\mu_F&=\frac{F_t+\mu F_x+\frac{1}{2}\sigma^2 F_{xx}}{F},\\
+\sigma_F&=\frac{\sigma F_x}{F}.
+\end{align*}
+
+By forming a portfolio of the two contracts we lead to the relation.
+
+$$
+\frac{\mu_F-r}{\sigma_F}=\frac{\mu_G-r}{\sigma_G}.
+$$
+
+This gives the important insight.
+
+<blockquote class = "prop">
+
+**Proposition 9.1.** Assume that the market for derivatives is free of arbitrage. Then there exists a universal process $\lambda(t,X_t)$ such that, with probability one, and for all $t$, we have
+
+$$
+\frac{\mu_F(t,X_t)-r}{\sigma_F(t,X_t)}=\mu(t,X_t),
+$$
+
+regardless of the specific choice of the derivative $F$.
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 9.2.** Assume absence of arbitrage, the pricing function $F(t,x)$ of the $T$-claim $\Phi(X_T)$ solves the following boundary value problem.
+
+\begin{align*}
+F_t(t,x)+\mathcal{A}F(t,x)-rF(t,x)&=0,\hspace{15pt}&(t,x)\in (0,T)\times \mathbb{R},\\
+F(T,x)&=\Phi(x), &x\in\mathbb{R},
+\end{align*}
+
+where
+
+$$
+\mathcal{A}F(t,x)=\left\{\mu(t,x)-\lambda(t,x)\sigma(t,x)\right\}F_x(t,x)+\frac{1}{2}\sigma^2(t,x)F_{xx}(t,x).
+$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 9.3.** **(Risk neutral valuation)** Assuming absence of arbitrage, the pricing function $F(t,x)$ of the $T$-claim $\Phi(X_T)$ is given by the formula
+
+$$
+F(t,x)=e^{-r(T-t)}E^Q_{t,x}[\Phi(X_T)].
+$$
+
+The dynamics of $X$ under the martingale measure $Q$ are given by
+
+$$
+dX_t=\left\{\mu(t,x)-\lambda(t,x)\sigma(t,x)\right\}F_x(t,x)+\sigma(t,x)\ dW^Q_t,
+$$
+
+where $W^Q$ is a $Q$-Brownien motion.
+
+</blockquote>
+
+### Exercises Week 7

@@ -8,10 +8,37 @@ output:
     extra_dependencies: ["amsmath","amssymb"]
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-options(scipen=999)
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```{r, setup,include=FALSE}
+library(knitr)
+rm(list = ls())
+options(knitr.duplicate.label = "allow")
+if (knitr::is_latex_output()) {
+  knit_hooks$set(wrapf = function(before, options, envir) {
+  if (!before) {
+    output <- vector(mode = "character", length = options$fig.num + 1)
+
+    for (i in 1:options$fig.num) {
+      output[i] <- sprintf("\\includegraphics{%s}", fig_path(number = i))
+    }
+
+    output[i+1] <- "\\end{wrapfigure}"
+    output <- c("\\begin{wrapfigure}{R}{0.5\\textwidth}",output)
+    if (length(output)>= 3) {
+      return(paste(output, collapse = ""))
+    }
+  }
+})
+  knitr::opts_chunk$set(
+    fig.show = 'hide',
+    echo = FALSE
+  )
+} else {
+  knitr::knit_hooks$set(wrapf = function(before, options, envir) {})
+  knitr::opts_chunk$set(
+    out.extra = 'style="float:right; padding:10px"',
+    out.width= "50%"
+  )
+}
 ```
 
 ```{r,include=FALSE}
