@@ -1,5 +1,0 @@
----
-title: "Stochastic processes in non-life-insurance (StokSkade)"
-output: html_document
----
-

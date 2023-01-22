@@ -1,5 +1,0 @@
----
-title: "Stochastic Processes in life-insurance (StokLiv)"
-output: html_document
----
-
