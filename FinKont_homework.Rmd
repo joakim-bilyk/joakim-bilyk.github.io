@@ -3629,9 +3629,37 @@ is a $(P,\mathcal{F}_t)$-martingale.
   Determine also the diffusion process $\Sigma_t^Z$ (in terms of the pricing function $F$ and its derivatives).
 
 <details>
-<summary>**Solution.**</summary>
+<summary>**Solution (a).**</summary>
 
+First we have that the dynamics of $S$ and $B$ are given by
 
+\begin{align*}
+dS_t&=\mu S_t\ dt + \sigma S_t\ dW_t,\\
+dB_t&=rB_t\ dt.
+\end{align*}
+
+We know that $\Pi_t[X]=F(t,S_t)$ for some smooth function $F$ hence by Ito's formula we have
+
+\begin{align*}
+d\Pi_t&=\frac{\partial F}{\partial t}(t,S_t)\ dt +\frac{\partial F}{\partial s}(t,S_t)\ dS_t+\frac{1}{2}\frac{\partial^2 F}{\partial s^2}(t,S_t)\ (dS_t)^2\\
+&=F_t\ dt+F_s(r S_t\ dt + \sigma S_t\ dW^Q_t)+\frac{1}{2}F_{ss}(r S_t\ dt + \sigma S_t\ dW^Q_t)^2\\
+&=(F_t+r S_t F_s)\ dt+F_s\sigma S_t\ dW^Q_t+\frac{1}{2}F_{ss}\sigma ^2S_t^2\ dt\\
+&=(F_t+r S_tF_s+\frac{1}{2}F_{ss}\sigma ^2S_t^2)\ dt+F_s\sigma S_t\ dW^   Q_t.
+\end{align*}
+
+By setting $g_t=F_s\sigma S_t$ and restating the Black-Scholes equation we have
+
+\begin{align*}
+rF=F_t+rsF_s+\frac{1}{2}F_{ss}\sigma ^2 s^2
+\end{align*}
+
+hence
+
+$$
+d\Pi_t=r F\ dt+g_t\ dW^Q_t
+$$
+
+as desired. $\square$
 
 </details>
 
