@@ -2653,7 +2653,7 @@ $$
 
 ### Exercises Week 3
 
-**Exercise 1** *(Bjork 5.1)* Show that the scalar SDE
+**Exercise 1.** *(Bjork 5.1)* Show that the scalar SDE
 
 $$
 \left\{
@@ -2721,7 +2721,7 @@ Then this solution does in fact satisfies the differential form. We furthermore 
 
 </details>
 
-**Exercise 2** *(Bjork 5.5)* Suppose that $X$ satisfies the SDE
+**Exercise 2.** *(Bjork 5.5)* Suppose that $X$ satisfies the SDE
 
 $$
 dX_t = \alpha X_t\ dt + \sigma X_t\ dW_t.
@@ -2752,7 +2752,7 @@ where $\alpha^Y=\left(\alpha \beta+\frac{1}{2}\sigma ^2\beta (\beta -1)\right)$ 
 
 </details>
 
-**Exercise 3** *(Bjork 5.6)* Suppose that $X$ satisfies the SDE
+**Exercise 3.** *(Bjork 5.6)* Suppose that $X$ satisfies the SDE
 
 $$
 dX_t = \alpha X_t\ dt + \sigma X_t\ dW_t,
@@ -2803,7 +2803,7 @@ As desired the above is the SDE for the process $Z_t$. $\square$
 
 </details>
 
-**Exercise 4** *(Bjork 5.9)* Use a stochastic representation result in order to solve the following boundary value problem in the domain $[0,T]\times\mathbb{R}$.
+**Exercise 4.** *(Bjork 5.9)* Use a stochastic representation result in order to solve the following boundary value problem in the domain $[0,T]\times\mathbb{R}$.
 
 $$
 \frac{\partial F}{\partial t}+\mu x\frac{\partial F}{\partial x}+\frac{1}{2}\sigma^2x^2\frac{\partial^2F}{\partial x^2}=0,
@@ -2851,10 +2851,10 @@ Using that the Brownian motion has increments with mean 0. $\square$
 
 </details>
 
-**Exercise 5** *(Bjork 5.13)* Solve the boundary value problem
+**Exercise 5.** *(Bjork 5.13)* Solve the boundary value problem
 
 $$
-\frac{\partial F}{\partial t}+\frac{1}{2}\sigma^2 \frac{\partial^2F}{\partial x^2}++\frac{1}{2}\delta^2\frac{\partial^2F}{\partial y^2}=0,
+\frac{\partial F}{\partial t}(t,x,y)+\frac{1}{2}\sigma^2 \frac{\partial^2F}{\partial x^2}(t,x,y)+\frac{1}{2}\delta^2\frac{\partial^2F}{\partial y^2}(t,x,y)=0,
 $$
 
 with $F(T,x,y)=xy$.
@@ -2862,11 +2862,81 @@ with $F(T,x,y)=xy$.
 <details>
 <summary>**Solution.**</summary>
 
+We see if this problem fit into the context of Feymann-Kac's multi-dimensional proposition 5.8. Comparing the above PDE with the propositions we see that
 
+$$
+\mu_i(t,X_t,Y_t)=0
+$$
+
+for $i=1,2$ representing the assets $X_t$ and $Y_t$. We furthermore have the matrix $C$
+
+\begin{align*}
+C&=\sigma(t,X_t,Y_t)\sigma(t,X_t,Y_t)^\top\\
+&=
+\begin{bmatrix}
+\sigma_{1,1} &\sigma_{1,2}\\
+\sigma_{2,1}& \sigma_{2,2}
+\end{bmatrix}\begin{bmatrix}
+\sigma_{1,1} &\sigma_{2,1}\\
+\sigma_{1,2}& \sigma_{2,2}
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+\sigma_{1,1}^2+\sigma_{1,2}^2 & \sigma_{1,1}\sigma_{2,1}+\sigma_{2,2}\sigma_{1,2}\\
+\sigma_{1,1}\sigma_{2,1}+\sigma_{2,2}\sigma_{1,2} & \sigma_{2,2}^2+\sigma_{2,1}^2
+\end{bmatrix}
+\end{align*}
+
+Where we have that the only none-zero entrances is the diagonal with
+
+\begin{align*}
+C_{1,1}&=\sigma_{1,1}^2+\sigma_{1,2}^2 = \sigma^2,\\
+C_{2,2}&=\sigma_{2,2}^2+\sigma_{2,1}^2=\delta^2.
+\end{align*}
+
+and obviously $r=0$ and $\Phi(x,y)=xy$. From proposition 5.8 we then have that $F$ has stochastic representation:
+
+$$
+F(t,x,y)=e^{-r(T-t)}E^Q[\Phi(X_T,Y_T)\ \vert\ X_t=x,Y_t=y]\\
+=E^Q[X_TY_T\ \vert\ X_t=x,Y_t=y]
+$$
+
+Having given the $C$ matrix we have the following
+
+$$
+C=
+\begin{bmatrix}
+\sigma^2 & 0\\
+0 & \delta^2
+\end{bmatrix}=\sigma\sigma ^\top\iff\sigma =
+\begin{bmatrix}
+\sigma & 0\\
+0 & \delta
+\end{bmatrix}.
+$$
+
+Hence in the stochastic representation $X$ and $Y$ has dynamics
+
+$$
+\left\{
+\begin{matrix}
+dX_t=\sigma\ dW_t\\
+dY_t=\delta\ dV_t.
+\end{matrix}
+\right.
+$$
+
+where $W$ and $B$ are independent Brownian motions. In particular we have that $X$ and $Y$ are maringales and independent i.e.
+
+$$
+F(t,x,y)=E^Q_{X_t=x}[X_T]\cdot E^Q_{Y_t=y}[Y_T]=xy.
+$$
+
+And so we arrive at the desired result. $\square$
 
 </details>
 
-**Exercise 6** *(Exam 2017/18, problem 1, question (a)-(b))*
+**Exercise 6.** *(Exam 2017/18, problem 1, question (a)-(b))*
 
 <details>
 <summary>**Solution.**</summary>
@@ -2875,7 +2945,7 @@ with $F(T,x,y)=xy$.
 
 </details>
 
-**Exercise 7** *(Exam 2019/20, problem 1, question (a))*
+**Exercise 7.** *(Exam 2019/20, problem 1, question (a))*
 
 <details>
 <summary>**Solution.**</summary>
@@ -2884,7 +2954,52 @@ with $F(T,x,y)=xy$.
 
 </details>
 
-**Exercise 8** *(Exam 2020/21, problem 1, question (a)-(b))*
+**Exercise 8.** *(Exam 2020/21, problem 1, question (a)-(b))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Extra-Exercise 1.** *(Bjork 5.7)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Extra-Exercise 2.** *(Bjork 5.8)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Extra-Exercise 3.** *(Bjork 5.10)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Extra-Exercise 4.** *(Bjork 5.11)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Extra-Exercise 5.** *(Bjork 5.12)*
 
 <details>
 <summary>**Solution.**</summary>
@@ -3500,6 +3615,98 @@ is a $(P,\mathcal{F}_t)$-martingale.
 
 ### Exercises week 4
 
+**Exercise 1.** *(Bjork 7.1)* Consider the standard Black-Scholes model and a $T$-claim $\mathcal{X}$ of the form $\mathcal{X}=\Phi(S_t)$. Denote the corresponding arbitrage free price processes by $\Pi_t$.
+
+  a. Show that, under the martingale measure $Q$, $\Pi_t$ has a local rate of return equal to the short rate $r$. In other words shot that $\Pi_t$ has a differential of the form
+  $$
+  d\Pi_t=r\Pi_t\ dt+g_t\ dW_t^Q.
+  $$
+  **Hint:** Use the $Q$-dynamics of $S$ together with the fact that $F$ satisfies the pricing PDE.
+  b. Show that, under the martingale measure $Q$, the process $Z_t=\frac{\Pi_t}{B_t}$ is a **martingale**. More precisely show that the stochastic differential for $Z$ has zero drift term, i.e. is of the form
+  $$
+  dZ_t=Z_t\sigma_t^Z\ dW_t^Q.
+  $$
+  Determine also the diffusion process $\Sigma_t^Z$ (in terms of the pricing function $F$ and its derivatives).
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 2.** *(Bjork 7.2)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 3.** *(Bjork 7.4)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 4.** *(Bjork 7.5)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 5.** *(Bjork 7.6)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 6.** *(Exam 2017/18, problem 2, question (c)-(d))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 7.** *(Exam 2018/19, problem 1)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 8.** *(Exam 2018/19, problem 2, question (a))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Extra-Exercise 1.** *(Bjork 7.7)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
 ## Week 5
 
 ### Table of Contents
@@ -3645,7 +3852,7 @@ Then $L$ is a martingale and in particular $E^P[L_T]=1$.
 
 <blockquote class = "thm">
 
-**Theorem 12.5.** **(The Converse of the Girsanov Theorem)** Let $W$ be a $d$-dimensional standard $P$-Brownian motion on $(\Omega,\mathcal{F},P,\mathbf{F})$ and assume that
+**Theorem 12.6.** **(The Converse of the Girsanov Theorem)** Let $W$ be a $d$-dimensional standard $P$-Brownian motion on $(\Omega,\mathcal{F},P,\mathbf{F})$ and assume that
 
 $$
 \mathcal{F}_t=\mathcal{F}^W_t,\ \forall t.
@@ -3680,7 +3887,87 @@ $$
 \mu(t,X_t)+\sigma(t,X_t)\varphi_t=r_t\iff\varphi_t=\frac{r_t-\mu(t,X_t)}{\sigma(t,X_t)}.
 $$
 
+We furthermore have the Levy characterisation of a Brownian motion.
+
+<blockquote class = "thm">
+
+**Theorem.** **(Levy Characterisation of Brownian motion)** Let $X_t$ be an Ito process with $X_0=0$. Then $X_t$ is a Brownian motion if and only if the two processes $X_t$ and $X_t^2-t$ are continuous martingales.
+
+</blockquote>
+
 ### Exercises Week 5
+
+**Exercise 1.** *(Bjork 10.1)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 2.** *(Bjork 10.2)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 3.** *(Bjork 10.3)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 4.** *(Exam 2017/18, problem 2, question (a)-(b))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 5.** *(Exam 2019/20, problem 2)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 6.** *(Exam 2020/21, problem 2, question (a)-(b))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 7.** *(Exam 2020/21, problem 3, question (b))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Extra-Exercise 1.** *(Bjork 10.4)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
 
 ## Week 6
 
@@ -3695,9 +3982,452 @@ $$
 
 #### Black-Scholes model - martingale approach
 
+We consider the standard Black-Scholes model with a single risk free asset and risky asset with dynamics
+
+\begin{align*}
+dS_t &= \mu S_t\ dt+\sigma S_t\ dW_t,\\
+dB_t &= r B_t\ dt.
+\end{align*}
+
+We want check whether the model is arbitrage free on any time interval $[0,T]$, and find a (perhaps unique) martingale measure such that we may apply the fundamental pricing theorem 1 and 2. From Girsanov this endavour is equivalent with searching for a (perhaps unique) Girsanov kernel $\varphi$. We therefore define as usual the likelihood process
+
+$$
+dL_t=\varphi_ tL_t\ dW_t,
+$$
+
+and setting $dQ=L_T\ dP$ on $\mathcal{F}_T$, we know from Girsanov theorem that
+
+$$
+dW_t=\varphi_t\ dt+dW_t^Q.
+$$
+
+Inserting into the Black-Scholes model we have
+
+$$
+dS_t=S_t(\mu + \sigma \varphi_t)\ dt+\sigma S_t\ dW_t^Q.
+$$
+
+We know that for $Q$ to be a martingale measure we know that the local rate of return under $Q$ of $S$ must be the short rate $r$ i.e. we have
+
+$$
+\mu + \sigma \varphi_t=r\iff \varphi_t=\frac{r-\mu}{\sigma}=-\frac{\mu -r}{\sigma},
+$$
+
+and so we see the Girsanov kernel is **constant and deterministic**. The process has the economic interpretation that the Girsanov kernel is the risk premium per unit volatility.
+
+<blockquote class = "lem">
+
+**Lemma 13.1.** The Girsanov kernel $\varphi$ is given by
+
+$$
+\varphi = -\lambda
+$$
+
+where the market price of risk $\lambda$ is defined by
+
+$$
+\lambda =\frac{r-\mu}{\sigma}.
+$$
+
+</blockquote>
+
+We therefore have determined *a martingale* and so we have the result.
+
+<blockquote class = "thm">
+
+**Theorem 13.2.** The Black-Scholes model above is arbitrage free.
+
+</blockquote>
+
+We could in general have that $\mu,\sigma,r$ are adapted processes. If this is the case we would have to show the Nivokov condition.
+
+Pricing then of any $T$-claim $X$ then is given by the risk neatral pricing formula
+
+$$
+\Pi_t[X]=e^{-r(T-t)}E^Q[X\ \vert\ \mathcal{F}_t],
+$$
+
+where the $Q$ dynamics of $S$ has local drift $r$ and volatility from the $Q$-brownian motion $W^Q$.
+
+<blockquote class = "thm">
+
+**Theorem 13.3.** The Black-Scholes model above is complete. This also holds for the more general model where $r,\mu,\sigma$ are adapted processes.
+
+</blockquote>
+
+Hedging is the possible by considiering a $T$ claim with
+
+$$
+E^Q\left[\frac{X}{B_T}\right]<\infty.
+$$
+
+Notice the numeraire $B_t$ as in the normalized $Z$-economy. Consider now the $Q$-martingale
+
+$$
+M_t=E^Q\left[\left. \frac{X}{B_T}\ \right\vert\ \mathcal{F}_t\right],
+$$
+
+and it now follows from lemma 11.15 the the model is complete if we can find a process $h_t^1$ such that
+
+$$
+dM_t=h_t^1\ dZ_t^i.
+$$
+
+In order to prove existance of such a process $h^1$ we use the Martingale Representation Theorem 12.2, which says that there *exists* a process $g_t$ such that
+
+$$
+dM_t=g_t\ dW_t^Q.
+$$
+
+We can now combine these two equation by the following $Q$ dynamics
+
+$$
+dZ_t^1=Z_t^1\sigma\ dW_t^Q.
+$$
+
+Hence we have
+
+$$
+dM_t=h_t^1Z_t^1\sigma\ dW_t^Q=g_t\ dW_t^Q\ \Rightarrow\ h_t^1=\frac{g_t}{Z_t^1\sigma}.
+$$
+
+<blockquote class = "thm">
+
+**Theorem 13.4.** In the Black-Scholes model every $T$-claim $X$ satisfying
+
+$$
+E^Q\left[\frac{X}{B_T}\right]<\infty
+$$
+
+can be replicated. The replicating portfolio is given by
+
+\begin{align*}
+h_t^1&=\frac{g_t}{Z_t^1\sigma},\\
+h_t^0&=M_t-h_t^1Z_t^1,
+\end{align*}
+
+where $M$ is defined by the above and $g$ is defined by above.
+
+</blockquote>
+
+If the $T$-claim is simple that is $X=\Phi(S_T)$ we may solve a boundary value problem with Feymann-Kac to arrive at the familiar result.
+
+<blockquote class = "thm">
+
+**Theorem 13.5.** In the Black-Scholes model every $T$-claim on the form $X=\Phi(S_T)$. Then $X$ can be replicated by the portfolio
+
+\begin{align*}
+h_t^0&=\frac{F(t,S_t)-S_t\frac{\partial F}{\partial s}(t,S_t)}{B_t},\\
+h_t^1&=\frac{\partial F}{\partial s}(t,S_t),
+\end{align*}
+
+where $F$ solves the **Black-Scholes equation**
+
+\begin{align*}
+\frac{\partial F}{\partial t}(t,s)+rs\frac{\partial F}{\partial s}(t,s)+\frac{1}{2}\sigma^2s^2 \frac{\partial^2 F}{\partial s^2}(t,s)-rF(t,s)&=0,\\
+F(T,s)&=\Phi(s).
+\end{align*}
+
+Furthermore the value process for the replicating portfolio is given by
+
+$$
+V_t=F(t,S_t).
+$$
+
+</blockquote>
+
 #### Multidimensional models
 
+We specify the general model by the assumptions below.
+
+**Assumption 14.0.1** We assume the following:
+
+  * There are $n$ risky assets $S^1,...,S^n$.
+  * Under the objective probability measure $P$, the $S$-dynamics are given by
+  $$
+  dS_t^i=\mu_t^iS_t^i\ dt +S_t^i\sum_{j=1}^N\sigma_t^{ij}\ dW_t^j,
+  $$
+  for $i=1,...,n$.
+  * The coefficients processes $\mu^i$ and $\sigma^{ij}$ above are assumed to be adapted.
+  * We have a standard risk free asset with price process $B$ with dynamics
+  $$
+  dB_t=r_tB_t\ dt,
+  $$
+  where the short rate process $r$ is assumed to be an adapted stochastic process.
+
+We can use the representation of $\mu^i$, $\sigma^{ij}$ and $S^i$ as vectors and matrices on the form.
+
+$$
+\mu =
+\begin{bmatrix}
+\mu ^1\\
+\vdots\\
+\mu ^n
+\end{bmatrix},\ \sigma=
+\begin{bmatrix}
+\sigma^{1,1}& \cdots & \sigma^{i,N}\\
+\vdots & \ddots & \vdots\\
+\sigma^{n,1}&\cdots&\sigma^{n,N}
+\end{bmatrix},\ D(S)=
+\begin{bmatrix}
+S^{1}& \cdots & 0\\
+\vdots & \ddots & \vdots\\
+0&\cdots&S^n
+\end{bmatrix}.
+$$
+
+And so we have the model on compact form.
+
+\begin{align*}
+dS_t&= D(S_t)\mu_t\ dt+D(S_t)\sigma_t\ dW_t,\\
+dB_t&=r_tB_t\ dt.
+\end{align*}
+
+Now using Girsanov Theorem we can define the prospective likelihood process $L$ by
+
+\begin{align*}
+dL_t&=L_t\varphi_t^\top\ dW_t,\\
+L_0&=1,
+\end{align*}
+
+where $\varphi$ is an adapted $N$-dimensional process. Then our candidate martingale measure $Q$ is given by $dQ=L_t\ dP$ on $\mathcal{F}_t$ and the Girsanov theorem give the dynamics
+
+$$
+dW_t=\varphi_t\ dt+dW_t^Q,
+$$
+
+where $W^Q$ is a standard $Q$-Brownian motion. Inserting into the $P$-dynamics we obtain.
+
+$$
+dS_t=D(S_t)[\mu_t+\sigma_t\varphi_t]\ dt+D(S_t)\sigma_t\ dW_t^Q.
+$$
+
+The from (11.54) we know that $Q$ is a martingale measure if and only if the local rate of return (the $dt$-term) is the short interest rate i.e. if and only if
+
+$$
+\mu_t+\sigma_t\varphi=\mathbf{r}_t,
+$$
+
+where $\mathbf{r}_t=[r,...,r]^\top\in\mathbb{R}^n$. We then have that
+
+$$
+\sigma_t\varphi_t = \mathbf{r}_t-\mu_t,\tag{14.11}
+$$
+
+where we want to solve for $\varphi$. Thus we may write a condition for the absence of arbitrage in linear algebra terms.
+
+<blockquote class = "prop">
+
+**Proposition 14.1.** A necessary condition for absence of arbitrage is that
+
+$$
+\mathbf{r}_t-\mu_t\in Im[\sigma_t]
+$$
+
+with probability one for each $t$. A sufficient condition for absence of arbitrage is that there exists a process $\varphi$ which solves (14.11) and such that $L$ is a martingale.
+
+</blockquote>
+
+Note that it is not enought for $\varphi$ to solce (14.11). We also need that $L$ is a martingale.
+
+<blockquote class = "def">
+
+**Definition 14.2.** A Girsanov kernel $\varphi$ is said to be **admissible** if it generates a martingale measure, i.e. it solves (14.11) and $L$ is a true martingale.
+
+</blockquote>
+
+<blockquote class = "def">
+
+**Definition 14.3.** The model above is said to be **generically arbitrage free** if it is arbitrage free for every choice of $\mu$.
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 14.4.** Disregarding integrability problems the model is generically arbitrage free if and only if, for each $t\le T$ and $P$-a.s., the mapping
+
+$$
+\sigma_t : \mathbb{R}^B\to \mathbb{R}^n
+$$
+
+is surjective, i.e. if and only if the volatility matrix $\sigma_t$ has rank $n$.
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 14.5.** Assume that the model i generically arbitrage free and that the filtration $\mathbf{F}$ is defined by
+
+$$
+\mathcal{F}_t=\mathcal{F}^W_t.
+$$
+
+Then, disregarding integrability problems, the model is complete if and only if $n=N$ and the volatility matrix $\sigma_t$ is invertible $P$-a.s. for each $t\le T$.
+
+</blockquote>
+
+**Assumption 14.3.1.** We assume that the model is generically free of arbitrage, i.e. that
+
+$$
+Im[\sigma_t]=\mathbb{R}^n,
+$$
+
+for all $t$ and with probability one. We also assume that the model is purely Brownian driven, i.e. that $\mathcal{F}_t=\mathcal{F}_t^W$.
+
+<blockquote class = "prop">
+
+**Proposition 14.6.** Under assumption 14.3.1 the model is complete if and only if
+
+$$
+Im[\sigma_t^\top]=\mathbb{R}^N.
+$$
+
+If the model is complete then, using the notation of chapter 11, the replicating portfolio $[h^0,h^S]$ is given by
+
+\begin{align*}
+h_t^S&=g_t\sigma_t^{-1}D^{-1}(Z_t),\\
+h_t^2&=M_t-h_tZ_t.
+\end{align*}
+
+With $M_t$ defined by
+
+$$
+M_t=E^Q\left[\left. \frac{\mathcal{X}}{B_T}\ \right\vert\ \mathcal{F}_t \right].
+$$
+
+</blockquote>
+
+<blockquote class = "thm">
+
+**Theorem 14.7.** **(The Second Fundamental Theorem)** Under assumptions 14.3.1 the model is complete if and only if the martingale measure is unique.
+
+</blockquote>
+
+Pricing of any $T$-claim $\mathcal{X}$ is now given by the risk neutral valuation formula
+
+$$
+\Pi_t[\mathcal{X}] = E^Q\left[\left. e^{-\int_t^Tr_u\ du}\mathcal{X} \ \right\vert\ \mathcal{F}_t\right],
+$$
+
+where $Q$ is some choice of martingale measure. Alternatively we can write the price as
+
+$$
+\Pi_t[\mathcal{X}] = E^Q\left[\left. \frac{\mathbf{M}_T}{\mathbf{M}_t}\mathcal{X} \ \right\vert\ \mathcal{F}_t\right],
+$$
+
+where $\mathbf{M}$ is the stochastic discount factor, defined by
+
+$$
+\mathbf{M}_t=\frac{1}{B_t}L_t.
+$$
+
+If we have a simple claim i.e. of the form $\mathcal{X}=\Phi(S_t)$ and if $S$ is Markovian we have
+
+$$
+e^{-r(T-t)}E^Q[\Phi(S_t)\ \vert\ \mathcal{F}_t]=e^{-r(T-t)}E^Q[\Phi(S_t)\ \vert\ S_t],
+$$
+
+and then the pricing process must be of the form $\Pi_t[\Phi]=F(t,S_t)$. We then have $F$ to be the solutions to the PDE
+
+\begin{align*}
+F_t(t,s)+\sum_{i=1}^nrs_iF_i(t,s)+\frac{1}{2}tr\left\{\sigma^\top D(S)F_{ss}D(S)\sigma\right\}-rF(t,s)&=0,\\
+F(T,s)&=\Phi(s),
+\end{align*}
+
+where $F_i=\frac{\partial F}{\partial s_i}$ and $F_{ss}$ denotes the Hessian matrix. We have that the hedging portfolio has value process $V_t^h=F(t,S_t)$ with dynamics
+
+$$
+dV_t^h=\sum_{i=1}^n F_i(t,S_t)\ dS_t^i.
+$$
+
+Then we must gave the solution
+
+\begin{align*}
+h_t^i&=\frac{\partial F}{\partial s_i}(t,S_t),\hspace{10pt}i=1,...,n,\\
+h_t^0&=\frac{1}{B_t}\left\{F(t,S_t)-\sum_{i=1}^n \frac{\partial F}{\partial s_i}(t,S_t)\ S_t^i\right\}.
+\end{align*}
+
+<blockquote class = "prop">
+
+**Proposition 14.8.** With $L$-dynamics as in $dL_t=L_t\varphi^\top_t\ dW_t$, the $\mathbf{M}$-dynamics are
+
+$$
+d\mathbf{M}_t=-r_t\mathbf{M}_t\ dt+\mathbf{M}_t\varphi_t^\top\ dW_t,
+$$
+
+or alternatively in terms of the market pric of risk $\lambda_t=-\varphi_t$
+
+$$
+d\mathbf{M}_t=-r_t\mathbf{M}_t\ dt-\mathbf{M}_t\lambda_t^\top\ dW_t.
+$$
+
+</blockquote>
+
+<blockquote class = "prop">
+
+**Proposition 14.9.** **(The Hansen-Jagannathan Bounds)** Assume generic absence of arbitrage. Then the following holds for all assets, underlying or derivative, and for all admissible Girsanov kernels $\varphi$, and market prices of risk $\lambda$.
+
+$$
+\frac{\vert \mu_t^p - r_t\vert}{\Vert \sigma_t ^p\Vert}\le \Vert \varphi_t\Vert,\hspace{15pt} \frac{\vert \mu_t^p - r_t\vert}{\Vert \sigma_t ^p\Vert}\le \Vert \lambda_t\Vert.
+$$
+
+</blockquote>
+
 ### Exercises Week 6
+
+**Exercise 1.** *(Exam 2017/18, problem 1, question (c))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 2.** *(Exam 2018/19, problem 2, question (b)i and (c)-(d))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 3.** *(Exam 2019/20, problem 1, question (b)-(c))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 4.** *(Exam 2019/20, problem 3, question (b))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 5.** *(Exam 2020/21, problem 1, question (c))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 6.** *(Exam 2020/21, problem 2, question (c)-(d))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
 
 ## Week 7
 
@@ -4109,3 +4839,48 @@ where $W^Q$ is a $Q$-Brownien motion.
 </blockquote>
 
 ### Exercises Week 7
+
+**Exercise 1.** *(Exam 2018/19, problem 2, question (b).ii)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 2.** *(Exam 2017/18, problem 3)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 3.** *(Exam 2018/19, problem 3)*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 4.** *(Exam 2019/20, problem 3, question (a) and  (c)-(e))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>
+
+**Exercise 5.** *(Exam 2020/21, problem 3, question (a) and (c))*
+
+<details>
+<summary>**Solution.**</summary>
+
+
+
+</details>

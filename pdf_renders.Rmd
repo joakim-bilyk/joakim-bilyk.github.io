@@ -12,7 +12,7 @@ output:
 
 ```{r, include = FALSE,eval = TRUE}
 options(knitr.duplicate.label = "allow")
-Rmds <- c("theory","FinKont_homework")
+Rmds <- c("theory","FinKont_homework","FinKont_examprep")
 for (dok in Rmds) {
   rmarkdown::render(
       paste0(dok,".Rmd"),
@@ -83,6 +83,10 @@ Arbitrage Theory in Continuous Time (Fourth edition)  by Thomas Björk, Oxford U
 <iframe src="pdf/render/FinKont_homework.pdf"></iframe>
 
 <a href="pdf/render/FinKont_homework.pdf" download>Click to Download</a>
+
+<iframe src="pdf/render/FinKont_examprep.pdf"></iframe>
+
+<a href="pdf/render/FinKont_examprep.pdf" download>Click to Download</a>
 
 #### Quantative risk management
 

@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Joakim Bilyk" />
 
+<meta name="date" content="2023-01-22" />
 
-<title>Homework (QRM)</title>
+<title>Exam-prep (FinKont)</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -71,6 +73,52 @@ function myFunction() {
     script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script>
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+<style>
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+</style>
+
+<script>
+
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 </script>
 
 <style type="text/css">
@@ -373,13 +421,18 @@ $(document).ready(function () {
 <div class="btn-group pull-right float-right">
 <button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
 <li><a id="rmd-download-source" href="#">Download Rmd</a></li>
 </ul>
 </div>
 
 
 
-<h1 class="title toc-ignore">Homework (QRM)</h1>
+<h1 class="title toc-ignore">Exam-prep (FinKont)</h1>
+<h4 class="author">Joakim Bilyk</h4>
+<h4 class="date">2023-01-22</h4>
 
 </div>
 
@@ -387,149 +440,8 @@ $(document).ready(function () {
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 </div>
-<div id="weeks" class="section level1 tabset">
-<h1 class="tabset">Weeks</h1>
-<div id="week-1" class="section level2">
-<h2>Week 1</h2>
-<div id="material" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Introduction; risk factors and loss distributions; coherent risk
-measures: MFE Ch. 2.</li>
-<li>VaR and expected shortfall: MFE Ch. 2, particularly Sec. 2.3. (For
-discussion of confidence bounds, see HL notes.)</li>
-</ul>
-</div>
-<div id="theory" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-2" class="section level2">
-<h2>Week 2</h2>
-<div id="material-1" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Var-Cov method, simulation, importance sampling and bootstrap. For
-the Var-Cov method, see MFE Sec. 9.2. For importance sampling and
-bootstrap, see the supplementary reading in Absalon.</li>
-<li>Extreme value theory: MFE Ch. 5 or alternative reading in HL
-(suggested for this part).</li>
-</ul>
-</div>
-<div id="theory-1" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-1" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-3" class="section level2">
-<h2>Week 3</h2>
-<div id="material-2" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Spherical and elliptical distributions: MFE Sec. 6.3.</li>
-<li>Spherical and elliptical distributions, cont.; introduction to
-copulas.</li>
-</ul>
-</div>
-<div id="theory-2" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-2" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-4" class="section level2">
-<h2>Week 4</h2>
-<div id="material-3" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Copulas: MFE Sec. 7.1-7.5 (Sklar’s theorem, Frechet bounds).</li>
-<li>Copulas cont. (Transformations; examples; Archimedean copulas).</li>
-</ul>
-</div>
-<div id="theory-3" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-3" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-5" class="section level2">
-<h2>Week 5</h2>
-<div id="material-4" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Copulas cont. (simulating Archimedean copulas, statistical methods,
-measures of dependence).</li>
-<li>Credit risk: the Merton model. MFE Ch. 10, particularly Sec. 10.3.
-[This lecture will only last two hours.]</li>
-</ul>
-</div>
-<div id="theory-4" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-4" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-6" class="section level2">
-<h2>Week 6</h2>
-<div id="material-5" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Portfolio credit risk: MFE Ch. 11, specifically Sections
-11.1-11.3.</li>
-<li>Portfolio credit risk, cont. [This lecture will only last two
-hours.]</li>
-</ul>
-</div>
-<div id="theory-5" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-5" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-<div id="week-7" class="section level2">
-<h2>Week 7</h2>
-<div id="material-6" class="section level3">
-<h3>Material</h3>
-<p>MFE refers to the book by McNeil, Frey, and Embrechts, while HL
-refers to the notes by Hult and Lindskog posted on Absalon.</p>
-<ul>
-<li>Intro. to operational risk. Stochastic processes in risk management:
-stochastic models for operational risk; financial time series models.
-Connections to non-life insurance models and estimates (last
-lecture).</li>
-</ul>
-</div>
-<div id="theory-6" class="section level3">
-<h3>Theory</h3>
-</div>
-<div id="exercises-6" class="section level3">
-<h3>Exercises</h3>
-</div>
-</div>
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkhvbWV3b3JrIChRUk0pIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogZmFsc2UNCiAgICB0b2NfZmxvYXQ6IHRydWUNCi0tLQ0KDQojIEludHJvZHVjdGlvbg0KDQojIFdlZWtzIHsudGFic2V0fQ0KDQojIyBXZWVrIDENCg0KIyMjIE1hdGVyaWFsDQoNCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLg0KDQogKiBJbnRyb2R1Y3Rpb247IHJpc2sgZmFjdG9ycyBhbmQgbG9zcyBkaXN0cmlidXRpb25zOyBjb2hlcmVudCByaXNrIG1lYXN1cmVzOiBNRkUgQ2guIDIuDQogKiBWYVIgYW5kIGV4cGVjdGVkIHNob3J0ZmFsbDogTUZFIENoLiAyLCBwYXJ0aWN1bGFybHkgU2VjLiAyLjMuIChGb3IgZGlzY3Vzc2lvbiBvZiBjb25maWRlbmNlIGJvdW5kcywgc2VlIEhMIG5vdGVzLikNCg0KIyMjIFRoZW9yeQ0KDQojIyMgRXhlcmNpc2VzDQoNCiMjIFdlZWsgMg0KDQojIyMgTWF0ZXJpYWwNCg0KTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uDQoNCiAqIFZhci1Db3YgbWV0aG9kLCBzaW11bGF0aW9uLCBpbXBvcnRhbmNlIHNhbXBsaW5nIGFuZCBib290c3RyYXAuIEZvciB0aGUgVmFyLUNvdiBtZXRob2QsIHNlZSBNRkUgU2VjLiA5LjIuIEZvciBpbXBvcnRhbmNlIHNhbXBsaW5nIGFuZCBib290c3RyYXAsIHNlZSB0aGUgc3VwcGxlbWVudGFyeSByZWFkaW5nIGluIEFic2Fsb24uDQogKiBFeHRyZW1lIHZhbHVlIHRoZW9yeTogTUZFIENoLiA1IG9yIGFsdGVybmF0aXZlIHJlYWRpbmcgaW4gSEwgKHN1Z2dlc3RlZCBmb3IgdGhpcyBwYXJ0KS4NCg0KIyMjIFRoZW9yeQ0KDQojIyMgRXhlcmNpc2VzDQoNCiMjIFdlZWsgMw0KDQojIyMgTWF0ZXJpYWwNCg0KTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uDQoNCiAqIFNwaGVyaWNhbCBhbmQgZWxsaXB0aWNhbCBkaXN0cmlidXRpb25zOiBNRkUgU2VjLiA2LjMuDQogKiBTcGhlcmljYWwgYW5kIGVsbGlwdGljYWwgZGlzdHJpYnV0aW9ucywgY29udC47IGludHJvZHVjdGlvbiB0byBjb3B1bGFzLg0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayA0DQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogQ29wdWxhczogTUZFIFNlYy4gNy4xLTcuNSAoU2tsYXIncyB0aGVvcmVtLCBGcmVjaGV0IGJvdW5kcykuDQogKiBDb3B1bGFzIGNvbnQuIChUcmFuc2Zvcm1hdGlvbnM7IGV4YW1wbGVzOyBBcmNoaW1lZGVhbiBjb3B1bGFzKS4NCg0KIyMjIFRoZW9yeQ0KDQojIyMgRXhlcmNpc2VzDQoNCiMjIFdlZWsgNQ0KDQojIyMgTWF0ZXJpYWwNCg0KTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uDQoNCiAqIENvcHVsYXMgY29udC4gKHNpbXVsYXRpbmcgQXJjaGltZWRlYW4gY29wdWxhcywgc3RhdGlzdGljYWwgbWV0aG9kcywgbWVhc3VyZXMgb2YgZGVwZW5kZW5jZSkuDQogKiBDcmVkaXQgcmlzazogdGhlIE1lcnRvbiBtb2RlbC4gTUZFIENoLiAxMCwgcGFydGljdWxhcmx5IFNlYy4gMTAuMy4gW1RoaXMgbGVjdHVyZSB3aWxsIG9ubHkgbGFzdCB0d28gaG91cnMuXQ0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayA2DQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogUG9ydGZvbGlvIGNyZWRpdCByaXNrOiBNRkUgQ2guIDExLCBzcGVjaWZpY2FsbHkgU2VjdGlvbnMgMTEuMS0xMS4zLg0KICogUG9ydGZvbGlvIGNyZWRpdCByaXNrLCBjb250LiBbVGhpcyBsZWN0dXJlIHdpbGwgb25seSBsYXN0IHR3byBob3Vycy5dDQoNCiMjIyBUaGVvcnkNCg0KIyMjIEV4ZXJjaXNlcw0KDQojIyBXZWVrIDcNCg0KIyMjIE1hdGVyaWFsDQoNCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLg0KDQogKiBJbnRyby4gdG8gb3BlcmF0aW9uYWwgcmlzay4gU3RvY2hhc3RpYyBwcm9jZXNzZXMgaW4gcmlzayBtYW5hZ2VtZW50OiBzdG9jaGFzdGljIG1vZGVscyBmb3Igb3BlcmF0aW9uYWwgcmlzazsgZmluYW5jaWFsIHRpbWUgc2VyaWVzIG1vZGVscy4gQ29ubmVjdGlvbnMgdG8gbm9uLWxpZmUgaW5zdXJhbmNlIG1vZGVscyBhbmQgZXN0aW1hdGVzIChsYXN0IGxlY3R1cmUpLg0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRXhhbS1wcmVwIChGaW5Lb250KSIKYXV0aG9yOiAiSm9ha2ltIEJpbHlrIgpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiCmhlYWRlci1pbmNsdWRlczoKICAgLSBcdXNlcGFja2FnZXt3cmFwZmlnfQogICAtIFx1c2VwYWNrYWdle2dyYXBoaWNzfQpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogbm8KICAgIGNvZGVfZm9sZGluZzogaGlkZQogIHBkZl9kb2N1bWVudDoKICAgIHRvYzogeWVzCi0tLQoKYGBge3IsIHNldHVwLGluY2x1ZGU9RkFMU0V9CmxpYnJhcnkoa25pdHIpCmlmIChrbml0cjo6aXNfbGF0ZXhfb3V0cHV0KCkpIHsKICBrbml0X2hvb2tzJHNldCh3cmFwZiA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHsKICBpZiAoIWJlZm9yZSkgewogICAgb3V0cHV0IDwtIHZlY3Rvcihtb2RlID0gImNoYXJhY3RlciIsIGxlbmd0aCA9IG9wdGlvbnMkZmlnLm51bSArIDEpCgogICAgZm9yIChpIGluIDE6b3B0aW9ucyRmaWcubnVtKSB7CiAgICAgIG91dHB1dFtpXSA8LSBzcHJpbnRmKCJcXGluY2x1ZGVncmFwaGljc3slc30iLCBmaWdfcGF0aChudW1iZXIgPSBpKSkKICAgIH0KCiAgICBvdXRwdXRbaSsxXSA8LSAiXFxlbmR7d3JhcGZpZ3VyZX0iCiAgICBvdXRwdXQgPC0gYygiXFxiZWdpbnt3cmFwZmlndXJlfXtSfXswLjVcXHRleHR3aWR0aH0iLG91dHB1dCkKICAgIGlmIChsZW5ndGgob3V0cHV0KT49IDMpIHsKICAgICAgcmV0dXJuKHBhc3RlKG91dHB1dCwgY29sbGFwc2UgPSAiIikpCiAgICB9CiAgfQp9KQogIGtuaXRyOjpvcHRzX2NodW5rJHNldCgKICAgIGZpZy5zaG93ID0gJ2hpZGUnLAogICAgZWNobyA9IEZBTFNFCiAgKQp9IGVsc2UgewogIGtuaXRyOjprbml0X2hvb2tzJHNldCh3cmFwZiA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHt9KQogIGtuaXRyOjpvcHRzX2NodW5rJHNldCgKICAgIG91dC5leHRyYSA9ICdzdHlsZT0iZmxvYXQ6cmlnaHQ7IHBhZGRpbmc6MTBweCInLAogICAgb3V0LndpZHRoPSAiNTAlIgogICkKfQpgYGAKCmBgYHtyLCBpbmNsdWRlPUZBTFNFLCByZXN1bHRzID0gJ2hpZGUnfQpsaWJyYXJ5KGdncGxvdDIpCmxpYnJhcnkoZHBseXIpCiNybWFya2Rvd246OnJlbmRlcihpbnB1dCA9ICJGaW5Lb250X2hvbWV3b3JrLlJtZCIsIG91dHB1dF9mb3JtYXQgPSAicGRmX2RvY3VtZW50IikKYGBgCgoKIyBJbnRyb2R1Y3Rpb24K</div>
 <style>
   footer{
     background: rgb(34,34,34);
@@ -615,6 +527,7 @@ $(document).ready(function () {
 <script>
 $(document).ready(function () {
   window.initializeSourceEmbed("FinKont_examprep.Rmd");
+  window.initializeCodeFolding("hide" === "show");
 });
 </script>
 
