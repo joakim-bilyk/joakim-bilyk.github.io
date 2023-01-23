@@ -11,7 +11,7 @@
 
 <meta name="author" content="Joakim Bilyk" />
 
-<meta name="date" content="2023-01-22" />
+<meta name="date" content="2023-01-23" />
 
 <title>Exam-prep (FinKont)</title>
 
@@ -432,16 +432,415 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Exam-prep (FinKont)</h1>
 <h4 class="author">Joakim Bilyk</h4>
-<h4 class="date">2023-01-22</h4>
+<h4 class="date">2023-01-23</h4>
 
 </div>
 
 
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
+<div id="exam-sets-201718-202122" class="section level1 tabset">
+<h1 class="tabset">Exam sets (2017/18-2021/22)</h1>
+<div id="in-progress" class="section level2">
+<h2>In progress</h2>
+<div id="problem-2" class="section level3">
+<h3>Problem 2</h3>
+<p>Consider a standard Black-Scholes model, that is, a model consisting
+of a bank account <span class="math inline">\(B_t\)</span> with <span
+class="math inline">\(P\)</span>-dynamics given by</p>
+<p><span class="math display">\[
+dB_t=rB_t\ dt,\ B_0=1
+\]</span></p>
+<p>and a stock <span class="math inline">\(S_t\)</span> with <span
+class="math inline">\(P\)</span>-dynamics given by</p>
+<p><span class="math display">\[
+dS_t=\alpha S_t\ dt+\sigma S_t\ d\overline{W}_t,\ S_0=s&gt;0
+\]</span></p>
+<p>where <span class="math inline">\(r,\alpha\in\mathbb{R}\)</span> and
+<span class="math inline">\(\sigma &gt;0\)</span> are constants and
+<span class="math inline">\(\overline{W}_t\)</span> is a <span
+class="math inline">\(P\)</span>-Brownian motion. Let <span
+class="math inline">\(T&gt;0\)</span> be a given and fixed date.</p>
+<p>Consider the derivative that at time <span
+class="math inline">\(T\)</span> pays <span class="math display">\[
+X=\max\left\{\min\left\{S_T,K_2\right\},K_1\right\},
+\]</span></p>
+<p>where <span class="math inline">\(0&lt;K_1&lt;K_2\)</span> are
+constants.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Determine the arbitrage free price of derivative <span
+class="math inline">\(X\)</span> at time <span
+class="math inline">\(t&lt;T\)</span>.</li>
+</ol>
+<p>Consider a new derivative that at time <span
+class="math inline">\(T\)</span> pays</p>
+<p><span class="math display">\[
+Y=(S^2_T-K^2)^+-(K^2-S^2_T)^+.
+\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><ol style="list-style-type: lower-roman">
+<li>Determine the arbitrage free price of derivative <span
+class="math inline">\(Y\)</span> at time <span
+class="math inline">\(t&lt;T\)</span>.</li>
+<li>Find a hedging portfolio for derivative <span
+class="math inline">\(Y\)</span>.</li>
+</ol></li>
+</ol>
+<details>
+<summary>
+<strong>Solution (a).</strong>
+</summary>
+<p>We see that the derivative is the bull spread given by the payout
+function</p>
+<p><span class="math display">\[
+X=
+\begin{cases}
+  K_2 &amp; \text{if }S_T&gt;K_2,\\
+  S_T &amp; \text{if }K_1\le S_T\le K_2,\\
+  K_1 &amp;\text{if }S_T&lt; K_1.
+\end{cases}
+\]</span></p>
+<p>We know from exercise 10.3 that this can be replicated by holding
+<span class="math inline">\(K_1\)</span> bonds, one call option with
+strike <span class="math inline">\(K_1\)</span> and a short on a call
+with strike <span class="math inline">\(K_2\)</span>. The arbitrage free
+price of the derivative is then the value process of the mentioned
+portfolio i.e.</p>
+<p><span class="math display">\[
+\Pi_t[X]=K_1 e^{-r(T-t)}+c(K_1;t,T)-c(K_2;t,T),
+\]</span></p>
+<p>where <span class="math inline">\(c\)</span> denotes the pricing
+function for a European call option (non-instructive parameters
+supressed). <span class="math inline">\(\square\)</span></p>
+</details>
+<details>
+<summary>
+<strong>Solution (b).</strong>
+</summary>
+<p><em>(i)</em>: We start by seeing that the derivative pays out</p>
+<p><span class="math display">\[
+Y=
+\begin{cases}
+  S_T^2-K^2 &amp; \text{if }S_T^2\ge K^2,\\
+  -(K^2-S_T^2) &amp;\text{if }S_T^2&lt; K^2.
+\end{cases}
+\]</span></p>
+<p>hence the payout is <span
+class="math inline">\(Y=S_T^2-K^2=\Phi(S_T)\)</span> where <span
+class="math inline">\(\Phi(s)=s^2-K^2\)</span>. That is <span
+class="math inline">\(Y\)</span> is in fact a simple claim. We have from
+the risk neutral valueation formula 7.11 that</p>
+<p><span class="math display">\[\begin{align*}
+\Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
+&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
+\end{align*}\]</span></p>
+<p>Recall that under the martingale measure <span
+class="math inline">\(Q\)</span> we have that <span
+class="math inline">\(S_t\)</span> is a GBM hence</p>
+<p><span class="math display">\[
+S_t=s\cdot
+\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+S_T^2=s^2\cdot
+\exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(W_T^Q-W_t^Q\right)\right\}.
+\]</span></p>
+<p>Inserting this into the risk neutral valuation formula we get</p>
+<p><span class="math display">\[\begin{align*}
+\Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
+&amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)}
+E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
+&amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)}e^{\frac{1}{2}4\sigma^2(T-t)}-e^{-r(T-t)}K^2\\
+&amp;=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
+&amp;=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
+\end{align*}\]</span></p>
+<p>The arbitrage free price of the derivative is then given above. <span
+class="math inline">\(\square\)</span></p>
+<p><em>(ii)</em>:</p>
+</details>
+<details>
+<summary>
+<strong>Solution (c).</strong>
+</summary>
+</details>
+<details>
+<summary>
+<strong>Solution (d).</strong>
+</summary>
+</details>
+</div>
+<div id="problem-3" class="section level3">
+<h3>Problem 3</h3>
+<details>
+<summary>
+<strong>Solution (a).</strong>
+</summary>
+</details>
+<details>
+<summary>
+<strong>Solution (b).</strong>
+</summary>
+</details>
+<details>
+<summary>
+<strong>Solution (c).</strong>
+</summary>
+</details>
+</div>
+</div>
+<div id="exam-201718" class="section level2">
+<h2>Exam 2017/18</h2>
+<div id="problem-1" class="section level3">
+<h3>Problem 1</h3>
+<p>Let <span class="math inline">\(W_t\)</span> denote a Brownian motion
+and let</p>
+<p><span class="math display">\[
+\mathcal{F}_t=\mathcal{F}_t^W=\sigma(\{W_s\ \vert\ 0\le s\le t\}).
+\]</span></p>
+<p>Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed
+time.</p>
+<p>Let <span class="math inline">\(f(t)\)</span> be a bounded
+deterministic continuous function. Define the two processes</p>
+<p><span class="math display">\[
+\begin{cases}
+X_t=\int_0^tf(u)\ dW_u,\\
+M^{(\lambda)}_t=\exp\left\{\lambda X_t-\frac{\lambda^2}{2}\int_0^t
+f^2(u)\ du\right\},
+\end{cases}
+\]</span></p>
+<p>where <span class="math inline">\(\lambda\in\mathbb{R}\)</span> is a
+constant.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(M^{(\lambda)}\)</span> is a
+martingale with <span
+class="math inline">\(E[M_t^{(\lambda)}]=1\)</span>.</li>
+</ol>
+<p>Let <span class="math inline">\(0&lt;s&lt;t\)</span> and <span
+class="math inline">\(\lambda_1,\lambda_2\in \mathbb{R}\)</span> be
+given and fixed.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><ol style="list-style-type: lower-roman">
+<li>Show that</li>
+</ol>
+<p><span class="math display">\[\begin{align*}
+M^{(\lambda_1)}_s&amp;=E\left[\left.\frac{M^{(\lambda_1)}_sM^{(\lambda_2)}_t}{M^{(\lambda_2)}_s}
+\ \right\vert\ \mathcal{F}_s\right]\\
+&amp;=E\left[\left.\exp\left\{\lambda_1X_s+\lambda_2(X_t-X_s)-\frac{1}{2}\lambda_1^2\int_0^sf^2(u)\
+du- \frac{1}{2}\lambda_2^2\int_s^tf^2(u)\ du\right\} \ \right\vert\
+\mathcal{F}_s\right]
+\end{align*}\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Show that <span class="math inline">\(X_s\)</span> and <span
+class="math inline">\(X_t-X_s\)</span> are normally distributed and
+independent.</li>
+</ol></li>
+<li><p>Compute the mean value of <span
+class="math inline">\(M^{(\lambda)}_T\log(M^{(\lambda)}_T)\)</span>.</p></li>
+</ol>
+<details>
+<summary>
+<strong>Solution (a).</strong>
+</summary>
+<p>First, we see that since <span class="math inline">\(X_t\)</span> is
+on integral form we know that</p>
+<p><span class="math display">\[
+\begin{cases}
+dX_t=f(t)\ dW_t\\
+X_0=0.
+\end{cases}
+\]</span></p>
+<p>Hence we may represent <span class="math inline">\(M\)</span> as
+<span class="math inline">\(M^{(\lambda)}_t=g(t,X_t,Y_t)\)</span> given
+by</p>
+<p><span class="math display">\[
+g(t,x,y)=\exp\left\{\lambda x-\frac{\lambda^2}{2}y \right\},
+\]</span></p>
+<p>where <span class="math inline">\(Y_t=\int_0^t f^2(u)\ du\)</span>
+with dynamics</p>
+<p><span class="math display">\[
+\begin{cases}
+dY_t=f^2(t)\ dt\\
+Y_0=0.
+\end{cases}
+\]</span></p>
+<p>Hence by the multidimensional Ito’s formula we have the dynamics of
+<span class="math inline">\(M\)</span> given by</p>
+<p><span class="math display">\[\begin{align*}
+dM^{(\lambda)}_t&amp;=g_t\ dt+g_x\ dX_t+g_y\ dY_t+\frac{1}{2}g_{yy}\
+(dY_t)^2+\frac{1}{2}g_{xx}\ (dX_t)^2 +f_{xy}(dX_t)(dY_t)\\
+&amp;=0+\lambda g\ dX_t-\frac{\lambda^2}{2}g\ dY_t+0+\frac{1}{2}\lambda
+^2g\ (dX_t)^2+0\\
+&amp;=\lambda M_t^{(\lambda)} f(t)\
+dW_t-\frac{1}{2}\lambda^2M_t^{(\lambda)} f^2(t)\ dt+\frac{1}{2}\lambda
+M_t^{(\lambda)} f^2(t)\ dt\\
+&amp;=\lambda f(t)M_t^{(\lambda)}\ dW_t,
+\end{align*}\]</span></p>
+<p>And so we see that <span class="math inline">\(M\)</span> is a
+martingale as it only has dynamics wrt. the Brownian motion <span
+class="math inline">\(W\)</span> (assuming <span
+class="math inline">\(\lambda
+f_tM_t^{(\lambda)}\in\mathcal{L}^2\)</span>). Furthermore we have
+that</p>
+<p><span class="math display">\[
+M_0^{(\lambda)}=g(0,X_0,Y_0)=\exp\left\{\lambda X_0-\frac{1}{2}\lambda
+^2 Y_0\right\}=e^0=1
+\]</span></p>
+<p>and so we have <span
+class="math inline">\(E[M_t^{(\lambda)}]=M_0^{(\lambda)}=1\)</span> as
+desired. <span class="math inline">\(\square\)</span></p>
+</details>
+<details>
+<summary>
+<strong>Solution (b).</strong>
+</summary>
+<p><em>“(i)”</em> We have from the previous exercise</p>
+<p><span class="math display">\[\begin{align*}
+&amp;\frac{M^{(\lambda_1)}_sM^{(\lambda_2)}_t}{M^{(\lambda_2)}_s}\\
+&amp;=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\
+du\right\}\exp\left\{\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t
+f^2(u)\ du\right\}\exp\left\{\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\
+du-\lambda_2 X_s\right\}\\
+&amp;=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\
+du+\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t f^2(u)\
+du+\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\ du-\lambda_2 X_s\right\}\\
+&amp;=\exp\left\{\lambda_1 X_s+\lambda_2
+(X_t-X_s)-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\
+du-\frac{1}{2}\lambda_2^2\int_s^t f^2(u)\ du\right\}
+\end{align*}\]</span></p>
+<p>and so the conclusion follows. <span
+class="math inline">\(\square\)</span></p>
+<p><em>“(ii)”</em> We have that from lemma 4.18 that</p>
+<p><span class="math display">\[
+X_s=\int_0^sf(u)\ dW_u\sim \mathcal{N}\left(0,\int_0^sf^2(u)\
+dW_u\right)
+\]</span></p>
+<p>furthermore we have that</p>
+<p><span class="math display">\[
+X_t-X_s=\int_s^tf(u)\ dW_u\sim \mathcal{N}\left(0,\int_s^tf^2(u)\
+dW_u\right).
+\]</span></p>
+<p>In regard to the independence claim we could check identity below</p>
+<p><span class="math display">\[
+E[e^{t_1X}e^{t_2 Y}]=E[e^{t_1X}]E[e^{t_2Y}]
+\]</span></p>
+<p>where <span class="math inline">\(X,Y\)</span> are independent random
+variables. The above identity holds if and only if <span
+class="math inline">\(X\)</span> and <span
+class="math inline">\(Y\)</span> are independent. From above we have
+that</p>
+<p><span class="math display">\[
+M_s^{(\lambda_1)}=E[e^{\lambda_1X_s}e^{\lambda_2(X_t-X_s)}\ \vert\
+\mathcal{F}_s]e^{-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\
+du-\frac{1}{2}\lambda_2^2\int_s^t f^2(u)\ du}
+\]</span></p>
+<p>and so taking expectation we have</p>
+<p><span class="math display">\[
+1=E[e^{\lambda_1X_s}e^{\lambda_2(X_t-X_s)}]e^{-\frac{1}{2}\lambda_1^2\int_0^s
+f^2(u)\ du-\frac{1}{2}\lambda_2^2\int_s^t f^2(u)\ du}
+\]</span> Which the gives</p>
+<p><span class="math display">\[
+E[e^{\lambda_1X_s}e^{\lambda_2(X_t-X_s)}]=e^{\frac{1}{2}\lambda_1^2\int_0^s
+f^2(u)\ du+\frac{1}{2}\lambda_2^2\int_s^t f^2(u)\
+du}=E[e^{\lambda_1X_s}]E[e^{\lambda_2(X_t-X_s)}]
+\]</span></p>
+<p>and so the conclusion is that <span
+class="math inline">\(X_s\)</span> and <span
+class="math inline">\(X_t-X_s\)</span> are independent. <span
+class="math inline">\(\square\)</span></p>
+</details>
+<details>
+<summary>
+<strong>Solution (c).</strong>
+</summary>
+<p>We recall the definition of <span
+class="math inline">\(M_t^{(\lambda)}\)</span> and observe that</p>
+<p><span class="math display">\[
+\log M_t^{(\lambda)}=\lambda X_t-\frac{1}{2}\lambda ^2\int_0^t f^2(u)\
+du.
+\]</span></p>
+<p>Furthermore we have the dynamics of <span
+class="math inline">\(M^{(\lambda)}\)</span> given by the differential
+form</p>
+<p><span class="math display">\[
+dM_t^{(\lambda)}=\lambda f(t)M_t^{(\lambda)}\ dW_t.
+\]</span></p>
+<p>with <span class="math inline">\(M_0^{(\lambda)}=1\)</span>. Since we
+know that <span class="math inline">\(M_t^{(\lambda)}\)</span> is a
+martingale we have</p>
+<p><span class="math display">\[
+E^P[M_T^{(\lambda)}]=E^P[M_0^{(\lambda)}]=1,
+\]</span></p>
+<p>and so we may define a new probability measure as</p>
+<p><span class="math display">\[
+d\tilde{P}=M_T^{(\lambda)}\ dP
+\]</span></p>
+<p>on <span class="math inline">\(\mathcal{F}_T\)</span>. We then have a
+new Brownian motion <span class="math inline">\(\tilde{W}\)</span> such
+that</p>
+<p><span class="math display">\[
+dW_t=\lambda f(t)\ dt + d\tilde{W}_t.
+\]</span></p>
+<p>We can then see</p>
+<p><span class="math display">\[\begin{align*}
+E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&amp;=\int M_T^{(\lambda)}\log
+M_T^{(\lambda)}\ dP=\int M_T^{(\lambda)}\log M_T^{(\lambda)}
+\frac{1}{M_T^{(\lambda)}}\ d\tilde{P}\\
+&amp;=\int \log M_T^{(\lambda)}\ d\tilde{P}=E^{\tilde{P}}[\log
+M_T^{(\lambda)}].
+\end{align*}\]</span></p>
+<p>Then we can evaluate the mean value by seeing the <span
+class="math inline">\(X\)</span> has representation wrt. <span
+class="math inline">\(\tilde{P}\)</span> by</p>
+<p><span class="math display">\[
+X_t=\int_0^tf(u)\ (\lambda f(u)\ du +
+d\tilde{W}_u)=\lambda\int_0^tf^2(u)\ du+\int_0^tf(u)\ d\tilde{W}_u.
+\]</span></p>
+<p>Giving that</p>
+<p><span class="math display">\[\begin{align*}
+E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&amp;=E^{\tilde{P}}[\log
+M_T^{(\lambda)}]\\
+&amp;=E^{\tilde{P}}\left[ \lambda X_T-\frac{1}{2}\lambda ^2\int_0^T
+f^2(u)\ du \right]\\
+&amp;=E^{\tilde{P}}\left[ \lambda^2\int_0^Tf^2(u)\
+du+\lambda\int_0^Tf(u)\ d\tilde{W}_u-\frac{1}{2}\lambda ^2\int_0^T
+f^2(u)\ du \right]\\
+&amp;=\lambda E^{\tilde{P}}\left[\frac{1}{2} \lambda\int_0^Tf^2(u)\
+du+\int_0^Tf(u)\ d\tilde{W}_u \right]\\
+&amp;=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du+\lambda
+E^{\tilde{P}}\left[\int_0^Tf(u)\ d\tilde{W}_u \right]\\
+&amp;=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du
+\end{align*}\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+\tilde{X}_T=\int_0^Tf(u)\ d\tilde{W}_u,
+\]</span></p>
+<p>is a <span class="math inline">\(\tilde{P}\)</span>-martingale. <span
+class="math inline">\(\square\)</span></p>
+</details>
+</div>
+</div>
+<div id="exam-201819" class="section level2">
+<h2>Exam 2018/19</h2>
+<p>Some content</p>
+</div>
+<div id="exam-201920" class="section level2">
+<h2>Exam 2019/20</h2>
+<p>Some content</p>
+</div>
+<div id="exam-202021" class="section level2">
+<h2>Exam 2020/21</h2>
+<p>Some content</p>
+</div>
+<div id="exam-202122" class="section level2">
+<h2>Exam 2021/22</h2>
+<p>Some content</p>
+</div>
+<div id="exam-202223" class="section level2">
+<h2>Exam 2022/23</h2>
+<p>Some content</p>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRXhhbS1wcmVwIChGaW5Lb250KSIKYXV0aG9yOiAiSm9ha2ltIEJpbHlrIgpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiCmhlYWRlci1pbmNsdWRlczoKICAgLSBcdXNlcGFja2FnZXt3cmFwZmlnfQogICAtIFx1c2VwYWNrYWdle2dyYXBoaWNzfQpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogbm8KICAgIGNvZGVfZm9sZGluZzogaGlkZQogIHBkZl9kb2N1bWVudDoKICAgIHRvYzogeWVzCi0tLQoKYGBge3IsIHNldHVwLGluY2x1ZGU9RkFMU0V9CmxpYnJhcnkoa25pdHIpCmlmIChrbml0cjo6aXNfbGF0ZXhfb3V0cHV0KCkpIHsKICBrbml0X2hvb2tzJHNldCh3cmFwZiA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHsKICBpZiAoIWJlZm9yZSkgewogICAgb3V0cHV0IDwtIHZlY3Rvcihtb2RlID0gImNoYXJhY3RlciIsIGxlbmd0aCA9IG9wdGlvbnMkZmlnLm51bSArIDEpCgogICAgZm9yIChpIGluIDE6b3B0aW9ucyRmaWcubnVtKSB7CiAgICAgIG91dHB1dFtpXSA8LSBzcHJpbnRmKCJcXGluY2x1ZGVncmFwaGljc3slc30iLCBmaWdfcGF0aChudW1iZXIgPSBpKSkKICAgIH0KCiAgICBvdXRwdXRbaSsxXSA8LSAiXFxlbmR7d3JhcGZpZ3VyZX0iCiAgICBvdXRwdXQgPC0gYygiXFxiZWdpbnt3cmFwZmlndXJlfXtSfXswLjVcXHRleHR3aWR0aH0iLG91dHB1dCkKICAgIGlmIChsZW5ndGgob3V0cHV0KT49IDMpIHsKICAgICAgcmV0dXJuKHBhc3RlKG91dHB1dCwgY29sbGFwc2UgPSAiIikpCiAgICB9CiAgfQp9KQogIGtuaXRyOjpvcHRzX2NodW5rJHNldCgKICAgIGZpZy5zaG93ID0gJ2hpZGUnLAogICAgZWNobyA9IEZBTFNFCiAgKQp9IGVsc2UgewogIGtuaXRyOjprbml0X2hvb2tzJHNldCh3cmFwZiA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHt9KQogIGtuaXRyOjpvcHRzX2NodW5rJHNldCgKICAgIG91dC5leHRyYSA9ICdzdHlsZT0iZmxvYXQ6cmlnaHQ7IHBhZGRpbmc6MTBweCInLAogICAgb3V0LndpZHRoPSAiNTAlIgogICkKfQpgYGAKCmBgYHtyLCBpbmNsdWRlPUZBTFNFLCByZXN1bHRzID0gJ2hpZGUnfQpsaWJyYXJ5KGdncGxvdDIpCmxpYnJhcnkoZHBseXIpCiNybWFya2Rvd246OnJlbmRlcihpbnB1dCA9ICJGaW5Lb250X2hvbWV3b3JrLlJtZCIsIG91dHB1dF9mb3JtYXQgPSAicGRmX2RvY3VtZW50IikKYGBgCgoKIyBJbnRyb2R1Y3Rpb24K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRXhhbS1wcmVwIChGaW5Lb250KSIKYXV0aG9yOiAiSm9ha2ltIEJpbHlrIgpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiCmhlYWRlci1pbmNsdWRlczoKICAgLSBcdXNlcGFja2FnZXt3cmFwZmlnfQogICAtIFx1c2VwYWNrYWdle2dyYXBoaWNzfQpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogbm8KICAgIGNvZGVfZm9sZGluZzogaGlkZQogIHBkZl9kb2N1bWVudDoKICAgIHRvYzogeWVzCi0tLQoKYGBge3IsIHNldHVwLGluY2x1ZGU9RkFMU0V9CmxpYnJhcnkoa25pdHIpCmlmIChrbml0cjo6aXNfbGF0ZXhfb3V0cHV0KCkpIHsKICBrbml0X2hvb2tzJHNldCh3cmFwZiA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHsKICBpZiAoIWJlZm9yZSkgewogICAgb3V0cHV0IDwtIHZlY3Rvcihtb2RlID0gImNoYXJhY3RlciIsIGxlbmd0aCA9IG9wdGlvbnMkZmlnLm51bSArIDEpCgogICAgZm9yIChpIGluIDE6b3B0aW9ucyRmaWcubnVtKSB7CiAgICAgIG91dHB1dFtpXSA8LSBzcHJpbnRmKCJcXGluY2x1ZGVncmFwaGljc3slc30iLCBmaWdfcGF0aChudW1iZXIgPSBpKSkKICAgIH0KCiAgICBvdXRwdXRbaSsxXSA8LSAiXFxlbmR7d3JhcGZpZ3VyZX0iCiAgICBvdXRwdXQgPC0gYygiXFxiZWdpbnt3cmFwZmlndXJlfXtSfXswLjVcXHRleHR3aWR0aH0iLG91dHB1dCkKICAgIGlmIChsZW5ndGgob3V0cHV0KT49IDMpIHsKICAgICAgcmV0dXJuKHBhc3RlKG91dHB1dCwgY29sbGFwc2UgPSAiIikpCiAgICB9CiAgfQp9KQogIGtuaXRyOjpvcHRzX2NodW5rJHNldCgKICAgIGZpZy5zaG93ID0gJ2hpZGUnLAogICAgZWNobyA9IEZBTFNFCiAgKQp9IGVsc2UgewogIGtuaXRyOjprbml0X2hvb2tzJHNldCh3cmFwZiA9IGZ1bmN0aW9uKGJlZm9yZSwgb3B0aW9ucywgZW52aXIpIHt9KQogIGtuaXRyOjpvcHRzX2NodW5rJHNldCgKICAgIG91dC5leHRyYSA9ICdzdHlsZT0iZmxvYXQ6cmlnaHQ7IHBhZGRpbmc6MTBweCInLAogICAgb3V0LndpZHRoPSAiNTAlIgogICkKfQpgYGAKCmBgYHtyLCBpbmNsdWRlPUZBTFNFLCByZXN1bHRzID0gJ2hpZGUnfQpsaWJyYXJ5KGdncGxvdDIpCmxpYnJhcnkoZHBseXIpCiNybWFya2Rvd246OnJlbmRlcihpbnB1dCA9ICJGaW5Lb250X2hvbWV3b3JrLlJtZCIsIG91dHB1dF9mb3JtYXQgPSAicGRmX2RvY3VtZW50IikKYGBgCgojIEV4YW0gc2V0cyAoMjAxNy8xOC0yMDIxLzIyKSB7LnRhYnNldH0KCiMjIEluIHByb2dyZXNzCgojIyMgUHJvYmxlbSAyCgpDb25zaWRlciBhIHN0YW5kYXJkIEJsYWNrLVNjaG9sZXMgbW9kZWwsIHRoYXQgaXMsIGEgbW9kZWwgY29uc2lzdGluZyBvZiBhIGJhbmsgYWNjb3VudCAkQl90JCB3aXRoICRQJC1keW5hbWljcyBnaXZlbiBieQoKJCQKZEJfdD1yQl90XCBkdCxcIEJfMD0xCiQkCgphbmQgYSBzdG9jayAkU190JCB3aXRoICRQJC1keW5hbWljcyBnaXZlbiBieQoKJCQKZFNfdD1cYWxwaGEgU190XCBkdCtcc2lnbWEgU190XCBkXG92ZXJsaW5le1d9X3QsXCBTXzA9cz4wCiQkCgp3aGVyZSAkcixcYWxwaGFcaW5cbWF0aGJie1J9JCBhbmQgJFxzaWdtYSA+MCQgYXJlIGNvbnN0YW50cyBhbmQgJFxvdmVybGluZXtXfV90JCBpcyBhICRQJC1Ccm93bmlhbiBtb3Rpb24uIExldCAkVD4wJCBiZSBhIGdpdmVuIGFuZCBmaXhlZCBkYXRlLgoKQ29uc2lkZXIgdGhlIGRlcml2YXRpdmUgdGhhdCBhdCB0aW1lICRUJCBwYXlzCiQkClg9XG1heFxsZWZ0XHtcbWluXGxlZnRce1NfVCxLXzJccmlnaHRcfSxLXzFccmlnaHRcfSwKJCQKCndoZXJlICQwPEtfMTxLXzIkIGFyZSBjb25zdGFudHMuCgogIGEuIERldGVybWluZSB0aGUgYXJiaXRyYWdlIGZyZWUgcHJpY2Ugb2YgZGVyaXZhdGl2ZSAkWCQgYXQgdGltZSAkdDxUJC4KCkNvbnNpZGVyIGEgbmV3IGRlcml2YXRpdmUgdGhhdCBhdCB0aW1lICRUJCBwYXlzCgokJApZPShTXjJfVC1LXjIpXistKEteMi1TXjJfVCleKy4KJCQKCiAgYi4KICAgIGkuIERldGVybWluZSB0aGUgYXJiaXRyYWdlIGZyZWUgcHJpY2Ugb2YgZGVyaXZhdGl2ZSAkWSQgYXQgdGltZSAkdDxUJC4KICAgIGlpLiBGaW5kIGEgaGVkZ2luZyBwb3J0Zm9saW8gZm9yIGRlcml2YXRpdmUgJFkkLgoKPGRldGFpbHM+CjxzdW1tYXJ5PioqU29sdXRpb24gKGEpLioqPC9zdW1tYXJ5PgoKV2Ugc2VlIHRoYXQgdGhlIGRlcml2YXRpdmUgaXMgdGhlIGJ1bGwgc3ByZWFkIGdpdmVuIGJ5IHRoZSBwYXlvdXQgZnVuY3Rpb24KCiQkClg9ClxiZWdpbntjYXNlc30KICBLXzIgJiBcdGV4dHtpZiB9U19UPktfMixcXAogIFNfVCAmIFx0ZXh0e2lmIH1LXzFcbGUgU19UXGxlIEtfMixcXAogIEtfMSAmXHRleHR7aWYgfVNfVDwgS18xLgpcZW5ke2Nhc2VzfQokJAoKV2Uga25vdyBmcm9tIGV4ZXJjaXNlIDEwLjMgdGhhdCB0aGlzIGNhbiBiZSByZXBsaWNhdGVkIGJ5IGhvbGRpbmcgJEtfMSQgYm9uZHMsIG9uZSBjYWxsIG9wdGlvbiB3aXRoIHN0cmlrZSAkS18xJCBhbmQgYSBzaG9ydCBvbiBhIGNhbGwgd2l0aCBzdHJpa2UgJEtfMiQuIFRoZSBhcmJpdHJhZ2UgZnJlZSBwcmljZSBvZiB0aGUgZGVyaXZhdGl2ZSBpcyB0aGVuIHRoZSB2YWx1ZSBwcm9jZXNzIG9mIHRoZSBtZW50aW9uZWQgcG9ydGZvbGlvIGkuZS4KCiQkClxQaV90W1hdPUtfMSBlXnstcihULXQpfStjKEtfMTt0LFQpLWMoS18yO3QsVCksCiQkCgp3aGVyZSAkYyQgZGVub3RlcyB0aGUgcHJpY2luZyBmdW5jdGlvbiBmb3IgYSBFdXJvcGVhbiBjYWxsIG9wdGlvbiAobm9uLWluc3RydWN0aXZlIHBhcmFtZXRlcnMgc3VwcmVzc2VkKS4gJFxzcXVhcmUkCgo8L2RldGFpbHM+Cgo8ZGV0YWlscz4KPHN1bW1hcnk+KipTb2x1dGlvbiAoYikuKio8L3N1bW1hcnk+CgoqKGkpKjogV2Ugc3RhcnQgYnkgc2VlaW5nIHRoYXQgdGhlIGRlcml2YXRpdmUgcGF5cyBvdXQKCiQkClk9ClxiZWdpbntjYXNlc30KICBTX1ReMi1LXjIgJiBcdGV4dHtpZiB9U19UXjJcZ2UgS14yLFxcCiAgLShLXjItU19UXjIpICZcdGV4dHtpZiB9U19UXjI8IEteMi4KXGVuZHtjYXNlc30KJCQKCmhlbmNlIHRoZSBwYXlvdXQgaXMgJFk9U19UXjItS14yPVxQaGkoU19UKSQgd2hlcmUgJFxQaGkocyk9c14yLUteMiQuIFRoYXQgaXMgJFkkIGlzIGluIGZhY3QgYSBzaW1wbGUgY2xhaW0uIFdlIGhhdmUgZnJvbSB0aGUgcmlzayBuZXV0cmFsIHZhbHVlYXRpb24gZm9ybXVsYSA3LjExIHRoYXQKClxiZWdpbnthbGlnbip9ClxQaV90W1ldJj1lXnstcihULXQpfUVeUV97dCxzfVtTX1ReMi1LXjJdXFwKJj1lXnstcihULXQpfUVeUV97dCxzfVtTX1ReMl0tZV57LXIoVC10KX1LXjIuClxlbmR7YWxpZ24qfQoKUmVjYWxsIHRoYXQgdW5kZXIgdGhlIG1hcnRpbmdhbGUgbWVhc3VyZSAkUSQgd2UgaGF2ZSB0aGF0ICRTX3QkIGlzIGEgR0JNIGhlbmNlCgokJApTX3Q9c1xjZG90IFxleHBcbGVmdFx7XGxlZnQoci1cZnJhY3sxfXsyfVxzaWdtYV4yXHJpZ2h0KShULXQpK1xzaWdtYVxsZWZ0KFdfVF5RLVdfdF5RXHJpZ2h0KVxyaWdodFx9CiQkCgp0aGVuIAoKJCQKU19UXjI9c14yXGNkb3QgXGV4cFxsZWZ0XHsyXGxlZnQoci1cZnJhY3sxfXsyfVxzaWdtYV4yXHJpZ2h0KShULXQpKzJcc2lnbWFcbGVmdChXX1ReUS1XX3ReUVxyaWdodClccmlnaHRcfS4KJCQKCkluc2VydGluZyB0aGlzIGludG8gdGhlIHJpc2sgbmV1dHJhbCB2YWx1YXRpb24gZm9ybXVsYSB3ZSBnZXQKCgpcYmVnaW57YWxpZ24qfQpcUGlfdFtZXSY9ZV57LXIoVC10KX1FXlFfe3Qsc31bU19UXjJdLWVeey1yKFQtdCl9S14yXFwKJj1lXnstcihULXQpfXNeMmVeezJcbGVmdChyLVxmcmFjezF9ezJ9XHNpZ21hXjJccmlnaHQpKFQtdCl9IEVeUVxsZWZ0W1xleHBcbGVmdFx7MlxzaWdtYVxsZWZ0KFdfVF5RLVdfdF5RXHJpZ2h0KVxyaWdodFx9XHJpZ2h0XS1lXnstcihULXQpfUteMlxcCiY9ZV57LXIoVC10KX1zXjJlXnsyXGxlZnQoci1cZnJhY3sxfXsyfVxzaWdtYV4yXHJpZ2h0KShULXQpfWVee1xmcmFjezF9ezJ9NFxzaWdtYV4yKFQtdCl9LWVeey1yKFQtdCl9S14yXFwKJj1lXnstcihULXQpfVxsZWZ0KHNeMmVeeygyci1cc2lnbWFeMikoVC10KStcZnJhY3sxfXsyfTRcc2lnbWFeMihULXQpfS1LXjJccmlnaHQpXFwKJj1lXnstcihULXQpfVxsZWZ0KHNeMmVeeygycitcc2lnbWFeMikoVC10KX0tS14yXHJpZ2h0KS4KXGVuZHthbGlnbip9CgoKVGhlIGFyYml0cmFnZSBmcmVlIHByaWNlIG9mIHRoZSBkZXJpdmF0aXZlIGlzIHRoZW4gZ2l2ZW4gYWJvdmUuICRcc3F1YXJlJAoKKihpaSkqOiAKCjwvZGV0YWlscz4KCjxkZXRhaWxzPgo8c3VtbWFyeT4qKlNvbHV0aW9uIChjKS4qKjwvc3VtbWFyeT4KCgoKPC9kZXRhaWxzPgoKPGRldGFpbHM+CjxzdW1tYXJ5PioqU29sdXRpb24gKGQpLioqPC9zdW1tYXJ5PgoKCgo8L2RldGFpbHM+CgojIyMgUHJvYmxlbSAzCgo8ZGV0YWlscz4KPHN1bW1hcnk+KipTb2x1dGlvbiAoYSkuKio8L3N1bW1hcnk+CgoKCjwvZGV0YWlscz4KCjxkZXRhaWxzPgo8c3VtbWFyeT4qKlNvbHV0aW9uIChiKS4qKjwvc3VtbWFyeT4KCgoKPC9kZXRhaWxzPgoKPGRldGFpbHM+CjxzdW1tYXJ5PioqU29sdXRpb24gKGMpLioqPC9zdW1tYXJ5PgoKCgo8L2RldGFpbHM+CgojIyBFeGFtIDIwMTcvMTgKCiMjIyBQcm9ibGVtIDEKCkxldCAkV190JCBkZW5vdGUgYSBCcm93bmlhbiBtb3Rpb24gYW5kIGxldAoKJCQKXG1hdGhjYWx7Rn1fdD1cbWF0aGNhbHtGfV90Xlc9XHNpZ21hKFx7V19zXCBcdmVydFwgMFxsZSBzXGxlIHRcfSkuCiQkCgpMZXQgJFQ+MCQgYmUgYSBnaXZlbiBhbmQgZml4ZWQgdGltZS4KCkxldCAkZih0KSQgYmUgYSBib3VuZGVkIGRldGVybWluaXN0aWMgY29udGludW91cyBmdW5jdGlvbi4gRGVmaW5lIHRoZSB0d28gcHJvY2Vzc2VzCgokJApcYmVnaW57Y2FzZXN9ClhfdD1caW50XzBedGYodSlcIGRXX3UsXFwKTV57KFxsYW1iZGEpfV90PVxleHBcbGVmdFx7XGxhbWJkYSBYX3QtXGZyYWN7XGxhbWJkYV4yfXsyfVxpbnRfMF50IGZeMih1KVwgZHVccmlnaHRcfSwKXGVuZHtjYXNlc30KJCQKCndoZXJlICRcbGFtYmRhXGluXG1hdGhiYntSfSQgaXMgYSBjb25zdGFudC4KCiAgYS4gU2hvdyB0aGF0ICRNXnsoXGxhbWJkYSl9JCBpcyBhIG1hcnRpbmdhbGUgd2l0aCAkRVtNX3ReeyhcbGFtYmRhKX1dPTEkLgoKTGV0ICQwPHM8dCQgYW5kICRcbGFtYmRhXzEsXGxhbWJkYV8yXGluIFxtYXRoYmJ7Un0kIGJlIGdpdmVuIGFuZCBmaXhlZC4KCiAgYi4KICAgIGkuIFNob3cgdGhhdAogICAgCiAgICBcYmVnaW57YWxpZ24qfQogICAgTV57KFxsYW1iZGFfMSl9X3MmPUVcbGVmdFtcbGVmdC5cZnJhY3tNXnsoXGxhbWJkYV8xKX1fc01eeyhcbGFtYmRhXzIpfV90fXtNXnsoXGxhbWJkYV8yKX1fc30gXCBccmlnaHRcdmVydFwgXG1hdGhjYWx7Rn1fc1xyaWdodF1cXAogICAgJj1FXGxlZnRbXGxlZnQuXGV4cFxsZWZ0XHtcbGFtYmRhXzFYX3MrXGxhbWJkYV8yKFhfdC1YX3MpLVxmcmFjezF9ezJ9XGxhbWJkYV8xXjJcaW50XzBec2ZeMih1KVwgZHUtIFxmcmFjezF9ezJ9XGxhbWJkYV8yXjJcaW50X3NedGZeMih1KVwgZHVccmlnaHRcfSBcIFxyaWdodFx2ZXJ0XCBcbWF0aGNhbHtGfV9zXHJpZ2h0XQogICAgXGVuZHthbGlnbip9CiAgICAKICAgIGlpLiBTaG93IHRoYXQgJFhfcyQgYW5kICRYX3QtWF9zJCBhcmUgbm9ybWFsbHkgZGlzdHJpYnV0ZWQgYW5kIGluZGVwZW5kZW50LgoKICBjLiBDb21wdXRlIHRoZSBtZWFuIHZhbHVlIG9mICRNXnsoXGxhbWJkYSl9X1RcbG9nKE1eeyhcbGFtYmRhKX1fVCkkLgoKPGRldGFpbHM+CjxzdW1tYXJ5PioqU29sdXRpb24gKGEpLioqPC9zdW1tYXJ5PgoKRmlyc3QsIHdlIHNlZSB0aGF0IHNpbmNlICRYX3QkIGlzIG9uIGludGVncmFsIGZvcm0gd2Uga25vdyB0aGF0CgokJApcYmVnaW57Y2FzZXN9CmRYX3Q9Zih0KVwgZFdfdFxcClhfMD0wLgpcZW5ke2Nhc2VzfQokJAoKSGVuY2Ugd2UgbWF5IHJlcHJlc2VudCAkTSQgYXMgJE1eeyhcbGFtYmRhKX1fdD1nKHQsWF90LFlfdCkkIGdpdmVuIGJ5CgokJApnKHQseCx5KT1cZXhwXGxlZnRce1xsYW1iZGEgeC1cZnJhY3tcbGFtYmRhXjJ9ezJ9eSBccmlnaHRcfSwKJCQKCndoZXJlICRZX3Q9XGludF8wXnQgZl4yKHUpXCBkdSQgd2l0aCBkeW5hbWljcwoKJCQKXGJlZ2lue2Nhc2VzfQpkWV90PWZeMih0KVwgZHRcXApZXzA9MC4KXGVuZHtjYXNlc30KJCQKCkhlbmNlIGJ5IHRoZSBtdWx0aWRpbWVuc2lvbmFsIEl0bydzIGZvcm11bGEgd2UgaGF2ZSB0aGUgZHluYW1pY3Mgb2YgJE0kIGdpdmVuIGJ5CgpcYmVnaW57YWxpZ24qfQpkTV57KFxsYW1iZGEpfV90Jj1nX3RcIGR0K2dfeFwgZFhfdCtnX3lcIGRZX3QrXGZyYWN7MX17Mn1nX3t5eX1cIChkWV90KV4yK1xmcmFjezF9ezJ9Z197eHh9XCAoZFhfdCleMiArZl97eHl9KGRYX3QpKGRZX3QpXFwKJj0wK1xsYW1iZGEgZ1wgZFhfdC1cZnJhY3tcbGFtYmRhXjJ9ezJ9Z1wgZFlfdCswK1xmcmFjezF9ezJ9XGxhbWJkYSBeMmdcIChkWF90KV4yKzBcXAomPVxsYW1iZGEgTV90XnsoXGxhbWJkYSl9IGYodClcIGRXX3QtXGZyYWN7MX17Mn1cbGFtYmRhXjJNX3ReeyhcbGFtYmRhKX0gZl4yKHQpXCBkdCtcZnJhY3sxfXsyfVxsYW1iZGEgTV90XnsoXGxhbWJkYSl9IGZeMih0KVwgZHRcXAomPVxsYW1iZGEgZih0KU1fdF57KFxsYW1iZGEpfVwgZFdfdCwKXGVuZHthbGlnbip9CgpBbmQgc28gd2Ugc2VlIHRoYXQgJE0kIGlzIGEgbWFydGluZ2FsZSBhcyBpdCBvbmx5IGhhcyBkeW5hbWljcyB3cnQuIHRoZSBCcm93bmlhbiBtb3Rpb24gJFckIChhc3N1bWluZyAkXGxhbWJkYSBmX3RNX3ReeyhcbGFtYmRhKX1caW5cbWF0aGNhbHtMfV4yJCkuIEZ1cnRoZXJtb3JlIHdlIGhhdmUgdGhhdAoKJCQKTV8wXnsoXGxhbWJkYSl9PWcoMCxYXzAsWV8wKT1cZXhwXGxlZnRce1xsYW1iZGEgWF8wLVxmcmFjezF9ezJ9XGxhbWJkYSBeMiBZXzBccmlnaHRcfT1lXjA9MQokJAoKYW5kIHNvIHdlIGhhdmUgJEVbTV90XnsoXGxhbWJkYSl9XT1NXzBeeyhcbGFtYmRhKX09MSQgYXMgZGVzaXJlZC4gJFxzcXVhcmUkCgo8L2RldGFpbHM+Cgo8ZGV0YWlscz4KPHN1bW1hcnk+KipTb2x1dGlvbiAoYikuKio8L3N1bW1hcnk+CgoqIihpKSIqIFdlIGhhdmUgZnJvbSB0aGUgcHJldmlvdXMgZXhlcmNpc2UKClxiZWdpbnthbGlnbip9CiZcZnJhY3tNXnsoXGxhbWJkYV8xKX1fc01eeyhcbGFtYmRhXzIpfV90fXtNXnsoXGxhbWJkYV8yKX1fc31cXAomPVxleHBcbGVmdFx7XGxhbWJkYV8xIFhfcy1cZnJhY3sxfXsyfVxsYW1iZGFfMV4yXGludF8wXnMgZl4yKHUpXCBkdVxyaWdodFx9XGV4cFxsZWZ0XHtcbGFtYmRhXzIgWF90LVxmcmFjezF9ezJ9XGxhbWJkYV8yXjJcaW50XzBedCBmXjIodSlcIGR1XHJpZ2h0XH1cZXhwXGxlZnRce1xmcmFjezF9ezJ9XGxhbWJkYV8yXjJcaW50XzBecyBmXjIodSlcIGR1LVxsYW1iZGFfMiBYX3NccmlnaHRcfVxcCiY9XGV4cFxsZWZ0XHtcbGFtYmRhXzEgWF9zLVxmcmFjezF9ezJ9XGxhbWJkYV8xXjJcaW50XzBecyBmXjIodSlcIGR1K1xsYW1iZGFfMiBYX3QtXGZyYWN7MX17Mn1cbGFtYmRhXzJeMlxpbnRfMF50IGZeMih1KVwgZHUrXGZyYWN7MX17Mn1cbGFtYmRhXzJeMlxpbnRfMF5zIGZeMih1KVwgZHUtXGxhbWJkYV8yIFhfc1xyaWdodFx9XFwKJj1cZXhwXGxlZnRce1xsYW1iZGFfMSBYX3MrXGxhbWJkYV8yIChYX3QtWF9zKS1cZnJhY3sxfXsyfVxsYW1iZGFfMV4yXGludF8wXnMgZl4yKHUpXCBkdS1cZnJhY3sxfXsyfVxsYW1iZGFfMl4yXGludF9zXnQgZl4yKHUpXCBkdVxyaWdodFx9ClxlbmR7YWxpZ24qfQoKYW5kIHNvIHRoZSBjb25jbHVzaW9uIGZvbGxvd3MuICRcc3F1YXJlJAoKKiIoaWkpIiogV2UgaGF2ZSB0aGF0IGZyb20gbGVtbWEgNC4xOCB0aGF0CgokJApYX3M9XGludF8wXnNmKHUpXCBkV191XHNpbSBcbWF0aGNhbHtOfVxsZWZ0KDAsXGludF8wXnNmXjIodSlcIGRXX3VccmlnaHQpCiQkCgpmdXJ0aGVybW9yZSB3ZSBoYXZlIHRoYXQKCiQkClhfdC1YX3M9XGludF9zXnRmKHUpXCBkV191XHNpbSBcbWF0aGNhbHtOfVxsZWZ0KDAsXGludF9zXnRmXjIodSlcIGRXX3VccmlnaHQpLgokJAoKSW4gcmVnYXJkIHRvIHRoZSBpbmRlcGVuZGVuY2UgY2xhaW0gd2UgY291bGQgY2hlY2sgaWRlbnRpdHkgYmVsb3cKCiQkCkVbZV57dF8xWH1lXnt0XzIgWX1dPUVbZV57dF8xWH1dRVtlXnt0XzJZfV0KJCQKCndoZXJlICRYLFkkIGFyZSBpbmRlcGVuZGVudCByYW5kb20gdmFyaWFibGVzLiBUaGUgYWJvdmUgaWRlbnRpdHkgaG9sZHMgaWYgYW5kIG9ubHkgaWYgJFgkIGFuZCAkWSQgYXJlIGluZGVwZW5kZW50LiBGcm9tIGFib3ZlIHdlIGhhdmUgdGhhdAoKJCQKTV9zXnsoXGxhbWJkYV8xKX09RVtlXntcbGFtYmRhXzFYX3N9ZV57XGxhbWJkYV8yKFhfdC1YX3MpfVwgXHZlcnRcIFxtYXRoY2Fse0Z9X3NdZV57LVxmcmFjezF9ezJ9XGxhbWJkYV8xXjJcaW50XzBecyBmXjIodSlcIGR1LVxmcmFjezF9ezJ9XGxhbWJkYV8yXjJcaW50X3NedCBmXjIodSlcIGR1fQokJAoKYW5kIHNvIHRha2luZyBleHBlY3RhdGlvbiB3ZSBoYXZlCgokJAoxPUVbZV57XGxhbWJkYV8xWF9zfWVee1xsYW1iZGFfMihYX3QtWF9zKX1dZV57LVxmcmFjezF9ezJ9XGxhbWJkYV8xXjJcaW50XzBecyBmXjIodSlcIGR1LVxmcmFjezF9ezJ9XGxhbWJkYV8yXjJcaW50X3NedCBmXjIodSlcIGR1fQokJApXaGljaCB0aGUgZ2l2ZXMKCiQkCkVbZV57XGxhbWJkYV8xWF9zfWVee1xsYW1iZGFfMihYX3QtWF9zKX1dPWVee1xmcmFjezF9ezJ9XGxhbWJkYV8xXjJcaW50XzBecyBmXjIodSlcIGR1K1xmcmFjezF9ezJ9XGxhbWJkYV8yXjJcaW50X3NedCBmXjIodSlcIGR1fT1FW2Vee1xsYW1iZGFfMVhfc31dRVtlXntcbGFtYmRhXzIoWF90LVhfcyl9XQokJAoKYW5kIHNvIHRoZSBjb25jbHVzaW9uIGlzIHRoYXQgJFhfcyQgYW5kICRYX3QtWF9zJCBhcmUgaW5kZXBlbmRlbnQuICRcc3F1YXJlJAoKPC9kZXRhaWxzPgoKPGRldGFpbHM+CjxzdW1tYXJ5PioqU29sdXRpb24gKGMpLioqPC9zdW1tYXJ5PgoKV2UgcmVjYWxsIHRoZSBkZWZpbml0aW9uIG9mICRNX3ReeyhcbGFtYmRhKX0kIGFuZCBvYnNlcnZlIHRoYXQKCiQkClxsb2cgTV90XnsoXGxhbWJkYSl9PVxsYW1iZGEgWF90LVxmcmFjezF9ezJ9XGxhbWJkYSBeMlxpbnRfMF50IGZeMih1KVwgZHUuCiQkCgpGdXJ0aGVybW9yZSB3ZSBoYXZlIHRoZSBkeW5hbWljcyBvZiAkTV57KFxsYW1iZGEpfSQgZ2l2ZW4gYnkgdGhlIGRpZmZlcmVudGlhbCBmb3JtCgokJApkTV90XnsoXGxhbWJkYSl9PVxsYW1iZGEgZih0KU1fdF57KFxsYW1iZGEpfVwgZFdfdC4KJCQKCndpdGggJE1fMF57KFxsYW1iZGEpfT0xJC4gU2luY2Ugd2Uga25vdyB0aGF0ICRNX3ReeyhcbGFtYmRhKX0kIGlzIGEgbWFydGluZ2FsZSB3ZSBoYXZlCgokJApFXlBbTV9UXnsoXGxhbWJkYSl9XT1FXlBbTV8wXnsoXGxhbWJkYSl9XT0xLAokJAoKYW5kIHNvIHdlIG1heSBkZWZpbmUgYSBuZXcgcHJvYmFiaWxpdHkgbWVhc3VyZSBhcwoKJCQKZFx0aWxkZXtQfT1NX1ReeyhcbGFtYmRhKX1cIGRQCiQkCgpvbiAkXG1hdGhjYWx7Rn1fVCQuIFdlIHRoZW4gaGF2ZSBhIG5ldyBCcm93bmlhbiBtb3Rpb24gJFx0aWxkZXtXfSQgc3VjaCB0aGF0CgokJApkV190PVxsYW1iZGEgZih0KVwgZHQgKyBkXHRpbGRle1d9X3QuCiQkCgpXZSBjYW4gdGhlbiBzZWUKClxiZWdpbnthbGlnbip9CkVeUFtNX1ReeyhcbGFtYmRhKX1cbG9nIE1fVF57KFxsYW1iZGEpfV0mPVxpbnQgTV9UXnsoXGxhbWJkYSl9XGxvZyBNX1ReeyhcbGFtYmRhKX1cIGRQPVxpbnQgTV9UXnsoXGxhbWJkYSl9XGxvZyBNX1ReeyhcbGFtYmRhKX0gXGZyYWN7MX17TV9UXnsoXGxhbWJkYSl9fVwgZFx0aWxkZXtQfVxcCiY9XGludCBcbG9nIE1fVF57KFxsYW1iZGEpfVwgZFx0aWxkZXtQfT1FXntcdGlsZGV7UH19W1xsb2cgTV9UXnsoXGxhbWJkYSl9XS4KXGVuZHthbGlnbip9CgpUaGVuIHdlIGNhbiBldmFsdWF0ZSB0aGUgbWVhbiB2YWx1ZSBieSBzZWVpbmcgdGhlICRYJCBoYXMgcmVwcmVzZW50YXRpb24gd3J0LiAkXHRpbGRle1B9JCBieQoKJCQKWF90PVxpbnRfMF50Zih1KVwgKFxsYW1iZGEgZih1KVwgZHUgKyBkXHRpbGRle1d9X3UpPVxsYW1iZGFcaW50XzBedGZeMih1KVwgZHUrXGludF8wXnRmKHUpXCBkXHRpbGRle1d9X3UuCiQkCgpHaXZpbmcgdGhhdAoKXGJlZ2lue2FsaWduKn0KRV5QW01fVF57KFxsYW1iZGEpfVxsb2cgTV9UXnsoXGxhbWJkYSl9XSY9RV57XHRpbGRle1B9fVtcbG9nIE1fVF57KFxsYW1iZGEpfV1cXAomPUVee1x0aWxkZXtQfX1cbGVmdFsgXGxhbWJkYSBYX1QtXGZyYWN7MX17Mn1cbGFtYmRhIF4yXGludF8wXlQgZl4yKHUpXCBkdSBccmlnaHRdXFwKJj1FXntcdGlsZGV7UH19XGxlZnRbIFxsYW1iZGFeMlxpbnRfMF5UZl4yKHUpXCBkdStcbGFtYmRhXGludF8wXlRmKHUpXCBkXHRpbGRle1d9X3UtXGZyYWN7MX17Mn1cbGFtYmRhIF4yXGludF8wXlQgZl4yKHUpXCBkdSBccmlnaHRdXFwKJj1cbGFtYmRhIEVee1x0aWxkZXtQfX1cbGVmdFtcZnJhY3sxfXsyfSBcbGFtYmRhXGludF8wXlRmXjIodSlcIGR1K1xpbnRfMF5UZih1KVwgZFx0aWxkZXtXfV91IFxyaWdodF1cXAomPVxmcmFjezF9ezJ9IFxsYW1iZGFeMlxpbnRfMF5UZl4yKHUpXCBkdStcbGFtYmRhIEVee1x0aWxkZXtQfX1cbGVmdFtcaW50XzBeVGYodSlcIGRcdGlsZGV7V31fdSBccmlnaHRdXFwKJj1cZnJhY3sxfXsyfSBcbGFtYmRhXjJcaW50XzBeVGZeMih1KVwgZHUKXGVuZHthbGlnbip9CgpTaW5jZQoKJCQKXHRpbGRle1h9X1Q9XGludF8wXlRmKHUpXCBkXHRpbGRle1d9X3UsCiQkCgppcyBhICRcdGlsZGV7UH0kLW1hcnRpbmdhbGUuICRcc3F1YXJlJAoKPC9kZXRhaWxzPgoKIyMgRXhhbSAyMDE4LzE5CgpTb21lIGNvbnRlbnQKCiMjIEV4YW0gMjAxOS8yMAoKU29tZSBjb250ZW50CgojIyBFeGFtIDIwMjAvMjEKClNvbWUgY29udGVudAoKIyMgRXhhbSAyMDIxLzIyCgpTb21lIGNvbnRlbnQKCiMjIEV4YW0gMjAyMi8yMwoKU29tZSBjb250ZW50</div>
 <style>
   footer{
     background: rgb(34,34,34);
