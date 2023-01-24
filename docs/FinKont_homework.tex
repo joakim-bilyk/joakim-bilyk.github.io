@@ -53,6 +53,10 @@
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{wrapfig}
 \usepackage{graphics}
+\usepackage{fancyhdr}
+\pagenumbering{gobble}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\addtocontents{title}{\protect\thispagestyle{empty}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -67,15 +71,21 @@
 
 \title{Homework (FinKont)}
 \author{Joakim Bilyk}
-\date{2023-01-23}
+\date{January 24, 2023\newpage}
 
 \begin{document}
 \maketitle
 
 {
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{5}
 \tableofcontents
 }
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
@@ -2832,7 +2842,13 @@ so, in particular, we have \(\sum_{i=1}^N w_i=1\).
 self-financing if and only if
 
 \[
-dV_t^h=V_t^h\sum_{i=1}^N w_t^i\frac{dS_t^i+dD_t^i}{S_t^i}-c_t\ dt.
+dV_t^h=V_t^h\sum_{i=1}^N w_t^i\frac{dS_t^i+dD_t^i}{S_t^i}-c_t\ dt
+\]
+
+or equivalently with the absolute weights
+
+\[
+dV_t^h=V_t^h\sum_{i=1}^N h_t^i(dS_t^i+dD_t^i)-c_t\ dt.
 \]
 
 \textbf{Lemma 6.13.} Consider the case with no dividends. Let \(c\) be a
@@ -3773,7 +3789,7 @@ as the relative portfolio. The corresponding value process is given by
 the process \(V\) and the absolute portfolio \(h\) is given by
 
 \[
-h_t^B=\frac{w_t^B V_t}{B_t},\hspace{10pt} h_t^S=\frac{w_t^S V_t}{S_y}.
+h_t^B=\frac{w_t^B V_t}{B_t},\hspace{10pt} h_t^S=\frac{w_t^S V_t}{S_t}.
 \]
 
 Doing some heuristics we come up with some clever weights, which turns
@@ -4466,6 +4482,232 @@ Then it follows from proposition 7.11 that the price process is given by
 as desired. \(\square\)
 
 \textbf{Exercise 6.} \emph{(Exam 2017/18, problem 2, question (c)-(d))}
+Consider a standard Black-Scholes model, that is, a model consisting of
+a bank account \(B_t\) with \(P\)-dynamics given by
+
+\[
+dB_t=rB_t\ dt,\ B_0=1
+\]
+
+and a stock \(S_t\) with \(P\)-dynamics given by
+
+\[
+dS_t=\alpha S_t\ dt+\sigma S_t\ d\overline{W}_t,\ S_0=s>0
+\]
+
+where \(r,\alpha\in\mathbb{R}\) and \(\sigma >0\) are constants and
+\(\overline{W}_t\) is a \(P\)-Brownian motion. Let \(T>0\) be a given
+and fixed date.
+
+Consider the derivative that at time \(T\) pays \[
+X=\max\left\{\min\left\{S_T,K_2\right\},K_1\right\},
+\]
+
+where \(0<K_1<K_2\) are constants.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Determine the arbitrage free price of derivative \(X\) at time
+  \(t<T\).
+\end{enumerate}
+
+Consider a new derivative that at time \(T\) pays
+
+\[
+Y=(S^2_T-K^2)^+-(K^2-S^2_T)^+.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\roman{enumii}.}
+  \tightlist
+  \item
+    Determine the arbitrage free price of derivative \(Y\) at time
+    \(t<T\).
+  \item
+    Find a hedging portfolio for derivative \(Y\).
+  \end{enumerate}
+\end{enumerate}
+
+Let \(h(t)=(h_0(t),h_1(t))\) be a portfolio where
+
+\[
+h_0(t)=-e^{r(T-2t)+\sigma^2(T-t)}S^2(t)
+\]
+
+is the number of units in the bank account at time \(t\) and
+
+\[
+h_1(t)=2e^{(r+\sigma^2)(T-t)}S(t)
+\]
+
+is the number of shares in the stock at time \(t\). Let \(V^h(t)\)
+denote the associated value process.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Determine whether the portfolio \(h\) is self-financing or not.
+\item
+  Compute \(V^h(T)\).
+\end{enumerate}
+
+\textbf{Solution (b).}
+
+\emph{(i)}: We start by seeing that the derivative pays out
+
+\[
+Y=
+\begin{cases}
+  S_T^2-K^2 & \text{if }S_T^2\ge K^2,\\
+  -(K^2-S_T^2) &\text{if }S_T^2< K^2.
+\end{cases}
+\]
+
+hence the payout is \(Y=S_T^2-K^2=\Phi(S_T)\) where \(\Phi(s)=s^2-K^2\).
+That is \(Y\) is in fact a simple claim. We have from the risk neutral
+valueation formula 7.11 that
+
+\begin{align*}
+\Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
+&=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
+\end{align*}
+
+Recall that under the martingale measure \(Q\) we have that \(S_t\) is a
+GBM hence
+
+\[
+S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}
+\]
+
+then
+
+\[
+S_T^2=s^2\cdot \exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(W_T^Q-W_t^Q\right)\right\}.
+\]
+
+Inserting this into the risk neutral valuation formula we get
+
+\begin{align*}
+\Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
+&=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)} E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
+&=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)}e^{\frac{1}{2}4\sigma^2(T-t)}-e^{-r(T-t)}K^2\\
+&=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
+&=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
+\end{align*}
+
+The arbitrage free price of the derivative is then given above.
+\(\square\)
+
+\emph{(ii)}: From theorem 8.5 we can determine a hedging portfolio with
+weightings
+
+\begin{align*}
+w_t^B&=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
+&=1-\frac{S_t2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}}{e^{-r(T-t)}\left(S_t^2e^{(2r+\sigma^2)(T-t)}-K^2\right)}\\
+&=1-\frac{2S_t^2e^{(2r+\sigma^2)(T-t)}}{S_t^2e^{(2r+\sigma^2)(T-t)}-K^2}\\
+&=1-\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}\\
+w_t^S&=\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}.
+\end{align*}
+
+In absolute terms we will hold the portfolio
+
+\begin{align*}
+h_t^S&=2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}\\
+h_t^B&=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{B_t}\\
+&=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{e^{rt}}\\
+&=e^{-rT}s^2e^{(2r+\sigma^2)(T-t)}-e^{-rT}K^2-e^{-rt}S_th_t^S.
+\end{align*}
+
+The portfolio above will hedge \(Y\) with probability one. \(\square\)
+
+\textbf{Solution (c).}
+
+We assume no dividends and no consumption that is \(c_t=0\) and
+\(dD_t^i=0\) for \(i=0,1\). Then the portfolio is self-financing if and
+only if the value process has dynamics.
+
+\[
+h_0(t)\ dB_t+h_1(t)\ dS_t=0
+\]
+
+This is given in lemma 6.12.
+
+\textbf{THE BELOW IS IN WORKS AND NOT CORRECT!}
+
+Now we have that the value process is given by
+
+\[
+V_t^h=h_0(t)B_t+h_1(t)S_t.
+\]
+
+Using the representation \(V_t^h=f(h_0(t),B_t)+f(h_1(t),S_t)\) given by
+\(f(x,y)=xy\) we have
+
+\[
+dV_t^h=df(h_0(t),B_t)+df(h_1(t),S_t).
+\]
+
+Using Ito's formula on each term we have
+
+\begin{align*}
+df(h_0(t),B_t)&=B_t\ dh_0(t)+h_0(t)\ dB_t+(dB_t)(dh_0(t)),\\
+df(h_1(t),S_t)&=S_t\ dh_1(t)+h_1(t)\ dS_t+(dS_t)(dh_1(t)),\\
+\end{align*}
+
+since of cause \(f_{xx}=f_{yy}=0\). We can the determine the dynamics of
+the portfolio by
+
+\begin{align*}
+dh_0(t)&=-(-2t-\sigma^2)S_t^2e^{r(T-2t)+\sigma^2(T-t)}\ dt\\
+&-2S_te^{r(T-2t)+\sigma^2(T-t)}\ dS_t\\
+&-\frac{1}{2}2e^{r(T-2t)+\sigma^2(T-t)}\ (dS_t)^2\\
+&=(-2t-\sigma^2)h_0(t)\ dt+\frac{2}{S_t}h_0(t)\ (\mu S_t\ dt+\sigma S_t\ dW_t)+\frac{1}{S_t^2}h_0(t) \sigma^2S_t^2\ dt\\
+&=(\mu-1)2h_0(t)\ dt+2\sigma h_0(t)\ dW_t
+\end{align*}
+
+and
+
+\begin{align*}
+dh_1(t)&=(-r-\sigma^2)2e^{(r+\sigma^2)(T-t)}S_t\ dt\\
+&+2e^{(r+\sigma^2)(T-t)}\ dS_t+0\\
+&=(-r-\sigma^2)h_1(t)\ dt+\frac{1}{S_t}h_1(t)(\mu S_t\ dt+\sigma S_t\ dW_t)\\
+&=(-r-\sigma^2+\mu)h_1(t)\ dt+h_1(t)\sigma \ dW_t\\
+\end{align*}
+
+And so in total
+
+\begin{align*}
+dV_t^h(t)&=df(h_0(t),B_t)+df(h_1(t),S_t)\\
+&=B_t\ dh_0(t)+h_0(t)\ dB_t+(dB_t)(dh_0(t))\\
+&+S_t\ dh_1(t)+h_1(t)\ dS_t+(dS_t)(dh_1(t))\\
+&=B_t\ ((\mu-1)2h_0(t)\ dt+2\sigma h_0(t)\ dW_t)+h_0(t)\ rB_t\ dt+0\\
+&+S_t\ ((-r-\sigma^2+\mu)h_1(t)\ dt+h_1(t)\sigma \ dW_t)+h_1(t)\ (\mu S_t\ dt+\sigma S_t\ dW_t)+\sigma^2S_th_1(t)\ dt\\
+&=\left[B_t(\mu-1)2h_0(t)+h_0(t)rB_t+S_t(-r-\sigma^2+\mu)h_1(t)+h_1\mu S_t+\sigma^2S_th_1(t)\right]\ dt\\
+&+\left[B_t2\sigma h_0(t)+S_th_1\sigma+h_1\sigma S_t\right]\ dW_t\\
+&=\left[(2\mu-2+r)B_th_0(t)+(-r+2\mu)S_th_1(t)\right]\ dt\\
+&+\left[B_t h_0(t)+h_1 S_t\right]2\sigma\ dW_t\\
+&=V_t^h2\mu\ dt+V_t^h\ dW_t
+\end{align*}
+
+\textbf{Solution (d).}
+
+We compute \(V_T^h\) easily by inserting \(h_0\) and \(h_1\) below
+
+\begin{align*}
+V_T^h&=B_Th_0(T)+S_Th_1(T)\\
+&=B_T\left(-e^{r(T-2T)+\sigma^2(T-T)}S_T^2\right)+S_T\left(2e^{(r+\sigma^2)(T-T)}S_T\right)\\
+&=-S_T^2+2S_T^2=S_T^2.
+\end{align*}
+
+and so \(h\) hedge the payout \(\Phi(S_T)=S_T^2\). \(\square\)
 
 \textbf{Solution.}
 
@@ -4856,8 +5098,177 @@ As desired. The value process then give the portfolio price:
 as desired. \(\square\)
 
 \textbf{Exercise 4.} \emph{(Exam 2017/18, problem 2, question (a)-(b))}
+Consider a standard Black-Scholes model, that is, a model consisting of
+a bank account \(B_t\) with \(P\)-dynamics given by
 
-\textbf{Solution.}
+\[
+dB_t=rB_t\ dt,\ B_0=1
+\]
+
+and a stock \(S_t\) with \(P\)-dynamics given by
+
+\[
+dS_t=\alpha S_t\ dt+\sigma S_t\ d\overline{W}_t,\ S_0=s>0
+\]
+
+where \(r,\alpha\in\mathbb{R}\) and \(\sigma >0\) are constants and
+\(\overline{W}_t\) is a \(P\)-Brownian motion. Let \(T>0\) be a given
+and fixed date.
+
+Consider the derivative that at time \(T\) pays \[
+X=\max\left\{\min\left\{S_T,K_2\right\},K_1\right\},
+\]
+
+where \(0<K_1<K_2\) are constants.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Determine the arbitrage free price of derivative \(X\) at time
+  \(t<T\).
+\end{enumerate}
+
+Consider a new derivative that at time \(T\) pays
+
+\[
+Y=(S^2_T-K^2)^+-(K^2-S^2_T)^+.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\roman{enumii}.}
+  \tightlist
+  \item
+    Determine the arbitrage free price of derivative \(Y\) at time
+    \(t<T\).
+  \item
+    Find a hedging portfolio for derivative \(Y\).
+  \end{enumerate}
+\end{enumerate}
+
+Let \(h(t)=(h_0(t),h_1(t))\) be a portfolio where
+
+\[
+h_0(t)=-e^{r(T-2t)+\sigma^2(T-t)}S^2(t)
+\]
+
+is the number of units in the bank account at time \(t\) and
+
+\[
+h_1(t)=2e^{(r+\sigma^2)(T-t)}S(t)
+\]
+
+is the number of shares in the stock at time \(t\). Let \(V^h(t)\)
+denote the associated value process.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Determine whether the portfolio \(h\) is self-financing or not.
+\item
+  Compute \(V^h(T)\).
+\end{enumerate}
+
+\textbf{Solution (a).}
+
+We see that the derivative is the bull spread given by the payout
+function
+
+\[
+X=
+\begin{cases}
+  K_2 & \text{if }S_T>K_2,\\
+  S_T & \text{if }K_1\le S_T\le K_2,\\
+  K_1 &\text{if }S_T< K_1.
+\end{cases}
+\]
+
+We know from exercise 10.3 that this can be replicated by holding
+\(K_1\) bonds, one call option with strike \(K_1\) and a short on a call
+with strike \(K_2\). The arbitrage free price of the derivative is then
+the value process of the mentioned portfolio i.e.
+
+\[
+\Pi_t[X]=K_1 e^{-r(T-t)}+c(K_1;t,T)-c(K_2;t,T),
+\]
+
+where \(c\) denotes the pricing function for a European call option
+(non-instructive parameters supressed). \(\square\)
+
+\textbf{Solution (b).}
+
+\emph{(i)}: We start by seeing that the derivative pays out
+
+\[
+Y=
+\begin{cases}
+  S_T^2-K^2 & \text{if }S_T^2\ge K^2,\\
+  -(K^2-S_T^2) &\text{if }S_T^2< K^2.
+\end{cases}
+\]
+
+hence the payout is \(Y=S_T^2-K^2=\Phi(S_T)\) where \(\Phi(s)=s^2-K^2\).
+That is \(Y\) is in fact a simple claim. We have from the risk neutral
+valueation formula 7.11 that
+
+\begin{align*}
+\Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
+&=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
+\end{align*}
+
+Recall that under the martingale measure \(Q\) we have that \(S_t\) is a
+GBM hence
+
+\[
+S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}
+\]
+
+then
+
+\[
+S_T^2=s^2\cdot \exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(W_T^Q-W_t^Q\right)\right\}.
+\]
+
+Inserting this into the risk neutral valuation formula we get
+
+\begin{align*}
+\Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
+&=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)} E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
+&=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)}e^{\frac{1}{2}4\sigma^2(T-t)}-e^{-r(T-t)}K^2\\
+&=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
+&=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
+\end{align*}
+
+The arbitrage free price of the derivative is then given above.
+\(\square\)
+
+\emph{(ii)}: From theorem 8.5 we can determine a hedging portfolio with
+weightings
+
+\begin{align*}
+w_t^B&=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
+&=1-\frac{S_t2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}}{e^{-r(T-t)}\left(S_t^2e^{(2r+\sigma^2)(T-t)}-K^2\right)}\\
+&=1-\frac{2S_t^2e^{(2r+\sigma^2)(T-t)}}{S_t^2e^{(2r+\sigma^2)(T-t)}-K^2}\\
+&=1-\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}\\
+w_t^S&=\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}.
+\end{align*}
+
+In absolute terms we will hold the portfolio
+
+\begin{align*}
+h_t^S&=2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}\\
+h_t^B&=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{B_t}\\
+&=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{e^{rt}}\\
+&=e^{-rT}s^2e^{(2r+\sigma^2)(T-t)}-e^{-rT}K^2-e^{-rt}S_th_t^S.
+\end{align*}
+
+The portfolio above will hedge \(Y\) with probability one. \(\square\)
 
 \textbf{Exercise 5.} \emph{(Exam 2019/20, problem 2)}
 
