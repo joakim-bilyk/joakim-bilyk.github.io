@@ -33,8 +33,16 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{wrapfig}
+\usepackage{graphics}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\pagenumbering{gobble}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\addtocontents{title}{\protect\thispagestyle{empty}}
+
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -51,12 +59,6 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\usepackage{wrapfig}
-\usepackage{graphics}
-\usepackage{fancyhdr}
-\pagenumbering{gobble}
-\addtocontents{toc}{\protect\thispagestyle{empty}}
-\addtocontents{title}{\protect\thispagestyle{empty}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -64,19 +66,87 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Homework (FinKont)},
+  pdftitle={Homework},
   pdfauthor={Joakim Bilyk},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{Homework (FinKont)}
+\title{Homework}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Continuous time finance (FinKont)}
 \author{Joakim Bilyk}
-\date{January 24, 2023\newpage}
+\date{January 26, 2023}
 
 \begin{document}
-\maketitle
+%\maketitle
 
 {
+%title
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE University of Copenhagen}\\[4cm] % Name of your university/college
+\textsc{\Large Continuous time finance
+(FinKont)}\\[0.5cm] % Major heading such as course name
+%\textsc{\large Assignment 1}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries \thetitle}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+\textsc{\theauthor} \\
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Date:} \\
+\textsc{\thedate} \\
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+%{\large \thedate}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+\includegraphics[height=200px, keepaspectratio]{logo_ku.png}\\[4cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
 \setcounter{tocdepth}{5}
 \tableofcontents
 }
@@ -85,7 +155,6 @@
 \setcounter{page}{1}
 \pagenumbering{arabic}
 \pagestyle{fancy}
-
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
@@ -2848,7 +2917,7 @@ dV_t^h=V_t^h\sum_{i=1}^N w_t^i\frac{dS_t^i+dD_t^i}{S_t^i}-c_t\ dt
 or equivalently with the absolute weights
 
 \[
-dV_t^h=V_t^h\sum_{i=1}^N h_t^i(dS_t^i+dD_t^i)-c_t\ dt.
+dV_t^h=\sum_{i=1}^N h_t^i(dS_t^i+dD_t^i)-c_t\ dt.
 \]
 
 \textbf{Lemma 6.13.} Consider the case with no dividends. Let \(c\) be a
@@ -4796,7 +4865,7 @@ in \(\mathcal{L}^2\).
 \hypertarget{girsanov-theorem}{%
 \paragraph{Girsanov theorem}\label{girsanov-theorem}}
 
-\textbf{Theorem 12.3.} \textbf{(The Girsanoc Theorem)} Let \(W\) be a
+\textbf{Theorem 12.3.} \textbf{(The Girsanov Theorem)} Let \(W\) be a
 \(d\) dimensional \(P\)-Brownian motion on
 \((\Omega,\mathcal{F},P,\mathbf{F})\) and let \(\varphi\) be any
 \(d\)-dimensional adapted column vector process. Choose a fixed \(T\)
@@ -5641,7 +5710,9 @@ M_t=E^Q\left[\left. \frac{\mathcal{X}}{B_T}\ \right\vert\ \mathcal{F}_t \right].
 
 \textbf{Theorem 14.7.} \textbf{(The Second Fundamental Theorem)} Under
 assumptions 14.3.1 the model is complete if and only if the martingale
-measure is unique.
+measure is unique. This is equivalent with the statements:
+\(Ker[\sigma_t]=\{0\}\), \(Im[\sigma_t^\top]=\mathbb{R}^N\) and
+\(\sigma_t^{-1}\) exists (i.e.~\(\sigma_t\) is invertible).
 
 Pricing of any \(T\)-claim \(\mathcal{X}\) is now given by the risk
 neutral valuation formula
@@ -5675,13 +5746,14 @@ and then the pricing process must be of the form
 PDE
 
 \begin{align*}
-F_t(t,s)+\sum_{i=1}^nrs_iF_i(t,s)+\frac{1}{2}tr\left\{\sigma^\top D(S)F_{ss}D(S)\sigma\right\}-rF(t,s)&=0,\\
+F_t(t,s)+\sum_{i=1}^nrs_iF_i(t,s)+\frac{1}{2}\text{tr}\left\{\sigma^\top D(S)F_{ss}D(S)\sigma\right\}-rF(t,s)&=0,\\
 F(T,s)&=\Phi(s),
 \end{align*}
 
 where \(F_i=\frac{\partial F}{\partial s_i}\) and \(F_{ss}\) denotes the
-Hessian matrix. We have that the hedging portfolio has value process
-\(V_t^h=F(t,S_t)\) with dynamics
+Hessian matrix. Furthermore, \(\text{tr}(A)\) denotes the trace of \(A\)
+i.e.~the sum of the diagonal. We have that the hedging portfolio has
+value process \(V_t^h=F(t,S_t)\) with dynamics
 
 \[
 dV_t^h=\sum_{i=1}^n F_i(t,S_t)\ dS_t^i.
