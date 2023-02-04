@@ -11,7 +11,7 @@
 
 
 
-<title>Homework (QRM)</title>
+<title>Notes from QRM</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -328,18 +328,10 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
+  <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="theory.html">
-    <span class="fa fa-integral"></span>
-     
-    Theory
-  </a>
+  <a href="theory.html">Theory</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -354,13 +346,10 @@ $(document).ready(function () {
       <a href="stok_liv.html">Stochastic Processes in life-insurance (StokLiv)</a>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Continuous finance (FinKont)</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Topics in Life Insurance (Liv2)</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="FinKont_homework.html">Homework</a>
-        </li>
-        <li>
-          <a href="FinKont_examprep.html">Exam preparation</a>
+          <a href="Liv2_homework.html">Homework</a>
         </li>
       </ul>
     </li>
@@ -368,8 +357,6 @@ $(document).ready(function () {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-house"></span>
-     
     Non-life insurance
      
     <span class="caret"></span>
@@ -392,16 +379,40 @@ $(document).ready(function () {
         </li>
       </ul>
     </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Machine Learning in Non-life Insurance</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="MLnLife_homework.html">Homework</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Finance
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Continuous finance (FinKont)</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="FinKont_homework.html">Homework</a>
+        </li>
+        <li>
+          <a href="FinKont_examprep.html">Exam preparation</a>
+        </li>
+      </ul>
+    </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="pdf_renders.html">
-    <span class="fa fa-file"></span>
-     
-    PDF-renders
-  </a>
+  <a href="pdf_renders.html">Archive</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -419,7 +430,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Homework (QRM)</h1>
+<h1 class="title toc-ignore">Notes from QRM</h1>
 
 </div>
 
@@ -444,6 +455,73 @@ discussion of confidence bounds, see HL notes.)</li>
 </div>
 <div id="theory" class="section level3">
 <h3>Theory</h3>
+<p>We describe the financial risk with random variables defined on a
+filtered probability space <span
+class="math inline">\(\left(\Omega,\mathcal{F},P,\left\{\mathcal{F}_t\right\}_{t\in
+\mathbb{R}_+}\right)\)</span>. We assume that <em>the value process</em>
+<span class="math inline">\(V_t\)</span>, denoting the market value of
+the portfolio at time <span class="math inline">\(t\)</span>, is adapted
+to the filtration i.e. may be determined at time <span
+class="math inline">\(t\)</span> or from information available at time
+<span class="math inline">\(t\)</span>. We will be considering discrete
+time jumps of size <span class="math inline">\(\Delta t\)</span> for
+simplicity and assume that</p>
+<ul>
+<li>the portfolio remains fixed over the time horizon <span
+class="math inline">\([t,t+\Delta t)\)</span>,</li>
+<li>there are no income or payments made during the time period.</li>
+</ul>
+<p>This means in particular that the value</p>
+<p><span class="math display">\[
+\Delta V_{t+\Delta t}=V_{t+\Delta t}-V_t,
+\]</span></p>
+<p>only depends on the valuation of the components in the portfolio. We
+will henceforth be using the notation <span
+class="math inline">\(t\)</span> and <span
+class="math inline">\(t+1\)</span> and so forth denoting the intervals
+<span class="math inline">\([t+n\Delta t,t+(n+1)\Delta t)\)</span>
+i.e. <span class="math inline">\(t\)</span> may be any time and the
+integer representing how many time jumps of size <span
+class="math inline">\(\Delta t\)</span> has been made since <span
+class="math inline">\(t\)</span>.</p>
+<p>Under the assumptions above it is reasonable to assume that <span
+class="math inline">\(V_t\)</span> is Markovian in the sense that there
+exist <span class="math inline">\(d\ge 1\)</span> random sources <span
+class="math inline">\(\mathbf{Z}_t=(Z_{t,1},...,Z_{t,d})^\top\)</span>
+such that</p>
+<p><span class="math display">\[
+V_t=f(t,\mathbf{Z}_t)\tag{2.2}
+\]</span></p>
+<p>for some measurable function <span class="math inline">\(f :
+\mathbb{R}_+\times \mathbb{R}^d\to\mathbb{R}\)</span>. We will call
+<span class="math inline">\(\mathbf{Z}_t\)</span> the <em>risk
+factors</em> associated with the portfolio. The could be for instance
+the stockprice of a stock held in the portfolio. We may now define the
+<em>loss variable</em> as <span
+class="math inline">\(L_{t+1}:=-(V_{t+1}-V_t)\)</span> and
+<em>risk-factor changes</em> as <span
+class="math inline">\(\mathbf{X}_{t+1}:=\mathbf{Z}_{t+1}-\mathbf{Z}_t\)</span>
+and see that</p>
+<p><span class="math display">\[
+L_{t+1}=-\left(f(t+1,\mathbf{Z}_t+\mathbf{X}_{t+1})-f(t,\mathbf{Z}_t)\right),\tag{2.3}
+\]</span></p>
+<p>if one assume differentiability of <span
+class="math inline">\(f\)</span> we may approximate <span
+class="math inline">\(L_{t+1}\)</span> as</p>
+<p><span class="math display">\[
+L_{t+1}^\Delta:=-\left(\frac{\partial f}{\partial
+t}(t,\mathbf{Z}_t)+\sum_{i=1}^d \frac{\partial f}{\partial
+z_i}(t,\mathbf{Z}_t)\mathbf{X}_{t+1,i}\right).\tag{2.4}
+\]</span></p>
+<p>This is obviously a nice linear but the approximation error may be
+large if <span class="math inline">\(\Delta t\)</span> is large. We are
+interested in the the distribution of <span
+class="math inline">\(L_{t+1}\)</span> such that we may determine
+sufficiently capital holding in realtion to the risk associated with the
+assets and liabilities held on the firm’s balance sheet.</p>
+<div id="risk-measures" class="section level4">
+<h4>Risk measures</h4>
+</div>
 </div>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
@@ -569,7 +647,7 @@ lecture).</li>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkhvbWV3b3JrIChRUk0pIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogZmFsc2UNCiAgICB0b2NfZmxvYXQ6IHRydWUNCi0tLQ0KDQoNCiMgSW50cm9kdWN0aW9uDQoNCiMgV2Vla3Mgey50YWJzZXR9DQoNCiMjIFdlZWsgMQ0KDQojIyMgTWF0ZXJpYWwNCg0KTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uDQoNCiAqIEludHJvZHVjdGlvbjsgcmlzayBmYWN0b3JzIGFuZCBsb3NzIGRpc3RyaWJ1dGlvbnM7IGNvaGVyZW50IHJpc2sgbWVhc3VyZXM6IE1GRSBDaC4gMi4NCiAqIFZhUiBhbmQgZXhwZWN0ZWQgc2hvcnRmYWxsOiBNRkUgQ2guIDIsIHBhcnRpY3VsYXJseSBTZWMuIDIuMy4gKEZvciBkaXNjdXNzaW9uIG9mIGNvbmZpZGVuY2UgYm91bmRzLCBzZWUgSEwgbm90ZXMuKQ0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayAyDQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogVmFyLUNvdiBtZXRob2QsIHNpbXVsYXRpb24sIGltcG9ydGFuY2Ugc2FtcGxpbmcgYW5kIGJvb3RzdHJhcC4gRm9yIHRoZSBWYXItQ292IG1ldGhvZCwgc2VlIE1GRSBTZWMuIDkuMi4gRm9yIGltcG9ydGFuY2Ugc2FtcGxpbmcgYW5kIGJvb3RzdHJhcCwgc2VlIHRoZSBzdXBwbGVtZW50YXJ5IHJlYWRpbmcgaW4gQWJzYWxvbi4NCiAqIEV4dHJlbWUgdmFsdWUgdGhlb3J5OiBNRkUgQ2guIDUgb3IgYWx0ZXJuYXRpdmUgcmVhZGluZyBpbiBITCAoc3VnZ2VzdGVkIGZvciB0aGlzIHBhcnQpLg0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayAzDQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogU3BoZXJpY2FsIGFuZCBlbGxpcHRpY2FsIGRpc3RyaWJ1dGlvbnM6IE1GRSBTZWMuIDYuMy4NCiAqIFNwaGVyaWNhbCBhbmQgZWxsaXB0aWNhbCBkaXN0cmlidXRpb25zLCBjb250LjsgaW50cm9kdWN0aW9uIHRvIGNvcHVsYXMuDQoNCiMjIyBUaGVvcnkNCg0KIyMjIEV4ZXJjaXNlcw0KDQojIyBXZWVrIDQNCg0KIyMjIE1hdGVyaWFsDQoNCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLg0KDQogKiBDb3B1bGFzOiBNRkUgU2VjLiA3LjEtNy41IChTa2xhcidzIHRoZW9yZW0sIEZyZWNoZXQgYm91bmRzKS4NCiAqIENvcHVsYXMgY29udC4gKFRyYW5zZm9ybWF0aW9uczsgZXhhbXBsZXM7IEFyY2hpbWVkZWFuIGNvcHVsYXMpLg0KDQojIyMgVGhlb3J5DQoNCiMjIyBFeGVyY2lzZXMNCg0KIyMgV2VlayA1DQoNCiMjIyBNYXRlcmlhbA0KDQpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4NCg0KICogQ29wdWxhcyBjb250LiAoc2ltdWxhdGluZyBBcmNoaW1lZGVhbiBjb3B1bGFzLCBzdGF0aXN0aWNhbCBtZXRob2RzLCBtZWFzdXJlcyBvZiBkZXBlbmRlbmNlKS4NCiAqIENyZWRpdCByaXNrOiB0aGUgTWVydG9uIG1vZGVsLiBNRkUgQ2guIDEwLCBwYXJ0aWN1bGFybHkgU2VjLiAxMC4zLiBbVGhpcyBsZWN0dXJlIHdpbGwgb25seSBsYXN0IHR3byBob3Vycy5dDQoNCiMjIyBUaGVvcnkNCg0KIyMjIEV4ZXJjaXNlcw0KDQojIyBXZWVrIDYNCg0KIyMjIE1hdGVyaWFsDQoNCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLg0KDQogKiBQb3J0Zm9saW8gY3JlZGl0IHJpc2s6IE1GRSBDaC4gMTEsIHNwZWNpZmljYWxseSBTZWN0aW9ucyAxMS4xLTExLjMuDQogKiBQb3J0Zm9saW8gY3JlZGl0IHJpc2ssIGNvbnQuIFtUaGlzIGxlY3R1cmUgd2lsbCBvbmx5IGxhc3QgdHdvIGhvdXJzLl0NCg0KIyMjIFRoZW9yeQ0KDQojIyMgRXhlcmNpc2VzDQoNCiMjIFdlZWsgNw0KDQojIyMgTWF0ZXJpYWwNCg0KTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uDQoNCiAqIEludHJvLiB0byBvcGVyYXRpb25hbCByaXNrLiBTdG9jaGFzdGljIHByb2Nlc3NlcyBpbiByaXNrIG1hbmFnZW1lbnQ6IHN0b2NoYXN0aWMgbW9kZWxzIGZvciBvcGVyYXRpb25hbCByaXNrOyBmaW5hbmNpYWwgdGltZSBzZXJpZXMgbW9kZWxzLiBDb25uZWN0aW9ucyB0byBub24tbGlmZSBpbnN1cmFuY2UgbW9kZWxzIGFuZCBlc3RpbWF0ZXMgKGxhc3QgbGVjdHVyZSkuDQoNCiMjIyBUaGVvcnkNCg0KIyMjIEV4ZXJjaXNlcw0K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTm90ZXMgZnJvbSBRUk0iCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiBmYWxzZQogICAgdG9jX2Zsb2F0OiB0cnVlCi0tLQoKCiMgSW50cm9kdWN0aW9uCgojIFdlZWtzIHsudGFic2V0fQoKIyMgV2VlayAxCgojIyMgTWF0ZXJpYWwKCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLgoKICogSW50cm9kdWN0aW9uOyByaXNrIGZhY3RvcnMgYW5kIGxvc3MgZGlzdHJpYnV0aW9uczsgY29oZXJlbnQgcmlzayBtZWFzdXJlczogTUZFIENoLiAyLgogKiBWYVIgYW5kIGV4cGVjdGVkIHNob3J0ZmFsbDogTUZFIENoLiAyLCBwYXJ0aWN1bGFybHkgU2VjLiAyLjMuIChGb3IgZGlzY3Vzc2lvbiBvZiBjb25maWRlbmNlIGJvdW5kcywgc2VlIEhMIG5vdGVzLikKCiMjIyBUaGVvcnkKCldlIGRlc2NyaWJlIHRoZSBmaW5hbmNpYWwgcmlzayB3aXRoIHJhbmRvbSB2YXJpYWJsZXMgZGVmaW5lZCBvbiBhIGZpbHRlcmVkIHByb2JhYmlsaXR5IHNwYWNlICRcbGVmdChcT21lZ2EsXG1hdGhjYWx7Rn0sUCxcbGVmdFx7XG1hdGhjYWx7Rn1fdFxyaWdodFx9X3t0XGluIFxtYXRoYmJ7Un1fK31ccmlnaHQpJC4gV2UgYXNzdW1lIHRoYXQgKnRoZSB2YWx1ZSBwcm9jZXNzKiAkVl90JCwgZGVub3RpbmcgdGhlIG1hcmtldCB2YWx1ZSBvZiB0aGUgcG9ydGZvbGlvIGF0IHRpbWUgJHQkLCBpcyBhZGFwdGVkIHRvIHRoZSBmaWx0cmF0aW9uIGkuZS4gbWF5IGJlIGRldGVybWluZWQgYXQgdGltZSAkdCQgb3IgZnJvbSBpbmZvcm1hdGlvbiBhdmFpbGFibGUgYXQgdGltZSAkdCQuIFdlIHdpbGwgYmUgY29uc2lkZXJpbmcgZGlzY3JldGUgdGltZSBqdW1wcyBvZiBzaXplICRcRGVsdGEgdCQgZm9yIHNpbXBsaWNpdHkgYW5kIGFzc3VtZSB0aGF0CgogICogdGhlIHBvcnRmb2xpbyByZW1haW5zIGZpeGVkIG92ZXIgdGhlIHRpbWUgaG9yaXpvbiAkW3QsdCtcRGVsdGEgdCkkLAogICogdGhlcmUgYXJlIG5vIGluY29tZSBvciBwYXltZW50cyBtYWRlIGR1cmluZyB0aGUgdGltZSBwZXJpb2QuCgpUaGlzIG1lYW5zIGluIHBhcnRpY3VsYXIgdGhhdCB0aGUgdmFsdWUKCiQkClxEZWx0YSBWX3t0K1xEZWx0YSB0fT1WX3t0K1xEZWx0YSB0fS1WX3QsCiQkCgpvbmx5IGRlcGVuZHMgb24gdGhlIHZhbHVhdGlvbiBvZiB0aGUgY29tcG9uZW50cyBpbiB0aGUgcG9ydGZvbGlvLiBXZSB3aWxsIGhlbmNlZm9ydGggYmUgdXNpbmcgdGhlIG5vdGF0aW9uICR0JCBhbmQgJHQrMSQgYW5kIHNvIGZvcnRoIGRlbm90aW5nIHRoZSBpbnRlcnZhbHMgJFt0K25cRGVsdGEgdCx0KyhuKzEpXERlbHRhIHQpJCBpLmUuICR0JCBtYXkgYmUgYW55IHRpbWUgYW5kIHRoZSBpbnRlZ2VyIHJlcHJlc2VudGluZyBob3cgbWFueSB0aW1lIGp1bXBzIG9mIHNpemUgJFxEZWx0YSB0JCBoYXMgYmVlbiBtYWRlIHNpbmNlICR0JC4KClVuZGVyIHRoZSBhc3N1bXB0aW9ucyBhYm92ZSBpdCBpcyByZWFzb25hYmxlIHRvIGFzc3VtZSB0aGF0ICRWX3QkIGlzIE1hcmtvdmlhbiBpbiB0aGUgc2Vuc2UgdGhhdCB0aGVyZSBleGlzdCAkZFxnZSAxJCByYW5kb20gc291cmNlcyAkXG1hdGhiZntafV90PShaX3t0LDF9LC4uLixaX3t0LGR9KV5cdG9wJCBzdWNoIHRoYXQKCiQkClZfdD1mKHQsXG1hdGhiZntafV90KVx0YWd7Mi4yfQokJAoKZm9yIHNvbWUgbWVhc3VyYWJsZSBmdW5jdGlvbiAkZiA6IFxtYXRoYmJ7Un1fK1x0aW1lcyBcbWF0aGJie1J9XmRcdG9cbWF0aGJie1J9JC4gV2Ugd2lsbCBjYWxsICRcbWF0aGJme1p9X3QkIHRoZSAqcmlzayBmYWN0b3JzKiBhc3NvY2lhdGVkIHdpdGggdGhlIHBvcnRmb2xpby4gVGhlIGNvdWxkIGJlIGZvciBpbnN0YW5jZSB0aGUgc3RvY2twcmljZSBvZiBhIHN0b2NrIGhlbGQgaW4gdGhlIHBvcnRmb2xpby4gV2UgbWF5IG5vdyBkZWZpbmUgdGhlICpsb3NzIHZhcmlhYmxlKiBhcyAkTF97dCsxfTo9LShWX3t0KzF9LVZfdCkkIGFuZCAqcmlzay1mYWN0b3IgY2hhbmdlcyogYXMgJFxtYXRoYmZ7WH1fe3QrMX06PVxtYXRoYmZ7Wn1fe3QrMX0tXG1hdGhiZntafV90JCBhbmQgc2VlIHRoYXQKCiQkCkxfe3QrMX09LVxsZWZ0KGYodCsxLFxtYXRoYmZ7Wn1fdCtcbWF0aGJme1h9X3t0KzF9KS1mKHQsXG1hdGhiZntafV90KVxyaWdodCksXHRhZ3syLjN9CiQkCgppZiBvbmUgYXNzdW1lIGRpZmZlcmVudGlhYmlsaXR5IG9mICRmJCB3ZSBtYXkgYXBwcm94aW1hdGUgJExfe3QrMX0kIGFzCgokJApMX3t0KzF9XlxEZWx0YTo9LVxsZWZ0KFxmcmFje1xwYXJ0aWFsIGZ9e1xwYXJ0aWFsIHR9KHQsXG1hdGhiZntafV90KStcc3VtX3tpPTF9XmQgXGZyYWN7XHBhcnRpYWwgZn17XHBhcnRpYWwgel9pfSh0LFxtYXRoYmZ7Wn1fdClcbWF0aGJme1h9X3t0KzEsaX1ccmlnaHQpLlx0YWd7Mi40fQokJAoKVGhpcyBpcyBvYnZpb3VzbHkgYSBuaWNlIGxpbmVhciBidXQgdGhlIGFwcHJveGltYXRpb24gZXJyb3IgbWF5IGJlIGxhcmdlIGlmICRcRGVsdGEgdCQgaXMgbGFyZ2UuIFdlIGFyZSBpbnRlcmVzdGVkIGluIHRoZSB0aGUgZGlzdHJpYnV0aW9uIG9mICRMX3t0KzF9JCBzdWNoIHRoYXQgd2UgbWF5IGRldGVybWluZSBzdWZmaWNpZW50bHkgY2FwaXRhbCBob2xkaW5nIGluIHJlYWx0aW9uIHRvIHRoZSByaXNrIGFzc29jaWF0ZWQgd2l0aCB0aGUgYXNzZXRzIGFuZCBsaWFiaWxpdGllcyBoZWxkIG9uIHRoZSBmaXJtJ3MgYmFsYW5jZSBzaGVldC4KCiMjIyMgUmlzayBtZWFzdXJlcwoKIyMjIEV4ZXJjaXNlcwoKIyMgV2VlayAyCgojIyMgTWF0ZXJpYWwKCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLgoKICogVmFyLUNvdiBtZXRob2QsIHNpbXVsYXRpb24sIGltcG9ydGFuY2Ugc2FtcGxpbmcgYW5kIGJvb3RzdHJhcC4gRm9yIHRoZSBWYXItQ292IG1ldGhvZCwgc2VlIE1GRSBTZWMuIDkuMi4gRm9yIGltcG9ydGFuY2Ugc2FtcGxpbmcgYW5kIGJvb3RzdHJhcCwgc2VlIHRoZSBzdXBwbGVtZW50YXJ5IHJlYWRpbmcgaW4gQWJzYWxvbi4KICogRXh0cmVtZSB2YWx1ZSB0aGVvcnk6IE1GRSBDaC4gNSBvciBhbHRlcm5hdGl2ZSByZWFkaW5nIGluIEhMIChzdWdnZXN0ZWQgZm9yIHRoaXMgcGFydCkuCgojIyMgVGhlb3J5CgojIyMgRXhlcmNpc2VzCgojIyBXZWVrIDMKCiMjIyBNYXRlcmlhbAoKTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uCgogKiBTcGhlcmljYWwgYW5kIGVsbGlwdGljYWwgZGlzdHJpYnV0aW9uczogTUZFIFNlYy4gNi4zLgogKiBTcGhlcmljYWwgYW5kIGVsbGlwdGljYWwgZGlzdHJpYnV0aW9ucywgY29udC47IGludHJvZHVjdGlvbiB0byBjb3B1bGFzLgoKIyMjIFRoZW9yeQoKIyMjIEV4ZXJjaXNlcwoKIyMgV2VlayA0CgojIyMgTWF0ZXJpYWwKCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLgoKICogQ29wdWxhczogTUZFIFNlYy4gNy4xLTcuNSAoU2tsYXIncyB0aGVvcmVtLCBGcmVjaGV0IGJvdW5kcykuCiAqIENvcHVsYXMgY29udC4gKFRyYW5zZm9ybWF0aW9uczsgZXhhbXBsZXM7IEFyY2hpbWVkZWFuIGNvcHVsYXMpLgoKIyMjIFRoZW9yeQoKIyMjIEV4ZXJjaXNlcwoKIyMgV2VlayA1CgojIyMgTWF0ZXJpYWwKCk1GRSByZWZlcnMgdG8gdGhlIGJvb2sgYnkgTWNOZWlsLCBGcmV5LCBhbmQgRW1icmVjaHRzLCB3aGlsZSBITCByZWZlcnMgdG8gdGhlIG5vdGVzIGJ5IEh1bHQgYW5kIExpbmRza29nIHBvc3RlZCBvbiBBYnNhbG9uLgoKICogQ29wdWxhcyBjb250LiAoc2ltdWxhdGluZyBBcmNoaW1lZGVhbiBjb3B1bGFzLCBzdGF0aXN0aWNhbCBtZXRob2RzLCBtZWFzdXJlcyBvZiBkZXBlbmRlbmNlKS4KICogQ3JlZGl0IHJpc2s6IHRoZSBNZXJ0b24gbW9kZWwuIE1GRSBDaC4gMTAsIHBhcnRpY3VsYXJseSBTZWMuIDEwLjMuIFtUaGlzIGxlY3R1cmUgd2lsbCBvbmx5IGxhc3QgdHdvIGhvdXJzLl0KCiMjIyBUaGVvcnkKCiMjIyBFeGVyY2lzZXMKCiMjIFdlZWsgNgoKIyMjIE1hdGVyaWFsCgpNRkUgcmVmZXJzIHRvIHRoZSBib29rIGJ5IE1jTmVpbCwgRnJleSwgYW5kIEVtYnJlY2h0cywgd2hpbGUgSEwgcmVmZXJzIHRvIHRoZSBub3RlcyBieSBIdWx0IGFuZCBMaW5kc2tvZyBwb3N0ZWQgb24gQWJzYWxvbi4KCiAqIFBvcnRmb2xpbyBjcmVkaXQgcmlzazogTUZFIENoLiAxMSwgc3BlY2lmaWNhbGx5IFNlY3Rpb25zIDExLjEtMTEuMy4KICogUG9ydGZvbGlvIGNyZWRpdCByaXNrLCBjb250LiBbVGhpcyBsZWN0dXJlIHdpbGwgb25seSBsYXN0IHR3byBob3Vycy5dCgojIyMgVGhlb3J5CgojIyMgRXhlcmNpc2VzCgojIyBXZWVrIDcKCiMjIyBNYXRlcmlhbAoKTUZFIHJlZmVycyB0byB0aGUgYm9vayBieSBNY05laWwsIEZyZXksIGFuZCBFbWJyZWNodHMsIHdoaWxlIEhMIHJlZmVycyB0byB0aGUgbm90ZXMgYnkgSHVsdCBhbmQgTGluZHNrb2cgcG9zdGVkIG9uIEFic2Fsb24uCgogKiBJbnRyby4gdG8gb3BlcmF0aW9uYWwgcmlzay4gU3RvY2hhc3RpYyBwcm9jZXNzZXMgaW4gcmlzayBtYW5hZ2VtZW50OiBzdG9jaGFzdGljIG1vZGVscyBmb3Igb3BlcmF0aW9uYWwgcmlzazsgZmluYW5jaWFsIHRpbWUgc2VyaWVzIG1vZGVscy4gQ29ubmVjdGlvbnMgdG8gbm9uLWxpZmUgaW5zdXJhbmNlIG1vZGVscyBhbmQgZXN0aW1hdGVzIChsYXN0IGxlY3R1cmUpLgoKIyMjIFRoZW9yeQoKIyMjIEV4ZXJjaXNlcwo=</div>
 <style>
   footer{
     background: rgb(34,34,34);
