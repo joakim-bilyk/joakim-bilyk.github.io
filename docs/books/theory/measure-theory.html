@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Measure theory | Complete Theory</title>
+  <meta name="description" content="Chapter 3 Measure theory | Complete Theory" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Measure theory | Complete Theory" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Measure theory | Complete Theory" />
+  
+  
+  
+
+<meta name="author" content="Joakim Bilyk" />
+
+
+<meta name="date" content="2023-02-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="finance.html"/>
+<link rel="next" href="linear-algebra.html"/>
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Comlete theory</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> References</a></li>
+<li class="chapter" data-level="2" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>2</b> Finance</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="finance.html"><a href="finance.html#discrete-time-models"><i class="fa fa-check"></i><b>2.1</b> Discrete time models</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="finance.html"><a href="finance.html#one-period-time-models"><i class="fa fa-check"></i><b>2.1.1</b> One-period time models</a></li>
+<li class="chapter" data-level="2.1.2" data-path="finance.html"><a href="finance.html#multi-period-model"><i class="fa fa-check"></i><b>2.1.2</b> Multi-period model</a></li>
+<li class="chapter" data-level="2.1.3" data-path="finance.html"><a href="finance.html#generelised-one-period-model"><i class="fa fa-check"></i><b>2.1.3</b> Generelised one-period model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="finance.html"><a href="finance.html#self-financing-portfolios"><i class="fa fa-check"></i><b>2.2</b> Self-financing portfolios</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="finance.html"><a href="finance.html#discrete-time-sf-portfolio"><i class="fa fa-check"></i><b>2.2.1</b> Discrete time SF portfolio</a></li>
+<li class="chapter" data-level="2.2.2" data-path="finance.html"><a href="finance.html#continuous-time-sf-portfolio"><i class="fa fa-check"></i><b>2.2.2</b> Continuous time SF portfolio</a></li>
+<li class="chapter" data-level="2.2.3" data-path="finance.html"><a href="finance.html#portfolio-weights"><i class="fa fa-check"></i><b>2.2.3</b> Portfolio weights</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="finance.html"><a href="finance.html#black-scholes-pde"><i class="fa fa-check"></i><b>2.3</b> Black-Scholes PDE</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="finance.html"><a href="finance.html#contingent-claims-and-arbitrage"><i class="fa fa-check"></i><b>2.3.1</b> Contingent Claims and Arbitrage</a></li>
+<li class="chapter" data-level="2.3.2" data-path="finance.html"><a href="finance.html#risk-neutral-valuation-1"><i class="fa fa-check"></i><b>2.3.2</b> Risk Neutral Valuation</a></li>
+<li class="chapter" data-level="2.3.3" data-path="finance.html"><a href="finance.html#black-scholes-formula"><i class="fa fa-check"></i><b>2.3.3</b> Black-Scholes formula</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="finance.html"><a href="finance.html#completeness-and-hedging"><i class="fa fa-check"></i><b>2.4</b> Completeness and Hedging</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="finance.html"><a href="finance.html#completeness-in-black-scholes"><i class="fa fa-check"></i><b>2.4.1</b> Completeness in Black-Scholes</a></li>
+<li class="chapter" data-level="2.4.2" data-path="finance.html"><a href="finance.html#absence-of-arbitrage-1"><i class="fa fa-check"></i><b>2.4.2</b> Absence of Arbitrage</a></li>
+<li class="chapter" data-level="2.4.3" data-path="finance.html"><a href="finance.html#incomplete-markets"><i class="fa fa-check"></i><b>2.4.3</b> Incomplete Markets</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="finance.html"><a href="finance.html#parity-relations"><i class="fa fa-check"></i><b>2.5</b> Parity relations</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="finance.html"><a href="finance.html#put-call-parity"><i class="fa fa-check"></i><b>2.5.1</b> Put-call Parity</a></li>
+<li class="chapter" data-level="2.5.2" data-path="finance.html"><a href="finance.html#the-greeks"><i class="fa fa-check"></i><b>2.5.2</b> The Greeks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="finance.html"><a href="finance.html#fundamental-pricing-theorem-i-and-ii"><i class="fa fa-check"></i><b>2.6</b> Fundamental pricing theorem I and II</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="finance.html"><a href="finance.html#completeness-1"><i class="fa fa-check"></i><b>2.6.1</b> Completeness</a></li>
+<li class="chapter" data-level="2.6.2" data-path="finance.html"><a href="finance.html#risk-neutral-valuation-formula"><i class="fa fa-check"></i><b>2.6.2</b> Risk Neutral Valuation Formula</a></li>
+<li class="chapter" data-level="2.6.3" data-path="finance.html"><a href="finance.html#stochastic-discount-factors-1"><i class="fa fa-check"></i><b>2.6.3</b> Stochastic Discount Factors</a></li>
+<li class="chapter" data-level="2.6.4" data-path="finance.html"><a href="finance.html#summary"><i class="fa fa-check"></i><b>2.6.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="finance.html"><a href="finance.html#mathematics-of-the-martingale-approach"><i class="fa fa-check"></i><b>2.7</b> Mathematics of the martingale approach</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="finance.html"><a href="finance.html#martingale-representation-theorem"><i class="fa fa-check"></i><b>2.7.1</b> Martingale representation theorem</a></li>
+<li class="chapter" data-level="2.7.2" data-path="finance.html"><a href="finance.html#girsanov-theorem"><i class="fa fa-check"></i><b>2.7.2</b> Girsanov theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="finance.html"><a href="finance.html#black-scholes-model---martingale-approach"><i class="fa fa-check"></i><b>2.8</b> Black-Scholes model - martingale approach</a></li>
+<li class="chapter" data-level="2.9" data-path="finance.html"><a href="finance.html#multidimensional-models"><i class="fa fa-check"></i><b>2.9</b> Multidimensional models</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="measure-theory.html"><a href="measure-theory.html"><i class="fa fa-check"></i><b>3</b> Measure theory</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures"><i class="fa fa-check"></i><b>3.1</b> Equivalent Probability Measures</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="measure-theory.html"><a href="measure-theory.html#the-radon-nikodym-theorem"><i class="fa fa-check"></i><b>3.1.1</b> The Radon-Nikodym Theorem</a></li>
+<li class="chapter" data-level="3.1.2" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures-1"><i class="fa fa-check"></i><b>3.1.2</b> Equivalent Probability Measures</a></li>
+<li class="chapter" data-level="3.1.3" data-path="measure-theory.html"><a href="measure-theory.html#likelihood-processes"><i class="fa fa-check"></i><b>3.1.3</b> Likelihood processes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>4</b> Linear Algebra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="linear-algebra.html"><a href="linear-algebra.html#invertible-matrices"><i class="fa fa-check"></i><b>4.1</b> Invertible matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="random-variables.html"><a href="random-variables.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="random-variables.html"><a href="random-variables.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="random-variables.html"><a href="random-variables.html#conditional-expectation"><i class="fa fa-check"></i><b>5.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="5.3" data-path="random-variables.html"><a href="random-variables.html#independence"><i class="fa fa-check"></i><b>5.3</b> Independence</a></li>
+<li class="chapter" data-level="5.4" data-path="random-variables.html"><a href="random-variables.html#moment-generating-function"><i class="fa fa-check"></i><b>5.4</b> Moment generating function</a></li>
+<li class="chapter" data-level="5.5" data-path="random-variables.html"><a href="random-variables.html#standard-distributions"><i class="fa fa-check"></i><b>5.5</b> Standard distributions</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="random-variables.html"><a href="random-variables.html#normal-disribution"><i class="fa fa-check"></i><b>5.5.1</b> Normal disribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html"><i class="fa fa-check"></i><b>6</b> Discrete Time Stochastic Processes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#convergence-concepts"><i class="fa fa-check"></i><b>6.1</b> Convergence concepts</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#sums-and-average-processes"><i class="fa fa-check"></i><b>6.1.1</b> Sums and average processes</a></li>
+<li class="chapter" data-level="6.1.2" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#ergodic-theory"><i class="fa fa-check"></i><b>6.1.2</b> Ergodic Theory</a></li>
+<li class="chapter" data-level="6.1.3" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#weak-convergence"><i class="fa fa-check"></i><b>6.1.3</b> Weak Convergence</a></li>
+<li class="chapter" data-level="6.1.4" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#central-limit-theorems"><i class="fa fa-check"></i><b>6.1.4</b> Central Limit Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html"><i class="fa fa-check"></i><b>7</b> Continuous Time Stochastic Processes</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#brownian-motion"><i class="fa fa-check"></i><b>7.1</b> Brownian Motion</a></li>
+<li class="chapter" data-level="7.2" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#filtration"><i class="fa fa-check"></i><b>7.2</b> Filtration</a></li>
+<li class="chapter" data-level="7.3" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#martingale"><i class="fa fa-check"></i><b>7.3</b> Martingale</a></li>
+<li class="chapter" data-level="7.4" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-calculus"><i class="fa fa-check"></i><b>7.4</b> Stochastic calculus</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-integrals"><i class="fa fa-check"></i><b>7.4.1</b> Stochastic Integrals</a></li>
+<li class="chapter" data-level="7.4.2" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#discrete-stochastic-integrals"><i class="fa fa-check"></i><b>7.4.2</b> Discrete Stochastic Integrals</a></li>
+<li class="chapter" data-level="7.4.3" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-differential-equations"><i class="fa fa-check"></i><b>7.4.3</b> Stochastic Differential Equations</a></li>
+<li class="chapter" data-level="7.4.4" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#partial-differential-equations"><i class="fa fa-check"></i><b>7.4.4</b> Partial differential equations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html"><i class="fa fa-check"></i><b>8</b> Quantative Risk Management</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#the-loss-variable"><i class="fa fa-check"></i><b>8.1</b> The Loss Variable</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#risk-measures"><i class="fa fa-check"></i><b>8.1.1</b> Risk measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://joakim-bilyk.github.io/index.html" target="blank">Back to main site</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Complete Theory</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="measure-theory" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Measure theory<a href="measure-theory.html#measure-theory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="equivalent-probability-measures" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Equivalent Probability Measures<a href="measure-theory.html#equivalent-probability-measures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-radon-nikodym-theorem" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> The Radon-Nikodym Theorem<a href="measure-theory.html#the-radon-nikodym-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote class="def">
+<p><strong>Definition A.50. (Bjork)</strong> <em>Consider a measurable space <span class="math inline">\((X,\mathcal{F})\)</span> on which there are defined two seperate measures <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span>:</em></p>
+<ul>
+<li><p><em>If, for all <span class="math inline">\(A\in \mathcal{F}\)</span>, it holds that</em>
+<span class="math display">\[
+  \mu(A)=0\ \Rightarrow\ \nu(A)=0,\tag{A.7}
+  \]</span>
+t_hen <span class="math inline">\(\nu\)</span> is said to be <strong>absolutely continuous</strong> with respect to <span class="math inline">\(\mu\)</span> on <span class="math inline">\(\mathcal{F}\)</span> and we write this as <span class="math inline">\(\nu &lt; &lt; \mu\)</span>._</p></li>
+<li><p><em>If we have both <span class="math inline">\(\mu &lt;&lt; \nu\)</span> and <span class="math inline">\(\nu &lt;&lt; \mu\)</span>, then <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span> said to be <strong>equivalent</strong> and we write <span class="math inline">\(\mu\sim \nu\)</span>.</em></p></li>
+<li><p><em>If there exists two events, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> such that:</em></p>
+<ul>
+<li><span class="math inline">\(A\cup B=X\)</span>,</li>
+<li><span class="math inline">\(A\cap B=\emptyset\)</span>,</li>
+<li><span class="math inline">\(\mu(B)=0\)</span>, and <span class="math inline">\(\nu(A)=0\)</span>,</li>
+</ul>
+<p><em>then <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> are said to be mutually <strong>singular</strong>, and we write <span class="math inline">\(\mu\ \bot\ \nu\)</span>.</em></p></li>
+</ul>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem A.52. (Bjork)</strong> <strong>(The Radon-Nikodym Theorem)</strong> <em>Consider the measure space <span class="math inline">\((X,\mathcal{F},\mu)\)</span>, where we assume that <span class="math inline">\(\mu\)</span> is finite, i.e. that <span class="math inline">\(\mu(X)&lt;\infty\)</span>. Let <span class="math inline">\(\nu\)</span> be a measure on <span class="math inline">\((X,\mathcal{F})\)</span> such that <span class="math inline">\(\nu &lt;&lt;\mu\)</span> on <span class="math inline">\(\mathcal{F}\)</span>. Then there exists a non-negative function <span class="math inline">\(f : X\to \mathbb{R}\)</span> such that:</em>
+<span class="math display">\[\begin{align*}
+&amp;f\ \text{is}\ \mathcal{F}\text{-measurable}\tag{A.9}\\
+&amp;\int_X f(x)\ d\mu(x)&lt;\infty,\tag{A.10}\\
+&amp;\nu(A)=\int_Af(x)\ d\mu(x),\ \text{for all}\ A\in \mathcal{F}.\tag{A.11}
+\end{align*}\]</span>
+<em>The function <span class="math inline">\(f\)</span> is called the <strong>Radon-Nikodym derivative</strong> of <span class="math inline">\(\nu\)</span> w.r.t. <span class="math inline">\(\mu\)</span>. It is uniquely determined <span class="math inline">\(\mu\)</span>-a.e. and we write</em></p>
+<p><span class="math display">\[
+f(x)=\frac{d\nu(x)}{d\mu(x)},\tag{A.12}
+\]</span></p>
+<p><em>or alternatively</em></p>
+<p><span class="math display">\[
+d\nu(x)=f(x)\ d\mu(x).\tag{A.13}
+\]</span></p>
+</blockquote>
+</div>
+<div id="equivalent-probability-measures-1" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Equivalent Probability Measures<a href="measure-theory.html#equivalent-probability-measures-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote class="lem">
+<p><strong>Lemma B.38. (Bjork)</strong> <em>For two probability measures <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>, the relation <span class="math inline">\(P\sim Q\)</span> on <span class="math inline">\(\mathcal{F}\)</span> holds if and only if <span class="math inline">\(P(A)=1\)</span> if and only if <span class="math inline">\(Q(A)=1\)</span> for all <span class="math inline">\(A\in\mathcal{F}\)</span>.</em></p>
+</blockquote>
+<blockquote class="prop">
+<p><strong>Proposition B.39. (Bjork)</strong> <em>Assume that <span class="math inline">\(Q &lt;&lt; P\)</span> on <span class="math inline">\(\mathcal{F}\)</span> and that <span class="math inline">\(\mathcal{G}\subseteq \mathcal{F}\)</span>. Then the Radon-Nikodym derivatives <span class="math inline">\(L^{\mathcal{F}}\)</span> and <span class="math inline">\(L^{\mathcal{G}}\)</span> are related by</em></p>
+<p><span class="math display">\[
+L^{\mathcal{G}}=E^P[L^{\mathcal{F}}\ \vert\ \mathcal{G}].\tag{B.17}
+\]</span></p>
+</blockquote>
+<blockquote class="prop">
+<p><strong>Proposition B.41. (Bjork)</strong> <strong>(Bayes’ Theorem)</strong> <em>Assume that <span class="math inline">\(X\)</span> is a random variable on <span class="math inline">\((\Omega, \mathcal{F},P)\)</span>, and let <span class="math inline">\(Q\)</span> be another probability measure on <span class="math inline">\((\Omega,\mathcal{F})\)</span> the Radon-Nikodym derivative</em></p>
+<p><span class="math display">\[
+L=\frac{d Q}{dP}
+\]</span></p>
+<p><em>on <span class="math inline">\(\mathcal{F}\)</span>. Assume that <span class="math inline">\(X\in L^1(\Omega,\mathcal{F},Q)\)</span> and <span class="math inline">\(\mathcal{G}\)</span> is a sigma-algebra with <span class="math inline">\(\mathcal{G}\subseteq \mathcal{F}\)</span>. Then</em></p>
+<p><span class="math display">\[
+E^Q[X\ \vert\ \mathcal{G}]=\frac{E^P[L\cdot X\ \vert\ \mathcal{G}]}{E^P[L\ \vert\ \mathcal{G}]},\ Q-a.s.\tag{B.18}
+\]</span></p>
+</blockquote>
+</div>
+<div id="likelihood-processes" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Likelihood processes<a href="measure-theory.html#likelihood-processes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote class="prop">
+<p><strong>Proposition C.12. (Bjork)</strong> <em>Consider a filtered probability space <span class="math inline">\((\Omega, \mathcal{F},P,\mathcal{F}_t)\)</span> on a compact interval <span class="math inline">\([0,T]\)</span>. Suppose <span class="math inline">\(L_T\)</span> is some non-negative integrable random variable in <span class="math inline">\(\mathcal{F}_T\)</span>. We can then define a new measure <span class="math inline">\(Q\)</span> on <span class="math inline">\(\mathcal{F}_T\)</span> by setting</em></p>
+<p><span class="math display">\[
+dQ=L_T\ dP
+\]</span></p>
+<p><em>on <span class="math inline">\(\mathcal{F}_T\)</span> and if <span class="math inline">\(E^P[L_T]=1\)</span> the measure <span class="math inline">\(Q\)</span> will also be a probability measure. The likelihood process <span class="math inline">\(L\)</span>, defined by</em></p>
+<p><span class="math display">\[
+L_t=\frac{dQ}{dP},\ on\ \mathcal{F}_t,\tag{C.8}
+\]</span></p>
+<p><em>is a <span class="math inline">\((P,\mathcal{F}_t)\)</span>-martingale.</em></p>
+</blockquote>
+<blockquote class="prop">
+<p><strong>Proposition C.13. (Bjork)</strong> <em>A process <span class="math inline">\(M\)</span> is a <span class="math inline">\(Q\)</span>-martingale if and only if the process <span class="math inline">\(L\cdot M\)</span> is a <span class="math inline">\(P\)</span>-martingale.</em></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="finance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-algebra.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
