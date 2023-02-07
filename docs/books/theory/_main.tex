@@ -87,7 +87,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{February 05, 2023}
+\date{February 07, 2023}
 
 \begin{document}
 %\maketitle
@@ -167,7 +167,7 @@ non-life insurance, stochastic differential equations.}
 \vfill
 \pagebreak
 
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{3}
 \tableofcontents
 }
 \thispagestyle{empty}
@@ -203,6 +203,12 @@ Continuous Time Stochastic Processes & Bjork & \emph{Arbitrage Theory in Continu
 Discrete Time Stochastic Processes & Hansen & \emph{Stochastic Processes} (2. edition) by Ernst Hansen (2021). \\
 \bottomrule()
 \end{longtable}
+
+\hypertarget{life-insurance-mathematics}{%
+\chapter{Life Insurance Mathematics}\label{life-insurance-mathematics}}
+
+\hypertarget{section}{%
+\chapter{}\label{section}}
 
 \hypertarget{finance}{%
 \chapter{Finance}\label{finance}}
@@ -2339,6 +2345,127 @@ d\mathbf{M}_t=-r_t\mathbf{M}_t\ dt-\mathbf{M}_t\lambda_t^\top\ dW_t.\tag{14.40}
 \frac{\vert \mu_t^p - r_t\vert}{\Vert \sigma_t ^p\Vert}\le \Vert \varphi_t\Vert,\hspace{15pt} \frac{\vert \mu_t^p - r_t\vert}{\Vert \sigma_t ^p\Vert}\le \Vert \lambda_t\Vert.\tag{14.42}
 \]
 
+\hypertarget{non-life-insurance-mathematics}{%
+\chapter{Non-Life Insurance Mathematics}\label{non-life-insurance-mathematics}}
+
+\hypertarget{probabilistic-machine-learning}{%
+\chapter{Probabilistic Machine Learning}\label{probabilistic-machine-learning}}
+
+\hypertarget{quantative-risk-management}{%
+\chapter{Quantative Risk Management}\label{quantative-risk-management}}
+
+\hypertarget{the-loss-variable}{%
+\section{The Loss Variable}\label{the-loss-variable}}
+
+We describe the financial risk with random variables defined on a filtered probability space \(\left(\Omega,\mathcal{F},P,\left\{\mathcal{F}_t\right\}_{t\in \mathbb{R}_+}\right)\). We assume that \emph{the value process} \(V_t\), denoting the market value of the portfolio at time \(t\), is adapted to the filtration i.e.~may be determined at time \(t\) or from information available at time \(t\). We will be considering discrete time jumps of size \(\Delta t\) for simplicity and assume that
+
+\begin{itemize}
+\tightlist
+\item
+  the portfolio remains fixed over the time horizon \([t,t+\Delta t)\),
+\item
+  there are no income or payments made during the time period.
+\end{itemize}
+
+This means in particular that the value
+
+\[
+\Delta V_{t+\Delta t}=V_{t+\Delta t}-V_t,
+\]
+
+only depends on the valuation of the components in the portfolio. We will henceforth be using the notation \(t\) and \(t+1\) and so forth denoting the intervals \([t+n\Delta t,t+(n+1)\Delta t)\) i.e.~\(t\) may be any time and the integer representing how many time jumps of size \(\Delta t\) has been made since \(t\).
+
+Under the assumptions above it is reasonable to assume that \(V_t\) is Markovian in the sense that there exist \(d\ge 1\) random sources \(\mathbf{Z}_t=(Z_{t,1},...,Z_{t,d})^\top\) such that
+
+\[
+V_t=f(t,\mathbf{Z}_t)\tag{2.2}
+\]
+
+for some measurable function \(f : \mathbb{R}_+\times \mathbb{R}^d\to\mathbb{R}\). We will call \(\mathbf{Z}_t\) the \emph{risk factors} associated with the portfolio. The could be for instance the stockprice of a stock held in the portfolio. We may now define the \emph{loss variable} as \(L_{t+1}:=-(V_{t+1}-V_t)\) and \emph{risk-factor changes} as \(\mathbf{X}_{t+1}:=\mathbf{Z}_{t+1}-\mathbf{Z}_t\) and see that
+
+\[
+L_{t+1}=-\left(f(t+1,\mathbf{Z}_t+\mathbf{X}_{t+1})-f(t,\mathbf{Z}_t)\right),\tag{2.3}
+\]
+
+if one assume differentiability of \(f\) we may approximate \(L_{t+1}\) as
+
+\[
+L_{t+1}^\Delta:=-\left(\frac{\partial f}{\partial t}(t,\mathbf{Z}_t)+\sum_{i=1}^d \frac{\partial f}{\partial z_i}(t,\mathbf{Z}_t)\mathbf{X}_{t+1,i}\right).\tag{2.4}
+\]
+
+This is obviously a nice linear but the approximation error may be large if \(\Delta t\) is large. We are interested in the the distribution of \(L_{t+1}\) such that we may determine sufficiently capital holding in realtion to the risk associated with the assets and liabilities held on the firm's balance sheet.
+
+\hypertarget{risk-measures}{%
+\subsection{Risk measures}\label{risk-measures}}
+
+In the general sense, a \emph{risk measure} is simply a measurable function \(\rho : \mathbb{L} \to\mathbb{R}\) taking a loss variable \(L\in \mathbb{L}\) as input and associating a number \(\rho(L)\) as output. In this setting we let \(\mathbb{L}\) be the set of all real-valued random variables. We may interpret this as the riskyness of the portfolio with associated loss variable \(L\). That is say we have two loss variable from the value processes \(V\) and \(V'\) i.e.~\(L\) and \(L'\) we say that \(V\) is riskier than \(V'\) if and only if \(\rho(L)\ge \rho(L')\).
+
+We may now consider the fundamental definition of a coherent risk measures as in \href{https://www.researchgate.net/publication/227614132_Coherent_Measures_of_Risk}{\emph{Coherent Measures of Risk}} by Artzner, Delbean, Eber and Heath (1999), by first stating the definition of a risk measure.
+
+\textbf{Definition.} \textbf{(Risk Measure)} \emph{Let \(\mathbb{L}\) be the set of all real valued random variable i.e.}
+
+\[
+\mathbb{L}=\left\{X\ \vert \ X : (\Omega,P,\mathcal{F})\to (\mathbb{R},\mathbb{B})\right\}
+\]
+
+\emph{Any mapping \(\rho : \mathbb{L} \to\mathbb{R}\) is called a measure of risk.}
+
+We now want some properties to be satisfied by the mapping \(\rho\) such that it is a sensable measure of risk. To this we define four axioms as.
+
+\textbf{Definition.} \textbf{(Coherent Risk Measure)} \emph{Let \(\rho\) be a measure of risk. We say that \(\rho\) is a coherent risk measure if and only if \(\rho\) satisfies the axioms below.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Translation invariance:} \emph{Let \(\alpha\in\mathbb{R}\) and \(r\) be a predictable process we have \(\rho(X+\alpha\cdot r)=\rho(X)+\alpha\).}
+\item
+  \textbf{Subadditivity:} \emph{Let \(X_1,X_2\in\mathbb{L}\), then \(\rho(X_1+X_2)\le \rho(X_1)+\rho(X_2)\).}
+\item
+  \textbf{Positive homogeneity:} \emph{Let \(c>0\), then \(\rho(cX)=c\rho(X)\).}
+\item
+  \textbf{Monotonicity:} \emph{Let \(X,Y\in\mathbb{L}\) such that \(X\le Y\) \(P\)-a.s., then \(\rho(X)\le \rho(Y)\).}
+\end{enumerate}
+
+\emph{Remark:} We see that axiom (1) gives the equation \(\rho(X+\rho(X)\cdot r)=0\) i.e.~we may hedge the risk by holding \(\rho(X)\) in a asset with rate of return \(r\). The axiom (2) ensures that we take into account the correlation of multiple assets i.e.~we will in general not experience the maximal loss of two sources at the same time (although this is possible). If \(X_1\) and \(X_2\) satisfies \(\text{Corr}(X_1,X_2)=1\) then \(\rho(X_1+X_2)= \rho(X_1)+\rho(X_2)\).
+
+There exist alot of different tangible measures of risk, some being coherent others non-coherent. The most well studied include Value at Risk VaR and Expected Shortfall ES. These two measures are in the realm of the loss distribution approach, however before studying these we introduce a few other worthy mentions: Factor sensitivity measures and scenario based risk measures:
+
+\textbf{Factor sensitivity measures} are measures on the form \(\rho=g(\nabla L)\) where \(g\) is some \(d\)-dimensional measurable function. In this \(\nabla L\) is the gradient i.e.
+
+\[
+\nabla L=\nabla \Big(f(t,\mathbf{Z}_t)-f(t+1,\mathbf{Z}_{t+1})\Big)=\left(\frac{\partial L}{\partial z_1},...,\frac{\partial L}{\partial z_d}\right).
+\]
+
+\textbf{Scenario based risk measures} are measures where one assume that a collection \(\mathbf{x}=(x_1,...,x_N)\) of events \(x_i\in \Omega\) such that \(\sum_{i=1}^N P(x_i)=1-\varepsilon\) for some small \(\varepsilon>0\). We may then associate the measures \(\psi\) as
+
+\[
+\psi(L)=\max\left\{w_1L(x_1),...,w_NL(x_N)\right\},
+\]
+
+with \(\mathbf{w}\ge 0\) and \(\sum_{i=1}^Nw_i=1\) being weights. That is \(\psi\) gives the largest weighted loss. A natural way of choosing \(w_i\) is such that \(w_i\approx P(x_i)\), but one may also weight certain events with a larger weight for a more prudent measure. Notice also that the criteria \(\sum_{i=1}^N P(x_i)=1-\varepsilon\) does not necessarily have to be satisfied when considering the worst possible outcomes.
+
+\hypertarget{value-at-risk}{%
+\subsubsection{Value at Risk}\label{value-at-risk}}
+
+The Value at Risk, henceforth VaR, is a quantile measure of the loss distribution \(F_L\) associated with \(L\). We define VaR as such:
+
+\textbf{Definition 2.8. (McNeil)} \textbf{(Value-at-Risk)} \emph{Let \(\alpha\in (0,1)\) (\(\alpha\) being large) we define the VaR of a portfolio with loss variable \(L\) at the confidence level \(\alpha\) is a given by}
+\begin{align*}
+\text{VaR}_\alpha(L)&=\inf\left\{ l\in\mathbb{R}\ :\ P(L>l)\le 1-\alpha \right\}\\
+&=\inf\left\{ l\in\mathbb{R}\ :\ F_L(l)\ge \alpha \right\}\\
+&=F^{\leftarrow}_L(\alpha),
+\end{align*}
+\emph{where \(F^{\leftarrow}_L\) is the generalized inverse of \(F_L\).}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/VaR_ES.png}
+  \end{center}
+\end{wrapfigure}
+
+There exist alot of different tangible measures of risk, some being coherent others non-coherent. The most well studied include Value at Risk VaR and Expected Shortfall ES. These two measures are in the realm of the loss distribution approach, however before studying these we introduce a few other worthy mentions: Factor sensitivity measures and scenario based risk measures:
+
 \hypertarget{measure-theory}{%
 \chapter{Measure theory}\label{measure-theory}}
 
@@ -2434,123 +2561,6 @@ L_t=\frac{dQ}{dP},\ on\ \mathcal{F}_t,\tag{C.8}
 \emph{is a \((P,\mathcal{F}_t)\)-martingale.}
 
 \textbf{Proposition C.13. (Bjork)} \emph{A process \(M\) is a \(Q\)-martingale if and only if the process \(L\cdot M\) is a \(P\)-martingale.}
-
-\hypertarget{linear-algebra}{%
-\chapter{Linear Algebra}\label{linear-algebra}}
-
-\hypertarget{invertible-matrices}{%
-\section{Invertible matrices}\label{invertible-matrices}}
-
-This sections study some fundamental properties of the \emph{invertible matrix}\index{invertible matrix}. We start by defining what an invertible matrix is.
-
-\textbf{Definition.} \emph{Let \(A\) be an \(n\times m\) matrix and \(B\) be an \(m\times n\) matrix. We say that \(A\) is invertible if}
-
-\[
-AB=I_{\min(m,n)}.
-\]
-
-\emph{In general, we only consider square matrices. If the above holds we say that \(B\) is \(A\)'s inverse and we write \(B=A^{-1}\).}
-
-We can consider some equivalence statements regarding invertible matrices.
-
-\textbf{Theorem.} \textbf{(The Invertible Matrix Theorem)} \emph{Let \(A\) be a \(n\times n\) matrix over a field \(K\) (\(\mathbb{R}^n\)), then the following statements are equivalent}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \emph{There exists an \(n\times n\) matrix \(B\) such that \(AB=I_n=BA\).}
-\item
-  \emph{There exist either a left inverse \(B\) or a right invers \(C\) i.e.~\(BA=I_n=AC\). In this case, \(B=C\).}
-\item
-  \emph{\(A\) has an inverse and is nonsingular and is nondegenerate.}
-\item
-  \emph{\(A\) is row-equivalent to \(I_n\).}
-\item
-  \emph{\(A\) is column-equivalent to \(I_n\).}
-\item
-  \emph{\(A\) has \(n\) pivot positions.}
-\item
-  \emph{\(A\) has full rank i.e.~\(\text{rank}(A)=n\) (spans \(K\)).}
-\item
-  \emph{The equation \(Ax=0\) (\(x\in K\)) has only the trivial solution \(x=0\).}
-\item
-  \emph{The equation \(Ax=b\) has only one solution \(x\).}
-\item
-  \emph{The kernal of \(A\) is trivial i.e.~\(\text{ker}(A)=\{0\}\).}
-\item
-  \emph{The columns of \(A\) are linearly independent.}
-\item
-  \emph{The columns of \(A\) span \(K\).}
-\item
-  \emph{\(\text{span}(A)=K\).}
-\item
-  \emph{The columns of \(A\) form a basis of \(K\).}
-\item
-  \emph{The linear transformation \(Ax\) is a bijection from \(K\) to \(K\).}
-\item
-  \emph{\(A\) has non-zero determinant i.e.~\(\text{det}(A)\ne 0\).}
-\item
-  \emph{\(A\) has not 0 as an eigenvalue.}
-\item
-  \emph{The transpose of \(A\) is invertible.}
-\item
-  \emph{\(A\) can be expressed as a finite product of elemtary matrices.}
-\end{enumerate}
-
-We futhermore have some properties.
-
-\textbf{Proposition.} \textbf{(Properties)} \emph{Let \(A\) be an \(n\times n\) invertible matrix. Then}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \((A^{-1})^{-1}=A\)
-\item
-  \((kA)^{-1}=k^{-1}A^{-1}\) \emph{with \(k\ne 0\).}
-\item
-  \((Ax)^+=x^+A^{-1}\) \emph{if \(A\) has orthonormal columns. \((\cdot)^+\) denotes the Moore-Penrose inverse and \(x\) is a vector.}
-\item
-  \emph{If \(B\) is an \(n\times n\) invertible matrix then \((AB)^{-1}=B^{-1}A^{-1}\).}
-\item
-  \(\text{det}(A^{-1})=(\text{det}(A))^{-1}\)
-\end{enumerate}
-
-The property 2 is especially useful in some settings. Consider for instance
-
-\[
-A=
-\begin{bmatrix}
-\sigma & 0\\
-\sigma & \sigma
-\end{bmatrix}=\sigma\begin{bmatrix}
-1 & 0\\
-1 & 1
-\end{bmatrix}=\sigma \tilde{A}.
-\]
-
-Then we simply find the inverse of \(\tilde{A}\) and multiply by \(\sigma^{-1}\). That is,
-
-\[
-A^{-1}=\frac{1}{\sigma}\tilde{A}^{-1}=\frac{1}{\sigma}
-\begin{bmatrix}
-1 & 0\\
--1 & 1
-\end{bmatrix}=
-\begin{bmatrix}
-1/\sigma & 0\\
--1/\sigma & 1/\sigma
-\end{bmatrix}.
-\]
-
-We have an easy propositions regarding diagonal matrices.
-
-\textbf{Proposition.} \emph{If \(A\) is an diagonal matrix\index{diagonal matrix}, then \(A\) is invertible. In particular,}
-
-\[
-A^{-1}=\text{diag}(A_{11}^{-1},...,A_{nn}^{-1}).
-\]
 
 \hypertarget{random-variables}{%
 \chapter{Random Variables}\label{random-variables}}
@@ -3222,7 +3232,7 @@ We say that a set \(A\in\mathbb{E}\) is an \textbf{invariant set} if \(T^{-1}(A)
 \textbf{Lemma 5.9. (Hansen)} \emph{Let \((\mathcal{X},\mathbb{E},\mu)\) be a probability space, and let \(T : \mathcal{X}\to \mathcal{X}\) be a measure-preserving map. Let \((\mathcal{Y},\mathbb{G})\) be another measurable space, and let \(S : \mathcal{Y} \to \mathcal{Y}\) be a measurable map.}
 \emph{Suppose there is a measurable map \(\gamma : \mathcal{X}\to \mathcal{Y}\) such that the following diagram commutes:}
 
-\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-7-1} \end{center}
 
 \emph{Then \((\mathcal{Y},\mathbb{G},\gamma(\mu),S)\) is a measure-preserving dynamical system.}
 
@@ -4167,120 +4177,199 @@ dX_s=\mu(s,X_s)\ ds+\sigma(s,X_s)\ dW_s,\tag{5.40}
     \]
 \end{itemize}
 
-\hypertarget{quantative-risk-management}{%
-\chapter{Quantative Risk Management}\label{quantative-risk-management}}
+\hypertarget{the-product-integral}{%
+\subsection{The Product Integral}\label{the-product-integral}}
 
-\hypertarget{the-loss-variable}{%
-\section{The Loss Variable}\label{the-loss-variable}}
-
-We describe the financial risk with random variables defined on a filtered probability space \(\left(\Omega,\mathcal{F},P,\left\{\mathcal{F}_t\right\}_{t\in \mathbb{R}_+}\right)\). We assume that \emph{the value process} \(V_t\), denoting the market value of the portfolio at time \(t\), is adapted to the filtration i.e.~may be determined at time \(t\) or from information available at time \(t\). We will be considering discrete time jumps of size \(\Delta t\) for simplicity and assume that
-
-\begin{itemize}
-\tightlist
-\item
-  the portfolio remains fixed over the time horizon \([t,t+\Delta t)\),
-\item
-  there are no income or payments made during the time period.
-\end{itemize}
-
-This means in particular that the value
+Consider the (stochastic) function \(Y : \mathbb{R} \to \mathbb{R}^{n\times n}\), where \(\mathbb{R}^{n\times n}\) is the set of all \(n\times n\) real-valued matrices, that is \(Y\) has the matrix-representation
 
 \[
-\Delta V_{t+\Delta t}=V_{t+\Delta t}-V_t,
+Y(t)=\begin{bmatrix}
+Y_{11}(t) & \cdots & Y_{1n}(t)\\
+Y_{21}(t) & \cdots & Y_{2n}(t)\\
+\vdots & \ddots & \vdots \\
+Y_{n1}(t) & \cdots & Y_{nn}(t)
+\end{bmatrix}.
 \]
 
-only depends on the valuation of the components in the portfolio. We will henceforth be using the notation \(t\) and \(t+1\) and so forth denoting the intervals \([t+n\Delta t,t+(n+1)\Delta t)\) i.e.~\(t\) may be any time and the integer representing how many time jumps of size \(\Delta t\) has been made since \(t\).
-
-Under the assumptions above it is reasonable to assume that \(V_t\) is Markovian in the sense that there exist \(d\ge 1\) random sources \(\mathbf{Z}_t=(Z_{t,1},...,Z_{t,d})^\top\) such that
+Assume furthermore that for each coordinate function \(Y_{ij}(t)\) the equation
 
 \[
-V_t=f(t,\mathbf{Z}_t)\tag{2.2}
+\frac{dY_{ij}}{dt}(t)=Y_{i1}(t)A_{1j}(t)+\cdots+Y_{in}(t)A_{nj}(t),\hspace{15pt}Y_{ij}(s)=C_{ij},
 \]
 
-for some measurable function \(f : \mathbb{R}_+\times \mathbb{R}^d\to\mathbb{R}\). We will call \(\mathbf{Z}_t\) the \emph{risk factors} associated with the portfolio. The could be for instance the stockprice of a stock held in the portfolio. We may now define the \emph{loss variable} as \(L_{t+1}:=-(V_{t+1}-V_t)\) and \emph{risk-factor changes} as \(\mathbf{X}_{t+1}:=\mathbf{Z}_{t+1}-\mathbf{Z}_t\) and see that
+is satisfied. That is on matrix form the linear system of differential equation
 
 \[
-L_{t+1}=-\left(f(t+1,\mathbf{Z}_t+\mathbf{X}_{t+1})-f(t,\mathbf{Z}_t)\right),\tag{2.3}
+\frac{dY}{dt}(t)=Y(t)A(t),\hspace{15pt}Y(s)=C,
 \]
 
-if one assume differentiability of \(f\) we may approximate \(L_{t+1}\) as
+for some function \(A : \mathbb{R}\to\mathbb{R}^{n\times n}\) and initial condition \(C\in \mathbb{R}^{n\times n}\). If \(A\) is continuous we know that \(Y\) is well-defined and absolutely continuous. We may then state the following theorem regarding uniqueness and existence of such a function above.
+
+\textbf{Theorem 1.1. (Bladt)} \textbf{(Uniqueness)} \emph{Consider the homogeneous system of linear differential equations}
 
 \[
-L_{t+1}^\Delta:=-\left(\frac{\partial f}{\partial t}(t,\mathbf{Z}_t)+\sum_{i=1}^d \frac{\partial f}{\partial z_i}(t,\mathbf{Z}_t)\mathbf{X}_{t+1,i}\right).\tag{2.4}
+\mathbf{Y}'(t)=\mathbf{Y}(t)\mathbf{A}(t),\hspace{15pt} \mathbf{Y}(s)=\mathbf{C},\tag{1}
 \]
 
-This is obviously a nice linear but the approximation error may be large if \(\Delta t\) is large. We are interested in the the distribution of \(L_{t+1}\) such that we may determine sufficiently capital holding in realtion to the risk associated with the assets and liabilities held on the firm's balance sheet.
+\emph{where \(\mathbf{Y}(t)\), \(\mathbf{A}(t)\) and \(\mathbf{C}\) are \(n\times n\)-matrices and \(\mathbf{A}(t)\) is continuous on \([s,t]\). Then (1) has at most one solution.}
 
-\hypertarget{risk-measures}{%
-\subsection{Risk measures}\label{risk-measures}}
-
-In the general sense, a \emph{risk measure} is simply a measurable function \(\rho : \mathbb{L} \to\mathbb{R}\) taking a loss variable \(L\in \mathbb{L}\) as input and associating a number \(\rho(L)\) as output. In this setting we let \(\mathbb{L}\) be the set of all real-valued random variables. We may interpret this as the riskyness of the portfolio with associated loss variable \(L\). That is say we have two loss variable from the value processes \(V\) and \(V'\) i.e.~\(L\) and \(L'\) we say that \(V\) is riskier than \(V'\) if and only if \(\rho(L)\ge \rho(L')\).
-
-We may now consider the fundamental definition of a coherent risk measures as in \href{https://www.researchgate.net/publication/227614132_Coherent_Measures_of_Risk}{\emph{Coherent Measures of Risk}} by Artzner, Delbean, Eber and Heath (1999), by first stating the definition of a risk measure.
-
-\textbf{Definition.} \textbf{(Risk Measure)} \emph{Let \(\mathbb{L}\) be the set of all real valued random variable i.e.}
+\textbf{Theorem 1.2. (Bladt)} \textbf{(Existance)} \emph{The matrix function}
 
 \[
-\mathbb{L}=\left\{X\ \vert \ X : (\Omega,P,\mathcal{F})\to (\mathbb{R},\mathbb{B})\right\}
+\mathbf{Y}(t)=\sum_{k=0}^\infty \mathbf{Y}_k(t),\tag{3}
 \]
 
-\emph{Any mapping \(\rho : \mathbb{L} \to\mathbb{R}\) is called a measure of risk.}
+\emph{converges uniformly and absolutely on finite intervals, and solves the differential equation}
 
-We now want some properties to be satisfied by the mapping \(\rho\) such that it is a sensable measure of risk. To this we define four axioms as.
+\[
+\mathbf{Y}'(t)=\mathbf{Y}(t)\mathbf{A}(t),\hspace{15pt} \mathbf{Y}(s)=\mathbf{C}.
+\]
 
-\textbf{Definition.} \textbf{(Coherent Risk Measure)} \emph{Let \(\rho\) be a measure of risk. We say that \(\rho\) is a coherent risk measure if and only if \(\rho\) satisfies the axioms below.}
+Now, we know that for any system as in (1) with a continuous function \(\mathbf{A}(t)\) we can always construct the solution as some converging series as per theorem 1.2 then theorem 1.1 gives that the solution is unique. We can then with a piece of mind define a symbol for such a solution, without care for the \emph{exact} solution.
+
+\textbf{Definition 1.3. (Bladt)} \textbf{(The Product Integral)} \emph{For any continuous matrix function \(\mathbf{A}(t)\) we define the product integral as}
+
+\[
+\prod_{s}^t(\mathbf{I}+\mathbf{A}(x)\ dx)
+\]
+
+\emph{as the unique solution \(\mathbf{Y}(t)\) to}
+
+\[
+\mathbf{Y}'(t)=\mathbf{Y}(t)\mathbf{A}(t),\hspace{15pt} \mathbf{Y}(s)=\mathbf{I}.
+\]
+
+From a simple integral argument we may construct \emph{a} converging series not containing \(\mathbf{Y}\) itself. We see that
+\begin{align*}
+\prod_{s}^t(\mathbf{I}+\mathbf{A}(x)\ dx)&=\mathbf{I}+\int_s^t\mathbf{Y}'(x)\ dx=\mathbf{I}+\int_s^t\mathbf{Y}(x)\mathbf{A}(x)\ dx\\
+&=\mathbf{I}+\int_s^t\left[ \mathbf{I}+\int_s^{x_1}\mathbf{Y}'(x_2)\ dx_2\right]\mathbf{A}(x_1)\ dx_1\\
+&=\mathbf{I}+\int_s^t\left[ \mathbf{I}+\int_s^{x_1}\mathbf{Y}(x_2)\mathbf{A}(x_2)\ dx_2\right]\mathbf{A}(x_1)\ dx_1\\
+&=\mathbf{I}+\int_s^t\mathbf{A}(x_1)\ dx_1+\int_s^t\int_s^{x_1}\mathbf{Y}(x_2)\mathbf{A}(x_2)\mathbf{A}(x_1)\ dx_2\ dx_1.
+\end{align*}
+One can continue indefinitely and see that we have the following representation.
+
+\textbf{Corollary 1.4. (Bladt)} \textbf{(Peano Representation)} \emph{The prduct integral has series representation given by}
+\begin{align*}
+\prod_{s}^t(\mathbf{I}+\mathbf{A}(x)\ dx)&=\mathbf{I}+\sum_{i=1}^\infty\int_s^t\int_s^{x_1}\cdots\int_s^{x_n}A(x_n)\cdots\mathbf{A}(x_2)\mathbf{A}(x_1)\ dx_n\cdots dx_2\ dx_1\\
+&=\mathbf{I}+\int_s^t\mathbf{A}(x_1)\ dx_1+\sum_{i=2}^\infty\int_s^t\int_s^{x_1}\cdots\int_s^{x_n}A(x_n)\cdots\mathbf{A}(x_2)\mathbf{A}(x_1)\ dx_n\cdots dx_2\ dx_1.
+\end{align*}
+
+\hypertarget{linear-algebra}{%
+\chapter{Linear Algebra}\label{linear-algebra}}
+
+\hypertarget{invertible-matrices}{%
+\section{Invertible matrices}\label{invertible-matrices}}
+
+This sections study some fundamental properties of the \emph{invertible matrix}\index{invertible matrix}. We start by defining what an invertible matrix is.
+
+\textbf{Definition.} \emph{Let \(A\) be an \(n\times m\) matrix and \(B\) be an \(m\times n\) matrix. We say that \(A\) is invertible if}
+
+\[
+AB=I_{\min(m,n)}.
+\]
+
+\emph{In general, we only consider square matrices. If the above holds we say that \(B\) is \(A\)'s inverse and we write \(B=A^{-1}\).}
+
+We can consider some equivalence statements regarding invertible matrices.
+
+\textbf{Theorem.} \textbf{(The Invertible Matrix Theorem)} \emph{Let \(A\) be a \(n\times n\) matrix over a field \(K\) (\(\mathbb{R}^n\)), then the following statements are equivalent}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Translation invariance:} \emph{Let \(\alpha\in\mathbb{R}\) and \(r\) be a predictable process we have \(\rho(X+\alpha\cdot r)=\rho(X)+\alpha\).}
+  \emph{There exists an \(n\times n\) matrix \(B\) such that \(AB=I_n=BA\).}
 \item
-  \textbf{Subadditivity:} \emph{Let \(X_1,X_2\in\mathbb{L}\), then \(\rho(X_1+X_2)\le \rho(X_1)+\rho(X_2)\).}
+  \emph{There exist either a left inverse \(B\) or a right invers \(C\) i.e.~\(BA=I_n=AC\). In this case, \(B=C\).}
 \item
-  \textbf{Positive homogeneity:} \emph{Let \(c>0\), then \(\rho(cX)=c\rho(X)\).}
+  \emph{\(A\) has an inverse and is nonsingular and is nondegenerate.}
 \item
-  \textbf{Monotonicity:} \emph{Let \(X,Y\in\mathbb{L}\) such that \(X\le Y\) \(P\)-a.s., then \(\rho(X)\le \rho(Y)\).}
+  \emph{\(A\) is row-equivalent to \(I_n\).}
+\item
+  \emph{\(A\) is column-equivalent to \(I_n\).}
+\item
+  \emph{\(A\) has \(n\) pivot positions.}
+\item
+  \emph{\(A\) has full rank i.e.~\(\text{rank}(A)=n\) (spans \(K\)).}
+\item
+  \emph{The equation \(Ax=0\) (\(x\in K\)) has only the trivial solution \(x=0\).}
+\item
+  \emph{The equation \(Ax=b\) has only one solution \(x\).}
+\item
+  \emph{The kernal of \(A\) is trivial i.e.~\(\text{ker}(A)=\{0\}\).}
+\item
+  \emph{The columns of \(A\) are linearly independent.}
+\item
+  \emph{The columns of \(A\) span \(K\).}
+\item
+  \emph{\(\text{span}(A)=K\).}
+\item
+  \emph{The columns of \(A\) form a basis of \(K\).}
+\item
+  \emph{The linear transformation \(Ax\) is a bijection from \(K\) to \(K\).}
+\item
+  \emph{\(A\) has non-zero determinant i.e.~\(\text{det}(A)\ne 0\).}
+\item
+  \emph{\(A\) has not 0 as an eigenvalue.}
+\item
+  \emph{The transpose of \(A\) is invertible.}
+\item
+  \emph{\(A\) can be expressed as a finite product of elemtary matrices.}
 \end{enumerate}
 
-\emph{Remark:} We see that axiom (1) gives the equation \(\rho(X+\rho(X)\cdot r)=0\) i.e.~we may hedge the risk by holding \(\rho(X)\) in a asset with rate of return \(r\). The axiom (2) ensures that we take into account the correlation of multiple assets i.e.~we will in general not experience the maximal loss of two sources at the same time (although this is possible). If \(X_1\) and \(X_2\) satisfies \(\text{Corr}(X_1,X_2)=1\) then \(\rho(X_1+X_2)= \rho(X_1)+\rho(X_2)\).
+We futhermore have some properties.
 
-There exist alot of different tangible measures of risk, some being coherent others non-coherent. The most well studied include Value at Risk VaR and Expected Shortfall ES. These two measures are in the realm of the loss distribution approach, however before studying these we introduce a few other worthy mentions: Factor sensitivity measures and scenario based risk measures:
+\textbf{Proposition.} \textbf{(Properties)} \emph{Let \(A\) be an \(n\times n\) invertible matrix. Then}
 
-\textbf{Factor sensitivity measures} are measures on the form \(\rho=g(\nabla L)\) where \(g\) is some \(d\)-dimensional measurable function. In this \(\nabla L\) is the gradient i.e.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \((A^{-1})^{-1}=A\)
+\item
+  \((kA)^{-1}=k^{-1}A^{-1}\) \emph{with \(k\ne 0\).}
+\item
+  \((Ax)^+=x^+A^{-1}\) \emph{if \(A\) has orthonormal columns. \((\cdot)^+\) denotes the Moore-Penrose inverse and \(x\) is a vector.}
+\item
+  \emph{If \(B\) is an \(n\times n\) invertible matrix then \((AB)^{-1}=B^{-1}A^{-1}\).}
+\item
+  \(\text{det}(A^{-1})=(\text{det}(A))^{-1}\)
+\end{enumerate}
+
+The property 2 is especially useful in some settings. Consider for instance
 
 \[
-\nabla L=\nabla \Big(f(t,\mathbf{Z}_t)-f(t+1,\mathbf{Z}_{t+1})\Big)=\left(\frac{\partial L}{\partial z_1},...,\frac{\partial L}{\partial z_d}\right).
+A=
+\begin{bmatrix}
+\sigma & 0\\
+\sigma & \sigma
+\end{bmatrix}=\sigma\begin{bmatrix}
+1 & 0\\
+1 & 1
+\end{bmatrix}=\sigma \tilde{A}.
 \]
 
-\textbf{Scenario based risk measures} are measures where one assume that a collection \(\mathbf{x}=(x_1,...,x_N)\) of events \(x_i\in \Omega\) such that \(\sum_{i=1}^N P(x_i)=1-\varepsilon\) for some small \(\varepsilon>0\). We may then associate the measures \(\psi\) as
+Then we simply find the inverse of \(\tilde{A}\) and multiply by \(\sigma^{-1}\). That is,
 
 \[
-\psi(L)=\max\left\{w_1L(x_1),...,w_NL(x_N)\right\},
+A^{-1}=\frac{1}{\sigma}\tilde{A}^{-1}=\frac{1}{\sigma}
+\begin{bmatrix}
+1 & 0\\
+-1 & 1
+\end{bmatrix}=
+\begin{bmatrix}
+1/\sigma & 0\\
+-1/\sigma & 1/\sigma
+\end{bmatrix}.
 \]
 
-with \(\mathbf{w}\ge 0\) and \(\sum_{i=1}^Nw_i=1\) being weights. That is \(\psi\) gives the largest weighted loss. A natural way of choosing \(w_i\) is such that \(w_i\approx P(x_i)\), but one may also weight certain events with a larger weight for a more prudent measure. Notice also that the criteria \(\sum_{i=1}^N P(x_i)=1-\varepsilon\) does not necessarily have to be satisfied when considering the worst possible outcomes.
+We have an easy propositions regarding diagonal matrices.
 
-\hypertarget{value-at-risk}{%
-\subsubsection{Value at Risk}\label{value-at-risk}}
+\textbf{Proposition.} \emph{If \(A\) is an diagonal matrix\index{diagonal matrix}, then \(A\) is invertible. In particular,}
 
-The Value at Risk, henceforth VaR, is a quantile measure of the loss distribution \(F_L\) associated with \(L\). We define VaR as such:
-
-\textbf{Definition 2.8. (McNeil)} \textbf{(Value-at-Risk)} \emph{Let \(\alpha\in (0,1)\) (\(\alpha\) being large) we define the VaR of a portfolio with loss variable \(L\) at the confidence level \(\alpha\) is a given by}
-\begin{align*}
-\text{VaR}_\alpha(L)&=\inf\left\{ l\in\mathbb{R}\ :\ P(L>l)\le 1-\alpha \right\}\\
-&=\inf\left\{ l\in\mathbb{R}\ :\ F_L(l)\ge \alpha \right\}\\
-&=F^{\leftarrow}_L(\alpha),
-\end{align*}
-\emph{where \(F^{\leftarrow}_L\) is the generalized inverse of \(F_L\).}
-
-\begin{wrapfigure}{r}{0.5\textwidth}
-  \begin{center}
-    \includegraphics[width=0.48\textwidth]{figures/VaR_ES.png}
-  \end{center}
-\end{wrapfigure}
-
-There exist alot of different tangible measures of risk, some being coherent others non-coherent. The most well studied include Value at Risk VaR and Expected Shortfall ES. These two measures are in the realm of the loss distribution approach, however before studying these we introduce a few other worthy mentions: Factor sensitivity measures and scenario based risk measures:
+\[
+A^{-1}=\text{diag}(A_{11}^{-1},...,A_{nn}^{-1}).
+\]
 
 \newpage
 
