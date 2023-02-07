@@ -1,7 +1,6 @@
 fig:unnamed-chunk-3
 references
 life-insurance-mathematics
-section
 finance
 discrete-time-models
 one-period-time-models

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Measure theory | Complete Theory</title>
-  <meta name="description" content="Chapter 8 Measure theory | Complete Theory" />
+  <title>Chapter 7 Measure theory | Complete Theory</title>
+  <meta name="description" content="Chapter 7 Measure theory | Complete Theory" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Measure theory | Complete Theory" />
+  <meta property="og:title" content="Chapter 7 Measure theory | Complete Theory" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Measure theory | Complete Theory" />
+  <meta name="twitter:title" content="Chapter 7 Measure theory | Complete Theory" />
   
   
   
@@ -62,6 +62,36 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<div class = "sticky-darkmode-toggle">
+  <label class="switch">
+  <input type="checkbox" onclick="myFunction()">
+  <span class="slider round">
+  </span>
+  </label>
+</div>
+
+<script>
+$(function() {
+  $('body').after($('.sticky-darkmode-toggle'));
+})
+</script>
+
+<style>
+
+.sticky-darkmode-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+</style>
+
+<script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+
 
 
 <style type="text/css">
@@ -148,113 +178,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> References</a></li>
 <li class="chapter" data-level="2" data-path="life-insurance-mathematics.html"><a href="life-insurance-mathematics.html"><i class="fa fa-check"></i><b>2</b> Life Insurance Mathematics</a></li>
-<li class="chapter" data-level="3" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>3</b> </a></li>
-<li class="chapter" data-level="4" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>4</b> Finance</a>
+<li class="chapter" data-level="3" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>3</b> Finance</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="finance.html"><a href="finance.html#discrete-time-models"><i class="fa fa-check"></i><b>4.1</b> Discrete time models</a>
+<li class="chapter" data-level="3.1" data-path="finance.html"><a href="finance.html#discrete-time-models"><i class="fa fa-check"></i><b>3.1</b> Discrete time models</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="finance.html"><a href="finance.html#one-period-time-models"><i class="fa fa-check"></i><b>4.1.1</b> One-period time models</a></li>
-<li class="chapter" data-level="4.1.2" data-path="finance.html"><a href="finance.html#multi-period-model"><i class="fa fa-check"></i><b>4.1.2</b> Multi-period model</a></li>
-<li class="chapter" data-level="4.1.3" data-path="finance.html"><a href="finance.html#generelised-one-period-model"><i class="fa fa-check"></i><b>4.1.3</b> Generelised one-period model</a></li>
+<li class="chapter" data-level="3.1.1" data-path="finance.html"><a href="finance.html#one-period-time-models"><i class="fa fa-check"></i><b>3.1.1</b> One-period time models</a></li>
+<li class="chapter" data-level="3.1.2" data-path="finance.html"><a href="finance.html#multi-period-model"><i class="fa fa-check"></i><b>3.1.2</b> Multi-period model</a></li>
+<li class="chapter" data-level="3.1.3" data-path="finance.html"><a href="finance.html#generelised-one-period-model"><i class="fa fa-check"></i><b>3.1.3</b> Generelised one-period model</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="finance.html"><a href="finance.html#self-financing-portfolios"><i class="fa fa-check"></i><b>4.2</b> Self-financing portfolios</a>
+<li class="chapter" data-level="3.2" data-path="finance.html"><a href="finance.html#self-financing-portfolios"><i class="fa fa-check"></i><b>3.2</b> Self-financing portfolios</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="finance.html"><a href="finance.html#discrete-time-sf-portfolio"><i class="fa fa-check"></i><b>4.2.1</b> Discrete time SF portfolio</a></li>
-<li class="chapter" data-level="4.2.2" data-path="finance.html"><a href="finance.html#continuous-time-sf-portfolio"><i class="fa fa-check"></i><b>4.2.2</b> Continuous time SF portfolio</a></li>
-<li class="chapter" data-level="4.2.3" data-path="finance.html"><a href="finance.html#portfolio-weights"><i class="fa fa-check"></i><b>4.2.3</b> Portfolio weights</a></li>
+<li class="chapter" data-level="3.2.1" data-path="finance.html"><a href="finance.html#discrete-time-sf-portfolio"><i class="fa fa-check"></i><b>3.2.1</b> Discrete time SF portfolio</a></li>
+<li class="chapter" data-level="3.2.2" data-path="finance.html"><a href="finance.html#continuous-time-sf-portfolio"><i class="fa fa-check"></i><b>3.2.2</b> Continuous time SF portfolio</a></li>
+<li class="chapter" data-level="3.2.3" data-path="finance.html"><a href="finance.html#portfolio-weights"><i class="fa fa-check"></i><b>3.2.3</b> Portfolio weights</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="finance.html"><a href="finance.html#black-scholes-pde"><i class="fa fa-check"></i><b>4.3</b> Black-Scholes PDE</a>
+<li class="chapter" data-level="3.3" data-path="finance.html"><a href="finance.html#black-scholes-pde"><i class="fa fa-check"></i><b>3.3</b> Black-Scholes PDE</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="finance.html"><a href="finance.html#contingent-claims-and-arbitrage"><i class="fa fa-check"></i><b>4.3.1</b> Contingent Claims and Arbitrage</a></li>
-<li class="chapter" data-level="4.3.2" data-path="finance.html"><a href="finance.html#risk-neutral-valuation-1"><i class="fa fa-check"></i><b>4.3.2</b> Risk Neutral Valuation</a></li>
-<li class="chapter" data-level="4.3.3" data-path="finance.html"><a href="finance.html#black-scholes-formula"><i class="fa fa-check"></i><b>4.3.3</b> Black-Scholes formula</a></li>
+<li class="chapter" data-level="3.3.1" data-path="finance.html"><a href="finance.html#contingent-claims-and-arbitrage"><i class="fa fa-check"></i><b>3.3.1</b> Contingent Claims and Arbitrage</a></li>
+<li class="chapter" data-level="3.3.2" data-path="finance.html"><a href="finance.html#risk-neutral-valuation-1"><i class="fa fa-check"></i><b>3.3.2</b> Risk Neutral Valuation</a></li>
+<li class="chapter" data-level="3.3.3" data-path="finance.html"><a href="finance.html#black-scholes-formula"><i class="fa fa-check"></i><b>3.3.3</b> Black-Scholes formula</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="finance.html"><a href="finance.html#completeness-and-hedging"><i class="fa fa-check"></i><b>4.4</b> Completeness and Hedging</a>
+<li class="chapter" data-level="3.4" data-path="finance.html"><a href="finance.html#completeness-and-hedging"><i class="fa fa-check"></i><b>3.4</b> Completeness and Hedging</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="finance.html"><a href="finance.html#completeness-in-black-scholes"><i class="fa fa-check"></i><b>4.4.1</b> Completeness in Black-Scholes</a></li>
-<li class="chapter" data-level="4.4.2" data-path="finance.html"><a href="finance.html#absence-of-arbitrage-1"><i class="fa fa-check"></i><b>4.4.2</b> Absence of Arbitrage</a></li>
-<li class="chapter" data-level="4.4.3" data-path="finance.html"><a href="finance.html#incomplete-markets"><i class="fa fa-check"></i><b>4.4.3</b> Incomplete Markets</a></li>
+<li class="chapter" data-level="3.4.1" data-path="finance.html"><a href="finance.html#completeness-in-black-scholes"><i class="fa fa-check"></i><b>3.4.1</b> Completeness in Black-Scholes</a></li>
+<li class="chapter" data-level="3.4.2" data-path="finance.html"><a href="finance.html#absence-of-arbitrage-1"><i class="fa fa-check"></i><b>3.4.2</b> Absence of Arbitrage</a></li>
+<li class="chapter" data-level="3.4.3" data-path="finance.html"><a href="finance.html#incomplete-markets"><i class="fa fa-check"></i><b>3.4.3</b> Incomplete Markets</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="finance.html"><a href="finance.html#parity-relations"><i class="fa fa-check"></i><b>4.5</b> Parity relations</a>
+<li class="chapter" data-level="3.5" data-path="finance.html"><a href="finance.html#parity-relations"><i class="fa fa-check"></i><b>3.5</b> Parity relations</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="finance.html"><a href="finance.html#put-call-parity"><i class="fa fa-check"></i><b>4.5.1</b> Put-call Parity</a></li>
-<li class="chapter" data-level="4.5.2" data-path="finance.html"><a href="finance.html#the-greeks"><i class="fa fa-check"></i><b>4.5.2</b> The Greeks</a></li>
+<li class="chapter" data-level="3.5.1" data-path="finance.html"><a href="finance.html#put-call-parity"><i class="fa fa-check"></i><b>3.5.1</b> Put-call Parity</a></li>
+<li class="chapter" data-level="3.5.2" data-path="finance.html"><a href="finance.html#the-greeks"><i class="fa fa-check"></i><b>3.5.2</b> The Greeks</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="finance.html"><a href="finance.html#fundamental-pricing-theorem-i-and-ii"><i class="fa fa-check"></i><b>4.6</b> Fundamental pricing theorem I and II</a>
+<li class="chapter" data-level="3.6" data-path="finance.html"><a href="finance.html#fundamental-pricing-theorem-i-and-ii"><i class="fa fa-check"></i><b>3.6</b> Fundamental pricing theorem I and II</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="finance.html"><a href="finance.html#completeness-1"><i class="fa fa-check"></i><b>4.6.1</b> Completeness</a></li>
-<li class="chapter" data-level="4.6.2" data-path="finance.html"><a href="finance.html#risk-neutral-valuation-formula"><i class="fa fa-check"></i><b>4.6.2</b> Risk Neutral Valuation Formula</a></li>
-<li class="chapter" data-level="4.6.3" data-path="finance.html"><a href="finance.html#stochastic-discount-factors-1"><i class="fa fa-check"></i><b>4.6.3</b> Stochastic Discount Factors</a></li>
-<li class="chapter" data-level="4.6.4" data-path="finance.html"><a href="finance.html#summary"><i class="fa fa-check"></i><b>4.6.4</b> Summary</a></li>
+<li class="chapter" data-level="3.6.1" data-path="finance.html"><a href="finance.html#completeness-1"><i class="fa fa-check"></i><b>3.6.1</b> Completeness</a></li>
+<li class="chapter" data-level="3.6.2" data-path="finance.html"><a href="finance.html#risk-neutral-valuation-formula"><i class="fa fa-check"></i><b>3.6.2</b> Risk Neutral Valuation Formula</a></li>
+<li class="chapter" data-level="3.6.3" data-path="finance.html"><a href="finance.html#stochastic-discount-factors-1"><i class="fa fa-check"></i><b>3.6.3</b> Stochastic Discount Factors</a></li>
+<li class="chapter" data-level="3.6.4" data-path="finance.html"><a href="finance.html#summary"><i class="fa fa-check"></i><b>3.6.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="finance.html"><a href="finance.html#mathematics-of-the-martingale-approach"><i class="fa fa-check"></i><b>4.7</b> Mathematics of the martingale approach</a>
+<li class="chapter" data-level="3.7" data-path="finance.html"><a href="finance.html#mathematics-of-the-martingale-approach"><i class="fa fa-check"></i><b>3.7</b> Mathematics of the martingale approach</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="finance.html"><a href="finance.html#martingale-representation-theorem"><i class="fa fa-check"></i><b>4.7.1</b> Martingale representation theorem</a></li>
-<li class="chapter" data-level="4.7.2" data-path="finance.html"><a href="finance.html#girsanov-theorem"><i class="fa fa-check"></i><b>4.7.2</b> Girsanov theorem</a></li>
+<li class="chapter" data-level="3.7.1" data-path="finance.html"><a href="finance.html#martingale-representation-theorem"><i class="fa fa-check"></i><b>3.7.1</b> Martingale representation theorem</a></li>
+<li class="chapter" data-level="3.7.2" data-path="finance.html"><a href="finance.html#girsanov-theorem"><i class="fa fa-check"></i><b>3.7.2</b> Girsanov theorem</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="finance.html"><a href="finance.html#black-scholes-model---martingale-approach"><i class="fa fa-check"></i><b>4.8</b> Black-Scholes model - martingale approach</a></li>
-<li class="chapter" data-level="4.9" data-path="finance.html"><a href="finance.html#multidimensional-models"><i class="fa fa-check"></i><b>4.9</b> Multidimensional models</a></li>
+<li class="chapter" data-level="3.8" data-path="finance.html"><a href="finance.html#black-scholes-model---martingale-approach"><i class="fa fa-check"></i><b>3.8</b> Black-Scholes model - martingale approach</a></li>
+<li class="chapter" data-level="3.9" data-path="finance.html"><a href="finance.html#multidimensional-models"><i class="fa fa-check"></i><b>3.9</b> Multidimensional models</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="non-life-insurance-mathematics.html"><a href="non-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>5</b> Non-Life Insurance Mathematics</a></li>
-<li class="chapter" data-level="6" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html"><i class="fa fa-check"></i><b>6</b> Probabilistic Machine Learning</a></li>
-<li class="chapter" data-level="7" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html"><i class="fa fa-check"></i><b>7</b> Quantative Risk Management</a>
+<li class="chapter" data-level="4" data-path="non-life-insurance-mathematics.html"><a href="non-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>4</b> Non-Life Insurance Mathematics</a></li>
+<li class="chapter" data-level="5" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html"><i class="fa fa-check"></i><b>5</b> Probabilistic Machine Learning</a></li>
+<li class="chapter" data-level="6" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html"><i class="fa fa-check"></i><b>6</b> Quantative Risk Management</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#the-loss-variable"><i class="fa fa-check"></i><b>7.1</b> The Loss Variable</a>
+<li class="chapter" data-level="6.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#the-loss-variable"><i class="fa fa-check"></i><b>6.1</b> The Loss Variable</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#risk-measures"><i class="fa fa-check"></i><b>7.1.1</b> Risk measures</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="measure-theory.html"><a href="measure-theory.html"><i class="fa fa-check"></i><b>8</b> Measure theory</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures"><i class="fa fa-check"></i><b>8.1</b> Equivalent Probability Measures</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="measure-theory.html"><a href="measure-theory.html#the-radon-nikodym-theorem"><i class="fa fa-check"></i><b>8.1.1</b> The Radon-Nikodym Theorem</a></li>
-<li class="chapter" data-level="8.1.2" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures-1"><i class="fa fa-check"></i><b>8.1.2</b> Equivalent Probability Measures</a></li>
-<li class="chapter" data-level="8.1.3" data-path="measure-theory.html"><a href="measure-theory.html#likelihood-processes"><i class="fa fa-check"></i><b>8.1.3</b> Likelihood processes</a></li>
+<li class="chapter" data-level="6.1.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#risk-measures"><i class="fa fa-check"></i><b>6.1.1</b> Risk measures</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="random-variables.html"><a href="random-variables.html"><i class="fa fa-check"></i><b>9</b> Random Variables</a>
+<li class="chapter" data-level="7" data-path="measure-theory.html"><a href="measure-theory.html"><i class="fa fa-check"></i><b>7</b> Measure theory</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="random-variables.html"><a href="random-variables.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
-<li class="chapter" data-level="9.2" data-path="random-variables.html"><a href="random-variables.html#conditional-expectation"><i class="fa fa-check"></i><b>9.2</b> Conditional expectation</a></li>
-<li class="chapter" data-level="9.3" data-path="random-variables.html"><a href="random-variables.html#independence"><i class="fa fa-check"></i><b>9.3</b> Independence</a></li>
-<li class="chapter" data-level="9.4" data-path="random-variables.html"><a href="random-variables.html#moment-generating-function"><i class="fa fa-check"></i><b>9.4</b> Moment generating function</a></li>
-<li class="chapter" data-level="9.5" data-path="random-variables.html"><a href="random-variables.html#standard-distributions"><i class="fa fa-check"></i><b>9.5</b> Standard distributions</a>
+<li class="chapter" data-level="7.1" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures"><i class="fa fa-check"></i><b>7.1</b> Equivalent Probability Measures</a>
 <ul>
-<li class="chapter" data-level="9.5.1" data-path="random-variables.html"><a href="random-variables.html#normal-disribution"><i class="fa fa-check"></i><b>9.5.1</b> Normal disribution</a></li>
+<li class="chapter" data-level="7.1.1" data-path="measure-theory.html"><a href="measure-theory.html#the-radon-nikodym-theorem"><i class="fa fa-check"></i><b>7.1.1</b> The Radon-Nikodym Theorem</a></li>
+<li class="chapter" data-level="7.1.2" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures-1"><i class="fa fa-check"></i><b>7.1.2</b> Equivalent Probability Measures</a></li>
+<li class="chapter" data-level="7.1.3" data-path="measure-theory.html"><a href="measure-theory.html#likelihood-processes"><i class="fa fa-check"></i><b>7.1.3</b> Likelihood processes</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html"><i class="fa fa-check"></i><b>10</b> Discrete Time Stochastic Processes</a>
+<li class="chapter" data-level="8" data-path="random-variables.html"><a href="random-variables.html"><i class="fa fa-check"></i><b>8</b> Random Variables</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#convergence-concepts"><i class="fa fa-check"></i><b>10.1</b> Convergence concepts</a>
+<li class="chapter" data-level="8.1" data-path="random-variables.html"><a href="random-variables.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="random-variables.html"><a href="random-variables.html#conditional-expectation"><i class="fa fa-check"></i><b>8.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="8.3" data-path="random-variables.html"><a href="random-variables.html#independence"><i class="fa fa-check"></i><b>8.3</b> Independence</a></li>
+<li class="chapter" data-level="8.4" data-path="random-variables.html"><a href="random-variables.html#moment-generating-function"><i class="fa fa-check"></i><b>8.4</b> Moment generating function</a></li>
+<li class="chapter" data-level="8.5" data-path="random-variables.html"><a href="random-variables.html#standard-distributions"><i class="fa fa-check"></i><b>8.5</b> Standard distributions</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#sums-and-average-processes"><i class="fa fa-check"></i><b>10.1.1</b> Sums and average processes</a></li>
-<li class="chapter" data-level="10.1.2" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#ergodic-theory"><i class="fa fa-check"></i><b>10.1.2</b> Ergodic Theory</a></li>
-<li class="chapter" data-level="10.1.3" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#weak-convergence"><i class="fa fa-check"></i><b>10.1.3</b> Weak Convergence</a></li>
-<li class="chapter" data-level="10.1.4" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#central-limit-theorems"><i class="fa fa-check"></i><b>10.1.4</b> Central Limit Theorems</a></li>
+<li class="chapter" data-level="8.5.1" data-path="random-variables.html"><a href="random-variables.html#normal-disribution"><i class="fa fa-check"></i><b>8.5.1</b> Normal disribution</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html"><i class="fa fa-check"></i><b>11</b> Continuous Time Stochastic Processes</a>
+<li class="chapter" data-level="9" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html"><i class="fa fa-check"></i><b>9</b> Discrete Time Stochastic Processes</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#brownian-motion"><i class="fa fa-check"></i><b>11.1</b> Brownian Motion</a></li>
-<li class="chapter" data-level="11.2" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#filtration"><i class="fa fa-check"></i><b>11.2</b> Filtration</a></li>
-<li class="chapter" data-level="11.3" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#martingale"><i class="fa fa-check"></i><b>11.3</b> Martingale</a></li>
-<li class="chapter" data-level="11.4" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-calculus"><i class="fa fa-check"></i><b>11.4</b> Stochastic calculus</a>
+<li class="chapter" data-level="9.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#convergence-concepts"><i class="fa fa-check"></i><b>9.1</b> Convergence concepts</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-integrals"><i class="fa fa-check"></i><b>11.4.1</b> Stochastic Integrals</a></li>
-<li class="chapter" data-level="11.4.2" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#discrete-stochastic-integrals"><i class="fa fa-check"></i><b>11.4.2</b> Discrete Stochastic Integrals</a></li>
-<li class="chapter" data-level="11.4.3" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-differential-equations"><i class="fa fa-check"></i><b>11.4.3</b> Stochastic Differential Equations</a></li>
-<li class="chapter" data-level="11.4.4" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#partial-differential-equations"><i class="fa fa-check"></i><b>11.4.4</b> Partial differential equations</a></li>
-<li class="chapter" data-level="11.4.5" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#the-product-integral"><i class="fa fa-check"></i><b>11.4.5</b> The Product Integral</a></li>
+<li class="chapter" data-level="9.1.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#sums-and-average-processes"><i class="fa fa-check"></i><b>9.1.1</b> Sums and average processes</a></li>
+<li class="chapter" data-level="9.1.2" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#ergodic-theory"><i class="fa fa-check"></i><b>9.1.2</b> Ergodic Theory</a></li>
+<li class="chapter" data-level="9.1.3" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#weak-convergence"><i class="fa fa-check"></i><b>9.1.3</b> Weak Convergence</a></li>
+<li class="chapter" data-level="9.1.4" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#central-limit-theorems"><i class="fa fa-check"></i><b>9.1.4</b> Central Limit Theorems</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>12</b> Linear Algebra</a>
+<li class="chapter" data-level="10" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html"><i class="fa fa-check"></i><b>10</b> Continuous Time Stochastic Processes</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="linear-algebra.html"><a href="linear-algebra.html#invertible-matrices"><i class="fa fa-check"></i><b>12.1</b> Invertible matrices</a></li>
+<li class="chapter" data-level="10.1" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#brownian-motion"><i class="fa fa-check"></i><b>10.1</b> Brownian Motion</a></li>
+<li class="chapter" data-level="10.2" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#filtration"><i class="fa fa-check"></i><b>10.2</b> Filtration</a></li>
+<li class="chapter" data-level="10.3" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#martingale"><i class="fa fa-check"></i><b>10.3</b> Martingale</a></li>
+<li class="chapter" data-level="10.4" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-calculus"><i class="fa fa-check"></i><b>10.4</b> Stochastic calculus</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-integrals"><i class="fa fa-check"></i><b>10.4.1</b> Stochastic Integrals</a></li>
+<li class="chapter" data-level="10.4.2" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#discrete-stochastic-integrals"><i class="fa fa-check"></i><b>10.4.2</b> Discrete Stochastic Integrals</a></li>
+<li class="chapter" data-level="10.4.3" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#stochastic-differential-equations"><i class="fa fa-check"></i><b>10.4.3</b> Stochastic Differential Equations</a></li>
+<li class="chapter" data-level="10.4.4" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#partial-differential-equations"><i class="fa fa-check"></i><b>10.4.4</b> Partial differential equations</a></li>
+<li class="chapter" data-level="10.4.5" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#the-product-integral"><i class="fa fa-check"></i><b>10.4.5</b> The Product Integral</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>11</b> Linear Algebra</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="linear-algebra.html"><a href="linear-algebra.html#invertible-matrices"><i class="fa fa-check"></i><b>11.1</b> Invertible matrices</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
-<li><a href="https://joakim-bilyk.github.io/index.html" target="blank">Back to main site</a></li>
+<li><a href="https://joakim-bilyk.github.io/index.html">Back to main site</a></li>
 
 </ul>
 
@@ -273,12 +302,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="measure-theory" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">Chapter 8</span> Measure theory<a href="measure-theory.html#measure-theory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="equivalent-probability-measures" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Equivalent Probability Measures<a href="measure-theory.html#equivalent-probability-measures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="the-radon-nikodym-theorem" class="section level3 hasAnchor" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> The Radon-Nikodym Theorem<a href="measure-theory.html#the-radon-nikodym-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="measure-theory" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Measure theory<a href="measure-theory.html#measure-theory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="equivalent-probability-measures" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Equivalent Probability Measures<a href="measure-theory.html#equivalent-probability-measures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-radon-nikodym-theorem" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> The Radon-Nikodym Theorem<a href="measure-theory.html#the-radon-nikodym-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote class="def">
 <p><strong>Definition A.50. (Bjork)</strong> <em>Consider a measurable space <span class="math inline">\((X,\mathcal{F})\)</span> on which there are defined two seperate measures <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span>:</em></p>
 <ul>
@@ -314,8 +343,8 @@ d\nu(x)=f(x)\ d\mu(x).\tag{A.13}
 \]</span></p>
 </blockquote>
 </div>
-<div id="equivalent-probability-measures-1" class="section level3 hasAnchor" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> Equivalent Probability Measures<a href="measure-theory.html#equivalent-probability-measures-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="equivalent-probability-measures-1" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Equivalent Probability Measures<a href="measure-theory.html#equivalent-probability-measures-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote class="lem">
 <p><strong>Lemma B.38. (Bjork)</strong> <em>For two probability measures <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>, the relation <span class="math inline">\(P\sim Q\)</span> on <span class="math inline">\(\mathcal{F}\)</span> holds if and only if <span class="math inline">\(P(A)=1\)</span> if and only if <span class="math inline">\(Q(A)=1\)</span> for all <span class="math inline">\(A\in\mathcal{F}\)</span>.</em></p>
 </blockquote>
@@ -336,8 +365,8 @@ E^Q[X\ \vert\ \mathcal{G}]=\frac{E^P[L\cdot X\ \vert\ \mathcal{G}]}{E^P[L\ \vert
 \]</span></p>
 </blockquote>
 </div>
-<div id="likelihood-processes" class="section level3 hasAnchor" number="8.1.3">
-<h3><span class="header-section-number">8.1.3</span> Likelihood processes<a href="measure-theory.html#likelihood-processes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="likelihood-processes" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Likelihood processes<a href="measure-theory.html#likelihood-processes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote class="prop">
 <p><strong>Proposition C.12. (Bjork)</strong> <em>Consider a filtered probability space <span class="math inline">\((\Omega, \mathcal{F},P,\mathcal{F}_t)\)</span> on a compact interval <span class="math inline">\([0,T]\)</span>. Suppose <span class="math inline">\(L_T\)</span> is some non-negative integrable random variable in <span class="math inline">\(\mathcal{F}_T\)</span>. We can then define a new measure <span class="math inline">\(Q\)</span> on <span class="math inline">\(\mathcal{F}_T\)</span> by setting</em></p>
 <p><span class="math display">\[
