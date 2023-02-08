@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-02-07" />
+<meta name="date" content="2023-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,9 +62,40 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
+<script>
+    $(function() {
+        var element = document.body;
+        if (localStorage.chkbx && localStorage.chkbx != '') {
+            $('#remember_me').attr('checked', 'checked');
+            element.classList.toggle("dark-mode");
+            document.querySelector('.book-header.fixed').click();
+        } else {
+            $('#remember_me').removeAttr('checked');
+            document.querySelector('.book-header.fixed').click();
+        }
+
+        $('#remember_me').click(function() {
+
+            if ($('#remember_me').is(':checked')) {
+                // save username and password
+                localStorage.chkbx = $('#remember_me').val();
+                element.classList.toggle("dark-mode");
+                document.querySelector('.book-header.fixed').click();
+            } else {
+                localStorage.chkbx = '';
+                element.classList.toggle("dark-mode");
+                document.querySelector('.book-header.fixed').click();
+            }
+        });
+    });
+
+</script>
+
 <div class = "sticky-darkmode-toggle">
   <label class="switch">
-  <input type="checkbox" onclick="myFunction()">
+  <input type="checkbox" value="remember-me" id="remember_me">
   <span class="slider round">
   </span>
   </label>
@@ -84,14 +115,6 @@ $(function() {
   bottom: 20px;
 }
 </style>
-
-<script>
-function myFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-}
-</script>
-
 
 
 <style type="text/css">
@@ -176,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Comlete theory</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> References</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Abbreviations</a></li>
 <li class="chapter" data-level="2" data-path="life-insurance-mathematics.html"><a href="life-insurance-mathematics.html"><i class="fa fa-check"></i><b>2</b> Life Insurance Mathematics</a></li>
 <li class="chapter" data-level="3" data-path="finance.html"><a href="finance.html"><i class="fa fa-check"></i><b>3</b> Finance</a>
 <ul>
@@ -281,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="linear-algebra.html"><a href="linear-algebra.html#invertible-matrices"><i class="fa fa-check"></i><b>11.1</b> Invertible matrices</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://joakim-bilyk.github.io/index.html">Back to main site</a></li>
 

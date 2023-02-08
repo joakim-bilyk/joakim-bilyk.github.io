@@ -37,25 +37,46 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
+<script>
+    $(function() {
+        var element = document.body;
+        if (localStorage.chkbx && localStorage.chkbx != '') {
+            $('#remember_me').attr('checked', 'checked');
+            element.classList.toggle("dark-mode");
+        } else {
+            $('#remember_me').removeAttr('checked');
+        }
+
+        $('#remember_me').click(function() {
+
+            if ($('#remember_me').is(':checked')) {
+                // save username and password
+                localStorage.chkbx = $('#remember_me').val();
+                element.classList.toggle("dark-mode");
+            } else {
+                localStorage.chkbx = '';
+                element.classList.toggle("dark-mode");
+            }
+        });
+    });
+
+</script>
+
 <div class = "sticky-darkmode-toggle">
   <label class="switch">
-  <input type="checkbox" onclick="myFunction()">
+  <input type="checkbox" value="remember-me" id="remember_me">
   <span class="slider round">
   </span>
   </label>
 </div>
 
-<script>
-$(function() {
-  $('.main-container').after($('.sticky-darkmode-toggle'));
-})
-</script>
-
 <style>
 
 .sticky-darkmode-toggle {
   position: fixed;
-  left: 20px;
+  right: 20px;
   bottom: 20px;
 }
 </style>
@@ -84,7 +105,7 @@ function myFunction() {
   display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
   bottom: 20px; /* Place the button at the bottom of the page */
-  right: 30px; /* Place the button 30px from the right */
+  left: 30px; /* Place the button 30px from the right */
   z-index: 99; /* Make sure it does not overlap */
   border: none; /* Remove borders */
   outline: none; /* Remove outline */

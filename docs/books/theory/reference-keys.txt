@@ -1,5 +1,5 @@
 fig:unnamed-chunk-3
-references
+abbreviations
 life-insurance-mathematics
 finance
 discrete-time-models
