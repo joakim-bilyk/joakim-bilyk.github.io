@@ -33,6 +33,46 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -87,7 +127,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{February 08, 2023}
+\date{February 13, 2023}
 
 \begin{document}
 %\maketitle
@@ -175,8 +215,11 @@ non-life insurance, stochastic differential equations.}
 \setcounter{page}{1}
 \pagenumbering{arabic}
 \pagestyle{fancy}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
 \hypertarget{abbreviations}{%
-\chapter{Abbreviations}\label{abbreviations}}
+\section{Abbreviations}\label{abbreviations}}
 
 Below is given the abbreviations used when referencing to books:
 
@@ -194,28 +237,496 @@ Source
 \end{minipage} \\
 \midrule()
 \endhead
+Basic Life Insurance Mathematics & & \\
+Stochastic Processes in Life Insurance Mathematics & & \\
 Life Insurance Mathematics & Asmussen & \emph{Risk and Insurance}: A Graduate Text by Soren Asmussen and Mogens Steffensen (2020). \\
-Finance & Bjork & \emph{Arbitrage Theory in Continuous Time (Fourth edition)} by Thomas Bjork, Oxford University Press (2019). \\
-Non-Life Insurance Mathematics & & \\
-Probabilistic Machine Learning & & \\
+& Bladt & Notes from lectures in Liv2. \\
+Topics in Life Insurance Mathematics & Asmussen & \emph{Risk and Insurance}: A Graduate Text by Soren Asmussen and Mogens Steffensen (2020). \\
+Continuous Time Finance & Bjork & \emph{Arbitrage Theory in Continuous Time (Fourth edition)} by Thomas Bjork, Oxford University Press (2019). \\
+Basic Non-Life Insurance Mathematics & & \\
+Stochastic Processes in Life Insurance Mathematics & & \\
+Topics in Non-Life Insurance Mathematics & & \\
+Probabilistic Machine Learning & \emph{None} & Slides from lectures. \\
 Quantative Risk Management & & \\
 Measure Theory & Bjork & \emph{Arbitrage Theory in Continuous Time (Fourth edition)} by Thomas Bjork, Oxford University Press (2019). \\
-Linear Algebra & Wiki & Wikipedia \\
+& Protter & \emph{Probability Essentials (2. edition)} by Jean Jacod and Philip Protter (2004). \\
 Random Variables & Bjork & \emph{Arbitrage Theory in Continuous Time (Fourth edition)} by Thomas Bjork, Oxford University Press (2019). \\
 & Hansen & \emph{Stochastic Processes} (2. edition) by Ernst Hansen (2021). \\
 Discrete Time Stochastic Processes & Hansen & \emph{Stochastic Processes} (2. edition) by Ernst Hansen (2021). \\
 Continuous Time Stochastic Processes & Bjork & \emph{Arbitrage Theory in Continuous Time (Fourth edition)} by Thomas Bjork, Oxford University Press (2019). \\
-Linear Algebra & & \\
+Stochastic Calculus & Bjork & \emph{Arbitrage Theory in Continuous Time (Fourth edition)} by Thomas Bjork, Oxford University Press (2019). \\
+& Bladt & Notes from lectures in Liv2. \\
+Linear Algebra & Wiki & Wikipedia \\
 \bottomrule()
 \end{longtable}
 
-\hypertarget{life-insurance-mathematics}{%
-\chapter{Life Insurance Mathematics}\label{life-insurance-mathematics}}
+\hypertarget{to-do-reading}{%
+\section{To-do reading}\label{to-do-reading}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule()
+Chapter & Note & Progress \\
+\midrule()
+\endhead
+Liv2 & Properties of product integral & Done \\
+& Relation to kolmogorov and markov chains & Bevis 2.3 og 2.12 \\
+ML & Risk measure and loss (First week in general) & \\
+QRM & Finish risk measures & \\
+StokLiv & Week 1 & \\
+StokLiv & Week 2 & \\
+SkadeStok & Week 1 & \\
+SkadeStok & Week 2 & \\
+Liv1 & Week 1 & \\
+Liv1 & Week 2 & \\
+Nonlife1 & Week 1 & \\
+Nonlife1 & Week 2 & \\
+MI & Insert notes & \\
+Stok & Insert notes & \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{basic-life-insurance-mathematics}{%
+\chapter{Basic Life Insurance Mathematics}\label{basic-life-insurance-mathematics}}
 
 Noget indhold
 
-\hypertarget{finance}{%
-\chapter{Finance}\label{finance}}
+\hypertarget{stochastic-processes-in-life-insurance-mathematics}{%
+\chapter{Stochastic Processes in Life Insurance Mathematics}\label{stochastic-processes-in-life-insurance-mathematics}}
+
+Noget indhold
+
+\hypertarget{topics-in-life-insurance-mathematics}{%
+\chapter{Topics in Life Insurance Mathematics}\label{topics-in-life-insurance-mathematics}}
+
+\hypertarget{markov-jump-processes}{%
+\section{Markov Jump Processes}\label{markov-jump-processes}}
+
+Life insurance mathematics revolves arrow Markov processes in continuous time on some discrete (or at least countable) state space. This may in the simplest model be the life-death model or it can be a generalized life-death model with interest levels. In any case, we use Markov processes to determine the possible payments that may occur in the future or have occurred in the past. Let us start by define the Markov jump process as follows.
+
+\textbf{Definition 2.1. (Bladt)} \emph{A continuous-time stochastic process \(\{X_t\}_{t\ge 0}\) taking values in a countable space \(E\) is called a Markov jump process\index{Markov jump process} with state space W if for all \(t_n>t_{n-1}>\cdots > t_1>0\) and \(i_n,i_{n-1},...,i_0\in E\) it holds that}
+
+\[
+P(X_{t_n}=i_n \ \vert\ X_{t_{n-1}}=i_{n-1},...,X_{t_1}=i_1,X_0=i_0)=P(X_{n-1}=i_n\ \vert\ X_{n-1}=i_{n-1}).
+\]
+
+It is seen that process have some property of ``forgetability'' in the sense that the jump to a fixed state at some future time only depends on the current state, not the sample path of \(X\). We may then define the transition probabilities\index{transition probabilities} as
+
+\[
+p_{ij}(s,t)=P(X_t=j\ \vert\ X_s=i),
+\]
+
+being the probability of the process being in state \(j\) at time \(t\) given that the process is in state \(i\) at time \(s\). This gives the natural transition matrix\index{transition matrix}
+
+\[
+\mathbf{P}(t,s)=\big\{p_{ij}(s,t)\big\}_{i,j\in E},\hspace{10pt} s\le t.
+\]
+
+In general, we study the time in-homogeneous models where the above is possibly different for any pair \(s\le t\). There does however exist the special case, where the probabilities only depends on the time \(h=t-s\). We call these time homogeneous Markov jump processes\index{time homogeneous Markov jump processes} and they have the form
+
+\[
+p_{ij}(t,s)=p_{ij}(t-s).
+\]
+
+I.e. the probability of jumping from \(i\) to \(j\) is the same so long the interval is the same length. Let us now define the transition intensities as below.
+
+\textbf{Definition 2.2. (Bladt)} \emph{Assume that the limit}
+
+\[
+\mathbf{M}(s)=\big\{\mu_{ij}(s)\big\}_{i,j\in E}=\lim_{h\to 0_+}\frac{\mathbf{P}(s,s+h)+\mathbf{I}}{j}
+\]
+
+\emph{exist for all \(s\ge 0\). The matrices \(\mathbf{M}(s)\) are called intensity matrices\index{intensity matrices}. The the special case of time-homogenous processes we have \(\mathbf{M}(s)=\mathbf{M}\) is a constant matrix. }
+
+We may interpret the intensity matrices in the infinitesimal interpretation as
+
+\[
+\mathbf{P}(s,s+h) = \mathbf{I}+h\mathbf{M}(s)+o(h),
+\]
+
+i.e.
+
+\[
+p_{ij}(s,s+h)=\delta_{ij}+\mu_{ij}(s)h+o(h),
+\]
+
+where \(\delta_{ij}=1_{i=j}\) is the Kronecker delta. We furthermore see, that the matrix \(\mathbf{M}(s)\) has non-positive diagonal and non-negative upper and lower triangle. Furthermore, the matrix has zero row sums and so it follows that
+
+\[
+\mu_{ii}(s)=-\sum_{j\ne i}\mu_{ij}(s):=-\mu_{i}(t),
+\]
+
+for all \(i\in E\). Returning to the infinitesimal interpretation we may write the dynamics of \(\mu_{ij}\) in the following manner
+
+\[
+d\mu_{ij}(t)=\mu_{ij}(t)\ dt=P(X_{t+dt}=j\ \vert\ X_t=i)
+\]
+
+i.e.~the probability of a jump from state \(i\) to state \(j\) during \([t,t+dt)\). On the other hand we have
+
+\[
+1-\mu_{ii}(t)\ dt=P(X_{t+dt}=i\ \vert\ X_t=i),
+\]
+
+i.e.~the probability that no jumps occur during \([t,t+dt)\). We can then define the conditional probability that a jump, if one occurs, is to state \(j\) from \(i\) as
+\begin{align*}
+q_{ij}(t)&=P(X_{t+dt}=j\ \vert\  X_t=i,X_{t+dt}\ne i)=\frac{P(X_{t+dt}=j\ \vert\  X_t=i)}{P(X_{t+dt}\ne i\ \vert\  X_t=i)}\\
+&=\frac{\mu_{ij}(t)}{\mu_i(t)}=-\frac{\mu_{ij}(t)}{\mu_{ii}(t)}.
+\end{align*}
+We can now look at the time until the next jump as the random variable
+
+\[
+T(s)=\inf\left\{u\ge 0\ :\ X_{s+u}\ne X_s\right\},
+\]
+
+i.e.~\(T(s)\) is a positive random variable. If we condition on \(X_s=i\) then \(T(s)\ \vert\ X_s=i\) is the time until \(X\) jumps out of state \(i\) into some other state \(j\ne i\). If we set \(S_i(t)=P(T(s)>t\ \vert\ X_s=i)\) and \(f_i(t)\) is the density of \(T(s)\ \vert\ X_s=i\), then we have
+
+\[
+\mu_i(u)=\frac{f_i(u)}{S_i(u)}=-\frac{S'_i(u)}{S_i(u)}=-\frac{d}{du}\log(S_i(u))
+\]
+
+which is solved for
+
+\[
+S_i(t)=P(T(s)>t\ \vert\ X_s=i)=\exp\left(-\int_s^t \mu_i(u)\ du\right)
+\]
+
+and then
+
+\[
+f_i(t)=\exp\left(-\int_s^t \mu_i(u)\ du\right)\mu_i(t).
+\]
+
+\textbf{Theorem 2.3. (Bladt)} \textbf{(Kolmogorov' Differential Equations)}\index{Kolmogorov' Differential Equations} \emph{Relation between \(\mathbf{M}(s)\) and \(\mathbf{P}(s,t)\) are given by Kolmogorov' forward and backward differential equations:}
+
+\[
+\frac{\partial}{\partial s}\mathbf{P}(s,t)=-\mathbf{M}(s)\mathbf{P}(s,t)
+\]
+
+and
+
+\[
+\frac{\partial}{\partial t}\mathbf{P}(s,t)=\mathbf{P}(s,t)\mathbf{M}(t).
+\]
+
+\emph{the soluction of which is given by}
+
+\[
+\mathbf{P}(s,t)=\prod_s^t(\mathbf{I}+\mathbf{M}(x)\ dx).
+\]
+
+\emph{In the time-homogeneous case we have that}
+
+\[
+\frac{d}{d t}\mathbf{P}(t)=\mathbf{M}\mathbf{P}(t)=\mathbf{P}(t)\mathbf{M}
+\]
+
+\emph{with solution}
+
+\[
+\mathbf{P}(t)=\exp(\mathbf{M}t).
+\]
+
+\textbf{Proof.}
+
+We may subdivide the interval \([s,t]\) into \([s,u]\) and \([u,t]\) and use theorem 1.5 from the chapter on Product Integrals to obtain the Chapman-Kolmogorov's\index{Chapman-Kolmogorov's} equation
+
+\[
+\mathbf{P}(s,t)=\mathbf{P}(s,u)\mathbf{P}(u,t)
+\]
+
+and in the time homogeneous case we have
+
+\[
+\mathbf{P}(s+t)=\mathbf{P}(s)\mathbf{P}(t).
+\]
+
+Finally, let us define a stopping time and introduce the strong markov property.
+
+\textbf{Definition 2.4. (Bladt)} \textbf{(Stopping time)}\index{Stopping time} \emph{Let \(X\) be a Markov jump process and let \(\mathcal{F}_t=\sigma(X_s\ :\ s\le t)\). A nonnegative random variable \(\tau\) is called a stopping time for \(X\) of \(\{\tau \le t\}\in\mathcal{F}_t\) for all \(t\).}\textbackslash{}
+\emph{The \(\sigma\)-algebra of the process up to a stopping time \(\tau\), \(\mathcal{F}_\tau\), is defined by the measurable sets \(A\) for which}
+
+\[
+\forall t\ge 0 : A\cap \{\tau\le t\}\in\mathcal{F}_t.
+\]
+
+We see that a stopping time in an intuitive sense is a random variable which at any time \(t\) we know either that the stopping time is in the future i.e.~\(\tau > t\) or that the stopping time already occured and so \(\tau\) becomes known at time \(t\). Furthermore, we see that \(\{\tau \le t\}\) is \(\mathcal{F}_t\) measurable and so we only need information from the Markov jump process in order to determine the above.
+
+\textbf{Theorem 2.5. (Bladt)} \textbf{(Strong Markov property)}\index{Strong Markov property} \emph{Every Markov jump process satisfies the strong Markov property, i.e., for all \(0\le h_1\le h_2\le \cdots \le h_n\), we have that}
+
+\[
+P(X_{\tau +h_1}=i_1,...,X_{\tau + h_n}=i_n\ \vert\ \mathcal{F}_t)=P(X_{\tau +h_1}=i_1,...,X_{\tau + h_n}=i_n\ \vert\ X_\tau)
+\]
+
+\emph{on \(\{\tau <\infty\}\). For time-homogeneous processes this further reduces to}
+
+\[
+P(X_{\tau +h_1}=i_1,...,X_{\tau + h_n}=i_n\ \vert\ \mathcal{F}_t)=P_{X_\tau}(X_{\tau +h_1}=i_1,...,X_{\tau + h_n}=i_n)
+\]
+
+\emph{also on \(\{\tau <\infty\}\).}
+
+\hypertarget{phase-type-distributions}{%
+\section{Phase-type distributions}\label{phase-type-distributions}}
+
+In life insurance models we often, that is always, have a model with one absorbing state, namely, \emph{death}. This means that the state space \(E\) will have the form of \(p\ge 1\) transient states (states that may interact in both ways) and one absorbing state (a state that is never moved away from). In this case we would often like to study the distribution of
+
+\[
+\inf\{t\ge 0 : X(t)=p+1\},
+\]
+
+where \(p+1\) is the absorbing state and \(1,...,p\) are the transient states. We will assume that \(P(X(0)=p+1)=0\) i.e.~the above is at least zero and never \(-\infty\). Let us now formalise this setup.
+
+Consider a time-inhomogeneous Markov jump process \(\{X_t\}_{t\ge 0}\) on the finite state-space \(E=\{1,...,p,p+1\}\) where the states \(1,...,p\) are transient states and \(p+1\) is the only absorbing state. This implies that the intesity matrix of \(\{X_t\}_{t\ge 0}\) take the form
+
+\[
+\Lambda(t)=\begin{bmatrix}
+\mathbf{T}(t) & \mathbf{t}(t)\\
+\mathbf{0} & 0
+\end{bmatrix}.
+\]
+
+In the above \(\mathbf{T}(t)\) is a \(p\times p\) matrix function and \(\mathbf{t}(t)\) is a \(p\times 1\) matrix function. We now define the initial distribution of \(X_0\) as
+
+\[
+\{P(X_0=i)\}_{i\in E\setminus \{p+1\}}=\mathbf{\pi}=\begin{pmatrix}\pi_1\\ \vdots\\ \pi_p\end{pmatrix}^\top.
+\]
+
+By assumption we have \(P(X_0=p+1)=0\) and so \(\sum_{i=1}^p\pi_i=1\) and \(\mathbf{\pi}\) is a proper distribution.
+
+\textbf{Definition 2.10. (Bladt)} \textbf{(Phase-Type distribution)}\index{Phase-Type distribution} \emph{Let}
+
+\[
+\tau = \inf\{t\ge 0 : X(t)=p+1\}
+\]
+
+\emph{denote the time until absorption of \(X\). The distribution of \(\tau\) is then said to be an inhomogeneous phase-type distribution with representation \((\mathbf{\pi},\mathbf{T}(t))\) and we write \(\tau \sim IPH(\mathbf{\pi},\mathbf{T}(t))\).}
+
+\textbf{Lemma 2.11. (Bladt)} \emph{We have the following decomposition:}
+
+\[
+\mathbf{P}(s,t)=\prod_s^t(\mathbf{I}+\mathbf{\Lambda}(u)\ du)=
+\begin{bmatrix}
+\prod_s^t(\mathbf{I}+\mathbf{T}(u)\ du) & \mathbf{e} -\prod_s^t(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{e}\\
+\mathbf{0} & 1
+\end{bmatrix},
+\]
+
+\emph{where \(\mathbf{e}=(1,1,...,1)^\top\).}
+
+\textbf{Theorem 2.12. (Bladt)} \emph{Assume that \(\tau \sim IPH(\mathbf{\pi},\mathbf{T}(t))\). Then the density \(f\) and the distribution function \(F\) of \(\tau\) are given by}
+\begin{align*}
+f(x)&=\mathbf{\pi}\prod_0^x(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{t}(x),\\
+F(x)&=1-\mathbf{\pi}\prod_0^x(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{e}.
+\end{align*}
+
+\textbf{Proof.}
+
+\textbf{Theorem 2.13. (Bladt)} \emph{If \(\tau \sim IPH(\mathbf{\pi},\mathbf{T}(t))\) then}
+
+\[
+P(\tau >s+t\ \vert\ \tau >s)=\frac{\mathbf{\pi}\prod_0^s(\mathbf{I}+\mathbf{T}(u)\ du)}{\mathbf{\pi}\prod_0^s(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{e}}\prod_s^t(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{e}
+\]
+
+\emph{so that}
+
+\[
+\tau-s\ \vert\ \{\tau>s\}\sim IPH(\mathbf{\alpha},\mathbf{S}(\cdot)),
+\]
+
+\emph{where \(\mathbf{S}(u)=\mathbf{T}(s+u)\) and }
+
+\[
+\mathbf{\alpha}=\frac{\mathbf{\pi}\prod_0^s(\mathbf{I}+\mathbf{T}(u)\ du)}{\mathbf{\pi}\prod_0^s(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{e}}.
+\]
+
+\textbf{Corollary 2.14. (Bladt)} \emph{If \(\tau\sim IPH(\mathbf{\alpha},\mathbf{T}(t))\) and \(\mathbf{T}(t_1)\) and \(\mathbf{T}(t_2)\) commute for all \(t_1,t_2\ge 0\), then the density \(f\) and the distribution function \(F\) of \(\tau\) are given by}
+\begin{align*}
+f(x)&=\mathbf{\pi}\exp\left(\int_0^x\mathbf{T}(u)\ du\right)\mathbf{t}(x),\\
+F(x)&=1-\mathbf{\pi}\exp\left(\int_0^x\mathbf{T}(u)\ du\right)\mathbf{e}.
+\end{align*}
+
+\textbf{Example (Approximation in time-inhomogeneous case).}
+
+Consider the Markov jump process on the state space \(E=\{1,2,3\}\) where 1 is the state \emph{``alive''} (working), 2 is \emph{``disabled''} and 3 is the state \emph{``death''}. We assume that \(\Lambda(t)\) has the structure:
+\begin{align*}
+\Lambda(t)&=\begin{bmatrix}
+\mu_{11}(t) & \mu_{12}(t) & \mu_{13}(t)\\
+\mu_{21}(t) & \mu_{22}(t) & \mu_{23}(t)\\
+\mu_{31}(t) & \mu_{32}(t) & \mu_{33}(t)
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+-\mu_{12}(t)-\mu_{13}(t) &  0.000015 + 10^{(4.6-10+0.015\cdot t)} & 0.00005 + 10^{(4.6-10+0.05\cdot t)}\\
+0.000005 + 10^{(4.6-10+0.015\cdot t)} & -\mu_{21}(t)-\mu_{23}(t) & 0.0001 + 10^{(4.6-10+0.05\cdot t)}\\
+0 & 0 & 0
+\end{bmatrix}
+\end{align*}
+We can now implement this intensity matrix as a function in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu12 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \FloatTok{0.000015} \SpecialCharTok{+} \DecValTok{10}\SpecialCharTok{\^{}}\NormalTok{(}\FloatTok{4.6}\DecValTok{{-}10}\FloatTok{+0.015}\SpecialCharTok{*}\NormalTok{t)}
+\NormalTok{\}}
+\NormalTok{mu13 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \FloatTok{0.00005} \SpecialCharTok{+} \DecValTok{10}\SpecialCharTok{\^{}}\NormalTok{(}\FloatTok{4.6}\DecValTok{{-}10}\FloatTok{+0.05}\SpecialCharTok{*}\NormalTok{t)}
+\NormalTok{\}}
+\NormalTok{mu11 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \SpecialCharTok{{-}}\FunctionTok{mu12}\NormalTok{(t)}\SpecialCharTok{{-}}\FunctionTok{mu13}\NormalTok{(t)}
+\NormalTok{\}}
+\NormalTok{mu21 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \FloatTok{0.000005} \SpecialCharTok{+} \DecValTok{10}\SpecialCharTok{\^{}}\NormalTok{(}\FloatTok{4.6}\DecValTok{{-}10}\FloatTok{+0.015}\SpecialCharTok{*}\NormalTok{t)}
+\NormalTok{\}}
+\NormalTok{mu23 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \FloatTok{0.0001} \SpecialCharTok{+} \DecValTok{10}\SpecialCharTok{\^{}}\NormalTok{(}\FloatTok{4.6}\DecValTok{{-}10}\FloatTok{+0.05}\SpecialCharTok{*}\NormalTok{t)}
+\NormalTok{\}}
+\NormalTok{mu22 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \SpecialCharTok{{-}}\FunctionTok{mu21}\NormalTok{(t)}\SpecialCharTok{{-}}\FunctionTok{mu23}\NormalTok{(t)}
+\NormalTok{\}}
+\NormalTok{mu31 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}\DecValTok{0}\NormalTok{\}}
+\NormalTok{mu32 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}\DecValTok{0}\NormalTok{\}}
+\NormalTok{mu33 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}\DecValTok{0}\NormalTok{\}}
+\NormalTok{M }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \FunctionTok{matrix}\NormalTok{(}
+    \FunctionTok{c}\NormalTok{(}\FunctionTok{mu11}\NormalTok{(t),}\FunctionTok{mu21}\NormalTok{(t),}\FunctionTok{mu31}\NormalTok{(t),}
+      \FunctionTok{mu12}\NormalTok{(t),}\FunctionTok{mu22}\NormalTok{(t),}\FunctionTok{mu32}\NormalTok{(t),}
+      \FunctionTok{mu13}\NormalTok{(t),}\FunctionTok{mu23}\NormalTok{(t),}\FunctionTok{mu33}\NormalTok{(t)),}
+    \AttributeTok{ncol =} \DecValTok{3}
+\NormalTok{  )}
+\NormalTok{\}}
+\FunctionTok{M}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               [,1]          [,2]         [,3]
+## [1,] -7.296214e-05  1.898107e-05 5.398107e-05
+## [2,]  8.981072e-06 -1.129621e-04 1.039811e-04
+## [3,]  0.000000e+00  0.000000e+00 0.000000e+00
+\end{verbatim}
+
+We see that the intensities is choosen such that the following holds for any time interval \([t,t+dt)\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The transition \(1\to 3\) is less likely than \(2\to 3\),
+\item
+  The transition \(2\to 1\) is less likely than \(1\to 2\),
+\item
+  The transition \(1\to 2\) is less likely than \(1\to 3\).
+\end{enumerate}
+
+We now wish to compute the density and distribution of
+
+\[
+\tau =\inf\{t\ge 0\ :\ X(t)=3\}.
+\]
+
+We assume that \(\pi=(1,0)\) i.e.~the person is alive. Calculating the distribution of \(\tau\) is then the distribution of the length of a newborn child lifespan. From theorem 2.12 this ammount to calculating the product integral of
+
+\[
+\mathbf{T}(t)=\{\mu_{ij}(t)\}_{i,j\in \{1,2\}}
+\]
+
+i.e.~
+
+\[
+\prod_0^x(\mathbf{I}+\mathbf{T}(u)\ du).
+\]
+
+To du this we simply approximate with stepsize \(h=1/n\) (for some \(n\ge 1\)) by
+
+\[
+\prod_0^{x+h}(\mathbf{I}+\mathbf{T}(u)\ du)=h\prod_0^x(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{T}(x)+\prod_0^x(\mathbf{I}+\mathbf{T}(u)\ du),
+\]
+
+and
+
+\[
+\prod_0^0(\mathbf{I}+\mathbf{T}(u)\ du)=\mathbf{I}.
+\]
+
+This is done in the code below
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{12} \CommentTok{\#monthly}
+\NormalTok{h }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{n}
+\NormalTok{N }\OtherTok{\textless{}{-}} \DecValTok{120} \CommentTok{\#max number years}
+\NormalTok{T\_matrix }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \FunctionTok{matrix}\NormalTok{(}
+    \FunctionTok{c}\NormalTok{(}\FunctionTok{mu11}\NormalTok{(t),}\FunctionTok{mu21}\NormalTok{(t),}
+      \FunctionTok{mu12}\NormalTok{(t),}\FunctionTok{mu22}\NormalTok{(t)),}
+    \AttributeTok{ncol =} \DecValTok{2}
+\NormalTok{  )}
+\NormalTok{\}}
+\FunctionTok{T\_matrix}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               [,1]          [,2]
+## [1,] -7.296214e-05  1.898107e-05
+## [2,]  8.981072e-06 -1.129621e-04
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t\_matrix }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(t) \{}
+  \FunctionTok{matrix}\NormalTok{(}
+    \FunctionTok{c}\NormalTok{(}\FunctionTok{mu13}\NormalTok{(t),}\FunctionTok{mu23}\NormalTok{(t)),}
+    \AttributeTok{ncol=}\DecValTok{1}
+\NormalTok{  )}
+\NormalTok{\}}
+\FunctionTok{t\_matrix}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              [,1]
+## [1,] 5.398107e-05
+## [2,] 1.039811e-04
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rlist)}
+\CommentTok{\#Initial condition t=0}
+\NormalTok{T\_product\_integral }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\FunctionTok{diag}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)))}
+\NormalTok{pi }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\AttributeTok{ncol =} \DecValTok{1}\NormalTok{)}
+\NormalTok{f }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(pi) }\SpecialCharTok{\%*\%} \FunctionTok{diag}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%*\%} \FunctionTok{t\_matrix}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{F }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{t}\NormalTok{(pi) }\SpecialCharTok{\%*\%} \FunctionTok{diag}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%*\%} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{ncol =} \DecValTok{1}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(N}\SpecialCharTok{*}\NormalTok{n)) \{}
+\NormalTok{  x\_1 }\OtherTok{\textless{}{-}}\NormalTok{ i}\SpecialCharTok{/}\NormalTok{n}
+\NormalTok{  x\_0 }\OtherTok{\textless{}{-}}\NormalTok{ (i}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{n}
+\NormalTok{  T\_0 }\OtherTok{\textless{}{-}} \FunctionTok{T\_matrix}\NormalTok{(x\_0)}
+\NormalTok{  M\_0 }\OtherTok{\textless{}{-}}\NormalTok{ T\_product\_integral[[i]]}
+\NormalTok{  M\_1 }\OtherTok{\textless{}{-}}\NormalTok{ h}\SpecialCharTok{*}\NormalTok{M\_0 }\SpecialCharTok{\%*\%}\NormalTok{ T\_0 }\SpecialCharTok{+}\NormalTok{ M\_0}
+\NormalTok{  T\_product\_integral }\OtherTok{\textless{}{-}} \FunctionTok{list.append}\NormalTok{(T\_product\_integral,M\_1)}
+\NormalTok{  f }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(f,}\FunctionTok{t}\NormalTok{(pi) }\SpecialCharTok{\%*\%}\NormalTok{ M\_1 }\SpecialCharTok{\%*\%} \FunctionTok{t\_matrix}\NormalTok{(x\_1))}
+\NormalTok{  F }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(F,}\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{t}\NormalTok{(pi) }\SpecialCharTok{\%*\%}\NormalTok{ M\_1 }\SpecialCharTok{\%*\%} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{ncol =} \DecValTok{1}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ex1_PT_dist.png}
+  \end{center}
+\end{figure}
+
+We see that by calculating
+
+\[
+E[\tau\ \vert\ X_0=1]=\int_0^\infty \tau f(\tau)\ d\tau\approx\int_0^{120}\tau f(\tau)\ d\tau\approx\frac{1}{n}\sum_{i=0}^{120\cdot n} i/n\cdot f(i/n).
+\]
+
+that the life expectation is 84.01 years. We have that we may approximate \(f\) and \(F\) with an arbitrary precisiion by choosing \(n\) appropriately.
+
+\hypertarget{continuous-time-finance}{%
+\chapter{Continuous Time Finance}\label{continuous-time-finance}}
 
 This topic revolves around the theory of the Brownian motion and martingale processes. Other main topics are the binomial model and an introduction to financial derivatives. Financial derivatives is contingent on the outcome of a stochastic process at some future time \(t=T\) and often is a function \(\Phi\) of some assets price \(S_t\). As such the derivative will give a stochastic payout, at time \(t=T\) of the size \(X_T=\Phi(S_T)\). Naturally we want to say something about the \emph{fair} price of the derivative in the form of
 
@@ -497,7 +1008,7 @@ V_T^h=X,
 
 \textbf{Example.}
 
-\begin{center}\includegraphics[width=0.75\linewidth]{_main_files/figure-latex/unnamed-chunk-1-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth]{_main_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 Consider \(R=0.04\), \(s=100\), \(u=1.1\), \(d=0.9\), \(p_u=0.6\) and \(p_d=0.4\). We consider a model of length \(T=2\) and we want to evaluate the price of the european call option with srike \(K=90\) that is the contingent claim
 
@@ -2349,13 +2860,459 @@ d\mathbf{M}_t=-r_t\mathbf{M}_t\ dt-\mathbf{M}_t\lambda_t^\top\ dW_t.\tag{14.40}
 \frac{\vert \mu_t^p - r_t\vert}{\Vert \sigma_t ^p\Vert}\le \Vert \varphi_t\Vert,\hspace{15pt} \frac{\vert \mu_t^p - r_t\vert}{\Vert \sigma_t ^p\Vert}\le \Vert \lambda_t\Vert.\tag{14.42}
 \]
 
-\hypertarget{non-life-insurance-mathematics}{%
-\chapter{Non-Life Insurance Mathematics}\label{non-life-insurance-mathematics}}
+\hypertarget{basic-non-life-insurance-mathematics}{%
+\chapter{Basic Non-Life Insurance Mathematics}\label{basic-non-life-insurance-mathematics}}
+
+Noget indhold
+
+\hypertarget{stochastic-processes-in-non-life-insurance-mathematics}{%
+\chapter{Stochastic Processes in Non-Life Insurance Mathematics}\label{stochastic-processes-in-non-life-insurance-mathematics}}
+
+Noget indhold
+
+\hypertarget{topics-in-non-life-insurance-mathematics}{%
+\chapter{Topics in Non-Life Insurance Mathematics}\label{topics-in-non-life-insurance-mathematics}}
 
 Noget indhold
 
 \hypertarget{probabilistic-machine-learning}{%
 \chapter{Probabilistic Machine Learning}\label{probabilistic-machine-learning}}
+
+\hypertarget{supervised-learning}{%
+\section{Supervised Learning}\label{supervised-learning}}
+
+In this chapter we restrict our selves to the area of \emph{Supervised Learning} as we use numerical methods and machine learning algorithms to estimate models in a restricted framework. Take for instance the random forest, this algorithm's estimation method is perfectly capable of being written recursively and so no ``leaning'' is done in the sense, that the calculations are predetermined from the algorithm. We therefore call the area of study supervised learning instead of the wider area of study \emph{machine learning}. Let us define what we mean by supervised learning.
+
+\textbf{Definition. (Supervised Learning)} \emph{Supervised learning is a field in machine learning that works with labeled data, i.e.~data consisting of a set of features \(X\), and a response \(Y\). The goal is to learn a function \(m^*\) that maps a given input \(x\) to an output \(y\).}
+
+We will in this chapter only use data in the form of a spread sheet e.g.
+
+\[
+\mathcal{D}_n=
+\left(X_i, Y_i \right)_{i=1,...,n}=
+\left[
+\begin{array}{cccc|c}
+X_{11} & X_{12} & \cdots & X_{1p} & Y_1\\
+X_{21} & X_{22} & \cdots & X_{2p} & Y_2\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+X_{n1} & X_{n2} & \cdots & X_{np} & Y_n
+\end{array}
+\right],
+\]
+
+we could however consider any data that may be interpreted by computer software.
+
+The setting is then; assume that we have \(n\) independent copies of the random variable \(D=(X,Y)\in \mathcal{X}\times \mathcal{Y}\), where \(X\) is \(p\)-dimensional and \(Y\) is one-dimensional. We make no assumption on whether \(X_j\), \(j=1,..,p\) and \(Y\) are discrete or continuous, however in concrete cases this will be specified. We combine the sample of the \(n\) observations in the matrix \(\mathcal{D}_n=(X_i,Y_i)_{i=1,...,n}\) being a \(n\times p+1\) matrix as in the above. We call \(\mathcal{D}_n\) the \textbf{training data}.
+
+This specification does indeed imply that \(D_i=(X_i,Y_i)\) are iid. This is actually a bit controversial as we would expect that the distribution of \(D\) will shift over time. For instance, the distribution of ages in a population changes over time and have been more right skewed as humanity advances. This may be accounted for by transforming the data such that the distribution becomes the same. This may be done in a variety of ways some example include: 1) transforming to uniform variable with the time dependent distribution \(F_t\), 2) normalizing using a price index and so forth. One should therefore start any analysis by ensuring that the data a given algorithm is trained on is iid.
+
+The job becomes finding a good estimator such that we may predict \(Y\) given \(X\) i.e.~\(Y\ \vert\ X\). Let us define what an estimator is.
+
+\textbf{Definition. (Estimator)} \emph{Consider a training dataset \(\mathcal{D}_n\). A estimator \(m\) is a function-valued mapping that takes \(\mathcal{D}_n\) as input and associates a function \(m_n : \mathcal{X}\to \mathcal{Y}\) i.e.~\(m\) takes the form}
+
+\[
+m(\mathcal{D}_n)=m_n:\mathcal{X}\to \mathcal{Y}
+\]
+
+\emph{the class of estimators is called \(\mathcal{G}\).}
+
+\hypertarget{what-is-a-good-estimator}{%
+\subsection{What is a good estimator?}\label{what-is-a-good-estimator}}
+
+It is easy to construct an estimator \(\hat{m}\) for instance by maximum likelihood esitmation, bayes optimization or simply by taking conditional expectations. We are however interested in two problems:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the best class of estimators \(\mathcal{G}_0\subset\mathcal{G}\),
+\item
+  In the subset of estimators \(m \in \mathcal{G}_0\), what is then the best estimator.
+\end{enumerate}
+
+We will now discuss the meaning of being the \emph{``best''} estimator. Obviously, the first type of consideration is regarding the inherent restrictions of some algorithm, where the second is the problem of error comming from the restriction that we do not have infinite observations. We therefore have two problems namely the \textbf{inductive bias} from the class \(\mathcal{G}_0\) and the \textbf{estimation error} from the available data. A typical problem is that the larger a class \(\mathcal{G}_0\) gives low inductive bias we then may not be able to estimate anything and so the estimation error will be large. The converse also applies.
+
+\textbf{Definition.} \emph{Let \(D=(X,Y)\) be a random variable on the background space \((\Omega, \mathcal{F},P)\). Then we define the following:}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{A \textbf{decision rule} is a deterministic function \(m:\mathcal{X}\to \mathcal{Y}\),}
+\item
+  \emph{A \textbf{loss function} is a deterministic function \(L: \mathcal{Y}\times \mathcal{Y}\to \mathbb{R}_+\),}
+\item
+  \emph{The \textbf{risk} of a decision rule \(m\) is given a loss function \(L\) is \(r(m)=E[L(Y,m(X))]\).}
+\end{itemize}
+
+Notice that in the definition of risk we see that \(m\) is included inside the expectation. This means in particular that the training data \(\mathcal{D}_n\) is also accounted for i.e.~by the tower rule we have
+
+\[
+r(m)=\mathbb{E}[L(Y,m(X))]=\mathbb{E}\left[\mathbb{E}\Big[L(Y,m_n(X))\ \Big\vert\ \mathcal{D}_n\Big]\right]:=\mathbb{E}\left[R(m)\right].
+\]
+
+Some widely used loss function include
+
+\begin{itemize}
+\tightlist
+\item
+  Quadratic loss function: \(L(y_1,y_2)=(y_1-y_2)^2\),
+\item
+  Poisson Deviance: \(L(y_1,y_2)=2\left(y_1\log\frac{y_1}{y_2}-y_1+y_2\right)\),
+\item
+  Binary loss function: \(L(y_1,y_2)=1_{y_1\ne y_2}\).
+\end{itemize}
+
+Given a loss function \(L\) we may find a (possibly non-unique) solution \(m^*\) that minimizes \(R(m)\). We call this the \textbf{Bayes estimator}. The quantity \(R(m^*)\) is called the \textbf{Bayes risk}. On some special case loss functions we may determine the unique solution.
+
+\textbf{Lemma.} \emph{Assume \(Y\) is \(L_2\) (square integrable), then the decision function that minimized the risk for the quadratic loss function is}
+
+\[
+m^*=\underset{m}{\text{argmin}}\ \mathbb{E}[(Y-m(X))^2]=E[Y\ \vert\ X=x]
+\]
+i.e.~the conditional expectation.
+
+\textbf{Lemma.} \emph{Assume \(\mathcal{Y}=\{1,...,K\}\), the decision function that minimizes the risk for the binary loss function satisfies}
+
+\[
+m^*=\underset{m}{\text{argmin}}\ \mathbb{E}[1_{Y\ne m(X)}]=\underset{m}{\text{argmin}}\  \mathbb{P}(Y\ne m(X))=\underset{k=1,..,K}{\text{argmax}}\ \mathbb{P}(Y=k\ \vert\ X=x).
+\]
+
+We can now define the prediction risk and the generalization error which relates to the balance of a sufficiently large class \(\mathcal{G}_0\) and how effective the optimal estimator is conditional on the class \(\mathcal{G}_0\).
+
+\textbf{Definition. (Conditional risk)} \emph{Let \(\mathcal{D}_n\) be some training data. Given an estimator \(\hat{m}_n\) we call}
+
+\[
+R(\hat{m}_n)=\mathbb{E}[L(Y,\hat{m}_n(X))\ \vert\ \mathcal{D}_n]
+\]
+
+\emph{the prediction risk or conditional generalized error.}
+
+\textbf{Definition. (Risk)} \emph{We call}
+
+\[
+r(\hat{m}_n)=\mathbb{E}[R(\hat{m}_n)],
+\]
+
+\emph{the prediction risk or generalized error.}
+
+\hypertarget{excess-risk}{%
+\subsection{Excess risk}\label{excess-risk}}
+
+\textbf{Definition. (Excess Risk)} \emph{Consider the set \(\mathcal{G}\) be the set of all measurable estimators. Fix a subset \(\mathcal{G}_0\subset\mathcal{G}\). Given some training data \(\mathcal{D}_n\) consider the Bayes estimator restricted to \(\mathcal{G}_0\) denoted by \(\hat{m}_n\) and the unconditional Bayes estimator restricted to \(\mathcal{G}\) we define the quantity}
+
+\[
+R(\hat{m}_n)-r(m^*)
+\]
+
+\emph{or}
+
+\[
+\mathbb{E}[R(\hat{m}_n)\ \vert\ X_1,...,X_n]-r(m^*),
+\]
+
+\emph{as the excess risk. This is the difference between the generalization error and the risk obtained by an optimal decision function.}
+
+In the context of the above definition we can decompose the risk associated with the optimal estimator \(\hat{m}_n\in\mathcal{G}_0\) into the estimation error and the inductive bias.
+
+\[
+R(\hat{m}_n)-r(m^*)=\underbrace{\left[R(\hat{m}_n)-\inf_{m\in\mathcal{G}_0}R(m)\right]}_{\text{estimation error}}+\underbrace{\left[\inf_{m\in\mathcal{G}_0}R(m)-R(m^*)\right].}_{\text{inductions bias/approximation error}}
+\]
+
+where we have to balance the trade-off with a larger \(\mathcal{G}_0\) infer a lower induction bias but larger estimation error and a smaller class \(\mathcal{G}_0\) infer a lower estimation error but larger induction bias.
+
+\textbf{Definition. (Empirical risk and empirical risk minimizer)} \emph{Given training data \(\mathcal{D}_n\) and a loss function \(L\), we call}
+
+\[
+\hat{R}_n(m):=\sum_{i=1}^nL(Y_i,m(X_i))
+\]
+
+\emph{the \textbf{empirical risk}. Given an additional function class \(\mathcal{G}_0\),}
+
+\[
+\underset{m\in\mathcal{G}_0}{\text{argmin}}\ \hat{R}_n(m)=\underset{m\in\mathcal{G}_0}{\text{argmin}}\ \sum_{i=1}^nL(Y_i,m(X_i))
+\]
+
+\emph{is called \textbf{empirical risk minimizer} or (standard leaner).}
+
+For larger function classes \(\mathcal{G}_0\) the empirical risk minimizer might not be unique and possibly too noisy. In this case one sometimes adds a penalty term \(J_\lambda : \mathcal{G}\to \mathbb{R}_+\) that penalizes the complexity of \(m\) and minimizes the penalized empirical risk:
+
+\[
+\underset{m\in\mathcal{G}_0}{\text{argmin}}\ \hat{R}_{n,\lambda}:=\underset{m\in\mathcal{G}_0}{\text{argmin}}\ \sum_{i=1}^nL(Y_i,m(X_i)) + J_\lambda(m).
+\]
+
+If \(J_\lambda\) and \(\hat{R}_n\) is convex one can show that
+
+\[
+\underset{m\in\mathcal{G}_0}{\text{argmin}}\ \hat{R}_{n,\lambda}=\underset{m\in\mathcal{G}_\eta}{\text{argmin}}\ \hat{R}_{n}
+\]
+
+for the class \(\mathcal{G}_\eta=\{m\in \mathcal{G}_0\ \vert\ J_\lambda(m)\le \eta\}\). Some penalty terms could be
+
+\begin{itemize}
+\tightlist
+\item
+  \(J_\lambda(m)=\lambda\int m''(x)\ dx\),
+\item
+  \(J_\lambda(m)=\lambda \int\vert m'(x)\vert\ dx\),
+\item
+  \(J_\lambda(m)=\lambda \int(m(x))^2\ dx\).
+\end{itemize}
+
+\textbf{Proposition. (Probability bounds)} \emph{Let \(\tilde{m}=\underset{m}{\text{argmin}}\ r(m)\). We have}
+
+\[
+r(\hat{m}_n)-r(\tilde{m})\le 2\sup_{m\in\mathcal{G}_0}\Big\vert\hat{R}_n(m) - r(m) \Big\vert,
+\]
+
+\emph{and for all \(\lambda \in \Lambda\),}
+
+\[
+r(\hat{m}_{n,\lambda})-r(\tilde{m})\le 2\sup_{m\in\mathcal{G}_0}\Big\vert\hat{R}_{n,\lambda}(m) - r(m) \Big\vert + J_\lambda(\tilde{m})-J_\lambda(\hat{m}_n).
+\]
+
+\textbf{Definition.} \emph{We say \(\hat{m}_n\) is \(\varepsilon\)-accurate with probabiltiy \(1-\delta\), if}
+
+\[
+P\Big(R(\hat{m}_n)-\inf_{m\in\mathcal{G}}r(m)>\varepsilon\Big)<\delta.
+\]
+
+\hypertarget{training-validating-and-testing}{%
+\section{Training, Validating and Testing}\label{training-validating-and-testing}}
+
+When deciding which method too choose for a given task, one may like to pick the method with the smallest generalization error. However, most machine learning methods depend on hyper parameters and one may first need to decide which hyper parameters are best for the given task. In short: We would like to compare the generalization error of optimally tuned machine learning methods given our data.
+
+\textbf{Definition. (Training and test set)} \emph{One often randomly divides the given data into training data and test data:}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathcal{D}_n=(X_i,Y_i)_{i=1,...,n}\) \emph{(traning data)}
+\item
+  \(\mathcal{T}_m=(\tilde{X}_j,\tilde{Y}_j)_{j=1,...,m}\) \emph{(test data)}
+\end{itemize}
+
+\emph{with \(n\in[0.8m,0.95m]\).}
+
+\textbf{Definition. (Training and test error)} \emph{The empirical risk on the training data is called training error and on the test data test error.}
+
+\textbf{Definition. (Validation set)} \emph{To tune the hyper parameters for an algorithm, one often randomly divides the given training data into training data (yes: also called training data.) and validation data:}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathcal{D}_{n_1}=(X_i,Y_i)_{i=\tau(1),...,\tau(n_1)}\) \emph{(traning data)}
+\item
+  \(\mathcal{V}_{n_2}=(\tilde{X}_j,\tilde{Y}_j)_{j=\tau(n_1+1),...,\tau(n)}\) \emph{(validation data)}
+\end{itemize}
+
+\emph{where \(\tau\) is a randomly picked permutation of \(\{1,...,n\}\) and \(n_1+n_2=n\) is respectively the size of the training set and the validation set.}
+
+One can now compare different methods via the following simple algorithm:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Split your data into train, validation and test set.
+\item
+  For a given method and a rich set of hyper parameter configurations train the method on the training set and compare performance via empirical risk on the validation set.
+\item
+  For every method, pick the hyper parameter with the smallest empirical risk.
+\item
+  Compare different methods with the chosen hyper parameters on the test set (trained on training+validation set) and pick the method with smallest empirical risk.
+\end{enumerate}
+
+Notice that the procedure above is stochastic and has bias and variance both for selecting the optimal hyper parameters and for selecting the optimal method.
+
+\begin{itemize}
+\tightlist
+\item
+  Bias: Bias occurs because the sample sizes used for learning the hyper parameters \(n_1\) are smaller than the actual training size \(n\) and also the full data size \(n+m\).
+\item
+  Variance: The results are stochastic because the validation and test set are not of infinite size.
+\end{itemize}
+
+Variance can be reduced by repeating steps 1-4 several times. The most popular method for doing so is (nested) cross validation.
+
+\hypertarget{estimating-risk}{%
+\subsection{Estimating risk}\label{estimating-risk}}
+
+We want to estimate the generalization error of a method \(\hat{m}_{n,\lambda}\) that depends on a fixed hyper parameter \(\lambda\).
+
+\textbf{Definition. (M-fold Cross validation)} \emph{Given the indices of a data set \(S=\{1,...,n\}\), M-fold cross validation follows the following steps:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Divide the data into \(M\) disjoint sets \(S_1,...,S_M\) of same size. Define \(S_{-l}=\cup_{k\ne l}S_k\) being the complement to \(S_l\). (\(\#S_l=n/M\) and \(\#S_{-l}=(M-1)n/M\))}
+\item
+  \emph{For each subdivision \(l=1,...,M\) train the algorithm on \(S_{-l}\) and denote the estimator \(\hat{m}_\lambda(S_{-l})\).}
+\item
+  \emph{Calculate the cross validated empirical risk}
+  \[
+    CV(\hat{m}_{n,\lambda})=\frac{1}{M}\sum_{l=1}^M\frac{1}{\vert S_{-l}\vert}\sum_{i\in S_{-l}}L\big(Y_i,\hat{m}_\lambda(S_{-l})(X_i)\big)
+    \]
+\end{enumerate}
+
+It is a non-trivial discussion what \(CV(\hat{m}_{n,\lambda})\) is estimating. Consider the heuristic
+\begin{align*}
+CV(\hat{m}_{n,\lambda})&=\frac{1}{M}\sum_{l=1}^M\frac{1}{\vert S_{-l}\vert}\sum_{i\in S_{-l}}L\big(Y_i,\hat{m}_\lambda(S_{-l})(X_i)\big)\\
+&\approx \frac{1}{M}\sum_{l=1}^MR\big(Y,\hat{m}_\lambda(S_{-l})(X)\big)\\
+&\approx \mathbb{E}\left[R\big(Y,\hat{m}_\lambda(S_{-l})(X)\big)\right].
+\end{align*}
+Where we used the law of large numbers in the first approximation. The last approximation is not so clear because the summands are dependent for \(M>2\).
+
+The bias is minimal for large \(M\) since estimation is based on training the algorithm on \((M-1)n/M\) data points. In the case that \(M=n\), M-fold cross validation is also known as leave-one-our cross validation. It is however often not practical because of the computational cost. In practice, setting \(M=5\) or \(M=10\) is common choices.
+
+When deciding on an optimal hyper parameter we would like to pick
+
+\[
+\underset{\lambda \in \Lambda}{\text{argmin}}\ CV(\hat{m}_{n,\lambda}).
+\]
+
+But the hyper parameter space \(\Lambda\) is often multi-dimensional and partly continuous. Hence it is infeasible to try out all parameters. Common practice are
+
+\begin{itemize}
+\tightlist
+\item
+  Grid search
+\item
+  Random search (e.g.~pick 200 parameters uniformly random from the parameter space)
+\item
+  Advanced optimization techniques (i.e.~techniques that aim to find the minimzer of a function (here: cross validated empirical risk) without the requirement of knowing the analytical form of the function to optimize.
+\end{itemize}
+
+Above we have discussed how we can use cross validation to pick an optimal parameter for a given method and data set. But how to choose between different methods? One popular way is nested cross validation comprising an inner loop for hyper parameter selection (tuning) and an outer loop for method comparison. Assume that we want to compare \(J\) methods \(\hat{m}_{n,j}\), \(j=1,...,J\). then we may use nested cross validation.
+
+\textbf{Definition. (Nested \(M_1-M_2\) Cross-validation)} \emph{Given the indices of a data set \(S=\{1,...,n\}\), nested \(M_1-M_2\) cross validation follows the following steps:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Divide the data into \(M_1\) disjoint sets \(S_1,...,S_{M_1}\) of same size. Define \(S_{-l}=\cup_{k\ne l}S_k\) being the complement to \(S_l\). (\(\#S_l=n/M_1\) and \(\#S_{-l}=(M_1-1)n/M_1\))}
+\item
+  \emph{For each \(l=1,...,M_1\), run \(M_2\)-fold cross validation on \(S_{-l}\) for all \(J\) methods, returning optimal hyper parameters \(\hat{\lambda}(j,l)\), \(j=1,...,J\) and \(l=1,...,M_1\). (the one with lowest \(CV\) is choosen for each \((j,l)\))}
+\item
+  \emph{Calculate the cross validated empirical risk}
+  \[
+    CV(\hat{m}_{n,j})=\frac{1}{M_1}\sum_{l=1}^{M_1}\frac{1}{\vert S_{-l}\vert}\sum_{i\in S_l}L\big(Y_i,\hat{m}_{\lambda(j,l)}(S_{-l})(X_i)\big)
+    \]
+\item
+  \emph{Pick the method with the smallest risk (and possibly tune again for fitting)}
+\end{enumerate}
+
+\hypertarget{linear-models}{%
+\section{Linear Models}\label{linear-models}}
+
+We may take the linear model as a case study of the methods introduced in the above chapter. As such we consider the squaed loss \(L(y_1,y_2)=(y_1-y_2)^2\) for which we already know the Bayes rule:
+
+\[
+m^*(x)=\underset{m}{\text{argmin}}\ R(m)=\mathbb{E}[Y\ \vert\ X=x].
+\]
+
+The linear model has the following assumptions. There exists paramaters \(\beta_0^*,\beta_1^*,...,\beta_p^*\), with
+
+\[
+m^*(x)=\beta_0^*+\sum_{j=1}^{p}\beta_j^*x_j.
+\]
+
+In other words, we assume that \(m^*\) is a linear function, i.e.,
+
+\[
+m^*\in\mathcal{G}=\{f : \mathbb{R}^p\to \mathbb{R}\ \vert\ f(x)=\beta^\top x\}.
+\]
+
+Given iid training data \((X_i,Y_i)_{i=1,...,n}\) we have an additive noise model
+
+\[
+Y_i=\beta_0^*+\sum_{j=1}^{p}\beta_j^*X_{ij}+\varepsilon_i,
+\]
+
+with \(\varepsilon_i=Y_i-m^*(X_i)\) and hence iid with \(\mathbb{E}[\varepsilon_i\ \vert\ X_i]=0\).
+
+Notice, that since we are assuming \(m^*\in\mathcal{G}\) we have by assumption no inductive bias and we therefore only consider estimation error i.e.
+
+\[
+R(\hat{m}_n)-r(m^*).
+\]
+
+Given the training data we may approximate the coefficients using the following.
+
+\textbf{Lemma. (Coefficients in the linear model)} \emph{Under the Linear model assumption we have for \(j=1,...,p\)}
+
+\[
+\beta^*_j=\frac{\text{Cov}\Big(X_{1j},Y_1-\sum_{k\in \{1,...,p\}\setminus \{j\}} \beta_k^*X_{1k}\Big)}{\text{Var}(X_{1j})}
+\]
+
+\emph{In particular, if the components of \(X\) are uncorrelated, we have}
+
+\[
+\beta_j^*=\frac{\text{Cov}(X_{1j},Y_1)}{\text{Var}(X_{1j})}.
+\]
+
+\textbf{Lemma. (Bayes risk in the linear model)} \emph{Under the Linear model assumption we have}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(r(m^*)=\text{Var}(\varepsilon_i)\)
+\item
+  For \(m(x)=\beta_0+\sum_{j=1}^p \beta_jx_j\),
+  \[
+    r(m)-r(m^*)=\Vert\Sigma^{1/2}(\beta -\beta^*) \Vert^2_2.
+    \]
+\end{enumerate}
+
+Moving forward we will assume \(\beta_0^*=0\) since we can always translate the data and make the centered around 0. We will furthermore use the notation:
+
+\[
+\mathbf{X}=
+\begin{bmatrix}
+X_{11} & \cdots & X_{1p}\\
+\vdots & \ddots & \vdots\\
+X_{n1} & \cdots & X_{np}
+\end{bmatrix},\hspace{10pt} \mathbf{Y}=
+\begin{pmatrix}
+Y_1\\
+\vdots\\
+Y_n
+\end{pmatrix},\hspace{10pt} \varepsilon=
+\begin{pmatrix}
+\varepsilon_1\\
+\vdots\\
+\varepsilon_n
+\end{pmatrix}.
+\]
+
+In this cases the empirical risk takes the form
+
+\[
+\hat{R}_n(m)=\frac{1}{n}\Vert\mathbf{Y}-\mathbf{X}\beta \Vert^2_2.
+\]
+
+\textbf{Lemma. (Least squares estimator)}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{It holds that \((\mathbf{X}^\top\mathbf{X})\hat{\beta}=\mathbf{X}^\top \mathbf{Y}\),}
+\item
+  \emph{If \(\mathbf{X}\) has full rank, then}
+  \[
+    \hat{\beta}_n^{LS}=(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top \mathbf{Y}.
+    \]
+\end{itemize}
+
+\textbf{Theorem. (Excess risk Least squares estimator)} If \(\mathbf{X}^\top\mathbf{X}\) is invertible, then
+
+\[
+\mathbb{E}[R(\hat{m}_n^{LS})\ \vert\ \mathbf{X}]-r(m^*)=\frac{\sigma^2}{n}\cdot \text{tr}\left(\Sigma\hat{\Sigma}^{-1}\right)
+\]
+
+with \(\Sigma=\mathbb{E}[\mathbf{X}^\top\mathbf{X}]\) and \(\hat{\Sigma}=\frac{1}{n}\mathbf{X}^\top\mathbf{X}\).
 
 \hypertarget{quantative-risk-management}{%
 \chapter{Quantative Risk Management}\label{quantative-risk-management}}
@@ -2475,6 +3432,127 @@ There exist alot of different tangible measures of risk, some being coherent oth
 \hypertarget{measure-theory}{%
 \chapter{Measure theory}\label{measure-theory}}
 
+\hypertarget{axioms-of-probability}{%
+\section{Axioms of Probability}\label{axioms-of-probability}}
+
+Som udgangspunkt betragtes rummet \((\Omega,\mathcal{A})\) udstyret med en brolægning \(\mathcal{A}\subseteq 2^\Omega\), hvor \(2^\Omega=\mathcal{P}(\Omega)\) er mængden af alle delmængder af \(\Omega\). Typisk anvendes brolægningerne 1) en algebra eller 2) en \(\sigma\)-algebra.
+
+\textbf{Definition 2.1. (Protter)} \textbf{(Algebra)} \emph{En brolægning \(\mathcal{A}\subseteq 2^\Omega\) kaldes en algebra, hvis}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\Omega\subseteq\mathcal{A}\),
+\item
+  \(\forall A\in\mathcal{A} \Rightarrow A^c=\Omega\setminus A\in\mathcal{A}\) \emph{(lukket under komplementer),}
+\item
+  \(A_1,A_2,...,A_n\in\mathcal{A}\Rightarrow \cup_{i=1}^n A_i\in\mathcal{A}\) \emph{(lukket under endelige foreninger).}
+\end{enumerate}
+
+\textbf{Definition 2.2. (Protter)} \textbf{(\(\mathit{\sigma}\)-algebra)} \emph{En brolægning \(\mathcal{A}\subseteq 2^\Omega\) kaldes en \(\sigma\)-algebra, hvis}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\Omega\subseteq\mathcal{A}\),
+\item
+  \(\forall A\in\mathcal{A} \Rightarrow A^c\in\mathcal{A}\) \emph{(lukket under komplementer),}
+\item
+  \((A_n)_{n\in\mathbb{N}}\subset\mathcal{A}\Rightarrow \cup_{i\in\mathbb{N}} A_i\in\mathcal{A}\) \emph{(lukket under tællelige foreninger).}
+\end{enumerate}
+
+\emph{Egenskaber for en \(\sigma\)-algebra}: 1) \(\emptyset\in\mathcal{A}\), 2) \(A,B\in\mathcal{A}\Rightarrow A \cup B\in\mathcal{A}\), og 3) \((A_i)_{i\in\mathbb{N}}\subseteq\mathcal{A}\Rightarrow\cap_{i\in\mathbb{A}}A_i\in\mathcal{A}\).
+
+\emph{Eksempel:} Borel-sigma-algebraen \(\mathcal{B}(\mathbb{R}^n)=\sigma(\mathcal{C})\), hvor \(\mathcal{C}\) kan være en af følgende frembrigersystem. (\(\sigma(\mathcal{C})\) benævner den mindste \(\sigma\)-algebra på \(\Omega\), hvor \(\mathcal{C}\in\mathcal{A}\)).
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  De åbne mængder dvs. \(\mathcal{C}=\mathcal{O}^n\)
+\item
+  De lukkede mængder dvs. \(\mathcal{C}=\{A^c : A\in\mathcal{O}^n\}\)
+\item
+  Halvåbne mængder/bokse
+\item
+  Uendelige intervaller som \(\mathcal{C}=\{(-\infty,a] : a\in\mathbb{R}\}\)
+\end{enumerate}
+
+\textbf{Definition 2.2. (Protter)} \textbf{(Sandsynlighedsmål)} \emph{Lad \(\mathcal{A}\subseteq2^\Omega\) være en \(\sigma\)-algebra. \(P : \mathcal{A}\to[0,1]\) kaldes et sandsynlighedsmål hvis}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(P(\Omega)=1\),
+\item
+  \emph{For \((A_n)_{n\in\mathbb{N}}\) af parvist disjunkte delmængder af \(\Omega\) gælder \(P\left(\bigcup_{n\in\mathbb{N}}A_n\right)=\sum_{n\in\mathbb{N}}P(A_n)\).}
+\end{enumerate}
+
+\emph{Bemærkning:} Husk et mål \(\mu : \mathcal{A}\to [0,\infty)\) på \(\mathcal{A}\) opfylder at 1) \(\mu(\emptyset)=0\) og 2) for en parvis disjunkt familie \((A_n)_{n\in\mathbb{N}}\) gælder \(\mu\left(\mathop{\dot{\bigcup}}_{n\in\mathbb{N}}A_n\right)=\sum_{n\in\mathbb{N}}\mu(A_n)\).
+
+\emph{Konsekvenser:} Umildbare konsekvenser ved definition 2.3 er følgende
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  \(\sum_{i=1}^n P(A_i)=P\left(\bigcup_{i=1}^nA_i\right)\), hvis alle \(A_i\) er pavist disjunkte
+\item
+  \(0\le P(A)\le 1\), for alle \(A\in\mathcal{A}\)
+\item
+  \(P(A^c)=1-P(A)\), for alle \(A\in\mathcal{A}\)
+\item
+  \(P(A)\le P(B)\) hvis \(A\subseteq B\)
+\end{enumerate}
+
+\textbf{Theorem 2.3. (Protter)} \textbf{(Opad- og nedadkontinuitet)} \emph{Lad \(P : \mathcal{A}\to[0,1]\) være et ssh. mål på \((\Omega,\mathcal{A})\). Da gælder}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \emph{\(P(A_n)\uparrow P(A)\) hvis \(A_n\uparrow A\),}
+\item
+  \emph{\(P(A_n)\downarrow P(A)\) hvis \(A_n\downarrow A\)}
+\end{enumerate}
+
+\hypertarget{conditional-probability-and-independence}{%
+\section{Conditional Probability and Independence}\label{conditional-probability-and-independence}}
+
+\textbf{Definition 3.1. (Protter)} \textbf{(Uafhængighed)} \emph{Lad \((\Omega,\mathcal{A},P)\) være et ssh. rum.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{Lad \(A,B\in\mathcal{A}\) være to hændelser. \(A\) og \(B\) kaldes uafhængige hvis \(P(A\cap B)=P(A)P(B)\).}
+\item
+  \emph{Lad \(A_i\in\mathcal{A}\) for en indeksmængde \(i\in I\) (ikke et krav om endelighed eller tællelig). Hændelserne \(A_i\) kaldes uafhængige hvis \(P(\cap_{i\in J}A_i)=\prod P(A_i)\) for et \(J\subseteq I\) med \(\# J< +\infty\).}
+\end{enumerate}
+
+\emph{Bemærkning.} Der gælder at 1) \(\emptyset\) og \(\Omega\) er uafhængige af alle \(A\in\mathcal{A}\) samt \(A\in\mathcal{A}\) er uafhængig med sig selv hvis og kun hvis \(P(A)=\{0,1\}\).
+
+\textbf{Theorem 3.1. (Protter)} \emph{Lad \((\Omega,\mathcal{A},P)\) være et ssh. rum. Antag \(A,B\in\mathcal{A}\) være uafhængige, så er følgende par uafhængige: \((A^c,B),(A,B^c)\) og \((A^c,B^c)\).}
+
+\textbf{Definition 3.2. (Protter)} \textbf{(Betinget sandsynlighed)} \emph{Lad \(A,B\in\mathcal{A}\) være hændelser og \(P(B)>0\). Den betingede sandsynlighed \(A\) givet \(B\) er \(P(A\vert B)=P(A\cap B)/P(B)\).}
+
+\textbf{Theorem 3.2. (Protter)} \emph{Lad \(A,B\in\mathcal{A}\) være hændelser og \(P(B)>0\).}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{\(A\) og \(B\) er uafhængige hvis og kun hvis \(P(A\vert B)=P(A)\).}
+\item
+  \emph{Funktionen \(P(\cdot \vert B) : \mathcal{A} \to [0,1]\) definerer et nyt ssh. mål på \(\mathcal{A}\), kaldet \textbf{den betingede sandsynlighed givet \(B\)}.}
+\end{enumerate}
+
+Andet kan tilføjes f.eks. Bayes'.
+
 \hypertarget{equivalent-probability-measures}{%
 \section{Equivalent Probability Measures}\label{equivalent-probability-measures}}
 
@@ -2571,8 +3649,8 @@ L_t=\frac{dQ}{dP},\ on\ \mathcal{F}_t,\tag{C.8}
 \hypertarget{random-variables}{%
 \chapter{Random Variables}\label{random-variables}}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
 
 \textbf{Definition 1.1. (Hansen)} \emph{A \textbf{real-valued random variable}\index{random variable} \(X\) on a probability space \((\Omega, \mathbb{F},P)\) is a measurable map \(X : (\Omega,\mathbb{F})\to (\mathbb{R},\mathbb{B})\).}
 
@@ -3238,7 +4316,7 @@ We say that a set \(A\in\mathbb{E}\) is an \textbf{invariant set} if \(T^{-1}(A)
 \textbf{Lemma 5.9. (Hansen)} \emph{Let \((\mathcal{X},\mathbb{E},\mu)\) be a probability space, and let \(T : \mathcal{X}\to \mathcal{X}\) be a measure-preserving map. Let \((\mathcal{Y},\mathbb{G})\) be another measurable space, and let \(S : \mathcal{Y} \to \mathcal{Y}\) be a measurable map.}
 \emph{Suppose there is a measurable map \(\gamma : \mathcal{X}\to \mathcal{Y}\) such that the following diagram commutes:}
 
-\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-7-1} \end{center}
+\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
 \emph{Then \((\mathcal{Y},\mathbb{G},\gamma(\mu),S)\) is a measure-preserving dynamical system.}
 
@@ -3708,13 +4786,11 @@ Martingales is useful, when proofing probalistic statements as the posses tracta
 
 \[M_t=E[X\ \vert\ \mathcal{F}_t].\]
 
-\newpage
-
 \hypertarget{stochastic-calculus}{%
-\section{Stochastic calculus}\label{stochastic-calculus}}
+\chapter{Stochastic calculus}\label{stochastic-calculus}}
 
 \hypertarget{stochastic-integrals}{%
-\subsection{Stochastic Integrals}\label{stochastic-integrals}}
+\section{Stochastic Integrals}\label{stochastic-integrals}}
 
 We want to formulate financial markets in continuous time and the most elegant theory is obtained from processes that can be defined in terms of \textbf{stochastic differential equations}\index{stochastic differential equations, SDE} or in other words by their dynamics. We may call them \textbf{diffusion processes}\index{diffusion processes}, as they may be approximated by a stochastic difference equation:
 
@@ -3725,7 +4801,7 @@ X_{t+\Delta t}-X_t=\mu(t,X_t)\Delta t+\sigma(t,X_t)Z_t.\tag{4.1}
 Above \(Z_t\) is a normally distributed random variable (a disturbance). In this formulation we say that \(S_t\) is driven by two forces: on one hand a locally deterministic velocity or drift \(\mu(t,X_t)\) and on the other hand a Gaussian term amplified by the deterministic factor \(\sigma(t,X_t)\).
 
 \hypertarget{information}{%
-\subsubsection{Information}\label{information}}
+\subsection{Information}\label{information}}
 
 We consider a primary process \(X_t\) and we introduce the notion of information generated by \(X_t\) in terms of the natural filtration. The idea can be summed up in the following definition.
 
@@ -3753,7 +4829,7 @@ We consider a primary process \(X_t\) and we introduce the notion of information
 \end{enumerate}
 
 \hypertarget{stochastic-integrals-1}{%
-\subsubsection{Stochastic Integrals}\label{stochastic-integrals-1}}
+\subsection{Stochastic Integrals}\label{stochastic-integrals-1}}
 
 We will now formulate the theory of stochastic integrals, that is, processes written in terms of stochastic processes with stochastic integrator and/or stochastic integrant. We will consider some given standard Brownian motion \(W_t\) and another stochastic process \(X_t\). We need som integrability condition on \(X_t\) in order to do the calculations. We therefore determine a selection of suitable stochastic processes \(X\) must be contained in.
 
@@ -3818,7 +4894,7 @@ Obviously the hardest step is finding the processes \(X^n\). This stochastic har
 \end{align*}
 
 \hypertarget{martingales}{%
-\subsubsection{Martingales}\label{martingales}}
+\subsection{Martingales}\label{martingales}}
 
 \textbf{Definition 4.7. (Bjork)} \emph{Let \(M_t\) be a stochastic process defined on a background space \((\Omega,\mathcal{F},P)\). Let \((\mathcal{F}_t)_{t\ge 0}\) be a filtration. If \(M_t\) is adapted to the filtration \(\mathcal{F}_t\), \(E\vert M_t\vert <\infty\) and}
 
@@ -3843,7 +4919,7 @@ M_t=\int_s^t X_s\ dW_s,
 \textbf{Lemma 4.10. (Bjork)} \emph{Let \(M_t\) be a stochastic process with stochastic differential, then \(M_t\) is a martingale if and only if the stochastic differential has the form \(dM_t=X_t\ dW_t\) i.e.~\(M_t\) as no \(dt\)-term.}
 
 \hypertarget{stochastic-calculus-and-the-ito-formula}{%
-\subsubsection{Stochastic Calculus and the Ito Formula}\label{stochastic-calculus-and-the-ito-formula}}
+\subsection{Stochastic Calculus and the Ito Formula}\label{stochastic-calculus-and-the-ito-formula}}
 
 Given this breif introduction to stochastic integrals we may formulate som simple calculus revolving around Ito's formula. We consider the stochastic process \(X_t\) and we suppose that there exist a real number \(X_0\) and adapted processes \(\mu\) and \(\sigma\) wrt. \(\mathcal{F}_t^W\) such that for all \(t\ge0\) we have
 
@@ -3898,7 +4974,7 @@ X_t\sim\mathcal{N}\left(0,\int_0^t\sigma^2(s)\ ds\right).
 \]
 
 \hypertarget{the-multidimensional-ito-formula}{%
-\subsubsection{The multidimensional Ito Formula}\label{the-multidimensional-ito-formula}}
+\subsection{The multidimensional Ito Formula}\label{the-multidimensional-ito-formula}}
 
 Consider a vector process \(X=(X^1,...,X^n)^\top\) where each component \(X^i\) has stochastic differential
 
@@ -3950,7 +5026,7 @@ The dynamics is given in the multidimensional version of Ito's formula.
 Obviously, one can write the differential in Ito's formula in many other ways including a matrix-wise version using the Hessian matrix \(H_{ij}=\frac{\partial^2 f}{\partial x^i\partial x^j}\).
 
 \hypertarget{correlated-brownian-motions}{%
-\subsubsection{Correlated Brownian motions}\label{correlated-brownian-motions}}
+\subsection{Correlated Brownian motions}\label{correlated-brownian-motions}}
 
 In the previous section the \(d\)-dimensional Brownian was assumed to have independent Brownian motions. However we may instead consider a variation where we have some dependence between the Brownian motions.
 
@@ -3958,13 +5034,13 @@ This section has not been finished.
 \pagebreak
 
 \hypertarget{discrete-stochastic-integrals}{%
-\subsection{Discrete Stochastic Integrals}\label{discrete-stochastic-integrals}}
+\section{Discrete Stochastic Integrals}\label{discrete-stochastic-integrals}}
 
 This section has not been finished.
 \pagebreak
 
 \hypertarget{stochastic-differential-equations}{%
-\subsection{Stochastic Differential Equations}\label{stochastic-differential-equations}}
+\section{Stochastic Differential Equations}\label{stochastic-differential-equations}}
 
 We start the chapter by formalising some used objects. We consider the following objects.
 
@@ -4087,7 +5163,7 @@ where \(\nabla_x\) is the gradient for function \(h\in C^1(\mathbb{R}^n)\) as
 \]
 
 \hypertarget{partial-differential-equations}{%
-\subsection{Partial differential equations}\label{partial-differential-equations}}
+\section{Partial differential equations}\label{partial-differential-equations}}
 
 \textbf{Proposition 5.5. (Bjork)} \textbf{(Feynmann-Kac)}\index{Feynmann-Kac} \emph{Assume that \(F\) is a solution to the boundary value problem}
 
@@ -4184,7 +5260,7 @@ dX_s=\mu(s,X_s)\ ds+\sigma(s,X_s)\ dW_s,\tag{5.40}
 \end{itemize}
 
 \hypertarget{the-product-integral}{%
-\subsection{The Product Integral}\label{the-product-integral}}
+\section{The Product Integral}\label{the-product-integral}}
 
 Consider the (stochastic) function \(Y : \mathbb{R} \to \mathbb{R}^{n\times n}\), where \(\mathbb{R}^{n\times n}\) is the set of all \(n\times n\) real-valued matrices, that is \(Y\) has the matrix-representation
 
@@ -4211,7 +5287,7 @@ is satisfied. That is on matrix form the linear system of differential equation
 
 for some function \(A : \mathbb{R}\to\mathbb{R}^{n\times n}\) and initial condition \(C\in \mathbb{R}^{n\times n}\). If \(A\) is continuous we know that \(Y\) is well-defined and absolutely continuous. We may then state the following theorem regarding uniqueness and existence of such a function above.
 
-\textbf{Theorem 1.1. (Bladt)} \textbf{(Uniqueness)} \emph{Consider the homogeneous system of linear differential equations}
+\textbf{Theorem 1.1. (Bladt)} \textbf{(Uniqueness)}\index{solution to linear differential equation system, uniqueness} \emph{Consider the homogeneous system of linear differential equations}
 
 \[
 \mathbf{Y}'(t)=\mathbf{Y}(t)\mathbf{A}(t),\hspace{15pt} \mathbf{Y}(s)=\mathbf{C},\tag{1}
@@ -4219,7 +5295,7 @@ for some function \(A : \mathbb{R}\to\mathbb{R}^{n\times n}\) and initial condit
 
 \emph{where \(\mathbf{Y}(t)\), \(\mathbf{A}(t)\) and \(\mathbf{C}\) are \(n\times n\)-matrices and \(\mathbf{A}(t)\) is continuous on \([s,t]\). Then (1) has at most one solution.}
 
-\textbf{Theorem 1.2. (Bladt)} \textbf{(Existance)} \emph{The matrix function}
+\textbf{Theorem 1.2. (Bladt)} \textbf{(Existence)}\index{solution to linear differential equation system, existence} \emph{The matrix function}
 
 \[
 \mathbf{Y}(t)=\sum_{k=0}^\infty \mathbf{Y}_k(t),\tag{3}
@@ -4233,7 +5309,7 @@ for some function \(A : \mathbb{R}\to\mathbb{R}^{n\times n}\) and initial condit
 
 Now, we know that for any system as in (1) with a continuous function \(\mathbf{A}(t)\) we can always construct the solution as some converging series as per theorem 1.2 then theorem 1.1 gives that the solution is unique. We can then with a piece of mind define a symbol for such a solution, without care for the \emph{exact} solution.
 
-\textbf{Definition 1.3. (Bladt)} \textbf{(The Product Integral)} \emph{For any continuous matrix function \(\mathbf{A}(t)\) we define the product integral as}
+\textbf{Definition 1.3. (Bladt)} \textbf{(The Product Integral)}\index{Product Integral} \emph{For any continuous matrix function \(\mathbf{A}(t)\) we define the product integral as}
 
 \[
 \prod_{s}^t(\mathbf{I}+\mathbf{A}(x)\ dx)
@@ -4254,11 +5330,188 @@ From a simple integral argument we may construct \emph{a} converging series not 
 \end{align*}
 One can continue indefinitely and see that we have the following representation.
 
-\textbf{Corollary 1.4. (Bladt)} \textbf{(Peano Representation)} \emph{The prduct integral has series representation given by}
+\textbf{Corollary 1.4. (Bladt)} \textbf{(Peano Representation)}\index{Peano Representation} \emph{The prduct integral has series representation given by}
 \begin{align*}
 \prod_{s}^t(\mathbf{I}+\mathbf{A}(x)\ dx)&=\mathbf{I}+\sum_{i=1}^\infty\int_s^t\int_s^{x_1}\cdots\int_s^{x_n}A(x_n)\cdots\mathbf{A}(x_2)\mathbf{A}(x_1)\ dx_n\cdots dx_2\ dx_1\\
 &=\mathbf{I}+\int_s^t\mathbf{A}(x_1)\ dx_1+\sum_{i=2}^\infty\int_s^t\int_s^{x_1}\cdots\int_s^{x_n}A(x_n)\cdots\mathbf{A}(x_2)\mathbf{A}(x_1)\ dx_n\cdots dx_2\ dx_1.
 \end{align*}
+
+\hypertarget{properties-of-the-product-integral}{%
+\subsection{Properties of the Product Integral}\label{properties-of-the-product-integral}}
+
+The product integral is the fundamental solution in the sense that if
+
+\[
+\mathbf{Y}'(t)=\mathbf{Y}(t)\mathbf{A}(t),\hspace{15pt}\mathbf{Y}(s)=\mathbf{C},
+\]
+
+then
+
+\[
+\mathbf{Y}(t)=\mathbf{C}\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big).
+\]
+
+We furthermore have for any \(s,t,u\) have
+
+\[
+\mathbf{Y}(t)=\mathbf{Y}(s)\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\prod_{u}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big).
+\]
+
+From uniqueness we then get the following theorem.
+
+\textbf{Theorem 1.5. (Bladt)} \emph{For any \(s,t,u\) we have that}
+
+\[
+\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)=\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\prod_{u}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big).
+\]
+
+By choosing \(u=t\) in the above we get the following corollary.
+
+\textbf{Corollary 1.6. (Bladt)} \emph{The inverse of the product integral is}
+
+\[
+\left[\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\right]^{-1}=\prod_{t}^s\big(\mathbf{I}+\mathbf{A}(x)\ dx\big).
+\]
+
+\textbf{Theorem 1.7. (Bladt)} \emph{If \(\mathbf{A}(x)\) commutes withall \(\mathbf{B}(x=\) i.e.~\(\mathbf{A}(x)\mathbf{B}(x)=\mathbf{B}(x)\mathbf{A}(x)\), then}
+
+\[
+\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\prod_{s}^t\big(\mathbf{I}+\mathbf{B}(x)\ dx\big)=\prod_{s}^t\big(\mathbf{I}+\left(\mathbf{A}(x)+\mathbf{B}(x)\right)\ dx\big).
+\]
+
+\textbf{Corollary 1.8. (Bladt)} \emph{Let \(r\) be a real-valued function, then}
+
+\[
+\exp\left(-\int_s^t r(x)\ dx\right)\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)=\prod_{s}^t\big(\mathbf{I}+\left(\mathbf{A}(x)-r(x)\mathbf{I}\right)\ dx\big).
+\]
+
+\textbf{Theorem 1.9. (Bladt)} \emph{If \(\mathbf{A}(x)\) commutes for all \(x\) i.e.~\(\mathbf{A}(y)\mathbf{A}(x)=\mathbf{A}(x)\mathbf{A}(y)\), then}
+
+\[
+\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)=e^{\int_s^t\mathbf{A}(x)\ dx}.
+\]
+
+\emph{In particular, if \(\mathbf{A}(x)=\mathbf{A}\lambda(x)\) for some real-valued function \(\lambda\) and a \(n\times n\) matrix \(\mathbf{A}\) then}
+
+\[
+\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)=e^{\mathbf{A}\int_s^t\lambda(x)\ dx}.
+\]
+
+Taking the function \(\lambda=1\) we have that \(\int_s^t\lambda(x)\ dx=(t-s)\) and so we get the result.
+
+\textbf{Theorem 1.10. (Bladt)} \emph{If \(\mathbf{A}(x)=\mathbf{A}\) is constant then}
+
+\[
+\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)=e^{\mathbf{A}(t-s)}.
+\]
+
+\textbf{Theorem 1.11. (Bladt)} \emph{The product integral satisfies}
+
+\[
+\frac{\partial}{\partial s}\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)=-\mathbf{A}(s)\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big).
+\]
+
+\emph{On the other hand, the solution to the system of differential equations}
+
+\[
+\frac{\partial}{\partial s}\mathbf{X}(s)=-\mathbf{A}(s)\mathbf{X}(s)
+\]
+
+\emph{with initial condition \(\mathbf{X}(t)=\mathbf{I}\) is the function}
+
+\[
+s\mapsto\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)
+\]
+
+We have a very useful result for insurance mathematics and markov chains given by the Van Loan's theorem giving the product integral of a block matrix with zero lower left block.
+
+\textbf{Theorem 1.12. (Bladt)} \emph{Let \(\mathbf{A}(x)\), \(\mathbf{B}(x)\) and \(\mathbf{C}(x)\) be continuous matrix functions such that}
+
+\[
+\mathbf{D}(x)=\begin{bmatrix}
+\mathbf{A}(x) & \mathbf{B}(x)\\
+\mathbf{0} & \mathbf{C}(x)
+\end{bmatrix},
+\]
+
+\emph{is a square matrix. Then the product integral of \(\mathbf{D}\) is}
+
+\[
+\prod_{s}^t\big(\mathbf{I}+\mathbf{D}(x)\ dx\big)=
+\begin{bmatrix}
+\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big) & \int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du\\
+\mathbf{0} & \prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)
+\end{bmatrix}.
+\]
+
+\textbf{Proof.}
+
+Start by defining \(\mathbf{X}(t)\) as below
+\begin{align*}
+\mathbf{X}(t)&=
+\begin{bmatrix}
+\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big) & \int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du\\
+\mathbf{0} & \prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)
+\end{bmatrix}\\
+&:=\begin{bmatrix}
+\mathbf{X}_{11}(t) & \mathbf{X}_{12}(t)\\
+\mathbf{X}_{21}(t) & \mathbf{X}_{22}(t)
+\end{bmatrix}.
+\end{align*}
+The derivative is then
+\begin{align*}
+\frac{d}{dt}\mathbf{X}(t)&=
+\begin{bmatrix}
+\frac{d}{dt}\mathbf{X}_{11}(t) & \frac{d}{dt}\mathbf{X}_{12}(t)\\
+\frac{d}{dt}\mathbf{X}_{21}(t) & \frac{d}{dt}\mathbf{X}_{22}(t)
+\end{bmatrix}.
+\end{align*}
+with
+\begin{align*}
+\frac{d}{dt}\mathbf{X}_{11}(t)&=\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{A}(t),\\
+\frac{d}{dt}\mathbf{X}_{12}(t)&= \frac{d}{dt}\int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du,\\
+\frac{d}{dt}\mathbf{X}_{21}(t)&=\mathbf{0},\\
+\frac{d}{dt}\mathbf{X}_{22}(t)&=\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\mathbf{C}(t).
+\end{align*}
+Consider that
+\begin{align*}
+\prod_{u}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)&=\prod_{u}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\underbrace{\prod_{t}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)}_{=\mathbf{I}}\\
+&=\prod_{u}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big),
+\end{align*}
+hence using af Riemann approximation of the integral \(\mathbf{X}_{12}(t)\) we may write
+\begin{align*}
+\mathbf{X}_{12}(t)&=\int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du\\
+&=\int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du\\
+&=\lim_{n\to \infty}\frac{t-s}{n}\sum_{i=0}^n\prod_{s}^{s+(t-s)i/n}\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(s+(t-s)i/n)\prod_{s+(t-s)i/n}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\\
+&\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\\
+&=\left\{\lim_{n\to \infty}\frac{t-s}{n}\sum_{i=0}^n\prod_{s}^{s+(t-s)i/n}\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(s+(t-s)i/n)\prod_{s+(t-s)i/n}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\right\}\\
+&\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\\
+&=\left\{\int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du\right\}\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big).
+\end{align*}
+We then get that
+\begin{align*}
+\frac{d}{dt}\mathbf{X}_{12}(t)&=\frac{d}{dt}\left\{\int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du\right\}\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\\
+&=\left\{\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(t)\prod_{t}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\right\}\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\\
+&+\left\{\int_s^t\prod_{s}^u\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(u)\prod_{u}^s\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\ du\right\}\prod_{s}^t\big(\mathbf{I}+\mathbf{C}(x)\ dx\big)\mathbf{C}(t)\\
+&=\prod_{s}^t\big(\mathbf{I}+\mathbf{A}(x)\ dx\big)\mathbf{B}(t)+\mathbf{X}_{12}(t)\mathbf{C}(t).
+\end{align*}
+We hope to show that \(\frac{d}{dt}\mathbf{X}(t)=\mathbf{X}(t)\mathbf{D}(t)\). Calculating the right side we have
+\begin{align*}
+\mathbf{X}(t)\mathbf{D}(t)&=
+\begin{bmatrix}
+\mathbf{X}_{11}(t) & \mathbf{X}_{12}(t)\\
+\mathbf{0} & \mathbf{X}_{22}(t)
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{A}(x) & \mathbf{B}(x)\\
+\mathbf{0} & \mathbf{C}(x)
+\end{bmatrix}\\
+&=\begin{bmatrix}
+\mathbf{X}_{11}(t)\mathbf{A}(x) & \mathbf{X}_{11}(t)\mathbf{B}(x)+\mathbf{X}_{12}(t)\mathbf{C}(x)\\
+\mathbf{0} & \mathbf{X}_{22}(t)\mathbf{C}(x)
+\end{bmatrix},
+\end{align*}
+given that \(\mathbf{X}\) satisfies the desired differential equation and so it follows that \(\mathbf{X}\) is the product integral \(\prod_{s}^t\big(\mathbf{I}+\mathbf{D}(x)\ dx\big)\) as desired.\(\blacksquare\)
 
 \hypertarget{linear-algebra}{%
 \chapter{Linear Algebra}\label{linear-algebra}}
@@ -4376,6 +5629,15 @@ We have an easy propositions regarding diagonal matrices.
 \[
 A^{-1}=\text{diag}(A_{11}^{-1},...,A_{nn}^{-1}).
 \]
+
+\hypertarget{coding}{%
+\chapter{Coding}\label{coding}}
+
+\hypertarget{r-packages}{%
+\section{R-Packages}\label{r-packages}}
+
+\hypertarget{mlr3}{%
+\subsection{mlr3}\label{mlr3}}
 
 \newpage
 

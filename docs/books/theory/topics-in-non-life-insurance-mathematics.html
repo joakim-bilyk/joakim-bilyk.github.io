@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Complete Theory</title>
-  <meta name="description" content="Complete Theory" />
+  <title>Chapter 8 Topics in Non-Life Insurance Mathematics | Complete Theory</title>
+  <meta name="description" content="Chapter 8 Topics in Non-Life Insurance Mathematics | Complete Theory" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Complete Theory" />
+  <meta property="og:title" content="Chapter 8 Topics in Non-Life Insurance Mathematics | Complete Theory" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Complete Theory" />
+  <meta name="twitter:title" content="Chapter 8 Topics in Non-Life Insurance Mathematics | Complete Theory" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="basic-life-insurance-mathematics.html"/>
+<link rel="prev" href="stochastic-processes-in-non-life-insurance-mathematics.html"/>
+<link rel="next" href="probabilistic-machine-learning.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -369,231 +369,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Complete Theory</h1>
-<h2 class="subtitle"><em>Msc in Actuarial Mathematics</em></h2>
-<p class="author"><em>Joakim Bilyk</em></p>
-<p class="date"><em>February 13, 2023</em></p>
-<div class="abstract">
-<p class="abstract">Abstract</p>
-<p>This document contain a comprehensive outline of theory on probability theory and mathematical statistics applied in finance, life insurance and non-life insurance.</p>
-</div>
-</div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="abbreviations" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Abbreviations<a href="index.html#abbreviations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below is given the abbreviations used when referencing to books:</p>
-<table>
-<colgroup>
-<col width="32%" />
-<col width="14%" />
-<col width="52%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Chapter</th>
-<th align="left">Abbreviation</th>
-<th align="left">Source</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Basic Life Insurance Mathematics</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Stochastic Processes in Life Insurance Mathematics</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Life Insurance Mathematics</td>
-<td align="left">Asmussen</td>
-<td align="left"><em>Risk and Insurance</em>: A Graduate Text by Soren Asmussen and Mogens Steffensen (2020).</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left">Bladt</td>
-<td align="left">Notes from lectures in Liv2.</td>
-</tr>
-<tr class="odd">
-<td align="left">Topics in Life Insurance Mathematics</td>
-<td align="left">Asmussen</td>
-<td align="left"><em>Risk and Insurance</em>: A Graduate Text by Soren Asmussen and Mogens Steffensen (2020).</td>
-</tr>
-<tr class="even">
-<td align="left">Continuous Time Finance</td>
-<td align="left">Bjork</td>
-<td align="left"><em>Arbitrage Theory in Continuous Time (Fourth edition)</em> by Thomas Bjork, Oxford University Press (2019).</td>
-</tr>
-<tr class="odd">
-<td align="left">Basic Non-Life Insurance Mathematics</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Stochastic Processes in Life Insurance Mathematics</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Topics in Non-Life Insurance Mathematics</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Probabilistic Machine Learning</td>
-<td align="left"><em>None</em></td>
-<td align="left">Slides from lectures.</td>
-</tr>
-<tr class="odd">
-<td align="left">Quantative Risk Management</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Measure Theory</td>
-<td align="left">Bjork</td>
-<td align="left"><em>Arbitrage Theory in Continuous Time (Fourth edition)</em> by Thomas Bjork, Oxford University Press (2019).</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Protter</td>
-<td align="left"><em>Probability Essentials (2. edition)</em> by Jean Jacod and Philip Protter (2004).</td>
-</tr>
-<tr class="even">
-<td align="left">Random Variables</td>
-<td align="left">Bjork</td>
-<td align="left"><em>Arbitrage Theory in Continuous Time (Fourth edition)</em> by Thomas Bjork, Oxford University Press (2019).</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Hansen</td>
-<td align="left"><em>Stochastic Processes</em> (2. edition) by Ernst Hansen (2021).</td>
-</tr>
-<tr class="even">
-<td align="left">Discrete Time Stochastic Processes</td>
-<td align="left">Hansen</td>
-<td align="left"><em>Stochastic Processes</em> (2. edition) by Ernst Hansen (2021).</td>
-</tr>
-<tr class="odd">
-<td align="left">Continuous Time Stochastic Processes</td>
-<td align="left">Bjork</td>
-<td align="left"><em>Arbitrage Theory in Continuous Time (Fourth edition)</em> by Thomas Bjork, Oxford University Press (2019).</td>
-</tr>
-<tr class="even">
-<td align="left">Stochastic Calculus</td>
-<td align="left">Bjork</td>
-<td align="left"><em>Arbitrage Theory in Continuous Time (Fourth edition)</em> by Thomas Bjork, Oxford University Press (2019).</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Bladt</td>
-<td align="left">Notes from lectures in Liv2.</td>
-</tr>
-<tr class="even">
-<td align="left">Linear Algebra</td>
-<td align="left">Wiki</td>
-<td align="left">Wikipedia</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="to-do-reading" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> To-do reading<a href="index.html#to-do-reading" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Chapter</th>
-<th align="left">Note</th>
-<th align="left">Progress</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Liv2</td>
-<td align="left">Properties of product integral</td>
-<td align="left">Done</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left">Relation to kolmogorov and markov chains</td>
-<td align="left">Bevis 2.3 og 2.12</td>
-</tr>
-<tr class="odd">
-<td align="left">ML</td>
-<td align="left">Risk measure and loss (First week in general)</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">QRM</td>
-<td align="left">Finish risk measures</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">StokLiv</td>
-<td align="left">Week 1</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">StokLiv</td>
-<td align="left">Week 2</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">SkadeStok</td>
-<td align="left">Week 1</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">SkadeStok</td>
-<td align="left">Week 2</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Liv1</td>
-<td align="left">Week 1</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Liv1</td>
-<td align="left">Week 2</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Nonlife1</td>
-<td align="left">Week 1</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Nonlife1</td>
-<td align="left">Week 2</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">MI</td>
-<td align="left">Insert notes</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Stok</td>
-<td align="left">Insert notes</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
+<div id="topics-in-non-life-insurance-mathematics" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Topics in Non-Life Insurance Mathematics<a href="topics-in-non-life-insurance-mathematics.html#topics-in-non-life-insurance-mathematics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Noget indhold</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="basic-life-insurance-mathematics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="stochastic-processes-in-non-life-insurance-mathematics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probabilistic-machine-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
