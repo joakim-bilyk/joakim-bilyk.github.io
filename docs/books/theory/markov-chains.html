@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Markov Chains | Complete Theory</title>
+  <meta name="description" content="Chapter 14 Markov Chains | Complete Theory" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Markov Chains | Complete Theory" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Markov Chains | Complete Theory" />
+  
+  
+  
+
+<meta name="author" content="Joakim Bilyk" />
+
+
+<meta name="date" content="2023-02-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="discrete-time-stochastic-processes.html"/>
+<link rel="next" href="continuous-time-stochastic-processes.html"/>
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
+<script>
+    $(function() {
+        var element = document.body;
+        if (localStorage.chkbx && localStorage.chkbx != '') {
+            $('#remember_me').attr('checked', 'checked');
+            element.classList.toggle("dark-mode");
+            document.querySelector('.book-header.fixed').click();
+        } else {
+            $('#remember_me').removeAttr('checked');
+            document.querySelector('.book-header.fixed').click();
+        }
+
+        $('#remember_me').click(function() {
+
+            if ($('#remember_me').is(':checked')) {
+                // save username and password
+                localStorage.chkbx = $('#remember_me').val();
+                element.classList.toggle("dark-mode");
+                document.querySelector('.book-header.fixed').click();
+            } else {
+                localStorage.chkbx = '';
+                element.classList.toggle("dark-mode");
+                document.querySelector('.book-header.fixed').click();
+            }
+        });
+    });
+
+</script>
+
+<div class = "sticky-darkmode-toggle">
+  <label class="switch">
+  <input type="checkbox" value="remember-me" id="remember_me">
+  <span class="slider round">
+  </span>
+  </label>
+</div>
+
+<script>
+$(function() {
+  $('body').after($('.sticky-darkmode-toggle'));
+})
+</script>
+
+<style>
+
+.sticky-darkmode-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+</style>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Comlete theory</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#abbreviations"><i class="fa fa-check"></i><b>1.1</b> Abbreviations</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#to-do-reading"><i class="fa fa-check"></i><b>1.2</b> To-do reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-life-insurance-mathematics.html"><a href="basic-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>2</b> Basic Life Insurance Mathematics</a></li>
+<li class="chapter" data-level="3" data-path="stochastic-processes-in-life-insurance-mathematics.html"><a href="stochastic-processes-in-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>3</b> Stochastic Processes in Life Insurance Mathematics</a></li>
+<li class="chapter" data-level="4" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>4</b> Topics in Life Insurance Mathematics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#markov-jump-processes"><i class="fa fa-check"></i><b>4.1</b> Markov Jump Processes</a></li>
+<li class="chapter" data-level="4.2" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#phase-type-distributions"><i class="fa fa-check"></i><b>4.2</b> Phase-type distributions</a></li>
+<li class="chapter" data-level="4.3" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#interest-rates"><i class="fa fa-check"></i><b>4.3</b> Interest rates</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#basic-definitions-and-properties"><i class="fa fa-check"></i><b>4.3.1</b> Basic definitions and properties</a></li>
+<li class="chapter" data-level="4.3.2" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#phase-type-representation-of-bond-prices"><i class="fa fa-check"></i><b>4.3.2</b> Phase-type representation of bond prices</a></li>
+<li class="chapter" data-level="4.3.3" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#term-structure-models"><i class="fa fa-check"></i><b>4.3.3</b> Term structure models</a></li>
+<li class="chapter" data-level="4.3.4" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#estimation-of-ph-bond-models"><i class="fa fa-check"></i><b>4.3.4</b> Estimation of PH bond models</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="topics-in-life-insurance-mathematics.html"><a href="topics-in-life-insurance-mathematics.html#survival-and-mortality-rates"><i class="fa fa-check"></i><b>4.4</b> Survival and mortality rates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html"><i class="fa fa-check"></i><b>5</b> Continuous Time Finance</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#discrete-time-models"><i class="fa fa-check"></i><b>5.1</b> Discrete time models</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#one-period-time-models"><i class="fa fa-check"></i><b>5.1.1</b> One-period time models</a></li>
+<li class="chapter" data-level="5.1.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#multi-period-model"><i class="fa fa-check"></i><b>5.1.2</b> Multi-period model</a></li>
+<li class="chapter" data-level="5.1.3" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#generelised-one-period-model"><i class="fa fa-check"></i><b>5.1.3</b> Generelised one-period model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#self-financing-portfolios"><i class="fa fa-check"></i><b>5.2</b> Self-financing portfolios</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#discrete-time-sf-portfolio"><i class="fa fa-check"></i><b>5.2.1</b> Discrete time SF portfolio</a></li>
+<li class="chapter" data-level="5.2.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#continuous-time-sf-portfolio"><i class="fa fa-check"></i><b>5.2.2</b> Continuous time SF portfolio</a></li>
+<li class="chapter" data-level="5.2.3" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#portfolio-weights"><i class="fa fa-check"></i><b>5.2.3</b> Portfolio weights</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#black-scholes-pde"><i class="fa fa-check"></i><b>5.3</b> Black-Scholes PDE</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#contingent-claims-and-arbitrage"><i class="fa fa-check"></i><b>5.3.1</b> Contingent Claims and Arbitrage</a></li>
+<li class="chapter" data-level="5.3.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#risk-neutral-valuation-1"><i class="fa fa-check"></i><b>5.3.2</b> Risk Neutral Valuation</a></li>
+<li class="chapter" data-level="5.3.3" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#black-scholes-formula"><i class="fa fa-check"></i><b>5.3.3</b> Black-Scholes formula</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#completeness-and-hedging"><i class="fa fa-check"></i><b>5.4</b> Completeness and Hedging</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#completeness-in-black-scholes"><i class="fa fa-check"></i><b>5.4.1</b> Completeness in Black-Scholes</a></li>
+<li class="chapter" data-level="5.4.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#absence-of-arbitrage-1"><i class="fa fa-check"></i><b>5.4.2</b> Absence of Arbitrage</a></li>
+<li class="chapter" data-level="5.4.3" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#incomplete-markets"><i class="fa fa-check"></i><b>5.4.3</b> Incomplete Markets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#parity-relations"><i class="fa fa-check"></i><b>5.5</b> Parity relations</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#put-call-parity"><i class="fa fa-check"></i><b>5.5.1</b> Put-call Parity</a></li>
+<li class="chapter" data-level="5.5.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#the-greeks"><i class="fa fa-check"></i><b>5.5.2</b> The Greeks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#fundamental-pricing-theorem-i-and-ii"><i class="fa fa-check"></i><b>5.6</b> Fundamental pricing theorem I and II</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#completeness-1"><i class="fa fa-check"></i><b>5.6.1</b> Completeness</a></li>
+<li class="chapter" data-level="5.6.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#risk-neutral-valuation-formula"><i class="fa fa-check"></i><b>5.6.2</b> Risk Neutral Valuation Formula</a></li>
+<li class="chapter" data-level="5.6.3" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#stochastic-discount-factors-1"><i class="fa fa-check"></i><b>5.6.3</b> Stochastic Discount Factors</a></li>
+<li class="chapter" data-level="5.6.4" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#summary"><i class="fa fa-check"></i><b>5.6.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#mathematics-of-the-martingale-approach"><i class="fa fa-check"></i><b>5.7</b> Mathematics of the martingale approach</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#martingale-representation-theorem"><i class="fa fa-check"></i><b>5.7.1</b> Martingale representation theorem</a></li>
+<li class="chapter" data-level="5.7.2" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#girsanov-theorem"><i class="fa fa-check"></i><b>5.7.2</b> Girsanov theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#black-scholes-model---martingale-approach"><i class="fa fa-check"></i><b>5.8</b> Black-Scholes model - martingale approach</a></li>
+<li class="chapter" data-level="5.9" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html#multidimensional-models"><i class="fa fa-check"></i><b>5.9</b> Multidimensional models</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="basic-non-life-insurance-mathematics.html"><a href="basic-non-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>6</b> Basic Non-Life Insurance Mathematics</a></li>
+<li class="chapter" data-level="7" data-path="stochastic-processes-in-non-life-insurance-mathematics.html"><a href="stochastic-processes-in-non-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>7</b> Stochastic Processes in Non-Life Insurance Mathematics</a></li>
+<li class="chapter" data-level="8" data-path="topics-in-non-life-insurance-mathematics.html"><a href="topics-in-non-life-insurance-mathematics.html"><i class="fa fa-check"></i><b>8</b> Topics in Non-Life Insurance Mathematics</a></li>
+<li class="chapter" data-level="9" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html"><i class="fa fa-check"></i><b>9</b> Probabilistic Machine Learning</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#supervised-learning"><i class="fa fa-check"></i><b>9.1</b> Supervised Learning</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#what-is-a-good-estimator"><i class="fa fa-check"></i><b>9.1.1</b> What is a good estimator?</a></li>
+<li class="chapter" data-level="9.1.2" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#excess-risk"><i class="fa fa-check"></i><b>9.1.2</b> Excess risk</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#training-validating-and-testing"><i class="fa fa-check"></i><b>9.2</b> Training, Validating and Testing</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#estimating-risk"><i class="fa fa-check"></i><b>9.2.1</b> Estimating risk</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#linear-models"><i class="fa fa-check"></i><b>9.3</b> Linear Models</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#least-squares-estimator"><i class="fa fa-check"></i><b>9.3.1</b> Least Squares Estimator</a></li>
+<li class="chapter" data-level="9.3.2" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#ridge-regression"><i class="fa fa-check"></i><b>9.3.2</b> Ridge Regression</a></li>
+<li class="chapter" data-level="9.3.3" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#lasso-regression"><i class="fa fa-check"></i><b>9.3.3</b> Lasso Regression</a></li>
+<li class="chapter" data-level="9.3.4" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#conclusion"><i class="fa fa-check"></i><b>9.3.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#nonparametric-regression"><i class="fa fa-check"></i><b>9.4</b> Nonparametric Regression</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.1</b> Curse of dimensionality</a></li>
+<li class="chapter" data-level="9.4.2" data-path="probabilistic-machine-learning.html"><a href="probabilistic-machine-learning.html#splines"><i class="fa fa-check"></i><b>9.4.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html"><i class="fa fa-check"></i><b>10</b> Quantative Risk Management</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#the-loss-variable"><i class="fa fa-check"></i><b>10.1</b> The Loss Variable</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html#risk-measures"><i class="fa fa-check"></i><b>10.1.1</b> Risk measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="measure-theory.html"><a href="measure-theory.html"><i class="fa fa-check"></i><b>11</b> Measure theory</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="measure-theory.html"><a href="measure-theory.html#axioms-of-probability"><i class="fa fa-check"></i><b>11.1</b> Axioms of Probability</a></li>
+<li class="chapter" data-level="11.2" data-path="measure-theory.html"><a href="measure-theory.html#conditional-probability-and-independence"><i class="fa fa-check"></i><b>11.2</b> Conditional Probability and Independence</a></li>
+<li class="chapter" data-level="11.3" data-path="measure-theory.html"><a href="measure-theory.html#probabilities-on-a-finite-or-countable-space"><i class="fa fa-check"></i><b>11.3</b> Probabilities on a Finite or Countable Space</a></li>
+<li class="chapter" data-level="11.4" data-path="measure-theory.html"><a href="measure-theory.html#construction-of-a-probability-measure-on-mathbb-r"><i class="fa fa-check"></i><b>11.4</b> Construction of a Probability Measure on <span class="math inline">\(\mathbb R\)</span></a></li>
+<li class="chapter" data-level="11.5" data-path="measure-theory.html"><a href="measure-theory.html#random-variables"><i class="fa fa-check"></i><b>11.5</b> Random Variables</a></li>
+<li class="chapter" data-level="11.6" data-path="measure-theory.html"><a href="measure-theory.html#integration-with-respect-to-a-probability-measure"><i class="fa fa-check"></i><b>11.6</b> Integration with Respect to a Probability Measure</a></li>
+<li class="chapter" data-level="11.7" data-path="measure-theory.html"><a href="measure-theory.html#independent-random-variables"><i class="fa fa-check"></i><b>11.7</b> Independent Random Variables</a></li>
+<li class="chapter" data-level="11.8" data-path="measure-theory.html"><a href="measure-theory.html#probability-distributions-on-mathbb-r"><i class="fa fa-check"></i><b>11.8</b> Probability Distributions on <span class="math inline">\(\mathbb R\)</span></a></li>
+<li class="chapter" data-level="11.9" data-path="measure-theory.html"><a href="measure-theory.html#probability-distributions-on-mathbb-rn"><i class="fa fa-check"></i><b>11.9</b> Probability Distributions on <span class="math inline">\(\mathbb R^n\)</span></a></li>
+<li class="chapter" data-level="11.10" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures"><i class="fa fa-check"></i><b>11.10</b> Equivalent Probability Measures</a>
+<ul>
+<li class="chapter" data-level="11.10.1" data-path="measure-theory.html"><a href="measure-theory.html#the-radon-nikodym-theorem"><i class="fa fa-check"></i><b>11.10.1</b> The Radon-Nikodym Theorem</a></li>
+<li class="chapter" data-level="11.10.2" data-path="measure-theory.html"><a href="measure-theory.html#equivalent-probability-measures-1"><i class="fa fa-check"></i><b>11.10.2</b> Equivalent Probability Measures</a></li>
+<li class="chapter" data-level="11.10.3" data-path="measure-theory.html"><a href="measure-theory.html#likelihood-processes"><i class="fa fa-check"></i><b>11.10.3</b> Likelihood processes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="random-variables-1.html"><a href="random-variables-1.html"><i class="fa fa-check"></i><b>12</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="random-variables-1.html"><a href="random-variables-1.html#introduction-1"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="random-variables-1.html"><a href="random-variables-1.html#conditional-expectation"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="random-variables-1.html"><a href="random-variables-1.html#independence"><i class="fa fa-check"></i><b>12.3</b> Independence</a></li>
+<li class="chapter" data-level="12.4" data-path="random-variables-1.html"><a href="random-variables-1.html#moment-generating-function"><i class="fa fa-check"></i><b>12.4</b> Moment generating function</a></li>
+<li class="chapter" data-level="12.5" data-path="random-variables-1.html"><a href="random-variables-1.html#standard-distributions"><i class="fa fa-check"></i><b>12.5</b> Standard distributions</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="random-variables-1.html"><a href="random-variables-1.html#normal-disribution"><i class="fa fa-check"></i><b>12.5.1</b> Normal disribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html"><i class="fa fa-check"></i><b>13</b> Discrete Time Stochastic Processes</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#convergence-concepts"><i class="fa fa-check"></i><b>13.1</b> Convergence concepts</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#sums-and-average-processes"><i class="fa fa-check"></i><b>13.1.1</b> Sums and average processes</a></li>
+<li class="chapter" data-level="13.1.2" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#ergodic-theory"><i class="fa fa-check"></i><b>13.1.2</b> Ergodic Theory</a></li>
+<li class="chapter" data-level="13.1.3" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#weak-convergence"><i class="fa fa-check"></i><b>13.1.3</b> Weak Convergence</a></li>
+<li class="chapter" data-level="13.1.4" data-path="discrete-time-stochastic-processes.html"><a href="discrete-time-stochastic-processes.html#central-limit-theorems"><i class="fa fa-check"></i><b>13.1.4</b> Central Limit Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="markov-chains.html"><a href="markov-chains.html"><i class="fa fa-check"></i><b>14</b> Markov Chains</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="markov-chains.html"><a href="markov-chains.html#definition-of-a-markov-chain"><i class="fa fa-check"></i><b>14.1</b> Definition of a Markov Chain</a></li>
+<li class="chapter" data-level="14.2" data-path="markov-chains.html"><a href="markov-chains.html#classification-of-states"><i class="fa fa-check"></i><b>14.2</b> Classification of states</a></li>
+<li class="chapter" data-level="14.3" data-path="markov-chains.html"><a href="markov-chains.html#limit-results-and-invariant-probabilities"><i class="fa fa-check"></i><b>14.3</b> Limit results and invariant probabilities</a></li>
+<li class="chapter" data-level="14.4" data-path="markov-chains.html"><a href="markov-chains.html#absorbing-probabilities"><i class="fa fa-check"></i><b>14.4</b> Absorbing probabilities</a></li>
+<li class="chapter" data-level="14.5" data-path="markov-chains.html"><a href="markov-chains.html#markov-chains-in-continuous-times"><i class="fa fa-check"></i><b>14.5</b> Markov Chains in Continuous Times</a></li>
+<li class="chapter" data-level="14.6" data-path="markov-chains.html"><a href="markov-chains.html#properties-of-transitionsprobabilities"><i class="fa fa-check"></i><b>14.6</b> Properties of transitionsprobabilities</a></li>
+<li class="chapter" data-level="14.7" data-path="markov-chains.html"><a href="markov-chains.html#invariant-probabilies-and-absorption"><i class="fa fa-check"></i><b>14.7</b> Invariant probabilies and absorption</a></li>
+<li class="chapter" data-level="14.8" data-path="markov-chains.html"><a href="markov-chains.html#birth-death-processes"><i class="fa fa-check"></i><b>14.8</b> Birth-death processes</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html"><i class="fa fa-check"></i><b>15</b> Continuous Time Stochastic Processes</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#brownian-motion"><i class="fa fa-check"></i><b>15.1</b> Brownian Motion</a></li>
+<li class="chapter" data-level="15.2" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#filtration"><i class="fa fa-check"></i><b>15.2</b> Filtration</a></li>
+<li class="chapter" data-level="15.3" data-path="continuous-time-stochastic-processes.html"><a href="continuous-time-stochastic-processes.html#martingale"><i class="fa fa-check"></i><b>15.3</b> Martingale</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html"><i class="fa fa-check"></i><b>16</b> Stochastic calculus</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#stochastic-integrals"><i class="fa fa-check"></i><b>16.1</b> Stochastic Integrals</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#information"><i class="fa fa-check"></i><b>16.1.1</b> Information</a></li>
+<li class="chapter" data-level="16.1.2" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#stochastic-integrals-1"><i class="fa fa-check"></i><b>16.1.2</b> Stochastic Integrals</a></li>
+<li class="chapter" data-level="16.1.3" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#martingales"><i class="fa fa-check"></i><b>16.1.3</b> Martingales</a></li>
+<li class="chapter" data-level="16.1.4" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#stochastic-calculus-and-the-ito-formula"><i class="fa fa-check"></i><b>16.1.4</b> Stochastic Calculus and the Ito Formula</a></li>
+<li class="chapter" data-level="16.1.5" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#the-multidimensional-ito-formula"><i class="fa fa-check"></i><b>16.1.5</b> The multidimensional Ito Formula</a></li>
+<li class="chapter" data-level="16.1.6" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#correlated-brownian-motions"><i class="fa fa-check"></i><b>16.1.6</b> Correlated Brownian motions</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#discrete-stochastic-integrals"><i class="fa fa-check"></i><b>16.2</b> Discrete Stochastic Integrals</a></li>
+<li class="chapter" data-level="16.3" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#stochastic-differential-equations"><i class="fa fa-check"></i><b>16.3</b> Stochastic Differential Equations</a></li>
+<li class="chapter" data-level="16.4" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#partial-differential-equations"><i class="fa fa-check"></i><b>16.4</b> Partial differential equations</a></li>
+<li class="chapter" data-level="16.5" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#the-product-integral"><i class="fa fa-check"></i><b>16.5</b> The Product Integral</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="stochastic-calculus.html"><a href="stochastic-calculus.html#properties-of-the-product-integral"><i class="fa fa-check"></i><b>16.5.1</b> Properties of the Product Integral</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>17</b> Linear Algebra</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="linear-algebra.html"><a href="linear-algebra.html#invertible-matrices"><i class="fa fa-check"></i><b>17.1</b> Invertible matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>18</b> Coding</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="coding.html"><a href="coding.html#r-packages"><i class="fa fa-check"></i><b>18.1</b> R-Packages</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="coding.html"><a href="coding.html#mlr3"><i class="fa fa-check"></i><b>18.1.1</b> mlr3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://joakim-bilyk.github.io/index.html">Back to main site</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Complete Theory</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="markov-chains" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Markov Chains<a href="markov-chains.html#markov-chains" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="definition-of-a-markov-chain" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Definition of a Markov Chain<a href="markov-chains.html#definition-of-a-markov-chain" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Transitionsdiagram.</strong> Et diagram, hvor der fremgår ssh. for et system overgår til et nyt stadie.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Stokastisk process i diskret tid)</strong> <em>Lad <span class="math inline">\(\mathcal{X}=(\mathcal{X}_n)_{n\in\mathbb{N}_0}\)</span> være en familie af stokastiske variable og <span class="math inline">\(\mathcal{S}\)</span> et udfaldsrum . Da er <span class="math inline">\(\mathcal{X}\)</span> en funktion der opfylder <span class="math inline">\(\mathcal{X} : \mathbb{N}_0\times \Omega \to \mathcal{S}\)</span> med <span class="math inline">\((n,w) \mapsto \mathcal{X}_n(w)\)</span>.</em></p>
+</blockquote>
+<p><strong>Bemærkning.</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(\mathbb{N}_0\)</span> er tidsvariablen senere <span class="math inline">\([0,\infty)\)</span></li>
+<li><span class="math inline">\(\mathcal{S}\)</span> er højst tællelig</li>
+</ol>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Markov kæder i diskret tid)</strong> <em>En stokastisk proces i diskret tid <span class="math inline">\((X_n)_{n\in\mathbb{N}_0}\)</span> har hvis for alle stadier <span class="math inline">\(i_0,...,i_n\in\mathcal{S}\)</span> opfylder</em></p>
+<p><span class="math display">\[
+\mathbb{P}(\mathcal{X}_n=i_n\vert \mathcal{X}_0,...,\mathcal{X}_{n-1}=i_{n-1})=\mathbb{P}(\mathcal{X}_n=i_n \vert \mathcal{X}_{n-1}=i_{n-1}).
+\]</span></p>
+<p><em>Da kaldes denne stokastiske proces en Markov kæde. Dvs. For hvert <span class="math inline">\(n\)</span> er det næste udfald kun afhængig af dette forrige udfald.</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Initial fordeling)</strong> <em>For alle <span class="math inline">\(i\in\mathcal{S}\)</span> tilhører en initial sandsynlighed for at starte i stadiet <span class="math inline">\(i\)</span> givet ved</em></p>
+<p><span class="math display">\[
+\phi(i):=\mathbb{P}(\mathcal{X}_0=i),
+\]</span></p>
+<p><em>hvor familien <span class="math inline">\(\overline{\phi}=(\phi(i))_{i\in\mathcal{S}}\)</span> er initial fordelingen i.e. <span class="math inline">\(\phi\)</span> er en vektor over alle mulige startsudfald og deres tilhørende ssh. Hvis <span class="math inline">\(\mathcal{S}\)</span> er endelig er <span class="math inline">\(\overline{\phi}\)</span> blot en rækkevektor.</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Transitionsmatricen)</strong> <em>For to stadier <span class="math inline">\(i,j\in\mathcal{S}\)</span> og et tidspunkt <span class="math inline">\(n\)</span> er transitionssandsynligheden for at flytte fra <span class="math inline">\(i\)</span> til <span class="math inline">\(j\)</span> er</em></p>
+<p><span class="math display">\[
+P_{ij}(n)=\mathbb{P}(\mathcal{X}_{n+1}=j \vert \mathcal{X}_n=i).
+\]</span></p>
+<p><em>Hvis <span class="math inline">\(P_{ij}(n)=P_{ij}(m)\)</span> for alle <span class="math inline">\(n,m\in\mathbb{N}_0\)</span> så kaldes <span class="math inline">\((\mathcal{X}_n)_{n\in\mathbb{N}_0}\)</span> <strong>tidshomogent (definition 1)</strong>. Den tilhørende matrice <span class="math inline">\(P=(P_{ij})_{i,j\in\mathcal{S}}\)</span> er kaldet transitionsmatricen.</em></p>
+</blockquote>
+<p><strong>Bemærkning.</strong> En transitionsmatrice karrakteriserer et transitions diagram og omvendt. </p>
+<p><span class="math display">\[
+P=\begin{pmatrix}
+2/3 &amp; 1/3\\
+1/2 &amp; 1/2
+\end{pmatrix}.
+\]</span></p>
+<blockquote class="thm">
+<p><strong>Theorem 2.</strong> <strong>(Fordeling af <span class="math inline">\(\mathcal{X}_n\)</span>)</strong> <em>For en Markov kæde på <span class="math inline">\(\mathcal{S}\)</span> med initial fordeling <span class="math inline">\(\phi\)</span> og transitionsmatrix <span class="math inline">\(P\)</span> er</em></p>
+<p><span class="math display">\[
+(\mathbb{P}(X_n=i))_{i\in\mathcal{S}}=\overline{\phi} P^n
+\]</span></p>
+</blockquote>
+</div>
+<div id="classification-of-states" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Classification of states<a href="markov-chains.html#classification-of-states" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote class="def">
+<p><strong>Definition 4.</strong> <strong>(Communication classes)</strong> <em>Lad <span class="math inline">\(i,j\in\mathcal{S}\)</span> være to stadier. Vi definere <span class="math inline">\(i\longrightarrow j\)</span> dvs. <span class="math inline">\(j\)</span> er <strong>accesible</strong> fra <span class="math inline">\(i\)</span>, hvis der eksisterer et <span class="math inline">\(n\in\mathbb{N}\)</span> så <span class="math inline">\(P_{ij}^n&gt;0\)</span>. Samt <span class="math inline">\(i\longleftrightarrow j\)</span> dvs. <span class="math inline">\(i\)</span> og <span class="math inline">\(j\)</span> kommunikerer, hvis både <span class="math inline">\(i\longrightarrow j\)</span> og <span class="math inline">\(j\longrightarrow i\)</span>.</em></p>
+</blockquote>
+<p><strong>Bemærkning.</strong> “<span class="math inline">\(i\longleftrightarrow j\)</span>” er en ækvivalens relation. Derfor sepererer denne relation <span class="math inline">\(\mathcal{S}\)</span> ind i to disjunkte ækvivalens klasser, hvad vi definerer som <em>communication classes</em>.</p>
+<blockquote class="def">
+<p><strong>Definition 6.</strong> <strong>(Lukket kommunikations klasser)</strong> <em>En kommunikations klasse <span class="math inline">\(e\subseteq \mathcal{S}\)</span> kaldes lukket, hvis for alle <span class="math inline">\(i\in e\)</span> gælder <span class="math inline">\(\sum_{i\in e}P_{ij}=1\)</span> (den <span class="math inline">\(i\)</span>’te søjlesummen sum er lig 1 eller ssh. for at forblive i klassen er 1).</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Ikke reducibel Markov kæde)</strong> <em>En Markov kæde kaldes irreducible, hvis der eksisterer kun en kommunikations klasse. Ellers er den reducible.</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Hitting time)</strong> <em>Tiden for at ramme <span class="math inline">\(i\in \mathcal{S}\)</span> er givet ved <span class="math inline">\(T_i:=\inf\{n&gt;0 \vert X_n=i\}\)</span>. Hvis <span class="math inline">\(X_0=i\)</span> kaldes denne tid <strong>return/recurrence</strong> tiden.</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition 9.</strong> <strong>(Recurrance/transients)</strong> <em>For en Markov kæde <span class="math inline">\((X_n)_{n\in\mathbb{N}}\)</span> på <span class="math inline">\(\mathcal{S}\)</span> er et stadie <span class="math inline">\(i\in\mathcal{S}\)</span> kaldet <strong>recurrent</strong> hvis <span class="math inline">\(\mathbb{P}(T_i&lt;\infty \vert X_0=i)=1\)</span>. Ellers kaldes <span class="math inline">\(i\)</span> <strong>transient</strong>.</em></p>
+</blockquote>
+<p><strong>Bemærkning.</strong> Det kan vises at <span class="math inline">\(\mathbb{P}(T_i&lt;\infty \vert X_0=i)=1\)</span> er ensbetydende med at <span class="math inline">\(\mathbb{P}(N_i=+\infty \vert X_0=i)=1\)</span>. (se Thm 14 i noterne)</p>
+<blockquote class="thm">
+<p><strong>Theorem 11.</strong> <strong>(Recurrence criterium 1)</strong> <em>For en Markov kæde på <span class="math inline">\(\mathcal{S}\)</span> med transistionsmatrice <span class="math inline">\(P\)</span>, da er følgende ækvivalent. Det holder at <span class="math inline">\(\sum_{n=1}^\infty (P^n)_{ii}=+\infty\)</span> og <span class="math inline">\(i\)</span> er recurrent.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 12.</strong> <strong>(Recurrence som klasseegenskab)</strong> <em>Alle stadier i en kommunikations klasse er enten recurrent eller transient dvs. hvis blot en af stadierne <span class="math inline">\(i\in e\)</span> er recurrent er alle recurrent og ligeledes med transient.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 13.</strong> <strong>(Antal af besøg)</strong> <em>Antal af besøg er givet ved den stokastiske variabel <span class="math inline">\(N_i:=\sum_{n=1}^\infty 1(X_n=i)\)</span>. Hvis <span class="math inline">\(i\)</span> er recurrent er <span class="math inline">\(\mathbb{P}(N_i=+\infty)=1\)</span>, hvis <span class="math inline">\(i\)</span> er transient er <span class="math inline">\(N_i\sim Geo(q)\)</span> på <span class="math inline">\(N_0\)</span> dvs. <span class="math inline">\(\mathbb{P}(N_i=k)=(1-q)^kq\)</span> for <span class="math inline">\(k\in\mathbb{N}_0\)</span> og <span class="math inline">\(q=P(T_i=+\infty\vert X(0)=i)\)</span>.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 14.</strong> <em>For en endelig kommunikationsklasse <span class="math inline">\(C\subseteq S\)</span> gælder: (<span class="math inline">\(C\)</span> er recurrent) <span class="math inline">\(\Leftrightarrow\)</span> (<span class="math inline">\(C\)</span> er lukket.)</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 16.</strong> <strong>(Recurrence criterium 2)</strong> <em>For en irreducibel Markov Kæde på <span class="math inline">\(S\)</span> gælder (<span class="math inline">\(i\in S\)</span> er recurrent) <span class="math inline">\(\Leftrightarrow\)</span> (For ligningssystemmet <span class="math inline">\(\alpha(j)=\sum_{k\ne i}P_{j,k}\alpha(k)\)</span> gælder <span class="math inline">\(\alpha(j)=0\)</span> for alle <span class="math inline">\(j\ne i\)</span> er den eneste endelige løsning).</em></p>
+</blockquote>
+<p><strong>Generaliseret matrix multiplikation.</strong> For <span class="math inline">\(\underline{\phi}=(\phi_i)_{i\in\mathcal{S}},\underline{\psi}=(\psi_i)_{i\in\mathcal{S}}\)</span> <em>(vektorer)</em> og <span class="math inline">\(P=(P_{ij})_{i,j\in\mathcal{S}},Q=(Q_{ij})_{i,j\in\mathcal{S}}\)</span> <em>(matricer)</em> kan følgende produkter udregnes ved</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\((\underline{\phi}\cdot \underline{\psi}^T):=\sum_{i\in\mathcal{S}}\phi_i\psi_i\)</span></li>
+<li><span class="math inline">\((\underline{\phi}\cdot P)_j:=\left(\sum_{i\in\mathcal{S}}\phi_i P_{ij}\right)_j\)</span></li>
+<li><span class="math inline">\((P\cdot Q)_{ij}:=\sum_{k,l\in\mathcal{S}}P_{i,k}Q_{l,j}\)</span></li>
+</ol>
+</div>
+<div id="limit-results-and-invariant-probabilities" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Limit results and invariant probabilities<a href="markov-chains.html#limit-results-and-invariant-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Sidenote.</strong> For en vektor <span class="math inline">\(\overline{\phi}=(\phi_i)_{i\in \mathcal{S}}\)</span> kaldes en fordeling, hvis for alle <span class="math inline">\(i\in\mathcal{S}\)</span> er <span class="math inline">\(\phi_i\ge0\)</span> og <span class="math inline">\(\sum_{i\in\mathcal{S}}\phi_i=1\)</span> og et mål hvis kun <span class="math inline">\(\phi_i\ge 0\)</span>.</p>
+<blockquote class="def">
+<p><strong>Definition 18.</strong> <strong>(Løkker og perioder)</strong> <em>For en Markov kæde i diskret tid er en mulig løkke af længde <span class="math inline">\(n\)</span> er en følge af stadier <span class="math inline">\(i_0,i_1,i_2,...,i_n\in\mathcal{S}\)</span> med <span class="math inline">\(i_0=i_n\)</span> hvor</em></p>
+<p><span class="math display">\[
+P_{i_0,i_1}\cdots P_{i_{n-1},i_n}&gt;0
+\]</span></p>
+<p><em>Perioden af et stadie <span class="math inline">\(i\in\mathcal{S}\)</span> er den største fælles divisor af</em></p>
+<p><span class="math display">\[
+D_i=\{n\in\mathbb{N}\ \vert\ \exists \text{a possible loop of length $n$ med $i_0=i_n=i$}\},
+\]</span></p>
+<p><em>dvs. <span class="math inline">\(\text{per}(i)=GCD(D_i)\)</span>. Hvis perioden er 1 kaldes stadiet <strong>aperiodisk</strong>.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 19.</strong> <em>Alle stadier i en kommunikations klasse har samme periode.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 21.</strong> <em>For en irreducibel, recurrent og ikkeperiodisk Markov kæde på <span class="math inline">\(\mathcal{S}\)</span> gælder for alle <span class="math inline">\(i\in\mathcal{S}\)</span> at</em></p>
+<p><span class="math display">\[
+\lim_{n\to\infty}P(X_n=i)=\frac{1}{E[T_i \vert X_0=i]}
+\]</span></p>
+<p><em>Hvis <span class="math inline">\(E[T_i \vert X_0=i]=\infty\)</span> defineres <span class="math inline">\(\lim_{n\to\infty}P(X_n=i):=0\)</span>.</em></p>
+</blockquote>
+<p><strong>Bemærkning.</strong> 1) Kun hvis Markov kæden er recurrent og dermed at <span class="math inline">\(P(T_i=\infty \vert X_i=0)=0\)</span> er <span class="math inline">\(E[T_i \vert X_0=i]=\sum_{n=1}^\infty nP(T_i=n\vert X_0=i)\)</span> eller er <span class="math inline">\(E[T_i \vert X_0=i]=+\infty\)</span>. 2) Hvis <span class="math inline">\(E[T_i \vert X_0=i]=\infty\)</span> så er grænsen ikke en fordeling.</p>
+<blockquote class="def">
+<p><strong>Definition 22.</strong> <em>Et recurrent stadie <span class="math inline">\(i\in\mathcal{S}\)</span> kaldes positivt recurrent hvis og kun hvis <span class="math inline">\(E[T_i \vert X_0=i]&lt;\infty\)</span>. Ellers kaldes stadiet nul-recurrent.</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Invariant fordeling og mål)</strong> <em>En ikke negativ vektor <span class="math inline">\(\overline{\pi}=(\pi_j)_{j\in S}\)</span> kaldes et invariant mål, hvis <span class="math inline">\(\overline{\pi}=\overline{\pi}P\)</span> og en invariant fordeling, hvis <span class="math inline">\(\vert\overline{\pi}\vert\)</span>.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 23.</strong> <em>For en irreducibel og recurrent Markov kæde på <span class="math inline">\(\mathcal{S}\)</span> findes et invariant mål <span class="math inline">\(\nu\)</span> der opfylder <span class="math inline">\(\nu =\nu P\)</span>. Specielt gælder for alle fixed <span class="math inline">\(i\in\mathcal{S}\)</span> holder det at</em></p>
+<p><span class="math display">\[
+\nu_j=E\left[\sum_{n=0}^{T_i-1}1(X_n=j \vert X_0=i)\right] \text{for alle } j\in\mathcal{S}
+\]</span></p>
+<p><em>er et invariant mål. Hvis og kun hvis Markov kæden er positiv recurrent kan ovenstående nomaliseres til en invariant fordeling.</em></p>
+</blockquote>
+<p><strong>Bemærkning.</strong> 1) <span class="math inline">\(i\in\mathcal{S}\)</span> er abitrær, 2) <span class="math inline">\(\nu(i)=1\)</span> og 3) for irreducible MC gælder (Positiv recurrent) <span class="math inline">\(\Leftrightarrow\)</span> (Eksisterer unik invariant fordeling)</p>
+<blockquote class="thm">
+<p><strong>Theorem 24.</strong> <em>or en irreducibel, aperiodisk og positiv recurrent Markov kæde gælder <span class="math inline">\(\lim_{n\to\infty}P(X_n=j)=\pi_j=1/E[T_j\vert X_0=j]\)</span>. Hvor <span class="math inline">\(\overline{\pi}=(\pi_j)_{j\in S}\)</span> er en invariant fordeling.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 25 og 26.</strong> <strong>(Grænseresultat for nul-recurrance og tranience)</strong> <em>For et nul-recurrent (THM 25) eller transient (THM 26) stadie <span class="math inline">\(j\in S\)</span> gælder <span class="math inline">\(\lim_{n\to\infty}P(X_n=j)=0\)</span> for alle valg af initialfordeling <span class="math inline">\(\overline{\phi}\)</span>.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 27.</strong> <strong>(Grænseresultat for periodiske stadier)</strong> <em>For en irreducibel Markov kæde med periode <span class="math inline">\(d&gt;1\)</span> findes grænsen <span class="math inline">\(\lim_{n\to \infty}P(X_n=i)\)</span> ikke. Men gennemsnittet for en periode gør dvs</em></p>
+<p><span class="math display">\[
+\nu_j=\lim_{n\to\infty}\frac{P(X_n=i)+P(X_{n+1}=i)+...+P(X_{n+d-1}=i)}{d}
+\]</span></p>
+<p><em><span class="math inline">\(\nu=(\nu_j)_{j\in S}\)</span> er et invariant mål og en invariant fordeling hvis <span class="math inline">\(\vert\nu\vert=1\)</span>.</em></p>
+</blockquote>
+</div>
+<div id="absorbing-probabilities" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Absorbing probabilities<a href="markov-chains.html#absorbing-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote class="thm">
+<p><strong>Theorem 29.</strong> <strong>(Absorberende sandsynlighed - endelige udfaldsrum)</strong> <em>Lad en endelig Markov kæde være givet ved transistionsmatricen <span class="math inline">\(P\)</span>. Antaget at transtionsmatricen kan inddeles efter kummunikations klasser så</em></p>
+<p><span class="math display">\[
+P=
+\left[
+\begin{array}{c|c}
+\tilde{P} &amp; 0 \\
+\hline
+     S &amp; Q
+\end{array}
+\right],
+\]</span></p>
+<p><em>hvor <span class="math inline">\(\tilde{P}\)</span> er transistionsmatricen indeholdende kun recurrent stadier. Dertil er <span class="math inline">\(Q\)</span> og <span class="math inline">\(S\)</span> sub-matricer af <span class="math inline">\(P\)</span>, hvor <span class="math inline">\(Q\)</span> indeholder de transient stadier og <span class="math inline">\(S\)</span> beskriver sandsynlighederne for overgangen fra et transient til et recurrent stadie. Matricen 0 repræsenterer sandsynligheden for at gå fra en recurrent til transient stadie, hvad er umuligt.</em></p>
+</blockquote>
+<p>Definer dertil matricerne <span class="math inline">\(M=(I-Q)^{-1}\)</span> og <span class="math inline">\(A=(I-Q)^{-1}S\)</span>. Tallet <span class="math inline">\(M_{i,j}\)</span> repræsenterer <span class="math inline">\(E[N_j\vert X_0=i]\)</span> for transient stadier <span class="math inline">\(i,j\)</span>. Tallet <span class="math inline">\(A_{i,j}\)</span> repræsenterer sandsynligheden for at <span class="math inline">\(j\)</span> er det første recurrent stadie, der besøger hvis <span class="math inline">\(X_0=i\)</span> for et transient stadie <span class="math inline">\(i\)</span>.</p>
+<blockquote class="thm">
+<p><strong>Theorem 31.</strong> <strong>(Absorberende sandsynlighed - tællelige udfaldsrum)</strong> <em>For en Markov kæde på <span class="math inline">\(S\)</span> lad <span class="math inline">\(C\subseteq S\)</span> være en recurrent klasse og <span class="math inline">\(C&#39;\in S\setminus C\)</span> være en transient klasse. Absorberingssandsynligheden <span class="math inline">\((\alpha_j)_{j\in C&#39;}\)</span> givet ved <span class="math inline">\(\alpha_j=P(X_n\in C \vert X_0=j)\)</span> løser ligningssystemet</em></p>
+<p><span class="math display">\[
+\alpha_i=\sum_{l\in S\setminus C}P_{i,l}\alpha_l+\sum_{l\in C}P_{i,l}
+\]</span></p>
+<p><em>Der findes en endelig løsning hvis og kun hvis <span class="math inline">\(\lim_{n\to\infty}P(X_n\in C&#39;\vert X_o\in C&#39;)=0\)</span>.</em></p>
+</blockquote>
+</div>
+<div id="markov-chains-in-continuous-times" class="section level2 hasAnchor" number="14.5">
+<h2><span class="header-section-number">14.5</span> Markov Chains in Continuous Times<a href="markov-chains.html#markov-chains-in-continuous-times" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Stokastisk process i kontinuer tid)</strong> <em>En stokastisk proces i kontinuer tid er en familie <span class="math inline">\(X=(X_t)_{t\in[0,\infty)}\)</span> af stokastiske variable.</em></p>
+</blockquote>
+<p><strong>Eksempel 33.</strong> <em>(Poisson processen)</em> Lad <span class="math inline">\((W_i)_{i\in\mathbb{N}}\)</span> være en følge af uafhængige stokastiske variable, hvor <span class="math inline">\(W_i\sim Exp(\lambda)\)</span> dvs. <span class="math inline">\(W_i\)</span> har tæthed <span class="math inline">\(f(x)=\lambda \exp(-\lambda x)\)</span>. Betragt <span class="math inline">\(W_i\)</span> som ventetiden indtil en begivenhed af interesse indtræffer. Lad <span class="math inline">\(\tau_n:=W_1+...+W_n\)</span> være tiden indtil den <span class="math inline">\(n\)</span>’te begivenhed indtræffer. Den stokastiske variabel <span class="math inline">\(N_t=\sum_{n=1}^\infty 1(\tau_n\le t)\)</span> der tæller antal begivenheder indtil tidspunkt <span class="math inline">\(t\)</span> definerer en stokastisk proces i kontinuer tid dvs. processen <span class="math inline">\((N_t)_{t\ge 0}\)</span>. Vi kalder denne proces <em>Poisson processen</em>.</p>
+<blockquote class="def">
+<p><strong>Definition 34.</strong> <strong>(Homogen Markov kæde i kontinuer tid)</strong> <em>En kontinuer Markov kæde på en højst tællelig mængde <span class="math inline">\(S\)</span> er en familie af stokastiske variable <span class="math inline">\((X_t)_{t\ge0}\)</span> på sandsynlighedsrummet <span class="math inline">\((\Omega, \mathcal{F},P)\)</span> der opfylder</em>
+<span class="math display">\[\begin{align*}
+    &amp;P(X(t_{n+1})=j\vert X(t_n)=i, X(t_{n-1})=i_{n-1},...,X(t_0)=i_0)\\
+    =\ &amp;P(X(t_{n+1})=j\vert X(t_n)=i)=P_{i,j}(t_{n+1}-t_n)
+\end{align*}\]</span>
+<em>for <span class="math inline">\(j,i,i_{n-1},...,i_0\in S\)</span> og <span class="math inline">\(t_{n+1}&gt;t_n&gt;...&gt;t_0\ge0\)</span>. Fordelingen af Markov kæden er givet ved initialfordelingen <span class="math inline">\(\overline{\phi}=(P(X_0=i))_{i\in S}\)</span> og transistionssandsynlighederne <span class="math inline">\(P_{i,j}(t)=P(X(t+s)=j\vert X(s)=i)\)</span> og identiteten</em>
+<span class="math display">\[\begin{align*}
+    &amp;P(X(t_{n+1})=j, X(t_n)=i, X(t_{n-1})=i_{n-1},...,X(t_0)=i_0)\\
+    =\ &amp;P_{i,j}(t_{n+1}-t_n)\cdot ...\cdot P_{i_0,i_1}(t_1-t_0)\phi(i_0)
+\end{align*}\]</span></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition 35.</strong> <strong>(Minimal konstruktion)</strong> <em>Lad <span class="math inline">\(\overline{\phi}=(\phi_i)_{i\in S}\)</span> være en sandsynlighedsvektor og lad <span class="math inline">\(Q=(q_{i,j})_{i,j\in S}\)</span> være en intensitetsmatrice dvs. <span class="math inline">\(q_{i,j}\)</span> er reelle tal med egenskaberne 1) alle ikke diagonal indgange er ikke negative dvs. <span class="math inline">\(q_{i,j}\ge 0\)</span> for alle <span class="math inline">\(i,j\in S\)</span> og <span class="math inline">\(i\ne j\)</span> og 2) diagonal er negativ lig rækkesummen dvs. <span class="math inline">\(q_{i,i}=-\sum_{j\ne i}q_{i,j}\)</span>.</em></p>
+</blockquote>
+<p>Givet <span class="math inline">\(\overline{\phi}\)</span> og <span class="math inline">\(Q\)</span> kan en tids-homogen Markov kæde konstrueres ved følgende fem trin. Matricen <span class="math inline">\(Q\)</span> kaldes transistionsintensiteten for den stokastiske proces <span class="math inline">\((X_t)_{t\ge 0}\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>Vælg <span class="math inline">\(\gamma(0)\)</span> ud fra initialfordelingen, så <span class="math inline">\(P(\gamma(0)=i)=\phi(i)\)</span>.</li>
+<li>givet <span class="math inline">\(\gamma(0)\)</span> sæt <span class="math inline">\(\tau_1:=W_1\sim Exp(q_{\gamma(0)})\)</span> og definer <span class="math inline">\(X(t)=\gamma(0),t\in[0,W_1)\)</span></li>
+<li>givet <span class="math inline">\(\gamma(0)\)</span> og <span class="math inline">\(W_1\)</span> vælg <span class="math inline">\(\gamma(1)\)</span> sådan at <span class="math inline">\(P(\gamma(1)\vert \gamma (0))=\frac{q_{\gamma(0),i}}{q_{\gamma(0)}},i\ne \gamma(0)\)</span></li>
+<li>recursivt givet <span class="math inline">\(\gamma(0),...,\gamma(n),W_1,...,W_n\)</span> vælg <span class="math inline">\(W_{n+1}\sim Exp(q_{\gamma(n)}\)</span>. Lad <span class="math inline">\(\tau_{n+1}=\tau_n+W_{n+1}\)</span> og definer <span class="math inline">\(X(t)=\gamma(n),t\in[\tau_n,\tau_{n+1})\)</span></li>
+<li>vælg <span class="math inline">\(\gamma(n+1)\)</span> sådan at <span class="math inline">\(P(\gamma(n+1)\vert \gamma(0),...,\gamma(n),W_1,...,W_n)=\frac{q_{\gamma(n),i}}{q_{\gamma(n)}},i\ne Y(n)\)</span>.</li>
+</ol>
+<blockquote class="def">
+<p><strong>Definition 37.</strong> <strong>(Absorbering)</strong> <em>Hvis Markov kæden givet ved minimal konstruktion på tidspunkt <span class="math inline">\(\tau_n\)</span> hopper til stadie <span class="math inline">\(\gamma(n)=i\)</span> med <span class="math inline">\(q_i=0\)</span> så lader vi <span class="math inline">\(X(t)=\gamma(n)\)</span> for <span class="math inline">\(t\ge \tau_n\)</span> og vi siger at Markov kæden er absorberet på stadie <span class="math inline">\(i\)</span>.</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Definition 38.</strong> <strong>(Eksplosion)</strong> <em>Hvis Markov kæden hopper uendeligt mange gange på et endeligt interval dvs. <span class="math inline">\(\tau_\infty :=\lim_{n\to\infty}\tau_n&lt;+\infty\)</span> og dermed <span class="math inline">\(P(\tau_\infty&lt;+\infty)&gt;0\)</span>. Lader vi <span class="math inline">\(X(t)=\Delta\)</span> for <span class="math inline">\(t\ge \tau_\infty\)</span>. Vi kalder tidspunktet <span class="math inline">\(\tau_\infty\)</span> for eksplosionstidspunktet.</em></p>
+</blockquote>
+<blockquote class="def">
+<p><strong>Theorem 39.</strong> <strong>(Embedded Markov Chain of jumps)</strong> <em>For en markov kæde i kontinuert tid med transitions intensiteter (intensitetsmatrice) <span class="math inline">\(Q = (q_{i,j})_{i,j\in s}\)</span> givet ved den minimale konstruktion fra definition 35, er følgen <span class="math inline">\((\Gamma(n))_{n \in \mathbb{N}_0}\)</span> af besøgte stadier en markov kæde i diskret tid med transitionsmatricen <span class="math inline">\(P\)</span> givet ved</em>
+<span class="math display">\[\begin{align*}
+    \left\{\begin{array}{cc}
+        -\frac{q_{i,j}}{q_{i,i}} = \frac{q_{i,j}}{q_i} &amp; i \in S \setminus A, j \notin \{i,\Delta\}  \\
+        0 &amp; i \in S \setminus A, j \in \{i, \Delta\} \\
+        0 &amp; i \in A, j \ne i \\
+        1 &amp; i \in A, j = i
+    \end{array}\right.
+\end{align*}\]</span>
+<em>Hvor <span class="math inline">\(A = \{i \in S \vert q_i = 0\}\)</span> er delmængden af absorberende stadier.</em></p>
+</blockquote>
+<p><strong>Bemærkning:</strong> Det er klart, at de enkelte indgange <span class="math inline">\((P_{i,j}(t))_{i,j \in S}\)</span> (<span class="math inline">\(t\ge0\)</span>) i transistionsmatricen må være ikke negative. Endvidere er rækkesummerne, for en markov kæde hvor eksplosion ikke er mulig, lig 1. Specielt er transitionssandsynlighederne for et valgt <span class="math inline">\(t \ge 0\)</span> i overenstemmelse med dem som vi har set i kapitel 2. For skift i tid, kræves næste teorem.</p>
+</div>
+<div id="properties-of-transitionsprobabilities" class="section level2 hasAnchor" number="14.6">
+<h2><span class="header-section-number">14.6</span> Properties of transitionsprobabilities<a href="markov-chains.html#properties-of-transitionsprobabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote class="thm">
+<p><strong>Theorem 42.</strong> <strong>(Chapman-Kolmogorov ligninger)</strong> <em>Transitionssandsynlighederne for en homogen markov kæde i kontinuert tid opfylder Chapman-Kolmogorov ligningerne </em></p>
+<p><span class="math display">\[
+\forall s,t \ge 0, \forall i,j \in S : P_{i,j}(t+s) = \sum_{l\in S}P_{i,l}(t) \cdot P_{l,j}(s)
+\]</span>
+<em>Hvis state space er endeligt, så kan <span class="math inline">\(P(t) = (P_{i,j}(t))_{i,j\in S}\)</span> ses som en matrice for hvilket som helst valgt <span class="math inline">\(T \ge 0\)</span> og så kan Chapman-Kolmogorov ligningerne skrives som matrice ligningen</em></p>
+<p><span class="math display">\[
+P(t+s) = P(t)P(s)
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 43.</strong> <strong>(Infinitesimal generatoren af en markov kæde)</strong> <em>For en markov kæde i kontinuert tid, kan transitionsintensiteterne udledes fra transitionssandsynlighederne som grænserne</em>
+<span class="math display">\[\begin{align*}
+    \lim_{t\to0+}\frac{P_{i,i}-1}{t} = -q_i \\
+    \lim_{t\to0+}\frac{P_{i,j}}{t} = q_{i,j}, \hspace{5pt} i \ne j
+\end{align*}\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 44.</strong> <strong>(Backward differential equations)</strong> <em>For en markov kæde i kontinuert tid holder det altid, at </em></p>
+<p><span class="math display">\[
+DP_{i,j}(t) = P_{i,j}&#39;(t) = -q_iP_{i,j}(t) + \sum_{k\ne i}q_{i,k}P_{k,j}(t)
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 45.</strong> <strong>(Forward differential and integral equations)</strong> <em>For en markov kæde i kontinuert tid, holder det, at </em></p>
+<p><span class="math display">\[
+P_{i,j}(t) = \delta_{i,j}\exp(-q_jt)+\int^t_0\sum_{l\ne j}P_{i,l}(u)q_{l,j}\exp(-q_j(t-u))du
+\]</span></p>
+<p><em>og at </em></p>
+<p><span class="math display">\[
+DP_{i,j}(t) = -P_{i,j}(t)q_j+\sum_{l \ne j}P_{i,l}(t)q_{l,j}.
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 47.</strong> <strong>(Transitionssandssynlighederne for et endeligt state space)</strong> <em>For en markov kæde i kontinuert tid med endeligt state space, kan den “backward differential equation” udtrykkes i matrice form som </em></p>
+<p><span class="math display">\[
+DP(t) = P&#39;(t) = QP(t)
+\]</span></p>
+<p><em>Hvor <span class="math inline">\(P(t) = (P_{i,j}(t))_{i,j \in S}\)</span> Ved at bruge startbetingelsen <span class="math inline">\(P(0) = I\)</span>, kan transistionssandsynlighederne udtrykkes på formen af eksponentiel matricen</em></p>
+<p><span class="math display">\[
+P(t) = \exp(Qt), \hspace{5pt} t \ge 0.
+\]</span></p>
+</blockquote>
+</div>
+<div id="invariant-probabilies-and-absorption" class="section level2 hasAnchor" number="14.7">
+<h2><span class="header-section-number">14.7</span> Invariant probabilies and absorption<a href="markov-chains.html#invariant-probabilies-and-absorption" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote class="def">
+<p><strong>Definition 49.</strong> <strong>(Kommunikationsklasser og “irreducibility”)</strong> <em>To stadier <span class="math inline">\(i,j \in S\)</span> siges at kommunikere, hvis der findes <span class="math inline">\(s,t &gt; 0\)</span> således at</em></p>
+<p><span class="math display">\[
+P_{i,j}(s) &gt; 0 \text{ og } P_{j,i}(t) &gt; 0.
+\]</span></p>
+<p><em>Denne definition inddeler <span class="math inline">\(S\)</span> i disjunkte kommunikationsklasser, ligesom vi har set i kapitel 2. En markov kæde i kontinuert tid siges at være “irreducible” hvis der kun findes én kommunikationsklasse.</em></p>
+</blockquote>
+<p><strong>Bemærkning:</strong> Man kan anvende, at to stadier <span class="math inline">\(i,j \in S\)</span>, hvor <span class="math inline">\(i \ne j\)</span> kommunikerer, hvis og kun hvis, der eksisterer en følge af stadier <span class="math inline">\(i_1, i_2, ..., i_n \in S\)</span> (som indeholder stadie <span class="math inline">\(j\)</span>) således, at <span class="math inline">\(q_{i,i_1}\cdot q_{i_1,i_2}\cdot...\cdot q_{i_{n-1},i_n}\cdot q_{i_n,i} &gt; 0\)</span>. (Er der en mulig sti frem og tilbage mellem <span class="math inline">\(i\)</span> og <span class="math inline">\(j\)</span>?)</p>
+<blockquote class="def">
+<p><strong>Definition 50.</strong> <strong>(Recurrence og transience)</strong></p>
+<ol style="list-style-type: decimal">
+<li><em>En irreducible markov kæde i kontinuert tid er recurrent, hvis og kun hvis, den embedded markov kæde (se teorem. 39) er recurrent. Den er transient, hvis og kun hvis, den embedded markov kæde er transient.</em></li>
+<li><em>Stadiet <span class="math inline">\(i\)</span> er transient, hvis og kun hvis, den totale tid tilbragt i stadiet <span class="math inline">\(i\)</span></em>
+<span class="math display">\[
+  V_i = \int^\infty_01_{X(t) = i}dt
+  \]</span>
+<em>er endelig med sandsynlighed 1, altså <span class="math inline">\(P(V_i &lt; +\infty \vert X(0) = i) = 1\)</span>. Tilsvarende er stadiet <span class="math inline">\(i\)</span> recurrent hvis <span class="math inline">\(P(V_i = +\infty \vert X(0) = i) = 1\)</span>.</em></li>
+</ol>
+</blockquote>
+<p><strong>Bemærkning:</strong> Denne definition kan anvendes på de enkelte kommunikationsklasser. Specielt er et absorberende stadie altid recurrent.</p>
+<blockquote class="def">
+<p><strong>Definition 51.</strong> <strong>(Invariant fordeling)</strong> <em>En sandsynlighedsvektor <span class="math inline">\(\overline{\pi} = (\pi(i))_{i \in S}\)</span> er en invariant (eller stationær) fordeling for en markov kæde i kontinuert tid, hvis for alle <span class="math inline">\(t \ge 0\)</span> og <span class="math inline">\(j \in S\)</span></em></p>
+<p><span class="math display">\[
+\pi(j) = \sum_{i \in S}\pi(i)P_{i,j}(t).
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 52.</strong> <strong>(Entydigheden af den invariante fordeling)</strong> <em>Overvej en markov kæde i kontinuert tid. En invariant fordeling er unik, hvis den eksisterer. Hvis der for et <span class="math inline">\(t_0 &gt; 0\)</span> findes en sandsynlighed <span class="math inline">\(\overline{\pi}=(\pi(i))_{i\in S}\)</span> sådan, at</em></p>
+<p><span class="math display">\[
+\forall j \in S : \pi(j) = \sum_{i \in S}\pi(i)P_{i,j}(t_0)
+\]</span></p>
+<p><em>kan vi konkludere, at</em></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\forall i \in S : \pi(i) &gt; 0\)</span></li>
+<li><em><span class="math inline">\(P(t_0)\)</span> er en overgangssandsynlighed, dvs.</em>
+<span class="math display">\[
+  \forall i \in S : \sum_{j \in S}\pi(i)P_{i,j}(t_0) = 1
+  \]</span></li>
+<li><em><span class="math inline">\(\overline{\pi}\)</span> er en invariant fordeling for markov kæden, dvs.</em>
+<span class="math display">\[
+  \forall t \ge 0, \forall j \in S : \pi(j) = \sum_{j \in S}P_{i,j}(t_0) = 1
+  \]</span></li>
+</ol>
+</blockquote>
+<p><strong>Bemærkning:</strong> Det følger af (3), at hvis vi kan finde en invariant fordeling for et bestemt <span class="math inline">\(t_0 &gt; 0\)</span>, så gælder denne for alle <span class="math inline">\(t &gt; 0\)</span>. Det følger også, som resultat af dette, at alle rækkesummerne <span class="math inline">\(\sum_{j \in S}P_{i,j}(h) = 1\)</span> for alle <span class="math inline">\(h \ge 0\)</span>, hvor en invariant fordeling kan findes.</p>
+<blockquote class="thm">
+<p><strong>Theorem 53.</strong> <strong>(Grænseresultater for overganssandsynligheder)</strong> <em>For en irreducible markov kæde i kontinuert tid, med en invariant fordeling <span class="math inline">\(\overline{\pi}\)</span>, gælder det for alle <span class="math inline">\(i,j \in S\)</span>, at </em></p>
+<p><span class="math display">\[
+\lim_{t \to \infty}P_{i,j}(t) = \pi(j).
+\]</span>
+<em>Endvidere gælder det for enhver initial fordeling <span class="math inline">\(\overline{\phi}\)</span>, at</em></p>
+<p><span class="math display">\[
+\lim_{t \to \infty}P(X(t) = j) = \pi(j).
+\]</span></p>
+<p><em>Hvis der ikke findes en invariant fordeling, så gælder der</em></p>
+<p><span class="math display">\[
+\lim_{t \to \infty}P_{i,j}(t) = 0.
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 55.</strong> <strong>(Nødvendig betingelse for invariant fordeling)</strong> <em>For en markov kæde i kontinuert tid, er det nødvendigt, at den invariante fordeling <span class="math inline">\(\overline{\pi}\)</span> passer med ligningsystemet</em></p>
+<p><span class="math display">\[
+\forall j \in s : \sum_{i \in S}\pi(i)q_{i,j} = 0
+\]</span></p>
+<p><em>Eller tilsvarende</em></p>
+<p><span class="math display">\[
+\forall j \in S : \sum_{i\ne j}\pi(i)q_{i,j} = \pi(j)(-q_{j,j}) = \pi(j)q_j
+\]</span></p>
+<p><em>Tænker man på <span class="math inline">\(\overline{\pi}\)</span> som en række vektor og <span class="math inline">\(Q\)</span> som en matrice, har ligningssystemet en mere kompakt formulering </em></p>
+<p><span class="math display">\[
+\overline{\pi}Q = 0.
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 56.</strong> <strong>(Tilstrækkelig betingelse for en invariant fordeling)</strong> <em>Hvis <span class="math inline">\(\overline{\pi}\)</span> overholder betingelsen i teorem 55 og endvidere overholder </em></p>
+<p><span class="math display">\[
+\sum_{j \in S}\pi(j)q_j &lt; \infty
+\]</span></p>
+<p><em>Så er <span class="math inline">\(\overline{\pi}\)</span> en unik invariant fordeling for en irreducible markov kæde.</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 58.</strong> <em>En irreducible markov kæde i kontinuert tid har en invariant fordeling, hvis og kun hvis, den indlejrede (embedded) markov kæde er recurrent og der ekstisterer en sandsynlighedsvektor <span class="math inline">\(\overline{\pi}\)</span> således, at teorem 55 er overholdt. (<span class="math inline">\(\overline{\pi}Q = 0\)</span>)</em></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 60.</strong> <strong>(Tids-invariant vs. hændelses-invariant fordeling)</strong> <em>Antag, at der for en irreducible markov kæde i kontinuert tid findes en invariant fordeling <span class="math inline">\(\overline{\nu}\)</span>. Hvis vi også har bekræftet eksistensen af en invariant fordeling for den indlejrede markov kæde, så gælder følgende forhold mellem dem. </em></p>
+<p><span class="math display">\[
+\pi(i) = \frac{\nu(i)q_i}{\sum_{j \in S}\nu(j)q_j}, \hspace{5pt} i \in S.
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 61.</strong> <strong>(Eksistens af invariant fordeling og positive recurrence)</strong> <em>For en irreducible og recurrent markov kæde i kontinuert tid definerer vi “escape time” fra stadiet <span class="math inline">\(i\)</span> som</em></p>
+<p><span class="math display">\[
+W_i=\inf\{t &gt; 0 \vert X(t) \ne i\}
+\]</span></p>
+<p><em>Og “return time” til stadiet <span class="math inline">\(i\)</span> som</em></p>
+<p><span class="math display">\[
+R_i = \inf\{t &gt; W_i \vert X(t) = i\}
+\]</span></p>
+<p><em>Og der gælder, at </em></p>
+<p><span class="math display">\[
+\pi(i) = \frac{E[W_i \vert X(0) = i]}{E[R_i \vert X(0) = i]} = \frac{1}{q_iE[R_i \vert X(0) = i]}
+\]</span></p>
+<p><em>Vi siger så, at en kommunikationsklasse er “positive recurrent” hvis</em></p>
+<p><span class="math display">\[
+E[R_i \vert X(0) = i] &lt; +\infty
+\]</span></p>
+</blockquote>
+<p><strong>Bemærkning:</strong> Positive recurrence er en klasseegenskab.</p>
+<blockquote class="thm">
+<p><strong>Theorem 62.</strong> <strong>(Tid tilbragt i stadiet j før absorbering)</strong> <em>For en markov kæde i kontinuert tid findes det gennemsnitlige antal af besøg til stadiet <span class="math inline">\(j\)</span> før det absorberende stadie <span class="math inline">\(i\)</span> rammes, ved at betragte overgangssandsynlighederne af den indlejrede markov kæde. For et endeligt state space, kan man bruge teorem 29, mens man kan bruge teorem 31 for tælleligt uendelige state spaces.</em></p>
+<p><em>Hvis <span class="math inline">\(N_j\)</span> er middelværdien af antal besøg til stadiet <span class="math inline">\(j\)</span> før absorbering i stadiet <span class="math inline">\(i\)</span>, så er middelværdien af tid tilbragt i stadiet j lig <span class="math inline">\(\frac{N_j}{q_j}\)</span>.</em></p>
+</blockquote>
+<p><strong>Side note:</strong> Eksempel 63 har været meget brugbar til at forstå kapitel 3.3.</p>
+</div>
+<div id="birth-death-processes" class="section level2 hasAnchor" number="14.8">
+<h2><span class="header-section-number">14.8</span> Birth-death processes<a href="markov-chains.html#birth-death-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote class="def">
+<p><strong>Definition.</strong> <strong>(Birth-and-death process)</strong> <em>En birth-and-death proces er en markov kæde på <span class="math inline">\(S = \mathbb{N}_0\)</span> som kun tillader hop (op eller ned) af størrelset ét. Dvs, at for overgangsintesiterne, gælder <span class="math inline">\(q_{i,j} = 0, i,j \in \mathbb{N}_0, |i-j| &gt; 1\)</span>, mens de eneste ikke-nul indgange (udover diagonalen) er lig</em>
+<span class="math display">\[\begin{align*}
+    q_{i,i+1} = \beta_i, i \in \mathbb{N}_0 \rightarrow \text{ birth intensitet} \\
+    q_{i,i+1} = \delta_i, i \in \mathbb{N} \rightarrow \text{ death intensitet}
+\end{align*}\]</span>
+<em>Adfærden af sådan en proces er meget simpelt at beskrive. Hvis man befinder sig i stadiet <span class="math inline">\(i\)</span>, så er ventetiden til det næste hop eksponentiel fordelt med parametren <span class="math inline">\(\beta_i+\delta_i\)</span> og med gennemsnitstiden <span class="math inline">\(\frac{1}{\beta_i+\delta_i}\)</span>. Når kæden hopper, kan den hoppe op med sandsynlighed <span class="math inline">\(\frac{\beta_i}{\beta_i + \delta_i}\)</span> eller hoppe ned med sandsynlighed <span class="math inline">\(\frac{\delta_i}{\beta_i+\delta_i}\)</span>.</em></p>
+</blockquote>
+<p><strong>Side note:</strong> Meget af kapitel 3.4 er eksempler på birth-and-death processer.</p>
+<blockquote class="thm">
+<p><strong>Theorem 66.</strong> <strong>(Birth-and-death processer: recurrence)</strong> <em>En birth-and-death proces er recurrent, hvis og kun hvis,</em></p>
+<p><span class="math display">\[
+\sum_{i=1}^\infty\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_1} = \infty.
+\]</span></p>
+<p><em>Ækvivalent er en birth-and-death proces transient, hvis og kun hvis,</em></p>
+<p><span class="math display">\[
+\sum_{i=1}^\infty\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_1} &lt; \infty.
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 67.</strong> <strong>(Birth-and-death processer: positive recurrence)</strong> <em>En birth-and-death proces er positive recurrent, hvis og kun hvis,</em></p>
+<p><span class="math display">\[
+\sum_{i=1}^\infty\frac{\beta_{i-1}\cdot...\cdot \beta_0}{\delta_i\cdot...\cdot \delta_1} &lt; \infty \hspace{10pt} \text{og} \hspace{10pt} \sum_{i=1}^\infty\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_1} = \infty
+\]</span></p>
+</blockquote>
+<blockquote class="thm">
+<p><strong>Theorem 68.</strong> <strong>(Eksplosion for en birth-and-death proces)</strong> <em>For en birth-and-death proces med intensiteterne</em></p>
+<p><span class="math display">\[
+q_{i,i+1} = \beta_i, \hspace{10pt} q_{i+1,i}=\delta_{i+1}, \hspace{10pt} q_{i+1,i+1} = -(\delta_{i+1}+\beta_{i+1})
+\]</span></p>
+<p><em>og med <span class="math inline">\(q_{i,j} = 0\)</span> ellers, <span class="math inline">\(i,j \in \mathbb{N}_0\)</span>, så er eksplosion muligt, hvis og kun hvis,</em></p>
+<p><span class="math display">\[
+\sum_{i=1}^\infty\left(\frac{1}{\beta_i}+\frac{\delta_i}{\beta_i\beta_{i-1}}+...+\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_0}\right)&lt;\infty
+\]</span></p>
+</blockquote>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="discrete-time-stochastic-processes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="continuous-time-stochastic-processes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

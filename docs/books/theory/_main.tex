@@ -127,7 +127,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{February 13, 2023}
+\date{February 17, 2023}
 
 \begin{document}
 %\maketitle
@@ -269,8 +269,12 @@ Chapter & Note & Progress \\
 \midrule()
 \endhead
 Liv2 & Properties of product integral & Done \\
-& Relation to kolmogorov and markov chains & Bevis 2.3 og 2.12 \\
-ML & Risk measure and loss (First week in general) & \\
+& Phase-type distributions & Bevis 2.3 og 2.12 \\
+& Interest Theory & \\
+ML & Supervied learning & Done \\
+& Training validating testing & Done \\
+& Linear models & Finetune proofs \\
+& Nonparametric regression & Done \\
 QRM & Finish risk measures & \\
 StokLiv & Week 1 & \\
 StokLiv & Week 2 & \\
@@ -280,8 +284,8 @@ Liv1 & Week 1 & \\
 Liv1 & Week 2 & \\
 Nonlife1 & Week 1 & \\
 Nonlife1 & Week 2 & \\
-MI & Insert notes & \\
-Stok & Insert notes & \\
+MI & Insert notes & Mangler indeks \\
+Stok & Insert notes & Mangler indeks \\
 \bottomrule()
 \end{longtable}
 
@@ -723,7 +727,176 @@ We see that by calculating
 E[\tau\ \vert\ X_0=1]=\int_0^\infty \tau f(\tau)\ d\tau\approx\int_0^{120}\tau f(\tau)\ d\tau\approx\frac{1}{n}\sum_{i=0}^{120\cdot n} i/n\cdot f(i/n).
 \]
 
-that the life expectation is 84.01 years. We have that we may approximate \(f\) and \(F\) with an arbitrary precisiion by choosing \(n\) appropriately.
+that the life expectation is 84.01 years. We have that we may approximate \(f\) and \(F\) with an arbitrary precision by choosing \(n\) appropriately. \(\square\)
+
+I practice we may have alot complications in calculating the product integral of \(\mathbf T\) as the matrix may have large dimensions, be non-cummative, encounter alternating sums with growing terms and obviously being time in-homogeneous. So one has to be smart when constructing numerical methods in computing the integral. We will briefly consider some considerations an implementer may use in calculating the product integral.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Applying differential equation.} Assume that \(X\) is a time in-homogeneous markov jump process then we may always calculate \(\prod_s^t(\mathbf I + \mathbf T(x)\ dx)\) using a stepwise argument:
+  \[
+    \prod_s^t(\mathbf I + \mathbf T(x)\ dx)=\prod_s^{s+1\cdot (t-s)/n}(\mathbf I + \mathbf T(x)\ dx)\prod_s^{s+2\cdot (t-s)/n}(\mathbf I + \mathbf T(x)\ dx)\cdots\prod_s^{t}(\mathbf I + \mathbf T(x)\ dx)
+    \]
+  for some \(n\ge 1\). In particular one can simply choose \(n\) large enough such that the increments is approximately linear and so this is a brute force methods (see example above).
+\item
+  \textbf{Piece wise constant matrix.} Since data is scarce it often occur that mortality rates are constant over at least a monthly timeline hence one may assume that \(\Lambda\) is piecewise constant for some fine grid. This in particular means that if the grid has size \(1/n\) (for instance \(n=12\) or \(n=4\)) we have
+  \[
+    \prod_s^{s+1/n}(\mathbf I + \mathbf T(x)\ dx)=\mathbf{I}e^{\mathbf{T}(s)\frac{1}{n}}=e^{\mathbf{T}(s)\frac{1}{n}}.
+    \]
+  and so the above reduces to
+  \[
+    \prod_s^t(\mathbf I + \mathbf T(x)\ dx)=e^{\mathbf{T}(s)\frac{1}{n}}e^{\mathbf{T}(s+1/n)\frac{1}{n}}\cdots e^{\mathbf{T}(t-1/n)\frac{1}{n}},
+    \]
+  assuming that \(s\) and \(t\) are integers (one could make this more general).
+\item
+  \textbf{Diagonalization.} Assume that \(\mathbf{T}(x)\) is constant on some interval \([s,t]\) and that for the constant matrix \(\mathbf{T}:=\mathbf{T}(s)\) there exist unique eigenvalues \(\lambda_1,...,\lambda_p\). Then we can diagonalize \(\mathbf{T}\) as
+  \[
+    \mathbf{T}=\mathbf{B}\mathbf{D}\mathbf{B}^{-1},
+    \]
+  where as usual \(\mathbf{D}=\text{diag}(\lambda_1,...,\lambda_p)\) and \(\mathbf{B}\) is a \(p\times p\) matrix with columns of eigenvectors for \(\lambda_1,...,\lambda_p\). In this case we can calculate
+  \begin{align*}
+    \prod_s^t(\mathbf I + \mathbf T(x)\ dx)&=e^{\mathbf{T}(t-s)}=e^{\mathbf{B}\mathbf{D}\mathbf{B}^{-1}(t-s)}=\sum_{n=0}^\infty \frac{\left(\mathbf{B}\mathbf{D}\mathbf{B}^{-1}\right)^n(t-s)^n}{n!}\\
+    &=\sum_{n=0}^\infty \frac{\mathbf{B}\mathbf{D}\mathbf{B}^{-1}\mathbf{B}\mathbf{D}\mathbf{B}^{-1}\cdots \mathbf{B}\mathbf{D}\mathbf{B}^{-1}\mathbf{B}\mathbf{D}\mathbf{B}^{-1}(t-s)^n}{n!}\\
+    &=\sum_{n=0}^\infty \frac{\mathbf{B}\mathbf{D}^n\mathbf{B}^{-1}(t-s)^n}{n!}=\mathbf{B}\left(\sum_{n=0}^\infty \frac{\mathbf{D}^n(t-s)^n}{n!}\right)\mathbf{B}^{-1}\\
+    &=\mathbf{B}\left(\sum_{n=0}^\infty \frac{\text{diag}(\lambda_1^n(t-s)^n,...,\lambda_p^n(t-s)^n)}{n!}\right)\mathbf{B}^{-1}\\
+    &=\mathbf{B}\text{diag}\left(\sum_{n=0}^\infty \frac{\lambda_1^n(t-s)^n}{n!},...,\sum_{n=0}^\infty \frac{\lambda_p^n(t-s)^n}{n!}\right)\mathbf{B}^{-1}\\
+    &=\mathbf{B}\text{diag}\left(e^{\lambda_1(t-s)},...,e^{\lambda_p(t-s)}\right)\mathbf{B}^{-1}.
+    \end{align*}
+  which is much easier than any approximation. This is however a unrealisitic expectations to have.
+\item
+  \textbf{Univerformization.}\index{Univerformization} Assume that \(\mathbf{T}(x)\) is constant on some interval \([s,t]\) and define \(\mathbf{T}:=\mathbf{T}(s)\). We may furthermore define \(\lambda= \max_{i}(-\lambda_{ii})\) as the largest diagonal entry in \(\mathbf T\) (\(\lambda <0\)). We now set
+  \[
+    \mathbf P = \mathbf I + \lambda^{-1}\mathbf T,
+    \]
+  and see that \(\mathbf P\) is a transition matrix i.e.~rowsums is 1 and the the diagonals \(0\le p_{ii}\le 1\). We see this as \(0\le \lambda^{-1}\lambda_{ii}\le1\) as \(\lambda_{ii}\le 0\) for all \(i\) and \(\lambda\ge 0\) and dominates all diagonal entries. The rowsums is 1 as \(\mathbf T\) is a intensity matrix i.e.~rowsums is 0 and so adding one to the diagonal of the scaled matrix gives a rowsum of 1. We can now rearrange and see that
+  \begin{align*}
+    \prod_s^t(\mathbf I + \mathbf T(x)\ dx)&=e^{\mathbf{T}(t-s)}=e^{\lambda (\mathbf P - \mathbf I)(t-s)}=e^{\lambda \mathbf P (t-s)}e^{-\lambda \mathbf I(t-s)}\\
+    &=e^{\lambda \mathbf P (t-s)}\mathbf Ie^{-\lambda (t-s)}=e^{-\lambda (t-s)}e^{\lambda \mathbf P (t-s)}\\
+    &=e^{-\lambda (t-s)}\sum_{n=0}^\infty \frac{(t-s)^n}{n!}\mathbf{P}^n.
+    \end{align*}
+  This is nice since \(\mathbf P\) has entries in the interval \([0,1]\) and so the series above converges and is monotonic, so we avoid the alternating sums from the negative diagonal in \(\mathbf T\).
+\item
+  \textbf{Scaling and squaring argument.}\index{Scaling and squaring argument} Assuming the setup above. If the interval \((t-s)\) is large we may apply a scaling and squaring argument by setting
+  \[
+    e^{\mathbf T(t-s)}=\mathbf{S}^{2^n},\hspace{15pt}\mathbf{S}=e^{\mathbf T (t-s)2^{-n}}.
+    \]
+  This ensures small entries in the matrix \(S\) and we can simply square \(\mathbf S\) \(n\) times after approximating \(\mathbf S\) numerically.
+\end{enumerate}
+
+\hypertarget{interest-rates}{%
+\section{Interest rates}\label{interest-rates}}
+
+\hypertarget{basic-definitions-and-properties}{%
+\subsection{Basic definitions and properties}\label{basic-definitions-and-properties}}
+
+In money markets interest is derived from the short term rate \(r\) that is a continuously compounded interest rate i.e.~a bank account \(B(t)\)\index{bank account} is on the form
+
+\[
+B(t)=B(0)e^{\int_0^tr(u)\ du}
+\]
+
+where we will by convention assume \(B(0)=1\). Let us define what we will require for the process \(r\).
+
+\textbf{Definition. (Interest rate process)}\index{Interest rate process} \emph{A stochastic process \(\{r(t)\}_{t\ge 0}\) is an interest rate process if and only if \(r(t)\) is adapted to some filtration \(\mathcal F_t\) on the probability space \((\Omega,\mathcal F,\mathbb P)\).}
+
+This in particular means that in theory we may construct the rate as a diffusion process, piecewise constant function jumping at random times and so forth. The class of possible rate process is large but few is realistic. We will in the following think of \(r\) generally as a given process which we only assume is adapted to some filtration \(\mathcal F\). The most important price process other than the bank account is the zero-coupon bond.
+
+\textbf{Definition. (Zero-Coupon Bond)}\index{Zero-Coupon Bond} \emph{A zero-coupon bond with maturity \(T\) with underlying interest rate process \(r(t)\) is a security which at time \(T\) pays the holder 1 and the price of the claim at time \(0\le t\le T\), \(B(t,T)\), satisfies}
+
+\[
+\left\{\frac{B(t,T)}{B_t}\right\}_{0\le t\le T},
+\]
+
+\emph{is a \(\mathbb Q\)-martingale measure for some equivalent martingale measure \(\mathbb Q\sim \mathbb P\) (including \(\mathbb Q = \mathbb P\)).}
+
+We can in particular deduce the price process under a \(\mathbb Q\)-expectation by the equation
+
+\[
+E^{\mathbb Q}\left[\left.\frac{1}{B_T}\right\vert \mathcal F_t\right]=E^{\mathbb Q}\left[\left.\frac{B(T,T)}{B_T}\right\vert \mathcal F_t\right]=\frac{B(t,T)}{B_t},
+\]
+
+since \(B(T,T)=1\) and the integrant is a \(\mathbb Q\)-martingale. Rearranging we have
+
+\[
+B(t,T)=B_tE^{\mathbb Q}\left[\left.\frac{1}{B_T}\right\vert \mathcal F_t\right]=e^{\int_0^t r(u)\ du}E^{\mathbb Q}\left[\left.e^{-\int_0^T r(u)\ du}\right\vert \mathcal F_t\right]=E^{\mathbb Q}\left[\left.e^{-\int_t^T r(u)\ du}\right\vert \mathcal F_t\right].\tag{11}
+\]
+
+\hypertarget{forward-rates-and-yields}{%
+\subsubsection{Forward rates and yields}\label{forward-rates-and-yields}}
+
+There exist alot of different transformations of \(r(t)\) which may be useful in simplifying complex equation and/or easing interpretation. Some of the most used include \emph{forward rates} and \emph{yields}. Let us start by defining a simple forward rate called the LIBOR forward rate.
+
+\textbf{Definition 3.1. (Bladt)}\index{LIBOR forward rate} \emph{Consider three fixed time-points \(t\le S< T\) and the corresponding self-financing portfolio consisting of one short position in a zero-coupon bond with maturity \(S\) and a long position in a zero-coupon bond with maturity \(T\) of size \(B(t,S)/B(t,T)\). This portfolio gives the payout: -1 at time \(S\) and \(B(t,S)/B(t,T)\) at time \(T\). This in particular results in the investment of 1 dollar at time \(S\) with a \(\mathcal F_t\) deterministic payout}
+
+\[
+\frac{B(t,S)}{B(t,T)}
+\]
+
+\emph{at time \(T\). The \textbf{LIBOR forward rate} \(L(t,S,T)\) is thus the average return in the interval i.e.}
+
+\[
+L(t,S,T)=\frac{1}{T-S}\left(\frac{B(t,S)}{B(t,T)}-1\right).
+\]
+
+We could of couse define the rate as a continuously compounding rate by solving
+
+\[
+e^{(T-S)R}=\frac{B(t,S)}{B(t,T)}\iff R=\frac{1}{T-S}\left(\log B(t,S)-\log B(t,T)\right).
+\]
+
+\textbf{Definition. (Continuously compounded forward rate)}\index{continuously compounded forward rate} \emph{Let \(t\le T\) be a fixed maturity date. The continuously compounded forward rate on \([S,T]\) is defined by}
+
+\[
+f(t,S,T)=-\frac{\log B(t,T)-\log B(t,S)}{T-S}
+\]
+
+\emph{being the continuously compounded rate for a portfolio consisting of \(B(t,S)/B(t,T)\) zero-coupon bond with maturity \(T\).}
+
+The yield with maturity \(T\) is the defined by.
+
+\textbf{Definition. (Yield)}\index{Yield} \emph{Let \(t\le T\) be a fixed maturity date. The yield on \([t,T]\) is defined by}
+
+\[
+Y(t,T)=-\frac{\log B(t,T)}{T-t},
+\]
+
+\emph{being the continuous rate on the portfolio consisting of 1 zero-coupon bond with maturity \(T\).}
+
+We obviously have that \(Y(t,T)=f(t,t,T)\) is the continuous compounded forward rate on \([S,T]\) with \(S=t\). Furthermore, we call \(\{Y(t,T)\}_{T\ge t}\) the \textbf{yield curve}\index{yield curve}.
+
+\textbf{Definition. (Forward rate)}\index{forward rate} \emph{Let \(t\le T\) be a fixed maturity date. The forward rate on \([t,T]\) is defined by}
+
+\[
+f(t,T)=-\frac{\partial}{\partial T}\log(B(t,T)).
+\]
+
+We see that the forward rate is simply the continuously compounded forward rate on a infinitesimal interval of time \([T-d t,T]\) i.e.
+
+\[
+f(t,T)=\lim_{S\to T}f(t,S,T)=\lim_{S\to T}-\frac{\log B(t,T)-\log B(t,S)}{T-S}=-\frac{\partial}{\partial T}\log(B(t,T)).
+\]
+
+Note that this is all in expectation. The forward rate is useful in the sense that we can write
+
+\[
+B(t,T)=\exp\left[-\int_t^T f(t,s)\ ds\right]=\mathbb E^{\mathbb Q}\left[\left.\exp\left(-\int_t^T r(s)\ ds\right) \right\vert \mathcal{F}_t\right].
+\]
+
+We may use forward rate interchangeably as expectation-weighted discounting factor, in constructing fixed rates and arbitrage free loans.
+
+\hypertarget{phase-type-representation-of-bond-prices}{%
+\subsection{Phase-type representation of bond prices}\label{phase-type-representation-of-bond-prices}}
+
+\hypertarget{term-structure-models}{%
+\subsection{Term structure models}\label{term-structure-models}}
+
+\hypertarget{estimation-of-ph-bond-models}{%
+\subsection{Estimation of PH bond models}\label{estimation-of-ph-bond-models}}
+
+\hypertarget{survival-and-mortality-rates}{%
+\section{Survival and mortality rates}\label{survival-and-mortality-rates}}
 
 \hypertarget{continuous-time-finance}{%
 \chapter{Continuous Time Finance}\label{continuous-time-finance}}
@@ -1008,7 +1181,7 @@ V_T^h=X,
 
 \textbf{Example.}
 
-\begin{center}\includegraphics[width=0.75\linewidth]{_main_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth]{_main_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Consider \(R=0.04\), \(s=100\), \(u=1.1\), \(d=0.9\), \(p_u=0.6\) and \(p_d=0.4\). We consider a model of length \(T=2\) and we want to evaluate the price of the european call option with srike \(K=90\) that is the contingent claim
 
@@ -2883,7 +3056,7 @@ Noget indhold
 
 In this chapter we restrict our selves to the area of \emph{Supervised Learning} as we use numerical methods and machine learning algorithms to estimate models in a restricted framework. Take for instance the random forest, this algorithm's estimation method is perfectly capable of being written recursively and so no ``leaning'' is done in the sense, that the calculations are predetermined from the algorithm. We therefore call the area of study supervised learning instead of the wider area of study \emph{machine learning}. Let us define what we mean by supervised learning.
 
-\textbf{Definition. (Supervised Learning)} \emph{Supervised learning is a field in machine learning that works with labeled data, i.e.~data consisting of a set of features \(X\), and a response \(Y\). The goal is to learn a function \(m^*\) that maps a given input \(x\) to an output \(y\).}
+\textbf{Definition. (Supervised Learning)}\index{Supervised Learning} \emph{Supervised learning is a field in machine learning that works with labeled data, i.e.~data consisting of a set of features \(X\), and a response \(Y\). The goal is to learn a function \(m^*\) that maps a given input \(x\) to an output \(y\).}
 
 We will in this chapter only use data in the form of a spread sheet e.g.
 
@@ -2902,13 +3075,13 @@ X_{n1} & X_{n2} & \cdots & X_{np} & Y_n
 
 we could however consider any data that may be interpreted by computer software.
 
-The setting is then; assume that we have \(n\) independent copies of the random variable \(D=(X,Y)\in \mathcal{X}\times \mathcal{Y}\), where \(X\) is \(p\)-dimensional and \(Y\) is one-dimensional. We make no assumption on whether \(X_j\), \(j=1,..,p\) and \(Y\) are discrete or continuous, however in concrete cases this will be specified. We combine the sample of the \(n\) observations in the matrix \(\mathcal{D}_n=(X_i,Y_i)_{i=1,...,n}\) being a \(n\times p+1\) matrix as in the above. We call \(\mathcal{D}_n\) the \textbf{training data}.
+The setting is then; assume that we have \(n\) independent copies of the random variable \(D=(X,Y)\in \mathcal{X}\times \mathcal{Y}\), where \(X\) is \(p\)-dimensional and \(Y\) is one-dimensional. We make no assumption on whether \(X_j\), \(j=1,..,p\) and \(Y\) are discrete or continuous, however in concrete cases this will be specified. We combine the sample of the \(n\) observations in the matrix \(\mathcal{D}_n=(X_i,Y_i)_{i=1,...,n}\) being a \(n\times p+1\) matrix as in the above. We call \(\mathcal{D}_n\) the \textbf{training data}\index{training data}.
 
 This specification does indeed imply that \(D_i=(X_i,Y_i)\) are iid. This is actually a bit controversial as we would expect that the distribution of \(D\) will shift over time. For instance, the distribution of ages in a population changes over time and have been more right skewed as humanity advances. This may be accounted for by transforming the data such that the distribution becomes the same. This may be done in a variety of ways some example include: 1) transforming to uniform variable with the time dependent distribution \(F_t\), 2) normalizing using a price index and so forth. One should therefore start any analysis by ensuring that the data a given algorithm is trained on is iid.
 
 The job becomes finding a good estimator such that we may predict \(Y\) given \(X\) i.e.~\(Y\ \vert\ X\). Let us define what an estimator is.
 
-\textbf{Definition. (Estimator)} \emph{Consider a training dataset \(\mathcal{D}_n\). A estimator \(m\) is a function-valued mapping that takes \(\mathcal{D}_n\) as input and associates a function \(m_n : \mathcal{X}\to \mathcal{Y}\) i.e.~\(m\) takes the form}
+\textbf{Definition. (Estimator)}\index{Estimator} \emph{Consider a training dataset \(\mathcal{D}_n\). A estimator \(m\) is a function-valued mapping that takes \(\mathcal{D}_n\) as input and associates a function \(m_n : \mathcal{X}\to \mathcal{Y}\) i.e.~\(m\) takes the form}
 
 \[
 m(\mathcal{D}_n)=m_n:\mathcal{X}\to \mathcal{Y}
@@ -2937,11 +3110,11 @@ We will now discuss the meaning of being the \emph{``best''} estimator. Obviousl
 \begin{itemize}
 \tightlist
 \item
-  \emph{A \textbf{decision rule} is a deterministic function \(m:\mathcal{X}\to \mathcal{Y}\),}
+  \emph{A \textbf{decision rule}\index{decision rule} is a deterministic function \(m:\mathcal{X}\to \mathcal{Y}\),}
 \item
-  \emph{A \textbf{loss function} is a deterministic function \(L: \mathcal{Y}\times \mathcal{Y}\to \mathbb{R}_+\),}
+  \emph{A \textbf{loss function}\index{loss function} is a deterministic function \(L: \mathcal{Y}\times \mathcal{Y}\to \mathbb{R}_+\),}
 \item
-  \emph{The \textbf{risk} of a decision rule \(m\) is given a loss function \(L\) is \(r(m)=E[L(Y,m(X))]\).}
+  \emph{The \textbf{risk}\index{risk} of a decision rule \(m\) is given a loss function \(L\) is \(r(m)=E[L(Y,m(X))]\).}
 \end{itemize}
 
 Notice that in the definition of risk we see that \(m\) is included inside the expectation. This means in particular that the training data \(\mathcal{D}_n\) is also accounted for i.e.~by the tower rule we have
@@ -2955,14 +3128,14 @@ Some widely used loss function include
 \begin{itemize}
 \tightlist
 \item
-  Quadratic loss function: \(L(y_1,y_2)=(y_1-y_2)^2\),
+  Quadratic loss function:\index{Quadratic loss function} \(L(y_1,y_2)=(y_1-y_2)^2\),
 \item
-  Poisson Deviance: \(L(y_1,y_2)=2\left(y_1\log\frac{y_1}{y_2}-y_1+y_2\right)\),
+  Poisson Deviance:\index{Poisson Deviance} \(L(y_1,y_2)=2\left(y_1\log\frac{y_1}{y_2}-y_1+y_2\right)\),
 \item
-  Binary loss function: \(L(y_1,y_2)=1_{y_1\ne y_2}\).
+  Binary loss function:\index{Binary loss function} \(L(y_1,y_2)=1_{y_1\ne y_2}\).
 \end{itemize}
 
-Given a loss function \(L\) we may find a (possibly non-unique) solution \(m^*\) that minimizes \(R(m)\). We call this the \textbf{Bayes estimator}. The quantity \(R(m^*)\) is called the \textbf{Bayes risk}. On some special case loss functions we may determine the unique solution.
+Given a loss function \(L\) we may find a (possibly non-unique) solution \(m^*\) that minimizes \(R(m)\). We call this the \textbf{Bayes estimator}\index{Bayes estimator}. The quantity \(R(m^*)\) is called the \textbf{Bayes risk}\index{Bayes risk}. On some special case loss functions we may determine the unique solution.
 
 \textbf{Lemma.} \emph{Assume \(Y\) is \(L_2\) (square integrable), then the decision function that minimized the risk for the quadratic loss function is}
 
@@ -2979,26 +3152,26 @@ m^*=\underset{m}{\text{argmin}}\ \mathbb{E}[1_{Y\ne m(X)}]=\underset{m}{\text{ar
 
 We can now define the prediction risk and the generalization error which relates to the balance of a sufficiently large class \(\mathcal{G}_0\) and how effective the optimal estimator is conditional on the class \(\mathcal{G}_0\).
 
-\textbf{Definition. (Conditional risk)} \emph{Let \(\mathcal{D}_n\) be some training data. Given an estimator \(\hat{m}_n\) we call}
+\textbf{Definition. (Conditional risk)}\index{Conditional risk} \emph{Let \(\mathcal{D}_n\) be some training data. Given an estimator \(\hat{m}_n\) we call}
 
 \[
 R(\hat{m}_n)=\mathbb{E}[L(Y,\hat{m}_n(X))\ \vert\ \mathcal{D}_n]
 \]
 
-\emph{the prediction risk or conditional generalized error.}
+\emph{the prediction risk or conditional generalized error.\index{conditional generalized error}}
 
-\textbf{Definition. (Risk)} \emph{We call}
+\textbf{Definition. (Risk)}\index{Risk} \emph{We call}
 
 \[
 r(\hat{m}_n)=\mathbb{E}[R(\hat{m}_n)],
 \]
 
-\emph{the prediction risk or generalized error.}
+\emph{the prediction risk or generalized error.\index{generalized error}}
 
 \hypertarget{excess-risk}{%
 \subsection{Excess risk}\label{excess-risk}}
 
-\textbf{Definition. (Excess Risk)} \emph{Consider the set \(\mathcal{G}\) be the set of all measurable estimators. Fix a subset \(\mathcal{G}_0\subset\mathcal{G}\). Given some training data \(\mathcal{D}_n\) consider the Bayes estimator restricted to \(\mathcal{G}_0\) denoted by \(\hat{m}_n\) and the unconditional Bayes estimator restricted to \(\mathcal{G}\) we define the quantity}
+\textbf{Definition. (Excess Risk)}\index{Excess Risk} \emph{Consider the set \(\mathcal{G}\) be the set of all measurable estimators. Fix a subset \(\mathcal{G}_0\subset\mathcal{G}\). Given some training data \(\mathcal{D}_n\) consider the Bayes estimator restricted to \(\mathcal{G}_0\) denoted by \(\hat{m}_n\) and the unconditional Bayes estimator restricted to \(\mathcal{G}\) we define the quantity}
 
 \[
 R(\hat{m}_n)-r(m^*)
@@ -3017,10 +3190,10 @@ In the context of the above definition we can decompose the risk associated with
 \[
 R(\hat{m}_n)-r(m^*)=\underbrace{\left[R(\hat{m}_n)-\inf_{m\in\mathcal{G}_0}R(m)\right]}_{\text{estimation error}}+\underbrace{\left[\inf_{m\in\mathcal{G}_0}R(m)-R(m^*)\right].}_{\text{inductions bias/approximation error}}
 \]
-
+\index{estimation error}\index{inductions bias}
 where we have to balance the trade-off with a larger \(\mathcal{G}_0\) infer a lower induction bias but larger estimation error and a smaller class \(\mathcal{G}_0\) infer a lower estimation error but larger induction bias.
 
-\textbf{Definition. (Empirical risk and empirical risk minimizer)} \emph{Given training data \(\mathcal{D}_n\) and a loss function \(L\), we call}
+\textbf{Definition. (Empirical risk and empirical risk minimizer)}\index{empirical risk}\index{empirical risk minimizer} \emph{Given training data \(\mathcal{D}_n\) and a loss function \(L\), we call}
 
 \[
 \hat{R}_n(m):=\sum_{i=1}^nL(Y_i,m(X_i))
@@ -3086,9 +3259,9 @@ When deciding which method too choose for a given task, one may like to pick the
 \begin{itemize}
 \tightlist
 \item
-  \(\mathcal{D}_n=(X_i,Y_i)_{i=1,...,n}\) \emph{(traning data)}
+  \(\mathcal{D}_n=(X_i,Y_i)_{i=1,...,n}\) \emph{(training data)\index{traning data}}
 \item
-  \(\mathcal{T}_m=(\tilde{X}_j,\tilde{Y}_j)_{j=1,...,m}\) \emph{(test data)}
+  \(\mathcal{T}_m=(\tilde{X}_j,\tilde{Y}_j)_{j=1,...,m}\) \emph{(test data)\index{test data}}
 \end{itemize}
 
 \emph{with \(n\in[0.8m,0.95m]\).}
@@ -3102,7 +3275,7 @@ When deciding which method too choose for a given task, one may like to pick the
 \item
   \(\mathcal{D}_{n_1}=(X_i,Y_i)_{i=\tau(1),...,\tau(n_1)}\) \emph{(traning data)}
 \item
-  \(\mathcal{V}_{n_2}=(\tilde{X}_j,\tilde{Y}_j)_{j=\tau(n_1+1),...,\tau(n)}\) \emph{(validation data)}
+  \(\mathcal{V}_{n_2}=(\tilde{X}_j,\tilde{Y}_j)_{j=\tau(n_1+1),...,\tau(n)}\) \emph{(validation data)\index{validation data}}
 \end{itemize}
 
 \emph{where \(\tau\) is a randomly picked permutation of \(\{1,...,n\}\) and \(n_1+n_2=n\) is respectively the size of the training set and the validation set.}
@@ -3139,7 +3312,7 @@ Variance can be reduced by repeating steps 1-4 several times. The most popular m
 
 We want to estimate the generalization error of a method \(\hat{m}_{n,\lambda}\) that depends on a fixed hyper parameter \(\lambda\).
 
-\textbf{Definition. (M-fold Cross validation)} \emph{Given the indices of a data set \(S=\{1,...,n\}\), M-fold cross validation follows the following steps:}
+\textbf{Definition. (M-fold Cross validation)}\index{M-fold Cross validation} \emph{Given the indices of a data set \(S=\{1,...,n\}\), M-fold cross validation follows the following steps:}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3185,7 +3358,7 @@ But the hyper parameter space \(\Lambda\) is often multi-dimensional and partly 
 
 Above we have discussed how we can use cross validation to pick an optimal parameter for a given method and data set. But how to choose between different methods? One popular way is nested cross validation comprising an inner loop for hyper parameter selection (tuning) and an outer loop for method comparison. Assume that we want to compare \(J\) methods \(\hat{m}_{n,j}\), \(j=1,...,J\). then we may use nested cross validation.
 
-\textbf{Definition. (Nested \(M_1-M_2\) Cross-validation)} \emph{Given the indices of a data set \(S=\{1,...,n\}\), nested \(M_1-M_2\) cross validation follows the following steps:}
+\textbf{Definition. (Nested \(M_1-M_2\) Cross-validation)}\index{Nested $M_1-M_2$ Cross-validation} \emph{Given the indices of a data set \(S=\{1,...,n\}\), nested \(M_1-M_2\) cross validation follows the following steps:}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3266,6 +3439,9 @@ Given the training data we may approximate the coefficients using the following.
     \]
 \end{enumerate}
 
+\hypertarget{least-squares-estimator}{%
+\subsection{Least Squares Estimator}\label{least-squares-estimator}}
+
 Moving forward we will assume \(\beta_0^*=0\) since we can always translate the data and make the centered around 0. We will furthermore use the notation:
 
 \[
@@ -3293,7 +3469,7 @@ In this cases the empirical risk takes the form
 \hat{R}_n(m)=\frac{1}{n}\Vert\mathbf{Y}-\mathbf{X}\beta \Vert^2_2.
 \]
 
-\textbf{Lemma. (Least squares estimator)}
+\textbf{Lemma. (Least squares estimator)}\index{Least squares estimator}
 
 \begin{itemize}
 \tightlist
@@ -3306,13 +3482,677 @@ In this cases the empirical risk takes the form
     \]
 \end{itemize}
 
-\textbf{Theorem. (Excess risk Least squares estimator)} If \(\mathbf{X}^\top\mathbf{X}\) is invertible, then
+\textbf{Theorem. (Excess risk Least squares estimator)} \emph{If \(\mathbf{X}^\top\mathbf{X}\) is invertible, then}
 
 \[
 \mathbb{E}[R(\hat{m}_n^{LS})\ \vert\ \mathbf{X}]-r(m^*)=\frac{\sigma^2}{n}\cdot \text{tr}\left(\Sigma\hat{\Sigma}^{-1}\right)
 \]
 
-with \(\Sigma=\mathbb{E}[\mathbf{X}^\top\mathbf{X}]\) and \(\hat{\Sigma}=\frac{1}{n}\mathbf{X}^\top\mathbf{X}\).
+\emph{with \(\Sigma=\mathbb{E}[\mathbf{X}^\top\mathbf{X}]\) and \(\hat{\Sigma}=\frac{1}{n}\mathbf{X}^\top\mathbf{X}\).}
+
+\textbf{Proof.}
+
+\[
+\hat{\beta}^{LS}=\left(\mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T \mathbf{Y}=\left(\mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T \mathbf{X} \beta^*+\left(\mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T \mathbf{\varepsilon}=\beta^*+\left(\mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T \mathbf{\mathbf { \varepsilon }}.
+\]
+
+Thus
+\begin{align*}
+R\left(\hat{m}^{LS}\right)-r\left(m^*\right) & =\left\|\Sigma^{1 / 2}\left(\hat{\beta}^{L S}-\beta^*\right)\right\|_2^2=\left\|\Sigma^{1 / 2}\left(\mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T \mathbf{\varepsilon}\right\|_2^2=n^{-1}\left\|n^{-1/2}\Sigma^{1 / 2} \hat{\Sigma}^{-1} {\mathbf{X}^T \mathbf{\varepsilon}}\right\|_2^2 \\
+& =n^{-1}\|A \mathbf{\varepsilon}\|_2^2,
+\end{align*}
+where \(\hat \Sigma=n^{-1} \mathbf{{X^T}X}, A:=n^{-1/2}\Sigma^{1 / 2} \hat{\Sigma}^{-1} {\mathbf{X}^T}\). We calculate the excess risk conditional on \(\mathbf{X}\). Note that \(\operatorname{tr}(\cdot)\) is linear and invariant under cyclic permutations. We have
+\begin{align*}
+\mathbb{E}\left[R\left(\hat{m}^{LS}\right) \mid \mathbf{X}\right]-r\left(m^*\right) & =n^{-1} \mathbb{E}\left[\|A \mathbf{\varepsilon}\|_2^2 \mid \mathbf{X}\right] \\
+& =n^{-1} \mathbb{E}\left[\operatorname{tr}\left(A \mathbf{\varepsilon \varepsilon}^T A^T\right) \mid \mathbf{X}\right]=n^{-1} \operatorname{tr}(A \underbrace{\mathbb{E}\left[\mathbf{\varepsilon \varepsilon}^T\right]}_{=\sigma^2 I_{p \times p}} A^T)=\frac{\sigma^2}{n}\|A\|_F^2 \\
+& =\frac{\sigma^2}{n} \cdot \operatorname{tr}\left(\Sigma^{1 / 2} \hat{\Sigma}^{-1} \hat{\Sigma} \hat{\Sigma}^{-1} \Sigma^{1 / 2}\right) \\
+& =\frac{\sigma^2}{n} \cdot \operatorname{tr}\left(\Sigma \hat{\Sigma}^{-1}\right) .
+\end{align*}
+as desired. \(\blacksquare\)
+
+From the above it follos that if \(\hat{\Sigma}\approx \Sigma\) then
+
+\[
+\mathbb{E}[R(\hat{m}_n^{LS})\ \vert\ \mathbf{X}]-r(m^*)\approx\frac{\sigma^2p}{n}.
+\]
+
+This approximation does not take into account the variation of \(X\). Due to the inverse, it is not easily possible to derive an upper bound for the expectation of \(\hat{\Sigma}^{-1}\). Therefore, we only obtain a result for the excess Bayes risk which holds with high probability and under additional assumptions (which could be relaxed but would lead to much more complicated proofs).
+
+\textbf{Theorem. (PAC Least squares estimator)}\index{PAC Least squares estimator} \emph{We do not assume a linear model. Let \(m(x)=E[Y\ \vert\ X=x]\) and assume \(m^*(x)=x\Sigma^{-1}E[YX]\) is the best linear approximation. Assume that \(X\) has bounded support and sub-Gaussian noise, i.e., there exists a \(\sigma\) such that for all \(t\):}
+
+\[
+E[e^{tx}\ \vert\ X=x]\le e^{t^2\sigma^2/2},
+\]
+
+\emph{then for \(n\) big enough, and \(t>\max\{0,2.6-\log p\}\)}
+
+\[
+P\left(r(\hat{m}^{LS})-r(m^*)\ge \frac{2 A}{n}(1+\sqrt{8t})^2+\frac{\sigma^2(p+2\sqrt{pt}+2t)}{n} + o(1/n)\right)\le 3e^{-t}
+\]
+
+\emph{where \(A=\mathbb{E}\left[\Vert\Sigma^{1/2}X(m(X)-\beta^\top X) \Vert^2\right]\) is an approximation error.}
+
+Up until now we have assumed that \(\mathbf{X}\) has full rank. This is not very realistic for very large \(p\) (\(p> > n\)). Even if \(\mathbf{X}^\top\mathbf{X}\) is invertible, the variance of the estimation error might be too large. This leads us to penalized models that reduce variance by adding some bias. Other alternatives (not discussed here) are dimension reduction, say via PCA, or feature selection, say forward stepwise regression.
+
+\hypertarget{ridge-regression}{%
+\subsection{Ridge Regression}\label{ridge-regression}}
+
+\textbf{Definition. (Ridge regression)}\index{Ridge regression} \emph{Let \(\lambda \geq 0\) and}
+
+\[
+J_\lambda(\beta)=\lambda\|\beta\|_2^2=\lambda \sum_{j=1}^p \beta_j^2.
+\]
+
+\emph{The Ridge estimator is defined as }
+\begin{align*}
+\hat{\beta}_\lambda^{\text {ridge }} & =\underset{\beta \in \mathbb{R}^p}{\arg \min }\left\{\hat{R}_n(\beta)+J_\lambda(\beta)\right\} \\
+& =\underset{\beta \in \mathbb{R}^p}{\arg \min }\left\{\|\mathbf{Y}-\mathbf{X} \beta\|_2^2+\lambda\|\beta\|_2^2\right\} .
+\end{align*}
+\emph{The corresponding algorithm is}
+
+\[
+\hat{m}_{n, \lambda}^{\text {ridge }}(x)=\sum_{j=1}^p \hat{\beta}^\text{ridge}_{\lambda, j} x_j.
+\]
+
+\textbf{Lemma. (Ridge regression solution)} \emph{Let \(\lambda>0\). Then }
+
+\[
+\hat{\beta}^\text{ridge}_\lambda=\left(\mathbf{X}^T \mathbf{X}+\lambda n I_{p \times p}\right)^{-1} \mathbf{X}^T \mathbf{Y}
+\]
+
+In ridge regression, the matrix \(\mathbf{X}^T \mathbf{X}\) is `made invertible' by adding a positive multiple of the identity matrix. Therefore, the ridge estimator also can be used in the case \(p>n\). The name `ridge' stems from the fact that the optimization problem is equivalent to
+
+\[
+\min _{ \beta \in \mathbb{R}^p} \hat{R}_n(X\beta) \quad \text { s.t. } \quad\|\beta\|_2 \leq t
+\]
+
+for some suitable \(t>0\).
+
+\textbf{Theorem. (Excess risk for ridge regression estimator)} \emph{Under the linear model, }
+
+\[
+\mathbb E[ R\left(\hat{m}^{n,\text{ridge}}_\lambda \right)|X]-r\left(m^*\right)=\frac{\sigma^2}{n} \cdot \operatorname{tr}\left(\Sigma\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \hat{\Sigma}\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1}\right)+\lambda^2\left\|\Sigma^{1 / 2}\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \beta^*\right\|_2^2.
+\]
+
+\emph{Let \(\Sigma=U D U^T\) be the spectral decomposition of \(\Sigma\) with orthogonal matrix \(U\) and diagonal matrix \(D=\operatorname{diag}\left(s_1, \ldots, s_p\right.\) ) (entries are the eigenvalues of \(\Sigma\) ). By assuming \(\hat \Sigma= \Sigma\), the excess risk simplifies to }
+
+\[
+\frac{\sigma^2}{n} \sum_{j=1}^p \frac{s_j^2}{\left(s_j+\lambda\right)^2}+\lambda^2 \cdot \sum_{j=1}^p \frac{s_j\left(U^T \beta^*\right)_j^2}{\left(s_j+\lambda\right)^2}.
+\]
+
+\textbf{Proof.}
+
+\begin{align*}
+\hat{\beta}_\lambda-\beta^* & =-\lambda n\left(\mathbf{X}^T \mathbf{X}+\lambda n I_{p \times p}\right)^{-1} \beta^*+\left(\mathbf{X}^T \mathbf{X}+\lambda n I_{p\times p}\right)^{-1} \mathbf{X}^T \mathbf{\varepsilon} \\
+& =-\lambda\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \beta^*+\frac{1}{n}\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \mathbf{X}^T \mathbf{\varepsilon}
+\end{align*}.
+thus
+
+\[
+R\left(\hat{\beta}_\lambda\right)-R\left(\beta^*\right)=\left\|B-\frac{1}{\sqrt{n}} A \mathbf{\varepsilon}\right\|_2^2=\|B\|_2^2-\frac{2}{\sqrt{n}}\langle B, A\varepsilon \rangle+\frac{1}{n}\|A \mathbb{\mathbf { \varepsilon }}\|_2^2
+\]
+
+where \(A=\Sigma^{1 / 2}\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \frac{\mathbf{X}^T}{\sqrt{n}}\) and \(B:=\lambda \Sigma^{1 / 2}\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \beta^*\). Since \(\mathbb{E} \mathbf{\varepsilon}=0\), we have
+\begin{align*}
+\mathbb{E}\left[R\left(\hat{\beta}_\lambda\right) \mid \mathbf{X}\right]-R\left(\beta^*\right) & =\frac{\sigma^2}{n}\|A\|_F^2+\|B\|_2^2 \\
+& =\frac{\sigma^2}{n} \cdot \operatorname{tr}\left(\Sigma\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \hat{\Sigma}\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1}\right)\\
+&+\lambda^2\left\|\Sigma^{1 / 2}\left(\hat{\Sigma}+\lambda I_{p \times p}\right)^{-1} \beta^*\right\|_2^2
+\end{align*}
+Furthermore, assuming \(\hat \Sigma= \Sigma\) the above expression simplifies to
+\begin{align*}
+&\frac{\sigma^2}{n} \cdot \operatorname{tr}\left(\Sigma\left(\Sigma+\lambda I_{p \times p}\right)^{-1} \Sigma\left(\Sigma+\lambda I_{p \times p}\right)^{-1}\right)+\lambda^2\left\|\Sigma^{1 / 2}\left(\Sigma+\lambda I_{p \times p}\right)^{-1} \beta^*\right\|_2^2 \\
+=&\frac{\sigma^2}{n} \cdot \operatorname{tr}\left(D\left(D+\lambda I_{p \times p}\right)^{-1} D\left(D+\lambda I_{p \times p}\right)^{-1}\right)+\lambda^2\left\|D^{1 / 2}\left(D+\lambda I_{p \times p}\right)^{-1} U^T \beta^*\right\|_2^2 \\
+=&\frac{\sigma^2}{n} \sum_{j=1}^p \frac{s_j^2}{\left(s_j+\lambda\right)^2}+\lambda^2 \cdot \sum_{j=1}^p \frac{s_j\left(U^T \beta^*\right)_j^2}{\left(s_j+\lambda\right)^2}
+\end{align*}
+
+and the result follows. \(\blacksquare\)
+
+If all eigenvalues are equal, that is, \(s_j=s\) and if additionally \(\left(U^T \beta^*\right)_j=b(j=1, \ldots, p)\), then the expression of the theorem simplifies to
+
+\[
+\frac{\sigma^2 p}{n} \cdot \frac{s^2}{(s+\lambda)^2}+\lambda^2 \frac{s b^2 p}{(s+\lambda)^2} \underset{\lambda=\frac{\sigma^2/n}{b^2}}{\stackrel{\min }{\rightarrow}} \frac{\sigma^2 p}{n} \cdot \frac{b^2 s}{\frac{\sigma^2}{n}+b^2 s} \leq \frac{\sigma^2 p}{n} .
+\]
+
+We see that for a suitable choice of the penalization parameter \(\lambda\), the excess Bayes risk of the ridge estimator can be smaller than the corresponding upper bound of the LS estimator.
+
+\hypertarget{lasso-regression}{%
+\subsection{Lasso Regression}\label{lasso-regression}}
+
+If we believe that some covariates are pure noise, i.e., unrelated to \(Y\), the most obvious choice to penalize \(\beta\) would be of the form \(\|\beta\|_0=\#\{j=\) \(\left.{1, \ldots, p: \beta_j} \neq 0\right\}\). Then, one would simply penalize the number of non-zero entries of \(\beta\). However, this leads to an NP-hard optimization problems whose solutions are not accessible in practice. One therefore uses a different norm which has similar properties but leads to a convex optimization problem.
+
+\textbf{Definition. (Lasso - Least absolute shrinkage and selection operator regression)}\index{Lasso regression} \emph{Let \(\lambda \geq 0\) and }
+
+\[
+J_\lambda(\beta)=\lambda \cdot\|\beta\|_1=\lambda \sum_{j=1}^p\left|\beta_j\right| .
+\]
+
+\emph{The LASSO estimator is given by }
+\begin{align*}
+\hat{\beta}_\lambda^{\text {lasso }} & \in \underset{\beta \in \mathbb{R}^p}{\arg \min }\left\{\hat{R}_n(X\beta)+J_\lambda(X\beta)\right\} \\
+& =\underset{\beta \in \mathbb{R}^p}{\arg \min }\left\{\frac{1}{n}\|\mathbf{Y}-\mathbf{X} \beta\|_2^2+\lambda \cdot\|\beta\|_1\right\}
+\end{align*}
+\emph{The corresponding algorithm reads }
+
+\[
+\hat{m}_{n, \lambda}^{l a s s o}(x)=\sum_{j=1}^p \hat{\beta}^{\text{lasso}}_{\lambda, j} x_j.
+\]
+
+There exists no easy closed-form solution for \(\hat \beta^{\text{lasso}}_{\lambda}\) besides some special cases.
+
+For \(\beta \in \mathbb{R}^p\), define
+
+\[
+S(\beta):=\left\{j \in\{1, \ldots, p\}: \beta_j \neq 0\right\}.
+\]
+
+For \(S \subset\{1, \ldots, p\}\) and \(v \in \mathbb{R}^p\), put \(v_S:=\left(v_j \mathbb{1}_{\{j \in S\}}\right)_{j=1, \ldots, p}\)
+
+If \(p \ll n\), then \(\hat{\Sigma}\) would usually be invertible and the smallest eigenvalue (Rayleigh quotient) would satisfy
+
+\[
+\lambda_{\min }(\hat{\Sigma}):=\inf _{v \in \mathbb{R}^p} \frac{v^T \hat{\Sigma} v}{\|v\|_2^2}>0.
+\]
+
+Then \(\hat{\Sigma}\) would be one-to-one (injective) and the linear equation system \(\hat{\Sigma} \beta=\frac{1}{n} \mathbf{X}^T \mathbf{Y}\) would lead to the (unique) least squares estimator.
+
+For \(p \gg n\), one has \(\lambda_{\min }(\hat{\Sigma})=0\).
+
+When employing LASSO, we are usually only interested in estimators \(\hat{\beta}\) whith non-zero entries at the components \(S\left(\beta^*\right)\). This means that in principle we only need injectivity of \(\hat{\Sigma}\) on the set
+
+\[
+\tilde{C}=\left\{\beta \in \mathbb{R}^p: S(\beta)=S\left(\beta^*\right)\right\}=\left\{\beta \in \mathbb{R}^p:\left\|\beta_{S\left(\beta^*\right)^ c}\right\|_1=0\right\},
+\]
+
+or equivalently, \(\inf _{v \in \tilde{C}} \frac{v^T \hat{\Sigma} v}{\|v\|_2^2}=\inf _{v \in \tilde{C}} \frac{v^T \hat{\Sigma} v}{\left\|v_{S\left(\beta^*\right)}\right\|_2^2}>0 .\)
+
+\textbf{Definition. (Restricted eigenvalue property (REP))}\index{Restricted eigenvalue property (REP)} \emph{We say that the restricted eigenvalue property (REP) is satisfied with \(\alpha>0\) if for}
+
+\[
+C:=\left\{\beta \in \mathbb{R}^p:\left\|\beta_{S\left(\beta^*\right)^c}\right\|_1 \leq \alpha \left\|\beta_{S\left(\beta^*\right)}\right\|_1\right\}
+\]
+
+\emph{it holds that}
+
+\[
+\Lambda_{\min }(\Sigma):=\inf _{v \in C} \frac{v^T \Sigma v}{\left\|v_{S\left(\beta^*\right)}\right\|_2^2}>0,
+\]
+
+\textbf{Theorem.} \emph{Let \(\varepsilon \sim N\left(0, \sigma^2\right), X \sim N(0, \Sigma)\) and \(\Sigma_{j j}=1(j=1, \ldots, p)\). Define \(s:=\# S\left(\beta^*\right)\). Then there exist universal constants \(c_1, c_2>0\) such that the condition}
+
+\[
+n \geq c_1 \frac{\|\Sigma\|_2}{\Lambda_{\min }(\Sigma)^2} s \log (e p / s)
+\]
+
+\emph{implies: For each \(t \geq 0\) and }
+
+\[
+\lambda \geq \frac{6 \sqrt{2} \sigma}{\sqrt{n}} \sqrt{\log (p)+t},
+\]
+
+\emph{it holds that}
+
+\[
+\mathbb{P}\left(R\left(\hat{m}_{n,\lambda}\right)-r\left(\beta^*\right)>16 \lambda^2 \frac{s}{\Lambda_{\min }(\Sigma)}\right) \leq e^{-t}+2 p e^{-c_2 n} .
+\]
+
+The upper bound for the convergence rate of the excess risk of the LASSO estimator is minimized for \(\lambda=6 \sqrt{2} \cdot \frac{\sigma}{\sqrt{n}} \sqrt{\log (p)}\). With that choice,
+
+\[
+16 \lambda^2 \frac{s}{\Lambda_{\min }(\Sigma)}=\frac{\text {c }}{\Lambda_{\min }(\Sigma)} \cdot \frac{\sigma^2 s}{n} \cdot \log (p)
+\]
+
+Interpretation: \(\hat{\beta}_\lambda\) behaves like the LS estimator in a model with \(s\) instead of \(p\) dimensions.
+
+The LASSO estimator \(\hat{\beta}_\lambda\) has to `pay' with a factor \(\log (p)\) for the missing insight which components are non-zero. This is a rather small price to pay even if \(p\) is large.
+
+One can prove similar theoretical statements without the conditions \(\varepsilon \sim N\left(0, \sigma^2\right)\) and \(X \sim N(0, \Sigma)\) and still can preserve the small \(\log (p)\) term.
+
+Regarding the REP: The smallest eigenvalue \(\lambda_{\min }(\Sigma)\) measures how strongly the components of \(X\) are correlated. Note that a strong correlation of \(X\) is a problem for estimation of \(\beta^*\), but not for the excess risk itself: In the extreme case \(X_1=X_2\), it is clear that \(\hat{\beta}\) cannot distinguish the values of \(\beta_1^*\) and \(\beta_2^*\), but it can still provide good predictions through \(X \hat{\beta}\). Unfortunately, the proof technique underlying the theorem transfers the estimation quality of \(\beta^*\) to an upper bound of the excess risk, therefore this fact is not adequately represented in the result.
+
+The assumption \(\Sigma_{j j}=1\) is only to provide an easier result. In practice, this normalization can be obtained by standardizing \(X_1, \ldots, X_n\) before computing the LASSO estimator (that is, center \(X_i\) and divide by the empirical standard deviation).
+
+\textbf{Theorem.} \emph{We do not assume that the linear model holds. Assume that \(X\) and \(Y\) have bounded support (bounded by \(B>0\)). Let }
+
+\[
+\beta_*=\underset{\|\beta\|_1 \leq \eta}{\operatorname{argmin}} r(X\beta)
+\]
+
+\emph{Then for any \(\xi>0\),}
+
+\[
+\mathbb P\left (r(\widehat{\beta})- r\left(\beta_*\right)\geq\sqrt{\frac{2(\eta+1)^4 B^2}{n} \log \left(\frac{2p^2}{\xi}\right)}\right) \leq \xi  .
+\]
+
+\textbf{Proof.}
+
+Set \(Z=(Y, X)\) and \(Z_i=\left(Y_i, X_i\right)\), \(\gamma = \gamma(\beta)=(-1, \beta)\). Then
+
+\[
+r(X\beta)=\mathbb{E}\left(Y-\beta^T X\right)^2=\gamma^T \Lambda \gamma
+\]
+
+where \(\Lambda=\mathbb{E}\left[Z Z^T\right]\). Note that \(\|\gamma\|_1=\|\beta\|_1+1\). Let \(\mathcal{B}=\left\{\beta:\|\beta\|_1 \leq \gamma\right\}\).
+
+\[
+\hat{R}_n( X\beta)=\frac{1}{n} \sum_{i=1}^n\left(Y_i-X_i^T \beta\right)^2=\gamma^T \widehat{\Lambda} \gamma
+\]
+
+where \(\widehat{\Lambda}=\frac{1}{n} \sum_{i=1}^n Z_i Z_i^T\). For any \(\beta \in \mathcal{B}\)
+\begin{align*}
+|\hat{R}_n(\mathbf X\beta)-r(X\beta)| & =\left|\gamma^T(\widehat{\Lambda}-\Lambda) \gamma\right| \\
+& \leq \sum_{j, k}|\gamma_j||\gamma_k||\widehat{\Lambda}_{j k}-\Lambda_{jk}| \\
+& \leq(\eta+1)^2 \max_{jk} |\widehat{\Lambda}_{j k}-\Lambda_{jk}|
+\end{align*}
+Note that \(|\Lambda_{jk}| \leq B^2\). By Hoeffding's inequality,
+
+\[
+\mathbb{P}\left( |\widehat{\Lambda}_{j k}-\Lambda_{jk}|\geq \epsilon\right) \leq 2 e^{-2n \epsilon^2 / B^2}
+\]
+
+and so, by the union bound,
+
+\[
+\mathbb{P}\left(\max _{j, k}|\widehat{\Lambda}_{j k}-\Lambda_{j k}| \geq \epsilon\right) \leq 2 p^2 e^{-2n \epsilon^2 / B^2}=\xi,
+\]
+
+if we choose \(\epsilon=\sqrt{\frac{B^2} {2 n} \log \left(\frac{{2} p^2}{{ \xi}}\right)}\).
+Hence, with probability \(1-\xi\) (see slide 14, lecture 1),
+
+\[
+r({X \hat\beta}) - r\left(X\beta^*\right)\leq 2(\eta+1)^2 \varepsilon. 
+\]
+
+as desired. \(\blacksquare\)
+
+\textbf{Definition.} \emph{If \(P(S(\widehat{\beta})=S(\beta)) \rightarrow 1\) we call \(\hat \beta\) \textbf{sparsistent}\index{sparsistent}.}
+
+\emph{We call \(\hat{\beta}\) weakly \textbf{sparsistent} if, for every \(\beta\) as \(n \rightarrow \infty\) }
+
+\[
+P_\beta\left(I\left(\widehat{\beta}_j=1\right) \leq I\left(\beta_j=1\right) \text { for all } j\right) \rightarrow 1
+\]
+
+Suppose that \(p\) is fixed. Then the least squares estimator \(\widehat{\beta}_n\) is minimax and satisfies
+
+\[
+\sup _\beta E_\beta\left(n\left\|\widehat{\beta}_n-\beta\right\|^2\right)=O(1) .
+\]
+
+But sparsistent estimators have larger risk:
+
+\textbf{Theorem.} \emph{We don't assume the linear model. Suppose that the following condiitons hold:}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{\(p\) is fixed.}
+\item
+  \emph{The covariariates are nonstochastic and \(n^{-1} \mathbf{X}^T \mathbf{X} \rightarrow \Sigma\) for some positive definite matrix \(\Sigma\).}
+\item
+  \emph{The errors \(\epsilon_i\) are independent with mean 0, finite variance \(\sigma^2\) and have a density \(f\) satisfying }
+  \[
+    0<\int\left(\frac{f^{\prime}(x)}{f(x)}\right)^2 f(x) d x<\infty
+    \]
+\end{itemize}
+
+\emph{If \(\widehat{\beta}\) is weakly sparsistent, then}
+
+\[
+\sup _\beta \mathbb E_\beta\left(n\left\|\widehat{\beta}_n-\beta\right\|^2\right) \rightarrow \infty .
+\]
+
+\emph{More generally, if \(\ell\) is any loss function \(\ell: \mathbb R \mapsto \mathbb R_{\geq 0}\).then }
+
+\[
+\sup _\beta  \mathbb E_\beta\left(\ell\left(n^{1 / 2}\left(\widehat{\beta}_n-\beta\right)\right)\right) \rightarrow \sup _s \ell(s) .
+\]
+
+\textbf{Proof.}
+
+Choose any \(s \in \mathbb{R}^d\) and let \(\beta_n=-s / \sqrt{n}\). Then,
+\begin{align*}
+\sup _\beta \mathbb E_\beta\left(\ell\left(n^{1 / 2}(\widehat{\beta}-\beta)\right)\right. & \geq \mathbb E_{\beta_n}\left(\ell\left(n^{1 / 2}(\widehat{\beta}-\beta)\right) \geq \mathbb E_{\beta_n}\left(\ell\left(n^{1 / 2}(\widehat{\beta}-\beta)\right) I(\widehat{\beta}=0)\right)\right. \\
+& =\ell\left(-\sqrt{n} \beta_n\right) \mathbb P_{\beta_n}(\widehat{\beta}=0)=\ell(s) P_{\beta_n}(\widehat{\beta}=0) .
+\end{align*}
+Now, \(\mathbb P_0(\widehat{\beta}=0) \rightarrow 1\) by assumption. It can be shown (via contiguity) that we also have \(\mathbb P_{\beta_n}(\widehat{\beta}=0) \rightarrow 1 .\) Hence, with probability tending to 1,
+
+\[
+\sup _\beta E_\beta\left(\ell\left(n^{1 / 2}(\widehat{\beta}-\beta)\right) \geq \ell(s) .\right.
+\]
+
+Since \(s\) was arbitrary the result follows. \(\blacksquare\)
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+Lasso and Ridge regression aim for different things. Ridge regression reduces variance of the estimator by restricting the function space. Heuristically, the smaller \(||\beta^\ast||_2\) the more helpful is ridge regression. Lasso is useful in sparse setting, i.e, if one wishes to eliminate components/features.
+
+\textbf{Example.} Assume that \(\rm{corr}(X_{1},X_2)=1\) and \(Y=0.5X_1+0.5X_2\). While Lasso will probably estimate \(\beta_1=1, \beta_2=0\), Ridge will probably estimate correctly \(\beta_1=0.5, \beta_2=0.5\).
+
+\textbf{Definition. (Elastic net)}\index{Elastic net} \emph{For \(\lambda>0, \alpha \in (0,1)\), and \(J^{elastic.net}(\beta)= \sum_{j=1}^p \alpha |\beta_j| + (1-\alpha) \beta_j^2\), we call}
+\begin{align*}
+\hat{\beta}_\lambda^{\text {elastic.net }} & \in \underset{\beta \in \mathbb{R}^d}{\arg \min }\left\{\hat{R}_n(\beta)+J^{elastic.net}_\lambda(\beta)\right\} \\
+\end{align*}
+\emph{\textbf{elastic net} estimator.}
+
+\hypertarget{nonparametric-regression}{%
+\section{Nonparametric Regression}\label{nonparametric-regression}}
+
+Linear models are quite restrictive and one may ask how one can achieve more flexibility. In this chapter we will look at the nonparametric regression problem with squared loss \(L(y_1,y_2)=(y_1-y_2)^2\). We already know that the Bayes-rule is \(m^\ast(x)=\mathbb E[Y|X=x]\).
+
+\textbf{Definition. (k-nearest-neighbor)}\index{k-nearest-neighbor} \emph{The k-nearest-neighbor estimator is }
+
+\[
+\hat m^{knn}(x)= \frac 1 k \sum_{i \in \mathcal N_k(x)}Y_i,
+\]
+
+\emph{where \(\mathcal N_k(x)\) contains the indices of the \(k\) closest points of \(\{X_1, \dots X_n\}\) to \(x\).}
+
+\textbf{Definition. (Linear Smoother)}\index{Linear Smoother} \emph{An estimator is called linear smoother if it can be written as }
+
+\[
+\hat m(x)= \sum_i w_i(x)Y_i,
+\]
+
+\emph{where the weight function \(w_i\) can depend on \(\{X_1, \dots, X_n\}\).}
+
+\textbf{Example.} The k-nearest-neighbor estimator is a linear smoother:
+
+\[
+\hat m^{knn}(x)= \sum_i^n w_i(x_i) Y_i,
+\]
+
+with
+
+\[
+w_i(x)=\begin{cases}\frac 1 k & X_i \ \text{belongs to the}\  k \ \text{closest points to}\  x \\ 0 & else\end{cases}
+\]
+
+\textbf{Proposition. (MSE k-nearest-neighbor)} \emph{Assume that}
+
+\[
+E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \text{is L-Lipschitz continuous}\},
+\]
+
+\emph{and \(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\) Then }
+
+\[
+\mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]\leq (cL)^2 \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k.
+\]
+
+\emph{In particular, for \(k_n=O_p( n^{2/(2+p)})\), we get }
+
+\[
+\mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]=O_p(n^{-2/(2+p)}).
+\]
+
+\textbf{Proof.}
+
+Write \(\mathbf X=X_1,\dots, X_n\) and denote by \(Y_i^{(x)}\) the \(i\)th closest \(Y\) to \(x\) among \(Y_1,\dots Y_n\).
+\begin{align*}\mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]& =\mathbb E \Big [{\left(\mathbb{E}[\hat m^{knn}(x)|\mathbf  X]-m^\ast(x)\right)^2}\Big]+{\mathbb{E}\Big[(\hat m^{knn}(x)-\mathbb{E}[\hat m^{knn}(x)|\mathbf  X])^2\Big]}\\
+&=\mathbb E\left[ \Big \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left(m^\ast\left(X_i\right)-m^\ast(x)\right)\Big \}^2\right] \\ &\quad + \frac 1 {k^2} \mathbb E \left[ \sum_i^k \sum_j^k \{Y_i^{(x)}- \mathbb  E[Y_i^{(x)}| \mathbf X]\}\{Y_j^{(x)}- \mathbb  E[Y_j^{(x)}| \mathbf X]\} \right] \\
+& \leq \mathbb  E\left[ \left(\frac{L}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2\right)^2 \right]+\frac{\sigma^2}{k} \\
+&\leq^{(1)}  L^2 c \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k
+\end{align*}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  \(\mathbb E\left[ \left \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2 \right\}^2 \right]\leq c \left(\frac k n \right)^{2/p}\), see (Gyorfi et al.~2002, vol.~1, chap.~6.3). \(\blacksquare\)
+\end{enumerate}
+
+Note that this is slower than the ``parametric'' MSE of \(n^{-1}\). In particular the rate depends on \(p\). Even worse: It grows exponentially in \(p\).
+
+We have learned that the knn estimator can be written as
+
+\[
+\hat m^{knn}(x)= \frac 1 k w_i(x_i) Y_i,
+\]
+
+Note that \(w_i(x)\) is not smooth as a function of \(x\). This also makes the estimator not smooth. Given that we assume that \(m^\ast\) is smooth, this may not be desirable. An alternative are kernel smoothers.
+
+\textbf{Definition. (Kernel Smoother)}\index{Kernel Smoother} \emph{The kernel smoother a linear smoother with }
+
+\[
+\hat m^{ks}(x)=  \sum_i w_i(x_i) Y_i,
+\]
+
+\emph{where }
+
+\[
+w_i(x)=\frac{K\left(\frac{||x-X_i||}{h}\right)}{\sum_j K\left(\frac{||x-X_j||}{h}\right)}
+\]
+
+\emph{Often \(K=\prod_j k_j\), such that \(K\left(\frac{||x-X_i||}{h}\right)=\prod_j k(x-X_{ij})\). The function \(k: \mathbb R \mapsto \mathbb R\) is usually a symmetric density function.}
+
+\textbf{Proposition. (MSE Kernel Smoother)} \emph{Assume that \(E[Y|X=x]=m^\ast(x)\in \mathcal G_L\) with}
+\[
+\mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \text{is L-Lipschitz continuous}\},
+\]
+
+\emph{and \(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\) Then }
+
+\[
+\mathbb E[(\hat m^{ks}(x)-m^\ast(x))^2]= O_p\left( \frac{1}{nh^p} + h^2 \right)
+\]
+
+\emph{In particular, for \(h_n=O_p(n^{-1/(2+p)})\), we get }
+
+\[
+\mathbb E[(\hat m^{ks}(x)-m^\ast(x))^2]=O_p(n^{-2/(2+p)}).
+\]
+
+\hypertarget{curse-of-dimensionality}{%
+\subsection{Curse of dimensionality}\label{curse-of-dimensionality}}
+
+We have seen that under a Lipschitz condition, both kernel smoother and knn have an asymptotic mean squared error of order \(n^{-2/(2+p)}\). One can show that under the assumption that \(m^\ast\) is twice continuously differentiable, the rate for both methods can be improved to
+
+\[
+n^{-4/(4+p)}.
+\]
+
+But this rate is still exponentially decreasing in \(p\). Furthermore, it has been shown that no method can do better under the given assumptions.
+
+A new observation \(x_0\) will have very few or no observations in its neighborhood. This leads to high variance and high bias when increasing the size of the neighborhood.
+
+Under the model of the previous slide, the setting \(n=50,p=1\) has the same expected amount of observations in a neighborhood as the setting \(n=7.5\times10^{110}, p=100\).
+
+There are two ways to tackle the curse of dimensionality.
+
+\textbf{Sparsity:} Assume that the intrinsic dimension is lower. E.g. Not all variables are relevant. Or feature engineer a few highly predictive variables.
+
+\textbf{Structure:} Interactions are limited and structure can be exploited
+e.g.~an additive structure \(m(x)=m_1(x_1)+m_2(x_2).\). Remember that structure is essential for interpretability.
+
+\hypertarget{splines}{%
+\subsection{Splines}\label{splines}}
+
+We want to establish a framework to estimate additive regression functions. To this end, assume \(p=1\) until further notice.
+
+\textbf{Definition. (Splines)}\index{Splines} \emph{A \(k\)th-order spline with \(l\) knotpoints \(x_1 <\dots<x_l\)}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{is a polynomial of degree \(k\) on each interval \((-\infty,x_1],[x_1,x_2]\dots,[x_l,\infty)\)}
+\item
+  \emph{has continuous derivatives of orders \(0,...,k-1\) on the knotpoints \(x_1 <\dots<x_l\)}
+\end{itemize}
+
+\textbf{Example.} A \(k\)th-order spline \(m\) with \(l\) knotpoints can an be uniquely written as
+
+\[
+m(x)=\sum_{j=1}^{k+1+l}\theta_jg_j(x)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  truncated power basis
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For \(j=1,\dots, k+1\): \(g_{j}=x^{j-1}\)
+  \item
+    For \(j=1,\dots,l:\) \(g_{k+1+j}=(x-x_j)^k_+\)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \((x)_+:= \max(x,0)\)
+    \end{itemize}
+  \end{itemize}
+\item
+  B-splines
+
+  \begin{itemize}
+  \tightlist
+  \item
+    more complicated, but computationally more robust and faster to compute.
+  \end{itemize}
+\end{itemize}
+
+Splines (used for regression, see next slide) have high variance at the boundaries. Solution: Let the piecewise polynomial function have a lower degree at \((-\infty,x_1],[x_l,\infty)\).
+
+\textbf{Definition. (Natural Splines)}\index{Natural Splines} \emph{A \(k\)th-order natural spline (\(k=\) odd number) with knotpoints \(x_1 <\dots<x_l\)}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{is a polynomial of degree \(k\) on the intervals \([x_1,x_2]\dots,[x_{l-1},x_l)\)}
+\item
+  \emph{is a polynomial of degree \((k-1)/2\) on \((-\infty,x_1],[x_l,\infty)\)}
+\item
+  \emph{has continuous derivatives of orders \(0,...,k-1\) on the knotpoints \(x_1 <\dots<x_l\)}
+\end{itemize}
+
+Note that natural splines have dimension \(l\) which is in particular independent of the order \(k\) (compare to dimension \(k+l\) for splines). There is also a truncated power basis and a B-splines basis for natural splines.
+
+\textbf{Linear regression with splines.} We still assume the one-dimensional case, \(p=1\). Instead of looking at observations \((X_i,Y_i)_{i=1,\dots,n}\) we can consider a natural splines basis and look at observations \((g_1(X_i), \dots, g_l(X_i), Y_i)_{i=1,\dots,n}.\) By doing so we are able to approximate any natural spline in \(x\) instead of just linear functions in \(x\), while still being in a linear regression framework, i.e.,
+
+\[
+\hat \beta = {\arg \min }_\beta \sum_i (Y_i - { G_i^T}\beta )^2= (\mathbf G^T\mathbf  G)^{-1}\mathbf  G^T\mathbf Y
+\]
+
+where \(G_i^T=(g_1(X_i), \dots, g_l(X_i))\), the rows of \(\mathbf G\). Problem: How do we choose the number of knotpoints \(l\) and their position? First thought: Cross validation. But that would be quite expensive to run.
+
+Let's look at the following minimization problem:
+
+\[
+\hat m= \arg\min_{m} \sum_i (Y_i-m(X_i))^2+\lambda\int_a^b m''(x)^2\mathrm dx,
+\]
+
+where minimization runs over all twice times differentiable functions \(m\) and observations \(X_i\) are in \([a,b]\) for all \(i\).
+
+\textbf{Theorem (Smoothing splines)} \emph{If \(m\) is twice differentiable and the solution to }
+
+\[
+\arg\min_{m} \sum_i (Y_i-m(X_i))^2+\lambda\int_a^b m''(x)^2\mathrm dx,
+\]
+
+\emph{then \(m\) is a natural spline of order 3 (natural cubic spline).}
+
+\textbf{Proof.}
+
+Given a minimizer \(\tilde m\), we construct the unique natural cubic spline \(m\) on \([a,b]\) with knotpoints \(X_1,\dots, X_n\) and \(m(X_i)=\tilde m(X_i)\). We will show that \(\tilde m=m\). Define \(h=\tilde m-m\). Note that \(h(X_j)=0 (j=1,\dots,n)\), \(m'''(x)=0\) for \(x<X_1\) and \(x>X_n\) as well as \(m^{(4)}=0\). Hence by applying integration by parts twice we get
+\begin{align*}
+\int_a^b m''(x)h''(x)\mathrm dx
+&= -\int_{X_1}^{X_n}m'''(x)h'(x)\mathrm dx \\
+&= -\sum_{j=1}^{n-1}m'''(x)h(x)\Big|_{X_j}^{X_{j+1}} \\
+&=0
+\end{align*}
+This implies
+
+\[
+\int_a^b \tilde m''(x)^2\mathrm dx= \int_a^b \{m''(x)+h(x)\}^2\mathrm dx=\int_a^b m''(x)^2+h(x)^2\mathrm dx.
+\]
+
+meaning
+
+\[
+\int_a^b m''(x)^2\mathrm dx \leq \int_a^b \tilde m''(x)^2\mathrm dx.
+\]
+
+with equality only for \(h''=0\), i.e, \(h\) linear. Since \(h(X_i)=0 (i=1,\dots n)\), we have \(h=0\) and so \(\tilde m=m\). \(\blacksquare\)
+
+We can conclude the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Let \(\mathbf G\) be the matrix with with rows \(G_i=(g_1(X_i), \dots, g_l(X_i))\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\{g_j\}_{j=1,\dots,l}\) is a basis for natural cubic splines.
+  \end{itemize}
+\item
+  Define
+  \[
+    \hat \beta  = \arg\min_{\beta} \sum_i (Y_i- G_i^T\beta)^2+\lambda\int_0^1 \left\{{\sum_j \beta_jg_j''}(x)\right\}^2\mathrm dx.
+    \]
+  Then,
+  \[
+    \sum_j \hat \beta_j g_j=\arg\min_{m} \sum_i (Y_i-m(X_i))^2+\lambda\int_0^1 m''(x)^2\mathrm dx.
+    \]
+\end{itemize}
+
+Smoothing splines can be seen as a special case of generalized ridge regression:
+
+\begin{itemize}
+\tightlist
+\item
+  Write \(\mathbf W_{ij}=\int_0^1g_i''(x)g_j''(x)\mathrm dx,\) then
+  \begin{align*}
+    &\arg\min_{\beta} \sum_i (Y_i- G_i^T\beta)^2+\lambda\int_0^1 \left\{{\sum_j \beta_jg_j''}(x)\right\}^2\mathrm dx\\=
+    &\arg\min_{\beta} \sum_i (Y_i- G_i^T\beta)^2+\lambda \beta^T \mathbf W \beta.
+    \end{align*}
+  Hence,
+  \[
+    \hat \beta= (\mathbf G^T\mathbf G+\lambda \mathbf W)^{-1}\mathbf G^T\mathbf Y.
+    \]
+\end{itemize}
+
+It can be shown the smoothing splines are asymptotically equivalent to kernel smoothers with varying bandwidth and a specific choice of kernel, see Silverman (1984) or Wang, Du, and Shen (2013) for a more recent contribution. In general, smoothing splines are more practical since they can be efficiently calculated while kernel smoothers are much easier to analyze theoretically.
+
+We have seen that fully nonparametric methods suffer from the curse of dimensionality: the optimal rate of convergence for twice continuously differentiable functions is \(n^{-4/(4+p)}\). One solution is to restrict oneself to the class of additive functions
+
+\[
+\mathcal G=\{m| m(x)=m_1(x_1)+\cdots +m_p(x_p)\}
+\]
+
+Stone (1985) showed that the components \(m_k\), if twice continuously differentiable, can be estimated with one-dimensional rate of \(n^{-4/4+1}\). The components \(m_j\) are usually estimated via the so called backfitting algorithm (Hastie and Tibshirani 1990).
+
+Backffitting comprises the following two steps:
+
+\textbf{Definition. (Backfitting Algorithm)}\index{Backfitting Algorithm}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Intialize: \(\hat m_j^{[0]}=0, j=1,\dots,p\)}
+\item
+  \emph{Iterate for \(r=1,\dots\)}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \emph{Residuals: \(r_{ij}^{[r]}=Y_i-\sum_{k < j} \hat{m}_{k}^{[r]}(x_{ik})-\sum_{k > j} \hat{m}_{k}^{[r-1]}(x_{ik})\).}
+  \item
+    \emph{Smooth: \(\hat{m}_j^{[r]}=\operatorname{Smooth}\left(\left\{X_{ij},r_{ij}^{[r]}\}_{i=1,\dots,n}\right\}\right).\)}
+  \item
+    \emph{Center: \(\hat{m}_j^{[r]}=\hat{m}_j^{[r]}-\frac{1}{n} \sum_{i=1}^n \hat{m}_j^{[r]}\left(X_{i j}\right)\).}
+  \end{enumerate}
+\end{itemize}
+
+Note that Smooth is a one-dimensional regression problem. In practice Smooth is most often a smoothing spline.
+It has been shown backfitting via smoothing splines achieve optimal rate of \(n^{-4/4+1}\) for each component and \(pn^{-4/4+1}\) for the p-dimensional additive regression function.
+
+Problem: Additive methods are still not optimal in the case of sparsity (i.e.~some features being not relevant) and interactions between features.
 
 \hypertarget{quantative-risk-management}{%
 \chapter{Quantative Risk Management}\label{quantative-risk-management}}
@@ -3553,6 +4393,416 @@ Som udgangspunkt betragtes rummet \((\Omega,\mathcal{A})\) udstyret med en brol�
 
 Andet kan tilføjes f.eks. Bayes'.
 
+\hypertarget{probabilities-on-a-finite-or-countable-space}{%
+\section{Probabilities on a Finite or Countable Space}\label{probabilities-on-a-finite-or-countable-space}}
+
+Lad \(\Omega\) være et endelig eller tællelig mængde og lad \(\sigma\)-algebraen \(\mathcal{A}=2^\Omega\).
+
+\textbf{Theorem 4.1. (Protter)} \textbf{(Punktsandsynligheder)} \emph{Lad \(A,B\in\mathcal{A}\) være hændelser og \(P(B)>0\).}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{En sandsynlighed på en tællelig eller endelig mængde \(\Omega\) er givet ved sandsynlighederne for hvert atom \(p_\omega=P(\{\omega\})\), \(\omega\in\Omega\).}
+\item
+  \emph{Hvis en følge af reelle tal \((p_\omega)_{\omega\in\Omega}\) indiceret over elementerne i \(\Omega\) opfylder at \(p_\omega\ge0\) og \(\sum_{k\in\Omega}p_k=1\), så eksisterer et unikt sandsynlighedsmål \(P\) givet ved \(P(\{\omega\})=p_\omega\).}
+\end{enumerate}
+
+\textbf{Bemærkning.} Alle sandsynlighedsmål på endelige eller tællelige mængder \(\Omega\) kan således karakteriseres ved punktsandsynlighederne \(p_\omega\). Dvs. et sandsynligedsmål \(P : 2^\Omega \to [0,1]\) er givet ved summen af punktsandsynligheder
+
+\[
+P(A)=\sum_{k\in A}p_k,\ A\subseteq\Omega
+\]
+
+\textbf{Definition 4.1. (Protter)} \emph{En ssh. \(P\) på en endelig mængde \(\Omega\) er uniform hvis \(p_\omega\) afhænger af \(\omega\).}
+
+\textbf{Eksempler:}
+
+\emph{(Den uniforme fordeling.)} Det følger direkte af definition 4.1, at den uniforme fordeling er givet ved
+
+\[
+P(A)=\frac{\#A}{\#\Omega}
+\]
+
+\emph{(Binomialfordelingen)} Lad \(\Omega=\{0,1,2,...,n\}\) og \(\mathcal{A}=2^\Omega\). Givet et \(q\in[0,1]\) defineres binomialfordelingen ved
+\[
+p_k={n\choose k}q^k(1-q)^{n-k},\ k\in\Omega
+\]
+\emph{(Geometriske fordeling)} Lad \(\Omega=\mathbb{N}_0=\{0,1,2,...\}\) og \(\mathcal{A}=2^{\mathbb{N}_0}\). Givet et \(q\in[0,1]\) er den geometriske fordeling givet ved
+
+\[
+p_k=(1-q)^kq,\ k\in\Omega
+\]
+
+\emph{(Hypergeometrisk fordeling)} Lad \(N,M\in\mathbb{N}\) være givet.
+
+\emph{(Poisson fordelingen)} Lad \(\Omega=\mathbb{N}_0\) og \(\mathcal{A}=2^{\mathbb{N}_0}\). Givet et parameter \(\lambda>0\) er poissonfordelingen gived ved
+
+\[
+p_n=e^{-\lambda}\frac{\lambda^n}{n!},\ n\in\Omega
+\]
+
+Desuden er \(K(n,k)={n\choose k}\) givet ved
+
+\[
+{n\choose k}=\frac{n!}{k!(n-k)!}.
+\]
+
+\hypertarget{construction-of-a-probability-measure-on-mathbb-r}{%
+\section{\texorpdfstring{Construction of a Probability Measure on \(\mathbb R\)}{Construction of a Probability Measure on \textbackslash mathbb R}}\label{construction-of-a-probability-measure-on-mathbb-r}}
+
+\textbf{Sandsynlighedsmålet} kan indledelsesvis indføres på følgende vis: Lad \((\Omega, \mathcal{A},\mu)\) være et målrum og lad \(f : (\Omega,\mathcal{A}) \to [0,\infty]\) være \(\mathcal{A}/\mathcal{B}\)-målelig. Definer nu målet \(\nu : \mathcal{A} \to [0,\infty]\) ved
+
+\[
+V(A)=\int_A f d\mu=\int 1_A fd\mu=\int 1_A(x)f(x)d\mu(x)=\int1_A(x)f(x)\mu(dx),\ A\in\mathcal{A}
+\]
+
+I situationen hvor \(V(\Omega)=1\) er \(\nu\) et ssh. mål. Især er vi interesseret i målrummet \((\mathbb{R}^n,\mathcal{B}_n)\). Notationen \(\nu =f\cdot \mu\) bruges og betyder ``\(\nu\) har tæthed \(f\) mht. \(\mu\)''.
+
+\textbf{Eksempler.} \emph{(Lebesguemålet)} Lad \((\Omega,\mathcal{A},\mu)=(\mathbb{R},\mathcal{B},m)\) været et målrum, hvor \(m\) er lebesgue-målet. Lad \(f : \mathbb{R}\to (0,1/\sqrt{2\pi}]\) være givet ved
+
+\[
+f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2},\ x\in\mathbb{R},
+\]
+
+da er \(f\) målelig, da \(f\) er kontinuer for alle \(x\in\mathbb{R}\). Da er \(\nu : \mathcal{B} \to [0,1]\), også kaldet \emph{normalfordelingen}, et ssh. mål givet ved
+
+\[
+\nu(A)=\int_A f(x) dm(x),\hspace{20pt} \nu(\mathbb{R})=\int_{\mathbb{R}}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}dm(x)=1
+\]
+
+\emph{(Tællemålet)} Lad \((\mathbb{N}_0,2^{\mathbb{N}_0},\mu)\) været et målrum og lad \(\mu\) være tællemålet. Lad \(f : \mathbb{N}_0 \to [0,\infty]\) være en vilkårlig målelig funktion. Da er \(\nu\) givet ved
+
+\[
+\nu(A)=\int_A fd\mu=\sum_{x\in A}f(x)
+\]
+
+hvis \(\nu(\mathbb{N}_0)=\sum_{x\in\mathbb{N}_0}f(x)=1\) er \(\nu\) et ssh. mål på \((\mathbb{N}_0,2^{\mathbb{N}_0})\).
+
+\textbf{Definition 7.1. (Protter)} \textbf{(Fordelingsfunktionen/distribution function)} \emph{Lad \(P\) være et ssh. mål på \((\mathbb{R},\mathcal{B})\), da er fordelingsfunktionen \(F : \mathbb{R}\to [0,1]\) defineret ved.}
+
+\[
+F(x)=P((-\infty,x]).
+\]
+
+\textbf{Theorem 7.1. (Protter)} \textbf{(Entydighed)} \emph{Fordelingsfunktionen \(F\) karakteriserer \(P\) og er unik.}
+
+\textbf{Corollary 7.1. (Protter)} \emph{Lad \(F\) være en fordelingsfunktion for \(P\) på \(\mathbb{R}\). Definer da \(F(x-):=\lim_{u\uparrow x}F(u)\). For vilkårlige \(x,y\in\mathbb{R}\) gælder}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  \(P((x,y])=F(y)-F(x)\)
+\item
+  \(P([x,y])=F(y)-F(x-)\)
+\item
+  \(P(\{x\})=F(x)-F(x-)\)
+\end{enumerate}
+
+\textbf{Theorem 7.2. (Protter)} \textbf{(Egenskaber for fordelingsfunktionen)} \emph{\(F : \mathbb{R} \to [0,1]\) er en fordelingsfunktion for et unikt sandsynlighedsmål \(P\) på \((\mathbb{R},\mathcal{B})\), hvis}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  \emph{\(F\) er ikke-aftagende dvs. \(F(x)\le F(y)\), for \(x\le y\)}
+\item
+  \emph{\(F\) er højre kontinuer dvs. \(F(u)\downarrow F(x)\) for \(u\downarrow x\).}
+\item
+  \emph{\(F(x)\to 1\) når \(x\to \infty\), \(F(x)\to 0\) når \(x\to -\infty\).}
+\end{enumerate}
+
+\emph{Bemærkning.} Teorem 7.2 kan fungere som et værktøj til konstruktion af et sandsynligedsmål givet en fordelingsfunktion.
+
+\hypertarget{random-variables}{%
+\section{Random Variables}\label{random-variables}}
+
+Indledelsesvis genopfriskes målbare rum. For to rum \((E,\mathcal{E})\) og \((F,\mathcal{F})\), hvor \(\mathcal{E}\) og \(\mathcal{F}\) er \(\sigma\)-algebraer på de respektive rum. Da kaldes en en afbildning \(X : (E,\mathcal{E})\to(F,\mathcal{F})\) for en målelig afbildning, hvis og kun hvis for alle delmængder \(A\in\mathcal{F}\) er \(X^{-1}(A)\in\mathcal{E}\). Med andre ord for enhver billedmængde, kan vi måle urbilledet, hvorfra funktionsværdierne på billedmængden kunne være kommet fra.
+
+\textbf{Definition.} \textbf{(Stokastisk variabel)} \emph{En målelig afbildning udstyret med et sandsynlighed mål på domænet dvs. \(X : (\Omega,\mathcal{A},P) \to (F,\mathcal{F})\), kaldes en stokastisk variabel (stochastic/random variable).}
+
+\textbf{Bemærkning.} Oftest betragtes \(F=\mathbb{R}^n\) og \(\mathcal{F}=\mathcal{B}_n\) især når \(n=1\).
+
+\textbf{Corollary 8.1. (Protter)} \textbf{(Urbilleder)} \emph{Lad \(X\) være en stokastisk variabel er \(X^{-1}(A):=\{\omega\in\Omega \vert X(\omega)\in A\}:=\{X\in A\}\). Hertil gælde specielt for eksempelvis \(A=(-\infty,x]\) og \(A=(x,\infty)\) følgende urbilleder \(X^{-1}(A)=\{X\le x\}\) og \(X^{-1}(A)=\{X> x\}\).}
+
+\textbf{Definition.} \textbf{(Billedmål)} \emph{For en målbar funktion \(X : (\Omega,\mathcal{A},\mu) \to (F,\mathcal{F})\), hvor \(\mu\) er et mål på \(\mathcal{A}\) defineres \(\mu^X(A)=\mu(X^{-1}(A))\) som billedmålet af \(A\).}
+
+\textbf{Theorem 8.5. (Protter)} \textbf{(Billedmål for stokastiske variable)} \emph{Lad \(X : (\Omega,\mathcal{A},P) \to (F,\mathcal{F})\) være en stokastisk variabel, så gælder for alle \(A\in\mathcal{F}\) at \(P^X(A)=X(P)(A)=P(X^{-1}(A))=P(X\in A)\), hvor \(P^X\) kaldes fordelingen af \(X\) (distribution of \(X\)). \textbf{Specielt er \(P^X\) et sandsynlighedsmål}..}
+
+\textbf{Bemærkning.} Fordelingsfunktionen \(F_X: \mathbb{R}\to [0,1]\) for \(X\) er givet ved \(F_X(x)=P^X((-\infty,x])=P(X\in (-\infty,x])=P(X\le x)\).
+
+\textbf{Definition.} \textbf{(Næsten sikker)} \emph{For en stokasitsk variabel \(X:(\Omega,\mathcal{A},P) \to (F,\mathcal{F})\) og en delmængde \(A\in \mathcal{F}\) siges at}
+
+\[
+X\in A\hspace{10pt} P\text{-n.s}\hspace{10pt}\Leftrightarrow\hspace{10pt} X\in A\hspace{10pt} P\text{-a.s}\hspace{10pt}\Leftrightarrow\hspace{10pt} X\in A\hspace{10pt} P\text{-a.e}
+\]
+
+\emph{gælde hvis \(P(X\in A)=1\) dvs. ækvivalent \(P(X\in A^c)=P(X\in F\setminus A)=0\).}
+
+Ovenstående udtales n.s (næsten sikker), a.s (almost surely) og a.e (almost everywhere).
+
+\hypertarget{integration-with-respect-to-a-probability-measure}{%
+\section{Integration with Respect to a Probability Measure}\label{integration-with-respect-to-a-probability-measure}}
+
+\textbf{Definition 9.1.} \textbf{(Forventet værdi)} \emph{Lad \(X : (\Omega, \mathcal{A}, P) \to (F,\mathcal{F})\) være en stokastisk variabel. Da defineres forventningen af \(X\) som følgende integrale, når dette er veldefineret.}
+
+\[
+E(X)=E\{X\}=\int X dP=\int_\Omega X dP=\int_\Omega X(\omega)dP(\omega)=\int_\Omega X(\omega)P(d\omega).
+\]
+
+\textbf{Bemærkning.} Integralet ovenfor er veldefineret hvis 1) \(X\ge 0\) P-n.s dvs \(P(X\ge 0)=1\) eller, hvis 2) \emph{(definition 9.2)} \(X=X^+-X^-\) er \(E(X)=E(X^+)-E(X^-)\), hvis blot \(E(X^+),E(X^-)<+\infty\) (kun en nødvendig).
+
+\textbf{Eksempler.} Hvis \(\Omega\) er tællelig, er \(P\) en simpel funktion, givet ved singelton mængder. Derved bestemmes \(E(X)\) ved
+
+\[
+E(X)=\sum_{\omega\in\Omega} X(\omega)P(\{\omega\})
+\]
+
+\textbf{Theorem 9.1. (Protter)} \textbf{(Sætninger fra An2)} \emph{Husk \(\mathcal{L}^p\) defineres som mængden af \(\mathcal{A}/\mathcal{B}\) målelige funktioner \(f\), hvor \(\vert f\vert ^p\) er integrabel. Det vil sige i konteksten af forventet værdi arbejder vi med mængden}
+
+\[
+\mathcal{L}^p=\{X : (\Omega,\mathcal{A},P)\to(\mathbb{R},\mathcal{B})\ \vert\ E\vert X\vert^p< +\infty\}.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{\(\mathcal{L}^p\) er et lineært vektorrum dvs. for \(X\in \mathcal{L}^p\Rightarrow aX\in\mathcal{L}^p\), \(a\in\mathbb{R}\) og for \(X,Y\in\mathcal{L}^p\Rightarrow X+Y\in\mathcal{L}^p\). Desuden for \(0\le X\le Y\) og \(Y\in\mathcal{L}^1\), så er \(X\in\mathcal{L}^1\) og \(E(X)\le E(Y)\).}
+\item
+  \emph{For \(X\in\mathcal{L}^p\) er \(E(X)\le E\vert X\vert\).}
+\item
+  \emph{Hvis \(X=Y\) \(P-n.s\) og \(X\in\mathcal{L}^p\), så er \(Y\in\mathcal{L}^p\) og \(E(X)=E(Y)\) samt \(E\vert X-Y\vert^p=0\).}
+\item
+  \textbf{(Monotom konvergens teorem)} \emph{Hvis \(X_n\uparrow X\) og \(X_n\) gælder \(\lim_{n\to \infty} E(X_n)=E(X)\).}
+\item
+  \textbf{(Fatou's lemma)} \emph{Hvis \(X_n\ge Y\) \(P-n.s.\) (\(Y\in\mathcal{L}^p\)) eller \(X_n\ge 0\) \(P-n.s.\) for alle \(n\), så er \(E(\liminf_{n\to\infty}X_n)\le \liminf_{n\to \infty} E(X_n)\).}
+\item
+  \textbf{(Lebesgue's domineret konvergens teorem)} \emph{Hvis \(X_n\uparrow X\) \(P-n.s.\) og hvis \(\vert X_n\vert \le Y\in\mathcal{L}^1\) \(P-n.s.\), så er \(X_n,X\in\mathcal{L}^1\) og \(E(X_n)\to E(X)\).}
+\end{enumerate}
+
+\textbf{Theorem 9.2. (Protter)} \emph{Lad \(X_n : (\Omega,\mathcal{A},P)\to(F,\mathcal{F})\) være en følge af stokastiske variable.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{Hvis \(X_n\ge0\), så gælder \(E\left(\sum_{n=1}^\infty X_n\right)=\sum_{n=1}^\infty E(X_n)\) (begge enten uendelige eller endelige)}
+\item
+  \emph{Hvis \(\sum_{n=1}^\infty E\vert X_n\vert <+\infty\), så konvergerer \(\sum_{n=1}^\infty X_n\) \(P-n.s.\) og er integrabel. Desuden holder ovenstående lighed.}
+\end{enumerate}
+
+\textbf{Theorem 9.3. (Protter)} \textbf{(Cauchy-Schwarz ulighed)} \emph{Lad \(L^p=\{X : (\Omega,\mathcal{A},P)\to(\mathbb{R},\mathcal{B})\ \vert\ E(X^p)< +\infty\}\) dvs. mængden af \(p\)-potens integrable stokastiske variable.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{Hvis \(X,Y\in L^2\), så er \(XY\in L^1\) og følgende ulighed gælder}
+  \[
+    \vert E(XY)\vert \le \sqrt{E(X^2)E(Y^2)}.
+    \]
+\item
+  \emph{Der gælder \(L^2\subset L^1\) og hvis \(X\in L^2\), så \(E(X)^2\le E(X^2)\).}
+\item
+  \emph{Rummmet \(L^2\) er et lineært vektor rum.}
+\end{enumerate}
+
+\textbf{Theorem 9.4. (Protter)} \textbf{(Chebyshev's/Markov's/Bienaymé-Chebyshev's ulighed)} \emph{For en stokastisk variabel \(X\) gælder}
+
+\[
+P(\vert X\vert \ge a)\le \frac{E(X^2)}{a^2},\frac{E\vert X\vert}{a} \hspace{20pt} P\{\vert X-E\{X\}\vert\ge a\}\le \frac{\sigma^2 E\{X^2\}}{a^2}
+\]
+
+\textbf{Theorem 9.5. (Protter)} \textbf{(Forventnings reglen)} \emph{Lad \(X\in \mathbb{R}\) være en stokastisk variabel, så \(X : (\Omega, \mathcal{A}, P)\to (E,\mathcal{E})\) og med fordeling \(P^X\). Lad \(h : (E,\mathcal{E})\to(\mathbb{R},\mathcal{B})\) være en målelig funktion.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{Der gælder \(h(X)\in\mathcal{L}^1(\Omega, \mathcal{A}, P)\iff h\in\mathcal{L}^1(E, \mathcal{E}, P^X)\)}
+\item
+  \emph{Hvis (a) er opfyldt eller \(h\ge 0\), så er}
+  \[
+    E(H(X))=\int h(x)P^X(dx)=\int h(x)dP^X(x)
+    \]
+\end{enumerate}
+
+\hypertarget{independent-random-variables}{%
+\section{Independent Random Variables}\label{independent-random-variables}}
+
+\textbf{Definition 10.1. (Protter)} \textbf{(Uafhængige Stokastiske Variable)}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{Brolægninger \((\mathcal{A}_i)_{i\in I}\subseteq \mathcal{A}\) kaldes uafhængige hvis for alle endelige \(J\subseteq I\) og alle \(A_i\in\mathcal{A}_i\) er}
+  \[
+    P(\cap_{i\in J} A_i)=\prod_{i\in J}P(A_i)
+    \]
+  \emph{dvs. for alle brolægning er alle hændelser uafhængige.}
+\item
+  \emph{tokastiske Variable \((X_i)_{i\in I}\), hvor \(X_i : (\Omega, \mathcal{A})\to (E_i,\mathcal{E}_i)\), kaldes uafhængige, hvis brolægningerne i familien givet ved \(\sigma(X_i^{-1}(\mathcal{E}_i))\subseteq \mathcal{A}\) er uafhængige.}
+\end{enumerate}
+
+\textbf{Theorem 10.1. (Protter)} \textbf{(Ækvivalensudsagn)} \emph{For to stokastiske variable \(X : (\Omega, \mathcal{A})\to (E,\mathcal{E})\) og \(Y : (\Omega, \mathcal{A})\to (F,\mathcal{F})\) er følgende udsagn ækvivalente.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  \emph{\(X\) og \(Y\) er uafhængige.}
+\item
+  \emph{\(P(X\in A, Y\in B)=P(X\in A)P(Y\in B)\) for alle \(A\in \mathcal{E}\) og \(B\in\mathcal{F}\).}
+\item
+  \emph{P(X\in A, Y\in B)=P(X\in A)P(Y\in B)\$ for alle \(A\in \mathcal{C}\) og \(B\in\mathcal{D}\). Hvor \(\mathcal{C}\) og \(\mathcal{D}\) er fællesmængdestabile mængdesystemer (brolægning) der frembringer hhv. \(\mathcal{E}\) og \(\mathcal{F}\).}
+\item
+  \emph{\(f(X)\) og \(g(Y)\) er uafhængige for alle par \((f,g)\) målbare funktioner.}
+\item
+  \emph{\(E(f(X)g(Y))=E(f(X))E(g(Y))\) for alle par \((f,g)\) begrænsede og målbar eller positive og målbare funktioner.}
+\item
+  \emph{Hvis \(E\) og \(F\) er metriske rum med respektive Borel \(\sigma\)-algebraer \(\mathcal{E}\) og \(\mathcal{F}\). \(E(f(X)g(Y))=E(f(X))E(g(Y))\) for alle par \((f,g)\) begrænsede og kontinuere funktioner. }
+\end{enumerate}
+
+\textbf{Notation.} Ofte ønskes at betragte funktioner af flere variable, hvor domænerummet ønskes konstrueret fra to rum hvorpå \(x\) og \(y\) lever hhv. \((E,\mathcal{E},P)\) og \((F,\mathcal{F},Q)\). Vi kan da konstruere et målrum givet ved \((E\times F, \sigma(\mathcal{E}\times\mathcal{F}))\), hvor vi lader \(\mathcal{E}\otimes \mathcal{F}=\sigma(\mathcal{E}\times\mathcal{F})\). Tilsvarende kan vi konstruere produktmålet \(P\otimes Q(A)=P(A)Q(A)\) på \((E\times F, \mathcal{E}\otimes \mathcal{F},P\otimes Q)\).
+
+\textbf{Theorem 10.2. (Protter)} \emph{Lad \(f : (E \times F, \mathcal{E} \otimes \mathcal{F}) \to (\mathbb{R}, \mathcal{R})\) være målbar. For hvert \(x \in E\) og \(y \in F\), er de respektive ``sektionerne'' \(y \to f(x,y)\) og \(x \to f(x,y)\) henholdsvis \(\mathcal{F}\)- og \(\mathcal{E}\) målbare funktioner.}
+
+\textbf{Notation.} Det kan ønskes at betragte mål med faste \(x,y\) og hvordan disse opfører sig. Teoremet fortæller, at man kan vælge tilfældige \(x \in E\) og \(y \in F\) således, at man kan betragte henholdsvis \(\mathcal{F}\)- og \(\mathcal{E}\) målbare funktioner i én variable (enten \(x\) eller \(y\)) for sig selv.
+
+\textbf{Theorem 10.3. (Protter)} \textbf{(Tonelli-Fubini)} \emph{Lad \((E,\mathcal{E},P)\) og \((F,\mathcal{F},Q)\) være sandsynlighedsrum.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{Lad \(P\otimes Q(A\times B)=P(A)Q(B)\). Dette er et unikt ssh mål, som udvider til sandsynlighedsrummet \((E\times F,\mathcal{E}\otimes \mathcal{F},P\otimes Q)\).}
+\item
+  \emph{Lad \(f : (E\times F,\mathcal{E}\otimes \mathcal{F},P\otimes Q) \to (\mathbb{R}, \mathcal{R})\) være en målbar, positiv eller integrabel mht. \(P\otimes Q\). Da er \(x\mapsto \int f(x,y)Q(dy)\) en \(\mathcal{E}\)-målelig funktion og \(y\mapsto \int f(x,y)P(dy)\) en \(\mathcal{F}\)-målelig funktion. Specielt er}
+  \[
+    \int f d P\otimes Q=\int\left\{\int f(x,y) Q(dy)\right\}P(dx)=\int\left\{\int f(x,y) P(dx)\right\}Q(dy)
+    \]
+\end{enumerate}
+
+\hypertarget{probability-distributions-on-mathbb-r}{%
+\section{\texorpdfstring{Probability Distributions on \(\mathbb R\)}{Probability Distributions on \textbackslash mathbb R}}\label{probability-distributions-on-mathbb-r}}
+
+Dette kapitel undersøger egenskaberne ved sandsynlighedsmål \(P\) på \((\mathbb{R},\mathcal{B})\), hvor fordelingsfunktionen er karakteriseret ved \(F(x)=P((-\infty,x])\).
+
+\textbf{Definition 11.1. (Protter)} \emph{Lebesguemålet er mængdefunktion \(m: \mathcal{B} \to[0,\infty0]\), der opfylder:}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  \emph{For \(A_1,A_2,A_3,...\in\mathcal{B}\) parvist disjunkte mængder gælder \(m(\cup_{i=1}^\infty A_i)=\sum_{i=1}^\infty m(A_i)\),}
+\item
+  \emph{hvis \(a<b\) og \(a,b\in\mathbb{R}\), så \(m((a,b])=b-a\).}
+\end{enumerate}
+
+\textbf{Theorem 11.1. (Protter)} \emph{Lebesguemålet er unikt.}
+
+\textbf{Theorem 11.2. (Protter)} \emph{Lebesguemålet eksisterer.}
+
+\textbf{Definition 11.2. (Protter)} \emph{Tætheden af et sandsynlighedsmål \(P\) på \((\mathbb{R},\mathcal{B})\) er en positiv Borel målelig funktion \(f\) der opfylder for alle \(x\in\mathbb{R}\):}
+
+\[
+F(x)=P((-\infty,x])=\int_{-\infty}^x f(y)dy=\int f(y)1_{(-\infty,x]}(y)dm(y)
+\]
+
+\emph{I tilfældet \(P=P^X\) (husk thm 8.5. \(P^X(A)=P(X\in A)\)), dvs \(P\) er fordelingsmålet af en s.v.~\(X\), så siger vi at \(f\) er tætheden af \(X\).}
+
+\textbf{Theorem 11.3. (Protter)} \emph{Lad \(f\in \mathcal{M}_{\mathbb{R}}^+\). Da gælder (\(f\) karakteriseret fuldkomment tætheden for et sandsynlighedsmål \(P\) på \((\mathbb{R},\mathcal{B})\)) \(\Longleftrightarrow\) (\(\int f dm(x)=1\)). Desuden gælder hvis \(f'\) opfylder \(m(f\ne f')=0\) (\(f=f'\) \(m\)-\(n.o.\)), så er \(f'\) og en tæthed for samme sandsynlighedsmål. Omvendt bestemmer et sandsynlighedsmål også den tæthed, når denne eksisterer.}
+
+\textbf{Remark 11.1.} \(F\) er differentiabel \(m\)-\(n.o.\) uafhængig af \(f\) og med \(f=0\) ellers.
+
+\textbf{Corollary 11.1. (Protter)} \textbf{(Forventningsreglen)} \emph{Lad \(X\) være en \(\mathbb{R}\)-værdi stokastisk variabel med tæthed \(f\). Lad \(g\in\mathcal{M}_{\mathbb{R}}\). Så er \(g\) integrabel mht. \(P^X\), hvis og kun hvis \(fg\) er integrabel mht. \(m\). Hvis da er}
+
+\[
+E[g(X)]=\int g(x)P^X(dx)=\int g(x)f(x) dm(x)
+\]
+
+\textbf{Theorem 11.4. (Protter)} \emph{Lad \(X\) have tæthed \(f_X\) og lad \(g\in\mathcal{M}_{\mathbb{R}}\). Lad \(Y=g(X)\). Så er}
+
+\[
+F_Y(y)=P(Y\le y)=P(G(X)\le y)=\int_{A_y} f_X(u)dm(u),
+\]
+
+\emph{hvor \(A_y=\{u : g(u)\le y\}\).}
+
+\textbf{Corollary 11.2. (Protter)} \emph{Lad \(X\) have en kontinuer tæthed \(f_X\). Lad \(g: \mathbb{R}\to \mathbb{R}\) være \(C^1\) og strengt monotom. Lad \(h(y)=g^{-1}(y)\) være \(g\) inverse også \(C^1\). Så har \(Y=g(X)\) tæthed}
+
+\[
+f_Y(y)=f_X(h(y))|h'(y)|.
+\]
+
+\textbf{Corollary 11.3. (Protter)} \emph{Lad \(X\) have en kontinuer tæthed \(f_X\). Lad \(g: \mathbb{R}\to \mathbb{R}\) være stykkevis \(C^1\) og strengt monotom på intervallerne \(I_1,I_2,...,I_n\) med \(\cup_{i\in I}I_i=\mathbb{R}\) (\(g\) skal kun være \(C^1\) og strengt monotom på det indre af \(I_i\)). Lad \(h_i(y)=g^{-1}(y)\) for \(g: I_i\to \mathbb{R}\). Så har \(Y=g(X)\) tæthed}
+
+\[
+f_Y(y)=\sum_{i=1}^n f_X(h_i(y))|h_i'(y)| 1_{g(I_i)}(y).
+\]
+
+\hypertarget{probability-distributions-on-mathbb-rn}{%
+\section{\texorpdfstring{Probability Distributions on \(\mathbb R^n\)}{Probability Distributions on \textbackslash mathbb R\^{}n}}\label{probability-distributions-on-mathbb-rn}}
+
+Dette kapitel undersøger fordelinger for stokatiske variable på \((\mathbb{R}^n,\mathcal{B}^n)\) for \(n=2,3,...\). Særligt vil vi have interesse for særtilfældet \(n=2\). Mange sætninger i dette kapitler har en analog i kapitel 11.
+
+\textbf{Definition 12.1. (Protter)} \emph{Lebesgue målet på \((\mathbb{R}^n,\mathcal{B}^n)\) er defineret for det kartesiske produkt \(A_1\times A_2\times ...\times A_n\) ved \(m_n(\prod_{i=1}^n A_i)=\prod_{i=1}^n m(A_i)\). Dermed også \(m_n(\prod_{i=1}^n (a_i,b_i])=\prod_{i=1}^n m((a_i,b_i])\).}
+
+\textbf{Definition 12.2. (Protter)} \emph{Et sandsynlighedsmål \(P\) på \((\mathbb{R}^n,\mathcal{B}^n)\) har tæthed \(f\) hvis \(f\) er en ikke negativ Borelmålelig funktion på \(\mathbb{R}^n\), der opfylder}
+
+\[
+P(A)=\int_A f(x)dm_n(x)=\int f(x_1,x_2,...,x_n)1_A(x_1,x_2,...,x_n)dm_n(x_1,x_2,...,x_n),\hspace{10pt} \forall A\in\mathcal{B}^n.
+\]
+
+\textbf{Theorem 12.1. (Protter)} \emph{En \(f\in\mathcal{M}_{R^n}^+\) er en tæthed for et sandsynlighedsmål \(P\) på \((\mathbb{R}^n,\mathcal{B}^n)\) hvis og kun hvis \(\int f(x)dm_n(x)=1\). I det tilfælde karakterer \(f\) fuldkomment målet \(P\) og for alle \(f'\in\mathcal{M}_{R^n}^+\) med \(m_n(f\ne f')=0\) er denne også tæthed for målet \(P\). Omvendt bestemmer målet \(P\) også en tæthed \(f\) op til enhver ikke Lebesgue nulmængde.}
+
+\textbf{Theorem 12.2. (Protter)} \emph{Antag \(X=(Y,Z)\) har tæthed \(f=f_X=f_{Y,Z}\) på \(\mathbb{R}^2\). Så gælder}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{Begge \(Y\) og \(Z\) har tætheder på \((\mathbb{R},\mathcal{B})\) givet ved}
+  \[
+    f_Y(y)=\int_{\mathbb{R}}f(y,z)dm(z),\hspace{15pt}f_Z(z)=\int_{\mathbb{R}}f(y,z)dm(y)
+    \]
+\item
+  \emph{\(Y\) og \(Z\) er uafhængige hvis og kun hvis \(f(y,z)=f_Y(y)f_Z(z)\) \(m_2\)-n.s. dvs. \(m_2(f(y,z)\ne f_Y(y)f_Z(z)=0\).}
+\item
+  \emph{Følgende bestemmer en fjerde tæthed på \(\mathbb{R}\) for alle \(y\in\mathbb{R}\) sådan at \(f_Y(y)\ne 0\): \(f_{Y=y}(z)=\frac{f(y,z)}{f_Y(y)}\).}
+\end{enumerate}
+
+\textbf{Definition 12.3. (Protter)} \emph{Lad \(X,Y\) være to reelle stokastiske variable begge med endelig varians. Covariansen af \(X,Y\) er defineret ved \(\text{Cov}(X,Y)=E[(X-E(X))(Y-E(Y))]=E[XY]-E[X]E[Y]\). Varians er dermed også givet ved \(\text{Cov}(X,X)=Var(X)=\sigma ^2(X)\).}
+
+\textbf{Theorem 12.3. (Protter)} \emph{Hvis \(X\) og \(Y\) er uafhængige så er \(\text{Cov}(X,Y)=0\).}
+
+\textbf{Definition 12.4. (Protter)} \emph{Lad \(X\) og \(Y\) være stokastiske variable begge med endelig varians. Korrelationskoefficienten af \(X\) og \(Y\) er tallet \(\rho_{X,Y}=\text{Cov}(X,Y)/(\sigma(X)\sigma(Y))\).}
+
+\textbf{Definition 12.5. (Protter)} \emph{Lad \(X=(X_1,...,X_n)\) være en \(\mathbb{R}^n\) stokastisk variabel. Covariansmatricen for \(X\) er en \(n\times n\) matrice med indgange \(c_{ij}=\text{Cov}(X_i,X_j)\).}
+
+\textbf{Theorem 12.4. (Protter)} \emph{En covarians matrice er positiv semidefinit dvs. den er symmetrisk (\(c_{ij}=c_{ji}\)) og \(\sum a_ia_jc_{ij}>0\) for alle \(\mathbf{a}\in\mathbb{R}^n\).}
+
+\textbf{Theorem 12.5. (Protter)} \emph{Lad \(X\) være en \(\mathbb{R}^n\) stokastisk variabel med covarians matrice \(C\). Lad \(A\) være en \(m\times n\) matrice og set \(Y=AX\). Så er \(Y\) en \(\mathbb{R}^m\) stokastisk variabel med covarians matrice \(C'=ACA^*\), hvor \(A^*\) er den transponerede matrice til \(A\).}
+
+\textbf{Theorem 12.6. (Protter)} \textbf{(Jacobi's transformations formel)} \emph{Lad \(G\subseteq \mathbb{R}^n\) være åben og lad \(g : G \to \mathbb{R}^n\) være kontinuer og differentiabel. Antag \(g\) er injektiv på \(G\) og \(J_g(x)\ne0\) for alle \(x\in G\). For en funktion \(f\in\mathcal{M}\) med \(f1_{g(G)}\) positiv eller integrabel mht. Lebesguemålet gælder: \(\int_{g(G)}f(y)dm_n(y)=\int_G f(g(x))\vert \det(J_g(x))\vert dm_n(x)\), hvor \(g(G)\) er mængden \(\{y\in\mathbb{R}^n : \exists x\in G, g(x)=y\}\).}
+
+\textbf{Theorem 12.7. (Protter)} \emph{Lad \(X=(X_1,...,X_n)\) have simultan tæthed \(f\) og lad \(g : \mathbb{R}^n\to\mathbb{R}^n\) være en kontinuer, diffenrentiabel, injektiv funktion med \(J_g(x)\ne 0\). Så har \(Y=g(X)\) tæthed}
+
+\[
+f_Y(y)=f_X(g^{-1}(y))\vert \det J_{g^{-1}}(y)\vert 1_{g(\mathbb{R}^n)}(y)
+\]
+
+\textbf{Corollary 12.1. (Protter)} \emph{Lad \(S\in\mathcal{B}^n\) være inddelt af et endeligt indeks \(I=\{0,1,...,m\}\), så \(\cup_{i=0}^m S_i=S\), \(S_i\) parvist disjunkte, og med \(m_n(S_0)=0\) og funktionen \(g : S_i \to\mathbb{R}^n\) være kontinuer, differentiabel, injektiv og \(J_{g_i^{-1}}(x)\ne 0\) for alle \(i\in I\). Lad \(X\) være giver som i teorem 12.7. Da har den stokastiske variabel \(Y=g(X)\) tæthed}
+
+\[
+f_Y(y)=\sum_{i=1}^m f_X(g_i^{-1}(y))\vert\det J_{g_i^{-1}}(y)\vert1_{g_i(S_i)}(y).
+\]
+
 \hypertarget{equivalent-probability-measures}{%
 \section{Equivalent Probability Measures}\label{equivalent-probability-measures}}
 
@@ -3646,8 +4896,8 @@ L_t=\frac{dQ}{dP},\ on\ \mathcal{F}_t,\tag{C.8}
 
 \textbf{Proposition C.13. (Bjork)} \emph{A process \(M\) is a \(Q\)-martingale if and only if the process \(L\cdot M\) is a \(P\)-martingale.}
 
-\hypertarget{random-variables}{%
-\chapter{Random Variables}\label{random-variables}}
+\hypertarget{random-variables-1}{%
+\chapter{Random Variables}\label{random-variables-1}}
 
 \hypertarget{introduction-1}{%
 \section{Introduction}\label{introduction-1}}
@@ -4316,7 +5566,7 @@ We say that a set \(A\in\mathbb{E}\) is an \textbf{invariant set} if \(T^{-1}(A)
 \textbf{Lemma 5.9. (Hansen)} \emph{Let \((\mathcal{X},\mathbb{E},\mu)\) be a probability space, and let \(T : \mathcal{X}\to \mathcal{X}\) be a measure-preserving map. Let \((\mathcal{Y},\mathbb{G})\) be another measurable space, and let \(S : \mathcal{Y} \to \mathcal{Y}\) be a measurable map.}
 \emph{Suppose there is a measurable map \(\gamma : \mathcal{X}\to \mathcal{Y}\) such that the following diagram commutes:}
 
-\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-10-1} \end{center}
+\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-11-1} \end{center}
 
 \emph{Then \((\mathcal{Y},\mathbb{G},\gamma(\mu),S)\) is a measure-preserving dynamical system.}
 
@@ -4718,6 +5968,485 @@ c.~\emph{The array satisfies \textbf{Lyapounov's condition}\index{Lyapounov's co
 \begin{align*}
     \sum_{m=1}^n\mathbf{X}_{nm}\stackrel{\mathcal{D}}{\to} \mathcal{N}(\mathbf{0},\Sigma)
 \end{align*}
+
+\hypertarget{markov-chains}{%
+\chapter{Markov Chains}\label{markov-chains}}
+
+\hypertarget{definition-of-a-markov-chain}{%
+\section{Definition of a Markov Chain}\label{definition-of-a-markov-chain}}
+
+\textbf{Transitionsdiagram.} Et diagram, hvor der fremgår ssh. for et system overgår til et nyt stadie.
+
+\begin{center}\includegraphics[width=0.4\linewidth]{_main_files/figure-latex/unnamed-chunk-12-1} \end{center}
+
+\textbf{Definition.} \textbf{(Stokastisk process i diskret tid)} \emph{Lad \(\mathcal{X}=(\mathcal{X}_n)_{n\in\mathbb{N}_0}\) være en familie af stokastiske variable og \(\mathcal{S}\) et udfaldsrum . Da er \(\mathcal{X}\) en funktion der opfylder \(\mathcal{X} : \mathbb{N}_0\times \Omega \to \mathcal{S}\) med \((n,w) \mapsto \mathcal{X}_n(w)\).}
+
+\textbf{Bemærkning.}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  \(\mathbb{N}_0\) er tidsvariablen senere \([0,\infty)\)
+\item
+  \(\mathcal{S}\) er højst tællelig
+\end{enumerate}
+
+\textbf{Definition.} \textbf{(Markov kæder i diskret tid)} \emph{En stokastisk proces i diskret tid \((X_n)_{n\in\mathbb{N}_0}\) har \textit{Markov egenskaben} hvis for alle stadier \(i_0,...,i_n\in\mathcal{S}\) opfylder}
+
+\[
+\mathbb{P}(\mathcal{X}_n=i_n\vert \mathcal{X}_0,...,\mathcal{X}_{n-1}=i_{n-1})=\mathbb{P}(\mathcal{X}_n=i_n \vert \mathcal{X}_{n-1}=i_{n-1}).
+\]
+
+\emph{Da kaldes denne stokastiske proces en Markov kæde. Dvs. For hvert \(n\) er det næste udfald kun afhængig af dette forrige udfald.}
+
+\textbf{Definition.} \textbf{(Initial fordeling)} \emph{For alle \(i\in\mathcal{S}\) tilhører en initial sandsynlighed for at starte i stadiet \(i\) givet ved}
+
+\[
+\phi(i):=\mathbb{P}(\mathcal{X}_0=i),
+\]
+
+\emph{hvor familien \(\overline{\phi}=(\phi(i))_{i\in\mathcal{S}}\) er initial fordelingen i.e.~\(\phi\) er en vektor over alle mulige startsudfald og deres tilhørende ssh. Hvis \(\mathcal{S}\) er endelig er \(\overline{\phi}\) blot en rækkevektor.}
+
+\textbf{Definition.} \textbf{(Transitionsmatricen)} \emph{For to stadier \(i,j\in\mathcal{S}\) og et tidspunkt \(n\) er transitionssandsynligheden for at flytte fra \(i\) til \(j\) er}
+
+\[
+P_{ij}(n)=\mathbb{P}(\mathcal{X}_{n+1}=j \vert \mathcal{X}_n=i).
+\]
+
+\emph{Hvis \(P_{ij}(n)=P_{ij}(m)\) for alle \(n,m\in\mathbb{N}_0\) så kaldes \((\mathcal{X}_n)_{n\in\mathbb{N}_0}\) \textbf{tidshomogent (definition 1)}. Den tilhørende matrice \(P=(P_{ij})_{i,j\in\mathcal{S}}\) er kaldet transitionsmatricen.}
+
+\textbf{Bemærkning.} En transitionsmatrice karrakteriserer et transitions diagram og omvendt. \textit{Eksempel til figur 1}
+
+\[
+P=\begin{pmatrix}
+2/3 & 1/3\\
+1/2 & 1/2
+\end{pmatrix}.
+\]
+
+\textbf{Theorem 2.} \textbf{(Fordeling af \(\mathcal{X}_n\))} \emph{For en Markov kæde på \(\mathcal{S}\) med initial fordeling \(\phi\) og transitionsmatrix \(P\) er}
+
+\[
+(\mathbb{P}(X_n=i))_{i\in\mathcal{S}}=\overline{\phi} P^n
+\]
+
+\hypertarget{classification-of-states}{%
+\section{Classification of states}\label{classification-of-states}}
+
+\textbf{Definition 4.} \textbf{(Communication classes)} \emph{Lad \(i,j\in\mathcal{S}\) være to stadier. Vi definere \(i\longrightarrow j\) dvs. \(j\) er \textbf{accesible} fra \(i\), hvis der eksisterer et \(n\in\mathbb{N}\) så \(P_{ij}^n>0\). Samt \(i\longleftrightarrow j\) dvs. \(i\) og \(j\) kommunikerer, hvis både \(i\longrightarrow j\) og \(j\longrightarrow i\).}
+
+\textbf{Bemærkning.} ``\(i\longleftrightarrow j\)'' er en ækvivalens relation. Derfor sepererer denne relation \(\mathcal{S}\) ind i to disjunkte ækvivalens klasser, hvad vi definerer som \emph{communication classes}.
+
+\textbf{Definition 6.} \textbf{(Lukket kommunikations klasser)} \emph{En kommunikations klasse \(e\subseteq \mathcal{S}\) kaldes lukket, hvis for alle \(i\in e\) gælder \(\sum_{i\in e}P_{ij}=1\) (den \(i\)'te søjlesummen sum er lig 1 eller ssh. for at forblive i klassen er 1).}
+
+\textbf{Definition.} \textbf{(Ikke reducibel Markov kæde)} \emph{En Markov kæde kaldes irreducible, hvis der eksisterer kun en kommunikations klasse. Ellers er den reducible.}
+
+\textbf{Definition.} \textbf{(Hitting time)} \emph{Tiden for at ramme \(i\in \mathcal{S}\) er givet ved \(T_i:=\inf\{n>0 \vert X_n=i\}\). Hvis \(X_0=i\) kaldes denne tid \textbf{return/recurrence} tiden.}
+
+\textbf{Definition 9.} \textbf{(Recurrance/transients)} \emph{For en Markov kæde \((X_n)_{n\in\mathbb{N}}\) på \(\mathcal{S}\) er et stadie \(i\in\mathcal{S}\) kaldet \textbf{recurrent} hvis \(\mathbb{P}(T_i<\infty \vert X_0=i)=1\). Ellers kaldes \(i\) \textbf{transient}.}
+
+\textbf{Bemærkning.} Det kan vises at \(\mathbb{P}(T_i<\infty \vert X_0=i)=1\) er ensbetydende med at \(\mathbb{P}(N_i=+\infty \vert X_0=i)=1\). (se Thm 14 i noterne)
+
+\textbf{Theorem 11.} \textbf{(Recurrence criterium 1)} \emph{For en Markov kæde på \(\mathcal{S}\) med transistionsmatrice \(P\), da er følgende ækvivalent. Det holder at \(\sum_{n=1}^\infty (P^n)_{ii}=+\infty\) og \(i\) er recurrent.}
+
+\textbf{Theorem 12.} \textbf{(Recurrence som klasseegenskab)} \emph{Alle stadier i en kommunikations klasse er enten recurrent eller transient dvs. hvis blot en af stadierne \(i\in e\) er recurrent er alle recurrent og ligeledes med transient.}
+
+\textbf{Theorem 13.} \textbf{(Antal af besøg)} \emph{Antal af besøg er givet ved den stokastiske variabel \(N_i:=\sum_{n=1}^\infty 1(X_n=i)\). Hvis \(i\) er recurrent er \(\mathbb{P}(N_i=+\infty)=1\), hvis \(i\) er transient er \(N_i\sim Geo(q)\) på \(N_0\) dvs. \(\mathbb{P}(N_i=k)=(1-q)^kq\) for \(k\in\mathbb{N}_0\) og \(q=P(T_i=+\infty\vert X(0)=i)\).}
+
+\textbf{Theorem 14.} \emph{For en endelig kommunikationsklasse \(C\subseteq S\) gælder: (\(C\) er recurrent) \(\Leftrightarrow\) (\(C\) er lukket.)}
+
+\textbf{Theorem 16.} \textbf{(Recurrence criterium 2)} \emph{For en irreducibel Markov Kæde på \(S\) gælder (\(i\in S\) er recurrent) \(\Leftrightarrow\) (For ligningssystemmet \(\alpha(j)=\sum_{k\ne i}P_{j,k}\alpha(k)\) gælder \(\alpha(j)=0\) for alle \(j\ne i\) er den eneste endelige løsning).}
+
+\textbf{Generaliseret matrix multiplikation.} For \(\underline{\phi}=(\phi_i)_{i\in\mathcal{S}},\underline{\psi}=(\psi_i)_{i\in\mathcal{S}}\) \emph{(vektorer)} og \(P=(P_{ij})_{i,j\in\mathcal{S}},Q=(Q_{ij})_{i,j\in\mathcal{S}}\) \emph{(matricer)} kan følgende produkter udregnes ved
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  \((\underline{\phi}\cdot \underline{\psi}^T):=\sum_{i\in\mathcal{S}}\phi_i\psi_i\)
+\item
+  \((\underline{\phi}\cdot P)_j:=\left(\sum_{i\in\mathcal{S}}\phi_i P_{ij}\right)_j\)
+\item
+  \((P\cdot Q)_{ij}:=\sum_{k,l\in\mathcal{S}}P_{i,k}Q_{l,j}\)
+\end{enumerate}
+
+\hypertarget{limit-results-and-invariant-probabilities}{%
+\section{Limit results and invariant probabilities}\label{limit-results-and-invariant-probabilities}}
+
+\textbf{Sidenote.} For en vektor \(\overline{\phi}=(\phi_i)_{i\in \mathcal{S}}\) kaldes en fordeling, hvis for alle \(i\in\mathcal{S}\) er \(\phi_i\ge0\) og \(\sum_{i\in\mathcal{S}}\phi_i=1\) og et mål hvis kun \(\phi_i\ge 0\).
+
+\textbf{Definition 18.} \textbf{(Løkker og perioder)} \emph{For en Markov kæde i diskret tid er en mulig løkke af længde \(n\) er en følge af stadier \(i_0,i_1,i_2,...,i_n\in\mathcal{S}\) med \(i_0=i_n\) hvor}
+
+\[
+P_{i_0,i_1}\cdots P_{i_{n-1},i_n}>0
+\]
+
+\emph{Perioden af et stadie \(i\in\mathcal{S}\) er den største fælles divisor af}
+
+\[
+D_i=\{n\in\mathbb{N}\ \vert\ \exists \text{a possible loop of length $n$ med $i_0=i_n=i$}\},
+\]
+
+\emph{dvs. \(\text{per}(i)=GCD(D_i)\). Hvis perioden er 1 kaldes stadiet \textbf{aperiodisk}.}
+
+\textbf{Theorem 19.} \emph{Alle stadier i en kommunikations klasse har samme periode.}
+
+\textbf{Theorem 21.} \emph{For en irreducibel, recurrent og ikkeperiodisk Markov kæde på \(\mathcal{S}\) gælder for alle \(i\in\mathcal{S}\) at}
+
+\[
+\lim_{n\to\infty}P(X_n=i)=\frac{1}{E[T_i \vert X_0=i]}
+\]
+
+\emph{Hvis \(E[T_i \vert X_0=i]=\infty\) defineres \(\lim_{n\to\infty}P(X_n=i):=0\).}
+
+\textbf{Bemærkning.} 1) Kun hvis Markov kæden er recurrent og dermed at \(P(T_i=\infty \vert X_i=0)=0\) er \(E[T_i \vert X_0=i]=\sum_{n=1}^\infty nP(T_i=n\vert X_0=i)\) eller er \(E[T_i \vert X_0=i]=+\infty\). 2) Hvis \(E[T_i \vert X_0=i]=\infty\) så er grænsen ikke en fordeling.
+
+\textbf{Definition 22.} \emph{Et recurrent stadie \(i\in\mathcal{S}\) kaldes positivt recurrent hvis og kun hvis \(E[T_i \vert X_0=i]<\infty\). Ellers kaldes stadiet nul-recurrent.}
+
+\textbf{Definition.} \textbf{(Invariant fordeling og mål)} \emph{En ikke negativ vektor \(\overline{\pi}=(\pi_j)_{j\in S}\) kaldes et invariant mål, hvis \(\overline{\pi}=\overline{\pi}P\) og en invariant fordeling, hvis \(\vert\overline{\pi}\vert\).}
+
+\textbf{Theorem 23.} \emph{For en irreducibel og recurrent Markov kæde på \(\mathcal{S}\) findes et invariant mål \(\nu\) der opfylder \(\nu =\nu P\). Specielt gælder for alle fixed \(i\in\mathcal{S}\) holder det at}
+
+\[
+\nu_j=E\left[\sum_{n=0}^{T_i-1}1(X_n=j \vert X_0=i)\right] \text{for alle } j\in\mathcal{S}
+\]
+
+\emph{er et invariant mål. Hvis og kun hvis Markov kæden er positiv recurrent kan ovenstående nomaliseres til en invariant fordeling.}
+
+\textbf{Bemærkning.} 1) \(i\in\mathcal{S}\) er abitrær, 2) \(\nu(i)=1\) og 3) for irreducible MC gælder (Positiv recurrent) \(\Leftrightarrow\) (Eksisterer unik invariant fordeling)
+
+\textbf{Theorem 24.} \emph{or en irreducibel, aperiodisk og positiv recurrent Markov kæde gælder \(\lim_{n\to\infty}P(X_n=j)=\pi_j=1/E[T_j\vert X_0=j]\). Hvor \(\overline{\pi}=(\pi_j)_{j\in S}\) er en invariant fordeling.}
+
+\textbf{Theorem 25 og 26.} \textbf{(Grænseresultat for nul-recurrance og tranience)} \emph{For et nul-recurrent (THM 25) eller transient (THM 26) stadie \(j\in S\) gælder \(\lim_{n\to\infty}P(X_n=j)=0\) for alle valg af initialfordeling \(\overline{\phi}\).}
+
+\textbf{Theorem 27.} \textbf{(Grænseresultat for periodiske stadier)} \emph{For en irreducibel Markov kæde med periode \(d>1\) findes grænsen \(\lim_{n\to \infty}P(X_n=i)\) ikke. Men gennemsnittet for en periode gør dvs}
+
+\[
+\nu_j=\lim_{n\to\infty}\frac{P(X_n=i)+P(X_{n+1}=i)+...+P(X_{n+d-1}=i)}{d}
+\]
+
+\emph{\(\nu=(\nu_j)_{j\in S}\) er et invariant mål og en invariant fordeling hvis \(\vert\nu\vert=1\).}
+
+\hypertarget{absorbing-probabilities}{%
+\section{Absorbing probabilities}\label{absorbing-probabilities}}
+
+\textbf{Theorem 29.} \textbf{(Absorberende sandsynlighed - endelige udfaldsrum)} \emph{Lad en endelig Markov kæde være givet ved transistionsmatricen \(P\). Antaget at transtionsmatricen kan inddeles efter kummunikations klasser så}
+
+\[
+P=
+\left[
+\begin{array}{c|c}
+\tilde{P} & 0 \\
+\hline
+     S & Q
+\end{array}
+\right],
+\]
+
+\emph{hvor \(\tilde{P}\) er transistionsmatricen indeholdende kun recurrent stadier. Dertil er \(Q\) og \(S\) sub-matricer af \(P\), hvor \(Q\) indeholder de transient stadier og \(S\) beskriver sandsynlighederne for overgangen fra et transient til et recurrent stadie. Matricen 0 repræsenterer sandsynligheden for at gå fra en recurrent til transient stadie, hvad er umuligt.}
+
+Definer dertil matricerne \(M=(I-Q)^{-1}\) og \(A=(I-Q)^{-1}S\). Tallet \(M_{i,j}\) repræsenterer \(E[N_j\vert X_0=i]\) for transient stadier \(i,j\). Tallet \(A_{i,j}\) repræsenterer sandsynligheden for at \(j\) er det første recurrent stadie, der besøger hvis \(X_0=i\) for et transient stadie \(i\).
+
+\textbf{Theorem 31.} \textbf{(Absorberende sandsynlighed - tællelige udfaldsrum)} \emph{For en Markov kæde på \(S\) lad \(C\subseteq S\) være en recurrent klasse og \(C'\in S\setminus C\) være en transient klasse. Absorberingssandsynligheden \((\alpha_j)_{j\in C'}\) givet ved \(\alpha_j=P(X_n\in C \vert X_0=j)\) løser ligningssystemet}
+
+\[
+\alpha_i=\sum_{l\in S\setminus C}P_{i,l}\alpha_l+\sum_{l\in C}P_{i,l}
+\]
+
+\emph{Der findes en endelig løsning hvis og kun hvis \(\lim_{n\to\infty}P(X_n\in C'\vert X_o\in C')=0\).}
+
+\hypertarget{markov-chains-in-continuous-times}{%
+\section{Markov Chains in Continuous Times}\label{markov-chains-in-continuous-times}}
+
+\textbf{Definition.} \textbf{(Stokastisk process i kontinuer tid)} \emph{En stokastisk proces i kontinuer tid er en familie \(X=(X_t)_{t\in[0,\infty)}\) af stokastiske variable.}
+
+\textbf{Eksempel 33.} \emph{(Poisson processen)} Lad \((W_i)_{i\in\mathbb{N}}\) være en følge af uafhængige stokastiske variable, hvor \(W_i\sim Exp(\lambda)\) dvs. \(W_i\) har tæthed \(f(x)=\lambda \exp(-\lambda x)\). Betragt \(W_i\) som ventetiden indtil en begivenhed af interesse indtræffer. Lad \(\tau_n:=W_1+...+W_n\) være tiden indtil den \(n\)'te begivenhed indtræffer. Den stokastiske variabel \(N_t=\sum_{n=1}^\infty 1(\tau_n\le t)\) der tæller antal begivenheder indtil tidspunkt \(t\) definerer en stokastisk proces i kontinuer tid dvs. processen \((N_t)_{t\ge 0}\). Vi kalder denne proces \emph{Poisson processen}.
+
+\textbf{Definition 34.} \textbf{(Homogen Markov kæde i kontinuer tid)} \emph{En kontinuer Markov kæde på en højst tællelig mængde \(S\) er en familie af stokastiske variable \((X_t)_{t\ge0}\) på sandsynlighedsrummet \((\Omega, \mathcal{F},P)\) der opfylder}
+\begin{align*}
+    &P(X(t_{n+1})=j\vert X(t_n)=i, X(t_{n-1})=i_{n-1},...,X(t_0)=i_0)\\
+    =\ &P(X(t_{n+1})=j\vert X(t_n)=i)=P_{i,j}(t_{n+1}-t_n)
+\end{align*}
+\emph{for \(j,i,i_{n-1},...,i_0\in S\) og \(t_{n+1}>t_n>...>t_0\ge0\). Fordelingen af Markov kæden er givet ved initialfordelingen \(\overline{\phi}=(P(X_0=i))_{i\in S}\) og transistionssandsynlighederne \(P_{i,j}(t)=P(X(t+s)=j\vert X(s)=i)\) og identiteten}
+\begin{align*}
+    &P(X(t_{n+1})=j, X(t_n)=i, X(t_{n-1})=i_{n-1},...,X(t_0)=i_0)\\
+    =\ &P_{i,j}(t_{n+1}-t_n)\cdot ...\cdot P_{i_0,i_1}(t_1-t_0)\phi(i_0)
+\end{align*}
+
+\textbf{Definition 35.} \textbf{(Minimal konstruktion)} \emph{Lad \(\overline{\phi}=(\phi_i)_{i\in S}\) være en sandsynlighedsvektor og lad \(Q=(q_{i,j})_{i,j\in S}\) være en intensitetsmatrice dvs. \(q_{i,j}\) er reelle tal med egenskaberne 1) alle ikke diagonal indgange er ikke negative dvs. \(q_{i,j}\ge 0\) for alle \(i,j\in S\) og \(i\ne j\) og 2) diagonal er negativ lig rækkesummen dvs. \(q_{i,i}=-\sum_{j\ne i}q_{i,j}\).}
+
+Givet \(\overline{\phi}\) og \(Q\) kan en tids-homogen Markov kæde konstrueres ved følgende fem trin. Matricen \(Q\) kaldes transistionsintensiteten for den stokastiske proces \((X_t)_{t\ge 0}\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Vælg \(\gamma(0)\) ud fra initialfordelingen, så \(P(\gamma(0)=i)=\phi(i)\).
+\item
+  givet \(\gamma(0)\) sæt \(\tau_1:=W_1\sim Exp(q_{\gamma(0)})\) og definer \(X(t)=\gamma(0),t\in[0,W_1)\)
+\item
+  givet \(\gamma(0)\) og \(W_1\) vælg \(\gamma(1)\) sådan at \(P(\gamma(1)\vert \gamma (0))=\frac{q_{\gamma(0),i}}{q_{\gamma(0)}},i\ne \gamma(0)\)
+\item
+  recursivt givet \(\gamma(0),...,\gamma(n),W_1,...,W_n\) vælg \(W_{n+1}\sim Exp(q_{\gamma(n)}\). Lad \(\tau_{n+1}=\tau_n+W_{n+1}\) og definer \(X(t)=\gamma(n),t\in[\tau_n,\tau_{n+1})\)
+\item
+  vælg \(\gamma(n+1)\) sådan at \(P(\gamma(n+1)\vert \gamma(0),...,\gamma(n),W_1,...,W_n)=\frac{q_{\gamma(n),i}}{q_{\gamma(n)}},i\ne Y(n)\).
+\end{enumerate}
+
+\textbf{Definition 37.} \textbf{(Absorbering)} \emph{Hvis Markov kæden givet ved minimal konstruktion på tidspunkt \(\tau_n\) hopper til stadie \(\gamma(n)=i\) med \(q_i=0\) så lader vi \(X(t)=\gamma(n)\) for \(t\ge \tau_n\) og vi siger at Markov kæden er absorberet på stadie \(i\).}
+
+\textbf{Definition 38.} \textbf{(Eksplosion)} \emph{Hvis Markov kæden hopper uendeligt mange gange på et endeligt interval dvs. \(\tau_\infty :=\lim_{n\to\infty}\tau_n<+\infty\) og dermed \(P(\tau_\infty<+\infty)>0\). Lader vi \(X(t)=\Delta\) for \(t\ge \tau_\infty\). Vi kalder tidspunktet \(\tau_\infty\) for eksplosionstidspunktet.}
+
+\textbf{Theorem 39.} \textbf{(Embedded Markov Chain of jumps)} \emph{For en markov kæde i kontinuert tid med transitions intensiteter (intensitetsmatrice) \(Q = (q_{i,j})_{i,j\in s}\) givet ved den minimale konstruktion fra definition 35, er følgen \((\Gamma(n))_{n \in \mathbb{N}_0}\) af besøgte stadier en markov kæde i diskret tid med transitionsmatricen \(P\) givet ved}
+\begin{align*}
+    \left\{\begin{array}{cc}
+        -\frac{q_{i,j}}{q_{i,i}} = \frac{q_{i,j}}{q_i} & i \in S \setminus A, j \notin \{i,\Delta\}  \\
+        0 & i \in S \setminus A, j \in \{i, \Delta\} \\
+        0 & i \in A, j \ne i \\
+        1 & i \in A, j = i
+    \end{array}\right.
+\end{align*}
+\emph{Hvor \(A = \{i \in S \vert q_i = 0\}\) er delmængden af absorberende stadier.}
+
+\textbf{Bemærkning:} Det er klart, at de enkelte indgange \((P_{i,j}(t))_{i,j \in S}\) (\(t\ge0\)) i transistionsmatricen må være ikke negative. Endvidere er rækkesummerne, for en markov kæde hvor eksplosion ikke er mulig, lig 1. Specielt er transitionssandsynlighederne for et valgt \(t \ge 0\) i overenstemmelse med dem som vi har set i kapitel 2. For skift i tid, kræves næste teorem.
+
+\hypertarget{properties-of-transitionsprobabilities}{%
+\section{Properties of transitionsprobabilities}\label{properties-of-transitionsprobabilities}}
+
+\textbf{Theorem 42.} \textbf{(Chapman-Kolmogorov ligninger)} \emph{Transitionssandsynlighederne for en homogen markov kæde i kontinuert tid opfylder Chapman-Kolmogorov ligningerne }
+
+\[
+\forall s,t \ge 0, \forall i,j \in S : P_{i,j}(t+s) = \sum_{l\in S}P_{i,l}(t) \cdot P_{l,j}(s)
+\]
+\emph{Hvis state space er endeligt, så kan \(P(t) = (P_{i,j}(t))_{i,j\in S}\) ses som en matrice for hvilket som helst valgt \(T \ge 0\) og så kan Chapman-Kolmogorov ligningerne skrives som matrice ligningen}
+
+\[
+P(t+s) = P(t)P(s)
+\]
+
+\textbf{Theorem 43.} \textbf{(Infinitesimal generatoren af en markov kæde)} \emph{For en markov kæde i kontinuert tid, kan transitionsintensiteterne udledes fra transitionssandsynlighederne som grænserne}
+\begin{align*}
+    \lim_{t\to0+}\frac{P_{i,i}-1}{t} = -q_i \\ 
+    \lim_{t\to0+}\frac{P_{i,j}}{t} = q_{i,j}, \hspace{5pt} i \ne j
+\end{align*}
+
+\textbf{Theorem 44.} \textbf{(Backward differential equations)} \emph{For en markov kæde i kontinuert tid holder det altid, at }
+
+\[
+DP_{i,j}(t) = P_{i,j}'(t) = -q_iP_{i,j}(t) + \sum_{k\ne i}q_{i,k}P_{k,j}(t)
+\]
+
+\textbf{Theorem 45.} \textbf{(Forward differential and integral equations)} \emph{For en markov kæde i kontinuert tid, holder det, at }
+
+\[
+P_{i,j}(t) = \delta_{i,j}\exp(-q_jt)+\int^t_0\sum_{l\ne j}P_{i,l}(u)q_{l,j}\exp(-q_j(t-u))du
+\]
+
+\emph{og at }
+
+\[
+DP_{i,j}(t) = -P_{i,j}(t)q_j+\sum_{l \ne j}P_{i,l}(t)q_{l,j}.
+\]
+
+\textbf{Theorem 47.} \textbf{(Transitionssandssynlighederne for et endeligt state space)} \emph{For en markov kæde i kontinuert tid med endeligt state space, kan den ``backward differential equation'' udtrykkes i matrice form som }
+
+\[
+DP(t) = P'(t) = QP(t)
+\]
+
+\emph{Hvor \(P(t) = (P_{i,j}(t))_{i,j \in S}\) Ved at bruge startbetingelsen \(P(0) = I\), kan transistionssandsynlighederne udtrykkes på formen af eksponentiel matricen}
+
+\[
+P(t) = \exp(Qt), \hspace{5pt} t \ge 0.
+\]
+
+\hypertarget{invariant-probabilies-and-absorption}{%
+\section{Invariant probabilies and absorption}\label{invariant-probabilies-and-absorption}}
+
+\textbf{Definition 49.} \textbf{(Kommunikationsklasser og ``irreducibility'')} \emph{To stadier \(i,j \in S\) siges at kommunikere, hvis der findes \(s,t > 0\) således at}
+
+\[
+P_{i,j}(s) > 0 \text{ og } P_{j,i}(t) > 0.
+\]
+
+\emph{Denne definition inddeler \(S\) i disjunkte kommunikationsklasser, ligesom vi har set i kapitel 2. En markov kæde i kontinuert tid siges at være ``irreducible'' hvis der kun findes én kommunikationsklasse.}
+
+\textbf{Bemærkning:} Man kan anvende, at to stadier \(i,j \in S\), hvor \(i \ne j\) kommunikerer, hvis og kun hvis, der eksisterer en følge af stadier \(i_1, i_2, ..., i_n \in S\) (som indeholder stadie \(j\)) således, at \(q_{i,i_1}\cdot q_{i_1,i_2}\cdot...\cdot q_{i_{n-1},i_n}\cdot q_{i_n,i} > 0\). (Er der en mulig sti frem og tilbage mellem \(i\) og \(j\)?)
+
+\textbf{Definition 50.} \textbf{(Recurrence og transience)}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{En irreducible markov kæde i kontinuert tid er recurrent, hvis og kun hvis, den embedded markov kæde (se teorem. 39) er recurrent. Den er transient, hvis og kun hvis, den embedded markov kæde er transient.}
+\item
+  \emph{Stadiet \(i\) er transient, hvis og kun hvis, den totale tid tilbragt i stadiet \(i\)}
+  \[
+    V_i = \int^\infty_01_{X(t) = i}dt
+    \]
+  \emph{er endelig med sandsynlighed 1, altså \(P(V_i < +\infty \vert X(0) = i) = 1\). Tilsvarende er stadiet \(i\) recurrent hvis \(P(V_i = +\infty \vert X(0) = i) = 1\).}
+\end{enumerate}
+
+\textbf{Bemærkning:} Denne definition kan anvendes på de enkelte kommunikationsklasser. Specielt er et absorberende stadie altid recurrent.
+
+\textbf{Definition 51.} \textbf{(Invariant fordeling)} \emph{En sandsynlighedsvektor \(\overline{\pi} = (\pi(i))_{i \in S}\) er en invariant (eller stationær) fordeling for en markov kæde i kontinuert tid, hvis for alle \(t \ge 0\) og \(j \in S\)}
+
+\[
+\pi(j) = \sum_{i \in S}\pi(i)P_{i,j}(t).
+\]
+
+\textbf{Theorem 52.} \textbf{(Entydigheden af den invariante fordeling)} \emph{Overvej en markov kæde i kontinuert tid. En invariant fordeling er unik, hvis den eksisterer. Hvis der for et \(t_0 > 0\) findes en sandsynlighed \(\overline{\pi}=(\pi(i))_{i\in S}\) sådan, at}
+
+\[
+\forall j \in S : \pi(j) = \sum_{i \in S}\pi(i)P_{i,j}(t_0)
+\]
+
+\emph{kan vi konkludere, at}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\forall i \in S : \pi(i) > 0\)
+\item
+  \emph{\(P(t_0)\) er en overgangssandsynlighed, dvs.}
+  \[
+    \forall i \in S : \sum_{j \in S}\pi(i)P_{i,j}(t_0) = 1
+    \]
+\item
+  \emph{\(\overline{\pi}\) er en invariant fordeling for markov kæden, dvs.}
+  \[
+    \forall t \ge 0, \forall j \in S : \pi(j) = \sum_{j \in S}P_{i,j}(t_0) = 1
+    \]
+\end{enumerate}
+
+\textbf{Bemærkning:} Det følger af (3), at hvis vi kan finde en invariant fordeling for et bestemt \(t_0 > 0\), så gælder denne for alle \(t > 0\). Det følger også, som resultat af dette, at alle rækkesummerne \(\sum_{j \in S}P_{i,j}(h) = 1\) for alle \(h \ge 0\), hvor en invariant fordeling kan findes.
+
+\textbf{Theorem 53.} \textbf{(Grænseresultater for overganssandsynligheder)} \emph{For en irreducible markov kæde i kontinuert tid, med en invariant fordeling \(\overline{\pi}\), gælder det for alle \(i,j \in S\), at }
+
+\[
+\lim_{t \to \infty}P_{i,j}(t) = \pi(j).
+\]
+\emph{Endvidere gælder det for enhver initial fordeling \(\overline{\phi}\), at}
+
+\[
+\lim_{t \to \infty}P(X(t) = j) = \pi(j).
+\]
+
+\emph{Hvis der ikke findes en invariant fordeling, så gælder der}
+
+\[
+\lim_{t \to \infty}P_{i,j}(t) = 0.
+\]
+
+\textbf{Theorem 55.} \textbf{(Nødvendig betingelse for invariant fordeling)} \emph{For en markov kæde i kontinuert tid, er det nødvendigt, at den invariante fordeling \(\overline{\pi}\) passer med ligningsystemet}
+
+\[
+\forall j \in s : \sum_{i \in S}\pi(i)q_{i,j} = 0
+\]
+
+\emph{Eller tilsvarende}
+
+\[
+\forall j \in S : \sum_{i\ne j}\pi(i)q_{i,j} = \pi(j)(-q_{j,j}) = \pi(j)q_j
+\]
+
+\emph{Tænker man på \(\overline{\pi}\) som en række vektor og \(Q\) som en matrice, har ligningssystemet en mere kompakt formulering }
+
+\[
+\overline{\pi}Q = 0.
+\]
+
+\textbf{Theorem 56.} \textbf{(Tilstrækkelig betingelse for en invariant fordeling)} \emph{Hvis \(\overline{\pi}\) overholder betingelsen i teorem 55 og endvidere overholder }
+
+\[
+\sum_{j \in S}\pi(j)q_j < \infty
+\]
+
+\emph{Så er \(\overline{\pi}\) en unik invariant fordeling for en irreducible markov kæde.}
+
+\textbf{Theorem 58.} \emph{En irreducible markov kæde i kontinuert tid har en invariant fordeling, hvis og kun hvis, den indlejrede (embedded) markov kæde er recurrent og der ekstisterer en sandsynlighedsvektor \(\overline{\pi}\) således, at teorem 55 er overholdt. (\(\overline{\pi}Q = 0\))}
+
+\textbf{Theorem 60.} \textbf{(Tids-invariant vs.~hændelses-invariant fordeling)} \emph{Antag, at der for en irreducible markov kæde i kontinuert tid findes en invariant fordeling \(\overline{\nu}\). Hvis vi også har bekræftet eksistensen af en invariant fordeling for den indlejrede markov kæde, så gælder følgende forhold mellem dem. }
+
+\[
+\pi(i) = \frac{\nu(i)q_i}{\sum_{j \in S}\nu(j)q_j}, \hspace{5pt} i \in S.
+\]
+
+\textbf{Theorem 61.} \textbf{(Eksistens af invariant fordeling og positive recurrence)} \emph{For en irreducible og recurrent markov kæde i kontinuert tid definerer vi ``escape time'' fra stadiet \(i\) som}
+
+\[
+W_i=\inf\{t > 0 \vert X(t) \ne i\}
+\]
+
+\emph{Og ``return time'' til stadiet \(i\) som}
+
+\[
+R_i = \inf\{t > W_i \vert X(t) = i\}
+\]
+
+\emph{Og der gælder, at }
+
+\[
+\pi(i) = \frac{E[W_i \vert X(0) = i]}{E[R_i \vert X(0) = i]} = \frac{1}{q_iE[R_i \vert X(0) = i]}
+\]
+
+\emph{Vi siger så, at en kommunikationsklasse er ``positive recurrent'' hvis}
+
+\[
+E[R_i \vert X(0) = i] < +\infty
+\]
+
+\textbf{Bemærkning:} Positive recurrence er en klasseegenskab.
+
+\textbf{Theorem 62.} \textbf{(Tid tilbragt i stadiet j før absorbering)} \emph{For en markov kæde i kontinuert tid findes det gennemsnitlige antal af besøg til stadiet \(j\) før det absorberende stadie \(i\) rammes, ved at betragte overgangssandsynlighederne af den indlejrede markov kæde. For et endeligt state space, kan man bruge teorem 29, mens man kan bruge teorem 31 for tælleligt uendelige state spaces.}
+
+\emph{Hvis \(N_j\) er middelværdien af antal besøg til stadiet \(j\) før absorbering i stadiet \(i\), så er middelværdien af tid tilbragt i stadiet j lig \(\frac{N_j}{q_j}\).}
+
+\textbf{Side note:} Eksempel 63 har været meget brugbar til at forstå kapitel 3.3.
+
+\hypertarget{birth-death-processes}{%
+\section{Birth-death processes}\label{birth-death-processes}}
+
+\textbf{Definition.} \textbf{(Birth-and-death process)} \emph{En birth-and-death proces er en markov kæde på \(S = \mathbb{N}_0\) som kun tillader hop (op eller ned) af størrelset ét. Dvs, at for overgangsintesiterne, gælder \(q_{i,j} = 0, i,j \in \mathbb{N}_0, |i-j| > 1\), mens de eneste ikke-nul indgange (udover diagonalen) er lig}
+\begin{align*}
+    q_{i,i+1} = \beta_i, i \in \mathbb{N}_0 \rightarrow \text{ birth intensitet} \\
+    q_{i,i+1} = \delta_i, i \in \mathbb{N} \rightarrow \text{ death intensitet}
+\end{align*}
+\emph{Adfærden af sådan en proces er meget simpelt at beskrive. Hvis man befinder sig i stadiet \(i\), så er ventetiden til det næste hop eksponentiel fordelt med parametren \(\beta_i+\delta_i\) og med gennemsnitstiden \(\frac{1}{\beta_i+\delta_i}\). Når kæden hopper, kan den hoppe op med sandsynlighed \(\frac{\beta_i}{\beta_i + \delta_i}\) eller hoppe ned med sandsynlighed \(\frac{\delta_i}{\beta_i+\delta_i}\).}
+
+\textbf{Side note:} Meget af kapitel 3.4 er eksempler på birth-and-death processer.
+
+\textbf{Theorem 66.} \textbf{(Birth-and-death processer: recurrence)} \emph{En birth-and-death proces er recurrent, hvis og kun hvis,}
+
+\[
+\sum_{i=1}^\infty\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_1} = \infty.
+\]
+
+\emph{Ækvivalent er en birth-and-death proces transient, hvis og kun hvis,}
+
+\[
+\sum_{i=1}^\infty\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_1} < \infty.
+\]
+
+\textbf{Theorem 67.} \textbf{(Birth-and-death processer: positive recurrence)} \emph{En birth-and-death proces er positive recurrent, hvis og kun hvis,}
+
+\[
+\sum_{i=1}^\infty\frac{\beta_{i-1}\cdot...\cdot \beta_0}{\delta_i\cdot...\cdot \delta_1} < \infty \hspace{10pt} \text{og} \hspace{10pt} \sum_{i=1}^\infty\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_1} = \infty
+\]
+
+\textbf{Theorem 68.} \textbf{(Eksplosion for en birth-and-death proces)} \emph{For en birth-and-death proces med intensiteterne}
+
+\[
+q_{i,i+1} = \beta_i, \hspace{10pt} q_{i+1,i}=\delta_{i+1}, \hspace{10pt} q_{i+1,i+1} = -(\delta_{i+1}+\beta_{i+1})
+\]
+
+\emph{og med \(q_{i,j} = 0\) ellers, \(i,j \in \mathbb{N}_0\), så er eksplosion muligt, hvis og kun hvis,}
+
+\[
+\sum_{i=1}^\infty\left(\frac{1}{\beta_i}+\frac{\delta_i}{\beta_i\beta_{i-1}}+...+\frac{\delta_i\cdot...\cdot \delta_1}{\beta_i\cdot...\cdot \beta_0}\right)<\infty
+\]
 
 \hypertarget{continuous-time-stochastic-processes}{%
 \chapter{Continuous Time Stochastic Processes}\label{continuous-time-stochastic-processes}}
