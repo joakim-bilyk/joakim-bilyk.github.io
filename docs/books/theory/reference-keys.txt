@@ -1,4 +1,4 @@
-fig:unnamed-chunk-7
+fig:unnamed-chunk-8
 introduction
 abbreviations
 to-do-reading
@@ -13,6 +13,8 @@ forward-rates-and-yields
 phase-type-representation-of-bond-prices
 term-structure-models
 estimation-of-ph-bond-models
+data-for-estimation
+estimation-of-phase-type-models
 survival-and-mortality-rates
 continuous-time-finance
 discrete-time-models

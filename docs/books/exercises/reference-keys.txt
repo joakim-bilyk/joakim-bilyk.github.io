@@ -1,0 +1,12 @@
+introduction
+abbreviations
+to-do-work
+continuous-time-finance
+exercises-week-1
+exercises-week-2
+exercises-week-3
+exercises-week-4
+exercises-week-5
+exercises-week-6
+exercises-week-7
+probabilistic-machine-learning

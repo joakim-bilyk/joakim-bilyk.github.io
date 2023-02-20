@@ -35,8 +35,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
 <script>
@@ -535,81 +533,11 @@ div.tocify {
 <li>
   <a href="books/theory/index.html">Theory</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-person"></span>
-     
-    Life insurance
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="stok_liv.html">Stochastic Processes in life-insurance (StokLiv)</a>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Topics in Life Insurance (Liv2)</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="Liv2_homework.html">Homework</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
+<li>
+  <a href="books/exercises/index.html">Exercises</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Non-life insurance
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="stok_skade.html">Stochastic processes in non-life-insurance (StokSkade)</a>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quantitative risk management (QRM)</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="QRM_projects.html">Projects</a>
-        </li>
-        <li>
-          <a href="QRM_homework.html">Homework</a>
-        </li>
-        <li>
-          <a href="QRM_examprep.html">Exam preparation</a>
-        </li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Machine Learning in Non-life Insurance</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="MLnLife_homework.html">Homework</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Finance
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Continuous finance (FinKont)</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="FinKont_homework.html">Homework</a>
-        </li>
-        <li>
-          <a href="FinKont_examprep.html">Exam preparation</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
+<li>
+  <a href="books/exam/index.html">Examprep</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -693,9 +621,9 @@ VaR_{0.99}(L)= 206.166  ,\hspace{30pt} ES_{0.99}(L)= 244.369
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="fu">sum</span>(L_prime[<span class="dv">1</span><span class="sc">:</span>bound])<span class="sc">/</span>bound</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span> <span class="ot">&lt;-</span> L_prime[bound]</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 202.9978</code></pre>
+<pre><code>## [1] 205.5985</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 243.3854</code></pre>
+<pre><code>## [1] 245.4054</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(L_prime[L_prime<span class="sc">&gt;-</span><span class="dv">1000</span>], <span class="at">breaks =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="float:right; padding:10px" /></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Look page 80 for R_i,j; rho_tau is given in problem-text, and diag is just 1</span></span>
@@ -736,9 +664,9 @@ VaR_{0.99}(L)= 120.930  ,\hspace{30pt} ES_{0.99}(L)= 181.634
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="fu">sum</span>(L_prime[<span class="dv">1</span><span class="sc">:</span>bound])<span class="sc">/</span>bound</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span> <span class="ot">&lt;-</span> L_prime[bound]</span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 117.9074</code></pre>
+<pre><code>## [1] 121.2081</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 183.1502</code></pre>
+<pre><code>## [1] 183.1506</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(L_prime, <span class="at">breaks =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-4-1.png" width="50%" style="float:right; padding:10px" /></p>
 <p><span class="math inline">\(VaR\)</span> and <span

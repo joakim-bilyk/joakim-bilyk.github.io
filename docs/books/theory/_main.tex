@@ -127,7 +127,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{February 17, 2023}
+\date{February 20, 2023}
 
 \begin{document}
 %\maketitle
@@ -889,11 +889,228 @@ We may use forward rate interchangeably as expectation-weighted discounting fact
 \hypertarget{phase-type-representation-of-bond-prices}{%
 \subsection{Phase-type representation of bond prices}\label{phase-type-representation-of-bond-prices}}
 
+Consider the interest rate process
+
+\[
+r(t)=r_{X(t)}(t),
+\]
+
+where \(\{X(t)\}_{t\ge 0}\) is a time-inhomogeneous Markov jump process on a statespace \(E=\{1,...p\}\) with intensity matrix \(\mathbf M(t)=\{\mu_{ij}\}_{i,j\in E}\) and \(r_i(t)\) for \(i=1,...,p\) are deterministic functions. We call this a Markov-jump representation interest model and we summaries the model below.
+
+\textbf{Definition. (Markov-jump representation interest model)}\index{Markov-jump representation interest model} \emph{Let \(\{X(t)\}_{t\ge 0}\) be a \(p\) dimensional time-inhomogeneous Markov jump process. Define \(\mathcal F_t=\sigma(X(s) : 0\le s\le t)\). Then if \(r_i(t)\) is bounded from below and deterministic the process}
+
+\[
+r(t)=r_{X(t)}(t),
+\]
+
+\emph{is an \(\mathcal F_t\) adapted interest rate process.}
+
+We see that in the context of this interest rate model the zero-coupon bond with maturity \(T\) has price process
+
+\[
+B(t,T)=\mathbb E^{\mathbb Q}\left[\left.\exp\left(-\int_t^Tr_{X(s)}(s)\ ds\right) \right\vert \mathcal F_t\right]=\mathbb E^{\mathbb Q}\left[\left.\exp\left(-\int_t^Tr_{X(s)}(s)\ ds\right) \right\vert X_t\right].
+\]
+
+We can then make the matrix representation of the discounting factors.
+
+\textbf{Theorem 3.2. (Bladt)} \emph{For \(i,j\in E\), let}
+
+\[
+d_{ij}(s,t)=\mathbb E^{\mathbb Q}\left[\left.1_{\{X(t)=j\}}\exp\left(-\int_s^tr_{X(u)}(u)\ du\right) \right\vert X_s=i\right],
+\]
+
+\emph{for \(s\le t\). Then the matrix \(\mathbf D(s,t)=\{d_{ij}(s,t)\}_{i,j\in E}\) has representation}
+
+\[
+\mathbf D(s,t)=\prod_s^t\Big(\mathbf I+(\mathbf M(u)-\Delta (r(u)))\ du\Big),
+\]
+
+\emph{with \(\Delta(r(u))=\text{diag}(r_1(u),...,r_p(u))\).}
+
+We can then by setting \(\rho\) as
+
+\[
+\rho=\max\left(0,-\min_{i\in E}\inf_{x\ge 0}r_i(x)\right),
+\]
+
+use the matrix representation of \(\mathbf D(s,t)\) to represent the zero-coupon bond and make a statement that relate \(B(t,T)\) to an IPH distributed random variable.
+
+\textbf{Theorem 3.3. (Bladt)} \textbf{(Phase-type representation of bond prices)}\index{Phase-type representation of bond prices} \emph{Assume the Markov-jump interest model. The price process of the zero-coupon bond satisfies}
+
+\[
+B(t,T)=\mathbb E^{\mathbb Q}\left[\left.\exp\left(-\int_t^Tr_{X(s)}(s)\ ds\right) \right\vert X_t\right]=\pi_{X(t)}^\top\mathbf D(t,T)\mathbf e,
+\]
+
+\emph{where \(\mathbf e=(1,...,1)^\top\) and \(\pi_{X(t)}\) is the distribution of \(X(t)\). Let \(\tau\sim IPH(\pi_{X(t)},\mathbf M(x+t)-\Delta (r(x+t))-\rho \mathbf I)\) and define \(\overline F(t)\) as the survival function for \(\tau\). Then we have}
+
+\[
+B(t,T)=e^{\rho (T-t)}\overline F(T).
+\]
+
+\emph{In particular if \(\rho = 0\) then \(B(t,T)=\overline F(T)\) is the survival function of \(\tau\).}
+
+We furthermore have the following result regarding the forward rate.
+
+\textbf{Corollary 3.4. (Bladt)} \emph{Assume the Markov-jump interest model and that \(X(t)=i\). The forward rate is then the hazard rate at \(T\) for the random variable \(\tau\sim IPH(\pi_{X(t)},\mathbf M(x+t)-\Delta (r(x+t))-\rho \mathbf I)\) less \rho i.e.}
+
+\[
+f(t,T)=\frac{f_{\tau}(T)}{\overline F(T)}-\rho.
+\]
+
+\emph{where \(f_\tau\) is the density function of \(\tau\).}
+
+We can now for explicity write the distribution function of \(\tau\) in 3.3 and 3.4 above.
+
+\textbf{Corollary 3.5. (Bladt)} \emph{The stopping time \(\tau(t)\sim IPH(\mathbb \pi,\mathbf M(x+t)-\Delta (r(x+t))-\rho \mathbf I)\) with \(\pi_j=1_{\{j=i\}}\) has distribution function}
+
+\[
+F_{\tau(t)}(T)=\mathbb E^{\mathbb Q}\left[\left.\int_t^T r_{X(y)}(y)\exp\left(-\int_t^yr_{X(u)}(u)\ du\right)\ dy\ \right\vert\ X(t)=i\right].
+\]
+
+\textbf{Corollary 3.6. (Bladt)} \emph{The stopping time \(\tau(t)\sim IPH(\mathbb \pi,\mathbf M(x+t)-\Delta (r(x+t))-\rho \mathbf I)\), with \(\pi\) as the initial distribution of \(X(t)\). Then the following holds}
+\begin{align*}
+\mathbb P(\tau > T)&=\mathbb E^{\mathbb Q}\left(\exp\left(-\int_0^T r_{X(u)}(u)\ du\right)\right),\\
+F_{\tau(t)}(T)&=\mathbb E^{\mathbb Q}\left(\int_0^T r_{X(y)}(y)\exp\left(-\int_0^y r_{X(u)}(u)\ du\right)\ dy\right),\\
+f_{\tau(t)}(t)&=\mathbb E^{\mathbb Q}\left( r_{X(t)}(t)\exp\left(-\int_0^t r_{X(u)}(u)\ du\right)\right),\\
+f(0,T)&=\frac{f_{\tau(t)}(T)}{1-F_{\tau(t)}(T)}.
+\end{align*}
+
 \hypertarget{term-structure-models}{%
 \subsection{Term structure models}\label{term-structure-models}}
 
+We may introduce another rate model, where \(r\) is drifting with a locally deterministic term and a drift given by a Brownian motion. We call these models term structure models.
+
+\textbf{Definition. (Term structure interest model)}\index{Term structure interest model} \emph{Let \(\mathbb Q\) be an equivalent martingale measure and let \(W^{\mathbb Q}\) be a \(\mathbb Q\)-Brownian motion. Assume that the process \(r\) has dynamics}
+
+\[
+dr(t)=\alpha(t,r(t))\ dt + \sigma(t,r(t))\ dW^{\mathbb Q}(t),
+\]
+
+\emph{with \(r(0)=r_0\). Assume that \(\alpha(t,r)\) and \(\sigma(t,r)\) are deterministic functions. Define \(\mathcal F_t=\sigma(W^{\mathbb Q}(s) : 0\le s\le t)\). Then \(r\) is \(\mathcal F_t\)-adapted and we call \(r\) a term structure interest rate with local drift \(\alpha\) and volatility \(\sigma\).}
+
+One easily sees that \(r\) is indeed a Markov process and the arbitrage free price of a zero-coupon bond in this model is given by the price process
+
+\[
+B(t,T)=p(t,r(t))
+\]
+
+i.e.~a function of time and the current rate. Furthermore, the pricing is derived from the risk neutral valuation formula:
+
+\[
+p(t,r(r))=\mathbb E^{\mathbb Q}\left[\left.e^{-\int_t^Tr(\tau)\ d\tau} \right\vert \mathcal{F}_t\right]=\mathbb E^{\mathbb Q}\left[\left.e^{-\int_t^Tr(\tau)\ d\tau} \right\vert r(t)\right],
+\]
+
+as \(r\) is Markov. We then know that the process
+
+\[
+e^{-\int_0^t r(u)\ du}B(t,T)=\mathbb E^{\mathbb Q}\left[\left.e^{-\int_0^Tr(\tau)\ d\tau} \right\vert \mathcal{F}_t\right]\tag{23}
+\]
+
+is a Doob \(\mathbb Q\)-martingale and so this gives rise to the term structure equation below.
+
+\textbf{Theorem 3.9. (Bladt)} \textbf{(Term structure equation)}\index{Term structure equation} \emph{Assume the term structure model. Then the bond price \(B(t,T)=p(t,r(t))\) satisfies the PDE}
+
+\[
+p_t(t,r)=rp(t,r)-\alpha(t,r)p_r(t,r)-\frac{1}{2}\sigma^2(t,r)p_{rr}(t,r)
+\]
+
+\emph{subect to the condition}
+
+\[
+p(T,r)=1.
+\]
+
+The result follows from Ito's formula on the martingale in (23) (simply set the local drift equal to 0).
+
+The equation above is generally not solvable, but there exist some restricted models, that does have an explicit solution. One of the models that does have a solution is the \textbf{affine model}.
+
+\textbf{Corollary.} \textbf{(Affine models)} \emph{Assume that the pricing function \(p\) of a zero-coupon bond has representation}
+
+\[
+B(t,T)=p(t,r(t))=e^{f(t)r(t)+g(t)},
+\]
+
+\emph{then the term structure equation becomes}
+
+\[
+r=f'(t)r+g'(t)+\alpha(t,r)f(t)+\frac{1}{2}\sigma^2(t,r)f^2(t),
+\]
+
+\emph{with terminal conditions}
+
+\[
+f(T)=g(T)=0.
+\]
+
+\emph{Assume furthermore that \(\alpha\) and \(\sigma\) has representation}
+
+\[
+\alpha(t,r)=a(t)+b(t)r\quad \text{and}\quad\sigma(t,r)=\sqrt{c(t)+d(t)r}
+\]
+\emph{then it follows that}
+
+\[
+f'(t)=1-b(t)f(t)-\frac{1}{2}d(t)f^2(t)\quad \text{and}\quad g'(t)=-a(t)f(t)-\frac{1}{2}c(t)f^2(t).
+\]
+
+One popular model is proposed by Vasicek where
+
+\[
+\alpha(t,r)=a-br(t)\quad \text{and}\quad \sigma(t,r)=\sigma,
+\]
+
+with \(a,b\in \mathbb R\) and \(\sigma\in\mathbb R_+\) are constants. Given the initial condition \(r(0)=r_0\in\mathbb R\) we have the solution as
+
+\[
+r(t)=r_0e^{-bt}+\frac{a}{b}\left(1-e^{-bt}\right)+\sigma\int_0^t e^{-(t-s)b}\ dW^{\mathbb Q}(t).
+\]
+
 \hypertarget{estimation-of-ph-bond-models}{%
 \subsection{Estimation of PH bond models}\label{estimation-of-ph-bond-models}}
+
+Estimation of rate models may be done by observing current spot rates on the market for zero-coupon bonds with a variety of maturity dates. One may for instance consider \(T=t+1,...,t+30\) or even up to \(T=t+100\). This gives us the corresponding yield curve defined as
+
+\[
+T\mapsto Y(t,T)=-\frac{\log p(t,T)}{T-t}=-\frac{\log B(t,T)}{T-t}.
+\]
+
+If we make probabilistic assumptions on \(r(t)\) we may in a parametrialized model estimate a parameter \(\theta\) that associate a distribution function for \(r(t)\) i.e.~\(\theta \mapsto F_{\theta,t}(r)\). Let us see how we may estimate a Markov-jump model and a term structure model below.
+
+\hypertarget{data-for-estimation}{%
+\subsubsection{Data for estimation}\label{data-for-estimation}}
+
+We consider yield for non-zero coupon bonds listed on \href{https://www.wsj.com/market-data/bonds/treasuries?mod=md_bond_view_treasury_quotes}{The Wall Street Journal}. The data considered was pulled on the 17th of february 2023.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ph_est_data.png}
+  \end{center}
+\end{figure}
+
+It must be stressed that the rates are not from zero-coupon bonds and so we in general have yields form contracts paying \(R\) continuously until maturity where the face value of \(1\) is payed. This in particular means that the prices in the data is prices according to
+
+\[
+B_R(t,T]=\mathbb E^{\mathbb Q}\left[\left.\int_t^T Re^{-\int_t^s r(u)\ du}\ ds+e^{-\int_0^T r(u)\ du} \right\vert\mathcal F_t\right]=R\ \mathbb  E^{\mathbb Q}\left[\left.\int_t^T e^{-\int_t^s r(u)\ du}\ ds \right\vert\mathcal F_t\right]+ B(t,T]
+\]
+
+This means that the yields are not equivalent to the zero-coupon yields. In fact it must hold that
+
+\[
+Y_R(t,T]\ge Y(t,T]
+\]
+
+with \(Y_R(t,T)\approx Y(t,T]+R\cdot f(T-t)\) where \(f\to 0\) for \(T-t\to 0\) and \(f\to 1\) for \(T-t\to \infty\). We will in any case try to determine estimate a statistical model of the yield curve based on the yields in the dataset.
+
+\hypertarget{estimation-of-phase-type-models}{%
+\subsubsection{Estimation of Phase-type models}\label{estimation-of-phase-type-models}}
+
+We restrict ourselves to the transition matrices on the form
+
+\[
+\mathbf T(x)=\lambda_\theta(x)\mathbf T,
+\]
+
+where \(\mathbf T\) is a constant \(p\times p\) matrix and \(\lambda_\theta\) is a real-valued function. The parameter space \(\Theta\subset \mathbb R^d\) for some \(d\ge 1\). This then gives a constant \emph{base dynamic} between the rate states \(1,...,p\in E\) and \(\lambda_\theta\) homogeneously speeds up or slows down the waiting time in each state by scaling the transitions intensities.
 
 \hypertarget{survival-and-mortality-rates}{%
 \section{Survival and mortality rates}\label{survival-and-mortality-rates}}
@@ -1181,7 +1398,7 @@ V_T^h=X,
 
 \textbf{Example.}
 
-\begin{center}\includegraphics[width=0.75\linewidth]{_main_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth]{_main_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 Consider \(R=0.04\), \(s=100\), \(u=1.1\), \(d=0.9\), \(p_u=0.6\) and \(p_d=0.4\). We consider a model of length \(T=2\) and we want to evaluate the price of the european call option with srike \(K=90\) that is the contingent claim
 
@@ -5566,7 +5783,7 @@ We say that a set \(A\in\mathbb{E}\) is an \textbf{invariant set} if \(T^{-1}(A)
 \textbf{Lemma 5.9. (Hansen)} \emph{Let \((\mathcal{X},\mathbb{E},\mu)\) be a probability space, and let \(T : \mathcal{X}\to \mathcal{X}\) be a measure-preserving map. Let \((\mathcal{Y},\mathbb{G})\) be another measurable space, and let \(S : \mathcal{Y} \to \mathcal{Y}\) be a measurable map.}
 \emph{Suppose there is a measurable map \(\gamma : \mathcal{X}\to \mathcal{Y}\) such that the following diagram commutes:}
 
-\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-11-1} \end{center}
+\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 \emph{Then \((\mathcal{Y},\mathbb{G},\gamma(\mu),S)\) is a measure-preserving dynamical system.}
 
@@ -5977,7 +6194,7 @@ c.~\emph{The array satisfies \textbf{Lyapounov's condition}\index{Lyapounov's co
 
 \textbf{Transitionsdiagram.} Et diagram, hvor der fremgår ssh. for et system overgår til et nyt stadie.
 
-\begin{center}\includegraphics[width=0.4\linewidth]{_main_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.4\linewidth]{_main_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 \textbf{Definition.} \textbf{(Stokastisk process i diskret tid)} \emph{Lad \(\mathcal{X}=(\mathcal{X}_n)_{n\in\mathbb{N}_0}\) være en familie af stokastiske variable og \(\mathcal{S}\) et udfaldsrum . Da er \(\mathcal{X}\) en funktion der opfylder \(\mathcal{X} : \mathbb{N}_0\times \Omega \to \mathcal{S}\) med \((n,w) \mapsto \mathcal{X}_n(w)\).}
 
@@ -7367,6 +7584,10 @@ A^{-1}=\text{diag}(A_{11}^{-1},...,A_{nn}^{-1}).
 
 \hypertarget{mlr3}{%
 \subsection{mlr3}\label{mlr3}}
+
+This short introduction to the \texttt{mlr3} package is based on the official documentation and introduction \href{https://mlr3book.mlr-org.com}{book} and exercises done in the course Machine Learning in Non-Life Insurance.
+
+We start by installing the package \texttt{mlr3verse} containing all of the importatant packages.
 
 \newpage
 
