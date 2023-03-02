@@ -62,6 +62,20 @@
 \usepackage{booktabs}
 \usepackage{subfig}
 \usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -87,7 +101,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{February 20, 2023}
+\date{March 02, 2023}
 
 \begin{document}
 %\maketitle
@@ -235,8 +249,8 @@ ML & Exercises week 1 & \\
 \hypertarget{continuous-time-finance}{%
 \chapter{Continuous Time Finance}\label{continuous-time-finance}}
 
-\hypertarget{exercises-week-1}{%
-\section{Exercises Week 1}\label{exercises-week-1}}
+\hypertarget{week-1}{%
+\section{Week 1}\label{week-1}}
 
 \textbf{Probability exercises}
 
@@ -479,8 +493,8 @@ Using that \(E\left.\left[\left(\exp\left(\lambda W_s\right)\right)\right\vert\m
 
 \[E[M_t\vert\mathcal{F}_s]=\exp\left(\lambda W_s-\frac{\lambda^2}{2}s\right)=M_s.\]
 
-\hypertarget{exercises-week-2}{%
-\section{Exercises Week 2}\label{exercises-week-2}}
+\hypertarget{week-2}{%
+\section{Week 2}\label{week-2}}
 
 \textbf{Exercise 1} \emph{(Bjork 4.1)} Compute the stochastic differential \(dZ_t\) when
 
@@ -931,8 +945,8 @@ E[X_t]=x_0e^{t}.
 
 Hence \(X_t\) has mean not depending on the tragetory of the sister-process \(Y_t\). \(\square\)
 
-\hypertarget{exercises-week-3}{%
-\section{Exercises Week 3}\label{exercises-week-3}}
+\hypertarget{week-3}{%
+\section{Week 3}\label{week-3}}
 
 \textbf{Exercise 1.} \emph{(Bjork 5.1)} Show that the scalar SDE
 
@@ -1376,8 +1390,8 @@ and so the conclusion is that \(X_s\) and \(X_t-X_s\) are independent. \(\square
 
 \textbf{Solution.}
 
-\hypertarget{exercises-week-4}{%
-\section{Exercises week 4}\label{exercises-week-4}}
+\hypertarget{week-4}{%
+\section{Week 4}\label{week-4}}
 
 \textbf{Exercise 1.} \emph{(Bjork 7.1)} Consider the standard Black-Scholes model and a \(T\)-claim \(\mathcal{X}\) of the form \(\mathcal{X}=\Phi(S_t)\). Denote the corresponding arbitrage free price processes by \(\Pi_t\).
 
@@ -1863,8 +1877,8 @@ and so \(h\) hedge the payout \(\Phi(S_T)=S_T^2\). \(\square\)
 
 \textbf{Solution.}
 
-\hypertarget{exercises-week-5}{%
-\section{Exercises Week 5}\label{exercises-week-5}}
+\hypertarget{week-5}{%
+\section{Week 5}\label{week-5}}
 
 \textbf{Exercise 1.} \emph{(Bjork 10.1)} Consider the standard Black-Scholes model. Fix the time of maturity \(T\) and consider the following \(T\)-claim \(X\):
 
@@ -2165,8 +2179,8 @@ The portfolio above will hedge \(Y\) with probability one. \(\square\)
 
 \textbf{Solution.}
 
-\hypertarget{exercises-week-6}{%
-\section{Exercises Week 6}\label{exercises-week-6}}
+\hypertarget{week-6}{%
+\section{Week 6}\label{week-6}}
 
 \textbf{Exercise 1.} \emph{(Exam 2017/18, problem 1, question (c))} Let \(W_t\) denote a Brownian motion and let
 
@@ -2279,8 +2293,8 @@ is a \(\tilde{P}\)-martingale. \(\square\)
 
 \textbf{Solution.}
 
-\hypertarget{exercises-week-7}{%
-\section{Exercises Week 7}\label{exercises-week-7}}
+\hypertarget{week-7}{%
+\section{Week 7}\label{week-7}}
 
 \textbf{Exercise 1.} \emph{(Exam 2018/19, problem 2, question (b).ii)}
 
@@ -2304,6 +2318,556 @@ is a \(\tilde{P}\)-martingale. \(\square\)
 
 \hypertarget{probabilistic-machine-learning}{%
 \chapter{Probabilistic Machine Learning}\label{probabilistic-machine-learning}}
+
+\hypertarget{week-1-1}{%
+\section{Week 1}\label{week-1-1}}
+
+\textbf{Exercise 1.} Let \(\tilde m = \arg\min_{m\in\mathcal G} r(m)\). Proof that
+
+\[
+r(\hat m_n)-r(\tilde m)\le 2\sup_{m\in\mathcal G}\left\vert\hat R_n(m)-r(m) \right\vert.
+\]
+
+\textbf{Solution.}
+
+We recall that per definition
+
+\[
+R(\hat m_n)=\mathbb E[L(Y,\hat m_n(X))\ \vert\ \mathcal D_n]\quad \text{and}\quad r(\hat m_n)=\mathbb E[R(\hat m_n)]
+\]
+
+for some estimator \(\hat m_n\). Assume now that \(m(\mathcal D_n)=\hat m_n\in \mathcal G\) is the estimator given the data \(\mathcal D_n\) from the precedure \(m\). We led \(\tilde m\) be the Bayes estimator on \(\mathcal G\). We therefore have
+\begin{align*}
+r(\hat m_n)-r(\tilde m)&=r(\hat m_n)-r(\tilde m)+\hat R_n(\hat m_n)-\hat R_n(\hat m_n)+\hat R_n(\tilde m)-\hat R_n(\tilde m)\\
+&=r(\hat m_n)-\hat R_n(\hat m_n)+\hat R_n(\tilde m)-r(\tilde m)+\underbrace{\hat R_n(\hat m_n)-\hat R_n(\tilde m)}_{\le 0}\\
+&\le \Big(r(\hat m_n)-\hat R_n(\hat m_n)\Big)+\Big(\hat R_n(\tilde m)-r(\tilde m)\Big)\\
+&\le \Big\vert \hat R_n(\hat m_n)-r(\hat m_n)\Big\vert+\Big\vert \hat R_n(\tilde m)-r(\tilde m)\Big\vert\\
+&\le2\sup_{m\in \mathcal G} \Big\vert \hat R_n(m)-r(m)\Big\vert
+\end{align*}
+as desired. \(\square\)
+
+We consider the Poisson deviance loss
+
+\[
+L_{\text{pois:dev}}(y_1,y_2)=2\left(y_1\log \frac{y_1}{y_2}-y_1+y_2\right).
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Show that \(\arg\min r(m)=m^*(x)=E[Y\ \vert\ X=x]\).
+\item
+  In the squared loss case \(L_2(y_1,y_2)=(y_1-y_2)^2\), we used its Hilbert space property to derive that for any estimator \(\hat m_n(x)\)
+  \[
+    r_2(\hat m_n(x))-r_2(m^*(x))=\mathbb E[L_2(\hat m_n(x),m^*(x))]
+    \]
+  Show that an anaolgue result for the he Poisson deviance loss is not true, i.e.,
+  \begin{align*}
+    r_{\text{pois:dev}}(\hat m_n(x))-r_{\text{pois:dev}}(m^*(x))&=\mathbb E\left[2\left(Y\log \frac{m^*(x)}{\hat m_n(x)}-m^*(x)+\hat m_n(x)\right)\right]\\
+    &\ne \mathbb E[L_{\text{pois:dev}}(\hat m_n(x),m^*(x))]
+    \end{align*}
+\end{enumerate}
+
+\textbf{Solution (1).}
+
+We have that
+\begin{align*}
+r(m)&=\mathbb E\left[2\left(Y\log \frac{Y}{m(X)}-Y+m(X)\right)\right]\\
+&=\mathbb E\left[ \mathbb E\left.\left[2\left(Y\log \frac{Y}{m(x)}-Y+m(x)\right)\ \right\vert\ X=x\right]\right]\\
+\end{align*}
+We see that the integrand is differentiable in \(m=m(x)\) and so we have
+\begin{align*}
+\frac{\partial}{\partial m}r(m)&=\frac{\partial}{\partial m}\mathbb E\left[ \mathbb E\left.\left[2\left(Y\log \frac{Y}{m}-Y+m\right)\ \right\vert\ X=x\right]\right]\\
+&=\mathbb E\left[ \mathbb E\left.\left[\frac{\partial}{\partial m}2\left(Y\log \frac{Y}{m}-Y+m\right)\ \right\vert\ X=x\right]\right]\\
+&=\mathbb E\left[ \mathbb E\left.\left[2\left(-Y \frac{m}{Y}\frac{Y}{m^2}+1\right)\ \right\vert\ X=x\right]\right]\\
+&=\mathbb E\left[ \mathbb E\left.\left[2\left(-\frac{Y}{m}+1\right)\ \right\vert\ X=x\right]\right]\\
+&=-2\mathbb E\left[ \mathbb E\left.\left[\frac{Y}{m}\ \right\vert\ X=x\right]\right]+2
+\end{align*}
+Setting this equal to zero gives
+
+\[
+1=\mathbb E\left[ \mathbb E\left.\left[\frac{Y}{m}\ \right\vert\ X=x\right]\right]=\frac{1}{m}\mathbb E\left[ \mathbb E\left.\left[Y\ \right\vert\ X=x\right]\right]
+\]
+
+Giving that the expectation is minimized for
+
+\[
+m=E\left.\left[Y\ \right\vert\ X=x\right]
+\]
+
+as desired. \(\square\)
+
+\textbf{Solution (2).}
+
+Take any estimator \(\hat m_n\) and consider the risk associated with the estimator:
+\begin{align*}
+r_{\text{pois:dev}}(\hat m_n(X))-r_{\text{pois:dev}}(m^*(x))&=\mathbb E\left[2\left(Y\log \frac{Y}{\hat m_n(X)}-Y+\hat m_n(X)\right)\right]-\mathbb E\left[2\left(Y\log \frac{Y}{ m^*(X)}-Y+m^*(X)\right)\right]\\
+&=\mathbb E\left[2\left(Y\log \frac{Y}{\hat m_n(X)}-Y+\hat m_n(X)-Y\log \frac{Y}{ m^*(X)}+Y-m^*(X)\right)\right]\\
+&=\mathbb E\left[2\left(Y\log \frac{Ym^*(X)}{\hat m_n(X)Y}+\hat m_n(X)-m^*(X)\right)\right]\\
+&=\mathbb E\left[2\left(Y\log \frac{m^*(X)}{\hat m_n(X)}+\hat m_n(X)-m^*(X)\right)\right]
+\end{align*}
+Yielding the desired result. \(\square\)
+
+\textbf{Exercise 3.} We consider a simple regression case with no explanatory variables. We denote by \(\hat m_{n,1}\) the sample mean and by \(\hat m_{n,2}\) the sample mean. Furthermore, \(\hat R_{n,1}\) and \(\hat R_{n,2}\) denote the empirical risk with respect to the \(L_1\) loss and the squared loss respectively.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate 10,000 iid observations \(y_1,...,y_{10000}\) from a standard normal distribution. Compare
+  \[
+    \hat R_{n,1}(\hat m_{n,1}),\hat R_{n,1}(\hat m_{n,2}),\hat R_{n,2}(\hat m_{n,1}),\hat R_{n,2}(\hat m_{n,2}).
+    \]
+\item
+  Generate 10,000 iid observations \(y_1,...,y_{10000}\) from a \(t\)-distribution with one degree of freedom. Compare
+  \[
+    \hat R_{n,1}(\hat m_{n,1}),\hat R_{n,1}(\hat m_{n,2}),\hat R_{n,2}(\hat m_{n,1}),\hat R_{n,2}(\hat m_{n,2}).
+    \]
+\item
+  What conclusion can you draw from the two exercises?
+\end{enumerate}
+
+\textbf{Solution (1).}
+
+We set the seed to 1 \texttt{set.seed(1)} and generate the \(n=10000\) samples.
+
+We may now compute the sample mean and median.
+
+One may recall that \(\text{median}(X)=\mathbb E[X]=0\) for \(X\sim \mathcal N(0,1)\) and so we would expect \(\hat m_{n,1}\approx \hat m_{n,2}\). We can compute the empirical risk wrt. the \(L_1\) and \(L_2\) loss.
+
+Although these are empirical risk we have not computed an estimate of the risk as we should generate more samples of the risk. As such we draw using the above method \(S=1000\) samples of the risks and compute the means.
+
+We may compare the results in the table below.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule()
+Measure & Value \\
+\midrule()
+\endhead
+\(\hat R_{n,1}(\hat m_{n,1})\) & 0.7979859 \\
+\(\hat R_{n,1}(\hat m_{n,2})\) & 0.7980077 \\
+\(\hat R_{n,2}(\hat m_{n,1})\) & 1.0004189 \\
+\(\hat R_{n,2}(\hat m_{n,2})\) & 1.0003643 \\
+\bottomrule()
+\end{longtable}
+
+We can see that the following holds:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  For the \(L_1\) loss the empirical median does better than the empirical mean,
+\item
+  For the squared loss the empirical median does worse than the empirical mean.
+\end{enumerate}
+
+\textbf{Solution (2).}
+
+We set the seed to 1 \texttt{set.seed(1)} and generate the \(n=10000\) samples.
+
+We may now compute the sample mean and median.
+
+One may recall that \(\text{median}(X)=\mathbb E[X]=0\) for \(X\sim \mathcal t(1)\) and so we would expect \(\hat m_{n,1}\approx \hat m_{n,2}\). We can compute the empiracal risk wrt. the \(L_1\) and \(L_2\) loss.
+
+We may compare the results in the table below.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule()
+Measure & Value \\
+\midrule()
+\endhead
+\(\hat R_{n,1}(\hat m_{n,1})\) & 11.7586085 \\
+\(\hat R_{n,1}(\hat m_{n,2})\) & 16.7838177 \\
+\(\hat R_{n,2}(\hat m_{n,1})\) & \ensuremath{1.8456626\times 10^{7}} \\
+\(\hat R_{n,2}(\hat m_{n,2})\) & \ensuremath{1.84548\times 10^{7}} \\
+\bottomrule()
+\end{longtable}
+
+We see that for the \(t\)-distribution with one degree of freedom we see the same relation as in the normal case. The median does better in the \(L_1\) loss but worse under the squared loss.
+
+\textbf{Solution (3).}
+
+We can see that the risk is far greater than the normal case. Comparing the density functions of a standard normal distribution and the \(t\)-distribution with one degree of freedom we see that the mean is the same but the variance is far greater than the normal case. In fact, with degrees of freedom below 2 we have that the variance is infinite.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_week1_ex3.png}
+  \end{center}
+\end{figure}
+
+This gives that for a given sample size the risk will tend to infinity as \(n\) grows to infinity. This in turn explains the large values we see in the risk. We see that for the \(t\)-distribution with one degree of freedom we see the same relation as in the normal case. The median does better in the \(L_1\) loss but worse under the squared loss.
+
+\textbf{Exercise 4.} We want to practise model tuning with the mlr3 package. Go through the following steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Install and load the relevant ml3 packages: mlr3, mlr3learners, mlr3tuning, mlr3mbo.
+\item
+  Create a task
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Load the \texttt{mtcars} data (write: \emph{data(mtcars)})
+\item
+  Use the \texttt{as\_task\_regr} to create a task with \texttt{mpg} as target
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Set \texttt{regr.xgboost} as learner with corresponding search space; e.g.,
+  \begin{align*}
+  eta &= to\_tune(0, 1)\\
+  nrounds &= to\_tune(10, 5000)\\
+  max\_depth &= to\_tune(1, 20)\\
+  colsample\_bytree &= to\_tune(0.1, 1)\\
+  subsample &= to\_tune(0.1, 1)
+  \end{align*}
+\item
+  Tune your learner on you task using the \texttt{tune} function with
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Resampling method: 5-fold cross validation
+\item
+  Measure: squared loss
+\item
+  Method: \texttt{mbo} or \texttt{random\ search}
+\item
+  Terminator: 10 evaluations
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Fit your learner on the task using the optimal hyper parameters calculated
+\end{enumerate}
+
+\textbf{Solution (1).}
+
+We install the required packages.
+
+\textbf{Solution (2).}
+
+We start by loading the data.
+
+We now transform the data into a task.
+
+We may now split out data set into random partions of a training dataset and a testing dataset.
+
+We see that the testing dataset has \(N_1=11\) and the training dataset has \(N_2=21\). We will be training the model on the training dataset. Therefore we start a task on the subset.
+
+\textbf{Solution (3).}
+
+We now initiate a learner.
+
+We can now look at the current configuration of the leaner by looking at the parameter space of the hyperparameter.
+
+As the text says we set som of the parameters to as specific section of the parameter space.
+
+\textbf{Solution (4).}
+
+We tune a regression model using \texttt{mbo} search.
+
+We can consider the the estimates from each subset and the fitted parameters.
+
+\textbf{Solution (5).}
+
+We can now use optimal paramteres in \texttt{instance\$result\_learner\_param\_vals} to create a learner that we may fit to the training data.
+
+We now fit the data.
+
+We can now predict onto the testing data.
+
+Using a diagram we can see. That the model does pretty well. In fact the empirical risk is 6.55.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_week1_ex4.png}
+  \end{center}
+\end{figure}
+
+\hypertarget{week-2-1}{%
+\section{Week 2}\label{week-2-1}}
+
+From now on, given sample size \(n\), a dimension \(p\), and a correlation parameter \(0\le \texttt{rho}<1\) we will generate data \(X\) via the following code.
+
+The resulting features will have approximately support on \([−1, 1]\) and will have approximately pairwise correlation of size \(\texttt{rho}\). Given the distribution of \(\varepsilon\) and a regression function \(m\), we then generate data \((X_i,Y_i)_{i=1,...,n}\) via
+
+\[
+Y_i=m(X_i)+\varepsilon_i,
+\]
+
+where \(\varepsilon_i\) are iid copies of \(\varepsilon\) and \(X_i\) is the \(i\)th row of \(X\).
+
+\textbf{Exercise 1.} We want to try out ordinary least squares regression, lasso, ridge regression and elastic net on some different data generating settings (Model 1--4).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+p
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+s
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+rho
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+m
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\varepsilon\)
+\end{minipage} \\
+\midrule()
+\endhead
+Model 1 & 1000 & 100 & 5 & 0.3 & \(\sum_{j=1}^s x_j\) & \(\mathcal N(0,1)\) \\
+Model 2 & 1000 & 100 & 100 & 0.3 & \(\sum_{j=1}^s x_j\) & \(\mathcal N(0,1)\) \\
+Model 3 & 1000 & 100 & 5 & 0.3 & \(\sum_{j=1}^s 0.1x_j\) & \(\mathcal N(0,1)\) \\
+Model 4 & 1000 & 100 & 100 & 0.3 & \(\sum_{j=1}^s 0.1x_j\) & \(\mathcal N(0,1)\) \\
+\bottomrule()
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Given one set of training data for each model tune (i.e.~estimate optimal hyperprameter) via 5-fold cross-validation using a search method and number of evals of your choice. You should now have an estimated optimal hyperparameter for every combination of model and method.
+\item
+  Generate 100 test sets each of size n for every model and calculate empirical mean and standard deviation of the test error for each method and model using the hyperparameters calculated in (a). Create a table of your results (each missing entry should show hyperparameter: mean(sd)):
+\end{enumerate}
+
+\begin{longtable}[]{@{}lcccc@{}}
+\toprule()
+& Least Squares & Ridge & Lasso & Elastic Net \\
+\midrule()
+\endhead
+Model 1 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \(\cdot\) \\
+Model 2 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \(\cdot\) \\
+Model 3 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \(\cdot\) \\
+Model 4 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \(\cdot\) \\
+\bottomrule()
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Discuss why test error alone might often not be the (only) quantity of interest.
+\end{enumerate}
+
+\textbf{Solution (a).}
+
+We start by simulating the data with the seed 1 for the training data and 2 for testing data.
+
+\textbf{Model 1}
+
+We may now estimate under model 1 by setting the parameters and generating the data.
+
+We can estimate the optimal parameters under least squares estimation with the \texttt{lm} function.
+
+We can use \texttt{predict} to see the model prediction vs.~the true values.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_week2_ex1_01.png}
+  \end{center}
+\end{figure}
+
+We can also use \texttt{mlr3} to tune optimal hyperparameters for a lasso, ridge and elastic net estimator. We start as usual by slitting the data into training and testing datasets and starting a task.
+
+We can now initiate a leaner. We start by fitting the hyperparameter for the lasso learner.
+
+We use the \texttt{glmnet} as it is an algorithm that solves the minimizing problem
+
+\[
+\hat{\beta}_\lambda^{\text {glmnet }} =\underset{\beta \in \mathbb{R}^p}{\arg \min }\left\{\hat{R}_n(\beta)+J_\lambda(\beta)\right\},\hspace{15pt}J_\lambda(\beta)=\lambda \left[\alpha\sum_{j=1}^p\left|\beta_j\right|+\frac{1-\alpha}{2}\sum_{j=1}^p\beta_j^2\right],
+\]
+
+One may recall that the lasso estimator is given by
+
+\[
+\hat{\beta}_\lambda^{\text {lasso }} =\underset{\beta \in \mathbb{R}^p}{\arg \min }\left\{\hat{R}_n(\beta)+J_\lambda(\beta)\right\},\hspace{15pt}J_\lambda(\beta)=\lambda \sum_{j=1}^p\left|\beta_j\right|,
+\]
+
+and so the lasso estimator is a specialcase of the \texttt{glmnet} with \(\alpha=1\). From the above we see that the minimizing algorithm punishes large beta's. The hyperparameter to tune is then \(\lambda\ge 0\) (\texttt{s} is the syntax for \(\lambda\)). Looking at the parameters in the \texttt{learner\_lasso} one can see the entire hyperparameter space.
+
+Let us tune a lasso learner by setting \texttt{alpha\ =\ 1} and tuning \texttt{s\ =\ totune(0,1)} i.e.~searching for \(\lambda \in [0,1]\).
+
+Now that we have tuned the algorithm we can fit the model with the above \(s\) (0.0618).
+
+Lets quickly look at the predictions.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_week2_ex1_02.png}
+  \end{center}
+\end{figure}
+
+One can get the coefficients of \(\beta\) by predicting the data frame \texttt{I\ =\ diag(1,nrow\ =\ 100)} being the identity.
+
+One can see that the values is close to the true value \(\beta=(1,1,1,1,1,0,...,0)\).
+
+We can now estimate the parameters in ridge regression by setting \(\alpha = 0\) and then getting a scaled version of \(\lambda\).
+
+We fit the model with the above \(s\) (0.22).
+
+Lets quickly look at the predictions.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_week2_ex1_03.png}
+  \end{center}
+\end{figure}
+
+For good measures we calculate the beta's as in lasso.
+
+Finally, let us tune an elastic net.
+
+We fit the model with the above \(s\) (0.0623).
+
+Lets quickly look at the predictions.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_week2_ex1_04.png}
+  \end{center}
+\end{figure}
+
+For good measures we calculate the beta's as in lasso.
+
+Let's lastly look at how the different estimators do with respect to the true beta.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_week2_ex1_05.png}
+  \end{center}
+\end{figure}
+
+We may now estimate the remaining three models.
+
+\textbf{Model 2-4.} We generate the data and estimate under the model. We define a function that compute the estimators.
+
+Now we simply gather the results.
+
+\textbf{Solution (b).}
+
+We simply generate \(N=100\) test sets and compute the mean squared error for each run, then take the empirical mean and standard deviation of the 100 samples of the empirical mean squared error.
+
+\textbf{Solution (c).}
+
+In general, it is better to have as small of a test error as possible. It it however also important not to overcomplicate the model if not all variables is relevant. Ridge regression does well in the models with fewer explanatory variable \(s\) as it punishes under \(L^2\) distance rather than \(L^1\). This means that ridge does a better job in setting \(\beta_j\approx 0\) for \(j> s\).
+
+\hypertarget{week-3-1}{%
+\section{Week 3}\label{week-3-1}}
+
+\textbf{Exercise 1.} Random forests are known for their computational speed and can be used in settings with thousands of features. Here we discuss how it is usually decided where to split a node. Assume we have n observations at a node, and want to find the optimal split. The \texttt{mtry} provides us with a list of possible features to split. Fix one feature and assume that observations in that node are sorted according to the value of that feature. In the current node the squared loss is
+
+\[
+Q=\sum_{i=1}^n(x_i-\overline x)^2=\sum_{i=1}^nx_i^2-n\overline{x}^2.
+\]
+
+Define
+
+\[
+Q_L(k)=\sum_{i=1}^k(x_i-\overline{x}_k^+)^2,\qquad Q_R(k)=\sum_{i=k+1}^n(x_i-\overline{x}_k^-)^2
+\]
+
+where
+
+\[
+\overline{x}_k^+=\frac{1}{k}\sum_{i=1}^kx_i\quad \text{and}\quad \overline{x}_k^-=\frac{1}{n-k}\sum_{i=k+1}^nx_i.
+\]
+
+The node is split at that \(k\) that minimizes \(Q_L(k)+Q_R(k)\). Discuss how the optimal \(k\) can be found more efficiently than calculating for every \(k\) \(Q_L(k)+Q_R(k)\) from scratch.
+
+\textbf{Solution.}
+
+\textbf{Exercise 2.} We extend the framework from previous week and now also consider classification tasks. When considering a classification task, the only change in the data generation compared to the regression setting is that we generate the response \(Y\) via
+
+\[
+Y=\frac{\text{sign}(m(X_i)+\varepsilon_i)+1}{2}.
+\]
+
+Try out least squares regression and classification with least squares and binary loss. As learners, we will work with linear regression/logistic regression (with e.g.~elastic net penalization), generalized additive models from the \texttt{mgcv} package and random forest via the \texttt{ranger} package. Part of the task is to figure out how to optimize the (penalty) parameters to be successful in the sparse settings as given below. We will consider the following models.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+p
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+s
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+rho
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+m
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\varepsilon\)
+\end{minipage} \\
+\midrule()
+\endhead
+Model 1 & 1000 & 100 & 5 & 0.3 & \(\sum_{j=1}^s x_j\) & \(\mathcal N(0,1)\) \\
+Model 3 & 1000 & 100 & 5 & 0.3 & \(\sum_{j=1}^s 0.1x_j\) & \(\mathcal N(0,1)\) \\
+Model 5 & 1000 & 100 & 5 & 0.3 & \(\sum_{j=1}^s m_j(x_j)\) & \(\mathcal N(0,1)\) \\
+Model 6 & 1000 & 100 & 5 & 0.3 & \(\sum_{j=1}^s m_j(x_j)+\sum_{j=1}^{s-1} m_j(x_jx_{j+1})\) & \(\mathcal N(0,1)\) \\
+\bottomrule()
+\end{longtable}
+
+Here \(m_j(x_j)=(-1)^j2\sin(\pi x_j)\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  For each of the three settings (regression: squared loss, classification: squared loss, classification: binary loss), given one set of training data for each model tune (i.e.~estimate optimal hyperprameter) via 5-fold cross-validation using a search method and number of evals of your choice. You should now have an estimated optimal hyperparameter for every combination of setting, model and learner.
+\item
+  Generate 100 test sets each of size n for every setting, model and learner and calculate empirical mean and standard deviation of the test error for each setting, model and learner using the hyperparameters calculated in (a). Create three tables ofor your results (each missing entry should show hyperparameter: mean(sd)):
+\end{enumerate}
+
+\begin{longtable}[]{@{}lcccc@{}}
+\toprule()
+& Linear model & glm & Random forest & \\
+\midrule()
+\endhead
+Model 1 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \\
+Model 3 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \\
+Model 5 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \\
+Model 6 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \\
+\bottomrule()
+\end{longtable}
+
+\textbf{Solution (a).}
+
+\textbf{Solution (b).}
 
 \newpage
 

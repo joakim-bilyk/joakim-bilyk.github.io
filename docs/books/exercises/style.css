@@ -267,9 +267,14 @@ blockquote {
   color: #ccc;
 }
 
-.dark-mode .book .book-body .page-wrapper .page-inner section.normal table tr {
-  background-color: rgb(40,40,40);
+.dark-mode .book .book-body .page-wrapper .page-inner section.normal table:not(details table) tr {
+  background-color: rgb(40, 40, 40);
 }
-.dark-mode .book .book-body .page-wrapper .page-inner section.normal table tr:nth-child(2n) {
-  background-color: rgb(34,34,34);
+
+.dark-mode .book .book-body .page-wrapper .page-inner section.normal table:not(details table) tr:nth-child(2n) {
+  background-color: rgb(34, 34, 34);
+}
+
+code {
+  color: blue;
 }

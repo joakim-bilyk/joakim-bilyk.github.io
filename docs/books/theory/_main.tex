@@ -127,7 +127,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{February 20, 2023}
+\date{March 02, 2023}
 
 \begin{document}
 %\maketitle
@@ -1053,6 +1053,58 @@ f(T)=g(T)=0.
 f'(t)=1-b(t)f(t)-\frac{1}{2}d(t)f^2(t)\quad \text{and}\quad g'(t)=-a(t)f(t)-\frac{1}{2}c(t)f^2(t).
 \]
 
+\textbf{Proof.}
+
+From theorem 3.9 the term structure equation is
+
+\[
+p_t(t,r)=rp(t,r)-\alpha(t,r)p_r(t,r)-\frac{1}{2}\sigma^2(t,r)p_{rr}(t,r).
+\]
+
+Under assumption that the log of the price process is affine we find that
+
+\[
+p_t(t,r)=(f'(t)r+g'(t)p(t,r),\quad p_r(t,r)=f(t)p(t,r),\quad p_{rr}(t,r)=f^2(t)p(t,r)
+\]
+
+and so
+
+\[
+(f'(t)r+g'(t)p(t,r)=rp(t,r)-\alpha(t,r)f(t)p(t,r)-\frac{1}{2}\sigma^2(t,r)f^2(t)p(t,r)
+\]
+
+Hence
+
+\[
+r=f'(t)r+g'(t)+\alpha(t,r)f(t)+\frac{1}{2}\sigma^2(t,r)f^2(t).
+\]
+
+This shows the first part. Now assume that
+
+\[
+\alpha(t,r)=a(t)+b(t)r,\quad\sqrt{c(t)+d(t)r}.
+\]
+
+When inserting in the equation before we have
+
+\[
+ r=f'(t)r+g'(t)+(a(t)+b(t)r)f(t)+\frac{1}{2}(c(t)+d(t)r)f^2(t).
+\]
+
+Then by a coefficient matching argument we have
+
+\[
+\begin{pmatrix}
+1\\ 0
+\end{pmatrix}^\top=
+\begin{pmatrix}
+f'(t)+b(t)f(t)+\frac{1}{2}d(t)f^2(t)\\
+g'(t)+a(t)f(t)+\frac{1}{2}c(t)f^2(t)
+\end{pmatrix}^\top
+\]
+
+since by multiplying by \((r,1)^\top\) we get the equation above. Isolating \(f'\) and \(g'\) yields the result. \(\blacksquare\)
+
 One popular model is proposed by Vasicek where
 
 \[
@@ -1064,6 +1116,13 @@ with \(a,b\in \mathbb R\) and \(\sigma\in\mathbb R_+\) are constants. Given the 
 \[
 r(t)=r_0e^{-bt}+\frac{a}{b}\left(1-e^{-bt}\right)+\sigma\int_0^t e^{-(t-s)b}\ dW^{\mathbb Q}(t).
 \]
+
+One may achieve the above integration result by differentiating the function \(h(t,r)=r(t)e^{bt}\) and integrating the derivative giving
+\begin{align*}
+r(t)e^{bt}-r(0)&=\int_0^tdh=\int_0^tbe^{bs}r(s)+e^{bs}(a-br(s))\ ds+\int_0^te^{bs}\sigma\ dW^{\mathbb Q}(s)\\
+&=\frac{a}{b}(e^{bt}-1)+\sigma\int_0^te^{bs}\ dW^{\mathbb Q}(s)
+\end{align*}
+where simpel isolation gives the equation.
 
 \hypertarget{estimation-of-ph-bond-models}{%
 \subsection{Estimation of PH bond models}\label{estimation-of-ph-bond-models}}
