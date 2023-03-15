@@ -127,7 +127,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 02, 2023}
+\date{March 15, 2023}
 
 \begin{document}
 %\maketitle
@@ -307,7 +307,7 @@ Noget indhold
 
 Life insurance mathematics revolves arrow Markov processes in continuous time on some discrete (or at least countable) state space. This may in the simplest model be the life-death model or it can be a generalized life-death model with interest levels. In any case, we use Markov processes to determine the possible payments that may occur in the future or have occurred in the past. Let us start by define the Markov jump process as follows.
 
-\textbf{Definition 2.1. (Bladt)} \emph{A continuous-time stochastic process \(\{X_t\}_{t\ge 0}\) taking values in a countable space \(E\) is called a Markov jump process\index{Markov jump process} with state space W if for all \(t_n>t_{n-1}>\cdots > t_1>0\) and \(i_n,i_{n-1},...,i_0\in E\) it holds that}
+\textbf{Definition 2.1. (Bladt)} \emph{A continuous-time stochastic process \(\{X_t\}_{t\ge 0}\) taking values in a countable space \(E\) is called a Markov jump process\index{Markov jump process} with state space \(E\) if for all \(t_n>t_{n-1}>\cdots > t_1>0\) and \(i_n,i_{n-1},...,i_0\in E\) it holds that}
 
 \[
 P(X_{t_n}=i_n \ \vert\ X_{t_{n-1}}=i_{n-1},...,X_{t_1}=i_1,X_0=i_0)=P(X_{n-1}=i_n\ \vert\ X_{n-1}=i_{n-1}).
@@ -1173,6 +1173,182 @@ where \(\mathbf T\) is a constant \(p\times p\) matrix and \(\lambda_\theta\) is
 
 \hypertarget{survival-and-mortality-rates}{%
 \section{Survival and mortality rates}\label{survival-and-mortality-rates}}
+
+\hypertarget{survival-probabilities-and-forward-mortality-rates}{%
+\subsection{Survival probabilities and forward mortality rates}\label{survival-probabilities-and-forward-mortality-rates}}
+
+We consider a non-negative random variable \(\tau\) on a probability space \((\Omega,\mathcal F, P)\). The mortality rate of \(\tau\) at time \(t\) is defined through the dynamics in the following definition.
+
+\textbf{Definition. (Mortality rate)}\index{Mortality rate} \emph{Let \(\tau\ge 0\) be a non-negative stochastic variable. The mortality rate function \(\mu(t)\) is a, possibly stochastic, function defined as}
+
+\[
+\mu(t)\ dt=\mathbb P(\tau\in[t,t+dt)\ \vert\ \tau > t)=\frac{f(t)}{\overline F(t)}\ dt,
+\]
+
+\emph{where \(\overline F(t)=1-F(t)=\mathbb P(\tau >t)\) is the survival function of \(\tau\).}
+
+The definition above shows that we may alternatively define \(\mu\) in terms of the below derivative
+
+\[
+\mu(t)=-\frac{d}{dt}\log\Big(\overline F(t)\Big),
+\]
+
+hence we have that
+
+\[
+-\int_0^t\mu(s)\ ds=\log\Big(\overline F(t)\Big)-\log\Big(\overline F(0)\Big)=\log\Big(\overline F(t)\Big),
+\]
+
+giving the well-known formula
+
+\[
+\overline F(t)=\exp\left(-\int_0^t\mu(s)\ ds\right).
+\]
+
+This also gives the nice interpretation for the conditional distribution of \(\tau\) given \(\tau>t\) since.
+
+\[
+\mathbb P(\tau > s\ \vert\ \tau > t)=\frac{\overline F(s)}{\overline F(t)}=\exp\left(-\int_t^s\mu(u)\ du\right).
+\]
+
+\textbf{Corollary.} \emph{Let \(\tau\ge 0\) be a non-negative stochastic variable with mortality rate \(\mu(t)\). The probability that \(\tau \in [t,s)\) in the event \(\tau >t\) is}
+
+\[
+p(t,s)=\mathbb P(\tau > s\ \vert\ \tau > t)=\exp\left(-\int_t^s\mu(u)\ du\right).
+\]
+
+How to deal with these random intensities. Either we could model them directly under a probability measure, \(\mathbb P\) say, but since we do not know much about the probabilities anyway, we might as well model the consequences in price (reserve) by changes of the intensities. That is, how much does a change in intensity cost? This might been seen in a financial context, even as a derivative security, and should therefore be evaluated relative to a risk--free asset, i.e.~by using an equivalent martingale measure, \(\mathbb Q\) say. We therefore define the mortality forward rates as
+
+\textbf{Definition. (Mortality forward rate)}\index{Mortality forward rate} \emph{Let \(\tau\ge 0\) be a non-negative stochastic variable with mortality rate \(\mu(t)\). The mortality forward rate rate \(m(t,s)\) is a function defined by}
+
+\[
+\exp\left(-\int_t^s m(t,u)\ du\right)=q(t,s)=\mathbb E^{\mathbb Q}\left[\left. \exp\left(-\int_t^s\mu(u)\ du\right)\right\vert \mathcal F(t)\right].
+\]
+
+Notice that in particular the function \(q(t,s)\) solves the differential equation
+
+\[
+\frac{\partial q(t,s)}{\partial s}=-m(t,s)q(t,s),\qquad q(t,t)=1.
+\]
+
+When evaluating a payment from insurance company and the insuread we also need to take into account the interest rate \(r\) and so bonds would be priced according to the quantity
+
+\[
+E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\right\vert \mathcal F(t)\right].
+\]
+
+Notice that the filtration \(\mathcal F(t)\) is now given by the path of \((\mu(t),r(t))\). A payment of 1 in the event the insured dies in the time interval \([s,s+dt)\) is given by
+
+\[
+E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\mu(s)\right\vert \mathcal F(t)\right].
+\]
+
+Then means that we may price for instance a contract of a payment of 1 in the event of death as
+
+\[
+E^{\mathbb Q}\left[\left. \int_t^T\exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\mu(s)\ ds\right\vert \mathcal F(t)\right]
+\]
+
+where the contract matures at time \(T>t\). Furhermore if we assume indepence between the mortality and the rates (obviously satisfies) we have the following decompositions:
+\begin{align*}
+(\text{Forward rates}):\qquad& E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)\ du\right)\right\vert \mathcal F(t)\right]=e^{-\int_t^sf(t,u)\ du},\\
+(\text{Bond prices}):\qquad& E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\right\vert \mathcal F(t)\right]=e^{-\int_t^sf(t,u)+m(t,u)\ du},\\
+(\text{Insurance event}):\qquad& E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)\ du\right)\mu(s)\right\vert \mathcal F(t)\right]=e^{-\int_t^sf(t,u)+m(t,u)\ du}m(t,s).
+\end{align*}
+
+\hypertarget{forward-transistion-rates}{%
+\subsection{Forward transistion rates}\label{forward-transistion-rates}}
+
+In the above sections we considered the simple Markov process with two states, one real and a absorbing state. In that context we simply model one jump. However in the general case, we would assume a Markov jump on a finite state space \(E\) i.e.~\(\{Z(t)\}_{t\ge 0}\) with random intensities \(\mu_{ij}(t)\) with \(i,j\in E\). We can combine these intensities into the matrix function
+
+\[
+\mathbf M(s)=\{\mu_{ij}(s)\}_{i,j\in E}.
+\]
+
+Then the natural definition of forward transition rates are the elements of the matrix, \(\mathbf F(t,s)\), given by the product integral below
+
+\[
+\mathbb E^{\mathbb Q}\left(\left.\prod_t^s(\mathbf I+\mathbf M(u))\ du\right\vert \mathcal F (t)\right)=\prod_t^s(\mathbf I+\mathbf F(t,u))\ du.
+\]
+
+We in this context define
+
+\[
+\mathbf P(t,s)=\prod_t^s(\mathbf I+\mathbf M(u))\ du,
+\]
+
+being the transition probabilities \(p_{ij}(t,s)\). We furthemore set the matrix \(\mathbf q\) to
+
+\[
+\mathbf q(t,s)=\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\right\vert \mathcal F (t)\right)=\prod_t^s(\mathbf I+\mathbf F(t,u))\ du.
+\]
+
+If we assume we may differentiate under the \(\mathbb Q\) expectation we get
+\begin{align*}
+\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\mathbf M(s)\right\vert \mathcal F (t)\right)&=\mathbb E^{\mathbb Q}\left(\left.\frac{\partial}{\partial s}\mathbf P(t,s)\right\vert \mathcal F (t)\right)=\frac{\partial}{\partial s}\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\right\vert \mathcal F (t)\right)\\
+&=\frac{\partial}{\partial s}\prod_t^s(\mathbf I+\mathbf F(t,u))\ du=\mathbf q(t,s)\mathbf F(t,s),
+\end{align*}
+where we simply use the above definition and the definition of the product integral.
+
+\textbf{Lemma. (Mortality forward rate)}\index{Mortality forward rate} \emph{Let \(\{Z(t)\}_{t\ge 0}\) be a Markov jump process on the finite state space \(E\). Assume that the intensity matrix function \(\mathbf M(t)\) exists, then}
+
+\[
+\mathbf F(t,s)=\mathbf q(t,s)^{-1}\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\mathbf M(s)\right\vert \mathcal F (t)\right)
+\]
+
+with
+
+\[
+\mathbf q(t,s) = \mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\right\vert \mathcal F (t)\right).
+\]
+
+\hypertarget{reserves-revisited}{%
+\subsection{Reserves revisited}\label{reserves-revisited}}
+
+Consider an life insurance contract of an insured with underlying Markov jump process \(\{Z(t)\}_{t\ge 0}\) commencing at time \(T>0\). The contract pays continuous rate \(b^i(t)\) while \(Z(t)= i\) and transition lump sum payments \(b^{ij}(t)\) in the event \(Z\) jumps from \(i\) to \(j\) at time \(t\). That is the payment has dynamics
+
+\[
+dB(t)=dB^{Z(t)}(t)+\sum_{j\ne Z(t-)}b^{Z(t-)j}dN_{Z(t-)j}(t),
+\]
+
+where \(N_{ij}(t)=\#\{s\le t:Z(s-)=i,Z(s)=j\}\) is the number of jumps from \(i\) to \(j\)
+in the interval \([0,t]\). The above is equivalent with the process
+
+\[
+dB(t)=\sum_{i\in E}I^i(t)\ dB^i(t)+\sum_{i\in E}\sum_{j\in E : j\ne i}b^{ij}(t)\ dN_{ij}(t),
+\]
+
+where obviously \(I^i(t)=1_{Z(t)=i}\). We assume that \(\{r(t)\}_{t\ge 0}\) is the stochastic interest rate process which is independent of the payment process. The market reserve or third order reserve is defined under the martingale measure \(\mathbb Q\) as
+
+\[
+V(t)=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-\int_t^ur(s)\ ds}\ dB(u)\right\vert \mathcal F(t)\right],
+\]
+
+i.e.~the discounted expected value of the payments. The above filtration is the one given by the sample path of both \(r\) and \(Z\). Using the independence assumption we have
+\begin{align*}
+V(t)&=\int_t^TE^{\mathbb Q}\left[\left.e^{-\int_t^ur(s)\ ds}\ dB(u)\right\vert \mathcal F(t)\right]\\
+&=\int_t^TE^{\mathbb Q}\left[\left.e^{-\int_t^ur(s)\ ds}\right\vert \mathcal F(t)\right]E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right]\\
+&=\int_t^Te^{-\int_t^uf(t,s)\ ds}E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right],
+\end{align*}
+by the definition of the forward rate \(f(t,s)\). Notice that now we have two terms both not depending on one another. In other words, \(E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right]\) only depends on \(Z\) not \(r\). When evaluating the expected dynamics under \(\mathbb Q\) we have
+
+\[
+E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right]=E^{\mathbb Q}\left[\left.dB(u)\right\vert Z(t)\right]=\sum_{i\in E}I^i(t)E^{\mathbb Q}\left[\left.dB(u)\right\vert Z(t)=i\right]
+\]
+
+with
+\begin{align*}
+&E^{\mathbb Q}\left[\left.dB(u)\right\vert Z(t)=i\right]=E^{\mathbb Q}\left[\left.\sum_{k\in E}I^k(u)\ dB^k(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}b^{kj}(u)\ dN_{jk}(u)\right\vert Z(t)=i\right]\\
+&=\sum_{k\in E}E^{\mathbb Q}\left[\left.I^k(u)\right\vert Z(t)=i\right]\ dB^i(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}b^{kj}(u)\ E^{\mathbb Q}\left[\left.dN_{jk}(u)\right\vert Z(t)=i\right]\\
+&=\sum_{k\in E}q_{ik}(t,u)\ dB^i(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}b^{kj}(u)\ E^{\mathbb Q}\left[\left.p_{ik}(t,u)\mu_{kj}(u)\right\vert Z(t)=i\right]\ du\\
+&=\sum_{k\in E}q_{ik}(t,u)\ dB^i(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}E^{\mathbb Q}\left[\left.p_{ik}(t,u)b^{kj}(u)\mu_{kj}(u)\right\vert Z(t)=i\right]\ du.
+\end{align*}
+
+\hypertarget{stochastic-mortality-rates}{%
+\subsection{Stochastic mortality rates}\label{stochastic-mortality-rates}}
+
+\hypertarget{matrix-methods-in-life-insurance}{%
+\section{Matrix methods in life insurance}\label{matrix-methods-in-life-insurance}}
 
 \hypertarget{continuous-time-finance}{%
 \chapter{Continuous Time Finance}\label{continuous-time-finance}}
@@ -4429,6 +4605,231 @@ Note that Smooth is a one-dimensional regression problem. In practice Smooth is 
 It has been shown backfitting via smoothing splines achieve optimal rate of \(n^{-4/4+1}\) for each component and \(pn^{-4/4+1}\) for the p-dimensional additive regression function.
 
 Problem: Additive methods are still not optimal in the case of sparsity (i.e.~some features being not relevant) and interactions between features.
+
+\hypertarget{trees-and-forests}{%
+\section{Trees and forests}\label{trees-and-forests}}
+
+In this chapter we will look at the nonparametric regression problem with squared loss \(L(y_1,y_2)=(y_1-y_2)^2\) and also the classification problem with Binary loss function \(L(y_1,y_2)=\Bbb 1(y_1\neq y_2)\) or squared loss.
+
+We already know that the Bayes-rule is
+
+\[
+m^\ast(x)=\mathbb E[Y|X=x]
+\]
+
+for the squared loss and
+
+\[
+m^\ast(x)=\underset{k=1,\dots,K}{\operatorname{argmax}} \mathbb P(Y=k|X=x)
+\]
+
+for the binary loss.
+
+\textbf{Definition. (Decision trees)}\index{Decision trees} \emph{A decision tree is an estimator, that partition the feature space \(\mathcal X\) into sections \(T=\{R_1,R_2,...,R_k\}\) such that \(R_i\cap R_j=\emptyset\) (pairwise disjoint) for all \(i\ne j\) with \(1\le i,j\le k\) and}
+
+\[
+\bigcup_{i=1}^kR_i=\mathcal X
+\]
+
+\emph{The algorithm associated with the decision tree is then}
+
+\[
+m(T)(x)=\sum_{i=1}^k m_i 1_{R_i}(x).
+\]
+
+From the above we notice that the tree estimate is a piecewise constant function. We call the constant areas of the tree estimate \emph{leaves} or \emph{terminal nodes}. The leaves partition the feature space \(\mathcal X\).
+
+Given the data \(\mathcal D_n\) the value within a leave is given by averaging the responses (regression with \(L_2\) loss) or majority vote (classification with binary loss). In particular we have
+
+\[
+m_i=\left(\sum_{j=1}^n1_{R_i}(X_j)\right)^{-1}\left(\sum_{j=1}^n1_{R_i}(X_j)X_j\right),\qquad (\text{continuous case})
+\]
+
+i.e.~the simple estimated conditional mean \(\mathbb {\hat E}[Y\ \vert\ X\in R_i]\) and
+
+\[
+m_i=\underset{y\in \mathcal Y}{\operatorname{argmax}}\left\{\sum_{j=1}^n1_{R_i}(X_j)1_{y}(Y_j)\right\}.\qquad (\text{discrete case})
+\]
+
+i.e.~the mode.
+
+Decision trees are popular because the decision making (estimate) is nicely visualizable/interpretable if not too deep. One can easily draw out the subsetting tree starting with the entire feature space \(\mathcal X\) and then spitting in two all the way down to the terminal notes. The interior edges on this representation are called nodes and can also be interpreted as subset of \(\mathcal X\).
+
+Decision trees can be quite efficient in classification tasks where we are interested in 0-1 (binary) decisions. This is the case in many application but is often not the case in insurance since it is imposible and frankly not usefull having a 0/1 estimate of whether a claim may arrive. Instead the insurance company is interested in the probability that a claim may arrive during a timespan.
+
+A decision tree is uniquely defined by its leaves. Given a tree \(T\), we write \(m(T)\) for the corresponding regression or classification function. The naive approach of looking for leaves \(R_1,\dots, R_l\) that minimize a certain loss is practically not feasible because of the computational cost. Instead: top-down greedy approach, called CART (classification and regression trees). We now describe how to construct nodes via the CART algorithm.
+
+\textbf{Definition. (CART)}\index{CART} \emph{Start with \(\mathcal X\) as initial node for splitting.}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Input: node \(R\subseteq \mathcal X\) }
+\item
+  \emph{For every dimension \(j=1,\dots,p\) and every point \(s_j\in \{x_j| \exists\ x_1,\dots,x_{j-1},x_{j+1},\dots,x_p\ \text{with} (x_1,\dots,x_p)\in R\}\) define}
+  \[R_1(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j \leq s_j\}, \quad R_2(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j > s_j\}.\]
+\item
+  \emph{We pick the minimizer}
+  \[
+  (j^\ast,s^\ast)= \arg\min_{j,s} Q_n(R_1(j,s_j)) + Q_n(R_2(j,s_j))
+  \]
+\item
+  \emph{Each of the new nodes \((R_1(j^\ast,s^\ast),R_2(j^\ast,s^\ast))\) is further split as long as stopping criterion does not apply.}
+\end{itemize}
+
+\textbf{Definition. (CART loss)} F\_or regression the most common loss function is the squared loss:\_
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Squared loss:} \(Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\overline Y_i(R_l)= \frac 1 {|R_l|}\sum_{i: X_i \in R_l}Y_i,\)
+    \(|R_j|=\#\{i: X_i\in R_j\}\).
+  \end{itemize}
+\end{itemize}
+
+\emph{In the classification case, define }
+\[
+\hat p_{lk}= \frac 1 {|R_l|} \sum_{i: X_i \in R_l}  \mathbb 1(Y_i=k)
+\]
+\emph{(=the proportion of class \(k\) observation in \(R_l\))}
+
+Common loss functions are:
+
+\begin{itemize}
+\tightlist
+\item
+  Brier score: \(Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2\) (=squared loss)
+\item
+  Misclassification error: \(Q_n(R_l)= 1 - \max_{k}\hat p_{lk}\)
+\item
+  Gini index: \(Q_n(R_l)= \sum_{k=1}^K \hat p_{lk}(1-\hat p_{lk})\)
+\item
+  Entropy : \(Q_n(R_l)=-\sum_{k=1}^K \hat p_{lk}\log\hat p_{lk}\)
+\end{itemize}
+
+Note: In classification, even if binary loss is the ultimate goal, Gini index and entropy might be the better choices for splitting.
+
+The most common stopping criterion is specifying a min-node size, i.e.~stop if \(|R_j|<c\). A common choice is \(c=5\). An alternative stopping criteria is the depth of \(R_j\), i.e., the number of parent nodes of \(R_j\).
+
+The process described so far will probably lead to an overfit. One may think that one way out is to stop growing the tree early enough.n This is not advisable because stopping the growing early because the current split does not lead to great improvement in the loss does not mean that a split afterwards might not turn very effective.
+
+The idea of pruning is to let a tree grow very deep first (= small min node size) and then select a subtree (pruning) as final fit. Idea: We can compare different subtrees via a penalized loss.
+
+\textbf{Definition. (Subtree)} \emph{We call \(T'\) a subtree of \(T\) if the nodes of \(T'\) is a subset of the nodes of \(T\). \(T'\) and \(T\) have the same root. If \(T'\) is a subtree of \(T\), we also write \(T'\subseteq T\).}
+
+We can derive a subtree, by pruning a tree at any non-terminal node (i.e.~by deleting all descendants of that node)
+
+\textbf{Definition. (\(\alpha\)-pruned tree)} \emph{Consider a tree \(\hat T_n\) with corresponding estimator \(\hat m_n(\hat T_n)\). Given a parameter \(\alpha>0\), the \(\alpha\)-pruned tree is}
+
+\[
+\hat T_{n,\alpha} := \arg \min_{T\subseteq \hat T_n}\{\hat R_n(\hat m_n) + \alpha |T|\},
+\]
+
+\emph{where \(|T|\) is the number of leaves of \(T\).}
+
+How do we find an optimal \(\alpha\) (and also the optimal subtree for a fixed \alpha)? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.
+
+\textbf{Proposition (weakest link)} \(\hat T_{n,\alpha}\) is unique. Furthermore, there are trees \(T_0\supset \cdots\supset T_l\) with \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}\); in particular the set \(\{\hat T_{n,\alpha} : \alpha>0\}\) is finite.
+
+Let \(\widetilde Q_n\) be the loss function corresponding to \(\hat R_n\).
+The trees \(T_0,\dots, T_l\) can be found with the following algorithm
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Let \(t_L,t_R\) be any two terminal nodes in \(\hat T_n\) resulting from a split of the immediate ancestor node t. If \(\widetilde Q_n(t) = \widetilde Q_n(t_L)+\widetilde Q_n(t_R)\), prune off \(t_L\) and \(t_R\). Continue this process until no more pruning is possible. The resulting tree is \(T_0\).
+\item
+  \(k=0\)
+\item
+  Go through all non-terminal nodes \(t\) of \(T_k\) and calculate
+  \[
+  g(t)=\frac{\widetilde Q_n(t)-\widetilde Q_n(T_t)}{|T_t|-1},
+  \]
+  where \(T_t\) is the tree (branch) with root \(t\) and nodes consisting of \(t\) and the descendants of \(t\) in \(T_k\).
+  \(\widetilde Q_n(T_t)=\sum_{t \ \text{leaf of}\  T_t} \widetilde Q_n(t)\).
+\item
+  \(\alpha= \min_{t \ \text{ non-terminal node of} \ T_k}g(t)\).
+\item
+  From top to bottom in \(T_k\) prune all non-terminal nodes with \(g(t)=\alpha\) and call the resulting tree \(T_{k+1}\).
+\item
+  If \(T_{k+1}\) has more than one node, set \(k \leftarrow k+1\) and go to step 3.
+\end{enumerate}
+
+Given \(l\) trees \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}\), we can pick the optimal tree via cross validation.
+
+\textbf{Problem with decision trees.} There are (at least) two major problems with decision trees
+
+\begin{itemize}
+\tightlist
+\item
+  Instability: Small variations in the data can lead to a very different tree
+\item
+  Performance: The performance (measured via test error) is usually much weaker compared to other learning algorithms
+\end{itemize}
+
+\textbf{Bagging.} Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees.
+
+\textbf{Definition.} \emph{(Bagging)}
+
+\begin{itemize}
+\tightlist
+\item
+  Given data \({(X_1,Y_1),\dots, (X_n,Y_n)}\), draw \(B\) bootstrap samples \(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}, b=1,\dots, B\), i.e., \(\tilde {\mathcal D}^{(b)}_n\) arises from \(\mathcal D_n\) by drawing \(n\) times with replacement.
+\item
+  The bagging estimator is defined as
+
+  \begin{itemize}
+  \tightlist
+  \item
+    squared loss \(\rightarrow\) average: \(\hat m^{bagg}_n=\frac 1 B \sum_{b=1}^B \hat m_n(\tilde {\mathcal D}^{(b)}_n)\)
+  \item
+    binary loss \(\rightarrow\) majority vote: \(\hat m^{bagg}_n(x)=\arg \max_{k\in {1,\dots K}} \#\{b: m_n(\tilde {\mathcal D}^{(b)}_n) (x)=k\}\)
+  \end{itemize}
+\end{itemize}
+
+Note that \(\hat m^{bagg}_n\) is a stochastic estimator, even given \(\mathcal D_n\). Note: Usually, bagging is applied on non-pruned trees. (See it as an alternative way to reduce variance)
+
+While bagging improves performance of decision trees, interpretability is worsened. If interpretability is not a concern, then bagging is still inferior compared to other learning techniques. Random forests are a modification on bagging estimators.
+
+\textbf{Random Forests.} As bagging random forest are an ensemble of decision trees. They add the following modification to bagging:
+- \(\texttt{mtry}\): Each time a node is split it is only done on a subset of size \(\texttt{mtry}\) of viable variables. I.e., each time you want to split a node, turn on a random generator and draw \(1\leq\texttt{mtry}<p\) viable variables from \(\{1,\dots,p\}\). Only those variables drawn are allowed to be considered for the next split.
+- We denote the random forest estimator by \(\hat m^{rf}_n\). Note that \(\hat m^{rf}_n\), as \(\hat m^{bagg}_n\), is a stochastic estimator, even given \(\mathcal D_n\).
+
+Why is \(\texttt{mtry}\) so useful? Assume that we are given \(l\) estimators \(m_n(\mathcal D_n, U_1), \dots m_n(\mathcal D_n, U_l)\). Here, \(U_1,\dots, U_l\) are iid variables inducing the additional stochasticity of the estimators (e.g.~through random forest or bagging). Assume that \(\hat m_n(\mathcal D_n, U_1), \dots \hat m_n(\mathcal D_n, U_l)\) have pairwise correlation \(\rho\) and variance \(\sigma^2\). We get
+\begin{align*}
+\textrm{Var}\left (\frac 1 l \sum_{j=1}^l \hat m_n(\mathcal D_n, U_j)\right)&= \frac 1 {l^2} \sum_{jk} \textrm{Cov}(m_n(\mathcal D_n, U_j),m_n(\mathcal D_n, U_k))\\&=\frac 1 {l^2} \left( l\sigma^2+ (l^2-l)\rho\sigma^2\right)\\&= \rho \sigma^2 + \frac{1-\rho}{l}\sigma^2
+\end{align*}
+Meaning: Variance of an ensemble of trees is small the smaller the correlation between the trees. The \(\texttt{mtry}\) parameter aims to make trees less alike and hence more uncorrelated.
+
+Random forest are competitive to many state of the art learners. While not having ``best performance'' in terms off accuracy they are not too far behind. Advantages of random forests are
+
+\begin{itemize}
+\tightlist
+\item
+  Default hyperparameters already lead to very strong results (i.e.~without tuning hyperparameter)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\texttt {mtry}=\lfloor \sqrt{p}\rfloor\)
+  \item
+    min node size= 1 for classification, 5 for regression
+  \end{itemize}
+\item
+  Can be implemented (and is implemented) very fast
+\end{itemize}
+
+Random forest (and also trees) don't perform well for additive functions
+
+Decision trees are not good with additive functions (example). Consider \(m^\ast(x) = \sum_j^p \mathbb 1(x_j \leq 0)\) for large \(p\). For a perfect fit, a tree algorithm would have to grow a tree with depth \(p\),
+where each leaf is the result of splitting once with respect to each covariate. Hence, we end up with \(2^p\) leaves, which on average contain \(n/(2^p)\) data points. Even if all splits are optimal for \(2^p>n\), the tree will not be able to lead to a perfect decision rule.
+
+While predictions of random forests are relatively smooth, they are not monotonic. e.g.~in car insurance, if everything else is the same, more mileage should lead to higher insurance price. Random forests deal well with sparsity, i.e., when the number of features \(p\) is large, but the number of relevant features is rather small: \(s<<p\).
 
 \hypertarget{quantative-risk-management}{%
 \chapter{Quantative Risk Management}\label{quantative-risk-management}}

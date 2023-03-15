@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-02" />
+<meta name="date" content="2023-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="interest-rates.html"/>
-<link rel="next" href="continuous-time-finance.html"/>
+<link rel="next" href="matrix-methods-in-life-insurance.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -217,7 +217,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="interest-rates.html"><a href="interest-rates.html#term-structure-models"><i class="fa fa-check"></i><b>4.3.3</b> Term structure models</a></li>
 <li class="chapter" data-level="4.3.4" data-path="interest-rates.html"><a href="interest-rates.html#estimation-of-ph-bond-models"><i class="fa fa-check"></i><b>4.3.4</b> Estimation of PH bond models</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html"><i class="fa fa-check"></i><b>4.4</b> Survival and mortality rates</a></li>
+<li class="chapter" data-level="4.4" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html"><i class="fa fa-check"></i><b>4.4</b> Survival and mortality rates</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html#survival-probabilities-and-forward-mortality-rates"><i class="fa fa-check"></i><b>4.4.1</b> Survival probabilities and forward mortality rates</a></li>
+<li class="chapter" data-level="4.4.2" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html#forward-transistion-rates"><i class="fa fa-check"></i><b>4.4.2</b> Forward transistion rates</a></li>
+<li class="chapter" data-level="4.4.3" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html#reserves-revisited"><i class="fa fa-check"></i><b>4.4.3</b> Reserves revisited</a></li>
+<li class="chapter" data-level="4.4.4" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html#stochastic-mortality-rates"><i class="fa fa-check"></i><b>4.4.4</b> Stochastic mortality rates</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="matrix-methods-in-life-insurance.html"><a href="matrix-methods-in-life-insurance.html"><i class="fa fa-check"></i><b>4.5</b> Matrix methods in life insurance</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html"><i class="fa fa-check"></i><b>5</b> Continuous Time Finance</a>
 <ul>
@@ -291,6 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.1</b> Curse of dimensionality</a></li>
 <li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.2</b> Splines</a></li>
 </ul></li>
+<li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html"><i class="fa fa-check"></i><b>10</b> Quantative Risk Management</a>
 <ul>
@@ -408,16 +416,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="survival-and-mortality-rates" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Survival and mortality rates<a href="survival-and-mortality-rates.html#survival-and-mortality-rates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-
+<div id="survival-probabilities-and-forward-mortality-rates" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Survival probabilities and forward mortality rates<a href="survival-and-mortality-rates.html#survival-probabilities-and-forward-mortality-rates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We consider a non-negative random variable <span class="math inline">\(\tau\)</span> on a probability space <span class="math inline">\((\Omega,\mathcal F, P)\)</span>. The mortality rate of <span class="math inline">\(\tau\)</span> at time <span class="math inline">\(t\)</span> is defined through the dynamics in the following definition.</p>
+<blockquote class="def">
+<p><strong>Definition. (Mortality rate)</strong> <em>Let <span class="math inline">\(\tau\ge 0\)</span> be a non-negative stochastic variable. The mortality rate function <span class="math inline">\(\mu(t)\)</span> is a, possibly stochastic, function defined as</em></p>
+<p><span class="math display">\[
+\mu(t)\ dt=\mathbb P(\tau\in[t,t+dt)\ \vert\ \tau &gt; t)=\frac{f(t)}{\overline F(t)}\ dt,
+\]</span></p>
+<p><em>where <span class="math inline">\(\overline F(t)=1-F(t)=\mathbb P(\tau &gt;t)\)</span> is the survival function of <span class="math inline">\(\tau\)</span>.</em></p>
+</blockquote>
+<p>The definition above shows that we may alternatively define <span class="math inline">\(\mu\)</span> in terms of the below derivative</p>
+<p><span class="math display">\[
+\mu(t)=-\frac{d}{dt}\log\Big(\overline F(t)\Big),
+\]</span></p>
+<p>hence we have that</p>
+<p><span class="math display">\[
+-\int_0^t\mu(s)\ ds=\log\Big(\overline F(t)\Big)-\log\Big(\overline F(0)\Big)=\log\Big(\overline F(t)\Big),
+\]</span></p>
+<p>giving the well-known formula</p>
+<p><span class="math display">\[
+\overline F(t)=\exp\left(-\int_0^t\mu(s)\ ds\right).
+\]</span></p>
+<p>This also gives the nice interpretation for the conditional distribution of <span class="math inline">\(\tau\)</span> given <span class="math inline">\(\tau&gt;t\)</span> since.</p>
+<p><span class="math display">\[
+\mathbb P(\tau &gt; s\ \vert\ \tau &gt; t)=\frac{\overline F(s)}{\overline F(t)}=\exp\left(-\int_t^s\mu(u)\ du\right).
+\]</span></p>
+<blockquote class="prop">
+<p><strong>Corollary.</strong> <em>Let <span class="math inline">\(\tau\ge 0\)</span> be a non-negative stochastic variable with mortality rate <span class="math inline">\(\mu(t)\)</span>. The probability that <span class="math inline">\(\tau \in [t,s)\)</span> in the event <span class="math inline">\(\tau &gt;t\)</span> is</em></p>
+<p><span class="math display">\[
+p(t,s)=\mathbb P(\tau &gt; s\ \vert\ \tau &gt; t)=\exp\left(-\int_t^s\mu(u)\ du\right).
+\]</span></p>
+</blockquote>
+<p>How to deal with these random intensities. Either we could model them directly under a probability measure, <span class="math inline">\(\mathbb P\)</span> say, but since we do not know much about the probabilities anyway, we might as well model the consequences in price (reserve) by changes of the intensities. That is, how much does a change in intensity cost? This might been seen in a financial context, even as a derivative security, and should therefore be evaluated relative to a risk–free asset, i.e. by using an equivalent martingale measure, <span class="math inline">\(\mathbb Q\)</span> say. We therefore define the mortality forward rates as</p>
+<blockquote class="def">
+<p><strong>Definition. (Mortality forward rate)</strong> <em>Let <span class="math inline">\(\tau\ge 0\)</span> be a non-negative stochastic variable with mortality rate <span class="math inline">\(\mu(t)\)</span>. The mortality forward rate rate <span class="math inline">\(m(t,s)\)</span> is a function defined by</em></p>
+<p><span class="math display">\[
+\exp\left(-\int_t^s m(t,u)\ du\right)=q(t,s)=\mathbb E^{\mathbb Q}\left[\left. \exp\left(-\int_t^s\mu(u)\ du\right)\right\vert \mathcal F(t)\right].
+\]</span></p>
+</blockquote>
+<p>Notice that in particular the function <span class="math inline">\(q(t,s)\)</span> solves the differential equation</p>
+<p><span class="math display">\[
+\frac{\partial q(t,s)}{\partial s}=-m(t,s)q(t,s),\qquad q(t,t)=1.
+\]</span></p>
+<p>When evaluating a payment from insurance company and the insuread we also need to take into account the interest rate <span class="math inline">\(r\)</span> and so bonds would be priced according to the quantity</p>
+<p><span class="math display">\[
+E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\right\vert \mathcal F(t)\right].
+\]</span></p>
+<p>Notice that the filtration <span class="math inline">\(\mathcal F(t)\)</span> is now given by the path of <span class="math inline">\((\mu(t),r(t))\)</span>. A payment of 1 in the event the insured dies in the time interval <span class="math inline">\([s,s+dt)\)</span> is given by</p>
+<p><span class="math display">\[
+E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\mu(s)\right\vert \mathcal F(t)\right].
+\]</span></p>
+<p>Then means that we may price for instance a contract of a payment of 1 in the event of death as</p>
+<p><span class="math display">\[
+E^{\mathbb Q}\left[\left. \int_t^T\exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\mu(s)\ ds\right\vert \mathcal F(t)\right]
+\]</span></p>
+<p>where the contract matures at time <span class="math inline">\(T&gt;t\)</span>. Furhermore if we assume indepence between the mortality and the rates (obviously satisfies) we have the following decompositions:
+<span class="math display">\[\begin{align*}
+(\text{Forward rates}):\qquad&amp; E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)\ du\right)\right\vert \mathcal F(t)\right]=e^{-\int_t^sf(t,u)\ du},\\
+(\text{Bond prices}):\qquad&amp; E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)+\mu(u)\ du\right)\right\vert \mathcal F(t)\right]=e^{-\int_t^sf(t,u)+m(t,u)\ du},\\
+(\text{Insurance event}):\qquad&amp; E^{\mathbb Q}\left[\left. \exp\left(-\int_t^sr(u)\ du\right)\mu(s)\right\vert \mathcal F(t)\right]=e^{-\int_t^sf(t,u)+m(t,u)\ du}m(t,s).
+\end{align*}\]</span></p>
 </div>
-<!-- </div> -->
+<div id="forward-transistion-rates" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Forward transistion rates<a href="survival-and-mortality-rates.html#forward-transistion-rates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the above sections we considered the simple Markov process with two states, one real and a absorbing state. In that context we simply model one jump. However in the general case, we would assume a Markov jump on a finite state space <span class="math inline">\(E\)</span> i.e. <span class="math inline">\(\{Z(t)\}_{t\ge 0}\)</span> with random intensities <span class="math inline">\(\mu_{ij}(t)\)</span> with <span class="math inline">\(i,j\in E\)</span>. We can combine these intensities into the matrix function</p>
+<p><span class="math display">\[
+\mathbf M(s)=\{\mu_{ij}(s)\}_{i,j\in E}.
+\]</span></p>
+<p>Then the natural definition of forward transition rates are the elements of the matrix, <span class="math inline">\(\mathbf F(t,s)\)</span>, given by the product integral below</p>
+<p><span class="math display">\[
+\mathbb E^{\mathbb Q}\left(\left.\prod_t^s(\mathbf I+\mathbf M(u))\ du\right\vert \mathcal F (t)\right)=\prod_t^s(\mathbf I+\mathbf F(t,u))\ du.
+\]</span></p>
+<p>We in this context define</p>
+<p><span class="math display">\[
+\mathbf P(t,s)=\prod_t^s(\mathbf I+\mathbf M(u))\ du,
+\]</span></p>
+<p>being the transition probabilities <span class="math inline">\(p_{ij}(t,s)\)</span>. We furthemore set the matrix <span class="math inline">\(\mathbf q\)</span> to</p>
+<p><span class="math display">\[
+\mathbf q(t,s)=\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\right\vert \mathcal F (t)\right)=\prod_t^s(\mathbf I+\mathbf F(t,u))\ du.
+\]</span></p>
+<p>If we assume we may differentiate under the <span class="math inline">\(\mathbb Q\)</span> expectation we get
+<span class="math display">\[\begin{align*}
+\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\mathbf M(s)\right\vert \mathcal F (t)\right)&amp;=\mathbb E^{\mathbb Q}\left(\left.\frac{\partial}{\partial s}\mathbf P(t,s)\right\vert \mathcal F (t)\right)=\frac{\partial}{\partial s}\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\right\vert \mathcal F (t)\right)\\
+&amp;=\frac{\partial}{\partial s}\prod_t^s(\mathbf I+\mathbf F(t,u))\ du=\mathbf q(t,s)\mathbf F(t,s),
+\end{align*}\]</span>
+where we simply use the above definition and the definition of the product integral.</p>
+<blockquote class="lem">
+<p><strong>Lemma. (Mortality forward rate)</strong> <em>Let <span class="math inline">\(\{Z(t)\}_{t\ge 0}\)</span> be a Markov jump process on the finite state space <span class="math inline">\(E\)</span>. Assume that the intensity matrix function <span class="math inline">\(\mathbf M(t)\)</span> exists, then</em></p>
+<p><span class="math display">\[
+\mathbf F(t,s)=\mathbf q(t,s)^{-1}\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\mathbf M(s)\right\vert \mathcal F (t)\right)
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+\mathbf q(t,s) = \mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\right\vert \mathcal F (t)\right).
+\]</span></p>
+</blockquote>
+</div>
+<div id="reserves-revisited" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Reserves revisited<a href="survival-and-mortality-rates.html#reserves-revisited" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider an life insurance contract of an insured with underlying Markov jump process <span class="math inline">\(\{Z(t)\}_{t\ge 0}\)</span> commencing at time <span class="math inline">\(T&gt;0\)</span>. The contract pays continuous rate <span class="math inline">\(b^i(t)\)</span> while <span class="math inline">\(Z(t)= i\)</span> and transition lump sum payments <span class="math inline">\(b^{ij}(t)\)</span> in the event <span class="math inline">\(Z\)</span> jumps from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> at time <span class="math inline">\(t\)</span>. That is the payment has dynamics</p>
+<p><span class="math display">\[
+dB(t)=dB^{Z(t)}(t)+\sum_{j\ne Z(t-)}b^{Z(t-)j}dN_{Z(t-)j}(t),
+\]</span></p>
+<p>where <span class="math inline">\(N_{ij}(t)=\#\{s\le t:Z(s-)=i,Z(s)=j\}\)</span> is the number of jumps from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>
+in the interval <span class="math inline">\([0,t]\)</span>. The above is equivalent with the process</p>
+<p><span class="math display">\[
+dB(t)=\sum_{i\in E}I^i(t)\ dB^i(t)+\sum_{i\in E}\sum_{j\in E : j\ne i}b^{ij}(t)\ dN_{ij}(t),
+\]</span></p>
+<p>where obviously <span class="math inline">\(I^i(t)=1_{Z(t)=i}\)</span>. We assume that <span class="math inline">\(\{r(t)\}_{t\ge 0}\)</span> is the stochastic interest rate process which is independent of the payment process. The market reserve or third order reserve is defined under the martingale measure <span class="math inline">\(\mathbb Q\)</span> as</p>
+<p><span class="math display">\[
+V(t)=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-\int_t^ur(s)\ ds}\ dB(u)\right\vert \mathcal F(t)\right],
+\]</span></p>
+<p>i.e. the discounted expected value of the payments. The above filtration is the one given by the sample path of both <span class="math inline">\(r\)</span> and <span class="math inline">\(Z\)</span>. Using the independence assumption we have
+<span class="math display">\[\begin{align*}
+V(t)&amp;=\int_t^TE^{\mathbb Q}\left[\left.e^{-\int_t^ur(s)\ ds}\ dB(u)\right\vert \mathcal F(t)\right]\\
+&amp;=\int_t^TE^{\mathbb Q}\left[\left.e^{-\int_t^ur(s)\ ds}\right\vert \mathcal F(t)\right]E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right]\\
+&amp;=\int_t^Te^{-\int_t^uf(t,s)\ ds}E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right],
+\end{align*}\]</span>
+by the definition of the forward rate <span class="math inline">\(f(t,s)\)</span>. Notice that now we have two terms both not depending on one another. In other words, <span class="math inline">\(E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right]\)</span> only depends on <span class="math inline">\(Z\)</span> not <span class="math inline">\(r\)</span>. When evaluating the expected dynamics under <span class="math inline">\(\mathbb Q\)</span> we have</p>
+<p><span class="math display">\[
+E^{\mathbb Q}\left[\left.dB(u)\right\vert \mathcal F(t)\right]=E^{\mathbb Q}\left[\left.dB(u)\right\vert Z(t)\right]=\sum_{i\in E}I^i(t)E^{\mathbb Q}\left[\left.dB(u)\right\vert Z(t)=i\right]
+\]</span></p>
+<p>with
+<span class="math display">\[\begin{align*}
+&amp;E^{\mathbb Q}\left[\left.dB(u)\right\vert Z(t)=i\right]=E^{\mathbb Q}\left[\left.\sum_{k\in E}I^k(u)\ dB^k(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}b^{kj}(u)\ dN_{jk}(u)\right\vert Z(t)=i\right]\\
+&amp;=\sum_{k\in E}E^{\mathbb Q}\left[\left.I^k(u)\right\vert Z(t)=i\right]\ dB^i(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}b^{kj}(u)\ E^{\mathbb Q}\left[\left.dN_{jk}(u)\right\vert Z(t)=i\right]\\
+&amp;=\sum_{k\in E}q_{ik}(t,u)\ dB^i(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}b^{kj}(u)\ E^{\mathbb Q}\left[\left.p_{ik}(t,u)\mu_{kj}(u)\right\vert Z(t)=i\right]\ du\\
+&amp;=\sum_{k\in E}q_{ik}(t,u)\ dB^i(u)+\sum_{k\in E}\sum_{j\in E : j\ne k}E^{\mathbb Q}\left[\left.p_{ik}(t,u)b^{kj}(u)\mu_{kj}(u)\right\vert Z(t)=i\right]\ du.
+\end{align*}\]</span></p>
+</div>
+<div id="stochastic-mortality-rates" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Stochastic mortality rates<a href="survival-and-mortality-rates.html#stochastic-mortality-rates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="interest-rates.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="continuous-time-finance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="matrix-methods-in-life-insurance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

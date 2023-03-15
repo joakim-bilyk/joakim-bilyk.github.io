@@ -16,6 +16,11 @@ estimation-of-ph-bond-models
 data-for-estimation
 estimation-of-phase-type-models
 survival-and-mortality-rates
+survival-probabilities-and-forward-mortality-rates
+forward-transistion-rates
+reserves-revisited
+stochastic-mortality-rates
+matrix-methods-in-life-insurance
 continuous-time-finance
 discrete-time-models
 one-period-time-models
@@ -73,6 +78,7 @@ conclusion
 nonparametric-regression
 curse-of-dimensionality
 splines
+trees-and-forests
 quantative-risk-management
 the-loss-variable
 risk-measures

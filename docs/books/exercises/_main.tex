@@ -101,7 +101,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 02, 2023}
+\date{March 15, 2023}
 
 \begin{document}
 %\maketitle
@@ -2868,6 +2868,211 @@ Model 6 & \(\cdot\) & \(\cdot\) & \(\cdot\) & \\
 \textbf{Solution (a).}
 
 \textbf{Solution (b).}
+
+\hypertarget{topics-in-life-insurance}{%
+\chapter{Topics in Life Insurance}\label{topics-in-life-insurance}}
+
+\hypertarget{computing-moments-of-reserve-in-timehomogeneous-case}{%
+\section{Computing moments of reserve in timehomogeneous case}\label{computing-moments-of-reserve-in-timehomogeneous-case}}
+
+In this exercise we consider a time-homogeneous Markov jump process \(X\) on the state-space \(E=\{1,...,5\}\) defined as such
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Active,
+\item
+  Inactive,
+\item
+  Unemployed,
+\item
+  Active after unemployment,
+\item
+  Dead.
+\end{enumerate}
+
+The associated intensity matrix \(\mathbf \Lambda\) is
+
+\[
+\mathbf\Lambda(x)=\mathbf \Lambda=
+\begin{bmatrix}
+-0.7 & 0.1 & 0.1&    &0.5 \\
+ &-0.5 &  &  & 0.5 \\
+ & 0.1& -0.7 & 0.1 & 0.5\\
+ & 0.1 & & -0.6 & 0.5\\
+ &  &  &  & \\
+\end{bmatrix}.
+\]
+
+Where all zero entries are left blank. We consider the insurance contract that,
+
+\begin{itemize}
+\tightlist
+\item
+  Insured pays \(\rho\) as long as he is alive,
+\item
+  Insured recieve 1 while unemployed or inactive and
+\item
+  Insured receive 2 if he becomes inactive. If he is active just before the jump this only happends with probability \(1/2\).
+\end{itemize}
+
+The contract expires at time \(T=1\) and we assume \(X(0)=1\). We want to compute the equivalence premium for a constant interest rate \(r=0\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Determine \(\mathbf B(t)\) and \(b\).
+\item
+  Decompose \(\mathbf \Lambda\) into \(\mathbf \Lambda=\mathbf \Lambda^0+\mathbf \Lambda^1\) and compute the rewards \(\mathbf R\).
+\item
+  Compute the reserve at time \(t=0\) for \(\rho = -1\).
+\item
+  Compute the equivalence premium \(\hat\rho\) and check that \(\mathbf V(0;X(0)=0)=0\).
+\item
+  Compute the contributions \(\mathbf C_r^{(2)}\) and use this to compute the second moment \(\mathbf V^{(2)}(0;X(0)=0)\).
+\end{enumerate}
+
+\textbf{Solution (a).}
+
+The matrix \(\mathbf B=\left\{b_{ij}\right\}_{i,j\in E}\) is given by \(b_{ij}=2\) if \(j=2\) and \(i\in \{1,3,4\}\) i.e.
+
+\[
+\mathbf B=
+\begin{bmatrix}
+0 & 2 &0 &0 & 0 \\
+0 & 0 &0 &0 & 0 \\
+0 & 2 &0 &0 & 0 \\
+0 & 2 &0 &0 & 0 \\
+0 & 0 &0 &0 & 0 \\
+\end{bmatrix}.
+\]
+
+The continuous payment rate is
+
+\[
+b=\begin{pmatrix}
+\rho\\
+1\\
+1\\
+\rho\\
+0
+\end{pmatrix}.
+\]
+
+We implement this i R using.
+
+\textbf{Solution (b).}
+
+The \(\mathbf \Lambda\) is decomposed by setting \((\lambda^1_{12},\lambda^1_{32},\lambda^1_{42})=(\lambda_{12}/2,\lambda_{32},\lambda_{42}/2)\) and the rest to 0 since the payment when transitioning from 1 or 4 only happens with probabiltiy \(1/2\). The reward matrix is simply given by \(\mathbf R=\mathbf \Lambda^1 \bullet \mathbf B + \Delta b\) i.e.
+
+\[
+\mathbf R = 
+\begin{bmatrix}
+\rho & 2\lambda_{12}^1 &0 &0 & 0 \\
+0 & 1 &0 &0 & 0 \\
+0 & 2\lambda_{32}^1 &1 &0 & 0 \\
+0 & 2\lambda_{42}^1 &0 &\rho & 0 \\
+0 & 0 &0 &0 & 0 \\
+\end{bmatrix}.
+\]
+
+We implement in R.
+
+\textbf{Solution (c).}
+
+We compute the reserve by using the following
+
+\[
+\prod_t^T\left(\mathbf I+\begin{pmatrix}
+\mathbf \Lambda-\Delta(r) & \mathbf R\\
+\mathbf 0 & \mathbf \Lambda
+\end{pmatrix}\ dx\right)=
+\begin{pmatrix}
+e^{-\int_t^Tr\ du}\mathbf P(t,T) & \mathbf V(t,T)\\
+\mathbf 0 & \mathbf P(t,T)
+\end{pmatrix}.
+\]
+
+We then compute
+
+\[
+V(t,T)=e_1^\top \mathbf V(t,T)e.
+\]
+
+\textbf{Solution (d).}
+
+The equivalence premium is computed by
+
+\[
+\hat \rho = \left.-\frac{e_1^\top \mathbf V(t,T)e}{e_1^\top \mathbf V'(t,T)e}\right\vert_{\rho=0},
+\]
+
+with \(\mathbf V'(t,T)\) defined by
+
+\[
+\prod_t^T\left(\mathbf I+\begin{pmatrix}
+\mathbf \Lambda-\Delta(r) &\frac{\partial}{\partial \rho} \mathbf R(\rho)\\
+\mathbf 0 & \mathbf \Lambda
+\end{pmatrix}\ dx\right)=
+\begin{pmatrix}
+e^{-\int_t^Tr\ du}\mathbf P(t,T) & \mathbf V'(t,T)\\
+\mathbf 0 & \mathbf P(t,T)
+\end{pmatrix}.
+\]
+
+We compute
+
+Let us see if the reserve is zero as expected.
+
+\textbf{Solution (e).}
+
+We have that
+
+\[
+\mathbf C_r^{(k)}=\frac{1}{k!}\mathbf\Lambda^1\bullet \mathbf B^{\bullet k}
+\]
+
+and
+\begin{align*}
+\prod_t^T&\left(\mathbf I+\begin{pmatrix}
+\mathbf \Lambda-k\Delta(r) & \mathbf R & \mathbf C_r^{(2)} & \cdots & \mathbf C_r^{(k)}\\
+\mathbf 0 & \mathbf \Lambda - (k-1)\Delta(r) & \mathbf R & \cdots & \mathbf C_r^{(k-1)}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf \Lambda
+\end{pmatrix}\ dx\right)\\
+&=
+\begin{pmatrix}
+* & * & * & \cdots & \mathbf V_r^{(k)}(t,T)\\
+* & * & * & \cdots & \mathbf V_r^{(k-1)}(t,T)\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+* & * &* & \cdots &  \mathbf P(t,T)
+\end{pmatrix}.
+\end{align*}
+Where
+
+\[
+\mathbf V_r^{(k)}(t,T)=\frac{1}{k!}\mathbf V^{(k)}(t,T).
+\]
+
+We therefore implement a Toeplizs block matrix function that for matrices \(\mathbf M_1,...,\mathbf M_k\) generates the matrix
+
+\[
+\mathbf M=\begin{pmatrix}
+\mathbf M_1 & \mathbf M_2 & \mathbf M_3 &\cdots & \mathbf M_k\\
+\mathbf 0 & \mathbf M_1 & \mathbf M_2 & \cdots & \mathbf M_{k-1}\\
+\mathbf 0 & \mathbf 0 & \mathbf M_1 & \cdots & \mathbf M_{k-2}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf M_1
+\end{pmatrix}
+\]
+
+This is done in the \texttt{bToeplitz}
+
+We can then compute the second moment.
+
+We can then see that the variance is 0.27.
 
 \newpage
 
