@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.5 Matrix methods in life insurance | Complete Theory</title>
   <meta name="description" content="4.5 Matrix methods in life insurance | Complete Theory" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.5 Matrix methods in life insurance | Complete Theory" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-15" />
+<meta name="date" content="2023-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,6 +62,10 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
 <script>
@@ -224,7 +228,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html#reserves-revisited"><i class="fa fa-check"></i><b>4.4.3</b> Reserves revisited</a></li>
 <li class="chapter" data-level="4.4.4" data-path="survival-and-mortality-rates.html"><a href="survival-and-mortality-rates.html#stochastic-mortality-rates"><i class="fa fa-check"></i><b>4.4.4</b> Stochastic mortality rates</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="matrix-methods-in-life-insurance.html"><a href="matrix-methods-in-life-insurance.html"><i class="fa fa-check"></i><b>4.5</b> Matrix methods in life insurance</a></li>
+<li class="chapter" data-level="4.5" data-path="matrix-methods-in-life-insurance.html"><a href="matrix-methods-in-life-insurance.html"><i class="fa fa-check"></i><b>4.5</b> Matrix methods in life insurance</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="matrix-methods-in-life-insurance.html"><a href="matrix-methods-in-life-insurance.html#basic-setup"><i class="fa fa-check"></i><b>4.5.1</b> Basic setup</a></li>
+<li class="chapter" data-level="4.5.2" data-path="matrix-methods-in-life-insurance.html"><a href="matrix-methods-in-life-insurance.html#interest-rate-free-analysis"><i class="fa fa-check"></i><b>4.5.2</b> Interest rate free analysis</a></li>
+<li class="chapter" data-level="4.5.3" data-path="matrix-methods-in-life-insurance.html"><a href="matrix-methods-in-life-insurance.html#transform-of-rewards-and-higher-order-moments"><i class="fa fa-check"></i><b>4.5.3</b> Transform of rewards and higher order moments</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html"><i class="fa fa-check"></i><b>5</b> Continuous Time Finance</a>
 <ul>
@@ -299,6 +308,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.2</b> Splines</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a></li>
+<li class="chapter" data-level="9.6" data-path="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><a href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><i class="fa fa-check"></i><b>9.6</b> Gradient Boosting Machines and Bayesian additive regression trees</a></li>
+<li class="chapter" data-level="9.7" data-path="some-practical-considerations.html"><a href="some-practical-considerations.html"><i class="fa fa-check"></i><b>9.7</b> Some practical considerations</a></li>
+<li class="chapter" data-level="9.8" data-path="neural-networks.html"><a href="neural-networks.html"><i class="fa fa-check"></i><b>9.8</b> Neural Networks</a></li>
+<li class="chapter" data-level="9.9" data-path="local-explanations.html"><a href="local-explanations.html"><i class="fa fa-check"></i><b>9.9</b> Local explanations</a>
+<ul>
+<li class="chapter" data-level="9.9.1" data-path="local-explanations.html"><a href="local-explanations.html#interpretability"><i class="fa fa-check"></i><b>9.9.1</b> Interpretability</a></li>
+</ul></li>
+<li class="chapter" data-level="9.10" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>9.10</b> Causality</a></li>
+<li class="chapter" data-level="9.11" data-path="local-and-global-explanations.html"><a href="local-and-global-explanations.html"><i class="fa fa-check"></i><b>9.11</b> Local and Global Explanations</a>
+<ul>
+<li class="chapter" data-level="9.11.1" data-path="local-and-global-explanations.html"><a href="local-and-global-explanations.html#interpretability-1"><i class="fa fa-check"></i><b>9.11.1</b> Interpretability</a></li>
+<li class="chapter" data-level="9.11.2" data-path="local-and-global-explanations.html"><a href="local-and-global-explanations.html#partial-dependence-plots"><i class="fa fa-check"></i><b>9.11.2</b> Partial dependence plots</a></li>
+<li class="chapter" data-level="9.11.3" data-path="local-and-global-explanations.html"><a href="local-and-global-explanations.html#a-functional-decomposition"><i class="fa fa-check"></i><b>9.11.3</b> A functional decomposition</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="quantative-risk-management.html"><a href="quantative-risk-management.html"><i class="fa fa-check"></i><b>10</b> Quantative Risk Management</a>
 <ul>
@@ -416,7 +439,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="matrix-methods-in-life-insurance" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Matrix methods in life insurance<a href="matrix-methods-in-life-insurance.html#matrix-methods-in-life-insurance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="basic-setup" class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Basic setup<a href="matrix-methods-in-life-insurance.html#basic-setup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We consider the time-inhomogeneous Markov jump process <span class="math inline">\(X=\{X(t)\}_{t\ge 0}\)</span> with a finite state–space <span class="math inline">\(E\)</span> and intensity matrix <span class="math inline">\(\mathbf \Lambda(t)=\{\lambda_{ij}(t)\}_{i,j\in E}\)</span>. We then define the payment process as</p>
+<p><span class="math display">\[
+dB(t)=\sum_{i\in E}1_{X(t-)=i}\left(b_i(t)\ dt +\sum_{j\in E}b_{ij}(t)\ dN_{ij}(t)\right),
+\]</span></p>
+<p>with <span class="math inline">\(b_i(t)\)</span> are continuous payment rates (negative if premiums) and <span class="math inline">\(b_{ij}(t)\)</span> lump sum payments, which occur according to the counting measure <span class="math inline">\(N_{ij}(t)\)</span>. The intensity matrix is decomposed into</p>
+<p><span class="math display">\[
+\mathbf \Lambda(t)=\mathbf \Lambda^0(t) + \mathbf \Lambda^1(t),
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf \Lambda^1(t)\)</span> is a non–negative matrix and, consequently, <span class="math inline">\(\mathbf \Lambda^0(t)\)</span> a sub–intensity matrix, i.e. row sums are non–positive. We choose this decomposition in a way such that <span class="math inline">\(\mathbf \Lambda^1(t)\)</span> contains the intensities with a factor <span class="math inline">\(l_{ij}(t)\)</span> being the probability upon jump from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> at time <span class="math inline">\(t\)</span> of recieving the payment <span class="math inline">\(b_{ij}(t)\)</span>. In other words, we have the decomposition</p>
+<p><span class="math display">\[
+\lambda_{ij}(t)=\lambda_{ij}^0(t)+\lambda_{ij}^1(t)=l_{ij}(t)\lambda_{ij}^0(t)+(1-l_{ij}(t))\lambda_{ij}^1(t)\iff l_{ij}(t)=\frac{\lambda_{ij}^1(t)}{\lambda_{ij}^0(t)+\lambda_{ij}^1(t)}.
+\]</span></p>
+<p>In the case <span class="math inline">\(i=j\)</span> then the counting measure <span class="math inline">\(N_{ii}\)</span> denotes a poisson arrival process for lump sum payments arriving during the visit in the state <span class="math inline">\(i\)</span>. This in particular means that the payment <span class="math inline">\(b_{ii}(t)\)</span> will be triggered in <span class="math inline">\([t,t+dt)\)</span> with probability <span class="math inline">\(\lambda_{ii}^1\ dt\)</span> given that <span class="math inline">\(X(t-)=i\)</span>.</p>
+<p>Finally, we assume that the spot interest rates in state i follow a deterministic function <span class="math inline">\(r_i(t)\)</span>. Hence the interest rates follow the model</p>
+<p><span class="math display">\[
+r(u) = r_{X(u)}(u).
+\]</span></p>
+<p>Recall that the reserve is defined as</p>
+<p><span class="math display">\[
+V(t)=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-\int_t^ur(s)\ ds}\ dB(u)\right\vert \mathcal F(t)\right].
+\]</span></p>
+<p>We will be using the following matrix functions when computing the reserve and higher order moments.
+<span class="math display">\[\begin{align*}
+\mathbf B(t)&amp;=\{b_{ij}(t)\}_{i,j\in E},\\
+\mathbf R(t)&amp;=\mathbf \Lambda^1(t)\bullet \mathbf B(t) + \mathbf \Delta (\mathbf b(t)),\\
+\mathbf C^{(k)}(t)&amp;=\mathbf \Lambda^1(t)\bullet \mathbf B^{\bullet k}(t),\qquad k\ge 2,
+\end{align*}\]</span>
+where <span class="math inline">\(\bullet\)</span> denotes the Schur product simply defined as <span class="math inline">\(\mathbf A\bullet\mathbf B=\{a_{ij}b_{ij}\}\)</span> with <span class="math inline">\(\mathbf A=\{a_{ij}\}\)</span> and <span class="math inline">\(\mathbf B=\{b_{ij}\}\)</span>. The notation <span class="math inline">\(\mathbf \Delta (\cdot)\)</span> operator sets <span class="math inline">\(\cdot\)</span> as the diagonal i.e.</p>
+<p><span class="math display">\[
+\mathbf \Delta (\mathbf b(t))=\text{diag}(b_1(t),...,b_p(t)),
+\]</span></p>
+<p>assuming <span class="math inline">\(E=\{1,...,p\}\)</span>. We call <span class="math inline">\(\mathbf B(t)\)</span> the transition payments, <span class="math inline">\(\mathbf R(t)\)</span> the rewards and <span class="math inline">\(\mathbf C^{(k)}(t)\)</span> the <span class="math inline">\(k\)</span>th order contributions. The matrix <span class="math inline">\(\mathbf C^{(k)}(t)\)</span> is mostly usefull notationally rather than intuitively.</p>
+</div>
+<div id="interest-rate-free-analysis" class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Interest rate free analysis<a href="matrix-methods-in-life-insurance.html#interest-rate-free-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this section, we consider the risk free context where we are not concerned with any discounting of expected payments. This make us introduce the following random process</p>
+<p><span class="math display">\[
+U^0(s,t) = \sum_{i\in E}\int_s^tb_i(u)1_{X(u-)=i}\ du+\sum_{i,j\in E}\int_s^tb_{ij}(u)\ dN_{ij}(u),
+\]</span></p>
+<p>giving the total reward obtained in the time interval <span class="math inline">\([s,t]\)</span>. We are interested in higher order moments of this quantity (representing the rate free reserve). To this goal we introduce the conditional moments with</p>
+<p><span class="math display">\[
+m_{ij}^{(k)}(s,t)=\mathbb E\left.\Big[1_{X(t)=j}U^0(s,t)^k\right\vert X(s)=i\Big],
+\]</span></p>
+<p>representing the weighted expected moment upon start in state <span class="math inline">\(i\)</span> weighted with the probability with end in state <span class="math inline">\(j\)</span>. This forms the matrix</p>
+<p><span class="math display">\[
+\mathbf m^{(k)}(s,t)=\left\{m_{ij}^{(k)}(s,t)\right\}_{i,j\in E}.
+\]</span></p>
+<p>For simplicity we simply for <span class="math inline">\(k=1\)</span> write <span class="math inline">\(\mathbf m^{(1)}(s,t) = \mathbf m(s,t)\)</span>.</p>
+<blockquote class="thm">
+<p><strong>Theorem 5.1. (Bladt)</strong> <em>With the above assumptions it holds that</em></p>
+<p><span class="math display">\[
+\mathbf m(s,t)=\int_s^t\mathbf P(s,u)\mathbf R(u)\mathbf P(u,t)\ du.
+\]</span></p>
+<p><em>In particular, by Van Loans formula we have</em></p>
+<p><span class="math display">\[
+\prod_s^t\left(\mathbf I + \begin{pmatrix}\mathbf \Lambda(x) &amp; \mathbf R(t)\\ \mathbf 0 &amp; \mathbf \Lambda(x)\end{pmatrix} dx\right)=
+\begin{pmatrix}
+\mathbf P(s,t) &amp; \mathbf m(s,t)\\
+\mathbf 0 &amp; \mathbf P(s,t).
+\end{pmatrix}
+\]</span></p>
+</blockquote>
+<details>
+<summary>
+<strong>Proof.</strong>
+</summary>
+</details>
+</div>
+<div id="transform-of-rewards-and-higher-order-moments" class="section level3 hasAnchor" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Transform of rewards and higher order moments<a href="matrix-methods-in-life-insurance.html#transform-of-rewards-and-higher-order-moments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
+</div>
 </div>
 <!-- </div> -->
             </section>

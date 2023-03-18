@@ -21,6 +21,9 @@ forward-transistion-rates
 reserves-revisited
 stochastic-mortality-rates
 matrix-methods-in-life-insurance
+basic-setup
+interest-rate-free-analysis
+transform-of-rewards-and-higher-order-moments
 continuous-time-finance
 discrete-time-models
 one-period-time-models
@@ -79,6 +82,16 @@ nonparametric-regression
 curse-of-dimensionality
 splines
 trees-and-forests
+gradient-boosting-machines-and-bayesian-additive-regression-trees
+some-practical-considerations
+neural-networks
+local-explanations
+interpretability
+causality
+local-and-global-explanations
+interpretability-1
+partial-dependence-plots
+a-functional-decomposition
 quantative-risk-management
 the-loss-variable
 risk-measures

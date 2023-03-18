@@ -95,6 +95,19 @@
 \pagenumbering{gobble}
 \addtocontents{toc}{\protect\thispagestyle{empty}}
 \addtocontents{title}{\protect\thispagestyle{empty}}
+
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -127,7 +140,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 15, 2023}
+\date{March 18, 2023}
 
 \begin{document}
 %\maketitle
@@ -951,7 +964,7 @@ B(t,T)=e^{\rho (T-t)}\overline F(T).
 
 We furthermore have the following result regarding the forward rate.
 
-\textbf{Corollary 3.4. (Bladt)} \emph{Assume the Markov-jump interest model and that \(X(t)=i\). The forward rate is then the hazard rate at \(T\) for the random variable \(\tau\sim IPH(\pi_{X(t)},\mathbf M(x+t)-\Delta (r(x+t))-\rho \mathbf I)\) less \rho i.e.}
+\textbf{Corollary 3.4. (Bladt)} \emph{Assume the Markov-jump interest model and that \(X(t)=i\). The forward rate is then the hazard rate at \(T\) for the random variable \(\tau\sim IPH(\pi_{X(t)},\mathbf M(x+t)-\Delta (r(x+t))-\rho \mathbf I)\) less \(\rho\) i.e.}
 
 \[
 f(t,T)=\frac{f_{\tau}(T)}{\overline F(T)}-\rho.
@@ -1349,6 +1362,99 @@ with
 
 \hypertarget{matrix-methods-in-life-insurance}{%
 \section{Matrix methods in life insurance}\label{matrix-methods-in-life-insurance}}
+
+\hypertarget{basic-setup}{%
+\subsection{Basic setup}\label{basic-setup}}
+
+We consider the time-inhomogeneous Markov jump process \(X=\{X(t)\}_{t\ge 0}\) with a finite state--space \(E\) and intensity matrix \(\mathbf \Lambda(t)=\{\lambda_{ij}(t)\}_{i,j\in E}\). We then define the payment process as
+
+\[
+dB(t)=\sum_{i\in E}1_{X(t-)=i}\left(b_i(t)\ dt +\sum_{j\in E}b_{ij}(t)\ dN_{ij}(t)\right),
+\]
+
+with \(b_i(t)\) are continuous payment rates (negative if premiums) and \(b_{ij}(t)\) lump sum payments, which occur according to the counting measure \(N_{ij}(t)\). The intensity matrix is decomposed into
+
+\[
+\mathbf \Lambda(t)=\mathbf \Lambda^0(t) + \mathbf \Lambda^1(t),
+\]
+
+where \(\mathbf \Lambda^1(t)\) is a non--negative matrix and, consequently, \(\mathbf \Lambda^0(t)\) a sub--intensity matrix, i.e.~row sums are non--positive. We choose this decomposition in a way such that \(\mathbf \Lambda^1(t)\) contains the intensities with a factor \(l_{ij}(t)\) being the probability upon jump from \(i\) to \(j\) at time \(t\) of recieving the payment \(b_{ij}(t)\). In other words, we have the decomposition
+
+\[
+\lambda_{ij}(t)=\lambda_{ij}^0(t)+\lambda_{ij}^1(t)=l_{ij}(t)\lambda_{ij}^0(t)+(1-l_{ij}(t))\lambda_{ij}^1(t)\iff l_{ij}(t)=\frac{\lambda_{ij}^1(t)}{\lambda_{ij}^0(t)+\lambda_{ij}^1(t)}.
+\]
+
+In the case \(i=j\) then the counting measure \(N_{ii}\) denotes a poisson arrival process for lump sum payments arriving during the visit in the state \(i\). This in particular means that the payment \(b_{ii}(t)\) will be triggered in \([t,t+dt)\) with probability \(\lambda_{ii}^1\ dt\) given that \(X(t-)=i\).
+
+Finally, we assume that the spot interest rates in state i follow a deterministic function \(r_i(t)\). Hence the interest rates follow the model
+
+\[
+r(u) = r_{X(u)}(u).
+\]
+
+Recall that the reserve is defined as
+
+\[
+V(t)=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-\int_t^ur(s)\ ds}\ dB(u)\right\vert \mathcal F(t)\right].
+\]
+
+We will be using the following matrix functions when computing the reserve and higher order moments.
+\begin{align*}
+\mathbf B(t)&=\{b_{ij}(t)\}_{i,j\in E},\\
+\mathbf R(t)&=\mathbf \Lambda^1(t)\bullet \mathbf B(t) + \mathbf \Delta (\mathbf b(t)),\\
+\mathbf C^{(k)}(t)&=\mathbf \Lambda^1(t)\bullet \mathbf B^{\bullet k}(t),\qquad k\ge 2,
+\end{align*}
+where \(\bullet\) denotes the Schur product simply defined as \(\mathbf A\bullet\mathbf B=\{a_{ij}b_{ij}\}\) with \(\mathbf A=\{a_{ij}\}\) and \(\mathbf B=\{b_{ij}\}\). The notation \(\mathbf \Delta (\cdot)\) operator sets \(\cdot\) as the diagonal i.e.
+
+\[
+\mathbf \Delta (\mathbf b(t))=\text{diag}(b_1(t),...,b_p(t)),
+\]
+
+assuming \(E=\{1,...,p\}\). We call \(\mathbf B(t)\) the transition payments, \(\mathbf R(t)\) the rewards and \(\mathbf C^{(k)}(t)\) the \(k\)th order contributions. The matrix \(\mathbf C^{(k)}(t)\) is mostly usefull notationally rather than intuitively.
+
+\hypertarget{interest-rate-free-analysis}{%
+\subsection{Interest rate free analysis}\label{interest-rate-free-analysis}}
+
+In this section, we consider the risk free context where we are not concerned with any discounting of expected payments. This make us introduce the following random process
+
+\[
+U^0(s,t) = \sum_{i\in E}\int_s^tb_i(u)1_{X(u-)=i}\ du+\sum_{i,j\in E}\int_s^tb_{ij}(u)\ dN_{ij}(u),
+\]
+
+giving the total reward obtained in the time interval \([s,t]\). We are interested in higher order moments of this quantity (representing the rate free reserve). To this goal we introduce the conditional moments with
+
+\[
+m_{ij}^{(k)}(s,t)=\mathbb E\left.\Big[1_{X(t)=j}U^0(s,t)^k\right\vert X(s)=i\Big],
+\]
+
+representing the weighted expected moment upon start in state \(i\) weighted with the probability with end in state \(j\). This forms the matrix
+
+\[
+\mathbf m^{(k)}(s,t)=\left\{m_{ij}^{(k)}(s,t)\right\}_{i,j\in E}.
+\]
+
+For simplicity we simply for \(k=1\) write \(\mathbf m^{(1)}(s,t) = \mathbf m(s,t)\).
+
+\textbf{Theorem 5.1. (Bladt)} \emph{With the above assumptions it holds that}
+
+\[
+\mathbf m(s,t)=\int_s^t\mathbf P(s,u)\mathbf R(u)\mathbf P(u,t)\ du.
+\]
+
+\emph{In particular, by Van Loans formula we have}
+
+\[
+\prod_s^t\left(\mathbf I + \begin{pmatrix}\mathbf \Lambda(x) & \mathbf R(t)\\ \mathbf 0 & \mathbf \Lambda(x)\end{pmatrix} dx\right)=
+\begin{pmatrix}
+\mathbf P(s,t) & \mathbf m(s,t)\\
+\mathbf 0 & \mathbf P(s,t).
+\end{pmatrix}
+\]
+
+\textbf{Proof.}
+
+\hypertarget{transform-of-rewards-and-higher-order-moments}{%
+\subsection{Transform of rewards and higher order moments}\label{transform-of-rewards-and-higher-order-moments}}
 
 \hypertarget{continuous-time-finance}{%
 \chapter{Continuous Time Finance}\label{continuous-time-finance}}
@@ -4831,6 +4937,1412 @@ where each leaf is the result of splitting once with respect to each covariate. 
 
 While predictions of random forests are relatively smooth, they are not monotonic. e.g.~in car insurance, if everything else is the same, more mileage should lead to higher insurance price. Random forests deal well with sparsity, i.e., when the number of features \(p\) is large, but the number of relevant features is rather small: \(s<<p\).
 
+\hypertarget{gradient-boosting-machines-and-bayesian-additive-regression-trees}{%
+\section{Gradient Boosting Machines and Bayesian additive regression trees}\label{gradient-boosting-machines-and-bayesian-additive-regression-trees}}
+
+In the previous section we have discussed that random forests are not good in estimating additive structures. In this section we will see two tree-based estimators that can deal better with additive structures.
+
+\textbf{Gradient Boosting Machines.} The general idea of boosting is to construct an estimator of the form
+
+\[
+\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x),
+\]
+
+where \(\hat m_{n,b}\) is the result of improving on the estimator \(\hat m_n^{(b-1)}(x)=\sum_{j=1}^{b-1} \hat m_{n,j}(x)\).
+
+\textbf{Definition.} \emph{(Forward Stagewise Additive Modeling)}
+
+The function \(\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x)\) is called Forward Stagewise Additive Modeling estimator if
+
+\begin{itemize}
+\item
+  \(m_{n,0}(x)=\arg \min_{\eta\in \mathcal G} \sum_{i=1}^N L\left(Y_i, \eta\right)\) and
+\item
+  for \(b=1,\dots,B\)
+  \[\hat m_{n,b} =  \arg \min_{\eta\in \mathcal G} \hat R_n\left( \hat m_n^{(b-1)}(x)+\eta(x)\right),\]
+  where \(\hat m_n^{(b-1)}=\sum_{j=1}^{b-1}\hat m_{n,j}.\)
+\item
+  The set \(\mathcal G\) is chosen to be very restrictive/small.
+\item
+  The component \(m_{n,b}\) is called weak learner.
+\end{itemize}
+
+Problem: Finding the exact minimizer is only feasible (not harder than than the usual minimisation) for very specific loss functions \(\hat R_n\). In the case of squared loss, minimization in step \(b\) boils down to minimizing the empirical squared loss with respect to the residuals \(Y_i- m_n^{(b-1)}(X_i)\).
+
+\[
+L\left(Y_i, \hat m_n^{(b-1)}(X_i)+\eta(X_i)\right)=L\left(Y_i-\hat m_n^{(b-1)}(X_i),\eta(X_i)\right)
+\]
+
+In the classification case with \(\{-1,1\}\) valued response and an exponential loss \((L(y_1,y_2)=e^{-y_1y_2})\), minimization in step \(b\) boils down to minimizing the weighted empirical exponential loss with observation \(i\) receiving weight \(e^{-Y_im_n^{(b-1)}(X_i)}\).
+
+\[
+L\left(Y_i,  \hat m_n^{(b-1)}(X_i)+\eta(X_i)\right)=e^{Y_im_n^{(b-1)}(X_i)}L\left(Y_i,\eta(X_i)\right)
+\]
+
+This algorithm is also known as AdaBoost.M1. Adaboost.M1 was introduced in Freund and Schapire (1997) and was only later (J. Friedman, Hastie, and Tibshirani 2000) identified as Forward Stagewise Additive Modeling with exponential loss.
+
+\textbf{Definition.} \emph{(Gradient Boosting Machine v1)} (J. H. Friedman 2001)
+
+\begin{itemize}
+\tightlist
+\item
+  Gradient Boosting approximates Forward Stagewise Additive Modeling.
+\item
+  Tuning parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    function space \(\mathcal G\)
+  \item
+    learning rate \(\eta\)
+  \end{itemize}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Initialize \(\hat m_{n}^{(0)}(x)=\arg \min_{m \in \mathcal G} \sum_{i=1}^N L\left(Y_i, m\right)\).
+\item
+  For \(b=1,\dots,B\) :
+
+  \begin{enumerate}
+  \def\labelenumii{(\alph{enumii})}
+  \tightlist
+  \item
+    For \(i=1,2, \ldots, n,\) calculate the gradient:
+    \[
+    g_{ib}=-\frac{\partial L(Y_i,y)}{\partial y} \Bigr\rvert_{y=m_n^{(b-1)}(X_i)} .
+    \]
+  \item
+    \((\xi_b, \tilde m_{n,b})= \arg \min_{\xi\in \mathbb R_{>0},m \in \mathcal G}\sum_{i=1}^n(g_{ib}-\xi m(X_i))^2\) (\(\xi_b\) is only necessary if \(\mathcal G\) is not closed under multiplication by constants)
+  \item
+    \(\alpha_b= \arg \min_{\alpha} \hat R_n(m_n^{(b-1)}+\alpha \tilde m_{n,b})\) (line search)
+  \item
+    \(\hat m_{n,b}(x)= \alpha_b \tilde m_{n,b}(x)\) (weak learner)
+  \item
+    Update: \(\hat m^{(b)}_n(x)=\hat m^{(b-1)}_n(x)+\eta \hat m_{n,b}(x)\).
+  \end{enumerate}
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Tuning parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    max depth \(J\), \(\mathcal G=\{\text{trees of max depth} \ J\}\)
+  \item
+    learning rate \(\eta\)
+  \end{itemize}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Initialize \(\hat m_{n}^{(0)}(x)=\arg \min_{m \in \mathcal G} \sum_{i=1}^N L\left(Y_i, m\right)\).
+\item
+  For \(b=1,\dots,B\) :
+
+  \begin{enumerate}
+  \def\labelenumii{(\alph{enumii})}
+  \tightlist
+  \item
+    For \(i=1,2, \ldots, n,\) calculate the gradient:
+    \[
+    g_{ib}=-\frac{\partial L(Y_i,y)}{\partial y} \Bigr\rvert_{y=m_n^{(b-1)}(X_i)} .
+    \]
+  \item
+    Fit a regression tree with squared loss and max depth \(J\) to the targets \(g_{ib}\). \(\rightarrow\) leaves \(R_{bj}, j=1,2, \ldots, J_b\).
+  \item
+    For \(j=1,2, \ldots, J_b\) calculate the value for leaf \(R_{bj}\):
+    \[
+    v_{bj}=\arg \min_{ v_{bj} \in \mathbb R} \sum_{i: X_i \in R_{kj}} L\left(Y_i, m_n^{(b-1)}(X_i)+ v_{bj}\right) .
+    \]
+  \item
+    \(\hat m_{n,b}(x)=\sum_{j=1}^{J_b} v_{bj} 1\left(X_i \in R_{b j}\right)\)
+  \item
+    Update: \(\hat m^{(b)}_n(x)=\hat m^{(b-1)}_n(x)+ \eta \hat m_{n,b}(x)\).
+  \end{enumerate}
+\end{enumerate}
+
+The main difference between the tree gradient booster and general gradient boosting is: Least squares problem is not solved directly but greedy step-wise by growing a tree via CART-algorithm. Instead of a line search we minimize the empirical loss in each leaf.
+
+More recently Chen and Guestrin (2016) proposed to optimize a regularized objective in the Forward Stagewise Additive Modeling with the following further changes:
+1. Replace \(\hat R_n\) by \(\hat R_{n,\gamma,\lambda}(\hat m_n^{(b-1)}+m_{n,b}) =\hat R_n(\hat m_n^{(b-1)}+m_{n,b}) + J_{\gamma,\lambda}(m_{n,b})\)
+- \(J_{\gamma,\lambda}(m_{n,b})= \gamma J_b+ \frac 1 2 \lambda ||v_b||_2^2\)
+- \(J_b\)= number of leaves of tree in iteration \(b\)
+- \(v_b=\) leaf values of tree in iteration \(b\)
+2. Use second order approximation instead of gradient descent (see next slide)
+- i.e.~gradient descent in 2b,c is replaced by a Newton-Raphson type approximation
+
+The algorithm is implemented in the \(\texttt{xgboost}\) package. Main hyperparameters:
+- Penalties: \(\gamma\), \(\lambda\)
+- learning rate: \(\eta\)
+- max tree depth
+
+\textbf{Gradient Boosting (Second version)} Use a second order approximation of \(\hat R_{n,\gamma,\lambda}\)
+\begin{align}
+&\hat R_{n,\gamma,\lambda}(\hat m_n^{(b-1)}(x))+\hat m_{n,b}(x))\\
+\\&\approx\sum_{i=1}^n \left\{ L(Y_i,\hat 
+m_n^{(b-1)}(X_i))+ g_i\hat m_{n,b}(X_i)+ \frac 1 2 h_i \hat m_{n,b}(X_i)^2\right \}+ J_{\gamma,\lambda}(m_{n,b})\\
+&= \sum_{j=1}^{J_b}\left \{ \left[\sum_{i: X_i \in R_{jb}}g_i\right]v_{jb} + \frac 1 2 \left[\sum_{i: X_i \in R_{jb}}h_i+\lambda\right]v_{jb}^2 \right\}+\gamma J_b \quad \text{(ignoring constants)}
+\end{align}
+
+with \(g_i= \frac{\partial L(Y_i,y_i)}{\partial y_i} \Bigr\rvert_{y_i=m_n^{(b-1)}(X_i)}\) and \(h_i= \frac{\partial^2 L(Y_i,y_i)}{\partial^2 y_i} \Bigr\rvert_{y_i=m_n^{(b-1)}(X_i)}\). In the last expression, for a fixed tree, the optimal leaf values \(v_{jb}\) are given by
+
+\[
+v_{jb}=-\frac{\sum_{i: X_i \in R_{jb}} g_i }{\sum_{i: X_i \in R_{jb}} h_i+\lambda}
+\]
+
+This leads to the objective function
+\[
+-\frac 1 2\sum_{j=1}^{J_b} \frac {(\sum_{i: X_i \in R_{jb}}g_i)^2}{\sum_{i: X_i \in R_{jb}}h_i+\lambda}+\gamma J_b
+\]
+
+Hence, in step \(b\), when growing a tree the loss reduction of splitting \(R_{jb}\) in \(R_{jb,L},R_{jb,R}\) is given by
+
+\[
+\frac 1 2 \left\{\frac {(\sum_{i: X_i \in R_{jb,L}}g_i)^2}{\sum_{i: X_i \in R_{jb,L}}h_i+\lambda}+\frac {(\sum_{i: X_i \in R_{jb,R}}g_i)^2}{\sum_{i: X_i \in R_{jb,R}}h_i+\lambda}-\frac {(\sum_{i: X_i \in R_{jb}}g_i)^2}{\sum_{i: X_i \in R_{jb}}h_i+\lambda}\right\}-\gamma
+\]
+
+In step \(b\) the \(j\)th node is split a dimension and position that maximises the loss reduction, given that the maximising loss reduction is positive and the current node has depth smaller \(J\). Otherwise the node is not further split.
+
+Gradient boosting machines are known to often provide the strongest predictive performance. \(\texttt{xgboost}\) and \(\texttt{lightgbm}\) are popular implementations. They are quite fast, but not as fast as random forests and also more reliant on optimal parameter tuning. The most relevant parameters are tree depth and learning rate
+
+Why are gradient boosting machines so powerful? A contributing factor may be that a small max depth restricts the number of interactions fitted.
+
+\begin{itemize}
+\tightlist
+\item
+  max dept=\(1\) corresponds to an additive model etc\ldots.
+  Gradient boosting machines, in contrast to random forests have also, no problem to fit additive functions. Different additive components can be fitted in different iterations \(b\).
+\end{itemize}
+
+\textbf{Bayesian additive regression trees.} Another powerful algorithm is BART
+
+\textbf{Definition.} \emph{(Bayesian additive regression trees (BART) (for least squares))} (Chipman, George, and McCulloch 2010)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Let \(\hat{m}^1(x)=\sum_{k=1}^K \hat{m}_k^1(x)\), \(\hat{m}_1^1(x)=\hat{m}_2^1(x)=\cdots=\hat{m}_K^1(x)=\frac{1}{n K} \sum_{i=1}^n Y_i\).
+\item
+  For \(b=2, \ldots, B\) :
+
+  \begin{enumerate}
+  \def\labelenumii{(\alph{enumii})}
+  \tightlist
+  \item
+    For \(k=1,2, \ldots, K\) :
+
+    \begin{enumerate}
+    \def\labelenumiii{\roman{enumiii}.}
+    \tightlist
+    \item
+      For \(i=1, \ldots, n\), calculate residuals
+      \(r_i=y_i-\sum_{k^{\prime}<k} \hat{m}_{k^{\prime}}^b\left(X_i\right)-\sum_{k^{\prime}>k} \hat{m}_{k^{\prime}}^{b-1}\left(X_i\right)\)
+    \item
+      Consider a new tree, \(\hat{m}_k^b\) by making ONE of the following changes to \(\hat{m}_k^{b-1}\) (every change has a fixed probability).
+
+      \begin{itemize}
+      \tightlist
+      \item
+        GROW: split one leaf
+      \item
+        PRUNE: prune sister leaves
+      \item
+        CHANGE: change the decision rule of one node
+      \item
+        SWAP: swap decision rule of two nodes
+      \end{itemize}
+    \item
+      The change is accepted by throwing a coin with the probabilities of the coin given by comparing posterior of old tree and proposed tree. Otherwise, tree is kept: \(\hat{m}_k^{b}=\hat{m}_k^{b-1}\)
+    \item
+      Update leaf values for \(\hat{m}_k^{b}\) by sampling from a posterior distribution.
+    \end{enumerate}
+  \item
+    Set \(\hat{m}^b(x)=\sum_{k=1}^K \hat{m}_k^b(x)\).
+  \end{enumerate}
+\item
+  Compute the mean after \(L\) burn-in samples,
+  \(\hat{m}(x)=\frac{1}{B-L} \sum_{b=L+1}^B \hat{m}^b(x)\)
+\end{enumerate}
+
+Only a heuristic of BART is presented here. Many packages differ in the exact implementation. In general BART can be seen as a mix of random forest, boosting, additive models. BART is very expensive to train. But if one is able to tune the hyperparameters, BART has often shown to provide unmatched accuracy.
+
+\hypertarget{some-practical-considerations}{%
+\section{Some practical considerations}\label{some-practical-considerations}}
+
+In this lecture we will discuss some practical issues that may help for your projects.
+
+\textbf{Categorical data. }One point often ignored is that in many applications a significant part of features are categorical. All algorithms we have introduced so far implicitly assume, however, that features are numerical. The most ``famous'' ways of dealing with categorical features are one-hot encoding or dummy encoding.
+
+\textbf{Definition.} \emph{(One-hot encoding)} Given a feature with \(X\) that can take \(k\) differen categorical values, one-hot encoding entails transforming the feature into \(k\)
+binary features where
+
+\[
+X^{(l)}=\mathbb 1(X=l), \quad l=1,\dots,k.
+\]
+
+\textbf{Definition.} \emph{(Dummy encoding)} Given a feature with \(X\) that can take \(k\) differen categorical values, dummy encoding entails transforming the feature into \(k-1\)
+binary features where, given a reference \(l^\ast\),
+
+\[
+X^{(l)}=\mathbb 1(X=l), \quad l=1,\dots,l^\ast-1,l^\ast+1,\dots,k.
+\]
+
+Dummy encoding solves the problem of collinearity when one-hot encoding. Both methods can easily make the dimension of the problem rapidly increase if a feature has many categories e.g.~car brand, country, or postcode. Grouping variables with similar effect on the response might reduce variance. This could e.g.~be done via expert knowledge. Trees are an automated alternative.
+
+There are \(B_k = \sum_{j=0}^k \binom k j\) ways to partition a categorical feature with \(k\) values \href{https://en.wikipedia.org/wiki/Bell_number}{(Bell number)}.
+
+\begin{itemize}
+\tightlist
+\item
+  \(B_2=2\), \(B_3=5\), \(B_4=15\), \(B_5=52\), \(B_6=203\), \(B_7=877\), \(B_8=4140\).
+\end{itemize}
+
+In a CART algorithm, we would only partition a current node into two child-nodes. In this case there are \(2^{k - 1}-1\) possible partitions. This is still not feasible for large \(k\). It is well known Wright and König (2019) that if optimal partition is with respect to gini index or squared loss, then the optimal partition can be found by considering only \(k-1\) partitions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Order feature values by mean response.
+\item
+  The optimal partition is a contiguous partition.
+  - Search for optimal partition treating the categorical features as numerical, i.e., split into a left and right partition.
+\end{enumerate}
+
+Wright and König (2019) propose to order categorical variables only once when fitting a random forest. This is the default in \(\texttt{ranger}\). \(\texttt{lightgbm}\) and very recently (April 2022) \(\texttt{xgboost}\) offer the option to order variables before every split.
+
+\textbf{Trees with different loss functions.} In many insurance applications it is common to assume that \(Y|X\) has a certain (known) parameterized distribution. In this case the loss function can correspond to the negative log likelihood or deviance. When fitting a tree, leaf values then correspond to the maximum likelihood parameter estimate for observations conditioned on that leaf. One advantage is that if the distribution is chosen well this can lead to more robust/better results and additionally it provides estimates of the full distribution. The disadvantage is that: It leaves room for misspecification. If one is only interested in the mean response, then estimating the distribution first may lead to a biased estimate of the mean. Computational time might be an issue if the likelihood function is too complicated.
+
+\textbf{Example.} \emph{(Poisson loss with given exposure)} Assume that the response \(Y\) given \(X\) is Poisson distributed with mean \(\lambda(X)E\). Given iid observations \((X_i,Y_i,E_i)_{i=1,\dots,n}\), the log likelihood in leaf \(R_1\) is given by
+
+\[
+l(\lambda)= \sum_{i: X_i\in R_1} -\lambda E_i+ Y_i\log(\lambda E_i)-log(Y_i!)
+\]
+
+The minimzer is given by
+
+\[
+\hat \lambda = \frac{\sum_{i: X_i\in R_1}  Y_i}{\sum_{i: X_i\in R_1} ^n E_i}
+\]
+
+Which has the same minimizer as when minimizing the empirical risk of the Poisson Deviance
+\[
+\hat R_n(\lambda E_i)=\sum_{i=1}^n 2\left(Y_i\log {\frac {Y_i}{\lambda E_i }}-Y_i+\lambda E_i \right).
+\]
+
+\href{https://github.com/henckr/distRforest}{\(\texttt{distRforest}\)} is a recent attempt to add more distributions to random forest.
+
+In boosting algorithms we don't directly work with the loss function but only with its gradient (boosting v1) or with a second order approximation (boosting v2). Assume \(Y|X\) follows a distributions from an exponential dispersion family, i.e., the density (for fixed \(X=x\)) can be written as
+
+\[
+f\left(Y ; \theta, E^{-1} \phi\right)=\exp \left\{ \frac{\theta Y-A(\theta)}{\phi/E}+c\left(Y ; \phi/E\right)\right\}.
+\]
+
+\(\phi\) is dispersion parameter. \(E\) is exposure. \(A\) is twice continuously differentiable, gradient of \(A\) one-to-one. We ignore the dispersion parameter \(\phi\) since it does not change point prediction if it does not change over different observations \(i=1,\dots,n\). Then, the negative log likelihood up to additive terms that do not depend on \(\theta\) is
+
+\[
+- E\times(\theta Y - A(\theta))
+\]
+
+We can translate this to a generalized framework: We could say we wish to estimate the distribution \(\tilde g (\mathbb E[Y])\), given canonical link function \(\tilde g\). \(\Rightarrow \tilde g(\mathbb E(Y))=\theta\). Meaning we wish to minimize the loss \(L(Y,\theta)= - E\times(\theta Y - A(\theta)).\) Hence, when employing a gradient boosting machine algorithm we can use the gradient:
+
+\[
+g_i= \frac{\partial  L(Y_i,\theta)}{\partial \theta} \Bigr\rvert_{\theta=m_n^{(b-1)}(X_i)}=-E_i\times \left(Y-  \frac{\partial  A(\theta)}{\partial \theta} \Bigr\rvert_{\theta=m_n^{(b-1)}(X_i)}\right),
+\]
+
+and the second derivative:
+
+\[
+h_i= \frac{\partial^2  L(Y_i,\theta)}{\partial^2 \theta} \Bigr\rvert_{\theta=m_n^{(b-1)}(X_i)}=E_i\times \left(  \frac{\partial^2  A(\theta)}{\partial^2 \theta} \Bigr\rvert_{\theta=m_n^{(b-1)}(X_i)}\right).
+\]
+
+\(\texttt{xboost}\) and \(\texttt{lightgbm}\) come with many pre-configured loss functions.
+
+\textbf{Imbalanced data.} When considering individual insurance claims data, one will find that most policies do not have a claim registered. In other words: The number of observed zeros will be much higher than observations of other numbers when looking at claim frequencies or claim amounts. This can be a problem when modelling under a Poisson assumptions and zero inflated distributions have been suggested. It is usually not problematic when modelling under a Bernoulli assumption (logistic regression). It can be a problem if we are instead interested in 0/1 decisions (e.g.~in fraud detection). In this case, there have been loss modifications suggested that reward more detecting 1s than detecting 0s. A prominent example is focal loss (Lin et al.~2017). In pricing we are rather interested in the probability and not in 0/1 decisions.
+
+Claim amounts are often modeled via a frequency severity approach modelling frequency and severity separately (assuming independence between frequency and severity):
+
+\[
+\pi=\mathbb{E}\left(\frac{L}{E}\right) = \mathbb{E}\left(\frac{N\times Y}{E}\right)= \mathbb{E}\left(\frac{N}{E}\right) \times  \mathbb{E}\left(Y\right)=\mathbb{E}(F) \times \mathbb{E}(Y).
+\]
+
+where \(\pi\)= technical price, \(L\)= loss, \(E\)= exposure, \(N\)= frequency and \(Y\)= severity. Note that it is important here how to define a claim (is a claim with claim size zero a claim?). If it is is not counted as a claim, then modelling \(E[Y]\) is easier.
+
+\hypertarget{neural-networks}{%
+\section{Neural Networks}\label{neural-networks}}
+
+In this lecture we will introduce neural networks. Neural networks with multiple layers are also known as deep learners. We will only consider feed forward neural networks. Usually used for tabular (=unstructrued) data. The recent popularity of neural networks stems mostly from modification more suitable for structured data, like
+
+\begin{itemize}
+\tightlist
+\item
+  Convolutional neural networks for image classification
+\item
+  Transformers in natural learning processing
+\end{itemize}
+
+As usual, we assume that we are given an iid dataset \(\mathcal D_n=\{X_i,Y_i\}_{i=1,\dots,n}\).
+
+\textbf{Single Layer Feed Forward.} We start with a single layer neural network (= 1 hidden layer).
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+The architecture of a single layer neural network corresponds to
+the function class \(\mathcal G\) such that
+\(\hat m(D_n)(x)=\hat m_n(x): \mathcal X \mapsto \mathcal Y\) can be written as
+\begin{align}
+\hat m_n(x)&=g\left(\beta_0 + \sum_{k=1}^{K} \beta_kH_k(x)\right)\\
+&= g\left(\beta_0 + \sum_{k=1}^{K} \beta_k\phi\left(w_{k0} + \sum_{j=1}^p w_{kj}x_j\right)\right).
+\end{align}
+In the the previous slide the illustration showed \(p=3\), \(K=4\). To ease notation we will be ignoring the intercepts, here: \(\beta_0, w_{k0}\). In matrix notation, the hidden layer is \(H(x)=\phi(x^tw)\) and the output is
+
+\[
+\hat m_n(x)=g \left( H(x)^T\beta \right)=g\left(\phi(x^Tw)^T\beta\right).
+\]
+
+with \(w \in \mathbb R^{p\times K}\), \(\beta \in \mathbb R^{K}\). The functions \(\phi\) and \(g\) are called activation functions and are applied element-wise. The activation functions make the estimator non-linear.
+
+\textbf{Popular activation functions.}
+
+\begin{itemize}
+\tightlist
+\item
+  Sigmoid: \(\phi(z)=\frac{e^z}{1+e^z}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    maps to \([0,1]\)
+  \end{itemize}
+\item
+  Hyperbolic tangent: \(\phi(z)=\textrm{tanh}(z)= \frac{e^z-e^{-z}}{e^x+e^{-z}}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    maps to \([-1,1]\)
+  \end{itemize}
+\item
+  Rectified Linear Unit (ReLU): \(\phi (z)=\max(z,0)\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``standard'' activation function
+  \end{itemize}
+\item
+  Leaky ReLU: \(\phi (z)=\max(z,0)+ \alpha \min(0,z)\)
+\end{itemize}
+
+\textbf{Backpropagation.} Neural networks are fitted via gradient descent with small step sizes. We are hence interested in \(\frac{\partial L(Y_i,m(\beta,w))}{\partial w}, \frac{\partial L(Y_i,m(\beta,w))}{\partial \beta}.\) Calculating the gradient via the chain rule is called backpropagation.
+
+Note that the loss is calculated via the following composition:
+
+\[
+X_i \stackrel{w}{\rightarrow } Z_1 \stackrel{\phi}{\rightarrow } H \stackrel{\beta}{\rightarrow }Z_2\stackrel{g}{\rightarrow } m \stackrel{}{\rightarrow } L(Y_i,m)
+\]
+
+Hence, by the chain rule we have
+
+\[
+\frac{\partial L(Y_i, \partial m)}{\partial \beta}=\frac{\partial L(Y_i,m)}{m}\frac{\partial m}{Z_2}  \frac{\partial Z_2}{\partial \beta},
+\]
+
+as well as
+
+\[
+\frac{\partial L(Y_i,m)}{\partial w}=\frac{\partial L(Y_i,m)}{\partial m}\frac{\partial m}{\partial Z_2} \frac{\partial Z_2}{\partial H} \frac{\partial H}{\partial Z_1}\frac{\partial Z_1}{\partial w}.
+\]
+
+In step \(r\) and given a learning rate \(\gamma\) the weights are updated as
+\begin{align*}
+\beta^{(r+1)}= \beta^{(r)} -\gamma \frac 1 n \sum_{i=1}^n\frac{\partial L(Y_i,\hat m_n^{(r)}(X_i))}{\partial \beta^{(r)}},  \\
+w^{(r+1)}= w^{(r)} -\gamma  \frac 1 n \sum_{i=1}^n \frac{\partial L(Y_i,\hat m_n^{(r)}(X_i))}{\partial w^{(r)}}. 
+\end{align*}
+
+\textbf{Feed foreward Neural Network.} Usually one works with multiple hidden layers and possibly mutlipe outputs.
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+the \(l\)th hidden layer arises from the \(l-1\)th hidden layer from (ignoring intercepts)
+
+\[
+H^{(l)}=\phi_l(H^{(l-1)}w^{(l)}).
+\]
+
+The fitting is analogue to the single layer case. To avoid overfitting one can imploy penalty terms, e.g.~lasso and/or ridge. In the machine learning community this is also known as weight decay. Especially ridge penalty is popular. Ridge penalty means penalizing every entry of \(\beta, w\) by its square.
+
+\textbf{Stochastic Gradient Descent and Early Stopping.} In ``deterministic'' gradient descent, weights are updated via
+
+\[
+\beta^{(r+1)}= \beta^{(r)} -\gamma \sum_{i=1}^n\frac{\partial L(Y_i,\hat m_n^{(r)}(X_i))}{\partial \beta^{(r)}},  \quad
+w^{(r+1)}= w^{(r)} -\gamma  \sum_{i=1}^n \frac{\partial L(Y_i,\hat m_n^{(r)}(X_i))}{\partial w^{(r)}}.
+\]
+
+For large data sets this may not be computationally feasible/too expensive and an alternative is Stochastic Gradient Descent (SGD).
+
+\textbf{Definition.} \emph{Stochastic Gradient Descent (SGD)}
+
+Input: \(\texttt{batch-size}\), early stopping criteria (most often whether improvement is better than some treshold on the validation set)
+
+\begin{itemize}
+\tightlist
+\item
+  For \(j=1,\dots\)STOP (=epochs)
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    For \(k=1,\dots, n/\texttt{batch-size}\)
+  \item
+    Sample without replacement \(\texttt{batch-size}\) from \(\{1,\dots,n\}\setminus \cup_{l=1}^{k-1}B_j^j\), resulting in the \(k\)th batch, \(B_k^j\).
+  \item
+    Perform gradient descent with using only observations \(i \in B_k^j\)
+  \end{enumerate}
+\end{itemize}
+
+\textbf{Dropout learning.} An alternative/additional way to perform regularization is dropout, introduced in Srivastava et al.~(2014). It is an analogue to random forest, but the obvious idea of averaging the outputs of many separately trained nets is prohibitively expensive. Instead: In every mini-batch, for every \(i\), randomly remove a fraction \(p\) of the units in a layer when calculating the gradient. The surviving units get an additional weight of \(1/(1 − p)\). I.e. in epoch \(j\) and mini-batch \(k\), for individual \(i\) and current unit \(H(j,k)\),
+
+\[
+\widetilde H(j,k,i)=\begin{cases}0 & \text{with probability}\  p \\ H(k,j)/(1 − p) &\text{else}\end{cases}
+\]
+
+Note: \(\mathbb E[\widetilde H(j,k,i)]=H(k,j)\). The heuristic is that many thinned networks are trained in parallel.
+
+\textbf{More Hyperparameters.} An alterantive to a ridge penalty is max-norm regularization, with parameter \(c\). I.e. in every learning step enforce \(||\beta||^2_2, ||w||^2_2\leq c\), where \(||\cdot||^2_2\) denotes the squared sum of all entries.
+
+Instead of standard SGD, alternative updates can be performed, e.g., momentum:
+
+\[
+w^{(r+1)}=w^{(r)} +\alpha \Delta w^{(r)}  - \gamma  \sum_{i=1}^n \frac{\partial L(Y_i,\hat m_n^{(r)}(X_i))}{\partial w^{(r)}}
+\]
+
+\[
+\Delta w^{(r)}= w^{(r)}-w^{(r-1)}
+\]
+
+or Adam.
+
+\textbf{Further comments.} The size of the learning rate can depend on the current epoch, also known as learning rate decay. Initial weights, i.e, starting values for \(w, \beta\), do effect the outcome. Covariates are often standardized via minmax scaling.
+
+\[
+\tilde x = \frac{x- \min(x)}{\max(x)-\min(x)} \in [0,1]
+\]
+
+In R, implementation of neural network is provided via keras/tensorflow \url{https://tensorflow.rstudio.com/}. Given the many options to configure, initialize and stop training a neural network, training a neural network is often seen as ``art''.
+
+For tabular (=unstructured) data tree-based algorithms usually outpeform neural networks with respect to test error. Neural networks are however unchallenged for structured data (especially when also extending the feed forward network accounting for the structure)
+
+\hypertarget{local-explanations}{%
+\section{Local explanations}\label{local-explanations}}
+
+In this lecture we shift the perspective and we wish to understand what a predictor \(\hat m_n(x)\) is actually doing.
+
+\hypertarget{interpretability}{%
+\subsection{Interpretability}\label{interpretability}}
+
+Regression: \(Y_i=m(X_i)+\varepsilon_i\)
+
+\[
+X\qquad \rightarrow \qquad  \widehat m (X)  \qquad \rightarrow  \qquad   m (X)\quad \text{or}\quad Y\ \vert\ X
+\]
+
+Interpretability is understanding the relationship between \(X\) and \(\widehat m (X)\). This is different to understanding the relationship between \(X\) and \(Y\).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4493}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2754}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2754}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Quality
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Linear Models
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Machine Learning
+\end{minipage} \\
+\midrule()
+\endhead
+interpretable & ✔ & ✘ \\
+interactions manually & ✔ & ✔ \\
+interactions & ✘ & ✔ \\
+variable selection/sparsity & ✔ & ✔ \\
+non-linearity & ✘ & ✔ \\
+\bottomrule()
+\end{longtable}
+
+Current machine learning algorithms are often highly flexible and
+can deal with interaction, non-linearity, sparsity and variable selection;
+but they are not interpretable.
+
+\textbf{Local explanations.} Fix a value \(x_0 \in \mathbb R^p\). A local approximation at \(x_0\) of the function \(\hat m_n\) is given by
+
+\[
+\hat m\left(x_0\right)=\phi_{0}+\sum_{k=1}^{p} \phi_k(x_0),
+\]
+
+where \(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\) are constants. Note: the right hand-side is not identified. Local explanations add constraints such that \(\phi_k(x_0)\) is uniquely identified and best reflects the local contribution of feature \(k\) to \(\hat m_n\left(x_0\right)\).
+
+\textbf{Definition.} \emph{(Additive Value functions)} A value function \(v\) assigns a real value
+\(v(S)\) to each subset \(S \subseteq \{1,\dots p\}\).
+
+\textbf{Definition.} \emph{(Shapley Axioms)}
+
+Given a vaue function \(v_{x_0}\) with \(v_{x_0}(\{1,\dots,p\})=m(x_0)\). The four Shapley axioms are
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Efficiency} \(m\left(x_0\right)=\phi_{0}+\sum_{k=1}^{p} \phi_k(x_0)\), \(\phi_{0}=v(\emptyset)\).
+\item
+  \textbf{Symmetry}: Fix any \(k,l \in \{1,\dots,p\}, k\neq l\).
+  If \(v_{x_0}(S\cup k)=v_{x_0}(S\cup l)\), for all \(S \subseteq \{1,\dots p\}\setminus \{k,l\}\), then \(\phi_k(x_0)=\phi_l(x_0).\)
+\item
+  \textbf{Dummy} For \(k=1,\dots,p\): If \(v_{x_0}(S\cup k)=v_{x_0}(S)\), for all \(S \subseteq \{1,\dots p\}\setminus \{k\}\), then \(\phi_k=0.\)
+\item
+  \textbf{Linearity} For \(k=1,\dots,p\): If \(m(x_0)=m^1(x_0)+m^2(x_0)\), then \(\phi_k(x_0)=\phi^1_k(x_0)+\phi^2_k(x_0)\), where \(\phi^l\) is the explanation corresponding to the function \(m^l\).
+\end{enumerate}
+
+\textbf{Theorem.} \emph{(Shapley Axioms)} Given a value function \(v_{x_0}\), there exist unique constants \(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\) such that the four Shapley axioms are satisfied. They are given by
+\begin{align}
+\phi_{k}(x_0)&=\frac{1}{p !} \sum_{\pi \in \Pi_p} \Delta_{v_{x_0}}\left(k, \{\pi(1),\dots,\pi(k-1)\}\right)\\
+&=\frac 1 {p!}\sum_{S: S \subseteq \{1,\dots,p\} \setminus\{k\}} {|S| !(p -|S|-1) !}\Delta_{v_{x_0}}(k, S),
+\end{align}
+where \(\Delta_{v_{x_0}}(k, S)=v_{x_0}(S \cup k)-v_{x_0}(S)\) and \(\Pi_p\) is the set of permutations of \(\{1,\dots,p\}\).
+
+\textbf{Proof.}
+
+For \(R\subseteq\{1,\dots,p\}\), and a value fucntion \(v\), define the value function
+
+\[
+v_R(S)=\begin{cases}m(x_0) & \text{if}\  R\subseteq S \\ 0 & \text{else} \end{cases}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  By the symmetry axiom, if \(j,k\in R\), then \(\phi_j(v_R)=\phi_k(v_R).\)
+\item
+  By the dummy axiom, if \(k\notin R\), then \(\phi_k(v_R)=0\).
+\end{itemize}
+
+Hence, by the efficiency axiom \((v_R(\{1,\dots,p\})=m(x_0))\), for \(k\in R\),
+
+\[
+\phi_k(v_R)= \frac{m(x_0)}{|R|}.
+\]
+
+We will (later) show that
+
+\[
+\tag{1}
+v(U)=\sum_{T: T\subseteq\{1,\dots,p\}}\sum_{S: S\subseteq T} (-1)^{|T-S|}\frac{v(S)}{m(x_0)}v_T(U).
+\]
+
+Then, by the linearity axiom
+\begin{align}
+\phi_k(v)&=\sum_{T: T\subseteq\{1,\dots,p\}}\sum_{S: S\subseteq T} (-1)^{|T-S|} \frac{v(S)}{m(x_0)} \phi_k(v_T)\\
+&=\sum_{T: T\subseteq\{1,\dots,p\}, k \in T}\sum_{S: S\subseteq T} (-1)^{|T-S|} \frac{v(S)}{|T|}\\
+&=\sum_{S: S\subseteq\{1,\dots,p\}}\sum_{T: S \cup \{k\} \subseteq T} (-1)^{|T-S|} \frac{v(S)}{|T|} .
+\end{align}
+We can write
+
+\[
+\phi_k(v)=\sum_{S: S\subseteq\{1,\dots,p\}}\gamma_i(S) v(S)  , \quad  \gamma_k(S)=\sum_{T: S\cup \{k\}\subseteq T} (-1)^{|T-S|} \frac{1}{|T|}
+\]
+
+Observe that for \(S_1\neq S_2, S_2=S_1\cup\{k\}\), \(\gamma_k(S_1)=-\gamma_k(S_2)\). Hence,
+\begin{align}
+\phi_k(v)&=\sum_{S: S\subseteq\{1,\dots,p\}}\gamma_k(S) v(S) \\
+&= \sum_{S: S\subseteq\{1,\dots,p\}, k\in S}\gamma_k(S) v(S) +\sum_{S: S\subseteq\{1,\dots,p\}, k\notin S}\gamma_k(S) v(S) \\
+&= \sum_{S: S\subseteq\{1,\dots,p\}, k\notin S}-\gamma_k(S) v(S\cup\{k\}) +\sum_{S: S\subseteq\{1,\dots,p\}, k\notin S}\gamma_k(S) v(S) \\
+&= \sum_{S: S\subseteq\{1,\dots,p\}, k\notin S}-\gamma_k(S) \left [ v(S\cup\{k\})  - v(S) \right]
+\end{align}
+The proof follows by showing that
+
+\[ 
+\tag{2}
+\gamma_k(S)=-\frac{|S|!(p-|S|-1)!}{p!}, \qquad k \notin S,
+\]
+
+as well as equation (1).
+
+We first show \((2)\). We will use that
+
+\[
+\frac 1 l = \int_0^1 x^{l-1}\mathrm dx.
+\]
+
+Such that for \(k \notin S\), we have
+\begin{align}
+\gamma_k(S)&= \sum_{l=0}^{p-|S|-1} (-1)^{l+1}\binom{p-|S|-1}{l}\frac 1 {|S|+1+l} \\
+&= -\int_0^1x^{|S|}\sum_{l=0}^{p-|S|-1} (-1)^{l}\binom{p-|S|-1}{l}x^{l}\mathrm dx.
+\end{align}
+By the binomial theorem, this simplifies to
+\begin{align}
+\gamma_k(S)&=  - \int_0^1x^{|S|}(1-x)^{p-|S|-1}\mathrm dx \\
+&= -\frac{|S|!(p-|S|-1)!}{p!}.
+\end{align}
+The last equality follows from
+
+\[
+\int_0^1 x^a (1-x)^b\mathrm dx= \frac{a!b!}{(a+b+1)!}, \qquad a,b\geq0
+\]
+
+which can be proven by induction over \(b\).
+It remains to show (1). We have
+\begin{align}
+& \quad \sum_{T: T\subseteq\{1,\dots,p\}}\sum_{S: S\subseteq T} (-1)^{|T-S|}\frac{v(S)}{m(x_0)}v_T(U) \\
+&=\sum_{T: T\subseteq U}\sum_{S: S\subseteq T} (-1)^{|T-S|}v(S)\\
+&= \sum_{S: S\subseteq U}\left[\sum_{D: D \subseteq \{U\setminus S\}} (-1)^{|D|} \right]v(S)\\
+&= v(U),
+\end{align}
+where the last equation follows because the expression in the square bracket is zero for \(U\neq S\). That is because a non-empty set has an equal number of subsets with an odd number of elements as subsets with an even number of elements.
+
+Note that we will slightly abuse notation by ignoring ordering in the input of the functions below. Lundberg and Lee (2017) proposed to use Shapley values with value function
+
+\[
+v(S)=\mathbb E[ \hat m_n(X_S,X_{-S})| X_S=x_S] = \int \hat m_n(x_1,\dots,x_p) p_X(x_S,X_{-S}) \mathrm dx_{-S}
+\]
+
+for model explanation. And called it SHAP (SHapley Additive exPlanations). To simplify calculations, Lundberg and Lee (2017) proposed to calculate
+
+\[
+v(S)= \mathbb E[\hat m_n(x_S,X_{-S})]= \int \hat m_n(x_1,\dots,x_p) p_{X_{-S}}(X_{-S}) \mathrm dx_{-S}
+\]
+
+Janzing, Minorics, and Blöbaum (2020) argue that the latter value function should actually be the preffered value function. Chen et al.~(2020) coin it interventional SHAP (and the original SHAP above observational SHAP). In the next, we give an example why interventional SHAP values might be preferred compared to observational SHAP values.
+
+\textbf{Example.} \emph{(Observational SHAP vs Interventional SHAP)} Assume
+
+\[
+\hat m_n(x_1,x_2)=x_1
+\]
+
+Let \(X_1\), \(X_2\) be binary with
+
+\[
+p(x_1,x_2)=
+\begin{cases}
+\frac 1 2 & \text{if} \ x_1=x_2 \\
+0 & \text{else}
+\end{cases}
+\]
+
+For observational SHAP, we have
+
+\begin{itemize}
+\tightlist
+\item
+  \(v_x (\emptyset)=\mathbb E[\hat m_n(X_1,X_2) ]=0.5\)
+\item
+  \(v_x (\{1\})=\mathbb E[\hat m_n(X_1,X_2) |X_1=x_1 ]=x_1\)
+\item
+  \(v_x (\{2\})=\mathbb E[\hat m_n(X_1,X_2) |X_2=x_2 ]=x_2\)
+\item
+  \(v_x (\{1,2\})=\hat m_n(x_1,x_2) =x_1\)
+\end{itemize}
+
+Hence,
+
+\begin{itemize}
+\tightlist
+\item
+  \(\Delta(2,\emptyset)= v_x (\{2\})-v_x (\emptyset)=x_1-0.5\)
+\item
+  \(\Delta(2,\{1\})= v_x (\{1,2\})-v_x (\{1\})=x_1-x_1=0\)
+\end{itemize}
+
+Such that
+
+\begin{itemize}
+\tightlist
+\item
+  \(\phi_2= \frac 1 2 (x_1-0.5)\neq 0\)
+\end{itemize}
+
+For interventional SHAP, we have
+
+\begin{itemize}
+\tightlist
+\item
+  \(v_x (\emptyset)=\mathbb E[\hat m_n(X_1,X_2) ]=0.5\)
+\item
+  \(v_x (\{1\})=\mathbb E[\hat m_n(x_1,X_2) ]=x_1\)
+\item
+  \(v_x (\{2\})=\mathbb E[\hat m_n(X_1,x_2) ]=0.5\)
+\item
+  \(v_x (\{1,2\})=[\hat m_n(x_1,x_2) =x_1\)
+\end{itemize}
+
+Hence,
+
+\begin{itemize}
+\tightlist
+\item
+  \(\Delta(2,\emptyset)= v_x (\{2\})-v_x (\emptyset)=0\)
+\item
+  \(\Delta(2,\{1\})= v_x (\{1,2\})-v_x (\{1\})=0\)
+\end{itemize}
+
+Such that
+
+\begin{itemize}
+\tightlist
+\item
+  \(\phi_2= 0\)
+\end{itemize}
+
+We conclude, that if one uses observational SHAP for model explanation, then the contribution of a feature is a combination of its own contribution and the contribution of features it is correlated with.
+
+\textbf{Discussion Point.} If \(\mathbb P(X_1=X_2)\), then \(\tilde m_n(x)=x_2\) is as good in estimating the response as \(\hat m_n(x)=x_2\). In particular the Bayes rule is not unique. With that regard, it could make sense to attribute \(x_1\) and \(x_2\) the same importance. An argument against assigning \(x_2\) any importance is that if \(\phi\) is to explain the behaviour of \(\hat m_n(x)=x_2\), then it is not directly affected by \(x_2\).
+
+We will later see that observational SHAP has one further issue: One may need to extrapolate in order to calculate it.
+
+\textbf{How do we calculate/estimate Shapley values?} Rember, Shapley values are:
+\begin{align}
+\phi_{k}(x_0)&=\frac{1}{p !} \sum_{\pi \in \Pi_p} \Delta_{v_{x_0}}\left(k, \{\pi(1),\dots,\pi(k-1)\}\right)\\
+&=\frac 1 {p!}\sum_{S: S \subseteq \{1,\dots,p\} \setminus\{k\}} {|S| !(p -|S|-1) !}\Delta_{v_{x_0}}(k, S),
+\end{align}
+To calculate Shapley values exact, one would need to evaluate \(p!\) or (second equation) \(2^p\) summands. For large \(p\) that may be infeasible.
+
+\textbf{Definition.} \emph{(Estimate Shapley values via permutation sampling)}
+
+The Shapley value \(\phi_k\) can be approximated by the following algorithm:
+
+For \(r=1,\dots\),
+
+\begin{itemize}
+\tightlist
+\item
+  Sample a permutation \(\pi\) of \(\{1,\dots,p\}\)
+\item
+  Approximate \(\Delta_{v_{x_0}}\left(k, \{\pi(1),\dots,\pi(k-1)\}\right)\) (call the result \(\Delta^{(r)}\))
+
+  \begin{itemize}
+  \tightlist
+  \item
+    I.e approximate \(v(\{\pi(1),\dots,\pi(k-1)\}\cup \{k\})\) and \(v(\{\pi(1),\dots,\pi(k-1)\})\)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \(\Delta^{(r)}\) is the difference
+    \end{itemize}
+  \item
+    If \(v(S)=\mathbb E[ \hat m_n(X_S,X_{-S})| X_S=x_S]\), (observational SHAP)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Not clear what to do. One would need to estimate the distribution of \(X\) first.
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Which is a high dimensional problem\ldots{}
+      \end{itemize}
+    \end{itemize}
+  \item
+    If \(v(S)=\mathbb E[ \hat m_n(x_S,X_{-S})]\) (interventional SHAP)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Draw \(m\) individuals from \(\{1,\dots,n\}\), say \(I\subseteq n\),
+    \item
+      \(v(S)\approx \frac 1 I \sum_{i \in I} \hat m_n(x_S,x_{i,-S})\)
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\(\hat \phi_k\) is the average of all \(\Delta^{(r)}\)
+
+Problem: many samples needed to get accurate approximation. Hence, slow.
+
+Charnes et al.~(1988) discussed that Shapley values can be re-written as the solution of the following constraint minimisation problem:
+
+\[
+(\phi(x_0))_{0,\dots,p} = \arg\min_{(\phi_k)_{k=1,\dots,p}} \mu(S) \sum_{S: S\subseteq\{1,\dots,p\}} \left(v_{x_0}(S)-  \left [\phi_0 + \sum_{k \in S} \phi_k\right]\right)^2,
+\]
+\[ 
+\mu(S) =\frac{p-1} {\binom{p}{|S|} |S| (p-|S|)}.
+\]
+
+Note that \(\mu(\emptyset)=\mu(\{1,\dots,p\})=\infty\) and so the minimisation is not well defined. The infinite weight practically enforces \(\phi_0=v_{x_0}(\emptyset)\), \(\sum_{k=0}^p \phi_k=v_{x_0}(\{1,\dots,p\})\). One can hence, exclude the two sets \((\emptyset, \{1,\dots,p\})\) from the minimisation and add the two constraints, \(\phi_0=v_{x_0}(\emptyset)\), \(\sum_{k=0}^p \phi_k =v_{x_0}(\{1,\dots,p\})\), to the minimisation.
+
+This is a quadratic programing problem (good), but estimating \(v_{x_0}(S)\) for all \(2^p\) subsets might economically not be feasible.
+
+Introduced in Lundberg and Lee (2017), Covert and Lee (2021) give a detailed explanation on how Kernel SHAP is implemented. Instead of estimating \(v_{x_0}(S)\) for all \(2^p\) subsets they only evaluate \(n\) subsets. The \(m\) subsets are drawn from the set of all subsets of \(\{1,\dots,p\}\) minus the empty set and the full set, where the probability of drawing set \(S\) is proportional to \(\mu(S)\)
+
+Hence the final minimisation reads
+\begin{align}
+\min_{(\phi_k)_{k=1,\dots,p}}  \frac 1 m  \sum_{i=1}^m \left(v_{x_0}(S_i)-  \left [v_{x_0}(\emptyset)+ \sum_{k \in S_i} \phi_k\right]\right)^2, \\ \text{subject to} \sum_{k=1}^p  \phi_k =v_{x_0}(\{1,\dots,p\})-v_{x_0}(\emptyset),
+\end{align}
+where \(S_i\) is the subset from draw \(i\). The value function used in Kernel SHAP is interventional SHAP, i.e., \(v_{x_0}(S)=\mathbb E[\hat m_n(x_S,X_{-S})]\).
+
+Lundberg and Lee (2017) propose a method to estimate interventional SHAP that is fast and exact (exact in the sense that it calculates the exact plug-in estimates). It is specific for tree based algoirthms. The algorithm is called TreeSHAP and it makes use of the binary tree structures that leads to a partitioning of the feature space. For calculating \(\mathbb E[\hat m_n(x_S,X_{-S})]\), TreeSHAP recursively follows the decision path for \(x_0\) if the split feature is in \(S\), and takes the weighted average of both branches if the split feature is not in \(S\). For efficient caulculation, TreeSHAP does not go down the tree for every \(S\) separately but only once and while doing so keeps track of all possible \(S\).
+
+\hypertarget{causality}{%
+\section{Causality}\label{causality}}
+
+This lecture covers a selected topic on causaliy leading to the so called adjustment formula. We mostly follow Peters, Janzing, and Schölkopf (2017).
+
+\textbf{Definition.} \emph{(Graph Terminology)}
+
+\begin{itemize}
+\item
+  We are given a random variables \(X = (X_1,...,X_p)\) with index set \(V := \{1,...,p\}\).
+\item
+  A graph \(G = (V,\mathcal E)\) consists of
+
+  \begin{itemize}
+  \tightlist
+  \item
+    nodes or vertices \(V\) and
+  \item
+    edges \(\mathcal E \subseteq V^2\) with \((v, v) \notin \mathcal E\) for any \(v \in V\).
+  \end{itemize}
+\item
+  A node \(k\) is called a
+
+  \begin{itemize}
+  \tightlist
+  \item
+    parent of \(j\) if \((k,j)\in \mathcal E\) and \((j,k)\notin \mathcal E\)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The set of parents of \(k\) is denoted by \(pa_G(k)\)
+    \end{itemize}
+  \item
+    a child if \((j,k) \in \mathcal E\) and \((k, j) \notin\mathcal E\).
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The set of childrens of \(k\) is denoted by \(ch_G(k)\)
+    \end{itemize}
+  \end{itemize}
+\item
+  Two nodes \(k\) and \(j\) are adjacent if either \((k,j)\in \mathcal E\) or \((j,k) \in \mathcal E\).
+\item
+  We say that there is an undirected edge between two adjacent nodes \(k\) and \(j\) if \((k, j) \in \mathcal E\) and \(( j, k) \in \mathcal E\).
+\item
+  An edge between two adjacent nodes \((k,j)\) is directed if \((k,j)\in \mathcal E\) and \((j,k) \notin \mathcal E\) or vice versa.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We write \(k \rightarrow j\) for \((k, j) \in \mathcal E\), \((j, k) \notin \mathcal E\) and \(j \rightarrow k\) for \((j, k) \in \mathcal E\), \((k, j) \notin \mathcal E\)
+  \end{itemize}
+\item
+  \(G\) is called directed if all its edges are directed.
+\item
+  A path in \(G\) is a sequence of (at least two) distinct vertices \(k_1,\dots ,k_m\), such that there is an edge between \(k_l\) and \(k_{l+1}\) for all \(l = 1,\dots ,m − 1\).
+
+  \begin{itemize}
+  \item
+    If \(k_{l-1} \rightarrow k_l\) and \(k_{l+1} \rightarrow k_l\) (\(k_{l-1} \rightarrow k_l\leftarrow k_{l+1}\)), \(k_l\) is called a collider relative to this path.
+  \item
+    If \(k_l \rightarrow k_{l+1}\) for all \(l\), we speak of a directed path from \(k_1\) to \(k_m\)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      In this case, We call \(k_1\) an ancestor of \(k_m\) and
+    \item
+      \(k_m\) a descendant of \(k_1\).
+    \end{itemize}
+  \end{itemize}
+\item
+  \(G\) is called a directed acyclic graph (DAG) if all edges are directed
+  and there is no pair \((j,k)\) with directed paths from \(j\) to \(k\) and from \(k\) to \(j\).
+\end{itemize}
+
+\textbf{Definition.} \emph{(Pearl's d-separation)}
+
+In a DAG \(G\), a path between nodes \(k_1\) and \(k_m\) is blocked by a set \(S\) (with neither \(k_1\) nor \(k_m\) in \(S\) ) if there is a node \(k_l\) fulfilling one of the two points:
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  \(k_l \in S\) and
+  \begin{align}
+    k_{l-1} & \rightarrow k_l \rightarrow k_{l+1} \\
+    \text { or } \ k_{l-1} & \leftarrow k_l \leftarrow k_{l+1} \\
+    \text { or }\  k_{l-1} & \leftarrow k_l \rightarrow k_{l+1}
+    \end{align}
+\item
+  neither \(k_l\) nor any of its descendants is in \(S\), and
+  \[
+    k_{l-1} \rightarrow k_l \leftarrow k_{l+1}
+    \]
+\end{enumerate}
+
+In a DAG \(G\), we say that two disjoint subsets of vertices \(A\) and \(B\) are \(d\)-separated by a third (also disjoint) subset \(S\) if every path between nodes in \(A\) and \(B\) is blocked by \(S\).\\
+- We then write
+\[
+    A \perp\!\!\!\!\perp_G B \mid S
+    \]
+
+\textbf{Definition.} \emph{(Structural causal models)} A structural causal model (SCM) \(\mathfrak{C}:=\left(S, P_N\right)\) consists of a collection \(S\) of \(p\) (structural) assignments
+
+\[
+X_j:=f_j\left(pa(j), N_j\right), \quad j=1, \ldots, p,
+\]
+
+and a distribution \(P_N=\bigtimes_{j=1}^p P_{N_j}\) of jontly independent noise variables \(N_1\dots,N_p\).
+
+Note: An SCM \(\mathfrak{C}\) defines a unique graph \(G\) and a unique distribution, \(P^{\mathfrak{C}}_X\), over the variables \(X_1,...,X_p\). The reverse is not true.
+
+\textbf{Example.} \emph{(Structural causal models with acyclic graph structure)}
+\begin{align*}
+& X_1:=f_1\left(X_3, N_1\right) \\
+& X_2:=f_2\left(X_1, N_2\right) \\
+& X_3:=f_3\left(N_3\right) \\
+& X_4:=f_4\left(X_2, X_3, N_4\right)
+\end{align*}
+\(N_1, \ldots, N_4\) jointly independent
+
+\textbf{Definition.} \emph{(Interventional distribution/ do-operator)}
+
+\begin{itemize}
+\item
+  Consider an SCM \(\mathfrak C := (S,P_N)\) and its entailed distribution \(P^{\mathfrak C}_X\).
+\item
+  We deifine a new SCM, \(\tilde {\mathfrak C}\), by replacing the assignment for \(X_k\) by
+  \[ 
+  X_k = \tilde f(\tilde {pa}(k), \tilde N_k).
+  \]
+  The resulting entailed distribution of the new SCM is called interventional distribution.
+  We write short:
+  \[
+  do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k)), \quad P_X^{\tilde {\mathfrak C}}=P^{\mathfrak C, do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k))}_X
+  \]
+\item
+  An intervention can also simply assign a fixed value \(a\) (i.e., \(\tilde N_k=a\) (deterministic) and the set of parents is empty).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This is called an atomic or deterministic intervention and can be denoted by \(do(X_k = a)\).
+  \end{itemize}
+\end{itemize}
+
+\textbf{Definition.} \emph{(Total causal effect)} Given an SCM \(\mathfrak{C}\), we say there is a total causal effect from \(X\) to \(Y\) if
+
+\[
+X \perp\!\!\!\!\perp Y \quad \text { in } P_{{X}}^{\mathfrak{C} ; d o\left(X=\tilde{N}_X\right)}
+\]
+
+for some random variable \(\tilde{N}_X\).
+
+Note: A directed path from \(X\) to \(Y\) is a necessary but not sufficient condition for a total causal effect (effects can cancel out). In contrast, a directed path from \(X\) to \(Y\) or \(Y\) to \(X\) is NOT necessary
+for \(X\) and \(Y\) to be correlated.
+
+\textbf{Definition.} \emph{(Markov property)} Given a DAG \(G\) and an entailed joint absolutely continuous distribution \(P_{{X}}\), this distribution is said to satisfy
+
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\tightlist
+\item
+  the global Markov property with respect to the DAG \(G\) if
+  \[
+  {A} {\perp\!\!\!\!\perp }_{\mathcal{G}} {B}|{C} \Rightarrow {A} {\perp\!\!\!\!\perp } {B}| {C}
+  \]
+  for all disjoint sets of nodes \({A}, {B}, {C}\).
+\item
+  the local Markov property with respect to the DAG \({G}\) if each variable is independent of its non-descendants given its parents, and
+\item
+  the Markov factorization property with respect to the DAG \({G}\) if
+  \[
+  p({x})=p\left(x_1, \ldots, x_d\right)=\prod_{j=1}^d p\left(x_j \mid {pa}(j)\right).
+  \]
+\end{enumerate}
+
+\textbf{Theorem.} \emph{(Equivalence of Markov properties, see e.g.~Lauritzen (1996))} If \(P_X\) is absolutely continuous, then all three Markov properties above are equivalent.
+
+\textbf{Remark (SCM induced Graph is Markov):} Note that every SCM induced Graph satisfies the markovian properties.
+
+\textbf{Proposition.} \emph{(Adjustment formula)} Consider an SCM over variables \({V}\) with \(X, Y \in {X}\) and \(Y \notin {pa(X)}\).
+
+\begin{itemize}
+\item
+  \(Z\) is called valid adjustment set if it fulfills one of the three following conditions
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    ``parent adjustment'':
+    \[
+      {Z}=pa(X)
+      \]
+  \item
+    ``backdoor criterion'': \({Z} \subseteq {V} \backslash\{X, Y\}\) with
+
+    \begin{enumerate}
+    \def\labelenumii{(\roman{enumii})}
+    \tightlist
+    \item
+      \({Z}\) contains no descendant of \(X\) AND
+    \item
+      \({Z}\) blocks all paths from \(X\) to \(Y\) entering \(X\) through the backdoor \((X \leftarrow \ldots)\).
+    \end{enumerate}
+  \item
+    ``toward necessity'': \({Z} \subseteq {V} \backslash\{X, Y\}\) with
+
+    \begin{enumerate}
+    \def\labelenumii{(\roman{enumii})}
+    \tightlist
+    \item
+      \({Z}\) contains no descendant of any node on a directed path from \(X\) to \(Y\) (except for descendants of \(X\) that are not on a directed path from \(X\) to \(Y\) ) AND
+    \item
+      \({Z}\) blocks all non-directed paths from \(X\) to \(Y\)
+    \end{enumerate}
+  \end{enumerate}
+\item
+  If \(Z\) is a valid adjustment set, then
+  \[
+    p^{\mathfrak{C}, d o(X=x)}(y)=\int  p^{\mathfrak{C}}(y \mid x, {z}) p^{\mathfrak{C}}({z}) \mathrm dz.
+    \]
+\end{itemize}
+
+\textbf{Proof.}
+
+We only proof ``parent adjustment'' and ``backdoor criterion''. ``towards necessity'' can be looked up in Shpitser, VanderWeele, and Robins (2010)
+
+We call the interventional density \(\tilde p\) and the original density \(p\).
+
+For the parent adjustment, \(Z=pa(X)\), note that\\
+\begin{align}
+\tilde p (y|z)&= \tilde p (y|x,z)= p (y|x,z) \\
+\tilde p(z)&= p(z)
+\end{align}
+Hence,
+\[
+p(y|do(X=x))= \tilde p(y)= \int \tilde p(y|z) \tilde p(z) \mathrm dz = \int  p(y|x,z)  p(z) \mathrm dz
+\]
+- For the backdoor adjustment, let \(Z\) fulfill (i) and (ii) and let \(S=pa(X)\). We have
+\begin{align}
+p(y|do(X=x))&\stackrel{\text{parent adjustment}}{=} \int  p(y|x,s)  p(s) \mathrm ds\\
+&=\int p(s)\int   p(y,z|x,s) \mathrm ds \mathrm dz \\
+&\stackrel{\text{Bayes formula}}{=}\int p(s)\int   p(y|x,s,z) p(z|x,s) \mathrm ds \mathrm dz \\
+&\stackrel{\text{(ii):} Y {\perp\!\!\!\!\perp } {S}| {X,Z}}{=}\int p(s)\int   p(y|x,z) p(z|x,s) \mathrm ds \mathrm dz \\
+&\stackrel{\text{(i):} X {\perp\!\!\!\!\perp } {Z}| {S}}{=}\int p(s)\int   p(y|x,z) p(z|s) \mathrm ds \mathrm dz \\
+&\stackrel{p(z)= \int p(s)p(z|s) \mathrm ds}{=}\int   p(y|x,z)   \mathrm dz 
+\end{align}
+
+Intuition behind backdoor criterion: Backdoor paths carry spurious associations from \(X\) to \(Y\). Blocking all backdoor paths ensures that measured assoziation is causal. We don't include descendants of \(𝑋\) that are also ancestors of \(𝑌\) because this would block a causal path. We don't include descendants of \(𝑋\) that are also descendants of \(𝑌\) because this would introduce collider bias.
+
+\textbf{Questions.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Do we need to observe \(Z_1\) to be able to calculate \(P(Y|do(X=x))\)?
+\item
+  What are all valid adjustment sets for calculating \(P(Y|do(X=x))\)?
+\end{enumerate}
+
+\textbf{Solution.} All valid adjustment sets are
+\[
+\{Z_1,Z_3\},\{Z_2,Z_3\},\{Z_1,Z_2,Z_3\}.
+\]
+In particular, \(Z_1\) is not needed need to calculate \(P(Y\vert do(X=x))\).
+
+\textbf{Measuring Total causal effect.} How can we calculate \(\mathbb E[Y\vert do(X =x)]-\mathbb E[Y]\), i.e.~the total causal effect of \(X=x\) on \(Y\). If we have a valid adjustment set \(Z\), then
+\begin{align}
+E[Y\vert do(X =x)]&= \int y p^{d o(X=x)}(y) \ dy \\
+&= \int \int  y p(y\vert x,z)p(z) \ dy \ dz \\
+&= \int p(z)   \int y p(y\vert x,z)\ dy \ dz \\
+&= \int p(z)  \mathbb E[  Y\vert X=x,Z=z]\ dz .
+\end{align}
+Which can be estimated from iid observations of \((X,Z,Y)\).
+
+\textbf{Counterfactual fairness.} Assume \(U\) is a set of protected features. For example \(U=\{\text{gender, ethnicity}\}\). Let \(U \cup V=\{1,\dots, p\}, U\cap V=\emptyset\). Can we debias an algorithm predicting \(\mathbb E[Y\vert X=x]\) such that it does not use information contained in \(X_U\); neither directly nor indirectly. Kusner et al.~(2017) introduced the notion of counterfactual fairness. We here present a sufficient condition: Given a structural causal model of \((X,Y)\), an estimator is counterfactual fair if it is a function of the non-descendents of \(X_U\). A counterfactual estimator is in particular given by \(\hat m_n^{debiased}(x_v)=E[\hat m_n(X)\vert do(X_v =x_v)]\)
+
+\hypertarget{local-and-global-explanations}{%
+\section{Local and Global Explanations}\label{local-and-global-explanations}}
+
+In this lecture we will introduce some global explanations and see how they are connected to local explanations. We will also see how these explanations can be used for de-biasing.
+
+\hypertarget{interpretability-1}{%
+\subsection{Interpretability}\label{interpretability-1}}
+
+Reminder: Why interpretability.
+
+\begin{itemize}
+\tightlist
+\item
+  Algorithmic accountability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Are risk estimates transparent?
+  \item
+    EU regulation
+
+    \begin{itemize}
+    \tightlist
+    \item
+      GDPR: ``Individuals have the right to an explanation of the logic behind the decision.''
+    \item
+      EU AI Act
+    \end{itemize}
+  \end{itemize}
+\item
+  If process of decision making is transparent
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\rightarrow\) Biases easier to detect
+  \item
+    \(\rightarrow\) more robustness a
+
+    \begin{itemize}
+    \tightlist
+    \item
+      unmeasured confounders can hunt you later under distributional shifts
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{partial-dependence-plots}{%
+\subsection{Partial dependence plots}\label{partial-dependence-plots}}
+
+Partial dependence plots are popular post-hoc global explanations
+
+\textbf{Definition.} \emph{(Partial dependence plots Friedman 2001)} Given an estimator \(\hat m_n\) and a target subset \(S\subset \{1,\dots,p\}\), the partial dependence plot \citep{}, \(\xi_S\), is defined as
+
+\[
+\xi_S(x_S)= \int \hat m_n(x) \hat p_{-S}(x_{-S})\mathrm dx_{-S}.
+\]
+
+In particular, a partial dependence plot for feature \(k\) is
+
+\[
+\xi_k(x_k)= \int \hat m_n(x) p_{-k}(x_{-k})\mathrm dx_{-k}.
+\]
+
+Partial dependence can be misleading because they ignore interaction effects. Approximation is highly non-trivial and can be very unstable trough extrapolatio.
+
+\hypertarget{a-functional-decomposition}{%
+\subsection{A functional decomposition}\label{a-functional-decomposition}}
+
+Assume a data set with \(p\) features. Also assume that we can approximate the regression function \(m\) by a \(q-th\) order functional decomposition:
+
+\[m(x) \approx  m_0+\sum_{k=1}^p  m_k(x_{k}) + \sum_{k_1<k_2}  m_{k_1k_2}(x_{k_1},x_{k_2}) + \cdots +\sum_{k_1<\cdots <k_q}  m_{k_1,\dots,k_q} (x_{k_1},\dots,x_{k_q}).\]
+
+Optimal rates of convergence under the assumption that \(m\) has
+two continuous partial derivatives:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Model general}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{general }\(p\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(p=6\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Comparable sample sizes for p=6}
+\end{minipage} \\
+\midrule()
+\endhead
+Full model & \(O_p(n^{-2/(p+4)})\) & \(O_p(n^{-1/5})\) & 1 000 000 \\
+Interaction (q) & \(O_p(n^{-2/(p+4)})\) & \(O_p(n^{-2/(p+4)})\) & 1 000 - 1 000 000 \\
+Interaction (q=2) & \(O_p(n^{-1/3})\) & \(O_p(n^{-1/3})\) & 4 000 \\
+Additive (q=1) & \(O_p(n^{-2/5})\) & \(O_p(n^{-2/5})\) & 1 000 \\
+\bottomrule()
+\end{longtable}
+
+Generalized ANOVA is probably the most considered functional decomposition identification.
+
+\textbf{Generalized ANOVA}: For every\(S\subseteq \{1,\dots,d\}\) and \(k\in S\),
+
+\[
+\int m_{S}\left(x_{S}\right) \int w(x) \mathrm dx_{-S} \ \mathrm d x_{k}=0
+\]
+
+Common choices for \(w\) are
+
+\begin{itemize}
+\tightlist
+\item
+  \(w \equiv 1\)
+\item
+  \(w(x)=p(x),\ \) \(p=\) density of \(X\).
+\item
+  \(w(x)=\prod p_j(x_j),\ \) \(p_j=\) density of \(X_j\).
+\end{itemize}
+
+Generalized ANOVA, however, has drawbacks for interpretability
+
+\begin{itemize}
+\tightlist
+\item
+  \(w=1\) ignores the distribution of \(X\)
+\item
+  \(w=p\) uses the correlation structure (analog to observational SHAP)
+\item
+  \(w=\prod p_j\) Assumes that features are independent
+\end{itemize}
+
+\textbf{Definition.} \emph{(Marginal Identification)} For every \(S\subseteq \{1,\dots,d\}\),
+\[
+\sum_{T: T \cap S \neq \emptyset} \int  \hat m_T(x_T)  p_{S}(x_{S}) \mathrm dx_S=0.
+\]
+
+\textbf{Theorem.} Given any initial estimator \(\hat m^{(0)}=\{\hat m^{(0)}_S | S\subseteq \{1,\dots,d\}\}\),
+there exists exactly one set of functions \(\hat m^\ast=\{\hat m^\ast_S | S\subseteq \{1,\dots,d\}\}\) satisfying the marginal identification with \(\sum_S \hat m^\ast_S = \sum_S \hat m^{(0)}_S\).
+The functions are given by
+
+\[
+\hat m^\ast_S (x_S)=  \sum_{T \supseteq S} \sum_{T\setminus S \subseteq U\subseteq  T}(-1)^{|S|-|T\setminus U|} \times \int \hat m^{(0)}_T(x_T) \hat p_U(x_U)\mathrm dx_U. \notag
+\]
+
+In particular \(\hat m^\ast\) does not depend on the particular identification of \(\hat m^{(0)}\).
+
+The are three reasons why the marginal identification is particularly interesting
+
+\begin{itemize}
+\tightlist
+\item
+  Partial dependence plots
+\item
+  Interventional SHAP values
+\item
+  Fairness/ discrimination-free pricing
+\end{itemize}
+
+Remember: partial dependence plot, \(\xi_S\), is defined as
+\[\xi_k(x_S)= \int \hat m(x) p_{-S}(x_{-S})\mathrm dx_{-S}.\]
+
+\textbf{Corollary.} If \(\hat m^{\ast}\) satisfies the marginal identification, then
+
+\[
+\xi_S=\sum_{U \subseteq S} \hat m_U^{\ast}.
+\]
+
+In particular if \(S\) is only one feature, i.e., \(S=\{k\}\), we have
+
+\[
+\xi_k(x_k)= \hat m_0^{\ast} + \hat m_k^\ast(x_k).
+\]
+
+\textbf{Theorem.}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat m^{\ast}\) satisfies the marginal identification
+\item
+  Then, interventional SHAP values are weighted averages components
+
+  \begin{itemize}
+  \tightlist
+  \item
+    interaction component is equally split between involved features:
+  \end{itemize}
+\end{itemize}
+
+\[
+\phi_k(x)= \hat m^{\ast}_k(x_k)+ \frac 1 2 \sum_j  \hat m^{\ast}_{kj}(x_{kj}) + \cdots + \frac 1 d \hat m^{\ast}_{1,\dots,d}(x_{1,\dots,d}).
+\]
+
+Assume \(U\) is a set of protected features. For example \(U=\{\text{gender, ethnicity}\}\). Let \(U \cup V=\{1,\dots, d\}, U\cap V=\emptyset\). \(E[m(X) |\  do(X_V=x_V))\) does not use information contained in \(X_U\); neither directly nor indirectly. Under the assumed causal structure we have
+
+\[
+E[m(X) |\ do(X_V=x_V)]= \int m(x) p_U(x_U) dx_U.
+\]
+
+Under marginal identifiaction:
+
+\[
+\int \hat m_n^\ast(x) \hat p_U(x_U) dx_U= \sum_{S \subseteq V} \hat {m}^\ast_S(x_S),
+\]
+
+i.e., a ``de-biased'' estimator can be extracted from \(\hat m_n\) by dropping all components that include features in \(U\).
+
+\textbf{Summary (Identification)} If \(m\) is identified via martginal identification,
+
+\[
+\hat m_n(x)=\hat m_0^\ast + \sum_j \hat m_j ^\ast (x_j) + \sum_{j<k} \hat m_{j,k} ^\ast (x_j,x_k)+ \cdots
+\]
+
+then
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Interventional SHAP values} are:
+  \[
+    \phi_k(x)= \hat m^{\ast}_k(x_k)+ \frac 1 2 \sum_j  \hat m^{\ast}_{kj}(x_{kj}) + \cdots 
+    \]
+\item
+  \textbf{Partial dependence plots} are:
+  \[
+    \xi_k(x_k)= \hat m_0^{\ast} + \hat m_k^\ast(x_k).
+    \]
+\item
+  \textbf{Fairness/Discrimination-free pricing:} If \(S\) are protected variables and all components that contain a subset of \(S\) are dropped,we derive a de-biased estimator.
+\end{itemize}
+
+\textbf{What does discrimination free pricing actually mean?}
+
+Average claim Size
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule()
+Car & Male & Female \\
+\midrule()
+\endhead
+Male Car Type & \$1 & \$2 \\
+Female Car Type & \$2 & \$1 \\
+\bottomrule()
+\end{longtable}
+
+Proportions in population \((p_{X,D})\)
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule()
+Car & Male & Female \\
+\midrule()
+\endhead
+Male Car Type & 0.45 & 0.05 \\
+Female Car Type & 0.05 & 0.45 \\
+\bottomrule()
+\end{longtable}
+
+If we use \(p_D(d) = 0.5\) for pricing, then the price for Male Car Type 1 and Female Car Type would be \$1.50 each.
+
+\textbf{Problem:} The prices are \textbf{not calibrated} now: The insurance company is charging more than the \emph{expected average claim size of \$1.10 }. (We ignore risk loading) We could multiply the price by \(\frac{1.10}{1.50}\approx 0.7333\). Hence charge everyone \(\$1.10\).
+
+Problem: Is the price still discrimination free? Note that \$1.10 is also the price if we would ignore gender completely, \(\mathbb E[Y|X=x]\) (i.e.~allow for indirect discrimination). The answer will most likely be around the question why we wanted to de-bias for gender in the first place; what are the risk-factors we want to use, and what are unmeasured confounders.
+
 \hypertarget{quantative-risk-management}{%
 \chapter{Quantative Risk Management}\label{quantative-risk-management}}
 
@@ -6243,7 +7755,7 @@ We say that a set \(A\in\mathbb{E}\) is an \textbf{invariant set} if \(T^{-1}(A)
 \textbf{Lemma 5.9. (Hansen)} \emph{Let \((\mathcal{X},\mathbb{E},\mu)\) be a probability space, and let \(T : \mathcal{X}\to \mathcal{X}\) be a measure-preserving map. Let \((\mathcal{Y},\mathbb{G})\) be another measurable space, and let \(S : \mathcal{Y} \to \mathcal{Y}\) be a measurable map.}
 \emph{Suppose there is a measurable map \(\gamma : \mathcal{X}\to \mathcal{Y}\) such that the following diagram commutes:}
 
-\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 \emph{Then \((\mathcal{Y},\mathbb{G},\gamma(\mu),S)\) is a measure-preserving dynamical system.}
 
@@ -6654,7 +8166,7 @@ c.~\emph{The array satisfies \textbf{Lyapounov's condition}\index{Lyapounov's co
 
 \textbf{Transitionsdiagram.} Et diagram, hvor der fremgår ssh. for et system overgår til et nyt stadie.
 
-\begin{center}\includegraphics[width=0.4\linewidth]{_main_files/figure-latex/unnamed-chunk-13-1} \end{center}
+\begin{center}\includegraphics[width=0.4\linewidth]{_main_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 \textbf{Definition.} \textbf{(Stokastisk process i diskret tid)} \emph{Lad \(\mathcal{X}=(\mathcal{X}_n)_{n\in\mathbb{N}_0}\) være en familie af stokastiske variable og \(\mathcal{S}\) et udfaldsrum . Da er \(\mathcal{X}\) en funktion der opfylder \(\mathcal{X} : \mathbb{N}_0\times \Omega \to \mathcal{S}\) med \((n,w) \mapsto \mathcal{X}_n(w)\).}
 
