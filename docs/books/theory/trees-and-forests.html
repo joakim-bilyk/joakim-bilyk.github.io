@@ -62,7 +62,7 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.9/grViz.js"></script>
@@ -522,7 +522,7 @@ m_i=\underset{y\in \mathcal Y}{\operatorname{argmax}}\left\{\sum_{j=1}^n1_{R_i}(
 \]</span></p>
 <p><em>where <span class="math inline">\(|T|\)</span> is the number of leaves of <span class="math inline">\(T\)</span>.</em></p>
 </blockquote>
-<p>How do we find an optimal <span class="math inline">\(\alpha\)</span> (and also the optimal subtree for a fixed )? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.</p>
+<p>How do we find an optimal <span class="math inline">\(\alpha\)</span> (and also the optimal subtree for a fixed <span class="math inline">\(\alpha\)</span>)? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.</p>
 <blockquote class="prop">
 <p><strong>Proposition (weakest link)</strong> <span class="math inline">\(\hat T_{n,\alpha}\)</span> is unique. Furthermore, there are trees <span class="math inline">\(T_0\supset \cdots\supset T_l\)</span> with <span class="math inline">\(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span>; in particular the set <span class="math inline">\(\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span> is finite.</p>
 <p>Let <span class="math inline">\(\widetilde Q_n\)</span> be the loss function corresponding to <span class="math inline">\(\hat R_n\)</span>.

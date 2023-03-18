@@ -4,7 +4,7 @@
 %
 \documentclass[
 ]{book}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsfonts,mathabx}
 \usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
@@ -12,9 +12,12 @@
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  %\usepackage{unicode-math}
+  %\defaultfontfeatures{Scale=MatchLowercase}
+  %\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+%\usepackage{fontspec}
+%\setmainfont{Latin Modern Roman}
+%\setmathrm{Cambria Math}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}

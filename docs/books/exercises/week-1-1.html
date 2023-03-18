@@ -739,16 +739,16 @@ subsample &amp;= to\_tune(0.1, 1)
 <span id="cb35-2"><a href="week-1-1.html#cb35-2" aria-hidden="true" tabindex="-1"></a>predictions</span></code></pre></div>
 <pre><code>## &lt;PredictionRegr&gt; for 11 observations:
 ##     row_ids truth response
-##           1  21.0 19.91326
-##           2  21.0 19.95671
-##           3  18.7 17.03209
+##           1  21.0 20.02108
+##           2  21.0 20.04601
+##           3  18.7 16.99866
 ## ---                       
-##           9  10.4 11.40222
-##          10  27.3 31.67276
-##          11  30.4 24.25820</code></pre>
+##           9  10.4 11.58364
+##          10  27.3 31.80603
+##          11  30.4 24.47183</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="week-1-1.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#empirical risk</span></span>
 <span id="cb37-2"><a href="week-1-1.html#cb37-2" aria-hidden="true" tabindex="-1"></a>risk <span class="ot">&lt;-</span> <span class="fu">mean</span>((predictions<span class="sc">$</span>truth<span class="sc">-</span>predictions<span class="sc">$</span>response)<span class="sc">**</span><span class="dv">2</span>)</span></code></pre></div>
-<p>Using a diagram we can see. That the model does pretty well. In fact the empirical risk is 6.55.</p>
+<p>Using a diagram we can see. That the model does pretty well. In fact the empirical risk is 6.38.</p>
 <p><img src="figures/ML_week1_ex4.png" width="75%" style="display: block; margin: auto;" /></p>
 </details>
 </div>

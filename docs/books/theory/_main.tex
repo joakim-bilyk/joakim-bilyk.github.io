@@ -4,7 +4,7 @@
 %
 \documentclass[
 ]{book}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsfonts,mathabx}
 \usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
@@ -12,9 +12,12 @@
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  %\usepackage{unicode-math}
+  %\defaultfontfeatures{Scale=MatchLowercase}
+  %\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+%\usepackage{fontspec}
+%\setmainfont{Latin Modern Roman}
+%\setmathrm{Cambria Math}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -4838,7 +4841,7 @@ We can derive a subtree, by pruning a tree at any non-terminal node (i.e.~by del
 
 \emph{where \(|T|\) is the number of leaves of \(T\).}
 
-How do we find an optimal \(\alpha\) (and also the optimal subtree for a fixed \alpha)? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.
+How do we find an optimal \(\alpha\) (and also the optimal subtree for a fixed \(\alpha\))? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.
 
 \textbf{Proposition (weakest link)} \(\hat T_{n,\alpha}\) is unique. Furthermore, there are trees \(T_0\supset \cdots\supset T_l\) with \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}\); in particular the set \(\{\hat T_{n,\alpha} : \alpha>0\}\) is finite.
 
@@ -6848,7 +6851,7 @@ P(\vert X\vert \ge a)\le \frac{E(X^2)}{a^2},\frac{E\vert X\vert}{a} \hspace{20pt
 \item
   \emph{\(P(X\in A, Y\in B)=P(X\in A)P(Y\in B)\) for alle \(A\in \mathcal{E}\) og \(B\in\mathcal{F}\).}
 \item
-  \emph{P(X\in A, Y\in B)=P(X\in A)P(Y\in B)\$ for alle \(A\in \mathcal{C}\) og \(B\in\mathcal{D}\). Hvor \(\mathcal{C}\) og \(\mathcal{D}\) er fællesmængdestabile mængdesystemer (brolægning) der frembringer hhv. \(\mathcal{E}\) og \(\mathcal{F}\).}
+  \emph{\(P(X\in A, Y\in B)=P(X\in A)P(Y\in B)\) for alle \(A\in \mathcal{C}\) og \(B\in\mathcal{D}\). Hvor \(\mathcal{C}\) og \(\mathcal{D}\) er fællesmængdestabile mængdesystemer (brolægning) der frembringer hhv. \(\mathcal{E}\) og \(\mathcal{F}\).}
 \item
   \emph{\(f(X)\) og \(g(Y)\) er uafhængige for alle par \((f,g)\) målbare funktioner.}
 \item
