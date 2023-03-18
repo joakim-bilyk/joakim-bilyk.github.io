@@ -621,9 +621,9 @@ VaR_{0.99}(L)= 206.166  ,\hspace{30pt} ES_{0.99}(L)= 244.369
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="fu">sum</span>(L_prime[<span class="dv">1</span><span class="sc">:</span>bound])<span class="sc">/</span>bound</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span> <span class="ot">&lt;-</span> L_prime[bound]</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 206.6749</code></pre>
+<pre><code>## [1] 202.8027</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 245.0944</code></pre>
+<pre><code>## [1] 242.6514</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(L_prime[L_prime<span class="sc">&gt;-</span><span class="dv">1000</span>], <span class="at">breaks =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="float:right; padding:10px" /></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Look page 80 for R_i,j; rho_tau is given in problem-text, and diag is just 1</span></span>
@@ -664,9 +664,9 @@ VaR_{0.99}(L)= 120.930  ,\hspace{30pt} ES_{0.99}(L)= 181.634
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span> <span class="ot">&lt;-</span> <span class="fu">sum</span>(L_prime[<span class="dv">1</span><span class="sc">:</span>bound])<span class="sc">/</span>bound</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span> <span class="ot">&lt;-</span> L_prime[bound]</span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>VaR_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 118.6526</code></pre>
+<pre><code>## [1] 119.1601</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ES_0<span class="fl">.99</span></span></code></pre></div>
-<pre><code>## [1] 182.0014</code></pre>
+<pre><code>## [1] 190.6647</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(L_prime, <span class="at">breaks =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p><img src="QRM_projects_files/figure-html/unnamed-chunk-4-1.png" width="50%" style="float:right; padding:10px" /></p>
 <p><span class="math inline">\(VaR\)</span> and <span
