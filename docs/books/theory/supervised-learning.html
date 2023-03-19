@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,8 +304,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>9.4</b> Nonparametric Regression</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.1</b> Curse of dimensionality</a></li>
-<li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.2</b> Splines</a></li>
+<li class="chapter" data-level="9.4.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-smoothers"><i class="fa fa-check"></i><b>9.4.1</b> Linear Smoothers</a></li>
+<li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.2</b> Curse of dimensionality</a></li>
+<li class="chapter" data-level="9.4.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.3</b> Splines</a></li>
+<li class="chapter" data-level="9.4.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-regression-with-splines."><i class="fa fa-check"></i><b>9.4.4</b> Linear regression with splines.</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a></li>
 <li class="chapter" data-level="9.6" data-path="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><a href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><i class="fa fa-check"></i><b>9.6</b> Gradient Boosting Machines and Bayesian additive regression trees</a></li>
@@ -501,6 +503,43 @@ m^*=\underset{m}{\text{argmin}}\ \mathbb{E}[(Y-m(X))^2]=E[Y\ \vert\ X=x]
 \]</span>
 i.e. the conditional expectation.</p>
 </blockquote>
+<details>
+<summary>
+<strong>Proof.</strong>
+</summary>
+<p>Consider the loss function <span class="math inline">\(L(y_1,y_2)=(y_1-y_2)^2\)</span> i.e. the <span class="math inline">\(L^2\)</span> loss function. For any estimator <span class="math inline">\(m(X)\in \mathcal G\)</span> we have
+<span class="math display">\[\begin{align*}
+R(m(X))&amp;=\mathbb E[L(m(X),Y)\ \vert\ X]=\mathbb E[(m(X)-Y)^2\ \vert\ X]\\
+&amp;=\mathbb E[m(X)^2\ \vert\ X]+\mathbb E[Y^2\ \vert\ X]-2\mathbb E[m(X)Y\ \vert\ X]\\
+&amp;=m(X)^2+\mathbb E[Y^2\ \vert\ X]-2m(X)\mathbb E[Y\ \vert\ X]
+\end{align*}\]</span>
+We see that the risk is minimized for the <span class="math inline">\(m\)</span> that minimizes <span class="math inline">\(m(X)^2-2m(X)\mathbb E[Y\ \vert\ X]\)</span>. The first order condition is then</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial m}R(m(X))=2m(X)-2\mathbb E[Y\ \vert\ X]=0
+\]</span></p>
+<p>hence giving that
+<span class="math display">\[
+m(X)=\mathbb E[Y\ \vert\ X]
+\]</span>
+as desired. <span class="math inline">\(\blacksquare\)</span></p>
+</details>
+<p><strong>Remarks on the <span class="math inline">\(L^2\)</span>-loss.</strong> The loss function <span class="math inline">\(L(y_1,y_2)=(y_1-y_2)^2\)</span> i.e. the <span class="math inline">\(L^2\)</span> loss function gives some nice interpretations. We know that <span class="math inline">\(L\)</span> as a norm on <span class="math inline">\(\mathbb R\)</span> forms a Hilbert Space. This means, for instance, that we have some nice geometric interpretations, but more importantly we have alot of tools from linear algebra. We know that the projection <span class="math inline">\(m^*\)</span> onto the space <span class="math inline">\(\mathcal G\)</span> and so any vector <span class="math inline">\(\hat m(X)-m^*(X)\)</span> is orthogonal to <span class="math inline">\(Y-m^*(X)\)</span>. In particular, this gives that
+<span class="math display">\[\begin{align*}
+r(\hat m(X))&amp;=\mathbb E[L(\hat m(X),Y)]=\mathbb E\left[(\hat m(X)-Y)^2\right]\\
+&amp;=\mathbb E\left[(\hat m(X)-m^*(X)+m^*(X)-Y)^2\right]\\
+&amp;\stackrel{(\dagger)}{=}\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+\mathbb E\left[(m^*(X)-Y)^2\right]\\
+&amp;=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+r(m^*(X))
+\end{align*}\]</span>
+Using in <span class="math inline">\((\dagger)\)</span> that <span class="math inline">\(\hat m(X)-m^*(X)\)</span> and <span class="math inline">\(m^*(X)-Y\)</span> are orthogonal with the last equation simply being the definition of risk. Rearringing the above gives
+<span class="math display">\[
+r(\hat m(X))-r(m^*(X))=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]=\text{MSE}(\hat m(x))
+\]</span>
+We can further write out the Mean Squared Error in terms of variance and bias.
+<span class="math display">\[\begin{align*}
+\text{MSE}(\hat m(x))&amp;=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]\\
+&amp;=\mathbb E\left[(\hat m(X)-\mathbb E[\hat m(X)\vert X])^2\right]+\mathbb E\left[(\mathbb E[\hat m(X)\vert X]-m^*(X))^2\right]\\
+&amp;=\text{Var}(\hat m(X))+\text{Bias}^2(\hat m(X)).
+\end{align*}\]</span></p>
 <blockquote class="lem">
 <p><strong>Lemma.</strong> <em>Assume <span class="math inline">\(\mathcal{Y}=\{1,...,K\}\)</span>, the decision function that minimizes the risk for the binary loss function satisfies</em></p>
 <p><span class="math display">\[

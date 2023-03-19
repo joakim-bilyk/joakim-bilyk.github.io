@@ -104,7 +104,15 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 18, 2023}
+\date{March 19, 2023}
+
+%\usepackage{setspace}\onehalfspacing
+\AtBeginDocument{%
+  \addtolength\abovedisplayskip{0\baselineskip}%
+  \addtolength\belowdisplayskip{0\baselineskip}%
+  \addtolength\abovedisplayshortskip{-0.75\baselineskip}%
+  \addtolength\belowdisplayshortskip{-0.5\baselineskip}%
+}
 
 \begin{document}
 %\maketitle
@@ -193,8 +201,8 @@ non-life insurance, stochastic differential equations.}
 \pagenumbering{arabic}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE]{\fontsize{8}{12} \selectfont\nouppercase{\rightmark\hfill\leftmark}}
-\fancyhead[RO]{\fontsize{8}{12} \selectfont\nouppercase{\leftmark\hfill\rightmark}}
+\fancyhead[LE]{\fontsize{10}{12} \selectfont\nouppercase{\rightmark\hfill\leftmark}}
+\fancyhead[RO]{\fontsize{10}{12} \selectfont\nouppercase{\leftmark\hfill\rightmark}}
 \fancyfoot[LE,RO]{\hfill\thepage\hfill}
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}

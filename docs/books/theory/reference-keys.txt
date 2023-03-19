@@ -79,8 +79,10 @@ ridge-regression
 lasso-regression
 conclusion
 nonparametric-regression
+linear-smoothers
 curse-of-dimensionality
 splines
+linear-regression-with-splines.
 trees-and-forests
 gradient-boosting-machines-and-bayesian-additive-regression-trees
 some-practical-considerations

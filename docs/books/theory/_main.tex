@@ -143,7 +143,15 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 18, 2023}
+\date{March 19, 2023}
+
+%\usepackage{setspace}\onehalfspacing
+\AtBeginDocument{%
+  \addtolength\abovedisplayskip{0\baselineskip}%
+  \addtolength\belowdisplayskip{0\baselineskip}%
+  \addtolength\abovedisplayshortskip{-0.75\baselineskip}%
+  \addtolength\belowdisplayshortskip{-0.5\baselineskip}%
+}
 
 \begin{document}
 %\maketitle
@@ -3709,6 +3717,44 @@ m^*=\underset{m}{\text{argmin}}\ \mathbb{E}[(Y-m(X))^2]=E[Y\ \vert\ X=x]
 \]
 i.e.~the conditional expectation.
 
+\textbf{Proof.}
+
+Consider the loss function \(L(y_1,y_2)=(y_1-y_2)^2\) i.e.~the \(L^2\) loss function. For any estimator \(m(X)\in \mathcal G\) we have
+\begin{align*}
+R(m(X))&=\mathbb E[L(m(X),Y)\ \vert\ X]=\mathbb E[(m(X)-Y)^2\ \vert\ X]\\
+&=\mathbb E[m(X)^2\ \vert\ X]+\mathbb E[Y^2\ \vert\ X]-2\mathbb E[m(X)Y\ \vert\ X]\\
+&=m(X)^2+\mathbb E[Y^2\ \vert\ X]-2m(X)\mathbb E[Y\ \vert\ X]
+\end{align*}
+We see that the risk is minimized for the \(m\) that minimizes \(m(X)^2-2m(X)\mathbb E[Y\ \vert\ X]\). The first order condition is then
+
+\[
+\frac{\partial}{\partial m}R(m(X))=2m(X)-2\mathbb E[Y\ \vert\ X]=0
+\]
+
+hence giving that
+\[
+m(X)=\mathbb E[Y\ \vert\ X]
+\]
+as desired. \(\blacksquare\)
+
+\textbf{Remarks on the \(L^2\)-loss.} The loss function \(L(y_1,y_2)=(y_1-y_2)^2\) i.e.~the \(L^2\) loss function gives some nice interpretations. We know that \(L\) as a norm on \(\mathbb R\) forms a Hilbert Space. This means, for instance, that we have some nice geometric interpretations, but more importantly we have alot of tools from linear algebra. We know that the projection \(m^*\) onto the space \(\mathcal G\) and so any vector \(\hat m(X)-m^*(X)\) is orthogonal to \(Y-m^*(X)\). In particular, this gives that
+\begin{align*}
+r(\hat m(X))&=\mathbb E[L(\hat m(X),Y)]=\mathbb E\left[(\hat m(X)-Y)^2\right]\\
+&=\mathbb E\left[(\hat m(X)-m^*(X)+m^*(X)-Y)^2\right]\\
+&\stackrel{(\dagger)}{=}\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+\mathbb E\left[(m^*(X)-Y)^2\right]\\
+&=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+r(m^*(X))
+\end{align*}
+Using in \((\dagger)\) that \(\hat m(X)-m^*(X)\) and \(m^*(X)-Y\) are orthogonal with the last equation simply being the definition of risk. Rearringing the above gives
+\[
+r(\hat m(X))-r(m^*(X))=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]=\text{MSE}(\hat m(x))
+\]
+We can further write out the Mean Squared Error in terms of variance and bias.
+\begin{align*}
+\text{MSE}(\hat m(x))&=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]\\
+&=\mathbb E\left[(\hat m(X)-\mathbb E[\hat m(X)\vert X])^2\right]+\mathbb E\left[(\mathbb E[\hat m(X)\vert X]-m^*(X))^2\right]\\
+&=\text{Var}(\hat m(X))+\text{Bias}^2(\hat m(X)).
+\end{align*}
+
 \textbf{Lemma.} \emph{Assume \(\mathcal{Y}=\{1,...,K\}\), the decision function that minimizes the risk for the binary loss function satisfies}
 
 \[
@@ -4004,6 +4050,32 @@ Given the training data we may approximate the coefficients using the following.
     \]
 \end{enumerate}
 
+\emph{with \(\Sigma = \mathbb E[\mathbf X\mathbf X^\top]\).}
+
+\textbf{Proof.}
+
+(1). We have by assumptions that \(m^*(X)=\mathbb E[Y\ \vert\ X]=X^\top\beta^*\) is the Bayes estimator. Using that the noise is additive we have \(Y=m^*(X)+\varepsilon\) with \(\mathbb E[\varepsilon]=0\).
+\begin{align*}
+r(m^*)&=\mathbb E[(m^*(X)-Y)^2]=\mathbb E[(X^\top\beta ^*-Y)^2]\\
+&=\mathbb E[\varepsilon^2]=\text{Var}(\varepsilon)-\mathbb E[\varepsilon]^2\\
+&=\text{Var}(\varepsilon).
+\end{align*}
+(2). Take any linear estimor \(m(X)=X^\top \beta\), then we have
+\begin{align*}
+r(m)&=\mathbb E[(m(X)-Y)^2]\\
+&=\mathbb E[(m(X)-m^*(X)+m^*(X)-Y)^2]\\
+&=\mathbb E[(m(X)-m^*(X))^2]+\mathbb E[(m^*(X)-Y)^2]+2\mathbb E[(m(X)-m^*(X))(m^*(X)-Y)]\\
+&=\mathbb E[(m(X)-m^*(X))^2]+r(m^*)
+\end{align*}
+Using that \(m^*(X)-Y\) is orthogonal to \(m(X)-m^*(X)\). This gives us the following
+\begin{align*}
+r(m)- r(m^*)&=\mathbb E[(m(X)-m^*(X))^2]\\
+&=\mathbb E[(X^\top \beta -X^\top \beta^*)^2]\\
+&=\mathbb E[XX^\top(\beta-\beta^*)^2]\\
+&=\Sigma(\beta-\beta^*)^2=\Vert \Sigma^{1/2}(\beta - \beta^*)\Vert ^2_2
+\end{align*}
+as desired. \(\blacksquare\)
+
 \hypertarget{least-squares-estimator}{%
 \subsection{Least Squares Estimator}\label{least-squares-estimator}}
 
@@ -4279,7 +4351,7 @@ The assumption \(\Sigma_{j j}=1\) is only to provide an easier result. In practi
 \textbf{Theorem.} \emph{We do not assume that the linear model holds. Assume that \(X\) and \(Y\) have bounded support (bounded by \(B>0\)). Let }
 
 \[
-\beta_*=\underset{\|\beta\|_1 \leq \eta}{\operatorname{argmin}} r(X\beta)
+\beta_*=\underset{\|\beta\|_1 \leq \eta}{\operatorname{argmin}}\ r(X\beta)
 \]
 
 \emph{Then for any \(\xi>0\),}
@@ -4337,7 +4409,7 @@ as desired. \(\blacksquare\)
 P_\beta\left(I\left(\widehat{\beta}_j=1\right) \leq I\left(\beta_j=1\right) \text { for all } j\right) \rightarrow 1
 \]
 
-Suppose that \(p\) is fixed. Then the least squares estimator \(\widehat{\beta}_n\) is minimax and satisfies
+In the above \(S(\cdot)\) represent the covariates with non-zero covariates. Therefore we can interpret a sparsistent estimator as an estimator which for increasing information converges to choosing the correct explanatory variables, where the weak condition only ensure that we may choose the right covariates but at least not the wrong. Suppose that \(p\) is fixed. Then the least squares estimator \(\widehat{\beta}_n\) is minimax and satisfies
 
 \[
 \sup _\beta E_\beta\left(n\left\|\widehat{\beta}_n-\beta\right\|^2\right)=O(1) .
@@ -4405,6 +4477,9 @@ Lasso and Ridge regression aim for different things. Ridge regression reduces va
 
 Linear models are quite restrictive and one may ask how one can achieve more flexibility. In this chapter we will look at the nonparametric regression problem with squared loss \(L(y_1,y_2)=(y_1-y_2)^2\). We already know that the Bayes-rule is \(m^\ast(x)=\mathbb E[Y|X=x]\).
 
+\hypertarget{linear-smoothers}{%
+\subsection{Linear Smoothers}\label{linear-smoothers}}
+
 \textbf{Definition. (k-nearest-neighbor)}\index{k-nearest-neighbor} \emph{The k-nearest-neighbor estimator is }
 
 \[
@@ -4422,50 +4497,56 @@ Linear models are quite restrictive and one may ask how one can achieve more fle
 \emph{where the weight function \(w_i\) can depend on \(\{X_1, \dots, X_n\}\).}
 
 \textbf{Example.} The k-nearest-neighbor estimator is a linear smoother:
-
 \[
-\hat m^{knn}(x)= \sum_i^n w_i(x_i) Y_i,
+\hat m^{knn}(x)= \sum_i^n w_i(x) Y_i,
 \]
-
 with
-
 \[
 w_i(x)=\begin{cases}\frac 1 k & X_i \ \text{belongs to the}\  k \ \text{closest points to}\  x \\ 0 & else\end{cases}
 \]
-
-\textbf{Proposition. (MSE k-nearest-neighbor)} \emph{Assume that}
+In the below proposition the definition of Lipschitz continuity is used. We recall that a real-valued function \(f:\mathbb R\to\mathbb R\) is \(L\)-Lipschitz continuous if and only if
 
 \[
-E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \text{is L-Lipschitz continuous}\},
+f(x_1)-f(x_2)\le L\Vert x_1-x_2\Vert_2
 \]
 
-\emph{and \(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\) Then }
+for all \((x_1,x_2)\in\mathbb R^2\). This in particulat means that \(f(x)\in[f(x_1)-L\vert x_1-x\vert,f(x_1)+L\vert x_1-x\vert]\) i.e.~does not on any interval grow faster that a linear function with slope \(L\).
 
+\textbf{Proposition. (MSE k-nearest-neighbor)} \emph{Assume that}
+\[
+E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\ m \ \text{is L-Lipschitz continuous}\},
+\]
+\emph{and \(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\) Then }
 \[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]\leq (cL)^2 \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k.
 \]
-
 \emph{In particular, for \(k_n=O_p( n^{2/(2+p)})\), we get }
-
 \[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]=O_p(n^{-2/(2+p)}).
 \]
 
 \textbf{Proof.}
 
-Write \(\mathbf X=X_1,\dots, X_n\) and denote by \(Y_i^{(x)}\) the \(i\)th closest \(Y\) to \(x\) among \(Y_1,\dots Y_n\).
-\begin{align*}\mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]& =\mathbb E \Big [{\left(\mathbb{E}[\hat m^{knn}(x)|\mathbf  X]-m^\ast(x)\right)^2}\Big]+{\mathbb{E}\Big[(\hat m^{knn}(x)-\mathbb{E}[\hat m^{knn}(x)|\mathbf  X])^2\Big]}\\
-&=\mathbb E\left[ \Big \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left(m^\ast\left(X_i\right)-m^\ast(x)\right)\Big \}^2\right] \\ &\quad + \frac 1 {k^2} \mathbb E \left[ \sum_i^k \sum_j^k \{Y_i^{(x)}- \mathbb  E[Y_i^{(x)}| \mathbf X]\}\{Y_j^{(x)}- \mathbb  E[Y_j^{(x)}| \mathbf X]\} \right] \\
-& \leq \mathbb  E\left[ \left(\frac{L}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2\right)^2 \right]+\frac{\sigma^2}{k} \\
-&\leq^{(1)}  L^2 c \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k
+Write \(\mathbf X=(X_1,\dots, X_n)\) and denote by \(Y_i^{(x)}\) the \(i\)th closest \(Y\) to \(x\) among \(Y_1,\dots Y_n\).
+\begin{align*}
+\mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]& \stackrel{(\dagger_1)}{=}\mathbb E \Big [{\left(\mathbb{E}[\hat m^{knn}(x)|\mathbf  X]-m^\ast(x)\right)^2}\Big]+{\mathbb{E}\Big[(\hat m^{knn}(x)-\mathbb{E}[\hat m^{knn}(x)|\mathbf  X])^2\Big]}\\
+&\stackrel{(\dagger_2)}{=}\mathbb E\left[ \Big \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left(m^\ast\left(X_i\right)-m^\ast(x)\right)\Big \}^2\right] \\ 
+&+ \frac 1 {k^2} \mathbb E \left[ \sum_i^k \sum_j^k \{Y_i^{(x)}- \mathbb  E[Y_i^{(x)}| \mathbf X]\}\{Y_j^{(x)}- \mathbb  E[Y_j^{(x)}| \mathbf X]\} \right] \\
+&\stackrel{(\dagger_3)}{\leq} \mathbb  E\left[ \left(\frac{L}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2\right)^2 \right]+\frac{\sigma^2}{k} \\
+&\stackrel{(\dagger_4)}{\leq}  L^2 c \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k
 \end{align*}
+where we as usual in \((\dagger_1)\) use that \(m^*(x)-Y\) is orthogonal to any element \(m(x)-m^*(x)\). In the \((\dagger_2)\) we use the assumption that \(m^*(x)=\mathbb E[Y\vert X=x]\) and hence
 
-\begin{enumerate}
-\def\labelenumi{(\arabic{enumi})}
-\tightlist
-\item
-  \(\mathbb E\left[ \left \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2 \right\}^2 \right]\leq c \left(\frac k n \right)^{2/p}\), see (Gyorfi et al.~2002, vol.~1, chap.~6.3). \(\blacksquare\)
-\end{enumerate}
+\[
+\mathbb E\left[\left. \hat m^{knn}(x)\right\vert X\right]=\frac{1}{k}\sum_{i\in \mathcal N_k(x)}\mathbb E\left[\left.  Y_i\right\vert X \right]=\frac{1}{k}\sum_{i\in \mathcal N_k(x)}m^*(X_i).
+\]
+
+Furthermore, the second term is derived from the below
+\begin{align*}
+\mathbb{E}\left[(\hat m^{knn}(x)-\mathbb{E}[\hat m^{knn}(x)|\mathbf  X])^2\right]&=\mathbb{E}\left[\left(\frac{1}{k}\sum_{l\in \mathcal N_k(x)}Y_l-\frac{1}{k}\sum_{i\in \mathcal N_k(x)}\mathbb E\left[\left.  Y_i\right\vert X \right]\right)^2\right]\\
+&=\frac 1 {k^2} \mathbb E \left[ \sum_i^k \sum_j^k \{Y_i^{(x)}- \mathbb  E[Y_i^{(x)}| \mathbf X]\}\{Y_j^{(x)}- \mathbb  E[Y_j^{(x)}| \mathbf X]\} \right] 
+\end{align*}
+The \((\dagger_3)\) is derived by the definition of a \(L\)-Lipschitz function and the assumption regarding the variance of the conditional variable \(Y\ \vert\ X=x\). \((\dagger_4)\) is a result taken from Gyorfi et al.~2002, vol.~1, chap.~6.3. \(\blacksquare\)
 
 Note that this is slower than the ``parametric'' MSE of \(n^{-1}\). In particular the rate depends on \(p\). Even worse: It grows exponentially in \(p\).
 
@@ -4477,7 +4558,7 @@ We have learned that the knn estimator can be written as
 
 Note that \(w_i(x)\) is not smooth as a function of \(x\). This also makes the estimator not smooth. Given that we assume that \(m^\ast\) is smooth, this may not be desirable. An alternative are kernel smoothers.
 
-\textbf{Definition. (Kernel Smoother)}\index{Kernel Smoother} \emph{The kernel smoother a linear smoother with }
+\textbf{Definition. (Kernel Smoother)}\index{Kernel Smoother} \emph{The kernel smoother is a linear smoother with }
 
 \[
 \hat m^{ks}(x)=  \sum_i w_i(x_i) Y_i,
@@ -4491,9 +4572,34 @@ w_i(x)=\frac{K\left(\frac{||x-X_i||}{h}\right)}{\sum_j K\left(\frac{||x-X_j||}{h
 
 \emph{Often \(K=\prod_j k_j\), such that \(K\left(\frac{||x-X_i||}{h}\right)=\prod_j k(x-X_{ij})\). The function \(k: \mathbb R \mapsto \mathbb R\) is usually a symmetric density function.}
 
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{figures/ML_fig_kernel.png}
+  \end{center}
+\end{figure}
+
+The general idea is to fit a smooth function to the data points \((X,Y)\) such that \(m(X)\) is somewhat centered between the data points. The choice of a symmetric function \(k\) ensures that the estimator weighs the datapoints closer to \(x\) higher than further away data point. In the case with \(X,Y\in \mathbb R\) we can choose for instance
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Gaussian kernel: \(k_j(z)=\exp\left(\frac{z}{2b^2}\right)\) with \(b>0\),
+\item
+  Uniform kernel: \(k_j(z)=1_{[0,1]}(z)/2\in \{0,1\}\),
+\item
+  Triangular kernel: \(k_j(z)=\big(1-z\big)^+\),
+\item
+  Epanechnikov kernel: \(k_j(z)=\frac{(1-z^2)^a}{2^{2a+1}\Gamma(a+1)^2\Gamma(2a+2)^{-1}}1_{[0,1]}(z)\) with \(a=1\).
+\item
+  Biweight kernel: Above with \(a=2\).
+\end{enumerate}
+
+where of course the argument is \(z=\vert x-X_{ij}\vert/h\) with \(h>0\) being the bandwidth. Notice that the uniform kernel in fact is the Epanechnikov kernel with \(a=0\).
+
 \textbf{Proposition. (MSE Kernel Smoother)} \emph{Assume that \(E[Y|X=x]=m^\ast(x)\in \mathcal G_L\) with}
 \[
-\mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \text{is L-Lipschitz continuous}\},
+\mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\  m \ \text{is L-Lipschitz continuous}\},
 \]
 
 \emph{and \(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\) Then }
@@ -4521,14 +4627,14 @@ But this rate is still exponentially decreasing in \(p\). Furthermore, it has be
 
 A new observation \(x_0\) will have very few or no observations in its neighborhood. This leads to high variance and high bias when increasing the size of the neighborhood.
 
-Under the model of the previous slide, the setting \(n=50,p=1\) has the same expected amount of observations in a neighborhood as the setting \(n=7.5\times10^{110}, p=100\).
+Under the model in the previous section, the setting \(n=50,p=1\) has the same expected amount of observations in a neighborhood as the setting \(n=7.5\times10^{110}, p=100\).
 
 There are two ways to tackle the curse of dimensionality.
 
 \textbf{Sparsity:} Assume that the intrinsic dimension is lower. E.g. Not all variables are relevant. Or feature engineer a few highly predictive variables.
 
 \textbf{Structure:} Interactions are limited and structure can be exploited
-e.g.~an additive structure \(m(x)=m_1(x_1)+m_2(x_2).\). Remember that structure is essential for interpretability.
+e.g.~an additive structure \(m(x)=m_1(x_1)+m_2(x_2)\). Remember that structure is essential for interpretability.
 
 \hypertarget{splines}{%
 \subsection{Splines}\label{splines}}
@@ -4579,7 +4685,7 @@ m(x)=\sum_{j=1}^{k+1+l}\theta_jg_j(x)
   \end{itemize}
 \end{itemize}
 
-Splines (used for regression, see next slide) have high variance at the boundaries. Solution: Let the piecewise polynomial function have a lower degree at \((-\infty,x_1],[x_l,\infty)\).
+Splines have high variance at the boundaries. Solution: Let the piecewise polynomial function have a lower degree at \((-\infty,x_1],[x_l,\infty)\).
 
 \textbf{Definition. (Natural Splines)}\index{Natural Splines} \emph{A \(k\)th-order natural spline (\(k=\) odd number) with knotpoints \(x_1 <\dots<x_l\)}
 
@@ -4595,7 +4701,10 @@ Splines (used for regression, see next slide) have high variance at the boundari
 
 Note that natural splines have dimension \(l\) which is in particular independent of the order \(k\) (compare to dimension \(k+l\) for splines). There is also a truncated power basis and a B-splines basis for natural splines.
 
-\textbf{Linear regression with splines.} We still assume the one-dimensional case, \(p=1\). Instead of looking at observations \((X_i,Y_i)_{i=1,\dots,n}\) we can consider a natural splines basis and look at observations \((g_1(X_i), \dots, g_l(X_i), Y_i)_{i=1,\dots,n}.\) By doing so we are able to approximate any natural spline in \(x\) instead of just linear functions in \(x\), while still being in a linear regression framework, i.e.,
+\hypertarget{linear-regression-with-splines.}{%
+\subsection{Linear regression with splines.}\label{linear-regression-with-splines.}}
+
+We still assume the one-dimensional case, \(p=1\). Instead of looking at observations \((X_i,Y_i)_{i=1,\dots,n}\) we can consider a natural splines basis and look at observations \((g_1(X_i), \dots, g_l(X_i), Y_i)_{i=1,\dots,n}.\) By doing so we are able to approximate any natural spline in \(x\) instead of just linear functions in \(x\), while still being in a linear regression framework, i.e.,
 
 \[
 \hat \beta = {\arg \min }_\beta \sum_i (Y_i - { G_i^T}\beta )^2= (\mathbf G^T\mathbf  G)^{-1}\mathbf  G^T\mathbf Y
@@ -4686,10 +4795,10 @@ It can be shown the smoothing splines are asymptotically equivalent to kernel sm
 We have seen that fully nonparametric methods suffer from the curse of dimensionality: the optimal rate of convergence for twice continuously differentiable functions is \(n^{-4/(4+p)}\). One solution is to restrict oneself to the class of additive functions
 
 \[
-\mathcal G=\{m| m(x)=m_1(x_1)+\cdots +m_p(x_p)\}
+\mathcal G=\{m\ |\ m(x)=m_1(x_1)+\cdots +m_p(x_p)\}
 \]
 
-Stone (1985) showed that the components \(m_k\), if twice continuously differentiable, can be estimated with one-dimensional rate of \(n^{-4/4+1}\). The components \(m_j\) are usually estimated via the so called backfitting algorithm (Hastie and Tibshirani 1990).
+Stone (1985) showed that the components \(m_k\), if twice continuously differentiable, can be estimated with one-dimensional rate of \(n^{-4/(4+p)}\). The components \(m_j\) are usually estimated via the so called backfitting algorithm (Hastie and Tibshirani 1990).
 
 Backffitting comprises the following two steps:
 
@@ -4715,14 +4824,14 @@ Backffitting comprises the following two steps:
 \end{itemize}
 
 Note that Smooth is a one-dimensional regression problem. In practice Smooth is most often a smoothing spline.
-It has been shown backfitting via smoothing splines achieve optimal rate of \(n^{-4/4+1}\) for each component and \(pn^{-4/4+1}\) for the p-dimensional additive regression function.
+It has been shown backfitting via smoothing splines achieve optimal rate of \(n^{-4/(4+p)}\) for each component and \(pn^{-4/(4+p)}\) for the p-dimensional additive regression function.
 
 Problem: Additive methods are still not optimal in the case of sparsity (i.e.~some features being not relevant) and interactions between features.
 
 \hypertarget{trees-and-forests}{%
 \section{Trees and forests}\label{trees-and-forests}}
 
-In this chapter we will look at the nonparametric regression problem with squared loss \(L(y_1,y_2)=(y_1-y_2)^2\) and also the classification problem with Binary loss function \(L(y_1,y_2)=\Bbb 1(y_1\neq y_2)\) or squared loss.
+In this chapter we will look at the nonparametric regression problem with squared loss \(L(y_1,y_2)=(y_1-y_2)^2\) and also the classification problem with Binary loss function \(L(y_1,y_2)= 1(y_1\neq y_2)\) or squared loss.
 
 We already know that the Bayes-rule is
 
@@ -4733,7 +4842,7 @@ m^\ast(x)=\mathbb E[Y|X=x]
 for the squared loss and
 
 \[
-m^\ast(x)=\underset{k=1,\dots,K}{\operatorname{argmax}} \mathbb P(Y=k|X=x)
+m^\ast(x)=\underset{k=1,\dots,K}{\operatorname{argmax}}\ \mathbb P(Y=k|X=x)
 \]
 
 for the binary loss.
@@ -4783,14 +4892,12 @@ A decision tree is uniquely defined by its leaves. Given a tree \(T\), we write 
   \[R_1(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j \leq s_j\}, \quad R_2(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j > s_j\}.\]
 \item
   \emph{We pick the minimizer}
-  \[
-  (j^\ast,s^\ast)= \arg\min_{j,s} Q_n(R_1(j,s_j)) + Q_n(R_2(j,s_j))
-  \]
+  \[(j^\ast,s^\ast)= \arg\min_{j,s} Q_n(R_1(j,s_j)) + Q_n(R_2(j,s_j))\]
 \item
   \emph{Each of the new nodes \((R_1(j^\ast,s^\ast),R_2(j^\ast,s^\ast))\) is further split as long as stopping criterion does not apply.}
 \end{itemize}
 
-\textbf{Definition. (CART loss)} F\_or regression the most common loss function is the squared loss:\_
+\textbf{Definition. (CART loss)} \emph{For regression the most common loss function is the squared loss:}
 
 \begin{itemize}
 \tightlist
@@ -5302,7 +5409,7 @@ As usual, we assume that we are given an iid dataset \(\mathcal D_n=\{X_i,Y_i\}_
 
 \textbf{Single Layer Feed Forward.} We start with a single layer neural network (= 1 hidden layer).
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{_main_files/figure-latex/unnamed-chunk-12-1.pdf}
 
 The architecture of a single layer neural network corresponds to
 the function class \(\mathcal G\) such that
@@ -5379,7 +5486,7 @@ w^{(r+1)}= w^{(r)} -\gamma  \frac 1 n \sum_{i=1}^n \frac{\partial L(Y_i,\hat m_n
 
 \textbf{Feed foreward Neural Network.} Usually one works with multiple hidden layers and possibly mutlipe outputs.
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-11-1.pdf}
+\includegraphics{_main_files/figure-latex/unnamed-chunk-13-1.pdf}
 
 the \(l\)th hidden layer arises from the \(l-1\)th hidden layer from (ignoring intercepts)
 
@@ -7762,7 +7869,7 @@ We say that a set \(A\in\mathbb{E}\) is an \textbf{invariant set} if \(T^{-1}(A)
 \textbf{Lemma 5.9. (Hansen)} \emph{Let \((\mathcal{X},\mathbb{E},\mu)\) be a probability space, and let \(T : \mathcal{X}\to \mathcal{X}\) be a measure-preserving map. Let \((\mathcal{Y},\mathbb{G})\) be another measurable space, and let \(S : \mathcal{Y} \to \mathcal{Y}\) be a measurable map.}
 \emph{Suppose there is a measurable map \(\gamma : \mathcal{X}\to \mathcal{Y}\) such that the following diagram commutes:}
 
-\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.25\linewidth]{_main_files/figure-latex/unnamed-chunk-17-1} \end{center}
 
 \emph{Then \((\mathcal{Y},\mathbb{G},\gamma(\mu),S)\) is a measure-preserving dynamical system.}
 
@@ -8173,7 +8280,7 @@ c.~\emph{The array satisfies \textbf{Lyapounov's condition}\index{Lyapounov's co
 
 \textbf{Transitionsdiagram.} Et diagram, hvor der fremgår ssh. for et system overgår til et nyt stadie.
 
-\begin{center}\includegraphics[width=0.4\linewidth]{_main_files/figure-latex/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics[width=0.4\linewidth]{_main_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 \textbf{Definition.} \textbf{(Stokastisk process i diskret tid)} \emph{Lad \(\mathcal{X}=(\mathcal{X}_n)_{n\in\mathbb{N}_0}\) være en familie af stokastiske variable og \(\mathcal{S}\) et udfaldsrum . Da er \(\mathcal{X}\) en funktion der opfylder \(\mathcal{X} : \mathbb{N}_0\times \Omega \to \mathcal{S}\) med \((n,w) \mapsto \mathcal{X}_n(w)\).}
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,8 +304,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>9.4</b> Nonparametric Regression</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.1</b> Curse of dimensionality</a></li>
-<li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.2</b> Splines</a></li>
+<li class="chapter" data-level="9.4.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-smoothers"><i class="fa fa-check"></i><b>9.4.1</b> Linear Smoothers</a></li>
+<li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.2</b> Curse of dimensionality</a></li>
+<li class="chapter" data-level="9.4.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.3</b> Splines</a></li>
+<li class="chapter" data-level="9.4.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-regression-with-splines."><i class="fa fa-check"></i><b>9.4.4</b> Linear regression with splines.</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a></li>
 <li class="chapter" data-level="9.6" data-path="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><a href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><i class="fa fa-check"></i><b>9.6</b> Gradient Boosting Machines and Bayesian additive regression trees</a></li>
@@ -480,7 +482,34 @@ R(\hat{m}_n)-r(m^*).
   r(m)-r(m^*)=\Vert\Sigma^{1/2}(\beta -\beta^*) \Vert^2_2.
   \]</span></li>
 </ol>
+<p><em>with <span class="math inline">\(\Sigma = \mathbb E[\mathbf X\mathbf X^\top]\)</span>.</em></p>
 </blockquote>
+<details>
+<summary>
+<strong>Proof.</strong>
+</summary>
+<p>(1). We have by assumptions that <span class="math inline">\(m^*(X)=\mathbb E[Y\ \vert\ X]=X^\top\beta^*\)</span> is the Bayes estimator. Using that the noise is additive we have <span class="math inline">\(Y=m^*(X)+\varepsilon\)</span> with <span class="math inline">\(\mathbb E[\varepsilon]=0\)</span>.
+<span class="math display">\[\begin{align*}
+r(m^*)&amp;=\mathbb E[(m^*(X)-Y)^2]=\mathbb E[(X^\top\beta ^*-Y)^2]\\
+&amp;=\mathbb E[\varepsilon^2]=\text{Var}(\varepsilon)-\mathbb E[\varepsilon]^2\\
+&amp;=\text{Var}(\varepsilon).
+\end{align*}\]</span>
+(2). Take any linear estimor <span class="math inline">\(m(X)=X^\top \beta\)</span>, then we have
+<span class="math display">\[\begin{align*}
+r(m)&amp;=\mathbb E[(m(X)-Y)^2]\\
+&amp;=\mathbb E[(m(X)-m^*(X)+m^*(X)-Y)^2]\\
+&amp;=\mathbb E[(m(X)-m^*(X))^2]+\mathbb E[(m^*(X)-Y)^2]+2\mathbb E[(m(X)-m^*(X))(m^*(X)-Y)]\\
+&amp;=\mathbb E[(m(X)-m^*(X))^2]+r(m^*)
+\end{align*}\]</span>
+Using that <span class="math inline">\(m^*(X)-Y\)</span> is orthogonal to <span class="math inline">\(m(X)-m^*(X)\)</span>. This gives us the following
+<span class="math display">\[\begin{align*}
+r(m)- r(m^*)&amp;=\mathbb E[(m(X)-m^*(X))^2]\\
+&amp;=\mathbb E[(X^\top \beta -X^\top \beta^*)^2]\\
+&amp;=\mathbb E[XX^\top(\beta-\beta^*)^2]\\
+&amp;=\Sigma(\beta-\beta^*)^2=\Vert \Sigma^{1/2}(\beta - \beta^*)\Vert ^2_2
+\end{align*}\]</span>
+as desired. <span class="math inline">\(\blacksquare\)</span></p>
+</details>
 <div id="least-squares-estimator" class="section level3 hasAnchor" number="9.3.1">
 <h3><span class="header-section-number">9.3.1</span> Least Squares Estimator<a href="linear-models.html#least-squares-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Moving forward we will assume <span class="math inline">\(\beta_0^*=0\)</span> since we can always translate the data and make the centered around 0. We will furthermore use the notation:</p>
@@ -703,7 +732,7 @@ n \geq c_1 \frac{\|\Sigma\|_2}{\Lambda_{\min }(\Sigma)^2} s \log (e p / s)
 <blockquote class="thm">
 <p><strong>Theorem.</strong> <em>We do not assume that the linear model holds. Assume that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have bounded support (bounded by <span class="math inline">\(B&gt;0\)</span>). Let </em></p>
 <p><span class="math display">\[
-\beta_*=\underset{\|\beta\|_1 \leq \eta}{\operatorname{argmin}} r(X\beta)
+\beta_*=\underset{\|\beta\|_1 \leq \eta}{\operatorname{argmin}}\ r(X\beta)
 \]</span></p>
 <p><em>Then for any <span class="math inline">\(\xi&gt;0\)</span>,</em></p>
 <p><span class="math display">\[
@@ -750,7 +779,7 @@ r({X \hat\beta}) - r\left(X\beta^*\right)\leq 2(\eta+1)^2 \varepsilon.
 P_\beta\left(I\left(\widehat{\beta}_j=1\right) \leq I\left(\beta_j=1\right) \text { for all } j\right) \rightarrow 1
 \]</span></p>
 </blockquote>
-<p>Suppose that <span class="math inline">\(p\)</span> is fixed. Then the least squares estimator <span class="math inline">\(\widehat{\beta}_n\)</span> is minimax and satisfies</p>
+<p>In the above <span class="math inline">\(S(\cdot)\)</span> represent the covariates with non-zero covariates. Therefore we can interpret a sparsistent estimator as an estimator which for increasing information converges to choosing the correct explanatory variables, where the weak condition only ensure that we may choose the right covariates but at least not the wrong. Suppose that <span class="math inline">\(p\)</span> is fixed. Then the least squares estimator <span class="math inline">\(\widehat{\beta}_n\)</span> is minimax and satisfies</p>
 <p><span class="math display">\[
 \sup _\beta E_\beta\left(n\left\|\widehat{\beta}_n-\beta\right\|^2\right)=O(1) .
 \]</span></p>

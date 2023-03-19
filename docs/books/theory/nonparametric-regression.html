@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,8 +304,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>9.4</b> Nonparametric Regression</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.1</b> Curse of dimensionality</a></li>
-<li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.2</b> Splines</a></li>
+<li class="chapter" data-level="9.4.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-smoothers"><i class="fa fa-check"></i><b>9.4.1</b> Linear Smoothers</a></li>
+<li class="chapter" data-level="9.4.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>9.4.2</b> Curse of dimensionality</a></li>
+<li class="chapter" data-level="9.4.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.3</b> Splines</a></li>
+<li class="chapter" data-level="9.4.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-regression-with-splines."><i class="fa fa-check"></i><b>9.4.4</b> Linear regression with splines.</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a></li>
 <li class="chapter" data-level="9.6" data-path="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><a href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><i class="fa fa-check"></i><b>9.6</b> Gradient Boosting Machines and Bayesian additive regression trees</a></li>
@@ -440,6 +442,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="nonparametric-regression" class="section level2 hasAnchor" number="9.4">
 <h2><span class="header-section-number">9.4</span> Nonparametric Regression<a href="nonparametric-regression.html#nonparametric-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Linear models are quite restrictive and one may ask how one can achieve more flexibility. In this chapter we will look at the nonparametric regression problem with squared loss <span class="math inline">\(L(y_1,y_2)=(y_1-y_2)^2\)</span>. We already know that the Bayes-rule is <span class="math inline">\(m^\ast(x)=\mathbb E[Y|X=x]\)</span>.</p>
+<div id="linear-smoothers" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Linear Smoothers<a href="nonparametric-regression.html#linear-smoothers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote class="def">
 <p><strong>Definition. (k-nearest-neighbor)</strong> <em>The k-nearest-neighbor estimator is </em></p>
 <p><span class="math display">\[
@@ -454,25 +458,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p><em>where the weight function <span class="math inline">\(w_i\)</span> can depend on <span class="math inline">\(\{X_1, \dots, X_n\}\)</span>.</em></p>
 </blockquote>
-<p><strong>Example.</strong> The k-nearest-neighbor estimator is a linear smoother:</p>
-<p><span class="math display">\[
-\hat m^{knn}(x)= \sum_i^n w_i(x_i) Y_i,
-\]</span></p>
-<p>with</p>
+<p><strong>Example.</strong> The k-nearest-neighbor estimator is a linear smoother:
+<span class="math display">\[
+\hat m^{knn}(x)= \sum_i^n w_i(x) Y_i,
+\]</span>
+with
 <span class="math display">\[
 w_i(x)=\begin{cases}\frac 1 k &amp; X_i \ \text{belongs to the}\  k \ \text{closest points to}\  x \\ 0 &amp; else\end{cases}
 \]</span>
+In the below proposition the definition of Lipschitz continuity is used. We recall that a real-valued function <span class="math inline">\(f:\mathbb R\to\mathbb R\)</span> is <span class="math inline">\(L\)</span>-Lipschitz continuous if and only if</p>
+<p><span class="math display">\[
+f(x_1)-f(x_2)\le L\Vert x_1-x_2\Vert_2
+\]</span></p>
+<p>for all <span class="math inline">\((x_1,x_2)\in\mathbb R^2\)</span>. This in particulat means that <span class="math inline">\(f(x)\in[f(x_1)-L\vert x_1-x\vert,f(x_1)+L\vert x_1-x\vert]\)</span> i.e. does not on any interval grow faster that a linear function with slope <span class="math inline">\(L\)</span>.</p>
 <blockquote class="prop">
-<p><strong>Proposition. (MSE k-nearest-neighbor)</strong> <em>Assume that</em></p>
-<p><span class="math display">\[
-E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \text{is L-Lipschitz continuous}\},
-\]</span></p>
-<p><em>and <span class="math inline">\(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\)</span> Then </em></p>
-<p><span class="math display">\[
+<p><strong>Proposition. (MSE k-nearest-neighbor)</strong> <em>Assume that</em>
+<span class="math display">\[
+E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\ m \ \text{is L-Lipschitz continuous}\},
+\]</span>
+<em>and <span class="math inline">\(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\)</span> Then </em>
+<span class="math display">\[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]\leq (cL)^2 \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k.
-\]</span></p>
-<p><em>In particular, for <span class="math inline">\(k_n=O_p( n^{2/(2+p)})\)</span>, we get </em></p>
-<p><span class="math display">\[
+\]</span>
+<em>In particular, for <span class="math inline">\(k_n=O_p( n^{2/(2+p)})\)</span>, we get </em>
+<span class="math display">\[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]=O_p(n^{-2/(2+p)}).
 \]</span></p>
 </blockquote>
@@ -480,15 +489,24 @@ E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \te
 <summary>
 <strong>Proof.</strong>
 </summary>
-<p>Write <span class="math inline">\(\mathbf X=X_1,\dots, X_n\)</span> and denote by <span class="math inline">\(Y_i^{(x)}\)</span> the <span class="math inline">\(i\)</span>th closest <span class="math inline">\(Y\)</span> to <span class="math inline">\(x\)</span> among <span class="math inline">\(Y_1,\dots Y_n\)</span>.
-<span class="math display">\[\begin{align*}\mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]&amp; =\mathbb E \Big [{\left(\mathbb{E}[\hat m^{knn}(x)|\mathbf  X]-m^\ast(x)\right)^2}\Big]+{\mathbb{E}\Big[(\hat m^{knn}(x)-\mathbb{E}[\hat m^{knn}(x)|\mathbf  X])^2\Big]}\\
-&amp;=\mathbb E\left[ \Big \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left(m^\ast\left(X_i\right)-m^\ast(x)\right)\Big \}^2\right] \\ &amp;\quad + \frac 1 {k^2} \mathbb E \left[ \sum_i^k \sum_j^k \{Y_i^{(x)}- \mathbb  E[Y_i^{(x)}| \mathbf X]\}\{Y_j^{(x)}- \mathbb  E[Y_j^{(x)}| \mathbf X]\} \right] \\
-&amp; \leq \mathbb  E\left[ \left(\frac{L}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2\right)^2 \right]+\frac{\sigma^2}{k} \\
-&amp;\leq^{(1)}  L^2 c \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k
-\end{align*}\]</span></p>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(\mathbb E\left[ \left \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2 \right\}^2 \right]\leq c \left(\frac k n \right)^{2/p}\)</span>, see (Gyorfi et al. 2002, vol. 1, chap. 6.3). <span class="math inline">\(\blacksquare\)</span></li>
-</ol>
+<p>Write <span class="math inline">\(\mathbf X=(X_1,\dots, X_n)\)</span> and denote by <span class="math inline">\(Y_i^{(x)}\)</span> the <span class="math inline">\(i\)</span>th closest <span class="math inline">\(Y\)</span> to <span class="math inline">\(x\)</span> among <span class="math inline">\(Y_1,\dots Y_n\)</span>.
+<span class="math display">\[\begin{align*}
+\mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]&amp; \stackrel{(\dagger_1)}{=}\mathbb E \Big [{\left(\mathbb{E}[\hat m^{knn}(x)|\mathbf  X]-m^\ast(x)\right)^2}\Big]+{\mathbb{E}\Big[(\hat m^{knn}(x)-\mathbb{E}[\hat m^{knn}(x)|\mathbf  X])^2\Big]}\\
+&amp;\stackrel{(\dagger_2)}{=}\mathbb E\left[ \Big \{\frac{1}{k} \sum_{i \in \mathcal{N}_k(x)}\left(m^\ast\left(X_i\right)-m^\ast(x)\right)\Big \}^2\right] \\
+&amp;+ \frac 1 {k^2} \mathbb E \left[ \sum_i^k \sum_j^k \{Y_i^{(x)}- \mathbb  E[Y_i^{(x)}| \mathbf X]\}\{Y_j^{(x)}- \mathbb  E[Y_j^{(x)}| \mathbf X]\} \right] \\
+&amp;\stackrel{(\dagger_3)}{\leq} \mathbb  E\left[ \left(\frac{L}{k} \sum_{i \in \mathcal{N}_k(x)}\left\|X_i-x\right\|_2\right)^2 \right]+\frac{\sigma^2}{k} \\
+&amp;\stackrel{(\dagger_4)}{\leq}  L^2 c \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k
+\end{align*}\]</span>
+where we as usual in <span class="math inline">\((\dagger_1)\)</span> use that <span class="math inline">\(m^*(x)-Y\)</span> is orthogonal to any element <span class="math inline">\(m(x)-m^*(x)\)</span>. In the <span class="math inline">\((\dagger_2)\)</span> we use the assumption that <span class="math inline">\(m^*(x)=\mathbb E[Y\vert X=x]\)</span> and hence</p>
+<p><span class="math display">\[
+\mathbb E\left[\left. \hat m^{knn}(x)\right\vert X\right]=\frac{1}{k}\sum_{i\in \mathcal N_k(x)}\mathbb E\left[\left.  Y_i\right\vert X \right]=\frac{1}{k}\sum_{i\in \mathcal N_k(x)}m^*(X_i).
+\]</span></p>
+<p>Furthermore, the second term is derived from the below
+<span class="math display">\[\begin{align*}
+\mathbb{E}\left[(\hat m^{knn}(x)-\mathbb{E}[\hat m^{knn}(x)|\mathbf  X])^2\right]&amp;=\mathbb{E}\left[\left(\frac{1}{k}\sum_{l\in \mathcal N_k(x)}Y_l-\frac{1}{k}\sum_{i\in \mathcal N_k(x)}\mathbb E\left[\left.  Y_i\right\vert X \right]\right)^2\right]\\
+&amp;=\frac 1 {k^2} \mathbb E \left[ \sum_i^k \sum_j^k \{Y_i^{(x)}- \mathbb  E[Y_i^{(x)}| \mathbf X]\}\{Y_j^{(x)}- \mathbb  E[Y_j^{(x)}| \mathbf X]\} \right]
+\end{align*}\]</span>
+The <span class="math inline">\((\dagger_3)\)</span> is derived by the definition of a <span class="math inline">\(L\)</span>-Lipschitz function and the assumption regarding the variance of the conditional variable <span class="math inline">\(Y\ \vert\ X=x\)</span>. <span class="math inline">\((\dagger_4)\)</span> is a result taken from Gyorfi et al. 2002, vol. 1, chap. 6.3. <span class="math inline">\(\blacksquare\)</span></p>
 </details>
 <p>Note that this is slower than the “parametric” MSE of <span class="math inline">\(n^{-1}\)</span>. In particular the rate depends on <span class="math inline">\(p\)</span>. Even worse: It grows exponentially in <span class="math inline">\(p\)</span>.</p>
 <p>We have learned that the knn estimator can be written as</p>
@@ -497,7 +515,7 @@ E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \te
 \]</span></p>
 <p>Note that <span class="math inline">\(w_i(x)\)</span> is not smooth as a function of <span class="math inline">\(x\)</span>. This also makes the estimator not smooth. Given that we assume that <span class="math inline">\(m^\ast\)</span> is smooth, this may not be desirable. An alternative are kernel smoothers.</p>
 <blockquote class="def">
-<p><strong>Definition. (Kernel Smoother)</strong> <em>The kernel smoother a linear smoother with </em></p>
+<p><strong>Definition. (Kernel Smoother)</strong> <em>The kernel smoother is a linear smoother with </em></p>
 <p><span class="math display">\[
 \hat m^{ks}(x)=  \sum_i w_i(x_i) Y_i,
 \]</span></p>
@@ -507,10 +525,20 @@ w_i(x)=\frac{K\left(\frac{||x-X_i||}{h}\right)}{\sum_j K\left(\frac{||x-X_j||}{h
 \]</span></p>
 <p><em>Often <span class="math inline">\(K=\prod_j k_j\)</span>, such that <span class="math inline">\(K\left(\frac{||x-X_i||}{h}\right)=\prod_j k(x-X_{ij})\)</span>. The function <span class="math inline">\(k: \mathbb R \mapsto \mathbb R\)</span> is usually a symmetric density function.</em></p>
 </blockquote>
+<p><img src="figures/ML_fig_kernel.png" width="75%" style="display: block; margin: auto;" /></p>
+<p>The general idea is to fit a smooth function to the data points <span class="math inline">\((X,Y)\)</span> such that <span class="math inline">\(m(X)\)</span> is somewhat centered between the data points. The choice of a symmetric function <span class="math inline">\(k\)</span> ensures that the estimator weighs the datapoints closer to <span class="math inline">\(x\)</span> higher than further away data point. In the case with <span class="math inline">\(X,Y\in \mathbb R\)</span> we can choose for instance</p>
+<ol style="list-style-type: decimal">
+<li>Gaussian kernel: <span class="math inline">\(k_j(z)=\exp\left(\frac{z}{2b^2}\right)\)</span> with <span class="math inline">\(b&gt;0\)</span>,</li>
+<li>Uniform kernel: <span class="math inline">\(k_j(z)=1_{[0,1]}(z)/2\in \{0,1\}\)</span>,</li>
+<li>Triangular kernel: <span class="math inline">\(k_j(z)=\big(1-z\big)^+\)</span>,</li>
+<li>Epanechnikov kernel: <span class="math inline">\(k_j(z)=\frac{(1-z^2)^a}{2^{2a+1}\Gamma(a+1)^2\Gamma(2a+2)^{-1}}1_{[0,1]}(z)\)</span> with <span class="math inline">\(a=1\)</span>.</li>
+<li>Biweight kernel: Above with <span class="math inline">\(a=2\)</span>.</li>
+</ol>
+<p>where of course the argument is <span class="math inline">\(z=\vert x-X_{ij}\vert/h\)</span> with <span class="math inline">\(h&gt;0\)</span> being the bandwidth. Notice that the uniform kernel in fact is the Epanechnikov kernel with <span class="math inline">\(a=0\)</span>.</p>
 <blockquote class="prop">
 <p><strong>Proposition. (MSE Kernel Smoother)</strong> <em>Assume that <span class="math inline">\(E[Y|X=x]=m^\ast(x)\in \mathcal G_L\)</span> with</em>
 <span class="math display">\[
-\mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R| m \ \text{is L-Lipschitz continuous}\},
+\mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\  m \ \text{is L-Lipschitz continuous}\},
 \]</span></p>
 <p><em>and <span class="math inline">\(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\)</span> Then </em></p>
 <p><span class="math display">\[
@@ -521,22 +549,23 @@ w_i(x)=\frac{K\left(\frac{||x-X_i||}{h}\right)}{\sum_j K\left(\frac{||x-X_j||}{h
 \mathbb E[(\hat m^{ks}(x)-m^\ast(x))^2]=O_p(n^{-2/(2+p)}).
 \]</span></p>
 </blockquote>
-<div id="curse-of-dimensionality" class="section level3 hasAnchor" number="9.4.1">
-<h3><span class="header-section-number">9.4.1</span> Curse of dimensionality<a href="nonparametric-regression.html#curse-of-dimensionality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="curse-of-dimensionality" class="section level3 hasAnchor" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> Curse of dimensionality<a href="nonparametric-regression.html#curse-of-dimensionality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We have seen that under a Lipschitz condition, both kernel smoother and knn have an asymptotic mean squared error of order <span class="math inline">\(n^{-2/(2+p)}\)</span>. One can show that under the assumption that <span class="math inline">\(m^\ast\)</span> is twice continuously differentiable, the rate for both methods can be improved to</p>
 <p><span class="math display">\[
 n^{-4/(4+p)}.
 \]</span></p>
 <p>But this rate is still exponentially decreasing in <span class="math inline">\(p\)</span>. Furthermore, it has been shown that no method can do better under the given assumptions.</p>
 <p>A new observation <span class="math inline">\(x_0\)</span> will have very few or no observations in its neighborhood. This leads to high variance and high bias when increasing the size of the neighborhood.</p>
-<p>Under the model of the previous slide, the setting <span class="math inline">\(n=50,p=1\)</span> has the same expected amount of observations in a neighborhood as the setting <span class="math inline">\(n=7.5\times10^{110}, p=100\)</span>.</p>
+<p>Under the model in the previous section, the setting <span class="math inline">\(n=50,p=1\)</span> has the same expected amount of observations in a neighborhood as the setting <span class="math inline">\(n=7.5\times10^{110}, p=100\)</span>.</p>
 <p>There are two ways to tackle the curse of dimensionality.</p>
 <p><strong>Sparsity:</strong> Assume that the intrinsic dimension is lower. E.g. Not all variables are relevant. Or feature engineer a few highly predictive variables.</p>
 <p><strong>Structure:</strong> Interactions are limited and structure can be exploited
-e.g. an additive structure <span class="math inline">\(m(x)=m_1(x_1)+m_2(x_2).\)</span>. Remember that structure is essential for interpretability.</p>
+e.g. an additive structure <span class="math inline">\(m(x)=m_1(x_1)+m_2(x_2)\)</span>. Remember that structure is essential for interpretability.</p>
 </div>
-<div id="splines" class="section level3 hasAnchor" number="9.4.2">
-<h3><span class="header-section-number">9.4.2</span> Splines<a href="nonparametric-regression.html#splines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="splines" class="section level3 hasAnchor" number="9.4.3">
+<h3><span class="header-section-number">9.4.3</span> Splines<a href="nonparametric-regression.html#splines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We want to establish a framework to estimate additive regression functions. To this end, assume <span class="math inline">\(p=1\)</span> until further notice.</p>
 <blockquote class="def">
 <p><strong>Definition. (Splines)</strong> <em>A <span class="math inline">\(k\)</span>th-order spline with <span class="math inline">\(l\)</span> knotpoints <span class="math inline">\(x_1 &lt;\dots&lt;x_l\)</span></em></p>
@@ -563,7 +592,7 @@ m(x)=\sum_{j=1}^{k+1+l}\theta_jg_j(x)
 <li>more complicated, but computationally more robust and faster to compute.</li>
 </ul></li>
 </ul>
-<p>Splines (used for regression, see next slide) have high variance at the boundaries. Solution: Let the piecewise polynomial function have a lower degree at <span class="math inline">\((-\infty,x_1],[x_l,\infty)\)</span>.</p>
+<p>Splines have high variance at the boundaries. Solution: Let the piecewise polynomial function have a lower degree at <span class="math inline">\((-\infty,x_1],[x_l,\infty)\)</span>.</p>
 <blockquote class="def">
 <p><strong>Definition. (Natural Splines)</strong> <em>A <span class="math inline">\(k\)</span>th-order natural spline (<span class="math inline">\(k=\)</span> odd number) with knotpoints <span class="math inline">\(x_1 &lt;\dots&lt;x_l\)</span></em></p>
 <ul>
@@ -573,7 +602,10 @@ m(x)=\sum_{j=1}^{k+1+l}\theta_jg_j(x)
 </ul>
 </blockquote>
 <p>Note that natural splines have dimension <span class="math inline">\(l\)</span> which is in particular independent of the order <span class="math inline">\(k\)</span> (compare to dimension <span class="math inline">\(k+l\)</span> for splines). There is also a truncated power basis and a B-splines basis for natural splines.</p>
-<p><strong>Linear regression with splines.</strong> We still assume the one-dimensional case, <span class="math inline">\(p=1\)</span>. Instead of looking at observations <span class="math inline">\((X_i,Y_i)_{i=1,\dots,n}\)</span> we can consider a natural splines basis and look at observations <span class="math inline">\((g_1(X_i), \dots, g_l(X_i), Y_i)_{i=1,\dots,n}.\)</span> By doing so we are able to approximate any natural spline in <span class="math inline">\(x\)</span> instead of just linear functions in <span class="math inline">\(x\)</span>, while still being in a linear regression framework, i.e.,</p>
+</div>
+<div id="linear-regression-with-splines." class="section level3 hasAnchor" number="9.4.4">
+<h3><span class="header-section-number">9.4.4</span> Linear regression with splines.<a href="nonparametric-regression.html#linear-regression-with-splines." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We still assume the one-dimensional case, <span class="math inline">\(p=1\)</span>. Instead of looking at observations <span class="math inline">\((X_i,Y_i)_{i=1,\dots,n}\)</span> we can consider a natural splines basis and look at observations <span class="math inline">\((g_1(X_i), \dots, g_l(X_i), Y_i)_{i=1,\dots,n}.\)</span> By doing so we are able to approximate any natural spline in <span class="math inline">\(x\)</span> instead of just linear functions in <span class="math inline">\(x\)</span>, while still being in a linear regression framework, i.e.,</p>
 <p><span class="math display">\[
 \hat \beta = {\arg \min }_\beta \sum_i (Y_i - { G_i^T}\beta )^2= (\mathbf G^T\mathbf  G)^{-1}\mathbf  G^T\mathbf Y
 \]</span></p>
@@ -641,9 +673,9 @@ Hence,
 <p>It can be shown the smoothing splines are asymptotically equivalent to kernel smoothers with varying bandwidth and a specific choice of kernel, see Silverman (1984) or Wang, Du, and Shen (2013) for a more recent contribution. In general, smoothing splines are more practical since they can be efficiently calculated while kernel smoothers are much easier to analyze theoretically.</p>
 <p>We have seen that fully nonparametric methods suffer from the curse of dimensionality: the optimal rate of convergence for twice continuously differentiable functions is <span class="math inline">\(n^{-4/(4+p)}\)</span>. One solution is to restrict oneself to the class of additive functions</p>
 <p><span class="math display">\[
-\mathcal G=\{m| m(x)=m_1(x_1)+\cdots +m_p(x_p)\}
+\mathcal G=\{m\ |\ m(x)=m_1(x_1)+\cdots +m_p(x_p)\}
 \]</span></p>
-<p>Stone (1985) showed that the components <span class="math inline">\(m_k\)</span>, if twice continuously differentiable, can be estimated with one-dimensional rate of <span class="math inline">\(n^{-4/4+1}\)</span>. The components <span class="math inline">\(m_j\)</span> are usually estimated via the so called backfitting algorithm (Hastie and Tibshirani 1990).</p>
+<p>Stone (1985) showed that the components <span class="math inline">\(m_k\)</span>, if twice continuously differentiable, can be estimated with one-dimensional rate of <span class="math inline">\(n^{-4/(4+p)}\)</span>. The components <span class="math inline">\(m_j\)</span> are usually estimated via the so called backfitting algorithm (Hastie and Tibshirani 1990).</p>
 <p>Backffitting comprises the following two steps:</p>
 <blockquote class="def">
 <p><strong>Definition. (Backfitting Algorithm)</strong></p>
@@ -658,7 +690,7 @@ Hence,
 </ul>
 </blockquote>
 <p>Note that Smooth is a one-dimensional regression problem. In practice Smooth is most often a smoothing spline.
-It has been shown backfitting via smoothing splines achieve optimal rate of <span class="math inline">\(n^{-4/4+1}\)</span> for each component and <span class="math inline">\(pn^{-4/4+1}\)</span> for the p-dimensional additive regression function.</p>
+It has been shown backfitting via smoothing splines achieve optimal rate of <span class="math inline">\(n^{-4/(4+p)}\)</span> for each component and <span class="math inline">\(pn^{-4/(4+p)}\)</span> for the p-dimensional additive regression function.</p>
 <p>Problem: Additive methods are still not optimal in the case of sparsity (i.e. some features being not relevant) and interactions between features.</p>
 </div>
 </div>
