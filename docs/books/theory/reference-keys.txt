@@ -84,7 +84,13 @@ curse-of-dimensionality
 splines
 linear-regression-with-splines.
 trees-and-forests
-gradient-boosting-machines-and-bayesian-additive-regression-trees
+cart
+pruning
+bagging
+random-forests
+boosting-and-additive-trees
+gradient-boosting-machines
+bayesian-additive-regression-trees
 some-practical-considerations
 neural-networks
 local-explanations

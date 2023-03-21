@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-19" />
+<meta name="date" content="2023-03-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="nonparametric-regression.html"/>
-<link rel="next" href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"/>
+<link rel="next" href="boosting-and-additive-trees.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -309,8 +309,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.3</b> Splines</a></li>
 <li class="chapter" data-level="9.4.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-regression-with-splines."><i class="fa fa-check"></i><b>9.4.4</b> Linear regression with splines.</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a></li>
-<li class="chapter" data-level="9.6" data-path="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><a href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><i class="fa fa-check"></i><b>9.6</b> Gradient Boosting Machines and Bayesian additive regression trees</a></li>
+<li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="trees-and-forests.html"><a href="trees-and-forests.html#cart"><i class="fa fa-check"></i><b>9.5.1</b> CART</a></li>
+<li class="chapter" data-level="9.5.2" data-path="trees-and-forests.html"><a href="trees-and-forests.html#pruning"><i class="fa fa-check"></i><b>9.5.2</b> Pruning</a></li>
+<li class="chapter" data-level="9.5.3" data-path="trees-and-forests.html"><a href="trees-and-forests.html#bagging"><i class="fa fa-check"></i><b>9.5.3</b> Bagging</a></li>
+<li class="chapter" data-level="9.5.4" data-path="trees-and-forests.html"><a href="trees-and-forests.html#random-forests"><i class="fa fa-check"></i><b>9.5.4</b> Random Forests</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="boosting-and-additive-trees.html"><a href="boosting-and-additive-trees.html"><i class="fa fa-check"></i><b>9.6</b> Boosting and additive trees</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="boosting-and-additive-trees.html"><a href="boosting-and-additive-trees.html#gradient-boosting-machines"><i class="fa fa-check"></i><b>9.6.1</b> Gradient Boosting Machines</a></li>
+<li class="chapter" data-level="9.6.2" data-path="boosting-and-additive-trees.html"><a href="boosting-and-additive-trees.html#bayesian-additive-regression-trees"><i class="fa fa-check"></i><b>9.6.2</b> Bayesian additive regression trees</a></li>
+</ul></li>
 <li class="chapter" data-level="9.7" data-path="some-practical-considerations.html"><a href="some-practical-considerations.html"><i class="fa fa-check"></i><b>9.7</b> Some practical considerations</a></li>
 <li class="chapter" data-level="9.8" data-path="neural-networks.html"><a href="neural-networks.html"><i class="fa fa-check"></i><b>9.8</b> Neural Networks</a></li>
 <li class="chapter" data-level="9.9" data-path="local-explanations.html"><a href="local-explanations.html"><i class="fa fa-check"></i><b>9.9</b> Local explanations</a>
@@ -472,44 +482,53 @@ m_i=\underset{y\in \mathcal Y}{\operatorname{argmax}}\left\{\sum_{j=1}^n1_{R_i}(
 \]</span></p>
 <p>i.e. the mode.</p>
 <p>Decision trees are popular because the decision making (estimate) is nicely visualizable/interpretable if not too deep. One can easily draw out the subsetting tree starting with the entire feature space <span class="math inline">\(\mathcal X\)</span> and then spitting in two all the way down to the terminal notes. The interior edges on this representation are called nodes and can also be interpreted as subset of <span class="math inline">\(\mathcal X\)</span>.</p>
-<p>Decision trees can be quite efficient in classification tasks where we are interested in 0-1 (binary) decisions. This is the case in many application but is often not the case in insurance since it is imposible and frankly not usefull having a 0/1 estimate of whether a claim may arrive. Instead the insurance company is interested in the probability that a claim may arrive during a timespan.</p>
+<p>Decision trees can be quite efficient in classification tasks where we are interested in 0-1 (binary) decisions. This is the case in many application but is often not the case in insurance since it is impossible and frankly not usefull having a 0/1 estimate of whether a claim may arrive. Instead the insurance company is interested in the probability that a claim may arrive during a timespan.</p>
+<div id="cart" class="section level3 hasAnchor" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> CART<a href="trees-and-forests.html#cart" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A decision tree is uniquely defined by its leaves. Given a tree <span class="math inline">\(T\)</span>, we write <span class="math inline">\(m(T)\)</span> for the corresponding regression or classification function. The naive approach of looking for leaves <span class="math inline">\(R_1,\dots, R_l\)</span> that minimize a certain loss is practically not feasible because of the computational cost. Instead: top-down greedy approach, called CART (classification and regression trees). We now describe how to construct nodes via the CART algorithm.</p>
 <blockquote class="def">
-<p><strong>Definition. (CART)</strong> <em>Start with <span class="math inline">\(\mathcal X\)</span> as initial node for splitting.</em></p>
-<ul>
-<li><em>Input: node <span class="math inline">\(R\subseteq \mathcal X\)</span> </em></li>
-<li><em>For every dimension <span class="math inline">\(j=1,\dots,p\)</span> and every point <span class="math inline">\(s_j\in \{x_j| \exists\ x_1,\dots,x_{j-1},x_{j+1},\dots,x_p\ \text{with} (x_1,\dots,x_p)\in R\}\)</span> define</em>
-<span class="math display">\[R_1(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j \leq s_j\}, \quad R_2(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j &gt; s_j\}.\]</span></li>
-<li><em>We pick the minimizer</em>
-<span class="math display">\[(j^\ast,s^\ast)= \arg\min_{j,s} Q_n(R_1(j,s_j)) + Q_n(R_2(j,s_j))\]</span></li>
-<li><em>Each of the new nodes <span class="math inline">\((R_1(j^\ast,s^\ast),R_2(j^\ast,s^\ast))\)</span> is further split as long as stopping criterion does not apply.</em></li>
-</ul>
+<p><strong>Definition. (CART)</strong> <em>Start with <span class="math inline">\(\mathcal X\)</span> as initial node for splitting. Follow the process below for all subnotes made from splitting.</em></p>
+<ol style="list-style-type: decimal">
+<li><em>Let <span class="math inline">\(R\subseteq \mathcal X\)</span> be the input note. (In initial run <span class="math inline">\(R=\mathcal X\)</span>)</em></li>
+<li><em>For every dimension <span class="math inline">\(j=1,\dots,p\)</span> and every point <span class="math inline">\(s_j\in R(j)\)</span> where</em>
+<span class="math display">\[R(j)= \{x_j\ |\     \exists\ x_1,\dots,x_{j-1},x_{j+1},\dots,x_p\ \text{with}\ (x_1,\dots,x_p)\in R\}\]</span>
+<em>i.e. the support of <span class="math inline">\(x_j\)</span> under the node <span class="math inline">\(R\)</span>. We define the following:</em>
+<span class="math display">\[R_1(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j \leq s_j\}, \quad R_2(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j &gt; s_j\}.\]</span>
+<em>being a subdivision of <span class="math inline">\(R=R_1(j,s_j)\cup R_2(j,s_j)\)</span> since <span class="math inline">\(R_1(j,s_j)\cap R_2(j,s_j)=\emptyset\)</span>. Notice that one intepret <span class="math inline">\(R_1(j,s_j)\)</span> is the lower section of <span class="math inline">\(R\)</span> through the splitter <span class="math inline">\(s_j\)</span> in dimension <span class="math inline">\(j\)</span> and <span class="math inline">\(R_2(j,s_j)\)</span> being the upper section of the note.</em></li>
+<li><em>We pick the following minimizer</em>
+<span class="math display">\[(j^\ast,s^\ast)= \arg\min_{j,s} Q_n(R_1(j,s_j)) + Q_n(R_2(j,s_j))\]</span>
+<em>and split the note <span class="math inline">\(R\)</span> into <span class="math inline">\(R_1(j^*,s^*)\)</span> and <span class="math inline">\(R_1(j^*,s^*)\)</span>.</em></li>
+<li><em>If either of <span class="math inline">\(R_1(j^*,s^*)\)</span> and <span class="math inline">\(R_1(j^*,s^*)\)</span> satisfy some predertermined stopping criterion the note is no longer splittet. If not it is further split as long as stopping criterion does not apply.</em></li>
+</ol>
 </blockquote>
 <blockquote class="def">
 <p><strong>Definition. (CART loss)</strong> <em>For regression the most common loss function is the squared loss:</em></p>
-<ul>
-<li><em>Squared loss:</em> <span class="math inline">\(Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2\)</span>
-<ul>
-<li><span class="math inline">\(\overline Y_i(R_l)= \frac 1 {|R_l|}\sum_{i: X_i \in R_l}Y_i,\)</span>
-<span class="math inline">\(|R_j|=\#\{i: X_i\in R_j\}\)</span>.</li>
-</ul></li>
-</ul>
-<p><em>In the classification case, define </em>
-<span class="math display">\[
-\hat p_{lk}= \frac 1 {|R_l|} \sum_{i: X_i \in R_l}  \mathbb 1(Y_i=k)
-\]</span>
-<em>(=the proportion of class <span class="math inline">\(k\)</span> observation in <span class="math inline">\(R_l\)</span>)</em></p>
-<p>Common loss functions are:</p>
+<p><span class="math display">\[
+Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2
+\]</span></p>
+<p><em>with</em></p>
+<p><span class="math display">\[
+\overline Y_i(R_l)= \frac 1 {|R_l|}\sum_{i: X_i \in R_l}Y_i\ \text{and}\ |R_j|=\#\{i: X_i\in R_j\}
+\]</span></p>
+<p><em>In the classification case, define</em></p>
+<p><span class="math display">\[
+\hat p_{lk}= \frac 1 {|R_l|} \sum_{i: X_i \in R_l}   1(Y_i=k)
+\]</span></p>
+<p><em>i.e. the proportion of class <span class="math inline">\(k\)</span> observation in <span class="math inline">\(R_l\)</span>.</em></p>
+</blockquote>
+<p>Other commom loss functions include:</p>
 <ul>
 <li>Brier score: <span class="math inline">\(Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2\)</span> (=squared loss)</li>
 <li>Misclassification error: <span class="math inline">\(Q_n(R_l)= 1 - \max_{k}\hat p_{lk}\)</span></li>
 <li>Gini index: <span class="math inline">\(Q_n(R_l)= \sum_{k=1}^K \hat p_{lk}(1-\hat p_{lk})\)</span></li>
 <li>Entropy : <span class="math inline">\(Q_n(R_l)=-\sum_{k=1}^K \hat p_{lk}\log\hat p_{lk}\)</span></li>
 </ul>
-</blockquote>
 <p>Note: In classification, even if binary loss is the ultimate goal, Gini index and entropy might be the better choices for splitting.</p>
 <p>The most common stopping criterion is specifying a min-node size, i.e. stop if <span class="math inline">\(|R_j|&lt;c\)</span>. A common choice is <span class="math inline">\(c=5\)</span>. An alternative stopping criteria is the depth of <span class="math inline">\(R_j\)</span>, i.e., the number of parent nodes of <span class="math inline">\(R_j\)</span>.</p>
 <p>The process described so far will probably lead to an overfit. One may think that one way out is to stop growing the tree early enough.n This is not advisable because stopping the growing early because the current split does not lead to great improvement in the loss does not mean that a split afterwards might not turn very effective.</p>
+</div>
+<div id="pruning" class="section level3 hasAnchor" number="9.5.2">
+<h3><span class="header-section-number">9.5.2</span> Pruning<a href="trees-and-forests.html#pruning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The idea of pruning is to let a tree grow very deep first (= small min node size) and then select a subtree (pruning) as final fit. Idea: We can compare different subtrees via a penalized loss.</p>
 <blockquote class="def">
 <p><strong>Definition. (Subtree)</strong> <em>We call <span class="math inline">\(T&#39;\)</span> a subtree of <span class="math inline">\(T\)</span> if the nodes of <span class="math inline">\(T&#39;\)</span> is a subset of the nodes of <span class="math inline">\(T\)</span>. <span class="math inline">\(T&#39;\)</span> and <span class="math inline">\(T\)</span> have the same root. If <span class="math inline">\(T&#39;\)</span> is a subtree of <span class="math inline">\(T\)</span>, we also write <span class="math inline">\(T&#39;\subseteq T\)</span>.</em></p>
@@ -524,44 +543,46 @@ m_i=\underset{y\in \mathcal Y}{\operatorname{argmax}}\left\{\sum_{j=1}^n1_{R_i}(
 </blockquote>
 <p>How do we find an optimal <span class="math inline">\(\alpha\)</span> (and also the optimal subtree for a fixed <span class="math inline">\(\alpha\)</span>)? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.</p>
 <blockquote class="prop">
-<p><strong>Proposition (weakest link)</strong> <span class="math inline">\(\hat T_{n,\alpha}\)</span> is unique. Furthermore, there are trees <span class="math inline">\(T_0\supset \cdots\supset T_l\)</span> with <span class="math inline">\(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span>; in particular the set <span class="math inline">\(\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span> is finite.</p>
-<p>Let <span class="math inline">\(\widetilde Q_n\)</span> be the loss function corresponding to <span class="math inline">\(\hat R_n\)</span>.
-The trees <span class="math inline">\(T_0,\dots, T_l\)</span> can be found with the following algorithm</p>
+<p><strong>Proposition (weakest link)</strong> <em>The <span class="math inline">\(\alpha\)</span>-pruned tree <span class="math inline">\(\hat T_{n,\alpha}\)</span> is unique. Furthermore, there exist (unique) trees <span class="math inline">\(T_0\supset \cdots\supset T_l\)</span> with <span class="math inline">\(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha&gt;0\}:=\hat{ \mathbb T}_n\)</span>; in particular the set <span class="math inline">\(\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span> is finite.</em></p>
+<p><em>(Weakest link algorith): Let <span class="math inline">\(\widetilde Q_n\)</span> be the loss function corresponding to <span class="math inline">\(\hat R_n\)</span>. The trees <span class="math inline">\(T_0,\dots, T_l\)</span> can be found with the following algorithm</em></p>
 <ol style="list-style-type: decimal">
-<li><p>Let <span class="math inline">\(t_L,t_R\)</span> be any two terminal nodes in <span class="math inline">\(\hat T_n\)</span> resulting from a split of the immediate ancestor node t. If <span class="math inline">\(\widetilde Q_n(t) = \widetilde Q_n(t_L)+\widetilde Q_n(t_R)\)</span>, prune off <span class="math inline">\(t_L\)</span> and <span class="math inline">\(t_R\)</span>. Continue this process until no more pruning is possible. The resulting tree is <span class="math inline">\(T_0\)</span>.</p></li>
-<li><p><span class="math inline">\(k=0\)</span></p></li>
-<li><p>Go through all non-terminal nodes <span class="math inline">\(t\)</span> of <span class="math inline">\(T_k\)</span> and calculate
-<span class="math display">\[
-g(t)=\frac{\widetilde Q_n(t)-\widetilde Q_n(T_t)}{|T_t|-1},
-\]</span>
-where <span class="math inline">\(T_t\)</span> is the tree (branch) with root <span class="math inline">\(t\)</span> and nodes consisting of <span class="math inline">\(t\)</span> and the descendants of <span class="math inline">\(t\)</span> in <span class="math inline">\(T_k\)</span>.
-<span class="math inline">\(\widetilde Q_n(T_t)=\sum_{t \ \text{leaf of}\  T_t} \widetilde Q_n(t)\)</span>.</p></li>
-<li><p><span class="math inline">\(\alpha= \min_{t \ \text{ non-terminal node of} \ T_k}g(t)\)</span>.</p></li>
-<li><p>From top to bottom in <span class="math inline">\(T_k\)</span> prune all non-terminal nodes with <span class="math inline">\(g(t)=\alpha\)</span> and call the resulting tree <span class="math inline">\(T_{k+1}\)</span>.</p></li>
-<li><p>If <span class="math inline">\(T_{k+1}\)</span> has more than one node, set <span class="math inline">\(k \leftarrow k+1\)</span> and go to step 3.</p></li>
+<li><em>Let <span class="math inline">\(t_L,t_R\)</span> be any two terminal nodes in <span class="math inline">\(\hat T_n\)</span> resulting from a split of the immediate ancestor node t. If <span class="math inline">\(\widetilde Q_n(t) = \widetilde Q_n(t_L)+\widetilde Q_n(t_R)\)</span>, prune off <span class="math inline">\(t_L\)</span> and <span class="math inline">\(t_R\)</span>. Continue this process until no more pruning is possible. The resulting tree is <span class="math inline">\(T_0\)</span>.</em></li>
+<li><span class="math inline">\(k=0\)</span></li>
+<li><em>Go through all non-terminal nodes <span class="math inline">\(t\)</span> of <span class="math inline">\(T_k\)</span> and calculate </em>
+<span class="math display">\[g(t)=\frac{\widetilde Q_n(t)-\widetilde Q_n(T_t)}{|T_t|-1},\]</span>
+<em>where <span class="math inline">\(T_t\)</span> is the tree (branch) with root <span class="math inline">\(t\)</span> and nodes consisting of <span class="math inline">\(t\)</span> and the descendants of <span class="math inline">\(t\)</span> in <span class="math inline">\(T_k\)</span>. Furthermore <span class="math inline">\(\widetilde Q_n(T_t)=\sum_{t \ \text{leaf of}\  T_t} \widetilde Q_n(t)\)</span>.</em></li>
+<li><span class="math inline">\(\alpha= \min_{t \ \text{ non-terminal node of} \ T_k}g(t)\)</span>.</li>
+<li><em>From top to bottom in <span class="math inline">\(T_k\)</span> prune all non-terminal nodes with <span class="math inline">\(g(t)=\alpha\)</span> and call the resulting tree <span class="math inline">\(T_{k+1}\)</span>.</em></li>
+<li><em>If <span class="math inline">\(T_{k+1}\)</span> has more than one node, set <span class="math inline">\(k \leftarrow k+1\)</span> and go to step 3.</em></li>
 </ol>
 </blockquote>
+<p>The above proposition gives a surprising result, that for all <span class="math inline">\(\alpha\in \mathbb R_+\)</span> the mapping <span class="math inline">\(\alpha \mapsto\hat T_{n,\alpha}\in\hat{ \mathbb T}_n\)</span> is well defined and the set <span class="math inline">\(\hat{ \mathbb T}_n\)</span> is finite. Intuitively one can come to this conclusion by pre-assuming that the mapping before is unique and considering that the mapping <span class="math inline">\(f : \alpha \mapsto \vert \hat T_{n,\alpha}\vert\)</span> is monotonic and that <span class="math inline">\(f(\alpha)\to \vert \hat T_n\vert\)</span> for <span class="math inline">\(\alpha \to 0_+\)</span> and <span class="math inline">\(f(\alpha)\to 1\)</span> for <span class="math inline">\(\alpha \to \infty\)</span>. In particular, the tree is pruned more and more harshly for larger <span class="math inline">\(\alpha\)</span> and for sufficiently large <span class="math inline">\(\alpha\)</span> the tree <span class="math inline">\(\hat T_{n,\alpha}\to\mathcal X\)</span> for <span class="math inline">\(\alpha \to \infty\)</span>.</p>
 <p>Given <span class="math inline">\(l\)</span> trees <span class="math inline">\(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span>, we can pick the optimal tree via cross validation.</p>
 <p><strong>Problem with decision trees.</strong> There are (at least) two major problems with decision trees</p>
 <ul>
 <li>Instability: Small variations in the data can lead to a very different tree</li>
 <li>Performance: The performance (measured via test error) is usually much weaker compared to other learning algorithms</li>
 </ul>
-<p><strong>Bagging.</strong> Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees.</p>
+</div>
+<div id="bagging" class="section level3 hasAnchor" number="9.5.3">
+<h3><span class="header-section-number">9.5.3</span> Bagging<a href="trees-and-forests.html#bagging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees.</p>
 <blockquote class="def">
-<p><strong>Definition.</strong> <em>(Bagging)</em></p>
-<ul>
-<li>Given data <span class="math inline">\({(X_1,Y_1),\dots, (X_n,Y_n)}\)</span>, draw <span class="math inline">\(B\)</span> bootstrap samples <span class="math inline">\(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}, b=1,\dots, B\)</span>, i.e., <span class="math inline">\(\tilde {\mathcal D}^{(b)}_n\)</span> arises from <span class="math inline">\(\mathcal D_n\)</span> by drawing <span class="math inline">\(n\)</span> times with replacement.</li>
-<li>The bagging estimator is defined as
-<ul>
-<li>squared loss <span class="math inline">\(\rightarrow\)</span> average: <span class="math inline">\(\hat m^{bagg}_n=\frac 1 B \sum_{b=1}^B \hat m_n(\tilde {\mathcal D}^{(b)}_n)\)</span></li>
-<li>binary loss <span class="math inline">\(\rightarrow\)</span> majority vote: <span class="math inline">\(\hat m^{bagg}_n(x)=\arg \max_{k\in {1,\dots K}} \#\{b: m_n(\tilde {\mathcal D}^{(b)}_n) (x)=k\}\)</span></li>
-</ul></li>
-</ul>
-<p>Note that <span class="math inline">\(\hat m^{bagg}_n\)</span> is a stochastic estimator, even given <span class="math inline">\(\mathcal D_n\)</span>. Note: Usually, bagging is applied on non-pruned trees. (See it as an alternative way to reduce variance)</p>
+<p><strong>Definition.</strong> <em>(Bagging)</em> <em>Given data <span class="math inline">\({(X_1,Y_1),\dots, (X_n,Y_n)}\)</span>, draw <span class="math inline">\(B\)</span> bootstrap samples <span class="math inline">\(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}, b=1,\dots, B\)</span>, i.e., <span class="math inline">\(\tilde {\mathcal D}^{(b)}_n\)</span> arises from <span class="math inline">\(\mathcal D_n\)</span> by drawing <span class="math inline">\(n\)</span> times with replacement. The bagging estimator is defined as the following. In the squared loss case (average):</em></p>
+<p><span class="math display">\[
+\hat m^{bagg}_n=\frac 1 B \sum_{b=1}^B \hat m_n(\tilde {\mathcal D}^{(b)}_n)
+\]</span></p>
+<p><em>and in the binary loss case (majority vote):</em></p>
+<p><span class="math display">\[
+\hat m^{bagg}_n(x)=\arg \max_{k\in {1,\dots K}} \#\{b: m_n(\tilde {\mathcal D}^{(b)}_n) (x)=k\}
+\]</span></p>
 </blockquote>
+<p>Note that <span class="math inline">\(\hat m^{bagg}_n\)</span> is a stochastic estimator, even given <span class="math inline">\(\mathcal D_n\)</span>. Note: Usually, bagging is applied on non-pruned trees. (See it as an alternative way to reduce variance)</p>
 <p>While bagging improves performance of decision trees, interpretability is worsened. If interpretability is not a concern, then bagging is still inferior compared to other learning techniques. Random forests are a modification on bagging estimators.</p>
-<p><strong>Random Forests.</strong> As bagging random forest are an ensemble of decision trees. They add the following modification to bagging:
+</div>
+<div id="random-forests" class="section level3 hasAnchor" number="9.5.4">
+<h3><span class="header-section-number">9.5.4</span> Random Forests<a href="trees-and-forests.html#random-forests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p> As bagging random forest are an ensemble of decision trees. They add the following modification to bagging:
 - <span class="math inline">\(\texttt{mtry}\)</span>: Each time a node is split it is only done on a subset of size <span class="math inline">\(\texttt{mtry}\)</span> of viable variables. I.e., each time you want to split a node, turn on a random generator and draw <span class="math inline">\(1\leq\texttt{mtry}&lt;p\)</span> viable variables from <span class="math inline">\(\{1,\dots,p\}\)</span>. Only those variables drawn are allowed to be considered for the next split.
 - We denote the random forest estimator by <span class="math inline">\(\hat m^{rf}_n\)</span>. Note that <span class="math inline">\(\hat m^{rf}_n\)</span>, as <span class="math inline">\(\hat m^{bagg}_n\)</span>, is a stochastic estimator, even given <span class="math inline">\(\mathcal D_n\)</span>.</p>
 <p>Why is <span class="math inline">\(\texttt{mtry}\)</span> so useful? Assume that we are given <span class="math inline">\(l\)</span> estimators <span class="math inline">\(m_n(\mathcal D_n, U_1), \dots m_n(\mathcal D_n, U_l)\)</span>. Here, <span class="math inline">\(U_1,\dots, U_l\)</span> are iid variables inducing the additional stochasticity of the estimators (e.g. through random forest or bagging). Assume that <span class="math inline">\(\hat m_n(\mathcal D_n, U_1), \dots \hat m_n(\mathcal D_n, U_l)\)</span> have pairwise correlation <span class="math inline">\(\rho\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. We get
@@ -583,13 +604,14 @@ Meaning: Variance of an ensemble of trees is small the smaller the correlation b
 where each leaf is the result of splitting once with respect to each covariate. Hence, we end up with <span class="math inline">\(2^p\)</span> leaves, which on average contain <span class="math inline">\(n/(2^p)\)</span> data points. Even if all splits are optimal for <span class="math inline">\(2^p&gt;n\)</span>, the tree will not be able to lead to a perfect decision rule.</p>
 <p>While predictions of random forests are relatively smooth, they are not monotonic. e.g. in car insurance, if everything else is the same, more mileage should lead to higher insurance price. Random forests deal well with sparsity, i.e., when the number of features <span class="math inline">\(p\)</span> is large, but the number of relevant features is rather small: <span class="math inline">\(s&lt;&lt;p\)</span>.</p>
 </div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="nonparametric-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="boosting-and-additive-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

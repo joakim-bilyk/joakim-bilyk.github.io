@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-19" />
+<meta name="date" content="2023-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -309,7 +309,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#splines"><i class="fa fa-check"></i><b>9.4.3</b> Splines</a></li>
 <li class="chapter" data-level="9.4.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#linear-regression-with-splines."><i class="fa fa-check"></i><b>9.4.4</b> Linear regression with splines.</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a></li>
+<li class="chapter" data-level="9.5" data-path="trees-and-forests.html"><a href="trees-and-forests.html"><i class="fa fa-check"></i><b>9.5</b> Trees and forests</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="trees-and-forests.html"><a href="trees-and-forests.html#pruning"><i class="fa fa-check"></i><b>9.5.1</b> Pruning</a></li>
+</ul></li>
 <li class="chapter" data-level="9.6" data-path="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><a href="gradient-boosting-machines-and-bayesian-additive-regression-trees.html"><i class="fa fa-check"></i><b>9.6</b> Gradient Boosting Machines and Bayesian additive regression trees</a></li>
 <li class="chapter" data-level="9.7" data-path="some-practical-considerations.html"><a href="some-practical-considerations.html"><i class="fa fa-check"></i><b>9.7</b> Some practical considerations</a></li>
 <li class="chapter" data-level="9.8" data-path="neural-networks.html"><a href="neural-networks.html"><i class="fa fa-check"></i><b>9.8</b> Neural Networks</a></li>
@@ -448,16 +451,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p>where <span class="math inline">\(\hat m_{n,b}\)</span> is the result of improving on the estimator <span class="math inline">\(\hat m_n^{(b-1)}(x)=\sum_{j=1}^{b-1} \hat m_{n,j}(x)\)</span>.</p>
 <blockquote class="def">
-<p><strong>Definition.</strong> <em>(Forward Stagewise Additive Modeling)</em></p>
-<p>The function <span class="math inline">\(\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x)\)</span> is called Forward Stagewise Additive Modeling estimator if</p>
-<ul>
-<li><p><span class="math inline">\(m_{n,0}(x)=\arg \min_{\eta\in \mathcal G} \sum_{i=1}^N L\left(Y_i, \eta\right)\)</span> and</p></li>
-<li><p>for <span class="math inline">\(b=1,\dots,B\)</span>
-<span class="math display">\[\hat m_{n,b} =  \arg \min_{\eta\in \mathcal G} \hat R_n\left( \hat m_n^{(b-1)}(x)+\eta(x)\right),\]</span>
-where <span class="math inline">\(\hat m_n^{(b-1)}=\sum_{j=1}^{b-1}\hat m_{n,j}.\)</span></p></li>
-<li><p>The set <span class="math inline">\(\mathcal G\)</span> is chosen to be very restrictive/small.</p></li>
-<li><p>The component <span class="math inline">\(m_{n,b}\)</span> is called weak learner.</p></li>
-</ul>
+<p><strong>Definition.</strong> <em>(Forward Stagewise Additive Modeling)</em> <em>The function <span class="math inline">\(\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x)\)</span> is called Forward Stagewise Additive Modeling estimator if</em></p>
+<p><span class="math display">\[
+m_{n,0}(x)=\arg \min_{\eta\in \mathcal G} \sum_{i=1}^N L\left(Y_i, \eta\right)
+\]</span></p>
+<p><em>and for <span class="math inline">\(b=1,\dots,B\)</span></em></p>
+<p><span class="math display">\[
+\hat m_{n,b} =  \arg \min_{\eta\in \mathcal G} \hat R_n\left( \hat m_n^{(b-1)}(x)+\eta(x)\right),
+\]</span></p>
+<p><em>where <span class="math inline">\(\hat m_n^{(b-1)}=\sum_{j=1}^{b-1}\hat m_{n,j}.\)</span>. The set <span class="math inline">\(\mathcal G\)</span> is chosen to be very restrictive/small. The component <span class="math inline">\(m_{n,b}\)</span> is called weak learner.</em></p>
 </blockquote>
 <p>Problem: Finding the exact minimizer is only feasible (not harder than than the usual minimisation) for very specific loss functions <span class="math inline">\(\hat R_n\)</span>. In the case of squared loss, minimization in step <span class="math inline">\(b\)</span> boils down to minimizing the empirical squared loss with respect to the residuals <span class="math inline">\(Y_i- m_n^{(b-1)}(X_i)\)</span>.</p>
 <p><span class="math display">\[

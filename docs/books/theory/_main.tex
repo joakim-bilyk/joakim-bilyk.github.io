@@ -143,7 +143,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 19, 2023}
+\date{March 21, 2023}
 
 %\usepackage{setspace}\onehalfspacing
 \AtBeginDocument{%
@@ -4877,48 +4877,55 @@ i.e.~the mode.
 
 Decision trees are popular because the decision making (estimate) is nicely visualizable/interpretable if not too deep. One can easily draw out the subsetting tree starting with the entire feature space \(\mathcal X\) and then spitting in two all the way down to the terminal notes. The interior edges on this representation are called nodes and can also be interpreted as subset of \(\mathcal X\).
 
-Decision trees can be quite efficient in classification tasks where we are interested in 0-1 (binary) decisions. This is the case in many application but is often not the case in insurance since it is imposible and frankly not usefull having a 0/1 estimate of whether a claim may arrive. Instead the insurance company is interested in the probability that a claim may arrive during a timespan.
+Decision trees can be quite efficient in classification tasks where we are interested in 0-1 (binary) decisions. This is the case in many application but is often not the case in insurance since it is impossible and frankly not usefull having a 0/1 estimate of whether a claim may arrive. Instead the insurance company is interested in the probability that a claim may arrive during a timespan.
+
+\hypertarget{cart}{%
+\subsection{CART}\label{cart}}
 
 A decision tree is uniquely defined by its leaves. Given a tree \(T\), we write \(m(T)\) for the corresponding regression or classification function. The naive approach of looking for leaves \(R_1,\dots, R_l\) that minimize a certain loss is practically not feasible because of the computational cost. Instead: top-down greedy approach, called CART (classification and regression trees). We now describe how to construct nodes via the CART algorithm.
 
-\textbf{Definition. (CART)}\index{CART} \emph{Start with \(\mathcal X\) as initial node for splitting.}
+\textbf{Definition. (CART)}\index{CART} \emph{Start with \(\mathcal X\) as initial node for splitting. Follow the process below for all subnotes made from splitting.}
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
 \tightlist
 \item
-  \emph{Input: node \(R\subseteq \mathcal X\) }
+  \emph{Let \(R\subseteq \mathcal X\) be the input note. (In initial run \(R=\mathcal X\))}
 \item
-  \emph{For every dimension \(j=1,\dots,p\) and every point \(s_j\in \{x_j| \exists\ x_1,\dots,x_{j-1},x_{j+1},\dots,x_p\ \text{with} (x_1,\dots,x_p)\in R\}\) define}
+  \emph{For every dimension \(j=1,\dots,p\) and every point \(s_j\in R(j)\) where}
+  \[R(j)= \{x_j\ |\     \exists\ x_1,\dots,x_{j-1},x_{j+1},\dots,x_p\ \text{with}\ (x_1,\dots,x_p)\in R\}\]
+  \emph{i.e.~the support of \(x_j\) under the node \(R\). We define the following:}
   \[R_1(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j \leq s_j\}, \quad R_2(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j > s_j\}.\]
+  \emph{being a subdivision of \(R=R_1(j,s_j)\cup R_2(j,s_j)\) since \(R_1(j,s_j)\cap R_2(j,s_j)=\emptyset\). Notice that one intepret \(R_1(j,s_j)\) is the lower section of \(R\) through the splitter \(s_j\) in dimension \(j\) and \(R_2(j,s_j)\) being the upper section of the note.}
 \item
-  \emph{We pick the minimizer}
+  \emph{We pick the following minimizer}
   \[(j^\ast,s^\ast)= \arg\min_{j,s} Q_n(R_1(j,s_j)) + Q_n(R_2(j,s_j))\]
+  \emph{and split the note \(R\) into \(R_1(j^*,s^*)\) and \(R_1(j^*,s^*)\).}
 \item
-  \emph{Each of the new nodes \((R_1(j^\ast,s^\ast),R_2(j^\ast,s^\ast))\) is further split as long as stopping criterion does not apply.}
-\end{itemize}
+  \emph{If either of \(R_1(j^*,s^*)\) and \(R_1(j^*,s^*)\) satisfy some predertermined stopping criterion the note is no longer splittet. If not it is further split as long as stopping criterion does not apply.}
+\end{enumerate}
 
 \textbf{Definition. (CART loss)} \emph{For regression the most common loss function is the squared loss:}
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Squared loss:} \(Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2\)
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \(\overline Y_i(R_l)= \frac 1 {|R_l|}\sum_{i: X_i \in R_l}Y_i,\)
-    \(|R_j|=\#\{i: X_i\in R_j\}\).
-  \end{itemize}
-\end{itemize}
-
-\emph{In the classification case, define }
 \[
-\hat p_{lk}= \frac 1 {|R_l|} \sum_{i: X_i \in R_l}  \mathbb 1(Y_i=k)
+Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2
 \]
-\emph{(=the proportion of class \(k\) observation in \(R_l\))}
 
-Common loss functions are:
+\emph{with}
+
+\[
+\overline Y_i(R_l)= \frac 1 {|R_l|}\sum_{i: X_i \in R_l}Y_i\ \text{and}\ |R_j|=\#\{i: X_i\in R_j\}
+\]
+
+\emph{In the classification case, define}
+
+\[
+\hat p_{lk}= \frac 1 {|R_l|} \sum_{i: X_i \in R_l}   1(Y_i=k)
+\]
+
+\emph{i.e.~the proportion of class \(k\) observation in \(R_l\).}
+
+Other commom loss functions include:
 
 \begin{itemize}
 \tightlist
@@ -4938,13 +4945,16 @@ The most common stopping criterion is specifying a min-node size, i.e.~stop if \
 
 The process described so far will probably lead to an overfit. One may think that one way out is to stop growing the tree early enough.n This is not advisable because stopping the growing early because the current split does not lead to great improvement in the loss does not mean that a split afterwards might not turn very effective.
 
+\hypertarget{pruning}{%
+\subsection{Pruning}\label{pruning}}
+
 The idea of pruning is to let a tree grow very deep first (= small min node size) and then select a subtree (pruning) as final fit. Idea: We can compare different subtrees via a penalized loss.
 
-\textbf{Definition. (Subtree)} \emph{We call \(T'\) a subtree of \(T\) if the nodes of \(T'\) is a subset of the nodes of \(T\). \(T'\) and \(T\) have the same root. If \(T'\) is a subtree of \(T\), we also write \(T'\subseteq T\).}
+\textbf{Definition. (Subtree)}\index{subtree} \emph{We call \(T'\) a subtree of \(T\) if the nodes of \(T'\) is a subset of the nodes of \(T\). \(T'\) and \(T\) have the same root. If \(T'\) is a subtree of \(T\), we also write \(T'\subseteq T\).}
 
 We can derive a subtree, by pruning a tree at any non-terminal node (i.e.~by deleting all descendants of that node)
 
-\textbf{Definition. (\(\alpha\)-pruned tree)} \emph{Consider a tree \(\hat T_n\) with corresponding estimator \(\hat m_n(\hat T_n)\). Given a parameter \(\alpha>0\), the \(\alpha\)-pruned tree is}
+\textbf{Definition. (\(\alpha\)-pruned tree)}\index{$\alpha$-pruned tree} \emph{Consider a tree \(\hat T_n\) with corresponding estimator \(\hat m_n(\hat T_n)\). Given a parameter \(\alpha>0\), the \(\alpha\)-pruned tree is}
 
 \[
 \hat T_{n,\alpha} := \arg \min_{T\subseteq \hat T_n}\{\hat R_n(\hat m_n) + \alpha |T|\},
@@ -4954,31 +4964,30 @@ We can derive a subtree, by pruning a tree at any non-terminal node (i.e.~by del
 
 How do we find an optimal \(\alpha\) (and also the optimal subtree for a fixed \(\alpha\))? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.
 
-\textbf{Proposition (weakest link)} \(\hat T_{n,\alpha}\) is unique. Furthermore, there are trees \(T_0\supset \cdots\supset T_l\) with \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}\); in particular the set \(\{\hat T_{n,\alpha} : \alpha>0\}\) is finite.
+\textbf{Proposition (weakest link)}\index{weakest link algorithm} \emph{The \(\alpha\)-pruned tree \(\hat T_{n,\alpha}\) is unique. Furthermore, there exist (unique) trees \(T_0\supset \cdots\supset T_l\) with \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}:=\hat{ \mathbb T}_n\); in particular the set \(\{\hat T_{n,\alpha} : \alpha>0\}\) is finite.}
 
-Let \(\widetilde Q_n\) be the loss function corresponding to \(\hat R_n\).
-The trees \(T_0,\dots, T_l\) can be found with the following algorithm
+\emph{(Weakest link algorith): Let \(\widetilde Q_n\) be the loss function corresponding to \(\hat R_n\). The trees \(T_0,\dots, T_l\) can be found with the following algorithm}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
+\tightlist
 \item
-  Let \(t_L,t_R\) be any two terminal nodes in \(\hat T_n\) resulting from a split of the immediate ancestor node t. If \(\widetilde Q_n(t) = \widetilde Q_n(t_L)+\widetilde Q_n(t_R)\), prune off \(t_L\) and \(t_R\). Continue this process until no more pruning is possible. The resulting tree is \(T_0\).
+  \emph{Let \(t_L,t_R\) be any two terminal nodes in \(\hat T_n\) resulting from a split of the immediate ancestor node t. If \(\widetilde Q_n(t) = \widetilde Q_n(t_L)+\widetilde Q_n(t_R)\), prune off \(t_L\) and \(t_R\). Continue this process until no more pruning is possible. The resulting tree is \(T_0\).}
 \item
   \(k=0\)
 \item
-  Go through all non-terminal nodes \(t\) of \(T_k\) and calculate
-  \[
-  g(t)=\frac{\widetilde Q_n(t)-\widetilde Q_n(T_t)}{|T_t|-1},
-  \]
-  where \(T_t\) is the tree (branch) with root \(t\) and nodes consisting of \(t\) and the descendants of \(t\) in \(T_k\).
-  \(\widetilde Q_n(T_t)=\sum_{t \ \text{leaf of}\  T_t} \widetilde Q_n(t)\).
+  \emph{Go through all non-terminal nodes \(t\) of \(T_k\) and calculate }
+  \[g(t)=\frac{\widetilde Q_n(t)-\widetilde Q_n(T_t)}{|T_t|-1},\]
+  \emph{where \(T_t\) is the tree (branch) with root \(t\) and nodes consisting of \(t\) and the descendants of \(t\) in \(T_k\). Furthermore \(\widetilde Q_n(T_t)=\sum_{t \ \text{leaf of}\  T_t} \widetilde Q_n(t)\).}
 \item
   \(\alpha= \min_{t \ \text{ non-terminal node of} \ T_k}g(t)\).
 \item
-  From top to bottom in \(T_k\) prune all non-terminal nodes with \(g(t)=\alpha\) and call the resulting tree \(T_{k+1}\).
+  \emph{From top to bottom in \(T_k\) prune all non-terminal nodes with \(g(t)=\alpha\) and call the resulting tree \(T_{k+1}\).}
 \item
-  If \(T_{k+1}\) has more than one node, set \(k \leftarrow k+1\) and go to step 3.
+  \emph{If \(T_{k+1}\) has more than one node, set \(k \leftarrow k+1\) and go to step 3.}
 \end{enumerate}
+
+The above proposition gives a surprising result, that for all \(\alpha\in \mathbb R_+\) the mapping \(\alpha \mapsto\hat T_{n,\alpha}\in\hat{ \mathbb T}_n\) is well defined and the set \(\hat{ \mathbb T}_n\) is finite. Intuitively one can come to this conclusion by pre-assuming that the mapping before is unique and considering that the mapping \(f : \alpha \mapsto \vert \hat T_{n,\alpha}\vert\) is monotonic and that \(f(\alpha)\to \vert \hat T_n\vert\) for \(\alpha \to 0_+\) and \(f(\alpha)\to 1\) for \(\alpha \to \infty\). In particular, the tree is pruned more and more harshly for larger \(\alpha\) and for sufficiently large \(\alpha\) the tree \(\hat T_{n,\alpha}\to\mathcal X\) for \(\alpha \to \infty\).
 
 Given \(l\) trees \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}\), we can pick the optimal tree via cross validation.
 
@@ -4992,31 +5001,31 @@ Given \(l\) trees \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}\), we ca
   Performance: The performance (measured via test error) is usually much weaker compared to other learning algorithms
 \end{itemize}
 
-\textbf{Bagging.} Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees.
+\hypertarget{bagging}{%
+\subsection{Bagging}\label{bagging}}
 
-\textbf{Definition.} \emph{(Bagging)}
+Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees.
 
-\begin{itemize}
-\tightlist
-\item
-  Given data \({(X_1,Y_1),\dots, (X_n,Y_n)}\), draw \(B\) bootstrap samples \(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}, b=1,\dots, B\), i.e., \(\tilde {\mathcal D}^{(b)}_n\) arises from \(\mathcal D_n\) by drawing \(n\) times with replacement.
-\item
-  The bagging estimator is defined as
+\textbf{Definition.} \emph{(Bagging)}\index{Bagging} \emph{Given data \({(X_1,Y_1),\dots, (X_n,Y_n)}\), draw \(B\) bootstrap samples \(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}, b=1,\dots, B\), i.e., \(\tilde {\mathcal D}^{(b)}_n\) arises from \(\mathcal D_n\) by drawing \(n\) times with replacement. The bagging estimator is defined as the following. In the squared loss case (average):}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    squared loss \(\rightarrow\) average: \(\hat m^{bagg}_n=\frac 1 B \sum_{b=1}^B \hat m_n(\tilde {\mathcal D}^{(b)}_n)\)
-  \item
-    binary loss \(\rightarrow\) majority vote: \(\hat m^{bagg}_n(x)=\arg \max_{k\in {1,\dots K}} \#\{b: m_n(\tilde {\mathcal D}^{(b)}_n) (x)=k\}\)
-  \end{itemize}
-\end{itemize}
+\[
+\hat m^{bagg}_n=\frac 1 B \sum_{b=1}^B \hat m_n(\tilde {\mathcal D}^{(b)}_n)
+\]
+
+\emph{and in the binary loss case (majority vote):}
+
+\[
+\hat m^{bagg}_n(x)=\arg \max_{k\in {1,\dots K}} \#\{b: m_n(\tilde {\mathcal D}^{(b)}_n) (x)=k\}
+\]
 
 Note that \(\hat m^{bagg}_n\) is a stochastic estimator, even given \(\mathcal D_n\). Note: Usually, bagging is applied on non-pruned trees. (See it as an alternative way to reduce variance)
 
 While bagging improves performance of decision trees, interpretability is worsened. If interpretability is not a concern, then bagging is still inferior compared to other learning techniques. Random forests are a modification on bagging estimators.
 
-\textbf{Random Forests.} As bagging random forest are an ensemble of decision trees. They add the following modification to bagging:
+\hypertarget{random-forests}{%
+\subsection{Random Forests}\label{random-forests}}
+
+\index{Random forest} As bagging random forest are an ensemble of decision trees. They add the following modification to bagging:
 - \(\texttt{mtry}\): Each time a node is split it is only done on a subset of size \(\texttt{mtry}\) of viable variables. I.e., each time you want to split a node, turn on a random generator and draw \(1\leq\texttt{mtry}<p\) viable variables from \(\{1,\dots,p\}\). Only those variables drawn are allowed to be considered for the next split.
 - We denote the random forest estimator by \(\hat m^{rf}_n\). Note that \(\hat m^{rf}_n\), as \(\hat m^{bagg}_n\), is a stochastic estimator, even given \(\mathcal D_n\).
 
@@ -5051,12 +5060,15 @@ where each leaf is the result of splitting once with respect to each covariate. 
 
 While predictions of random forests are relatively smooth, they are not monotonic. e.g.~in car insurance, if everything else is the same, more mileage should lead to higher insurance price. Random forests deal well with sparsity, i.e., when the number of features \(p\) is large, but the number of relevant features is rather small: \(s<<p\).
 
-\hypertarget{gradient-boosting-machines-and-bayesian-additive-regression-trees}{%
-\section{Gradient Boosting Machines and Bayesian additive regression trees}\label{gradient-boosting-machines-and-bayesian-additive-regression-trees}}
+\hypertarget{boosting-and-additive-trees}{%
+\section{Boosting and additive trees}\label{boosting-and-additive-trees}}
 
 In the previous section we have discussed that random forests are not good in estimating additive structures. In this section we will see two tree-based estimators that can deal better with additive structures.
 
-\textbf{Gradient Boosting Machines.} The general idea of boosting is to construct an estimator of the form
+\hypertarget{gradient-boosting-machines}{%
+\subsection{Gradient Boosting Machines}\label{gradient-boosting-machines}}
+
+The general idea of boosting is to construct an estimator of the form
 
 \[
 \hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x),
@@ -5064,22 +5076,19 @@ In the previous section we have discussed that random forests are not good in es
 
 where \(\hat m_{n,b}\) is the result of improving on the estimator \(\hat m_n^{(b-1)}(x)=\sum_{j=1}^{b-1} \hat m_{n,j}(x)\).
 
-\textbf{Definition.} \emph{(Forward Stagewise Additive Modeling)}
+\textbf{Definition.} \emph{(Forward Stagewise Additive Modeling)} \emph{The function \(\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x)\) is called Forward Stagewise Additive Modeling estimator if}
 
-The function \(\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x)\) is called Forward Stagewise Additive Modeling estimator if
+\[
+m_{n,0}(x)=\arg \min_{\eta\in \mathcal G} \sum_{i=1}^N L\left(Y_i, \eta\right)
+\]
 
-\begin{itemize}
-\item
-  \(m_{n,0}(x)=\arg \min_{\eta\in \mathcal G} \sum_{i=1}^N L\left(Y_i, \eta\right)\) and
-\item
-  for \(b=1,\dots,B\)
-  \[\hat m_{n,b} =  \arg \min_{\eta\in \mathcal G} \hat R_n\left( \hat m_n^{(b-1)}(x)+\eta(x)\right),\]
-  where \(\hat m_n^{(b-1)}=\sum_{j=1}^{b-1}\hat m_{n,j}.\)
-\item
-  The set \(\mathcal G\) is chosen to be very restrictive/small.
-\item
-  The component \(m_{n,b}\) is called weak learner.
-\end{itemize}
+\emph{and for \(b=1,\dots,B\)}
+
+\[
+\hat m_{n,b} =  \arg \min_{\eta\in \mathcal G} \hat R_n\left( \hat m_n^{(b-1)}(x)+\eta(x)\right),
+\]
+
+\emph{where \(\hat m_n^{(b-1)}=\sum_{j=1}^{b-1}\hat m_{n,j}.\). The set \(\mathcal G\) is chosen to be very restrictive/small. The component \(m_{n,b}\) is called weak learner.}
 
 Problem: Finding the exact minimizer is only feasible (not harder than than the usual minimisation) for very specific loss functions \(\hat R_n\). In the case of squared loss, minimization in step \(b\) boils down to minimizing the empirical squared loss with respect to the residuals \(Y_i- m_n^{(b-1)}(X_i)\).
 
@@ -5237,7 +5246,10 @@ Why are gradient boosting machines so powerful? A contributing factor may be tha
   Gradient boosting machines, in contrast to random forests have also, no problem to fit additive functions. Different additive components can be fitted in different iterations \(b\).
 \end{itemize}
 
-\textbf{Bayesian additive regression trees.} Another powerful algorithm is BART
+\hypertarget{bayesian-additive-regression-trees}{%
+\subsection{Bayesian additive regression trees}\label{bayesian-additive-regression-trees}}
+
+Another powerful algorithm is BART
 
 \textbf{Definition.} \emph{(Bayesian additive regression trees (BART) (for least squares))} (Chipman, George, and McCulloch 2010)
 

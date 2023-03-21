@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 17 Linear Algebra | Complete Theory</title>
-  <meta name="description" content="Chapter 17 Linear Algebra | Complete Theory" />
+  <title>9.6 Boosting and additive trees | Complete Theory</title>
+  <meta name="description" content="9.6 Boosting and additive trees | Complete Theory" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 17 Linear Algebra | Complete Theory" />
+  <meta property="og:title" content="9.6 Boosting and additive trees | Complete Theory" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 17 Linear Algebra | Complete Theory" />
+  <meta name="twitter:title" content="9.6 Boosting and additive trees | Complete Theory" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="the-product-integral.html"/>
-<link rel="next" href="invertible-matrices.html"/>
+<link rel="prev" href="trees-and-forests.html"/>
+<link rel="next" href="some-practical-considerations.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -449,16 +449,163 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="linear-algebra" class="section level1 hasAnchor" number="17">
-<h1><span class="header-section-number">Chapter 17</span> Linear Algebra<a href="linear-algebra.html#linear-algebra" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="boosting-and-additive-trees" class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> Boosting and additive trees<a href="boosting-and-additive-trees.html#boosting-and-additive-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the previous section we have discussed that random forests are not good in estimating additive structures. In this section we will see two tree-based estimators that can deal better with additive structures.</p>
+<div id="gradient-boosting-machines" class="section level3 hasAnchor" number="9.6.1">
+<h3><span class="header-section-number">9.6.1</span> Gradient Boosting Machines<a href="boosting-and-additive-trees.html#gradient-boosting-machines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The general idea of boosting is to construct an estimator of the form</p>
+<p><span class="math display">\[
+\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x),
+\]</span></p>
+<p>where <span class="math inline">\(\hat m_{n,b}\)</span> is the result of improving on the estimator <span class="math inline">\(\hat m_n^{(b-1)}(x)=\sum_{j=1}^{b-1} \hat m_{n,j}(x)\)</span>.</p>
+<blockquote class="def">
+<p><strong>Definition.</strong> <em>(Forward Stagewise Additive Modeling)</em> <em>The function <span class="math inline">\(\hat m_n(x)=\sum_{j=1}^B \hat m_{n,j}(x)\)</span> is called Forward Stagewise Additive Modeling estimator if</em></p>
+<p><span class="math display">\[
+m_{n,0}(x)=\arg \min_{\eta\in \mathcal G} \sum_{i=1}^N L\left(Y_i, \eta\right)
+\]</span></p>
+<p><em>and for <span class="math inline">\(b=1,\dots,B\)</span></em></p>
+<p><span class="math display">\[
+\hat m_{n,b} =  \arg \min_{\eta\in \mathcal G} \hat R_n\left( \hat m_n^{(b-1)}(x)+\eta(x)\right),
+\]</span></p>
+<p><em>where <span class="math inline">\(\hat m_n^{(b-1)}=\sum_{j=1}^{b-1}\hat m_{n,j}.\)</span>. The set <span class="math inline">\(\mathcal G\)</span> is chosen to be very restrictive/small. The component <span class="math inline">\(m_{n,b}\)</span> is called weak learner.</em></p>
+</blockquote>
+<p>Problem: Finding the exact minimizer is only feasible (not harder than than the usual minimisation) for very specific loss functions <span class="math inline">\(\hat R_n\)</span>. In the case of squared loss, minimization in step <span class="math inline">\(b\)</span> boils down to minimizing the empirical squared loss with respect to the residuals <span class="math inline">\(Y_i- m_n^{(b-1)}(X_i)\)</span>.</p>
+<p><span class="math display">\[
+L\left(Y_i, \hat m_n^{(b-1)}(X_i)+\eta(X_i)\right)=L\left(Y_i-\hat m_n^{(b-1)}(X_i),\eta(X_i)\right)
+\]</span></p>
+<p>In the classification case with <span class="math inline">\(\{-1,1\}\)</span> valued response and an exponential loss <span class="math inline">\((L(y_1,y_2)=e^{-y_1y_2})\)</span>, minimization in step <span class="math inline">\(b\)</span> boils down to minimizing the weighted empirical exponential loss with observation <span class="math inline">\(i\)</span> receiving weight <span class="math inline">\(e^{-Y_im_n^{(b-1)}(X_i)}\)</span>.</p>
+<p><span class="math display">\[
+L\left(Y_i,  \hat m_n^{(b-1)}(X_i)+\eta(X_i)\right)=e^{Y_im_n^{(b-1)}(X_i)}L\left(Y_i,\eta(X_i)\right)
+\]</span></p>
+<p>This algorithm is also known as AdaBoost.M1. Adaboost.M1 was introduced in Freund and Schapire (1997) and was only later (J. Friedman, Hastie, and Tibshirani 2000) identified as Forward Stagewise Additive Modeling with exponential loss.</p>
+<blockquote class="def">
+<p><strong>Definition.</strong> <em>(Gradient Boosting Machine v1)</em> (J. H. Friedman 2001)</p>
+<ul>
+<li>Gradient Boosting approximates Forward Stagewise Additive Modeling.</li>
+<li>Tuning parameters:
+<ul>
+<li>function space <span class="math inline">\(\mathcal G\)</span></li>
+<li>learning rate <span class="math inline">\(\eta\)</span></li>
+</ul></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Initialize <span class="math inline">\(\hat m_{n}^{(0)}(x)=\arg \min_{m \in \mathcal G} \sum_{i=1}^N L\left(Y_i, m\right)\)</span>.</li>
+<li>For <span class="math inline">\(b=1,\dots,B\)</span> :
+<ol style="list-style-type: lower-alpha">
+<li>For <span class="math inline">\(i=1,2, \ldots, n,\)</span> calculate the gradient:
+<span class="math display">\[
+g_{ib}=-\frac{\partial L(Y_i,y)}{\partial y} \Bigr\rvert_{y=m_n^{(b-1)}(X_i)} .
+\]</span></li>
+<li><span class="math inline">\((\xi_b, \tilde m_{n,b})= \arg \min_{\xi\in \mathbb R_{&gt;0},m \in \mathcal G}\sum_{i=1}^n(g_{ib}-\xi m(X_i))^2\)</span> (<span class="math inline">\(\xi_b\)</span> is only necessary if <span class="math inline">\(\mathcal G\)</span> is not closed under multiplication by constants)</li>
+<li><span class="math inline">\(\alpha_b= \arg \min_{\alpha} \hat R_n(m_n^{(b-1)}+\alpha \tilde m_{n,b})\)</span> (line search)</li>
+<li><span class="math inline">\(\hat m_{n,b}(x)= \alpha_b \tilde m_{n,b}(x)\)</span> (weak learner)</li>
+<li>Update: <span class="math inline">\(\hat m^{(b)}_n(x)=\hat m^{(b-1)}_n(x)+\eta \hat m_{n,b}(x)\)</span>.</li>
+</ol></li>
+</ol>
+<ul>
+<li>Tuning parameters:
+<ul>
+<li>max depth <span class="math inline">\(J\)</span>, <span class="math inline">\(\mathcal G=\{\text{trees of max depth} \ J\}\)</span></li>
+<li>learning rate <span class="math inline">\(\eta\)</span></li>
+</ul></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Initialize <span class="math inline">\(\hat m_{n}^{(0)}(x)=\arg \min_{m \in \mathcal G} \sum_{i=1}^N L\left(Y_i, m\right)\)</span>.</li>
+<li>For <span class="math inline">\(b=1,\dots,B\)</span> :
+<ol style="list-style-type: lower-alpha">
+<li>For <span class="math inline">\(i=1,2, \ldots, n,\)</span> calculate the gradient:
+<span class="math display">\[
+g_{ib}=-\frac{\partial L(Y_i,y)}{\partial y} \Bigr\rvert_{y=m_n^{(b-1)}(X_i)} .
+\]</span></li>
+<li>Fit a regression tree with squared loss and max depth <span class="math inline">\(J\)</span> to the targets <span class="math inline">\(g_{ib}\)</span>. <span class="math inline">\(\rightarrow\)</span> leaves <span class="math inline">\(R_{bj}, j=1,2, \ldots, J_b\)</span>.</li>
+<li>For <span class="math inline">\(j=1,2, \ldots, J_b\)</span> calculate the value for leaf <span class="math inline">\(R_{bj}\)</span>:
+<span class="math display">\[
+v_{bj}=\arg \min_{ v_{bj} \in \mathbb R} \sum_{i: X_i \in R_{kj}} L\left(Y_i, m_n^{(b-1)}(X_i)+ v_{bj}\right) .
+\]</span></li>
+<li><span class="math inline">\(\hat m_{n,b}(x)=\sum_{j=1}^{J_b} v_{bj} 1\left(X_i \in R_{b j}\right)\)</span></li>
+<li>Update: <span class="math inline">\(\hat m^{(b)}_n(x)=\hat m^{(b-1)}_n(x)+ \eta \hat m_{n,b}(x)\)</span>.</li>
+</ol></li>
+</ol>
+</blockquote>
+<p>The main difference between the tree gradient booster and general gradient boosting is: Least squares problem is not solved directly but greedy step-wise by growing a tree via CART-algorithm. Instead of a line search we minimize the empirical loss in each leaf.</p>
+<p>More recently Chen and Guestrin (2016) proposed to optimize a regularized objective in the Forward Stagewise Additive Modeling with the following further changes:
+1. Replace <span class="math inline">\(\hat R_n\)</span> by <span class="math inline">\(\hat R_{n,\gamma,\lambda}(\hat m_n^{(b-1)}+m_{n,b}) =\hat R_n(\hat m_n^{(b-1)}+m_{n,b}) + J_{\gamma,\lambda}(m_{n,b})\)</span>
+- <span class="math inline">\(J_{\gamma,\lambda}(m_{n,b})= \gamma J_b+ \frac 1 2 \lambda ||v_b||_2^2\)</span>
+- <span class="math inline">\(J_b\)</span>= number of leaves of tree in iteration <span class="math inline">\(b\)</span>
+- <span class="math inline">\(v_b=\)</span> leaf values of tree in iteration <span class="math inline">\(b\)</span>
+2. Use second order approximation instead of gradient descent (see next slide)
+- i.e. gradient descent in 2b,c is replaced by a Newton-Raphson type approximation</p>
+<p>The algorithm is implemented in the <span class="math inline">\(\texttt{xgboost}\)</span> package. Main hyperparameters:
+- Penalties: <span class="math inline">\(\gamma\)</span>, <span class="math inline">\(\lambda\)</span>
+- learning rate: <span class="math inline">\(\eta\)</span>
+- max tree depth</p>
+<p><strong>Gradient Boosting (Second version)</strong> Use a second order approximation of <span class="math inline">\(\hat R_{n,\gamma,\lambda}\)</span>
+<span class="math display">\[\begin{align}
+&amp;\hat R_{n,\gamma,\lambda}(\hat m_n^{(b-1)}(x))+\hat m_{n,b}(x))\\
+\\&amp;\approx\sum_{i=1}^n \left\{ L(Y_i,\hat
+m_n^{(b-1)}(X_i))+ g_i\hat m_{n,b}(X_i)+ \frac 1 2 h_i \hat m_{n,b}(X_i)^2\right \}+ J_{\gamma,\lambda}(m_{n,b})\\
+&amp;= \sum_{j=1}^{J_b}\left \{ \left[\sum_{i: X_i \in R_{jb}}g_i\right]v_{jb} + \frac 1 2 \left[\sum_{i: X_i \in R_{jb}}h_i+\lambda\right]v_{jb}^2 \right\}+\gamma J_b \quad \text{(ignoring constants)}
+\end{align}\]</span></p>
+<p>with <span class="math inline">\(g_i= \frac{\partial L(Y_i,y_i)}{\partial y_i} \Bigr\rvert_{y_i=m_n^{(b-1)}(X_i)}\)</span> and <span class="math inline">\(h_i= \frac{\partial^2 L(Y_i,y_i)}{\partial^2 y_i} \Bigr\rvert_{y_i=m_n^{(b-1)}(X_i)}\)</span>. In the last expression, for a fixed tree, the optimal leaf values <span class="math inline">\(v_{jb}\)</span> are given by</p>
+<p><span class="math display">\[
+v_{jb}=-\frac{\sum_{i: X_i \in R_{jb}} g_i }{\sum_{i: X_i \in R_{jb}} h_i+\lambda}
+\]</span></p>
+<p>This leads to the objective function
+<span class="math display">\[
+-\frac 1 2\sum_{j=1}^{J_b} \frac {(\sum_{i: X_i \in R_{jb}}g_i)^2}{\sum_{i: X_i \in R_{jb}}h_i+\lambda}+\gamma J_b
+\]</span></p>
+<p>Hence, in step <span class="math inline">\(b\)</span>, when growing a tree the loss reduction of splitting <span class="math inline">\(R_{jb}\)</span> in <span class="math inline">\(R_{jb,L},R_{jb,R}\)</span> is given by</p>
+<p><span class="math display">\[
+\frac 1 2 \left\{\frac {(\sum_{i: X_i \in R_{jb,L}}g_i)^2}{\sum_{i: X_i \in R_{jb,L}}h_i+\lambda}+\frac {(\sum_{i: X_i \in R_{jb,R}}g_i)^2}{\sum_{i: X_i \in R_{jb,R}}h_i+\lambda}-\frac {(\sum_{i: X_i \in R_{jb}}g_i)^2}{\sum_{i: X_i \in R_{jb}}h_i+\lambda}\right\}-\gamma
+\]</span></p>
+<p>In step <span class="math inline">\(b\)</span> the <span class="math inline">\(j\)</span>th node is split a dimension and position that maximises the loss reduction, given that the maximising loss reduction is positive and the current node has depth smaller <span class="math inline">\(J\)</span>. Otherwise the node is not further split.</p>
+<p>Gradient boosting machines are known to often provide the strongest predictive performance. <span class="math inline">\(\texttt{xgboost}\)</span> and <span class="math inline">\(\texttt{lightgbm}\)</span> are popular implementations. They are quite fast, but not as fast as random forests and also more reliant on optimal parameter tuning. The most relevant parameters are tree depth and learning rate</p>
+<p>Why are gradient boosting machines so powerful? A contributing factor may be that a small max depth restricts the number of interactions fitted.</p>
+<ul>
+<li>max dept=<span class="math inline">\(1\)</span> corresponds to an additive model etc….
+Gradient boosting machines, in contrast to random forests have also, no problem to fit additive functions. Different additive components can be fitted in different iterations <span class="math inline">\(b\)</span>.</li>
+</ul>
+</div>
+<div id="bayesian-additive-regression-trees" class="section level3 hasAnchor" number="9.6.2">
+<h3><span class="header-section-number">9.6.2</span> Bayesian additive regression trees<a href="boosting-and-additive-trees.html#bayesian-additive-regression-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another powerful algorithm is BART</p>
+<blockquote class="def">
+<p><strong>Definition.</strong> <em>(Bayesian additive regression trees (BART) (for least squares))</em> (Chipman, George, and McCulloch 2010)</p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(\hat{m}^1(x)=\sum_{k=1}^K \hat{m}_k^1(x)\)</span>, <span class="math inline">\(\hat{m}_1^1(x)=\hat{m}_2^1(x)=\cdots=\hat{m}_K^1(x)=\frac{1}{n K} \sum_{i=1}^n Y_i\)</span>.</li>
+<li>For <span class="math inline">\(b=2, \ldots, B\)</span> :
+<ol style="list-style-type: lower-alpha">
+<li>For <span class="math inline">\(k=1,2, \ldots, K\)</span> :
+<ol style="list-style-type: lower-roman">
+<li>For <span class="math inline">\(i=1, \ldots, n\)</span>, calculate residuals
+<span class="math inline">\(r_i=y_i-\sum_{k^{\prime}&lt;k} \hat{m}_{k^{\prime}}^b\left(X_i\right)-\sum_{k^{\prime}&gt;k} \hat{m}_{k^{\prime}}^{b-1}\left(X_i\right)\)</span></li>
+<li>Consider a new tree, <span class="math inline">\(\hat{m}_k^b\)</span> by making ONE of the following changes to <span class="math inline">\(\hat{m}_k^{b-1}\)</span> (every change has a fixed probability).
+<ul>
+<li>GROW: split one leaf</li>
+<li>PRUNE: prune sister leaves</li>
+<li>CHANGE: change the decision rule of one node</li>
+<li>SWAP: swap decision rule of two nodes</li>
+</ul></li>
+<li>The change is accepted by throwing a coin with the probabilities of the coin given by comparing posterior of old tree and proposed tree. Otherwise, tree is kept: <span class="math inline">\(\hat{m}_k^{b}=\hat{m}_k^{b-1}\)</span></li>
+<li>Update leaf values for <span class="math inline">\(\hat{m}_k^{b}\)</span> by sampling from a posterior distribution.</li>
+</ol></li>
+<li>Set <span class="math inline">\(\hat{m}^b(x)=\sum_{k=1}^K \hat{m}_k^b(x)\)</span>.</li>
+</ol></li>
+<li>Compute the mean after <span class="math inline">\(L\)</span> burn-in samples,
+<span class="math inline">\(\hat{m}(x)=\frac{1}{B-L} \sum_{b=L+1}^B \hat{m}^b(x)\)</span></li>
+</ol>
+</blockquote>
+<p>Only a heuristic of BART is presented here. Many packages differ in the exact implementation. In general BART can be seen as a mix of random forest, boosting, additive models. BART is very expensive to train. But if one is able to tune the hyperparameters, BART has often shown to provide unmatched accuracy.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="the-product-integral.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="invertible-matrices.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="trees-and-forests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="some-practical-considerations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
