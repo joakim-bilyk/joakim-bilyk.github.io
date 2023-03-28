@@ -143,7 +143,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 21, 2023}
+\date{March 28, 2023}
 
 %\usepackage{setspace}\onehalfspacing
 \AtBeginDocument{%
@@ -267,9 +267,8 @@ Source
 \endhead
 Basic Life Insurance Mathematics & & \\
 Stochastic Processes in Life Insurance Mathematics & & \\
-Life Insurance Mathematics & Asmussen & \emph{Risk and Insurance}: A Graduate Text by Soren Asmussen and Mogens Steffensen (2020). \\
-& Bladt & Notes from lectures in Liv2. \\
 Topics in Life Insurance Mathematics & Asmussen & \emph{Risk and Insurance}: A Graduate Text by Soren Asmussen and Mogens Steffensen (2020). \\
+& Bladt & Notes from lectures in Liv2. \\
 Continuous Time Finance & Bjork & \emph{Arbitrage Theory in Continuous Time (Fourth edition)} by Thomas Bjork, Oxford University Press (2019). \\
 Basic Non-Life Insurance Mathematics & & \\
 Stochastic Processes in Life Insurance Mathematics & & \\
@@ -296,13 +295,10 @@ Linear Algebra & Wiki & Wikipedia \\
 Chapter & Note & Progress \\
 \midrule()
 \endhead
-Liv2 & Properties of product integral & Done \\
-& Phase-type distributions & Bevis 2.3 og 2.12 \\
-& Interest Theory & \\
-ML & Supervied learning & Done \\
-& Training validating testing & Done \\
-& Linear models & Finetune proofs \\
-& Nonparametric regression & Done \\
+Liv2 & Matrix representation & 4 and later \\
+& Chapter 6 & Remember handouts \\
+& Chapter 7 & Remember handouts \\
+ML & Make outlines for exam & \\
 QRM & Finish risk measures & \\
 StokLiv & Week 1 & \\
 StokLiv & Week 2 & \\
@@ -312,8 +308,6 @@ Liv1 & Week 1 & \\
 Liv1 & Week 2 & \\
 Nonlife1 & Week 1 & \\
 Nonlife1 & Week 2 & \\
-MI & Insert notes & Mangler indeks \\
-Stok & Insert notes & Mangler indeks \\
 \bottomrule()
 \end{longtable}
 
@@ -1470,6 +1464,313 @@ For simplicity we simply for \(k=1\) write \(\mathbf m^{(1)}(s,t) = \mathbf m(s,
 
 \hypertarget{transform-of-rewards-and-higher-order-moments}{%
 \subsection{Transform of rewards and higher order moments}\label{transform-of-rewards-and-higher-order-moments}}
+
+Recall that for a random variable \(X\) the moment generating function \(M(\theta)\) given by
+
+\[
+M(\theta)=\mathbb E[e^{\theta X}],
+\]
+
+gives us a comprehensive insight into the moments of \(X\). Take the taylor approximation of \(e^{\theta X}\):
+
+\[
+e^{\theta X}=\sum_{n=0}^\infty\frac{(\theta X)^n}{n!}
+\]
+
+Hence taking expectation gives
+
+\[
+M_X(\theta)=\mathbb E[e^{\theta X}]=\mathbb E\left[\sum_{n=0}^\infty\frac{(\theta X)^n}{n!}\right]=\sum_{n=0}^\infty\frac{\theta^n \mathbb E[X^n]}{n!}.
+\]
+
+Now differentiating wrt. \(\theta\) yields the important result
+
+\[
+\frac{\partial M_X(\theta)}{\partial \theta}(\theta)=\sum_{n=1}^\infty\frac{n\theta^{n-1} \mathbb E[X^n]}{n!}=\sum_{n=1}^\infty\frac{\theta^{n-1} \mathbb E[X^n]}{(n-1)!}=\mathbb E[X]+\sum_{n=1}^\infty\frac{\theta^{n} \mathbb E[X^{n+1}]}{n!},
+\]
+
+hence by evaluating in \(\theta = 0\) we get \(M'_X(0)=\mathbb E[X]\). In general we have
+
+\[
+\left.\frac{\partial^n M_X(\theta)}{\partial \theta^n}(\theta)\right\vert_{\theta = 0}=\mathbb E[X^n],\qquad n\ge 1.
+\]
+
+This is really the motivation for examining the moment generating function of the reward obtained in the interval \([s,t]\) i.e.~the quantity \(U^0(s,t)\). To this we define
+
+\[
+\hat F_{ij}(\theta;s,t)=\mathbb E\left[\left.e^{\theta U^0(s,t)}1\{X(t)=j\}\ \right\vert\ X(s)=i\right],
+\]
+
+for \(i,j=1,...,p\). Obviously we have the following identity
+
+\[
+\sum_{j=1}^p\hat F_{ij}(\theta;s,t)=\mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=i\right].
+\]
+
+Furthermore, if we define the distribution of \(X(t),U^0(s,t)\) given \(X(s)\) by
+
+\[
+F_{ij}(x; s,t)=\mathbb P(X(t)=j,U^0(s,t)\le x\ \vert\ X(s)=i)
+\]
+
+then we have the integral decomposition
+
+\[
+\hat F_{ij}(\theta; s,t)=\int_{\mathbb R} e^{\theta x}\ dF_{ij}(x; s,t).
+\]
+
+The following theorem gives a way of calculating the object \(\hat{\mathbf F}(\theta; s,t)=\{\hat F_{ij}(\theta; s,t)\}\).
+
+\textbf{Theorem 5.5. (Bladt)} \emph{Let \(\hat{\mathbf F}(\theta; s,t)=\{\hat F_{ij}(\theta; s,t)\}_{i,j=1,...,p}\) and}
+
+\[
+\mathbf A(\theta;u)=\mathbf\Lambda^1(u)\bullet\left\{e^{\theta b_{kl}(u)}\right\}_{k,l}+\mathbf \Lambda^0(u)+\theta \mathbf \Delta(\mathbf b(u))
+\]
+
+\emph{where \(\bullet\) denotes the Schur matrix product. Then the moment generating function of \(U^0(s,t)\) is given by}
+
+\[
+\hat{\mathbf F}(\theta; s,t)=\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du).
+\]
+
+\textbf{Proof.}
+
+By the above theorem we see that
+\[
+\mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=i\right] =e_i^\top\hat{\mathbf F}(\theta; s,t)e = e_i^\top\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e,
+\]
+in particular
+\[
+\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e=
+\begin{pmatrix}
+\mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=1\right]\\
+\mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=2\right]\\
+\vdots\\
+\mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=p\right]
+\end{pmatrix}.
+\]
+Furthermore, we have from the property above that
+\[
+\left.\frac{\partial^k}{\partial \theta^k}\left(e_i^\top\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e\right)\right\vert_{\theta = 0}=m^{(k)}_{i}(s,t).
+\]
+
+\textbf{Lemma 5.6. (Bladt)} \emph{Given the definitions in theorem 5.5 we have}
+\begin{align*}
+\left.\frac{\partial^0}{\partial \theta^0}\mathbf A(\theta; s)\right\vert_{\theta=0}&=\mathbf A(\theta; s)\Big\vert_{\theta=0}=\mathbf \Lambda^1(s)+\mathbf\Lambda^0(s)=\mathbf\Lambda(s),\\
+\left.\frac{\partial}{\partial \theta}\mathbf A(\theta; s)\right\vert_{\theta=0}&=\mathbf \Lambda^1(s)\bullet \mathbf B(s)+\mathbf \Delta(\mathbf b(s))=\mathbf R(s),\\
+\left.\frac{\partial^k}{\partial \theta^k}\mathbf A(\theta; s)\right\vert_{\theta=0}&=\mathbf \Lambda^1(s)\bullet \mathbf B^{\bullet k} B(s)=\mathbf C^{(k)}(s),\qquad k>1.
+\end{align*}
+
+Recall that we defined the moments in general by
+
+\[
+\mathbf m^{(k)}(s,t)=\left\{\mathbb E\left[\left. 1\{X(t)=j\}U^0(s,t)^k\ \right\vert\ X(s)=i\right]\right\}_{i,j=1,...,p}=\left\{m^{(k)}_{ij}(s,t)\right\}_{i,j=1,...,p},
+\]
+
+hence we can define (for ease of notation) the reduced moments by
+
+\[
+\mathbf m_r^{(k)}(s,t)=\left\{\frac{m^{(k)}_{ij}(s,t)}{k!}\right\}_{i,j=1,...,p}=\frac{1}{k!}\mathbf m^{(k)}(s,t).
+\]
+
+Furthermore, we define the reduced contributions
+
+\[
+\mathbf C^{(k)}_r(s,t)=\frac{1}{k!}\mathbf C^{(k)}(s,t)=\frac{1}{k!}\mathbf \Lambda^1(t)\bullet \mathbf B^{\bullet k}(t).
+\]
+
+\textbf{Theorem 5.7. (Bladt)} \emph{Given the definitions above we have}
+
+\[
+\mathbf m^{(k)}(s,t)=\int_s^t\mathbf P(s,x)\mathbf R(x)\mathbf m^{(k-1)}_r(x,t)\ dx+\sum_{m=2}^k\int_s^t\mathbf P(s,x)\mathbf C^{(m)}_r(x)\mathbf m^{(k-m)}_r(x,t)\ dx.
+\]
+
+Using this result we can make a powerful statement regarding how one could calculate all of the \(k\)th moments at once. To this we have the result.
+
+\textbf{Theorem 5.8. (Bladt)} \emph{Let \(\mathbf F^{(k)}(x)\) be given by}
+
+\[
+\mathbf F^{(k)}(x)=
+\begin{bmatrix}
+\mathbf \Lambda(x) & \mathbf R(x) & \mathbf C^{(2)}_r(x) & \cdots & \mathbf C^{(k-1)}_r(x) & \mathbf C^{(k)}_r(x)\\
+\mathbf 0 & \mathbf \Lambda(x) & \mathbf R(x) & \cdots & \mathbf C^{(k-2)}_r(x) & \mathbf C^{(k-1)}_r(x)\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots &\mathbf \Lambda(x) & \mathbf R(x)\\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf 0 &\mathbf \Lambda(x)
+\end{bmatrix},
+\]
+
+\emph{and \(\mathbf H^{(k)}(s,t)\) defined by}
+
+\[
+\mathbf H^{(k)}(x)=
+\begin{bmatrix}
+\mathbf P(s,t) & \mathbf m_r^{(1)}(s,t) & \mathbf m_r^{(2)}(s,t) & \cdots & \mathbf m_r^{(k-1)}(s,t) & \mathbf m_r^{(k)}(s,t)\\
+\mathbf 0 & \mathbf P(s,t) & \mathbf m_r^{(1)}(s,t) & \cdots & \mathbf m_r^{(k-2)}(s,t) & \mathbf m_r^{(k-1)}(s,t)\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf P(s,t) & \mathbf m_r^{(1)}(s,t)\\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf 0 & \mathbf P(s,t)
+\end{bmatrix}.
+\]
+
+\emph{Then we have the result}
+
+\[
+\prod_s^t(\mathbf I + \mathbf F^{(k)}(x)\ dx)=\mathbf H^{(k)}(s,t).
+\]
+
+For ease of notation we define the Toeplitz matrix as
+\[
+\mathcal T(\mathbf A_1,\mathbf A_2,...,\mathbf A_n)=
+\begin{bmatrix}
+\mathbf A_1 & \mathbf A_2 & \mathbf A_3 & \cdots & \mathbf A_{n-1} & \mathbf A_n\\
+\mathbf 0 & \mathbf A_1 & \mathbf A_2 & \cdots & \mathbf A_{n-2} & \mathbf A_{n-1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf A_1 & \mathbf A_2\\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf 0 & \mathbf A_1
+\end{bmatrix}.
+\]
+And hence we could write:
+\[
+\mathbf F^{(k)}(x)=\mathcal T(\mathbf \Lambda(x), \mathbf R(x) , \mathbf C^{(2)}_r(x) , ... , \mathbf C^{(k-1)}_r(x), \mathbf C^{(k)}_r(x)),
+\]
+and
+\[
+\mathbf H^{(k)}(x)=\mathcal T(\mathbf P(s,t) , \mathbf m_r^{(1)}(s,t) , \mathbf m_r^{(2)}(s,t), ...,\mathbf m_r^{(k-1)}(s,t) , \mathbf m_r^{(k)}(s,t)).
+\]
+
+\hypertarget{markovian-interest-rates}{%
+\subsection{Markovian interest rates}\label{markovian-interest-rates}}
+
+We now study how we may calculate the moments of the reserves in the case with rates. To this we start by assuming the Markov-jump interest model in sync with the Markov-jump process for the policy holder. Obviously, we in practice would assume that these two processes are independent, but for generality we will not insist on this for now. We therefore define the process
+\[
+\mathbf r(t)=\{r_i(t)\}_{i\in E_r}
+\]
+and the two Markov jump processes
+\[
+X_r=\{X_r(t)\}_{t\ge 0}\in E_r=\{1,...,p\},\qquad X_b(t)=\{X_b(t)\}_{t\ge 0}\in E_b=\{1,...,q\},
+\]
+and naturally we at time \(t\) have the interest rate \(r_{X_r(t)}(t)\) and \(X_v(t)\) governs the state of the policy holder. Using this we define the combined Markov jump process as
+\[
+X(t)=\{X_r(t),X_b(t)\}_{t\ge 0}\in E_r\times E_b.
+\]
+The processes \(X_b\) and \(X_r\) may or may not be independent, and the payment processes likewise may or may not be independent of \(X_r\). In the independent case the processes \(X_b\) and \(X_r\) are defined on each their state--space, and the common state--space will be the product set of the two. If the processes are sharing states, with the possibility of having simultaneous jumps, then we obtain dependency of the processes. Such a case could, e.g.~be a rise in the interest rate causing an increased intensity of jumping to surrender or free--policy states.
+
+In the case where we have independence we have that the transition intensities of \(X\) is given by
+\[
+\mathbf \Lambda(t)=\mathbf \Lambda_b(t)\oplus \mathbf\Lambda_r(t)=\mathbf \Lambda_b(t)\otimes \mathbf I_p+\mathbf I_p \otimes \mathbf \Lambda_r(t)=\{\lambda_{ij}\}_{i,j=1,...,pq},
+\]
+where \(\oplus\) is the Kronecker sum and \(\otimes\) is the Kronecker product given by
+\[
+\mathbf A\otimes \mathbf B=\{a_{ij}\mathbf B\}=\begin{bmatrix}
+a_{1,1}\mathbf B & \cdots & a_{1,n}\mathbf B\\
+\vdots & \ddots & \vdots\\
+a_{n,1}\mathbf B & \cdots & a_{n,n}\mathbf B
+\end{bmatrix}.
+\]
+
+\hypertarget{reserves}{%
+\subsection{Reserves}\label{reserves}}
+
+We now consider the valuation of the payment process \(B\). Introduce the matrix of partial state--wise prospective reserves,
+\begin{align*}
+\mathbf V(s,t)&=\{V_{ij}(s,t)\}_{i,j\in E_b},\\
+V_{ij}(s,t)&=\mathbb E\left[\left.1\{X(t)=j\}\int_s^te^{-\int_s^xr_{X(u)}(u)\ du}\ dB(x) \ \right\vert\ X(s)=i\right].
+\end{align*}
+From the Markov-jump representation we recall that we defines \(d_{ij}(s,t)\) by
+\[
+d_{ij}(s,t)=\mathbb E\left[\left.1\{X(t)=j\}\exp\left\{-\int_s^tr_{X(u)}(u)\ du\right\} \ \right\vert\ X(s)=i\right],
+\]
+and that the matrix \(\mathbf D(s,t)=\{d_{ij}(s,t)\}\) has representation
+\[
+\mathbf D(s,t)=\prod_s^t\Big(\mathbf I+[\mathbf \Lambda(u)-\mathbf\Delta (r(u))]\ du\Big).
+\]
+Using this we have the theorem.
+
+\textbf{Theorem 5.10. (Bladt)} \emph{The matrix of partial state-wise prospective reserves \(\mathbf V(s,t)\) has the following integral representation}
+\[
+\mathbf V(s,t)=\int_s^t\mathbf D(s,x)\mathbf R(x)\mathbf P(x,t)\ dx.
+\]
+
+Using Van loans formula we can avoid the integration and calculate the product integral from below.
+
+\textbf{Corollary 5.11. (Bladt)} \emph{The matrix of partial state-wise prospective reserves \(\mathbf V(s,t)\) has the following product integral representation}
+\[
+\prod_s^t\left(\mathbf I+
+\begin{pmatrix}
+\mathbf \Lambda(u)-\mathbf \Delta (r(u)) & \mathbf R(u)\\
+\mathbf 0 & \mathbf \Lambda(u)
+\end{pmatrix}
+\right)=\begin{pmatrix}
+\mathbf D(s,t) & \mathbf V(s,t)\\
+\mathbf 0 & \mathbf P(s,t)
+\end{pmatrix}.
+\]
+
+Finally, we state and prove Thiele's differential equations for partial reserves with stochastic interest
+rates.
+
+\textbf{Theorem 5.12. (Bladt)} The statewise reserves satisfies the differential equations
+\[
+\frac{\partial}{\partial s}\mathbf V(s,t)=\int_s^t\mathbf D(s,x) - \mathbf R(s)\mathbf P(s,t)
+\]
+
+\hypertarget{higher-order-moments}{%
+\subsection{Higher order moments}\label{higher-order-moments}}
+
+\hypertarget{equivalence-premium}{%
+\subsection{Equivalence premium}\label{equivalence-premium}}
+
+\hypertarget{distributions-of-future-payments}{%
+\subsection{Distributions of future payments}\label{distributions-of-future-payments}}
+
+\hypertarget{financial-mathematics-in-life-insurance}{%
+\section{Financial Mathematics in Life Insurance}\label{financial-mathematics-in-life-insurance}}
+
+\hypertarget{background-and-simple-claims}{%
+\subsection{Background and Simple Claims}\label{background-and-simple-claims}}
+
+\hypertarget{payment-streams}{%
+\subsection{Payment Streams}\label{payment-streams}}
+
+\hypertarget{unit-link-insurance}{%
+\subsection{Unit-Link Insurance}\label{unit-link-insurance}}
+
+\hypertarget{with-profit-insurance-and-the-dynamics-of-the-surplus}{%
+\subsection{With-Profit Insurance and the Dynamics of the Surplus}\label{with-profit-insurance-and-the-dynamics-of-the-surplus}}
+
+\hypertarget{cash-dividends-and-market-reserve}{%
+\subsection{Cash Dividends and Market Reserve}\label{cash-dividends-and-market-reserve}}
+
+\hypertarget{the-pure-case-of-cash-dividends}{%
+\subsection{The Pure Case of Cash Dividends}\label{the-pure-case-of-cash-dividends}}
+
+\hypertarget{bonus-payments-and-market-reserve}{%
+\subsection{Bonus Payments and Market Reserve}\label{bonus-payments-and-market-reserve}}
+
+\hypertarget{the-pure-case-of-bonus-payments}{%
+\subsection{The Pure Case of Bonus Payments}\label{the-pure-case-of-bonus-payments}}
+
+\hypertarget{comparison-of-products}{%
+\subsection{Comparison of Products}\label{comparison-of-products}}
+
+\hypertarget{special-studies-in-life-insurance}{%
+\section{Special Studies in Life Insurance}\label{special-studies-in-life-insurance}}
+
+\hypertarget{survival-probabilities-and-forward-mortality-rates-1}{%
+\subsection{Survival Probabilities and Forward Mortality Rates}\label{survival-probabilities-and-forward-mortality-rates-1}}
+
+\hypertarget{dependent-interest-and-mortality-rates}{%
+\subsection{Dependent Interest and Mortality Rates}\label{dependent-interest-and-mortality-rates}}
+
+\hypertarget{stochastic-interest-and-mortality-rate-models}{%
+\subsection{Stochastic Interest and Mortality Rate Models}\label{stochastic-interest-and-mortality-rate-models}}
+
+\hypertarget{reserves-revisited-1}{%
+\subsection{Reserves Revisited}\label{reserves-revisited-1}}
+
+\hypertarget{incidental-policy-holder-behavior}{%
+\subsection{Incidental Policy Holder Behavior}\label{incidental-policy-holder-behavior}}
 
 \hypertarget{continuous-time-finance}{%
 \chapter{Continuous Time Finance}\label{continuous-time-finance}}
@@ -5004,9 +5305,9 @@ Given \(l\) trees \(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha>0\}\), we ca
 \hypertarget{bagging}{%
 \subsection{Bagging}\label{bagging}}
 
-Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees.
+Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees. In the following recall that Bootstrap sampling involves drawing \(m\) samples \((\tilde X_i,\tilde Y_i)\) from the original dataset with replacement. This gives a new dataset \(\tilde {\mathcal D}_m\) of new data which may be analised. The process of drawing alot of dataset will reduce the variance by simply averaging over all boostrap samples \(\tilde {\mathcal D}_m^{(1)},...,\tilde {\mathcal D}_m^{(B)}\).
 
-\textbf{Definition.} \emph{(Bagging)}\index{Bagging} \emph{Given data \({(X_1,Y_1),\dots, (X_n,Y_n)}\), draw \(B\) bootstrap samples \(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}, b=1,\dots, B\), i.e., \(\tilde {\mathcal D}^{(b)}_n\) arises from \(\mathcal D_n\) by drawing \(n\) times with replacement. The bagging estimator is defined as the following. In the squared loss case (average):}
+\textbf{Definition.} \emph{(Bagging)}\index{Bagging} \emph{Given data \({(X_1,Y_1),\dots, (X_n,Y_n)}\), draw \(B\) bootstrap samples \(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}\), for \(b=1,\dots, B\), i.e., \(\tilde {\mathcal D}^{(b)}_n\) arises from \(\mathcal D_n\) by drawing \(n\) times with replacement. The bagging estimator is defined as the following. In the squared loss case (average):}
 
 \[
 \hat m^{bagg}_n=\frac 1 B \sum_{b=1}^B \hat m_n(\tilde {\mathcal D}^{(b)}_n)
@@ -5055,7 +5356,7 @@ Random forest are competitive to many state of the art learners. While not havin
 
 Random forest (and also trees) don't perform well for additive functions
 
-Decision trees are not good with additive functions (example). Consider \(m^\ast(x) = \sum_j^p \mathbb 1(x_j \leq 0)\) for large \(p\). For a perfect fit, a tree algorithm would have to grow a tree with depth \(p\),
+Decision trees are not good with additive functions (example). Consider \(m^\ast(x) = \sum_j^p 1(x_j \leq 0)\) for large \(p\). For a perfect fit, a tree algorithm would have to grow a tree with depth \(p\),
 where each leaf is the result of splitting once with respect to each covariate. Hence, we end up with \(2^p\) leaves, which on average contain \(n/(2^p)\) data points. Even if all splits are optimal for \(2^p>n\), the tree will not be able to lead to a perfect decision rule.
 
 While predictions of random forests are relatively smooth, they are not monotonic. e.g.~in car insurance, if everything else is the same, more mileage should lead to higher insurance price. Random forests deal well with sparsity, i.e., when the number of features \(p\) is large, but the number of relevant features is rather small: \(s<<p\).
@@ -5104,64 +5405,35 @@ L\left(Y_i,  \hat m_n^{(b-1)}(X_i)+\eta(X_i)\right)=e^{Y_im_n^{(b-1)}(X_i)}L\lef
 
 This algorithm is also known as AdaBoost.M1. Adaboost.M1 was introduced in Freund and Schapire (1997) and was only later (J. Friedman, Hastie, and Tibshirani 2000) identified as Forward Stagewise Additive Modeling with exponential loss.
 
-\textbf{Definition.} \emph{(Gradient Boosting Machine v1)} (J. H. Friedman 2001)
+\textbf{Definition.} \emph{(Gradient Boosting Machine v1)} (J. H. Friedman 2001) \emph{Gradient Boosting approximates Forward Stagewise Additive Modeling. The idea is to choose to hyperparameters: the function space \(\mathcal G\) and the learning rate \(\eta\). The algorithm for chosen hyperparameters is.}
 
-\begin{itemize}
-\tightlist
-\item
-  Gradient Boosting approximates Forward Stagewise Additive Modeling.
-\item
-  Tuning parameters:
+\emph{Step 0: Initialize}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    function space \(\mathcal G\)
-  \item
-    learning rate \(\eta\)
-  \end{itemize}
-\end{itemize}
+\[
+\hat m_{n}^{(0)}(x)=\arg \min_{m \in \mathcal G} \sum_{i=1}^N L\left(Y_i, m\right).
+\]
+
+\emph{Step \(1,..., B\): For \(b=1,\dots,B\) do:}
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\def\labelenumi{(\alph{enumi})}
 \tightlist
 \item
-  Initialize \(\hat m_{n}^{(0)}(x)=\arg \min_{m \in \mathcal G} \sum_{i=1}^N L\left(Y_i, m\right)\).
+  \emph{For each observation \(i=1,2, \ldots, n,\) calculate the gradient:}
+  \[g_{ib}=-\frac{\partial L(Y_i,y)}{\partial y} \Bigr\rvert_{y=m_n^{(b-1)}(X_i)}.\]
 \item
-  For \(b=1,\dots,B\) :
-
-  \begin{enumerate}
-  \def\labelenumii{(\alph{enumii})}
-  \tightlist
-  \item
-    For \(i=1,2, \ldots, n,\) calculate the gradient:
-    \[
-    g_{ib}=-\frac{\partial L(Y_i,y)}{\partial y} \Bigr\rvert_{y=m_n^{(b-1)}(X_i)} .
-    \]
-  \item
-    \((\xi_b, \tilde m_{n,b})= \arg \min_{\xi\in \mathbb R_{>0},m \in \mathcal G}\sum_{i=1}^n(g_{ib}-\xi m(X_i))^2\) (\(\xi_b\) is only necessary if \(\mathcal G\) is not closed under multiplication by constants)
-  \item
-    \(\alpha_b= \arg \min_{\alpha} \hat R_n(m_n^{(b-1)}+\alpha \tilde m_{n,b})\) (line search)
-  \item
-    \(\hat m_{n,b}(x)= \alpha_b \tilde m_{n,b}(x)\) (weak learner)
-  \item
-    Update: \(\hat m^{(b)}_n(x)=\hat m^{(b-1)}_n(x)+\eta \hat m_{n,b}(x)\).
-  \end{enumerate}
+  \emph{Improve the estimator by finding:}
+  \[(\xi_b, \tilde m_{n,b})= \arg \min_{\xi\in \mathbb R_+,m \in \mathcal G}\sum_{i=1}^n(g_{ib}-\xi m(X_i))^2\]
+  \emph{Note: \(\xi_b\) is only necessary if \(\mathcal G\) is not closed under multiplication by constants.}
+  (i) \emph{Search for \(\tilde m_{n,b}\) by line search:}
+  \[\alpha_b= \arg \min_{\alpha} \hat R_n(m_n^{(b-1)}+\alpha \tilde  m_{n,b})\]
+  \emph{We call \(\hat m_{n,b}(x)= \alpha_b \tilde m_{n,b}(x)\) the weak learner.}
+\item
+  \emph{Improve the estimator by setting:}
+  \[\hat m^{(b)}_n(x)=\hat m^{(b-1)}_n(x)+\eta \hat m_{n,b}(x).\]
 \end{enumerate}
 
-\begin{itemize}
-\tightlist
-\item
-  Tuning parameters:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    max depth \(J\), \(\mathcal G=\{\text{trees of max depth} \ J\}\)
-  \item
-    learning rate \(\eta\)
-  \end{itemize}
-\end{itemize}
+\emph{One may tune the hyperparameters, max depth \(J\), \(\mathcal G=\{\text{trees of max depth} \ J\}\) and learning rate \(\eta\), by:}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -5208,7 +5480,7 @@ The algorithm is implemented in the \(\texttt{xgboost}\) package. Main hyperpara
 - learning rate: \(\eta\)
 - max tree depth
 
-\textbf{Gradient Boosting (Second version)} Use a second order approximation of \(\hat R_{n,\gamma,\lambda}\)
+\textbf{Gradient Boosting (Second version)} \emph{XGBoost}\index{XGBoost} Use a second order approximation of \(\hat R_{n,\gamma,\lambda}\)
 \begin{align}
 &\hat R_{n,\gamma,\lambda}(\hat m_n^{(b-1)}(x))+\hat m_{n,b}(x))\\
 \\&\approx\sum_{i=1}^n \left\{ L(Y_i,\hat 
@@ -5249,7 +5521,7 @@ Why are gradient boosting machines so powerful? A contributing factor may be tha
 \hypertarget{bayesian-additive-regression-trees}{%
 \subsection{Bayesian additive regression trees}\label{bayesian-additive-regression-trees}}
 
-Another powerful algorithm is BART
+Another powerful algorithm is BART\index{BART}
 
 \textbf{Definition.} \emph{(Bayesian additive regression trees (BART) (for least squares))} (Chipman, George, and McCulloch 2010)
 
@@ -5313,14 +5585,14 @@ In this lecture we will discuss some practical issues that may help for your pro
 binary features where
 
 \[
-X^{(l)}=\mathbb 1(X=l), \quad l=1,\dots,k.
+X^{(l)}=1(X=l), \quad l=1,\dots,k.
 \]
 
 \textbf{Definition.} \emph{(Dummy encoding)} Given a feature with \(X\) that can take \(k\) differen categorical values, dummy encoding entails transforming the feature into \(k-1\)
 binary features where, given a reference \(l^\ast\),
 
 \[
-X^{(l)}=\mathbb 1(X=l), \quad l=1,\dots,l^\ast-1,l^\ast+1,\dots,k.
+X^{(l)}= 1(X=l), \quad l=1,\dots,l^\ast-1,l^\ast+1,\dots,k.
 \]
 
 Dummy encoding solves the problem of collinearity when one-hot encoding. Both methods can easily make the dimension of the problem rapidly increase if a feature has many categories e.g.~car brand, country, or postcode. Grouping variables with similar effect on the response might reduce variance. This could e.g.~be done via expert knowledge. Trees are an automated alternative.
@@ -5600,11 +5872,11 @@ Machine Learning
 \end{minipage} \\
 \midrule()
 \endhead
-interpretable & ✔ & ✘ \\
-interactions manually & ✔ & ✔ \\
-interactions & ✘ & ✔ \\
-variable selection/sparsity & ✔ & ✔ \\
-non-linearity & ✘ & ✔ \\
+interpretable & yes & no \\
+interactions manually & yes & yes \\
+interactions & no & yes \\
+variable selection/sparsity & yes & yes \\
+non-linearity & no & yes \\
 \bottomrule()
 \end{longtable}
 

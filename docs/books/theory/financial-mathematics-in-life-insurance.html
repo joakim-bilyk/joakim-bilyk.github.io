@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.7 Independent Random Variables | Complete Theory</title>
-  <meta name="description" content="11.7 Independent Random Variables | Complete Theory" />
+  <title>4.6 Financial Mathematics in Life Insurance | Complete Theory</title>
+  <meta name="description" content="4.6 Financial Mathematics in Life Insurance | Complete Theory" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.7 Independent Random Variables | Complete Theory" />
+  <meta property="og:title" content="4.6 Financial Mathematics in Life Insurance | Complete Theory" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.7 Independent Random Variables | Complete Theory" />
+  <meta name="twitter:title" content="4.6 Financial Mathematics in Life Insurance | Complete Theory" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="integration-with-respect-to-a-probability-measure.html"/>
-<link rel="next" href="probability-distributions-on-mathbb-r.html"/>
+<link rel="prev" href="matrix-methods-in-life-insurance.html"/>
+<link rel="next" href="special-studies-in-life-insurance.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -474,53 +474,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="independent-random-variables" class="section level2 hasAnchor" number="11.7">
-<h2><span class="header-section-number">11.7</span> Independent Random Variables<a href="independent-random-variables.html#independent-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote class="def">
-<p><strong>Definition 10.1. (Protter)</strong> <strong>(Uafhængige Stokastiske Variable)</strong></p>
-<ol style="list-style-type: lower-alpha">
-<li><em>Brolægninger <span class="math inline">\((\mathcal{A}_i)_{i\in I}\subseteq \mathcal{A}\)</span> kaldes uafhængige hvis for alle endelige <span class="math inline">\(J\subseteq I\)</span> og alle <span class="math inline">\(A_i\in\mathcal{A}_i\)</span> er</em>
-<span class="math display">\[
-  P(\cap_{i\in J} A_i)=\prod_{i\in J}P(A_i)
-  \]</span>
-<em>dvs. for alle brolægning er alle hændelser uafhængige.</em></li>
-<li><em>tokastiske Variable <span class="math inline">\((X_i)_{i\in I}\)</span>, hvor <span class="math inline">\(X_i : (\Omega, \mathcal{A})\to (E_i,\mathcal{E}_i)\)</span>, kaldes uafhængige, hvis brolægningerne i familien givet ved <span class="math inline">\(\sigma(X_i^{-1}(\mathcal{E}_i))\subseteq \mathcal{A}\)</span> er uafhængige.</em></li>
-</ol>
-</blockquote>
-<blockquote class="thm">
-<p><strong>Theorem 10.1. (Protter)</strong> <strong>(Ækvivalensudsagn)</strong> <em>For to stokastiske variable <span class="math inline">\(X : (\Omega, \mathcal{A})\to (E,\mathcal{E})\)</span> og <span class="math inline">\(Y : (\Omega, \mathcal{A})\to (F,\mathcal{F})\)</span> er følgende udsagn ækvivalente.</em></p>
-<ol start="15" style="list-style-type: lower-alpha">
-<li><em><span class="math inline">\(X\)</span> og <span class="math inline">\(Y\)</span> er uafhængige.</em></li>
-<li><em><span class="math inline">\(P(X\in A, Y\in B)=P(X\in A)P(Y\in B)\)</span> for alle <span class="math inline">\(A\in \mathcal{E}\)</span> og <span class="math inline">\(B\in\mathcal{F}\)</span>.</em></li>
-<li><em><span class="math inline">\(P(X\in A, Y\in B)=P(X\in A)P(Y\in B)\)</span> for alle <span class="math inline">\(A\in \mathcal{C}\)</span> og <span class="math inline">\(B\in\mathcal{D}\)</span>. Hvor <span class="math inline">\(\mathcal{C}\)</span> og <span class="math inline">\(\mathcal{D}\)</span> er fællesmængdestabile mængdesystemer (brolægning) der frembringer hhv. <span class="math inline">\(\mathcal{E}\)</span> og <span class="math inline">\(\mathcal{F}\)</span>.</em></li>
-<li><em><span class="math inline">\(f(X)\)</span> og <span class="math inline">\(g(Y)\)</span> er uafhængige for alle par <span class="math inline">\((f,g)\)</span> målbare funktioner.</em></li>
-<li><em><span class="math inline">\(E(f(X)g(Y))=E(f(X))E(g(Y))\)</span> for alle par <span class="math inline">\((f,g)\)</span> begrænsede og målbar eller positive og målbare funktioner.</em></li>
-<li><em>Hvis <span class="math inline">\(E\)</span> og <span class="math inline">\(F\)</span> er metriske rum med respektive Borel <span class="math inline">\(\sigma\)</span>-algebraer <span class="math inline">\(\mathcal{E}\)</span> og <span class="math inline">\(\mathcal{F}\)</span>. <span class="math inline">\(E(f(X)g(Y))=E(f(X))E(g(Y))\)</span> for alle par <span class="math inline">\((f,g)\)</span> begrænsede og kontinuere funktioner. </em></li>
-</ol>
-</blockquote>
-<p><strong>Notation.</strong> Ofte ønskes at betragte funktioner af flere variable, hvor domænerummet ønskes konstrueret fra to rum hvorpå <span class="math inline">\(x\)</span> og <span class="math inline">\(y\)</span> lever hhv. <span class="math inline">\((E,\mathcal{E},P)\)</span> og <span class="math inline">\((F,\mathcal{F},Q)\)</span>. Vi kan da konstruere et målrum givet ved <span class="math inline">\((E\times F, \sigma(\mathcal{E}\times\mathcal{F}))\)</span>, hvor vi lader <span class="math inline">\(\mathcal{E}\otimes \mathcal{F}=\sigma(\mathcal{E}\times\mathcal{F})\)</span>. Tilsvarende kan vi konstruere produktmålet <span class="math inline">\(P\otimes Q(A)=P(A)Q(A)\)</span> på <span class="math inline">\((E\times F, \mathcal{E}\otimes \mathcal{F},P\otimes Q)\)</span>.</p>
-<blockquote class="thm">
-<p><strong>Theorem 10.2. (Protter)</strong> <em>Lad <span class="math inline">\(f : (E \times F, \mathcal{E} \otimes \mathcal{F}) \to (\mathbb{R}, \mathcal{R})\)</span> være målbar. For hvert <span class="math inline">\(x \in E\)</span> og <span class="math inline">\(y \in F\)</span>, er de respektive “sektionerne” <span class="math inline">\(y \to f(x,y)\)</span> og <span class="math inline">\(x \to f(x,y)\)</span> henholdsvis <span class="math inline">\(\mathcal{F}\)</span>- og <span class="math inline">\(\mathcal{E}\)</span> målbare funktioner.</em></p>
-</blockquote>
-<p><strong>Notation.</strong> Det kan ønskes at betragte mål med faste <span class="math inline">\(x,y\)</span> og hvordan disse opfører sig. Teoremet fortæller, at man kan vælge tilfældige <span class="math inline">\(x \in E\)</span> og <span class="math inline">\(y \in F\)</span> således, at man kan betragte henholdsvis <span class="math inline">\(\mathcal{F}\)</span>- og <span class="math inline">\(\mathcal{E}\)</span> målbare funktioner i én variable (enten <span class="math inline">\(x\)</span> eller <span class="math inline">\(y\)</span>) for sig selv.</p>
-<blockquote class="thm">
-<p><strong>Theorem 10.3. (Protter)</strong> <strong>(Tonelli-Fubini)</strong> <em>Lad <span class="math inline">\((E,\mathcal{E},P)\)</span> og <span class="math inline">\((F,\mathcal{F},Q)\)</span> være sandsynlighedsrum.</em></p>
-<ol style="list-style-type: lower-alpha">
-<li><em>Lad <span class="math inline">\(P\otimes Q(A\times B)=P(A)Q(B)\)</span>. Dette er et unikt ssh mål, som udvider til sandsynlighedsrummet <span class="math inline">\((E\times F,\mathcal{E}\otimes \mathcal{F},P\otimes Q)\)</span>.</em></li>
-<li><em>Lad <span class="math inline">\(f : (E\times F,\mathcal{E}\otimes \mathcal{F},P\otimes Q) \to (\mathbb{R}, \mathcal{R})\)</span> være en målbar, positiv eller integrabel mht. <span class="math inline">\(P\otimes Q\)</span>. Da er <span class="math inline">\(x\mapsto \int f(x,y)Q(dy)\)</span> en <span class="math inline">\(\mathcal{E}\)</span>-målelig funktion og <span class="math inline">\(y\mapsto \int f(x,y)P(dy)\)</span> en <span class="math inline">\(\mathcal{F}\)</span>-målelig funktion. Specielt er</em>
-<span class="math display">\[
-  \int f d P\otimes Q=\int\left\{\int f(x,y) Q(dy)\right\}P(dx)=\int\left\{\int f(x,y) P(dx)\right\}Q(dy)
-  \]</span></li>
-</ol>
-</blockquote>
+<div id="financial-mathematics-in-life-insurance" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Financial Mathematics in Life Insurance<a href="financial-mathematics-in-life-insurance.html#financial-mathematics-in-life-insurance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="background-and-simple-claims" class="section level3 hasAnchor" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Background and Simple Claims<a href="financial-mathematics-in-life-insurance.html#background-and-simple-claims" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="payment-streams" class="section level3 hasAnchor" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Payment Streams<a href="financial-mathematics-in-life-insurance.html#payment-streams" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="unit-link-insurance" class="section level3 hasAnchor" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> Unit-Link Insurance<a href="financial-mathematics-in-life-insurance.html#unit-link-insurance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="with-profit-insurance-and-the-dynamics-of-the-surplus" class="section level3 hasAnchor" number="4.6.4">
+<h3><span class="header-section-number">4.6.4</span> With-Profit Insurance and the Dynamics of the Surplus<a href="financial-mathematics-in-life-insurance.html#with-profit-insurance-and-the-dynamics-of-the-surplus" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="cash-dividends-and-market-reserve" class="section level3 hasAnchor" number="4.6.5">
+<h3><span class="header-section-number">4.6.5</span> Cash Dividends and Market Reserve<a href="financial-mathematics-in-life-insurance.html#cash-dividends-and-market-reserve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="the-pure-case-of-cash-dividends" class="section level3 hasAnchor" number="4.6.6">
+<h3><span class="header-section-number">4.6.6</span> The Pure Case of Cash Dividends<a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-cash-dividends" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="bonus-payments-and-market-reserve" class="section level3 hasAnchor" number="4.6.7">
+<h3><span class="header-section-number">4.6.7</span> Bonus Payments and Market Reserve<a href="financial-mathematics-in-life-insurance.html#bonus-payments-and-market-reserve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="the-pure-case-of-bonus-payments" class="section level3 hasAnchor" number="4.6.8">
+<h3><span class="header-section-number">4.6.8</span> The Pure Case of Bonus Payments<a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-bonus-payments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="comparison-of-products" class="section level3 hasAnchor" number="4.6.9">
+<h3><span class="header-section-number">4.6.9</span> Comparison of Products<a href="financial-mathematics-in-life-insurance.html#comparison-of-products" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="integration-with-respect-to-a-probability-measure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="probability-distributions-on-mathbb-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="matrix-methods-in-life-insurance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="special-studies-in-life-insurance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
