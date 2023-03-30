@@ -28,7 +28,6 @@ markovian-interest-rates
 reserves
 higher-order-moments
 equivalence-premium
-distributions-of-future-payments
 financial-mathematics-in-life-insurance
 background-and-simple-claims
 payment-streams

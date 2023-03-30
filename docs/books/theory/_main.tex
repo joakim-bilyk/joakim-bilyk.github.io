@@ -143,7 +143,7 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 28, 2023}
+\date{March 30, 2023}
 
 %\usepackage{setspace}\onehalfspacing
 \AtBeginDocument{%
@@ -1710,19 +1710,106 @@ Using Van loans formula we can avoid the integration and calculate the product i
 Finally, we state and prove Thiele's differential equations for partial reserves with stochastic interest
 rates.
 
-\textbf{Theorem 5.12. (Bladt)} The statewise reserves satisfies the differential equations
+\textbf{Theorem 5.12. (Bladt)} \emph{The state-wise reserves satisfies the differential equations}
 \[
-\frac{\partial}{\partial s}\mathbf V(s,t)=\int_s^t\mathbf D(s,x) - \mathbf R(s)\mathbf P(s,t)
+\frac{\partial}{\partial s}\mathbf V(s,t)=-[\mathbf \Lambda(s) - \mathbf\Delta(r(s))]\mathbf V(s,t) - \mathbf R(s)\mathbf P(s,t)
 \]
+\emph{where \(\mathbf V(t,t)=0\). For the conventional state-wise prospective reserves \(\mathbf V^{Th}(t)=\mathbf V(t,T)\mathbf e\), this has the form}
+\[
+\frac{\partial}{\partial s}\mathbf V^{Th}(t)=-[\mathbf \Lambda(t) - \mathbf\Delta(r(t)]\mathbf V^{Th}(t) - \mathbf R(t)\mathbf e,
+\]
+where \(\mathbf V^{Th}(T)=\mathbf 0\).
 
 \hypertarget{higher-order-moments}{%
 \subsection{Higher order moments}\label{higher-order-moments}}
 
+Consider the matrix of partial state-wise higher order moments of future payments, given by, for \(k\in\mathbb N\),
+\begin{align*}
+\mathbf V^{(k)}(t,T)&=\Big\{V_{ij}^{(k)}(t,T)\Big\}_{i,j\in E}\\
+V_{ij}^{(k)}(t,T)&=\mathbb E\left[\left.1\{X(T)=j\}\left(\int_s^te^{-\int_s^xr_{X(u)}(u)\ du}\ dB(x)\right)^k \ \right\vert\ X(s)=i\right],
+\end{align*}
+and introduce what we shall term the \emph{reduced} partial state-wise higher order moments:
+\[
+\mathbf V_r^{(k)}(t,T)=\frac{\mathbf V^{(k)}(t,T)}{k!}
+\]
+and denoting
+\[
+\mathbf D^{(m)}(s,t)=\prod_s^t\Big(\mathbf I + [\mathbf\Lambda(u)-m\mathbf\Delta(r(u))]\ du\Big),\qquad m\in\mathbb N,
+\]
+we then obtain the following version of Hattendorff's theorem for partial reserves with stochastic interest rate.
+
+\textbf{Theorem 5.13. (Bladt)} \emph{The matrix of reduced partial state-wise higher order moments satisfies the integral equation, for \(k\in\mathbb N_0\),}
+\begin{align*}
+\mathbf V_r^{(k)}&(t,T)\\
+&=\int_t^T\mathbf D^{(k)}(t,x)\mathbf R(x)\mathbf V^{(k-1)}_r(x,T)\ dx+\sum_{m=2}^k\int_t^T\mathbf D^{(k)}(t,x)\mathbf C^{(m)}_r(x)\mathbf V^{(k-m)}_r(x,T)\ dx.
+\end{align*}
+
+Using Van loan we can define the following matrix
+\[
+\mathbf F_U^{(k)}(x)=
+\begin{bmatrix}
+\mathbf \Lambda(x)-k\mathbf \Delta(r(x)) & \mathbf R(x) & \mathbf C^{(2)}_r(x) & \cdots & \mathbf C_r^{(k-1)}(x) & \mathbf C_r^{(k)}(x)\\
+\mathbf0 & \mathbf \Lambda(x)-(k-1)\mathbf \Delta(r(x)) & \mathbf R(x)  & \cdots & \mathbf C_r^{(k-2)}(x) & \mathbf C_r^{(k-1)}(x)\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf \Lambda(x)-\mathbf \Delta(r(x)) & \mathbf R(x)\\
+\mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf 0 & \mathbf \Lambda(x)
+\end{bmatrix},
+\]
+then we get the usefull product integral
+\[
+\prod_t^T\Big(\mathbf I + \mathbf F_U^{(k)}(x)\ dx\Big)=
+\begin{bmatrix}
+* & * & * & * & \cdots &* & \mathbf V_r^{(k)}(t)\\
+* & * & * & * & \cdots &* & \mathbf V_r^{(k-1)}(t)\\
+* & * & * & * & \cdots &* & \mathbf V_r^{(k-2)}(t)\\
+\vdots & \vdots & \vdots & \vdots & \ddots &\vdots & \vdots\\
+* & * & * & * & \cdots &* & \mathbf V_r^{(2)}(t)\\
+* & * & * & * & \cdots &* & \mathbf V(t)\\
+* & * & * & * & \cdots &* & \mathbf P(t,T)
+\end{bmatrix}.
+\]
+Then by differentiating we obtain the classical differential equations below.
+
+\textbf{Theorem 5.14. (Bladt)} \emph{The matrix of reduced partial state-wise higher order moments satisfies the system of differential equations, for \(k\in \mathbb N_0\),}
+\[
+\frac{\partial}{\partial t}\mathbf V_r^{(k)}(t,T)=\Big(k\mathbf\Delta(r(t)) - \mathbf \Lambda(t)\Big)\mathbf V_r^{(k)}(t,T)-\mathbf R(t)\mathbf V_r^{(k-1)}(t,T)-\sum_{i=2}^k\mathbf C_r^{(i)}(t)\mathbf V_r^{(k-i)}(t,T),
+\]
+\emph{with terminal condition \(\mathbf V_r^{(k)}(T,T)=1_{(k=0)}\mathbf I\).}
+
 \hypertarget{equivalence-premium}{%
 \subsection{Equivalence premium}\label{equivalence-premium}}
 
-\hypertarget{distributions-of-future-payments}{%
-\subsection{Distributions of future payments}\label{distributions-of-future-payments}}
+We assume that a policy has payments determined and fixed and that we want to adjust one or more payments such that \(V^{Th}\) satisfies the equivalence principle i.e.~\(V_{X(0)}^{Th}(0)=0\). To this define \(\mathbf R(t)=\mathbf R(t;\theta)\) for some payment \(\theta\). Notice that \(\theta\) is rather general and may be thought of as either a single transition payment or payment rate. This in particular gives the mapping \(\theta \mapsto \mathbf V(t;\theta)\) given by
+\[
+\mathbf V(t;\theta) = \int_t^T\prod_t^u\Big(\mathbf I +[\mathbf\Lambda(s)-\mathbf\Delta(r(s))]\ ds\Big)\mathbf R(u;\theta)\prod_u^T\Big(\mathbf I +\mathbf \Lambda(s)\ ds\Big)\ du,
+\]
+hence if \(\mathbf R(t;\theta)\) is continuously differentiable and \(\mathbf \Lambda\) and \(\mathbf r\) are continuous we have
+\[
+\frac{\partial}{\partial \theta}\mathbf V(t;\theta) = \int_t^T\prod_t^u\Big(\mathbf I +[\mathbf\Lambda(s)-\mathbf\Delta(r(s))]\ ds\Big)\frac{\partial}{\partial \theta}\mathbf R(u;\theta)\prod_u^T\Big(\mathbf I +\mathbf \Lambda(s)\ ds\Big)\ du.
+\]
+and then by Van loan formula
+\[
+\prod_t^T\left(\mathbf I+
+\begin{pmatrix}
+\mathbf \Lambda(u)-\mathbf \Delta(r(u)) & \frac{\partial}{\partial \theta}\mathbf R(u;\theta)\\
+\mathbf 0 & \mathbf \Lambda(u)
+\end{pmatrix}du
+\right)=
+\begin{pmatrix}
+\mathbf D(t,T) & \frac{\partial}{\partial \theta}\mathbf V(t;\theta)\\
+\mathbf 0 & \mathbf P(t,T)
+\end{pmatrix}.
+\]
+Using this framework we can make establish the pricing corollary below.
+
+\textbf{Corollary.} \emph{(Equivalence premium)\index{Equivalence premium} Assume that \(\mathbf R(t)=\mathbf R(t;\theta)\) for \(\theta\in\Theta\). Let \(\tilde\theta\) b the equivalence premium i.e.~\(\tilde \theta\) solves \(V^{Th}_{X(0)}(0;\tilde\theta)=0\), then the sequence \(\{\theta_n\}_{n\in \mathbb N_0}\) defined by}
+\[
+\theta_0\in\Theta,\qquad \theta_{n+1}=\theta_{n}-\frac{\mathbf e_{X(0)}^\top\mathbf V(0;\theta_n)\mathbf e}{\mathbf e_{X(0)}^\top\mathbf V_\theta(0;\theta_n)\mathbf e},
+\]
+\emph{converges to \(\tilde\theta\). In the above \(\mathbf V_\theta(0;\theta)\) denote the first derivative in \(\theta\). In case \(V^{Th}_{X(0)}(0;\tilde\theta)\) is linear in \(\theta\) then the above converges for \(n=1\) and}
+\[
+\tilde\theta = -\frac{\mathbf e_{X(0)}^\top\mathbf V(0;0)\mathbf e}{\mathbf e_{X(0)}^\top\mathbf V_\theta(0;0)\mathbf e}.
+\]
 
 \hypertarget{financial-mathematics-in-life-insurance}{%
 \section{Financial Mathematics in Life Insurance}\label{financial-mathematics-in-life-insurance}}
@@ -1730,17 +1817,580 @@ rates.
 \hypertarget{background-and-simple-claims}{%
 \subsection{Background and Simple Claims}\label{background-and-simple-claims}}
 
+We consider a Black-Scholes market consisting of two assets \((S^0,S)\) with dynamics
+\begin{align*}
+dS^0(t)&=r(t)S^0(t)\ dt,\\
+dS(t)&=\mu(t)S(t)\ dt+\sigma(t) S(t)\ dW(t)\\
+&=r(t)S(t)\ dt + \sigma(t)S(t)\ dW^{\mathbb Q}(t),
+\end{align*}
+for adapted processes \(r\), \(\mu\) and \(\sigma\). Note that we for now consider the deterministic and constant case with
+\[
+r(t)=r,\quad\mu(t)=\mu, \quad\sigma(t)=\sigma.
+\]
+We furthermore there exist a equivalent martingale measure \(\mathbb Q\sim \mathbb P\) which as usual is given by the Radon-Nikodym derivative in the Girsanov theorem where
+\[
+\frac{d\mathbb Q}{d\mathbb P}(t)=\phi(t)=\frac{r(t)-\mu(t)}{\sigma},
+\]
+i.e.~\(W^{\mathbb Q}\) is a \(\mathbb Q\)-martingale with \(\mathbb P\)-dynamics
+\[
+dW^{\mathbb Q}(t)=dW(t)-\phi(t)\ dt.
+\]
+By the risk neutral valuation formula we have for the simple claim \(\Phi(S(T))\) the arbitrage free price is given by
+\[
+\Pi(t)=\mathbb E^{\mathbb Q}\left[\left.e^{-\int_t^Tr(u)\ du}\Phi(S(T))\ \right\vert\ \mathcal F(t)\right]
+\]
+remember \(\mathbb Q\) is not necessarily unique if we only assume that the market is arbitrage free. If we want uniqueness the market \((S^0,S)\) need to be complete. This happens to hold in the Black-Scholes model even if \(r\), \(\mu\) and \(\sigma\) are not constant.
+
 \hypertarget{payment-streams}{%
 \subsection{Payment Streams}\label{payment-streams}}
+
+Using the notation from the above section we consider a contract that pays in accordance to the pricing function of the risky asset \(S\). We let \(B\) denote the accumulated payments on the interval \([0,t]\) and assume that \(B\) has dynamics
+\[
+dB(t)=b(t,S(t))\ dt+\Delta B(t,S(t)),
+\]
+where \(b(t,s)\) denotes a continuous payment at time \(t\) priced according til the price of the asset: \(s\). Likewise, \(\Delta B(t,s)\) is lump sums payed at time \(t\) according to the price \(s\).
+
+We know that \(\mathbb Q\) exist and is unique in the Black-Scholes model so we may define the prospective reserve by
+\[
+V(t,s)=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-\int_t^vr(u)\ du}dB(v)\ \right\vert\ S(t)=s\right]=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-(v-t)r}dB(v)\ \right\vert\ S(t)=s\right].
+\]
+Notice that we can decompose into discrete and continuous payments by
+\begin{align*}
+V(t,s)&=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-(v-t)r}b(v,S(v))\ dv\ \right\vert\ S(t)=s\right]\\
+&+\mathbb E^{\mathbb Q}\left[\left.\sum_{t< v\le T}e^{-(v-t)r}\Delta B(v,S(v))\ dv\ \right\vert\ S(t)=s\right],
+\end{align*}
+where the sum is over all lump sums in the interval \((t,T]\). We could construct a collection of arrival times, but these will be stochastic anyways. Since the reserve is prices as a contingent claim we have the Black-Scholes PDE in the following proposition.
+
+\textbf{Proposition 2.1. (Asmussen)} \emph{The reserve \(V(t,s)\) fulfills the PDE on \(t\in\{\Delta B(t,s)=0\}\):}
+\begin{align*}
+V_t(t,s)&=rV(t,s)-b(t,s)-V_s(t,s)rs-\frac{1}{2}V_{ss}(t,s)\sigma^2s^2,\\
+V(T,s)&=0.
+\end{align*}
+\emph{On the events \(t\in \{\Delta B(t,s)\ne 0\}\) we have the jumps}
+\[
+V(t-,s)=V(t,s)+\Delta B(t,s).
+\]
+
+\textbf{Proof.}
+
+Consider the martingale
+\[
+m(t)=\mathbb E^{\mathbb Q}\left[\left. \int_0^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right].
+\]
+Then we can decompose into
+\begin{align*}
+m(t)&=\int_0^te^{-ru}\ dB(u)+\mathbb E^{\mathbb Q}\left[\left. \int_t^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right]\\
+&=\int_0^te^{-ru}\ dB(u)+e^{-rt}V(t,S(t))
+\end{align*}
+Then we can derive the dynamics by Ito's formula.
+\begin{align*}
+e^{rt}dm(t)&=dB(t)+e^{rt}d\Big(e^{-rt}V(t,S(t))\Big)\\
+&=b(t,S(t))\ dt+\Delta B(t,S(t))-rV(t,S(t))\ dt\\
+&+V_t(t,S(t))\ dt+V_y(t,S(t))\ dS(t)+\frac{1}{2}V_{yy}(t,S(t))\big(dS(t)\big)^2\\
+&+V(t,S(t))-V(t-,S(t))\\
+&=b(t,S(t))\ dt+\Delta B(t,S(t))-rV(t,S(t))\ dt\\
+&+V_t(t,S(t))\ dt+V_y(t,S(t))rS(t)\ dt + V_y(t,S(t))\sigma S(t)\ dW^\mathbb Q(t)\\
+&+\frac{1}{2}V_{yy}(t,S(t))\sigma^2S^2(t)\ dt\\
+&+V(t,S(t))-V(t-,S(t))
+\end{align*}
+Then since \(m\) is a martingale we must have a zero drift i.e.
+\begin{align*}
+0&=b(t,S(t))-rV(t,S(t))\\
+&+V_t(t,S(t))+V_y(t,S(t))rS(t)\\
+&+\frac{1}{2}V_{yy}(t,S(t))\sigma^2S^2(t)
+\end{align*}
+Hence we have
+\[
+V_t(t,S(t))=rV(t,S(t))-b(t,S(t))-V_y(t,S(t))rS(t)-\frac{1}{2}V_{yy}(t,S(t))\sigma^2S^2(t)
+\]
+and on discontinuity points
+\[
+V(t-,S(t))=V(t,S(t))+\Delta B(t,S(t))
+\]
+as desired. \(\blacksquare\)
+
+We also have the reverse statement:
+
+\textbf{Proposition 2.2. (Asmussen)} \emph{Assume that a function \(V\) exist that solve proposition 2.1's PDE with the gluing condition, then this functions defines the reserve.}
+
+From finance mathematics we certainly can find a hedging strategy for this portfolio. This is simply done by choosing the portfolio \(h(t)=(h^0(t),h^1(t))\) in accordance to the scheme
+\[
+h^1(t)=V_s(t,S(t)),\qquad h^0(t)=\frac{V(t,S(t))-V_s(t,S(t))S(t)}{S^0(t)}.
+\]
+Normally we would adjust the model such that \(S^0(t)=1\) (by dividing by \(S^0\)) and so we see we simply hold the amount \(V(t,S(t))-h^1(t)S(t)\) in the bank account/risk free asset.
+
+We can list a few common contracts used in practice:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Pure endowment insurance}: Consider a person aged \(x\) at time \(0\). The pure endowment insurance product pays a single payment \(S(t)\) at time \(T>0\) if and only if the insured is alive. The equivalence premium is identified as:
+  \[\tilde\theta =\mathbb P(T_x> T)S(0)\]
+\item
+  \textbf{Term life insurance insurance}: The insured heirs are payed \(S(t)\) in the event of death at time \(t\le T\). Equivalence premium:
+  \[\tilde\theta(s) =\int_0^T\mathbb E^{\mathbb Q}\left(\left.e^{-rT}S(t)\ \right\vert\ S(0)=s\right)f_{T_x}(t)\ dt=S(0)\mathbb P(T_x\le T)\]
+\item
+  \textbf{Pure endowment}: The insured is payed \(N(T)S(T)\) at time \(T\), though at minimum \(G(T)\), regardless of state. Equivalence premium:
+  \[\tilde\theta(s) =e^{-rT}\mathbb E^{\mathbb Q}\left(\left.\max\Big(N(T)S(T),G(T)\Big) \ \right\vert\ S(0)=s\right)\]
+\item
+  \textbf{Term life insurance}: The insured heirs are payed \(N(T)S(T)\) at time \(T\), though at minimum \(G(T)\), if insured dies at time \(t\le T\). Equivalence premium:
+  \[\tilde\theta(s) =\int_0^Te^{-rt}\mathbb E^{\mathbb Q}\left(\left.\max\Big(N(t)S(t),G(t)\Big) \ \right\vert\ S(0)=s\right)f_{T_x}(t)\ dt\]
+\end{itemize}
 
 \hypertarget{unit-link-insurance}{%
 \subsection{Unit-Link Insurance}\label{unit-link-insurance}}
 
+Let us start with stating the Thiele differential equation and provide a proof.
+
+\textbf{Theorem. (Thiele differential equation)}\index{Thiele differential equation} \emph{Let \(B\) denote the accumulated payments with dynamics}
+\begin{align*}
+dB(t)&=dB^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\ dN^k(t)\\
+&=b^{Z(t)}(t)\ dt+\Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\ dN^k(t)
+\end{align*}
+\emph{where \(Z\) is the a Markov-jump process on finite state space \(E=\{1,...,p\}\) that governs the payments. The process \(N\) is defined as}
+
+\[
+N^k(t)=\#\{Z(t-)\ne k,Z(t)=k\},
+\]
+
+\emph{that is counting the number of visits in the \(k\)th state. Assume that the interest rate \(r\) is deterministic and integrable. The reserve is defined as}
+
+\[
+V(t)=V^{Z(t)}(t)=\mathbb E\left[\left.\int_t^Te^{-\int_t^u r(v)\ dv}\ dB(u)\ \right\vert\ Z(t)\right].
+\]
+
+\emph{Then \(V^j\) has representation}
+
+\[
+V^j(t)=\int_t^Te^{-\int_t^ur(v)\ dv}\underbrace{\left(\sum_{k\in E}p_{jk}(t,u)\left(b^k(u)\ du+\Delta B^k(u)+\sum_{l:l\ne k}\lambda_{kl}(u)b^{kl}(u)\ du\right)\right)}_{:= dC^j(u)}
+\]
+
+\emph{and follows the dynamics}
+\begin{align*}
+d\Big(V^{Z(t)}(t)\Big)&=rV^{Z(t)}(t)\ dt-b^{Z(t)}(t)\ dt -\Delta B^{Z(t)}(t)\\
+&-\sum_{k : k\ne Z(t)}\lambda_{Z(t)k}(t)\underbrace{\Big(b^{Z(t)k}(t)+V^k(t)-V^{Z(t)}(t)\Big)}_{:=R^{Z(t)k}}\ dt\\
+&+\sum_{k : k\ne Z(t-)}\Big(V^k(t)-V^{Z(t-)}(t)\Big)\ dN^k(t).
+\end{align*}
+\emph{called the Thiele differential equations.}
+
+\textbf{Proof.}
+
+Split the proof into two parts. The first part we show the representation
+\[
+V^j(t)=\int_t^Te^{-\int_t^ur(v)\ dv}\ dC^j(t)
+\]
+then we give two profs for Thieles differential equation. The first is direct on the above and the other is an indirect martingale approach.
+
+\emph{``(Part i)''} We assume that \(r\) is deterministic. This is rather important, although if stochastic we could ease the computations with assuming \(Z\) and \(r\) are independent. If \(r\) is deterministic it holds that
+\begin{align*}
+V^j(t)&=\int_t^Te^{-\int_t^ur(v)\ dv}\mathbb E\left[\left.dB(u) \ \right\vert\ Z(t)= j\right]\\
+&=\int_t^Te^{-\int_t^ur(v)\ dv}\mathbb E\left[\left. dB^{Z(u)}(u)+\sum_{k:k\ne Z(u-)}b^{Z(u-)k}(u)\ dN^k(u) \ \right\vert\ Z(t)= j\right]\\
+&=\int_t^Te^{-\int_t^ur(v)\ dv}\mathbb E\left[\left. dB^{Z(u)}(u) \ \right\vert\ Z(t)= j\right]\tag{1}\\
+&+\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k:k\ne Z(u-)}\mathbb E\left[\left. b^{Z(u-)k}(u)\ dN^k(u) \ \right\vert\ Z(t)= j\right]\tag{2}
+\end{align*}
+where we for ease of notation use \(dB^{Z(u)}(u)=b^{Z(u)}(u)\ dt+\Delta B^{Z(u)}(u)\). Then we can work on (1) and (2) independently. For (1) we simply have
+\[
+\mathbb E\left[\left. dB^{Z(u)}(u) \ \right\vert\ Z(t)= j\right]=\sum_{k\in E}p_{jk}(t,u)d B^k(u),
+\]
+since we need only the transition \(j\to u\) on \([t,u]\) which happens with probability \(p_{jk}(t,u)\) if \(Z(t)=j\). For (2) we do an additional conditioning and obtain
+\begin{align*}
+\sum_{k:k\ne Z(u-)}\mathbb E&\left[\left. b^{Z(u-)k}(u)\ dN^k(u) \ \right\vert\ Z(t)= j\right]\\
+&=\mathbb E\left[\left.\mathbb E\left[\left.\sum_{k:k\ne Z(u-)} b^{Z(u-)k}(u)\ dN^k(u) \ \right\vert\ Z(t)= j,Z(u-)\right]\ \right\vert\ Z(t)= j\right]\\
+&\stackrel{(\dagger_1)}{=}\mathbb E\left[\left.\sum_{k:k\ne Z(u-)} b^{Z(u-)k}(u)\mathbb E\left[\left. dN^k(u) \ \right\vert\ Z(t)= j,Z(u-)\right]\ \right\vert\ Z(t)= j\right]\\
+&\stackrel{(\dagger_2)}{=}\mathbb E\left[\left.\sum_{k:k\ne Z(u-)} b^{Z(u-)k}(u)\lambda_{Z(u-)k}(u)\ du\ \right\vert\ Z(t)= j\right]\\
+&=\sum_{\ell\in E}\sum_{k:k\ne \ell}\mathbb E\left[\left.1\{Z(u-)=\ell\} b^{\ell k}(u)\lambda_{\ell k}(u)\ du\ \right\vert\ Z(t)= j\right]\\
+&=\sum_{\ell\in E}\sum_{k:k\ne \ell} p_{j\ell}(t,u) b^{\ell k}(u)\lambda_{\ell k}(u)\ du\\
+&=\sum_{\ell\in E}p_{j\ell}(t,u)\sum_{k:k\ne \ell}  b^{\ell k}(u)\lambda_{\ell k}(u)\ du\\
+&=\sum_{k\in E}p_{jk}(t,u)\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du
+\end{align*}
+where we in \((\dagger_1)\) used that \(b^{Z(u-)k}(u)\) is \(Z(u-)\)-measurable, in \((\dagger_2)\) we used that \(N^k\) has predictable compensator \(\lambda_k\)
+\begin{align*}
+N^k(t)=M^k(t)+\int_0^t\lambda_k(s)\ ds\Rightarrow dN^k(t)=dM^k(t)+\lambda_k(t)\ dt
+\end{align*}
+hence
+\[
+\mathbb E[dN^k(t) \ \vert\ Z(t-)]=\lambda_{Z(t-)k}(t)\ dt.
+\]
+The last step is simply a re indexing wich we use in the below
+\begin{align*}
+V^j(t)&=\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)d B^k(u)\\
+&+\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\\
+&=\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)
+\end{align*}
+which gives the desired result.
+
+\emph{``Part 2''} We proceed as follows. By the change of variables formula the dynamics in general is given by
+\[
+d\Big(V^{Z(t)}(t)\Big)=V_t^{Z(t)}(t)\ dt+\sum_{k: k\ne Z(t)}\Big(V^k(t)-V^{Z(t-)}(t)\Big)\ dN^k(t)
+\]
+where
+\[
+\frac{d}{dt}V^{Z(t)}(t)=V_t^{Z(t)}(t).
+\]
+Hence we want to study the \(V_t^{Z(t)}(t)\) term. We give a proof of the structure of this term with two approaches.
+
+\emph{``Part 2.a''} \emph{(Direct approach)} Using the above we have
+\begin{align*}
+V_t^{Z(t)}(t)&=\frac{d}{dt}\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)\\
+&=\frac{d}{dt}e^{\int_0^tr(v)\ dv}\int_t^Te^{-\int_0^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right).
+\end{align*}
+Then using the product rule we have
+\begin{align*}
+V_t^{Z(t)}(t)&=r(t)e^{\int_0^tr(v)\ dv}\int_t^Te^{-\int_0^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)\\
+&+e^{\int_0^tr(v)\ dv}\left(\sum_{k\in E}\frac{d}{dt}\left(\int_t^Te^{-\int_0^ur(v)\ dv}p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)\right)\right)\\
+&=r(t)V^{Z(t)}(t)\\
+&-e^{\int_0^tr(v)\ dv}\sum_{k\in E}e^{-\int_0^tr(v)\ dv}p_{jk}(t,t)\left(b^k(t)+\sum_{\ell :\ell \ne k}  b^{k\ell }(t)\lambda_{k\ell }(t)\right)\\
+&+e^{\int_0^tr(v)\ dv}\sum_{k\in E}\int_t^T\frac{d}{dt}e^{-\int_0^ur(v)\ dv}p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)\\
+&=r(t)V^{Z(t)}(t)-b^j(t)-\sum_{k :k \ne j}  b^{jk}(t)\lambda_{jk }(t)\\
+&+\sum_{k\in E}\int_t^Te^{-\int_t^ur(v)\ dv}\frac{d}{dt}p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)\\
+&=r(t)V^{Z(t)}(t)-b^j(t)-\sum_{k :k \ne j}  b^{jk}(t)\lambda_{jk }(t)\\
+&+\sum_{k\in E}\int_t^Te^{-\int_t^ur(v)\ dv}\left(\lambda_j(t)p_{jk}(t,u)-\sum_{i:i\ne k}\lambda_{ji}(t)p_{ik}(t,u)\right)\\
+&\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)\\
+&=r(t)V^{Z(t)}(t)-b^j(t)-\sum_{k :k \ne j}  b^{jk}(t)\lambda_{jk }(t)\\
+&+\sum_{k\in E}\int_t^Te^{-\int_t^ur(v)\ dv}\lambda_j(t)p_{jk}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)\\
+&-\sum_{k\in E}\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{i:i\ne k}\lambda_{ji}(t)p_{ik}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)
+\end{align*}
+using that
+\[
+\frac{d}{dt}\int_t^s g(t,u)\ du=-g(t,t)+\int_t^s\frac{d}{dt}g(t,u)\ du
+\]
+and Kolmogorov differential equation
+\[
+\frac{d}{dt}p_{jk}(t,u)=\lambda_{j}(t)p_{jk}(t,u)-\sum_{i:i\ne k}\lambda_{ji}(t)p_{ik}(t,u).
+\]
+We notice that the second term is \(\lambda_jV^j(t)\) and the second is a sum over \(\lambda_{ji}(t)V^i(t)\) hence
+\begin{align*}
+V_t^{Z(t)}(t)&=r(t)V^{Z(t)}(t)-b^j(t)-\sum_{k :k \ne j}  b^{jk}(t)\lambda_{jk }(t)\\
+&+\lambda_j(t)V^j(t)-\sum_{i:i\ne j}\lambda_{ji}(t)V^i(t)\\
+&=r(t)V^{Z(t)}(t)-b^j(t)-\sum_{k :k \ne j}  b^{jk}(t)\lambda_{jk }(t)\\
+&+\sum_{k:k\ne j}\lambda_{jk}(t)V^j(t)-\lambda_{jk}(t)V^k(t)\\
+&=r(t)V^{Z(t)}(t)-b^j(t)-\sum_{k :k \ne j}\lambda_{jk }(t)\Big(b^{jk}(t)+V^k(t)-V^j(t)\Big)
+\end{align*}
+as desired.
+
+\emph{``Part 2.b''} \emph{(Martingale approach)} Consider the Doob-meyer martingale
+\begin{align*}
+m(t)&=\mathbb E\left[\left.\int_0^Te^{-\int_0^ur(v)\ dv}dB(u)\ \right\vert\ \mathcal F(t)\right]\\
+&=\mathbb E\left[\left.\int_0^Te^{-\int_0^ur(v)\ dv}dB(u)\ \right\vert\ Z(t)\right]
+\end{align*}
+We know that if \(m\) is a martingale it must have zero drift term. We have at time \(t\) the decomposition
+\begin{align*}
+m(t)&=\int_0^te^{-\int_0^ur(v)\ dv}dB(u)+\mathbb E\left[\left.\int_t^Te^{-\int_0^ur(v)\ dv}dB(u)\ \right\vert\ Z(t)\right],
+\end{align*}
+since the process \(B\) is known on \([0,t]\). Notice that the above is
+\begin{align*}
+m(t)&=\int_0^te^{-\int_0^ur(v)\ dv}dB(u)+e^{-\int_0^tr(v)\ dv}\mathbb E\left[\left.\int_t^Te^{-\int_t^ur(v)\ dv}dB(u)\ \right\vert\ Z(t)\right]\\
+&=\int_0^te^{-\int_0^ur(v)\ dv}dB(u)+e^{-\int_0^tr(v)\ dv}V^{Z(t)}(t)
+\end{align*}
+On the one hand side we have
+\begin{align*}
+d\left(e^{-\int_0^tr(v)\ dv}V^{Z(t)}(t)\right)&=-r(t)e^{-\int_0^tr(v)\ dv}V^{Z(t)}(t)\ dt+e^{-\int_0^tr(v)\ dv}d\Big(V^{Z(t)}(t)\Big)\\
+&=-r(t)e^{-\int_0^tr(v)\ dv}V^{Z(t)}(t)\ dt\\
+&+e^{-\int_0^tr(v)\ dv}\Big(V_t^{Z(t)}(t)\ dt+\Delta B^{Z(t)}(t)+V^{Z(t)}(t)-V^{Z(t-)}(t)\Big)\\
+&=e^{-\int_0^tr(v)\ dv}\left(-r(t)V^{Z(t)}(t)+V_t^{Z(t)}(t)\right)\ dt\\
+&+e^{-\int_0^tr(v)\ dv}\left(\Delta B^{Z(t)}(t)+\sum_{k: k\ne Z(t-)}\left(V^{k}(t)-V^{Z(t-)}(t)\right)\ dN^k(t)\right)\\
+&=e^{-\int_0^tr(v)\ dv}\left(-r(t)V^{Z(t)}(t)+V_t^{Z(t)}(t)+\sum_{k: k\ne Z(t-)}\left(V^{k}(t)-V^{Z(t-)}(t)\right)\ \lambda_{jk}(t)\right)\ dt\\
+&+e^{-\int_0^tr(v)\ dv}\left(\Delta B^{Z(t)}(t)+\sum_{k: k\ne Z(t-)}\left(V^{k}(t)-V^{Z(t-)}(t)\right)\ dM^k(t)\right)
+\end{align*}
+and the first time we have
+\begin{align*}
+d\left(\int_0^te^{-\int_0^ur(v)\ dv}dB(u)\right)&=e^{-\int_0^tr(v)\ dv}dB(t)\\
+&=e^{-\int_0^tr(v)\ dv}\left(b^{Z(t)}(t)\ dt + \Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\ dN^k(t)\right)\\
+&=e^{-\int_0^tr(v)\ dv}\left(b^{Z(t)}(t)\ +\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\lambda_{Z(t-)k}(t)\right)\ dt\\
+&+e^{-\int_0^tr(v)\ dv}\left( \Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\ dM^k(t)\right)
+\end{align*}
+by using the compensated version of \(N^k(t)\) that is \(M^k(t)+\int_0^t\lambda_{k}(t)\ dt\). Then cobining we get
+\begin{align*}
+\frac{d}{dt}m(t)&=e^{-\int_0^tr(v)\ dv}\Big(-r(t)V^{Z(t)}(t)+V_t^{Z(t)}(t)+b^{Z(t)}(t)\\
+&+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\lambda_{Z(t-)k}(t)\\
+&+\sum_{k: k\ne Z(t-)}\left(V^{k}(t)-V^{Z(t-)}(t)\right)\lambda_{jk}(t)\Big)\ dt
+\end{align*}
+Hence \(m\) is a martingale if and only if
+\begin{align*}
+0&=-r(t)V^{Z(t)}(t)+V_t^{Z(t)}(t)+b^{Z(t)}(t)\\
+&+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\lambda_{Z(t-)k}(t)\\
+&+\sum_{k: k\ne Z(t-)}\left(V^{k}(t)-V^{Z(t-)}(t)\right)\lambda_{jk}(t)
+\end{align*}
+giving that
+\begin{align*}
+V_t^{Z(t)}(t)&=r(t)V^{Z(t)}(t)-b^{Z(t)}(t)\\
+&-\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\lambda_{Z(t-)k}(t)\\
+&-\sum_{k: k\ne Z(t-)}\left(V^{k}(t)-V^{Z(t-)}(t)\right)\lambda_{jk}(t)\\
+&=r(t)V^{Z(t)}(t)-b^{Z(t)}(t)\\
+&-\sum_{k: k\ne Z(t-)}\lambda_{jk}(t)\left(b^{Z(t-)k}(t)+V^{k}(t)-V^{Z(t-)}(t)\right)
+\end{align*}
+as desired. \(\blacksquare\)
+
+We form the following payment stream for the reserve for an insurance contract.
+\begin{align*}
+dA(t)&=dA^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}a^{Z(t-)k}(t)d N^k(t),\\
+dA^{Z(t)}&=a^{Z(t)}(t)\ dt+\Delta A^{Z(t)}(t),
+\end{align*}
+where \(Z(t)\) is the state of the insured at time \(t\) on the state space \(E=\{1,...,p\}\). For now ignore the use of \(A\) instead of \(B\), we will soon fix this. The dynamics of the reserve is then given by
+\begin{align*}
+dV^{Z(t)}(t)&=rV^{Z(t)}(t)\ dt-dA^{Z(t)}(t)-\sum_{k:k\ne Z(t-)}\lambda_{Z(t)k}(t) R^{Z(t)k}(t)\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(V^k(t)-V^{Z(t-)}(t)\Big)dN^k(t),\\
+R^{Z(t)k}(t)&=a^{Z(t)k}(t)+V^{k}(t)-V^{Z(t)},
+\end{align*}
+where we call \(R^{ij}\) the risk sum. By definition the reserve terminates at 0 i.e.~\(V^{Z(T)}(T-)=\Delta A^{Z(T)}(T)\) and so the above is a backward differential equation. If we furthermore want equivalence we would insist that the payment stream is constructed such that \(V^{Z(0)}(0-)=0\).
+
+We can reverse the differential equation and consider a forwards stochastic equation where we define a new reserve, namely \(X\), where \(X\) is not valued in as the expected value of the future payments, but instead is governed by an initial condition \(X(0-)=0\) and dynamics
+\begin{align*}
+dX(t)&=rX(t)\ dt-dA^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t)k}(t) \varrho^{Z(t)k}(t,X(t))\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)dN^k(t),\\
+\varrho^{Z(t)k}&=a^{Z(t)k}(t,X(t))+\chi^k(t,X(t))-X(t)
+\end{align*}
+where we now let the payments \(a^i\), \(a{ij}\) and \(\Delta A^i\) depend on the value of \(X\) itself. The process \(\chi^k\) is the value of the process \(X\) upon a jump into the state \(k\). A traditional choice is \(\chi^k(t,x)=1_{(k\ne p)}x\) if \(p\) is the death state.
+
+If we also allow for investment of porportion \(\pi(t,x)\) into the risky asset with dynamics given earlier we would have the following dynamics of \(X\).
+\begin{align*}
+dX(t)&=\Big(r+\pi(t,X(t))(\mu(t)-r)\Big)X(t)\ dt+\sigma(t)\pi(t,X(t))X(t)\ dW(t)\\
+&-dA^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t)k}(t) \varrho^{Z(t)k}(t,X(t))\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)dN^k(t),
+\end{align*}
+since the investment would yield an additional \(\mu(t)-r\) deterministic more profits than the bank account with an additional volatility \(\sigma(t)\).
+
+We then define the payment stream the policy holder is faced with as
+\begin{align*}
+dB(t)&=dB^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))\ dN^k(t),\\
+dB^{Z(t)}(t,X(t-))&=b^{Z(t)}(t,X(t))\ dt + \Delta B^{Z(t)}(t,X(t-)).
+\end{align*}
+where we see that the payments depend on the state transitions in \(Z\) and the state of the reserve \(X\) at time \(t\).
+
+We want to evaluate the value of the future payment to present value i.e.~the integral
+\[
+\int_t^Te^{-\int_t^u r(v)\ dv}dB(u),
+\]
+
+which depends on the the process \(Z\) and \(X\), where \(X\) fundamentally is a process dependent on both \(X\) and \(S\). In financial markets we know how to evaluate derivative by finding an equivalent martingale measure \(\mathbb Q\), but in regard to the transition risk in \(Z\) it is natural to adhere to the objective measure \(\mathbb P\). This is why we choose to evaluate the payment stream wrt. the product measure \(\mathbb P\otimes \mathbb Q\). Recall that we have have two probability spaces \((\Omega, \mathcal F,\mathbb P)\) and \((\Omega, \mathcal F,\mathbb Q)\) where we simply denote
+\[
+\sigma(\Omega\times\Omega)=\mathcal F \otimes \mathcal F:=\mathcal F^{\otimes2}
+\]
+and measure a set \(A\in \mathcal F^{\otimes2}\) in accordance to \(\mathbb P\otimes \mathbb Q\) \emph{simply} by defining
+\begin{align*}
+\mathbb P\otimes \mathbb Q(A):&=\int_\Omega \mathbb P(\{\omega_1 \in \Omega\ \vert\ (\omega_1,\omega_2) \in A\})\ d\mathbb Q(\omega_2)\\
+&=\int_\Omega \mathbb Q(\{\omega_2 \in \Omega\ \vert\ (\omega_1,\omega_2) \in A\})\ d\mathbb P(\omega_1)
+\end{align*}
+In the case \(A=A_1\times A_2\) with \(A_1,A_2\in \Omega\) then the above is
+\[
+\mathbb P\otimes \mathbb Q(A)=\mathbb P(A_1)\mathbb Q(A_2)=\mathbb P(A_2)\mathbb Q(A_1).
+\]
+This is not essential to understand for the discussion but we are in simple terms trying to separating the market risk and life risk. We define the reserve under this new measure:
+\[
+V^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\int_t^u r(v)\ dv}\ dB(u)\ \right\vert\ X(t),Z(t)\right].
+\]
+Here the intensities \(\mathbf \Lambda\) for \(Z\) does not change but the dynamics of \(S\) is transformed by the \(\mathbb Q\)-dynamics of \(W^\mathbb Q\)
+\[
+dW^\mathbb Q(t)=dW(t)-\frac{r-\mu}{\sigma}dt.
+\]
+The dynamics of the \(X\)-reserve under \(\mathbb P\otimes \mathbb Q\) then becomes
+\begin{align*}
+dX(t)&=r(t)X(t)\ dt+\sigma(t)\pi(t,X(t))X(t)dW^\mathbb Q(t)\\
+&-dA^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\mu_{Z(t)k}(t) \varrho^{Z(t)k}(t,X(t))\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)dN^k(t).
+\end{align*}
+When conditioning on \((X(t),Z(t))=(x,j)\) we get the family of functions \(V^j(t,x)\) fulfilling the below proposition.
+
+\textbf{Proposition 3.3. (Asmussen)} \emph{Assuming that \(V^j(t,x)\) is sufficiently differentiable, the following set of PDE's is fulfilled:}
+\begin{align*}
+V_t^j(t,x)&=rV^j(t,x)-b^j(t,x)-\sum_{k:k\ne j}\lambda_{jk}(t)R^{jk}(t,x)-\mathcal D_x V^j(t,x),\\
+V^t(t-,x)&=\Delta B^j(t,x)+V^j(t,x-\Delta A^j(t,x)),\\
+V^j(T,x)&=0,
+\end{align*}
+\emph{where \(\mathcal D_x\) is the operator}
+\[
+\mathcal D_xV^j(t,x)=V_x^j(t,x)\left(rx-a^j(t,x)-\sum_{k:k\ne j}\lambda_{jk}(t)\varrho^{jk}(t,x)\right)+\frac{1}{2}V^j_{xx}(t,x)\pi^2(t,x)\sigma^2x^2
+\]
+\emph{and}
+\[
+R^{jk}(t,x)=b^{jk}(t,x)+V^k(t,\chi^k(t,x))-V^j(t,x).
+\]
+\emph{Conversely, if there exist a set of functions \(V^j(t,x)\) such that the above holds, then \(V^{Z(t)}(t,X(t))\) is the reserved defined as}
+\[
+V^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\int_t^u r(v)\ dv}\ dB(u)\ \right\vert\ X(t),Z(t)\right].
+\]
+
+\textbf{Proof.}
+
+Consider the martingale
+\[
+m(t)=\mathbb E^{\mathbb Q}\left[\left. \int_0^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right].
+\]
+Then we can decompose into
+\begin{align*}
+m(t)&=\int_0^te^{-ru}\ dB(u)+\mathbb E^{\mathbb Q}\left[\left. \int_t^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right]\\
+&=\int_0^te^{-ru}\ dB(u)+e^{-rt}V^{Z(t)}(t,X(t))
+\end{align*}
+Then we can derive the dynamics by Ito's formula.
+\begin{align*}
+e^{rt}dm(t)&=dB(t)+e^{rt}d\Big(e^{-rt}V^{Z(t)}(t,X(t))\Big)\\
+&=b^{Z(t)}(t,X(t-))\ dt+\Delta B^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))dN^k(t)\\
+&-rV^{Z(t)}(t,X(t))\ dt+dV^{Z(t)}(t,X(t))\\
+&=b^{Z(t)}(t,X(t-))\ dt+\Delta B^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))dM^k(t)\\
+&+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))\lambda_{Z(t-)k}\ dt-rV^{Z(t)}(t,X(t))\ dt\\
+&+V_t^{Z(t)}(t,X(t))\ dt+V_x^{Z(t)}(t,X(t))\ dX(t)+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\ \big(dX(t)\big)^2\\
+&+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)dM^k(t)\\
+&+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)\lambda_{Z(t-)k}(t)\ dt
+\end{align*}
+By the construction of \(X\) we have
+\begin{align*}
+dX(t)&=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
+&-dA^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
+&=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
+&-a^{Z(t)}(t,X(t-))\ dt -\Delta A^{Z(t)}(t,X(t-))\\
+&-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
+\big(dX(t)\big)^2&=\pi^2(t,X(t-))\sigma^2 X^2(t)\ dt + jumps
+\end{align*}
+Hence we have the \(dt\) terms
+\begin{align*}
+e^{rt}\frac{d}{dt}m(t)&=-rV^{Z(t)}(t,X(t))+b^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))\lambda_{Z(t-)k}\\
+&+V_t^{Z(t)}(t,X(t))\\
+&+V_x^{Z(t)}(t,X(t))\\
+&\left(rX(t)-a^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\left(\varrho^{Z(t-)k}(t,X(t))+\chi^{Z(t)}(t,X(t-))-X(t-)\right)\right)\\
+&+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\pi^2(t,X(t-))\sigma^2 X^2(t)\\
+&+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)\lambda_{Z(t-)k}(t)
+\end{align*}
+Giving the desired PDE. On discontinuity points
+\[
+V^{Z(t)}\Big(t,X(t-)-\Delta A^{Z(t)}(t,X(t-)\Big)-V^{Z(t)}(t-,X(t-))=-\Delta B^{Z(t)}(t,X(t))
+\]
+as desired. \(\blacksquare\)
+
 \hypertarget{with-profit-insurance-and-the-dynamics-of-the-surplus}{%
 \subsection{With-Profit Insurance and the Dynamics of the Surplus}\label{with-profit-insurance-and-the-dynamics-of-the-surplus}}
 
+One popular model for life insurance policies is the \emph{with-profit} insurance policy where the payments are agreed upon on a prudent basis of deterministic \((r^*,\Lambda ^*)\) and as such there arises a reserve bases on the \emph{first order basis} market with a \(*\). We call the pair \((r^*,\Lambda ^*)\) the \emph{technical basis} or \emph{first-order basis} and
+
+\[
+V^{j*}(t)=\mathbb E^*\left[\left.\int_t^Te^{-\int_t^u r^*(v)\ dv}\ dB(u)\ \right\vert\ Z(t)=j\right]
+\]
+
+the \emph{technical reserve} or \emph{first-order reserve}. The payment stream \(B\) is constructed in such a way that the technical reserve fulfills the equivalence principle i.e.~\(V^{Z(0)*}(0-)=0\). The technical basis is chosen conservatively such that in general the market value of the reserve is less than the technical reserve that is the real interest rate \(r>r^*\) and \(\lambda^*<\lambda\) i.e.~the policy holder is expected to live longer than in reality and the interest obtained is greater than the ``guaranteed'' \(r^*\). The surplus that arises is payed back to the insured by a \emph{dividend payment stream} \(D\) defined by
+\begin{align*}
+dD(t)&=dD^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}\delta^{Z(t-)k}(t)dN^k(t),\\
+dD^{Z(t)}(t)&=\delta^{Z(t)}(t)\ dt+\Delta D^{Z(t)}(t).
+\end{align*}
+If we assume a general investment strategy with value process \(G\) then we can consider the accumulated value of the account
+
+\[
+Y_0(t)=\int_0^t\frac{G(t)}{G(s)}d(-(B+D)(s))
+\]
+
+i.e.~a payment at time \(s\) bears the interest \(G(t)/G(s)\) up until time \(t\). Remember that premiums is negative in \(B\) and \(D\) and benefits positive, hence the factor \(-1\). With this in mind we can define the surplus
+
+\[
+Y(t)=Y_0(t)-V^{Z(t)*}(t).
+\]
+
+If we assume that \(G\) is a portfolio consisting of \(q\) weight in a risk asset and \(1-q\) in the risk free asset with weight chosen by
+
+\[
+\pi(t,Y(t))=q(t)\frac{Y_0(t)}{Y(t)}\iff q(t)=\pi(t,Y(t))\frac{Y(t)}{Y_0(t)}>0.
+\]
+
+As we will see this in fact leads to the proportion \(\pi\) is invested in the risky asset. This indeed means that the assets of the insurance company have dynamics
+\begin{align*}
+dG(t)&=r(1-q(t))G(t)\ dt+q(t)(rG(t)\ dt + \sigma G(t)\ dW^{\mathbb Q}(t)\\
+&=rG(t)\ dt+q(t)\sigma G(t)\ dW^\mathbb Q(t).
+\end{align*}
+Notice that we use the actual interest \(r\).
+
+\textbf{Proposition 4.2. (Asmussen)} \emph{Assuming the with-profit model, the surplus increases with}
+\begin{align*}
+dY(t)&=rY(t)\ dt+\sigma\pi(t,Y(t)) Y(t)\ dW^\mathbb Q(t)+ d(C-D)(t),\\
+dC(t)&=c^{Z(t)}(t)\ dt-\sum_{k:k\ne j}R^{Z(t-)k*}(t)\ dM^k(t),\\
+c^j(t)&=(r-r^*)V^{j*}(t)+\sum_{k:k\ne j}\Big(\lambda_{jk}^*(t)-\lambda_{jk}(t)\Big)R^{jk*}(t),\\
+R^{jk*}(t)&=b^{jk}(t)+V^{k*}(t)-V^{j*}(t).
+\end{align*}
+\emph{In the above \(C\) is called the \textbf{surplus contribution process}.}
+
+\textbf{Proof.}
+
+We have the dynamics of \(Y_0\)
+\begin{align*}
+dY_0(t)&=\frac{Y_0(t)}{G(t)}dG(t)+G(t)\frac{1}{G(t)}d(-(B+D)(s))\\
+&=d(-(B+D)(s))+rY_0(t)\ dt+q(t)\sigma Y_0(t)\ dW^\mathbb Q(t)\\
+&=d(-(B+D)(s))+rY_0(t)\ dt+\pi(t,Y(t))\frac{Y(t)}{Y_0(t)}\sigma Y_0(t)\ dW^\mathbb Q(t)\\
+&=d(-(B+D)(s))+rY_0(t)\ dt+\pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)\\
+&=d(-(B+D)(s))+rY_0(t)\ dt-rV^{Z(t)*}(t)\ dt+\pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)+rV^{Z(t)*}(t)\ dt\\
+&=rY(t)\ dt+rV^{Z(t)*}(t)\ dt+\pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)-d(B+D)(s)
+\end{align*}
+and the dynamics of the technical reserve
+\begin{align*}
+dV^{Z(t)*}(t)&=V_t^{Z(t-)*}(t)\ dt-\Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}\Big(V^{k*}(t)-V^{Z(t-)*}(t)\Big)\ dN^k(t)\\
+&=\left[r^*(t)V^{Z(t)*}(t)-b^{Z(t)}(t)-\sum_{k:k\ne Z(t-)}\Big(b^{Z(t-)k}(t)+V^{k*}(t)-V^{Z(t-)*}(t)\Big)\lambda_{Z(t-)k}^*(t)\right]\ dt\\
+&-\Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}\Big(V^{k*}(t)-V^{Z(t-)*}(t)\Big)\ dN^k(t)\\
+&=\left[r^*(t)V^{Z(t)*}(t)-b^{Z(t)}(t)-\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\lambda_{Z(t-)k}^*(t)\right]\ dt\\
+&-\Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}\Big(V^{k*}(t)-V^{Z(t-)*}(t)\Big)\ dN^k(t)
+\end{align*}
+thus the surplus arrises from
+\begin{align*}
+dY(t)&=dY_0(t)-dV^{Z(t)*}(t)\\
+&=rY(t)\ dt+rV^{Z(t)*}(t)\ dt+\pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)-d(B+D)(t)\\
+&-\left[r^*(t)V^{Z(t)*}(t)-b^{Z(t)}(t)-\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\lambda_{Z(t-)k}^*(t)\right]\ dt\\
+&+\Delta B^{Z(t)}(t)-\sum_{k:k\ne Z(t-)}\Big(V^{k*}(t)-V^{Z(t-)*}(t)\Big)\ dN^k(t)\\
+&=-dD(t) + rY(t)\ dt + \pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)\\
+&+(r-r^*)V^{Z(t)*}(t)\ dt\\
+&+b^{Z(t)}(t)\ dt+\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\lambda_{Z(t-)k}^*(t)\ dt+\Delta B^{Z(t)}(t)-dB(t)\\
+&-\sum_{k:k\ne Z(t-)}\Big(V^{k*}(t)-V^{Z(t-)*}(t)\Big)\ dN^k(t)\\
+&=-dD(t) + rY(t)\ dt + \pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)+(r-r^*)V^{Z(t)*}(t)\ dt\\
+&+\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\lambda_{Z(t-)k}^*(t)\ dt-\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)dN^k(t)\\
+&-\sum_{k:k\ne Z(t-)}\Big(V^{k*}(t)-V^{Z(t-)*}(t)\Big)\ dN^k(t)\\
+&=-dD(t) + rY(t)\ dt + \pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)+(r-r^*)V^{Z(t)*}(t)\ dt\\
+&+\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\lambda_{Z(t-)k}^*(t)\ dt-\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\ dN^k(t)\\
+&=-dD(t) + rY(t)\ dt + \pi(t,Y(t))Y(t)\sigma \ dW^\mathbb Q(t)\\
+&+\underbrace{(r-r^*)V^{Z(t)*}(t)\ dt+\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\Big(\lambda_{Z(t-)k}^*(t)-\lambda_{Z(t-)k}(t)\Big)\ dt}_{:=c^{Z(t)}(t)\ dt}\\
+&\underbrace{-\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t)\ dM^k(t)}_{dC(t)-c^{Z(t)}(t)\ dt}\\
+\end{align*}
+as desired.\(\blacksquare\)
+
+We will assume that we pay only dividend rates and allow for lump sum dividend at the end of the contract i.e.
+
+\[
+dY(t)=rY(t)\ dt+\sigma \pi(t,Y(t))Y(t)\ dW^\mathbb Q+(c^{Z(t)}(t)-\delta^{Z(t)}(t))\ dt-\Delta D^{Z(t)}(t)d1_{\{T\}}(t).
+\]
+
 \hypertarget{cash-dividends-and-market-reserve}{%
 \subsection{Cash Dividends and Market Reserve}\label{cash-dividends-and-market-reserve}}
+
+We now turn to evaluating the market value of the reserve i.e.
+
+\[
+V^{Z(t)}(t,Y(t))=\mathbb E^{\mathbb P\otimes \mathbb Q}\left[\left.\int_t^Te^{-\int_t^u r(v)\ dt}\ d(B+D)(u)\ \right\vert\ Z(t),Y(t)\right]
+\]
+
+It happens to hold that we can achieve a PDE the reserve must satisfies by choosing the functions \(A\), \(\chi\) and \(\varrho\) and repeating the Unit-link PDE. Notice that we can link the dynamics of the surplus in the with profit case with the unit link case by considering the with-profit dynamics:
+\begin{align*}
+dY(t)&=r(t)Y(t)\ dt + \sigma\pi(t,Y(t)) Y(t)\ dW^\mathbb Q(t) + d(C-D)(t)\\
+&=r(t)Y(t)\ dt + \sigma\pi(t,Y(t)) Y(t)\ dW^\mathbb Q(t)\\
+&+(c^{Z(t)}(t)-\delta^{Z(t)}(t))\ dt-\Delta D^{Z(t)}(t)d1_{\{T\}}(t)
+\end{align*}
+and the unit-link dynamics
+\begin{align*}
+dX(t)&=r(t)X(t)\ dt + \sigma\pi(t,X(t)) X(t)\ dW^\mathbb Q(t)\\
+&-dA^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t)k}(t)\varrho^{Z(t)k}(t,X(t))\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\ dN^k(t),
+\end{align*}
+Then if we set \(A=D-C\), \(\varrho=0\) and \(\chi = X\) then we obtain the with-profit surplus. This in particular gives us the following proposition for free.
+
+\textbf{Proposition 5.1. (Asmussen)} \emph{Assuming that \(V^j(t,x)\) is sufficiently differentiable, the following set of PDE's is fulfilled:}
+\begin{align*}
+V_t^j(t,y)&=rV^j(t,y)-b^j(t,y)-\delta^j(t,y)-\sum_{k:k\ne j}\lambda_{jk}(t)R^{jk}(t,y)-\mathcal D_y V^j(t,y),\\
+V^t(t-,y)&=\Delta B^j(t,y)+\Delta D^j(t,y)+V^j(t,y-\Delta D^j(t,y)),\\
+V^j(T,y)&=0,
+\end{align*}
+\emph{where \(\mathcal D_y\) is the operator}
+\[
+\mathcal D_yV^j(t,y)=V_y^j(t,y)\left(ry+c^j(t,y)-\delta^j(t,y)\right)+\frac{1}{2}V^j_{yy}(t,y)\pi^2(t,y)\sigma^2y^2
+\]
+\emph{and}
+\[
+R^{jk}(t,y)=b^{jk}(t)+V^k(t,y)-V^j(t,y).
+\]
+\emph{Conversely, if there exist a set of functions \(V^j(t,y)\) such that the above holds, then \(V^{Z(t)}(t,Y(t))\) is the reserved defined as}
+\[
+V^{Z(t)}(t,Y(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\int_t^u r(v)\ dv}\ d(B+D)(u)\ \right\vert\ Z(t),Y(t)\right].
+\]
 
 \hypertarget{the-pure-case-of-cash-dividends}{%
 \subsection{The Pure Case of Cash Dividends}\label{the-pure-case-of-cash-dividends}}
