@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-30" />
+<meta name="date" content="2023-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -431,7 +431,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.1.3" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#martingales"><i class="fa fa-check"></i><b>16.1.3</b> Martingales</a></li>
 <li class="chapter" data-level="16.1.4" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#stochastic-calculus-and-the-ito-formula"><i class="fa fa-check"></i><b>16.1.4</b> Stochastic Calculus and the Ito Formula</a></li>
 <li class="chapter" data-level="16.1.5" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#the-multidimensional-ito-formula"><i class="fa fa-check"></i><b>16.1.5</b> The multidimensional Ito Formula</a></li>
-<li class="chapter" data-level="16.1.6" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#correlated-brownian-motions"><i class="fa fa-check"></i><b>16.1.6</b> Correlated Brownian motions</a></li>
+<li class="chapter" data-level="16.1.6" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#the-multidimensional-ito-formula-with-states"><i class="fa fa-check"></i><b>16.1.6</b> The multidimensional Ito Formula with states</a></li>
+<li class="chapter" data-level="16.1.7" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#correlated-brownian-motions"><i class="fa fa-check"></i><b>16.1.7</b> Correlated Brownian motions</a></li>
 </ul></li>
 <li class="chapter" data-level="16.2" data-path="discrete-stochastic-integrals.html"><a href="discrete-stochastic-integrals.html"><i class="fa fa-check"></i><b>16.2</b> Discrete Stochastic Integrals</a></li>
 <li class="chapter" data-level="16.3" data-path="stochastic-differential-equations.html"><a href="stochastic-differential-equations.html"><i class="fa fa-check"></i><b>16.3</b> Stochastic Differential Equations</a></li>
@@ -853,7 +854,7 @@ V^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\
 <summary>
 <strong>Proof.</strong>
 </summary>
-Consider the martingale
+<p><em>“Existence”</em> Consider the martingale
 <span class="math display">\[
 m(t)=\mathbb E^{\mathbb Q}\left[\left. \int_0^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right].
 \]</span>
@@ -869,33 +870,81 @@ e^{rt}dm(t)&amp;=dB(t)+e^{rt}d\Big(e^{-rt}V^{Z(t)}(t,X(t))\Big)\\
 &amp;-rV^{Z(t)}(t,X(t))\ dt+dV^{Z(t)}(t,X(t))\\
 &amp;=b^{Z(t)}(t,X(t-))\ dt+\Delta B^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))dM^k(t)\\
 &amp;+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))\lambda_{Z(t-)k}\ dt-rV^{Z(t)}(t,X(t))\ dt\\
-&amp;+V_t^{Z(t)}(t,X(t))\ dt+V_x^{Z(t)}(t,X(t))\ dX(t)+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\ \big(dX(t)\big)^2\\
+&amp;+V_t^{Z(t)}(t,X(t))\ dt+V_x^{Z(t)}(t,X(t))\ dX^c(t)+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\ \big(dX^c(t)\big)^2\\
 &amp;+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)dM^k(t)\\
 &amp;+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)\lambda_{Z(t-)k}(t)\ dt
 \end{align*}\]</span>
 By the construction of <span class="math inline">\(X\)</span> we have
 <span class="math display">\[\begin{align*}
-dX(t)&amp;=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
-&amp;-dA^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
-&amp;=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
-&amp;-a^{Z(t)}(t,X(t-))\ dt -\Delta A^{Z(t)}(t,X(t-))\\
+dX^c(t)&amp;=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
+&amp;-a^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
 &amp;-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
-\big(dX(t)\big)^2&amp;=\pi^2(t,X(t-))\sigma^2 X^2(t)\ dt + jumps
+\big(dX^c(t)\big)^2&amp;=\pi^2(t,X(t-))\sigma^2 X^2(t)\ dt
 \end{align*}\]</span>
 Hence we have the <span class="math inline">\(dt\)</span> terms
 <span class="math display">\[\begin{align*}
 e^{rt}\frac{d}{dt}m(t)&amp;=-rV^{Z(t)}(t,X(t))+b^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))\lambda_{Z(t-)k}\\
 &amp;+V_t^{Z(t)}(t,X(t))\\
-&amp;+V_x^{Z(t)}(t,X(t))\\
-&amp;\left(rX(t)-a^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\left(\varrho^{Z(t-)k}(t,X(t))+\chi^{Z(t)}(t,X(t-))-X(t-)\right)\right)\\
+&amp;+V_x^{Z(t)}(t,X(t))\left(rX(t)-a^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\right)\\
 &amp;+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\pi^2(t,X(t-))\sigma^2 X^2(t)\\
 &amp;+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)\lambda_{Z(t-)k}(t)
 \end{align*}\]</span>
-Giving the desired PDE. On discontinuity points
+Giving the desired PDE when setting equal to zero and rearranging. On discontinuity points where <span class="math inline">\(Z\)</span> does not jump we have the gluing condition
 <span class="math display">\[
-V^{Z(t)}\Big(t,X(t-)-\Delta A^{Z(t)}(t,X(t-)\Big)-V^{Z(t)}(t-,X(t-))=-\Delta B^{Z(t)}(t,X(t))
+V^{Z(t)}(t,X(t))=V^{Z(t)}(t,X(t-)+\Delta A^{Z(t)}(t,X(t-))=\Delta B^{Z(t)}(t,X(t-))+V^{Z(t-)}(t,X(t-))
 \]</span>
-as desired. <span class="math inline">\(\blacksquare\)</span>
+as desired.</p>
+<em>“Uniqueness”</em> Assume that <span class="math inline">\(f^{Z(t)}(t,X(t))\)</span> satisfies the PDE with gluing and terminal condition. Then it holds that
+<span class="math display">\[\begin{align*}
+e^{rt}d\left(e^{-rt}f^{Z(t)}(t,X(t))\right)&amp;=-rf^{Z(t)}(t,X(t))\ dt+d\left(f^{Z(t)}(t,X(t))\right)\\
+&amp;=-rf^{Z(t)}(t,X(t))\ dt\\
+&amp;+f_t^{Z(t)}(t,X(t))\ dt+f^{Z(t)}_x(t,X(t))\ dX^c(t)\\
+&amp;+\frac{1}{2}f_{xx}^{Z(t)}(t,X(t))\ (dX^c(t))^2\\
+&amp;+f^{Z(t)}(t,X(t))-f^{Z(t-)}(t,X(t-))\\
+&amp;=-rf^{Z(t)}(t,X(t))\ dt+f_t^{Z(t)}(t,X(t))\ dt\\
+&amp;+f^{Z(t)}_x(t,X(t))\left(rX(t) + a^{Z(t)}(t)+\sum_{k:k \ne Z(t-)}\varrho_{Z(t-)k}(t,X(t))\lambda_{Z(t-)k}(t)\right)\ dt\\
+&amp;+f_x^{Z(t)}(t,X(t))\sigma \pi(t,X(t))X(t)\ dW^\mathbb Q(t)\\
+&amp;+\frac{1}{2}f_{xx}^{Z(t)}(t,X(t))\sigma^2 \pi^2(t,X(t))X^2(t)\ dt\\
+&amp;+\sum_{k:k\ne Z(t-)}\left(f^k(t,\chi^k(t,X(t-)))-f^{Z(t-)}(t,X(t-)\right)\ dN^k(t)\\
+&amp;+f^{Z(t)}(t,X(t-)+\Delta A^{Z(t)}(t,X(t-)))-f^{Z(t)}(t,X(t-))
+\end{align*}\]</span>
+Integrating <span class="math inline">\(e^{-rt}f^{Z(t)}(t,X(t))\)</span> on <span class="math inline">\([t,T]\)</span> we have
+<span class="math display">\[\begin{align*}
+e^{-rt}f^{Z(t)}(t,X(t))&amp;=-\int_t^Te^{-ru}\left(-rf^{Z(u)}(u,X(u))+f_t^{Z(u)}(u,X(u))\right)\ du\\
+&amp;-\int_t^Te^{-ru}f^{Z(u)}_x(u,X(u))\left(rX(u) + a^{Z(u)}(u)+\sum_{k:k \ne Z(u-)}\varrho_{Z(u-)k}(u,X(u))\lambda_{Z(u-)k}(u)\right)\ du\\
+&amp;-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&amp;-\int_t^Te^{-ru}\frac{1}{2}f_{xx}^{Z(u)}(u,X(u))\sigma^2 \pi^2(u,X(u))X^2(u)\ du\\
+&amp;-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\underbrace{\left(f^k(u,\chi^k(u,X(u-)))-f^{Z(u-)}(u,X(u-)\right)}_{=R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))}\ dN^k(u)\\
+&amp;-\sum_{t\le u\le T}e^{-ru}\left(\underbrace{f^{Z(u)}(u,X(u-)+\Delta A^{Z(u)}(u,X(u-)))-f^{Z(u)}(t,X(u-))}_{=-\Delta B^{Z(u)}(u,X(u-))}\right)\\
+&amp;=-\int_t^Te^{-ru}\underbrace{\left(-rf^{Z(u)}(u,X(u))+f_t^{Z(u)}(u,X(u))+\mathcal D_xf^{Z(u)}(u,X(u))\right)}_{=-b^{Z(u)}(u,X(u-))-\sum_{k:k\ne Z(u-)}R^{Z(u-)k}(u,X(u-))\lambda_{Z(u-)k}(t)}\ du\\
+&amp;-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&amp;-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)\\
+&amp;-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)\lambda_{Z(u-)k}(u)\ du\\
+&amp;+\sum_{t\le u\le T}e^{-ru}\Delta B^{Z(u)}(u,X(u-))\\
+&amp;=-\int_t^Te^{-ru}\left(-b^{Z(u)}(u,X(u-))-\sum_{k:k\ne Z(u-)}\color{red}{R^{Z(u-)k}(u,X(u-))}\lambda_{Z(u-)k}(t)\right)\ du\\
+&amp;-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(\color{red}{R^{Z(u-)k}(u,X(u-))}-b^{Z(u-)k}(u,X(u-))\right)\lambda_{Z(u-)k}(u)\ du\\
+&amp;-\sum_{t\le u\le T}e^{-ru}\Delta B^{Z(u)}(u,X(u-))\\
+&amp;-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&amp;+\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)\\
+&amp;=-\int_t^Te^{-ru}\left(-b^{Z(u)}(u,X(u-))-\sum_{k:k\ne Z(u-)}b^{Z(u-)k}(u,X(u-))\lambda_{Z(u-)k}(t)\right)\ du\\
+&amp;+\sum_{t\le u\le T}e^{-ru}\Delta B^{Z(u)}(u,X(u-))\\
+&amp;-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&amp;-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)\\
+&amp;=\int_t^Te^{-ru}\ dB(u)\\
+&amp;-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&amp;-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)
+\end{align*}\]</span>
+Multiplying with <span class="math inline">\(e^{rt}\)</span> we have
+<span class="math display">\[\begin{align*}
+f^{Z(t)}(t,X(t))&amp;=\int_t^Te^{-r(u-t)}\ dB(u)\\
+&amp;-\int_t^Te^{-r(u-t)}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&amp;-\int_t^Te^{-r(u-t)}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)
+\end{align*}\]</span>
+Taking expectation wrt. to <span class="math inline">\(\mathbb P\otimes \mathbb Q\)</span> gives
+<span class="math display">\[
+f^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P \otimes \mathbb Q}\left[\left.\int_t^Te^{-r(u-t)}\ dB(u)\ \right\vert\ Z(t),X(t) \right]
+\]</span>
+since <span class="math inline">\(W^\mathbb Q\)</span> is a martingale wrt. <span class="math inline">\(\mathbb Q\)</span> and <span class="math inline">\(M^k\)</span> is a martingale wrt. <span class="math inline">\(\mathbb P\)</span>. <span class="math inline">\(\blacksquare\)</span>
 </details>
 </div>
 <div id="with-profit-insurance-and-the-dynamics-of-the-surplus" class="section level3 hasAnchor" number="4.6.4">

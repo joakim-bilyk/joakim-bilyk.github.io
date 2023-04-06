@@ -171,6 +171,7 @@ stochastic-integrals-1
 martingales
 stochastic-calculus-and-the-ito-formula
 the-multidimensional-ito-formula
+the-multidimensional-ito-formula-with-states
 correlated-brownian-motions
 discrete-stochastic-integrals
 stochastic-differential-equations

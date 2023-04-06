@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-03-30" />
+<meta name="date" content="2023-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -431,7 +431,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.1.3" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#martingales"><i class="fa fa-check"></i><b>16.1.3</b> Martingales</a></li>
 <li class="chapter" data-level="16.1.4" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#stochastic-calculus-and-the-ito-formula"><i class="fa fa-check"></i><b>16.1.4</b> Stochastic Calculus and the Ito Formula</a></li>
 <li class="chapter" data-level="16.1.5" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#the-multidimensional-ito-formula"><i class="fa fa-check"></i><b>16.1.5</b> The multidimensional Ito Formula</a></li>
-<li class="chapter" data-level="16.1.6" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#correlated-brownian-motions"><i class="fa fa-check"></i><b>16.1.6</b> Correlated Brownian motions</a></li>
+<li class="chapter" data-level="16.1.6" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#the-multidimensional-ito-formula-with-states"><i class="fa fa-check"></i><b>16.1.6</b> The multidimensional Ito Formula with states</a></li>
+<li class="chapter" data-level="16.1.7" data-path="stochastic-integrals.html"><a href="stochastic-integrals.html#correlated-brownian-motions"><i class="fa fa-check"></i><b>16.1.7</b> Correlated Brownian motions</a></li>
 </ul></li>
 <li class="chapter" data-level="16.2" data-path="discrete-stochastic-integrals.html"><a href="discrete-stochastic-integrals.html"><i class="fa fa-check"></i><b>16.2</b> Discrete Stochastic Integrals</a></li>
 <li class="chapter" data-level="16.3" data-path="stochastic-differential-equations.html"><a href="stochastic-differential-equations.html"><i class="fa fa-check"></i><b>16.3</b> Stochastic Differential Equations</a></li>
@@ -652,8 +653,84 @@ Z_t=f(t,X_t).
 </blockquote>
 <p>Obviously, one can write the differential in Ito’s formula in many other ways including a matrix-wise version using the Hessian matrix <span class="math inline">\(H_{ij}=\frac{\partial^2 f}{\partial x^i\partial x^j}\)</span>.</p>
 </div>
-<div id="correlated-brownian-motions" class="section level3 hasAnchor" number="16.1.6">
-<h3><span class="header-section-number">16.1.6</span> Correlated Brownian motions<a href="stochastic-integrals.html#correlated-brownian-motions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-multidimensional-ito-formula-with-states" class="section level3 hasAnchor" number="16.1.6">
+<h3><span class="header-section-number">16.1.6</span> The multidimensional Ito Formula with states<a href="stochastic-integrals.html#the-multidimensional-ito-formula-with-states" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote class="def">
+<p><strong>Definition. (<span class="math inline">\(n\)</span>-dimensional Markov-jump process)</strong> <em>Let <span class="math inline">\(Z(t)\)</span> be a Markov-jump process on a at most countable state space <span class="math inline">\(E\)</span>. Let <span class="math inline">\(\mathbf X(t)=(X_1(t),X_2(t),...,X_n(t))\in\mathcal X\)</span> be a <span class="math inline">\(n\)</span>-dimensional stochastic process. Let <span class="math inline">\(f : \mathcal X\to \mathbb R\)</span> be a twice differential function. We call the process</em></p>
+<p><span class="math display">\[
+f^{Z(t)}(\mathbf X(t))=f^{Z(t)}(X_1(t),...,X_n(t))
+\]</span></p>
+<p><em>a <span class="math inline">\(n\)</span>-dimensional Markov-jump process on <span class="math inline">\(E\)</span>.</em></p>
+</blockquote>
+<p>One could for instance have the 2 dimensional process <span class="math inline">\(f^{Z(t)}(t,X(t))\)</span> where <span class="math inline">\(X\)</span> has dynamics</p>
+<p><span class="math display">\[
+dX(t)=rX(t)\ dt + \sigma X(t)\ dW^\mathbb Q(t)
+\]</span></p>
+<p>i.e. a geometric brownian motion. For such af process <span class="math inline">\(f\)</span> we have the change of variables formula</p>
+<blockquote class="thm">
+<p><strong>Theorem. (Ito’s formula for <span class="math inline">\(n\)</span>-dimensional Markov-jump process)</strong> <em>Let <span class="math inline">\(f^{Z(t)}(\mathbf X(t))\)</span> be a <span class="math inline">\(n\)</span>-dimensional Markov-jump process on <span class="math inline">\(E\)</span>. The dynamics of <span class="math inline">\(f\)</span> is given by</em>
+<span class="math display">\[\begin{align*}
+d \Big(f^{Z(t)}(\mathbf X(t))\Big)&amp;=\sum_{i=1}^n f_{x_i}^{Z(t)}(\mathbf X(t))\ dX_i^c(t)\\
+&amp;+\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n f_{x_ix_j}^{Z(t)}(\mathbf X(t))\ d(X_iX_j)^c(t)\\
+&amp;+\Big(f^{Z(t)}(\mathbf X(t))-f^{Z(t-)}(\mathbf X(t-))\Big)dN^Z(t)\\
+&amp;+\Big(f^{Z(t)}(\mathbf X(t))-f^{Z(t)}(\mathbf X(t-))\Big)dN^\mathbf X(t)
+\end{align*}\]</span>
+<em>where <span class="math inline">\(f^{Z(t)}_{x_i}\)</span> denotes the derivative <span class="math inline">\(\frac{\partial f^{Z(t)}}{\partial x_i}\)</span> and <span class="math inline">\(f^{Z(t)}_{x_ix_j}\)</span> denotes the second derivative <span class="math inline">\(\frac{\partial^2 f^{Z(t)}}{\partial x_i\partial x_j}\)</span>. In the above <span class="math inline">\(dX^c(t)\)</span> refers to the continuous part of the differential form of <span class="math inline">\(X(t)\)</span>. Furthermore, the quadratic variation is given on differential form</em></p>
+<p><span class="math display">\[
+d(XY)(t)=X(t-)dY(t)+Y(t-)dX(t)+dX(t)dY(t)
+\]</span></p>
+<p><em>where</em></p>
+<p><span class="math display">\[
+d(XY)^c(t)=dX^c(t)dY^c(t).
+\]</span></p>
+<p><em>The processes <span class="math inline">\(N^Z\)</span> and <span class="math inline">\(N^\mathbf X\)</span> is defined as</em>
+<span class="math display">\[\begin{align*}
+N^Z(t)&amp;=\#\left\{ 0\le s\le t: Z(s)\ne Z(s-) \right\},\\
+N^\mathbf X(t)&amp;=\#\left\{ 0\le s\le t: \mathbf X(s)\ne \mathbf X(s-) \right\}.
+\end{align*}\]</span></p>
+</blockquote>
+<p>Take the example <span class="math inline">\(X_1(t)=t\)</span> and <span class="math inline">\(X_2=X\)</span> is a geometric brownian motions with jumps according to <span class="math inline">\(Z\)</span> and deterministic jumps given <span class="math inline">\(Z\)</span> i.e.
+<span class="math display">\[\begin{align*}
+dX(t)&amp;=rX(t)\ dt+\sigma X(t)\ dW^\mathbb Q(t)+\Delta X^{Z(t)}(t)\\
+&amp;+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)dN^{k}(t)
+\end{align*}\]</span>
+Then we know that
+<span class="math display">\[\begin{align*}
+dX^c(t)&amp;=rX(t)\ dt+\sigma X(t)\ dW^\mathbb Q(t)\\
+&amp;+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt
+\end{align*}\]</span>
+Using that <span class="math inline">\(dN^k(t)=dM^k(t)+\lambda_k(t)\ dt\)</span> for some martingale process <span class="math inline">\(M^k\)</span> and the predictable compensator. Furthermore, we see that the only non-zero quadratic term is <span class="math inline">\(dW^\mathbb Q(t)dW^\mathbb Q(t)=dt\)</span> hence</p>
+<p><span class="math display">\[
+\frac{1}{2}\sum_{i,j=1}^2d(X_iX_j)(t)=\frac{1}{2}\sigma^2X^2(t)\ dt.
+\]</span></p>
+<p>Combining this with</p>
+<p><span class="math display">\[
+\Big(f^{Z(t)}(\mathbf X(t))-f^{Z(t)}(\mathbf X(t-))\Big)dN^\mathbf X(t)=\Delta X^{Z(t)}(t)
+\]</span></p>
+<p>we obtain the differential form
+<span class="math display">\[\begin{align*}
+d \Big(f^{Z(t)}(t,X(t))\Big)&amp;=f_t^{Z(t)}(t,X(t))\ dt+f_x^{Z(t)}(t,X(t))\ dX^c(t)\\
+&amp;+\frac{1}{2}f^{Z(t)}_{xx}(t,X(t))\sigma^2X^2(t)\ dt\\
+&amp;+\sum_{k:k\ne Z(t-)}\Big(f^{Z(t)}(t,X(t))-f^{Z(t-)}(t,X(t-))\Big)\ dN^k(t)\\
+&amp;+\Delta X^{Z(t)}(t)\\
+&amp;=f_t^{Z(t)}(t,X(t))\ dt+\frac{1}{2}f^{Z(t)}_{xx}(t,X(t))\sigma^2X^2(t)\ dt\\
+&amp;+f_x^{Z(t)}(t,X(t))rX(t)\ dt+f_x^{Z(t)}(t,X(t))\sigma X(t)\ dW^\mathbb Q(t)\\
+&amp;+f_x^{Z(t)}(t,X(t))\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\\
+&amp;+\sum_{k:k\ne Z(t-)}\Big(f^{Z(t)}(t,\chi^k(t,X(t-)))-f^{Z(t-)}(t,X(t-))\Big)\ dN^k(t)\\
+&amp;+\Delta X^{Z(t)}(t)
+\end{align*}\]</span>
+Notice we use that on the event <span class="math inline">\(Z(t)=k\)</span> and <span class="math inline">\(Z(t-)\ne k\)</span> the variable <span class="math inline">\(X\)</span> jumps to the value <span class="math inline">\(\chi^k(t,X(t-))\)</span>. If we choose <span class="math inline">\(f^j(t,x)=x\)</span> for all <span class="math inline">\(j\in E\)</span> we see that the above simplifies to
+<span class="math display">\[\begin{align*}
+d \Big(f^{Z(t)}(t,X(t))\Big)&amp;=rX(t)\ dt+\sigma X(t)\ dW^\mathbb Q(t)\\
+&amp;+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\\
+&amp;+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-))\ dN^k(t)\\
+&amp;+\Delta X^{Z(t)}(t)\ne dX(t)
+\end{align*}\]</span>
+And so we are left with an extra term <span class="math inline">\(\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\)</span>, where we should simply have had <span class="math inline">\(dX(t)\)</span> that is without the term <span class="math inline">\(\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\)</span>.
+</p>
+</div>
+<div id="correlated-brownian-motions" class="section level3 hasAnchor" number="16.1.7">
+<h3><span class="header-section-number">16.1.7</span> Correlated Brownian motions<a href="stochastic-integrals.html#correlated-brownian-motions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the previous section the <span class="math inline">\(d\)</span>-dimensional Brownian was assumed to have independent Brownian motions. However we may instead consider a variation where we have some dependence between the Brownian motions.</p>
 <p>This section has not been finished.
 </p>

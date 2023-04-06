@@ -143,17 +143,23 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 30, 2023}
+\date{April 06, 2023}
 
 %\usepackage{setspace}\onehalfspacing
-\AtBeginDocument{%
-  \addtolength\abovedisplayskip{0\baselineskip}%
-  \addtolength\belowdisplayskip{0\baselineskip}%
-  \addtolength\abovedisplayshortskip{-0.75\baselineskip}%
-  \addtolength\belowdisplayshortskip{-0.5\baselineskip}%
-}
+%\AtBeginDocument{%
+ % \addtolength\abovedisplayskip{0\baselineskip}%
+ % \addtolength\belowdisplayskip{0\baselineskip}%
+ % \addtolength\abovedisplayshortskip{0\baselineskip}% play with -0.75
+ % \addtolength\belowdisplayshortskip{0\baselineskip}%play with -0.5
+%}
 
 \begin{document}
+
+\setlength{\abovedisplayskip}{10pt}
+\setlength{\belowdisplayskip}{10pt}
+\setlength{\abovedisplayshortskip}{-10pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
 %\maketitle
 
 
@@ -2212,7 +2218,7 @@ V^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\
 
 \textbf{Proof.}
 
-Consider the martingale
+\emph{``Existence''} Consider the martingale
 \[
 m(t)=\mathbb E^{\mathbb Q}\left[\left. \int_0^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right].
 \]
@@ -2228,33 +2234,82 @@ e^{rt}dm(t)&=dB(t)+e^{rt}d\Big(e^{-rt}V^{Z(t)}(t,X(t))\Big)\\
 &-rV^{Z(t)}(t,X(t))\ dt+dV^{Z(t)}(t,X(t))\\
 &=b^{Z(t)}(t,X(t-))\ dt+\Delta B^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))dM^k(t)\\
 &+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))\lambda_{Z(t-)k}\ dt-rV^{Z(t)}(t,X(t))\ dt\\
-&+V_t^{Z(t)}(t,X(t))\ dt+V_x^{Z(t)}(t,X(t))\ dX(t)+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\ \big(dX(t)\big)^2\\
+&+V_t^{Z(t)}(t,X(t))\ dt+V_x^{Z(t)}(t,X(t))\ dX^c(t)+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\ \big(dX^c(t)\big)^2\\
 &+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)dM^k(t)\\
 &+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)\lambda_{Z(t-)k}(t)\ dt
 \end{align*}
 By the construction of \(X\) we have
 \begin{align*}
-dX(t)&=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
-&-dA^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
-&=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
-&-a^{Z(t)}(t,X(t-))\ dt -\Delta A^{Z(t)}(t,X(t-))\\
+dX^c(t)&=rX(t)\ dt+\pi(t,X(t-))\sigma X(t)\ dW^\mathbb Q(t)\\
+&-a^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
 &-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\ dt\\
-\big(dX(t)\big)^2&=\pi^2(t,X(t-))\sigma^2 X^2(t)\ dt + jumps
+\big(dX^c(t)\big)^2&=\pi^2(t,X(t-))\sigma^2 X^2(t)\ dt
 \end{align*}
 Hence we have the \(dt\) terms
 \begin{align*}
 e^{rt}\frac{d}{dt}m(t)&=-rV^{Z(t)}(t,X(t))+b^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t,X(t-))\lambda_{Z(t-)k}\\
 &+V_t^{Z(t)}(t,X(t))\\
-&+V_x^{Z(t)}(t,X(t))\\
-&\left(rX(t)-a^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\left(\varrho^{Z(t-)k}(t,X(t))+\chi^{Z(t)}(t,X(t-))-X(t-)\right)\right)\\
+&+V_x^{Z(t)}(t,X(t))\left(rX(t)-a^{Z(t)}(t,X(t-))-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\varrho^{Z(t-)k}(t,X(t))\right)\\
 &+\frac{1}{2}V_{xx}^{Z(t)}(t,X(t))\pi^2(t,X(t-))\sigma^2 X^2(t)\\
 &+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)\lambda_{Z(t-)k}(t)
 \end{align*}
-Giving the desired PDE. On discontinuity points
+Giving the desired PDE when setting equal to zero and rearranging. On discontinuity points where \(Z\) does not jump we have the gluing condition
 \[
-V^{Z(t)}\Big(t,X(t-)-\Delta A^{Z(t)}(t,X(t-)\Big)-V^{Z(t)}(t-,X(t-))=-\Delta B^{Z(t)}(t,X(t))
+V^{Z(t)}(t,X(t))=V^{Z(t)}(t,X(t-)+\Delta A^{Z(t)}(t,X(t-))=\Delta B^{Z(t)}(t,X(t-))+V^{Z(t-)}(t,X(t-))
 \]
-as desired. \(\blacksquare\)
+as desired.
+
+\emph{``Uniqueness''} Assume that \(f^{Z(t)}(t,X(t))\) satisfies the PDE with gluing and terminal condition. Then it holds that
+\begin{align*}
+e^{rt}d\left(e^{-rt}f^{Z(t)}(t,X(t))\right)&=-rf^{Z(t)}(t,X(t))\ dt+d\left(f^{Z(t)}(t,X(t))\right)\\
+&=-rf^{Z(t)}(t,X(t))\ dt\\
+&+f_t^{Z(t)}(t,X(t))\ dt+f^{Z(t)}_x(t,X(t))\ dX^c(t)\\
+&+\frac{1}{2}f_{xx}^{Z(t)}(t,X(t))\ (dX^c(t))^2\\
+&+f^{Z(t)}(t,X(t))-f^{Z(t-)}(t,X(t-))\\
+&=-rf^{Z(t)}(t,X(t))\ dt+f_t^{Z(t)}(t,X(t))\ dt\\
+&+f^{Z(t)}_x(t,X(t))\left(rX(t) + a^{Z(t)}(t)+\sum_{k:k \ne Z(t-)}\varrho_{Z(t-)k}(t,X(t))\lambda_{Z(t-)k}(t)\right)\ dt\\
+&+f_x^{Z(t)}(t,X(t))\sigma \pi(t,X(t))X(t)\ dW^\mathbb Q(t)\\
+&+\frac{1}{2}f_{xx}^{Z(t)}(t,X(t))\sigma^2 \pi^2(t,X(t))X^2(t)\ dt\\
+&+\sum_{k:k\ne Z(t-)}\left(f^k(t,\chi^k(t,X(t-)))-f^{Z(t-)}(t,X(t-)\right)\ dN^k(t)\\
+&+f^{Z(t)}(t,X(t-)+\Delta A^{Z(t)}(t,X(t-)))-f^{Z(t)}(t,X(t-))
+\end{align*}
+Integrating \(e^{-rt}f^{Z(t)}(t,X(t))\) on \([t,T]\) we have
+\begin{align*}
+e^{-rt}f^{Z(t)}(t,X(t))&=-\int_t^Te^{-ru}\left(-rf^{Z(u)}(u,X(u))+f_t^{Z(u)}(u,X(u))\right)\ du\\
+&-\int_t^Te^{-ru}f^{Z(u)}_x(u,X(u))\left(rX(u) + a^{Z(u)}(u)+\sum_{k:k \ne Z(u-)}\varrho_{Z(u-)k}(u,X(u))\lambda_{Z(u-)k}(u)\right)\ du\\
+&-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&-\int_t^Te^{-ru}\frac{1}{2}f_{xx}^{Z(u)}(u,X(u))\sigma^2 \pi^2(u,X(u))X^2(u)\ du\\
+&-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\underbrace{\left(f^k(u,\chi^k(u,X(u-)))-f^{Z(u-)}(u,X(u-)\right)}_{=R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))}\ dN^k(u)\\
+&-\sum_{t\le u\le T}e^{-ru}\left(\underbrace{f^{Z(u)}(u,X(u-)+\Delta A^{Z(u)}(u,X(u-)))-f^{Z(u)}(t,X(u-))}_{=-\Delta B^{Z(u)}(u,X(u-))}\right)\\
+&=-\int_t^Te^{-ru}\underbrace{\left(-rf^{Z(u)}(u,X(u))+f_t^{Z(u)}(u,X(u))+\mathcal D_xf^{Z(u)}(u,X(u))\right)}_{=-b^{Z(u)}(u,X(u-))-\sum_{k:k\ne Z(u-)}R^{Z(u-)k}(u,X(u-))\lambda_{Z(u-)k}(t)}\ du\\
+&-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)\\
+&-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)\lambda_{Z(u-)k}(u)\ du\\
+&+\sum_{t\le u\le T}e^{-ru}\Delta B^{Z(u)}(u,X(u-))\\
+&=-\int_t^Te^{-ru}\left(-b^{Z(u)}(u,X(u-))-\sum_{k:k\ne Z(u-)}\color{red}{R^{Z(u-)k}(u,X(u-))}\lambda_{Z(u-)k}(t)\right)\ du\\
+&-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(\color{red}{R^{Z(u-)k}(u,X(u-))}-b^{Z(u-)k}(u,X(u-))\right)\lambda_{Z(u-)k}(u)\ du\\
+&-\sum_{t\le u\le T}e^{-ru}\Delta B^{Z(u)}(u,X(u-))\\
+&-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&+\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)\\
+&=-\int_t^Te^{-ru}\left(-b^{Z(u)}(u,X(u-))-\sum_{k:k\ne Z(u-)}b^{Z(u-)k}(u,X(u-))\lambda_{Z(u-)k}(t)\right)\ du\\
+&+\sum_{t\le u\le T}e^{-ru}\Delta B^{Z(u)}(u,X(u-))\\
+&-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)\\
+&=\int_t^Te^{-ru}\ dB(u)\\
+&-\int_t^Te^{-ru}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&-\int_t^Te^{-ru}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)
+\end{align*}
+Multiplying with \(e^{rt}\) we have
+\begin{align*}
+f^{Z(t)}(t,X(t))&=\int_t^Te^{-r(u-t)}\ dB(u)\\
+&-\int_t^Te^{-r(u-t)}f_x^{Z(u)}(u,X(u))\sigma \pi(u,X(u))X(u)\ dW^\mathbb Q(u)\\
+&-\int_t^Te^{-r(u-t)}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)
+\end{align*}
+Taking expectation wrt. to \(\mathbb P\otimes \mathbb Q\) gives
+\[
+f^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P \otimes \mathbb Q}\left[\left.\int_t^Te^{-r(u-t)}\ dB(u)\ \right\vert\ Z(t),X(t) \right]
+\]
+since \(W^\mathbb Q\) is a martingale wrt. \(\mathbb Q\) and \(M^k\) is a martingale wrt. \(\mathbb P\). \(\blacksquare\)
 
 \hypertarget{with-profit-insurance-and-the-dynamics-of-the-surplus}{%
 \subsection{With-Profit Insurance and the Dynamics of the Surplus}\label{with-profit-insurance-and-the-dynamics-of-the-surplus}}
@@ -9990,6 +10045,94 @@ The dynamics is given in the multidimensional version of Ito's formula.
 \end{itemize}
 
 Obviously, one can write the differential in Ito's formula in many other ways including a matrix-wise version using the Hessian matrix \(H_{ij}=\frac{\partial^2 f}{\partial x^i\partial x^j}\).
+
+\hypertarget{the-multidimensional-ito-formula-with-states}{%
+\subsection{The multidimensional Ito Formula with states}\label{the-multidimensional-ito-formula-with-states}}
+
+\textbf{Definition. (\(n\)-dimensional Markov-jump process)} \emph{Let \(Z(t)\) be a Markov-jump process on a at most countable state space \(E\). Let \(\mathbf X(t)=(X_1(t),X_2(t),...,X_n(t))\in\mathcal X\) be a \(n\)-dimensional stochastic process. Let \(f : \mathcal X\to \mathbb R\) be a twice differential function. We call the process}
+
+\[
+f^{Z(t)}(\mathbf X(t))=f^{Z(t)}(X_1(t),...,X_n(t))
+\]
+
+\emph{a \(n\)-dimensional Markov-jump process on \(E\).}
+
+One could for instance have the 2 dimensional process \(f^{Z(t)}(t,X(t))\) where \(X\) has dynamics
+
+\[
+dX(t)=rX(t)\ dt + \sigma X(t)\ dW^\mathbb Q(t)
+\]
+
+i.e.~a geometric brownian motion. For such af process \(f\) we have the change of variables formula
+
+\textbf{Theorem. (Ito's formula for \(n\)-dimensional Markov-jump process)} \emph{Let \(f^{Z(t)}(\mathbf X(t))\) be a \(n\)-dimensional Markov-jump process on \(E\). The dynamics of \(f\) is given by}
+\begin{align*}
+d \Big(f^{Z(t)}(\mathbf X(t))\Big)&=\sum_{i=1}^n f_{x_i}^{Z(t)}(\mathbf X(t))\ dX_i^c(t)\\
+&+\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n f_{x_ix_j}^{Z(t)}(\mathbf X(t))\ d(X_iX_j)^c(t)\\
+&+\Big(f^{Z(t)}(\mathbf X(t))-f^{Z(t-)}(\mathbf X(t-))\Big)dN^Z(t)\\
+&+\Big(f^{Z(t)}(\mathbf X(t))-f^{Z(t)}(\mathbf X(t-))\Big)dN^\mathbf X(t)
+\end{align*}
+\emph{where \(f^{Z(t)}_{x_i}\) denotes the derivative \(\frac{\partial f^{Z(t)}}{\partial x_i}\) and \(f^{Z(t)}_{x_ix_j}\) denotes the second derivative \(\frac{\partial^2 f^{Z(t)}}{\partial x_i\partial x_j}\). In the above \(dX^c(t)\) refers to the continuous part of the differential form of \(X(t)\). Furthermore, the quadratic variation is given on differential form}
+
+\[
+d(XY)(t)=X(t-)dY(t)+Y(t-)dX(t)+dX(t)dY(t)
+\]
+
+\emph{where}
+
+\[
+d(XY)^c(t)=dX^c(t)dY^c(t).
+\]
+
+\emph{The processes \(N^Z\) and \(N^\mathbf X\) is defined as}
+\begin{align*}
+N^Z(t)&=\#\left\{ 0\le s\le t: Z(s)\ne Z(s-) \right\},\\
+N^\mathbf X(t)&=\#\left\{ 0\le s\le t: \mathbf X(s)\ne \mathbf X(s-) \right\}.
+\end{align*}
+
+Take the example \(X_1(t)=t\) and \(X_2=X\) is a geometric brownian motions with jumps according to \(Z\) and deterministic jumps given \(Z\) i.e.
+\begin{align*}
+dX(t)&=rX(t)\ dt+\sigma X(t)\ dW^\mathbb Q(t)+\Delta X^{Z(t)}(t)\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)dN^{k}(t)
+\end{align*}
+Then we know that
+\begin{align*}
+dX^c(t)&=rX(t)\ dt+\sigma X(t)\ dW^\mathbb Q(t)\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt
+\end{align*}
+Using that \(dN^k(t)=dM^k(t)+\lambda_k(t)\ dt\) for some martingale process \(M^k\) and the predictable compensator. Furthermore, we see that the only non-zero quadratic term is \(dW^\mathbb Q(t)dW^\mathbb Q(t)=dt\) hence
+
+\[
+\frac{1}{2}\sum_{i,j=1}^2d(X_iX_j)(t)=\frac{1}{2}\sigma^2X^2(t)\ dt.
+\]
+
+Combining this with
+
+\[
+\Big(f^{Z(t)}(\mathbf X(t))-f^{Z(t)}(\mathbf X(t-))\Big)dN^\mathbf X(t)=\Delta X^{Z(t)}(t)
+\]
+
+we obtain the differential form
+\begin{align*}
+d \Big(f^{Z(t)}(t,X(t))\Big)&=f_t^{Z(t)}(t,X(t))\ dt+f_x^{Z(t)}(t,X(t))\ dX^c(t)\\
+&+\frac{1}{2}f^{Z(t)}_{xx}(t,X(t))\sigma^2X^2(t)\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(f^{Z(t)}(t,X(t))-f^{Z(t-)}(t,X(t-))\Big)\ dN^k(t)\\
+&+\Delta X^{Z(t)}(t)\\
+&=f_t^{Z(t)}(t,X(t))\ dt+\frac{1}{2}f^{Z(t)}_{xx}(t,X(t))\sigma^2X^2(t)\ dt\\
+&+f_x^{Z(t)}(t,X(t))rX(t)\ dt+f_x^{Z(t)}(t,X(t))\sigma X(t)\ dW^\mathbb Q(t)\\
+&+f_x^{Z(t)}(t,X(t))\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(f^{Z(t)}(t,\chi^k(t,X(t-)))-f^{Z(t-)}(t,X(t-))\Big)\ dN^k(t)\\
+&+\Delta X^{Z(t)}(t)
+\end{align*}
+Notice we use that on the event \(Z(t)=k\) and \(Z(t-)\ne k\) the variable \(X\) jumps to the value \(\chi^k(t,X(t-))\). If we choose \(f^j(t,x)=x\) for all \(j\in E\) we see that the above simplifies to
+\begin{align*}
+d \Big(f^{Z(t)}(t,X(t))\Big)&=rX(t)\ dt+\sigma X(t)\ dW^\mathbb Q(t)\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\\
+&+\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-))\ dN^k(t)\\
+&+\Delta X^{Z(t)}(t)\ne dX(t)
+\end{align*}
+And so we are left with an extra term \(\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\), where we should simply have had \(dX(t)\) that is without the term \(\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\lambda_{Z(t-)k}(t)\ dt\).
+\pagebreak
 
 \hypertarget{correlated-brownian-motions}{%
 \subsection{Correlated Brownian motions}\label{correlated-brownian-motions}}

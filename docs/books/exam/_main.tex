@@ -90,17 +90,23 @@ non-life insurance, stochastic differential equations.},
 \makeatother
 \subtitle{Msc in Actuarial Mathematics}
 \author{Joakim Bilyk}
-\date{March 30, 2023}
+\date{April 06, 2023}
 
 %\usepackage{setspace}\onehalfspacing
-\AtBeginDocument{%
-  \addtolength\abovedisplayskip{0\baselineskip}%
-  \addtolength\belowdisplayskip{0\baselineskip}%
-  \addtolength\abovedisplayshortskip{-0.75\baselineskip}%
-  \addtolength\belowdisplayshortskip{-0.5\baselineskip}%
-}
+%\AtBeginDocument{%
+ % \addtolength\abovedisplayskip{0\baselineskip}%
+ % \addtolength\belowdisplayskip{0\baselineskip}%
+ % \addtolength\abovedisplayshortskip{0\baselineskip}% play with -0.75
+ % \addtolength\belowdisplayshortskip{0\baselineskip}%play with -0.5
+%}
 
 \begin{document}
+
+\setlength{\abovedisplayskip}{10pt}
+\setlength{\belowdisplayskip}{10pt}
+\setlength{\abovedisplayshortskip}{-10pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
 %\maketitle
 
 
@@ -3428,7 +3434,6 @@ As desired. \(\square\)
 \textbf{Solution (f).}
 
 Using that \(S_i\) is a GBM we have for \(j\ne i=1\):
-
 \begin{align*}
 E[S_i(T)S_j(T)]&=s_is_jE\left\{e^{\left(\mu_i-\frac{1}{2}\sigma_i^2\right)t+\sigma_i W_i(t)}e^{\left(\mu_j-\frac{1}{2}\sigma_j^2\right)t+\sigma_j W_j(t)}\right\}\\
 &=s_is_jE\left\{e^{\left(\mu_i-\frac{1}{2}\sigma_i^2\right)t+\sigma_i W_i(t)}\right\}E\left\{e^{\left(\mu_j-\frac{1}{2}\sigma_j^2\right)t+\sigma_j W_j(t)}\right\}\\
@@ -3436,9 +3441,7 @@ E[S_i(T)S_j(T)]&=s_is_jE\left\{e^{\left(\mu_i-\frac{1}{2}\sigma_i^2\right)t+\sig
 &=s_is_je^{\left(\mu_i+\mu_j-\frac{1}{2}(\sigma_i^2+\sigma_j^2)\right)t}e^{\frac{1}{2}t\sigma_i^2}e^{\frac{1}{2}t\sigma_j^2}\\
 &=s_is_je^{\left(\mu_i+\mu_j\right)t}=E[S_i(T)]E[S_j(T)].
 \end{align*}
-
 using that \(W_i\) and \(W_j\) are independent and the moment generating function for a normal random variable. Hence \(\text{Cov}_{i,j}(S_i(T)S_j(T))=0\) when \(i\) or \(j\) is one and \(i\ne j\). For \(i=2\) and \(j=3\) we have
-
 \begin{align*}
 E[S_2(T)S_3(T)]&=s_is_jE\left\{e^{\left(\mu_2-\frac{1}{2}\sigma_2^2\right)t+\sigma_i W_2(t)}e^{\left(\mu_3-\frac{1}{2}\sigma_3^2\right)t+\sigma_3 W_2(t)}\right\}\\
 &=s_2s_3e^{\left(\mu_2+\mu_3-\frac{1}{2}(\sigma_2^2+\sigma_3^2)\right)t}E\left\{e^{\sigma_3 W_2(t)}e^{\sigma_3 W_2(t)}\right\}\\
@@ -3447,14 +3450,11 @@ E[S_2(T)S_3(T)]&=s_is_jE\left\{e^{\left(\mu_2-\frac{1}{2}\sigma_2^2\right)t+\sig
 &=s_2s_3e^{\left(\mu_2+\mu_3-\frac{1}{2}(\sigma_2^2+\sigma_3^2)\right)t+\frac{1}{2}t(\sigma_2^2 +\sigma_3^2+2\sigma_2\sigma3 )}\\
 &=s_2s_3e^{\left(\mu_2+\mu_3-\sigma_2\sigma3\right)t}
 \end{align*}
-
 hence we have
-
 \begin{align*}
 \text{Cov}[S_2(T)S_3(T)]&=s_2s_3e^{\left(\mu_2+\mu_3-\sigma_2\sigma3\right)t}-s_2s_3e^{(\mu_2+\mu_3)t}\\
 &=s_2s_3e^{(\mu_2+\mu_3)t}\Big(e^{\sigma_2\sigma3t}-1\Big).
 \end{align*}
-
 Then the covarince matrix is on the from
 
 \[
@@ -3473,13 +3473,10 @@ In the above the * is simply \(\text{Var}(S_i(T))\). \(\square\)
 \textbf{Solution (g).}
 
 The model is arbitrage free and complete if the Girsanov kernel is unique (and exists). We have as usual the equation:
-
 \begin{align*}
 \sigma \varphi=r-\mu
 \end{align*}
-
 or on matrix form
-
 \begin{align*}
 \begin{bmatrix}
 \sigma_1 & 0\\
@@ -3496,7 +3493,6 @@ r- \mu_2\\
 r-\mu_3
 \end{bmatrix}
 \end{align*}
-
 hence \(\varphi =\frac{r-\mu_1}{\sigma_1}\) and
 
 \[
@@ -3525,12 +3521,693 @@ as desired. It is now left to show that the Novikov condition is satisfied. This
 
 Some content
 
-\hypertarget{probabilistic-machine-learning}{%
-\chapter{Probabilistic Machine Learning}\label{probabilistic-machine-learning}}
+\hypertarget{topics-in-life-insurance-mathematics}{%
+\chapter{Topics in Life Insurance Mathematics}\label{topics-in-life-insurance-mathematics}}
+
+\hypertarget{question-1-interest-and-mortality-rate-models}{%
+\section{Question 1: Interest and mortality rate models}\label{question-1-interest-and-mortality-rate-models}}
+
+\begin{itemize}
+\tightlist
+\item
+  Introduce the spot short rate \(\{r(t)\}_{t\ge 0}\) and the accumulator
+  \begin{align*}
+    B_t=e^{\int_0^tr(v)\ dv}
+    \end{align*}
+\item
+  Define the Zero-coupon bond \(B(t,T)\) via the \(\mathbb Q\)-martingale \(B(t,T)/B_t\).
+\item
+  Derive the dynamics of \(m(t)=B(t,T)/B_t\) via \(p(t,r(t))=B(t,T)\)
+\item
+  Establish the Term structure equation
+\item
+  Consider the affine model family
+  \begin{align*}
+    p(t,r)=e^{f(t)r+g(t)}
+    \end{align*}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Derive the derivatives of \(f\) and \(g\) and boundary condition
+  \item
+    Give an example with the Vasicek model
+    \begin{align*}
+    \alpha(t,r)=(a-br),\qquad \sigma(t,r)=\sigma^2
+    \end{align*}
+  \item
+    Solve for \(r\).
+  \end{itemize}
+\end{itemize}
 
 \newpage
 
-\printindex
+\hypertarget{question-2-matrix-approach-to-life-insurance-models}{%
+\section{Question 2: Matrix-approach to life insurance models}\label{question-2-matrix-approach-to-life-insurance-models}}
+
+\begin{itemize}
+\tightlist
+\item
+  Define markov process \(Z(t)\) for both markov jump interest rates and policy markov process
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Arrange states in \(Z(t)=(Z_b(t),Z_r(t))\) in grid via \(k\mapsto k(i,j) = (i-1)p_r+j\)
+  \end{itemize}
+\item
+  Define payments in terms of \(\mathbf B\) and \(\Delta (\mathbf b(t))\) in \(Z\) terms.
+\item
+  Define transition rates \(\mathbf \Lambda(t)=\mathbf \Lambda_1(t)+\mathbf \Lambda_2(t)\).
+\item
+  Define rewards \(\mathbf R(t)=\mathbf \Lambda_1(t)\bullet \mathbf B(t)+\Delta(\mathbf b(t))\).
+\item
+  Define statewise reserves \(\mathbf V\)
+\item
+  Show the theorem
+  \begin{align*}
+    \mathbf V(s,t)=\int_s^t \mathbf D(s,u)\mathbf R(u)\mathbf P(u,t)\ du
+    \end{align*}
+  by showing it holds for all \(i,j\).
+\item
+  If time write Thiele's differential equations.
+\end{itemize}
+
+\newpage
+
+\hypertarget{question-3-unit-linked-life-insurance-models}{%
+\section{Question 3: Unit-linked life insurance models}\label{question-3-unit-linked-life-insurance-models}}
+
+\begin{itemize}
+\tightlist
+\item
+  Briefly say that the setting is the Black Scholes model. With \(S\) and \(Z\) as independent stochastic processes.
+\item
+  Define the payment process \(A\) given by
+  \begin{align*}
+    dA(t)&=a^{Z(t)}(t)\ dt+\Delta A^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}a^{Z(t-)k}(t)dN^k
+    \end{align*}
+\item
+  Define the capital process \(X\) as the
+  \begin{align*}
+    dX(t)&=rX(t)\ dt+\sigma \pi(t,X(t))X(t)\ dW^{\mathbb Q}(t)\\
+    &-dA^{Z(t)}(t,X(t-))\\
+    &-\sum_{k:k\ne Z(t-)}\lambda_{Z(t-)k}\Big(\chi^k(t,X(t-)+a^{Z(t-)k}(t,X(t-))-X(t-)\Big)\ dt\\
+    &-\sum_{k:k\ne Z(t-)}\Big(\chi^k(t,X(t-))-X(t-)\Big)\ dN^k(t)
+    \end{align*}
+\item
+  \(A\) governs the capital allocation and \(B\) is the actual payments between both parties. Perhaps define \(B\) or say it is define just like \(A\).
+\item
+  I will establish a PDE that the reserve satisfies \(V\) is based on \(B\) and \(\mathbb P\otimes \mathbb Q\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Start by constructing the martingale \(m\)
+  \item
+    Explain the structure of the proof: 1) Set \(dt=0\) and 2) identify gluing.
+  \item
+    Derive dynamics of \(m\)
+  \item
+    Insert \(X(t)=\chi^k(t,X(t-))\) on \(Z(t)=k\) and \(Z(t-)\ne k\).
+  \item
+    Use compensators to get all \(dt\)-terms
+  \item
+    Rearrange
+  \item
+    Remember payments \(\Delta A\) and \(\Delta B\) in the jumps (glueing)
+  \end{itemize}
+\end{itemize}
+
+\textbf{Notes.} Remember that \(W\) has \(\mathbb Q\) dynamics
+\begin{align*}
+dW(t)=dW^\mathbb Q(t)+\frac{r-\mu}{\sigma}\ dt
+\end{align*}
+hence
+\begin{align*}
+dX(t)&=((\mu-r)\pi(t,X(t))+r)X(t)\ dt+\pi(t,X(t))\sigma X(t)\ dW(t)+...\\
+&=(\color{red}{(\mu-r)\pi(t,X(t))}+r)X(t)\ dt+\pi(t,X(t))\sigma X(t)\ dW^\mathbb Q+\color{red}{(r-\mu)\pi(t,X(t))}X(t)\ dt+...\\
+&=rX(t)\ dt+\pi(t,X(t))\sigma X(t)\ dW^\mathbb Q+...
+\end{align*}
+
+\newpage
+
+\hypertarget{question-4-with-profit-life-insurance-models}{%
+\section{Question 4: With-profit life insurance models}\label{question-4-with-profit-life-insurance-models}}
+
+\begin{itemize}
+\tightlist
+\item
+  Briefly, explains the setup with first order basis and where there are equivalence.
+\item
+  Define \(B\) and \(D\) and explain the role of \(D\).
+\item
+  Decompose the balance with assets \(Y_0\) and \(V^*\) evolving with
+  \begin{align*}
+    Y_0(t)=\int_0^t\frac{G(t)}{G(s)}d(-(B+D)(s))
+    \end{align*}
+\item
+  Derive the dynamics of the surplus \(Y(t)=Y_0(t)-V^*(t)\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Choose that \(q\) amount of the surplus is invested in \(S\).
+    \begin{align*}
+    q(t)=\pi(t,Y(t))Y(t)/Y_0(t)
+    \end{align*}
+  \item
+    Derive \(dY_0\) and \(dV^*\).
+  \item
+    Combine and obtain \(dY\)
+  \item
+    Identify \(R\) and \(C\).
+  \end{itemize}
+\item
+  Find a unit-link type PDE
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Assume only rate contributions and dividends (and lump sum at the end)
+  \item
+    Compare \(dY\) to \(dX\) in unit-link and see that \(A=D-C\)
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{quantative-risk-management}{%
+\chapter{Quantative Risk Management}\label{quantative-risk-management}}
+
+\hypertarget{emne-1-risk-measures}{%
+\section{Emne 1: Risk measures}\label{emne-1-risk-measures}}
+
+\begin{itemize}
+\tightlist
+\item
+  Risk measures, axioms, theoretical properties of VaR and ES,loss r.v.'s and operators.
+\item
+  Forelæsning 21/11, 23/11
+\item
+  Introduktion: Definition af risk measure (axiomerne), inverse fordelinger, hvad beskriver et risk measure
+\item
+  Bevis: VaR opfylder ikke axiomerne. ES udregninerne med tegning i Rias hæfte (uge 1 punkt 2).
+\item
+  Eksempel: VaR i Black Scholes model.
+\end{itemize}
+
+\hypertarget{emne-2-var-and-es}{%
+\section{Emne 2: VaR and ES}\label{emne-2-var-and-es}}
+
+\begin{itemize}
+\tightlist
+\item
+  VaR and ES: calculational methods (Var-Cov methods, empirical methods, confidence intervals, Monte Carlo andimportance sampling, bootstrap).
+\item
+  Forelæsning 23/11, 28/11
+\item
+  Indtroduktion: Definition af VaR og ES.
+\item
+  Bevis: udlede emperisk VaR, ES og confidence bounds (Hav afleveringen i baghovedet som motivation for andre metoder)
+\item
+  Diskussion: Forskellige måder at simulere på (Monte Carlo, importance sampling/rare event simulation), da vi ikke har nok data i halen.
+\end{itemize}
+
+\hypertarget{emne-3-evt}{%
+\section{Emne 3: EVT}\label{emne-3-evt}}
+
+\begin{itemize}
+\tightlist
+\item
+  Extreme value theory (and its general relationship to problems in risk management).
+\item
+  Forelæsning 30/11.
+\item
+  Introduktion: Tale om hvad det vil sige at være regularly eller slowly varying.
+\item
+  Bevis: Udlede Hill's estimator (Karamata's thm)
+\item
+  Risk management afslutning: Hvordan vil man aflæse et Hill plot (fortolkning). Diskussion om forskelle/ligheder til POT (bruges begge til at bestemme tail index alfa).
+\end{itemize}
+
+\hypertarget{emne-4-elliptical-distributions}{%
+\section{Emne 4: Elliptical distributions\}}\label{emne-4-elliptical-distributions}}
+
+\begin{itemize}
+\tightlist
+\item
+  Elliptical distributions.
+\item
+  Forelæsning 5/12, 7/12
+\item
+  Introduktion: spheriske og eliptiske fordelinger. (Karakteristiske funktioner)
+\item
+  Bevis: Konstruktion af elliptisk ud fra sfærisk (og deres egenskaber). Proposition ALLE TO VEJE (Amalies noter).
+\item
+  Risk management afslutning: disadvantage of elliptical dist.: all coordinates have same dist, application in portfolio investment
+\end{itemize}
+
+\hypertarget{emne-5-copulas-i}{%
+\section{Emne 5: Copulas I}\label{emne-5-copulas-i}}
+
+\begin{itemize}
+\tightlist
+\item
+  Basics, Sklar's Theorem, measures of dependence, statistical fitting to data.
+\item
+  Forelæsning 7/12, 12/12, 19/12
+\item
+  Introduktion: Defintion af copula, egenskaber af generalisede inverse, tegning
+\item
+  Bevis: Sklar's Theorem
+\item
+  Afslutning: Fitting copulas to data (correlation, tail dependence) -\textgreater{} Tail dependence (upper tail), (kendall's tau, spearmans rho)
+\end{itemize}
+
+\hypertarget{emne-6-copulas-ii}{%
+\section{Emne 6: Copulas II}\label{emne-6-copulas-ii}}
+
+\begin{itemize}
+\tightlist
+\item
+  Examples (e.g.~Gaussian, elliptical, t, Archimedean, simulating Archimedean copulas), Frechet bounds.
+\item
+  Forelæsning 12/12, 14/12
+\item
+  Introduktion: Definition af copula, klasser af copula, tegning. Eksempel med Archimedean copulas (Clayton, Frank, Gumbel) og udledning af én (med definition af archimeadean copula).
+\item
+  Bevis: Frechet bounds i begge ender. (Amalies noter)
+\item
+  Eksempel: comonotonicity/counter monotonicity, (generelt bound, gælder for alle copulas)
+\end{itemize}
+
+\hypertarget{emne-7-credit-risk-i}{%
+\section{Emne 7: Credit Risk I}\label{emne-7-credit-risk-i}}
+
+\begin{itemize}
+\tightlist
+\item
+  Merton's model and its extensions (i.e.~KMV, multidimensional Merton)
+\item
+  Forelæsning 21/12, 4/1
+\item
+  Introduktion: Definition of credit risk. Different types of methods to describe credit risk (Merton, mundtligt), factor models
+\item
+  Bevis: Merton model and -DD. Extension to multivariate Merton.
+\item
+  Perspektiver: VaR, factor models (common factors and firm-specific factors).
+\end{itemize}
+
+\hypertarget{emne-8-credit-risk-ii}{%
+\section{Emne 8: Credit Risk II}\label{emne-8-credit-risk-ii}}
+
+\begin{itemize}
+\tightlist
+\item
+  Portfolio credit risk management; ``reduced form models'' including the various mixture models
+\item
+  Forelæsning 2/1, 4/1
+\item
+  Introduktion: Definition of credit risk. Different methods to describe credit risk, i.e.~Merton and reduced form (probit normal, bernoulli, beta mixture, poisson mixture)
+\item
+  Bevis: Probit normal mixture model and its VaR, Basel formula with Vasicek LLN.
+\item
+  Afslutning: Sammenligning af modeller.
+\item
+  Perspektivering til operational risk.
+\end{itemize}
+
+\hypertarget{probabilistic-machine-learning}{%
+\chapter{Probabilistic Machine Learning}\label{probabilistic-machine-learning}}
+
+\hypertarget{part-one}{%
+\section{Part one}\label{part-one}}
+
+In the first part of the exam one draws a topic. The student must breifly explain the topics and at least include one proof.
+
+\hypertarget{question-1-linear-models-with-penalization}{%
+\subsection{Question 1: Linear models with penalization}\label{question-1-linear-models-with-penalization}}
+
+\begin{itemize}
+\tightlist
+\item
+  Define model framework:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Squared loss \(L(y_1,y_2)=(y_1-y_2)^2\)
+  \item
+    Regression \(Y\in \mathbb R\)
+  \item
+    Assume linear model i.e.~\(m^*(X)=\mathbb E[Y\ \vert\ X]=X^\top \beta^*\)
+  \end{itemize}
+\item
+  Show that the excess risk is
+  \begin{align*}
+    R(\hat m)-r(m^*)=\Vert \Sigma^{1/2}(\hat\beta - \beta^*)\Vert_2^2
+    \end{align*}
+\item
+  Use this to show the excess risk of the least square estimator
+\end{itemize}
+
+\hypertarget{question-2-nonparametrics}{%
+\subsection{Question 2: Nonparametrics}\label{question-2-nonparametrics}}
+
+\begin{itemize}
+\tightlist
+\item
+  Define model framework:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Squared loss \(L(y_1,y_2)=(y_1-y_2)^2\)
+  \item
+    Regression \(Y\in \mathbb R\)
+  \item
+    Assume continuous Bayes rule i.e.~\(m^*(X)=\mathbb E[Y\ \vert\ X]=X^\top \beta^*\)
+    \begin{align*}
+    m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\ m \ \text{is L-Lipschitz continuous}\}
+    \end{align*}
+    Define what \(L\)-Lipschitz contnuous functions are.
+  \end{itemize}
+\item
+  Define linear smoothers
+  \begin{align*}
+    m(x)=\sum_{i=1}^nw_i(x) Y_i
+    \end{align*}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Consider the KNN estimator with \(w_i(x)=\frac{1}{k}1_{\{[0,\Vert x-X_i\Vert_k\}}(\Vert x-X_i\Vert)\) explain subscript
+  \item
+    Derive an upper bound for the excess risk of KNN
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{question-3-additive-models}{%
+\subsection{Question 3: Additive models}\label{question-3-additive-models}}
+
+\begin{itemize}
+\tightlist
+\item
+  Additive models assume
+  \begin{align*}
+    m(x)=m_1(x_1)+...+m_p(x_p)
+    \end{align*}
+  so the effects are independent.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hence the parameters grow linearly where they grow exponentially in interactive models.
+  \end{itemize}
+\item
+  Define splines
+\item
+  Transform \(X\) and show that
+  \begin{align*}
+    \hat\beta = (\mathbf G^\top \mathbf G)^{-1}\mathbf G^\top \mathbf Y
+    \end{align*}
+\item
+  Show that in the penalized case the solution is a special case of ridge regression
+\end{itemize}
+
+\hypertarget{question-4-model-explanation-and-fairness}{%
+\subsection{Question 4: Model explanation and fairness}\label{question-4-model-explanation-and-fairness}}
+
+\hypertarget{part-two}{%
+\section{Part two}\label{part-two}}
+
+In the second part of the exam one draws an algorithm. The student must explain the algorithm and be prepared to defend why it works and in which circumstances it is prefered.
+
+\hypertarget{question-1-backfitting}{%
+\subsection{Question 1: Backfitting}\label{question-1-backfitting}}
+
+\begin{itemize}
+\tightlist
+\item
+  A method of fitting an additive model
+  \begin{align*}
+    Y=\alpha +\sum_{i=1}^pm^*_i(X_i)+\varepsilon
+    \end{align*}
+\end{itemize}
+
+The algorithm:
+
+\begin{itemize}
+\tightlist
+\item
+  Initialize with
+  \begin{align*}
+    \hat \alpha = \frac{1}{n}\sum_{i=1}^n Y_i,\qquad\forall j=1,...,p\ :\ \hat m_j\equiv 0
+    \end{align*}
+\item
+  For \(j=1,...,p\) do
+
+  \begin{enumerate}
+  \def\labelenumi{(\alph{enumi})}
+  \tightlist
+  \item
+    Calculate
+    \begin{align*}
+    \tilde Y_j=Y-\alpha-\sum_{k:k\ne j}\hat m_k(X_{k})
+    \end{align*}
+  \item
+    Smooth an estimator
+    \begin{align*}
+    \hat m_j(x_j)=\text{Smooth}(X_j,\tilde Y_j)
+    \end{align*}
+  \item
+    Center smoother
+    \begin{align*}
+    \hat m_j(x_j)=\hat m_j(x_j)-\frac{1}{n}\sum_{i=1}^n \hat m_j(X_{ij})
+    \end{align*}
+  \end{enumerate}
+\item
+  The estimator is
+  \begin{align*}
+    \hat m(x)=\hat\alpha + \sum_{j=1}^p\hat m_j(x_j)
+    \end{align*}
+\end{itemize}
+
+\hypertarget{question-2-cart-algorithm}{%
+\subsection{Question 2: CART algorithm}\label{question-2-cart-algorithm}}
+
+\begin{itemize}
+\tightlist
+\item
+  A method of constructing a binary classification or regression tree \(T\).
+\end{itemize}
+
+The algorithm:
+
+\begin{itemize}
+\tightlist
+\item
+  Choose loss function \(Q\) and a threshold \(q\).
+\item
+  Initialize tree as \(T=\{\mathcal X\}\).
+\item
+  For a node \(R\) define
+  \begin{align*}
+    Q_n(R)=\sum_{i : X_{i\cdot} \in R}\left( Y_i - \frac{1}{\vert R\vert}\sum_{k : X_{k\cdot}\in R} Y_k\right)^2
+    \end{align*}
+\item
+  Define \(\mathcal R_q=\{R\in T : C(R)>c\}\) for some criteria function \(C : \mathbb X\to\mathbb R_+\) and \(c>0\). While \(\mathcal R_q\ne \emptyset\) choose some \(R\in \mathcal R_q\) and do:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For all predictors \(j=1,...,p\) do:
+
+    \begin{enumerate}
+    \def\labelenumi{(\alph{enumi})}
+    \tightlist
+    \item
+      Define
+      \begin{align*}
+      R(j)=\{x_j\ \vert\ \exists (x_1,...,x_{j-1},x_{j+1},...,x_p)\ s.t.\ (x_1,...,x_{j-1},x_j,x_{j+1},...,x_p)\in R \}
+      \end{align*}
+    \item
+      Define for each \(s_j\in R(j)\)
+      \begin{align*}
+      R^+(j,s_j)=\{x\in R\ \vert\ x_j> s_j\},\qquad R^-(j,s_j)=\{x\in R\ \vert\ x_j\le s_j\}
+      \end{align*}
+    \item
+      Define the set \(\overline R=\{(j,s_j)\ \vert\ s_j\in R(j)\}\).
+    \item
+      Split the node \(R\) into \(R^+(j^*,s^*)\) and \(R^-(j^*,s^*)\) for
+      \begin{align*}
+      (j^*,s^*)=\underset{s_j\in \overline R}{\text{arg min}}\left\{ Q_n(R^+(j,s_j))+Q_n(R^-(j,s_j))\right\}
+      \end{align*}
+    \item
+      Update tree \(T=(T\setminus \{R\})\cup \{R^+(j^*,s^*),R^-(j^*,s^*)\}\).
+    \end{enumerate}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{question-3-alpha-pruning}{%
+\subsection{Question 3: Alpha-pruning}\label{question-3-alpha-pruning}}
+
+\begin{itemize}
+\tightlist
+\item
+  Growing a tree \(T_{\max}\) may lead to overfit. Solution: pruning branches.
+\item
+  Context: We have a objective risk measure \(R\) based on \(Q_n\) which favors smaller nodes/branches. Where
+  \begin{align*}
+    R(T_t)=\sum_{t'\in \tilde T_t}Q_n(t')
+    \end{align*}
+  with \(T_t\) being the branch with root \(t\) and \(\tilde T_t\) is the terminal nodes in \(T_t\). We penalizes the size of branch by
+  \begin{align*}
+    \widetilde R_\alpha(T_t)=R(T_t)+\alpha \vert T_t\vert
+    \end{align*}
+  where \(\vert T_t\vert\) is the number of terminal leaves in \(T_t\) (a tree can be a single leaf \(\tilde T_t=\{R\}\)).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For any note \(t\) and a branch \(T_t\) we have \(\widetilde R_\alpha(T_t)<\widetilde R_\alpha(t)\) for \(\alpha\) small and \(\frac{\partial}{\partial \alpha}\widetilde R_\alpha(T)=\vert T\vert\) hence grows faster for the branch.
+  \item
+    For some \(\alpha\) we have \(\widetilde R_\alpha(T_t)=\widetilde R_\alpha(t)\)
+  \item
+    We can gather a sequence \(0=\alpha_0<\alpha_1<...<\alpha_{\max}\) with \(T_0\supset T_1\supset ... \supset T_{\max}\) and define the mapping \(\alpha \mapsto T_{n,\alpha}\) via the sequence.
+  \end{itemize}
+\end{itemize}
+
+The algorithm
+
+\begin{itemize}
+\tightlist
+\item
+  Set \(k=0\). Initiate by pruning all terminal leaf pairs with
+  \begin{align*}
+    R(t)=R(t_L)+R(t_R)
+    \end{align*}
+  The first pair \((\alpha_0,T_0)=(0,T_n-t')\) where \(t'\) is the terminal nodes satisfying the above.
+\item
+  While \(\vert T_k\vert >1\) do:
+
+  \begin{enumerate}
+  \def\labelenumi{(\alph{enumi})}
+  \tightlist
+  \item
+    For all \(t\in T_k\) we can find the smallest \(\alpha\) such that \(R_\alpha(t)=R_\alpha(T_t)\) and define
+    \begin{align*}
+    g(t)=\frac{R(t)-R(T_t)}{\vert T_t\vert -1}
+    \end{align*}
+  \item
+    The next \(\alpha_{k+1}\) is then
+    \begin{align*}
+    \alpha_{k+1}=\underset{t\in T_k}{\text{arg min}}(g(t)).
+    \end{align*}
+  \item
+    Prune all terminal notes in \(T_t\) where \(g(t)=\alpha_{k+1}\).
+  \item
+    Collect the pruned tree and the \(\alpha\) in \((\alpha_{k+1},T_{k+1})\).
+  \item
+    Set \(k=k+1\).
+  \end{enumerate}
+\end{itemize}
+
+\hypertarget{question-4-gradient-boosting-machine}{%
+\subsection{Question 4: Gradient Boosting Machine}\label{question-4-gradient-boosting-machine}}
+
+We construct an estimator by improving on the previous for an amount of iterations.
+
+\begin{itemize}
+\tightlist
+\item
+  Initialize with
+  \begin{align*}
+    m^{(0)}(x)=\underset{m\in \mathcal G}{\text{arg min}}\sum_{i=1}^n L(Y_i,m(X_i)).
+    \end{align*}
+\item
+  For \(b= 1,..., B\) do
+
+  \begin{enumerate}
+  \def\labelenumi{(\alph{enumi})}
+  \tightlist
+  \item
+    Calculate the derivative
+    \begin{align*}
+    g_{ib}=-\left.\frac{\partial L(Y_i,y)}{\partial y}\right\vert_{y=m^{(b-1)}(X_i)}
+    \end{align*}
+  \item
+    Train \(\gamma_b\) on \(\{X,g_b\}\)
+  \item
+    Search for optimal learning rate
+    \begin{align*}
+    \alpha_b=\underset{\alpha}{\text{arg min}}\sum_{i=1}^n L(Y_i,m^{(b-1)}(X_i) +\alpha\gamma_b(X_i)).
+    \end{align*}
+  \item
+    Update
+    \begin{align*}
+    m^{(b)}(x)=m^{(b)}(x) + \alpha_b\gamma_b(x)
+    \end{align*}
+  \end{enumerate}
+\end{itemize}
+
+\hypertarget{question-5-neural-network}{%
+\subsection{Question 5: Neural Network}\label{question-5-neural-network}}
+
+Neural networks are defined by the amount of layers and the activation functions \(\{g_k\}_{k=0,...,l}\) where \(l\) is the number of hidden layers.
+
+The estimator is
+
+\[
+\hat m(x)=g^{(l)}\left(\beta^{(l)}_0+\beta^{(l)\top}g^{(l-1)}\left(\beta^{(l-2)}_0+\beta^{(l-2)\top}g^{(l-2)}\left(...\right)\right) \right)
+\]
+
+or
+
+\[
+\hat m (x)=\left(g^{(l)}\circ \beta^{(l)}\circ g^{(l-1)}\circ \cdots \circ g^{(0)} \circ\beta^{(0)}\right)(x)
+\]
+
+Backpropogation and Gradient decent:
+
+\begin{itemize}
+\tightlist
+\item
+  Assume \(l=1\).
+\item
+  We initialize \(\beta^{(k)}=(1,...,1)^\top\) for \(k=0,1\).
+\item
+  We set \(b=0\) and
+  \begin{align*}
+    \hat m^{(b)}(\beta^{(0),b},\beta^{(1),b};x)=g^{(1)}\left(\beta^{(1),b}_0 + \sum_{k=1}^{K}\beta_k^{(1),b}g^{(0)}\left(\beta^{(0),b}_0+\sum_{i=1}^n\beta^{(0),b}_ix_i\right)\right)
+    \end{align*}
+\item
+  For \(b=1,...,B\) do
+
+  \begin{enumerate}
+  \def\labelenumi{(\alph{enumi})}
+  \tightlist
+  \item
+    Calculate for \(k=0,1\)
+    \begin{align*}
+    \rho_{ib}^{(k)}=-\left.\frac{\partial L(Y_i,y)}{\partial \beta^{(k)}}\right\vert_{y=\hat m^{(b-1)}(X_i)}
+    \end{align*}
+    and define
+    \(\rho_{b}^{(k)}=\frac{1}{n}\sum_{i=1}^n\rho_{ib}^{(k)}\).
+  \item
+    Optional: Calculate optimal decent for \(k=0,1\):
+    \begin{align*}
+    \gamma_{b}=\underset{\gamma \in (0,\infty)^{l+1}}{\text{arg min}}\sum_{i=1}^n L(Y_i,m(\beta^{(0),b-1}+\gamma_0\rho_b^{(0)},\beta^{(1),b-1}+\gamma_1\rho_b^{(1)},X_i)).
+    \end{align*}
+    else simply define learning rate \(\gamma_b^{(k)}=\gamma\) always.
+  \item
+    Update estimator with \(\beta^{(k),b}=\beta^{(k),b-1}+\gamma_{b}^{(k)}\rho_b^{(k)}\).
+  \end{enumerate}
+\item
+  Return \(\hat m(x)=\hat m^{(B)}(x)\).
+\end{itemize}
+
+\hypertarget{question-6-tree-shap}{%
+\subsection{Question 6: Tree SHAP}\label{question-6-tree-shap}}
 
   \bibliography{book.bib,packages.bib}
 
