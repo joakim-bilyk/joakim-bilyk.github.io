@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-04-06" />
+<meta name="date" content="2023-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1075,6 +1075,58 @@ V^{Z(t)}(t,Y(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\
 </div>
 <div id="the-pure-case-of-cash-dividends" class="section level3 hasAnchor" number="4.6.6">
 <h3><span class="header-section-number">4.6.6</span> The Pure Case of Cash Dividends<a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-cash-dividends" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We consider as before the payment streams
+<span class="math display">\[\begin{align*}
+dB(t)&amp;=b^{Z(t)}(t)\ dt + \Delta B^{Z(t)}+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)dN^k(t),\\
+dD(t)&amp;=\delta^{Z(t)}(t)\ dt+\Delta D^{Z(t)}(t)d1_{\{T\}}(t),\\
+dC(t)&amp;=c^{Z(t)}(t)\ dt,\\
+dY(t)&amp;=r(t)Y(t)\ dt + \sigma\pi(t,Y(t)) Y(t)\ dW^\mathbb Q(t) + d(C-D)(t)\\
+&amp;=r(t)Y(t)\ dt + \sigma\pi(t,Y(t)) Y(t)\ dW^\mathbb Q(t)\\
+&amp;+(c^{Z(t)}(t)-\delta^{Z(t)}(t))\ dt-\Delta D^{Z(t)}(t)d1_{\{T\}}(t),
+\end{align*}\]</span>
+We will now consider a contract like the above but where all dividends is held in cash in the insurance company and payed out when the contract is terminated. This is the case where</p>
+<p><span class="math display">\[
+\forall t\ge 0:\qquad\delta^j(t)0,\quad\Delta D^j(t,y)=y.
+\]</span></p>
+<p>We then claim that the reserve may be decomposed as</p>
+<p><span class="math display">\[
+V^j(t,y)=f^j(t)+y
+\]</span></p>
+<p>i.e. as a pure time component and linear in the surplus. When considering the PDE for the reserve we can put in</p>
+<p><span class="math display">\[
+V_t^j=f_t^j,\quad V_y^j=1,\quad V_{yy}^j=0,
+\]</span></p>
+<p>hence we optain
+<span class="math display">\[\begin{align*}
+f_t^j(t)&amp;=rf^j(t)+ry-b^j(t)-\sum_{k:k\ne j}\lambda_{jk}(t)\Big(b^{jk}(t)+f^k(t)-f^j(t)\Big)\\
+&amp;-ry-c^j(t)\\
+&amp;=rf^j(t)-b^j(t)-c^j(t)-\sum_{k:k\ne j}\lambda_{jk}(t)\Big(b^{jk}(t)+f^k(t)-f^j(t)\Big),\\
+f^j(t)+y&amp;=\Delta B^j(t)+f^j(t-)+y
+\end{align*}\]</span>
+with terminal condition</p>
+<p><span class="math display">\[
+f^j(T-)+y=\Delta D^j(T)+\Delta B^j(T)=y+\Delta B^j(T)
+\]</span></p>
+<p>hence we have the ODE for <span class="math inline">\(f\)</span> given by
+<span class="math display">\[\begin{align*}
+f_t^j(t)&amp;=rf^j(t)-b^j(t)-c^j(t)-\sum_{k:k\ne j}\lambda_{jk}(t)\Big(b^{jk}(t)+f^k(t)-f^j(t)\Big),\\
+f^j(t)&amp;=\Delta B^j(t)+f^j(t-),\\
+f^j(T-)&amp;=\Delta B^j(T)
+\end{align*}\]</span>
+We can reqognize this as the PDE of the reserve with payment stream <span class="math inline">\(B+C\)</span> hence
+<span class="math display">\[\begin{align*}
+V^j(t,y)&amp;=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-\int_t^u r(v)\ dv}d(B+C)(u)\ \right\vert\ Z(t)=j\right]+y\\
+&amp;=V_B^j(t)+V_C^j(t)+y.
+\end{align*}\]</span>
+However, we also know that the reserve is the expected present value of the payment stream <span class="math inline">\(B+D\)</span> and since only <span class="math inline">\(D\)</span> depends on <span class="math inline">\(Y\)</span> we must have</p>
+<p><span class="math display">\[
+V^j(t,y)=V_B^j(t)+V_D^j(t,y).
+\]</span></p>
+<p>This of cause gives the equality</p>
+<p><span class="math display">\[
+V_D^j(t,y)=V_C^j(t)+y.
+\]</span></p>
+<p>We call <span class="math inline">\(V_B\)</span> the <em>Guaranteed Benefits</em> (or just GB) and <span class="math inline">\(V_D\)</span> is called <em>Future Discretionary Benefits</em> (or just FDB). Only in the case with pure cash dividends and payout at termination is FDB this easy to calculate. This is in general not the case.</p>
 </div>
 <div id="bonus-payments-and-market-reserve" class="section level3 hasAnchor" number="4.6.7">
 <h3><span class="header-section-number">4.6.7</span> Bonus Payments and Market Reserve<a href="financial-mathematics-in-life-insurance.html#bonus-payments-and-market-reserve" class="anchor-section" aria-label="Anchor link to header"></a></h3>

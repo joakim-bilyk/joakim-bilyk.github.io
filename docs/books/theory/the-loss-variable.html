@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-04-06" />
+<meta name="date" content="2023-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -544,7 +544,31 @@ L_{t+1}^\Delta:=-\left(\frac{\partial f}{\partial t}(t,\mathbf{Z}_t)+\sum_{i=1}^
 <em>where <span class="math inline">\(F^{\leftarrow}_L\)</span> is the generalized inverse of <span class="math inline">\(F_L\)</span>.</em></p>
 </blockquote>
 <p><img src="figures/VaR_ES.png" width="75%" style="display: block; margin: auto;" /></p>
-<p>There exist alot of different tangible measures of risk, some being coherent others non-coherent. The most well studied include Value at Risk VaR and Expected Shortfall ES. These two measures are in the realm of the loss distribution approach, however before studying these we introduce a few other worthy mentions: Factor sensitivity measures and scenario based risk measures:</p>
+<p>There exist alot of different tangible measures of risk, some being coherent others non-coherent. The most well studied include Value at Risk VaR and Expected Shortfall ES. These two measures are in the realm of the loss distribution approach, however before studying these we introduce a few other worthy mentions: Factor sensitivity measures and scenario based risk measures.</p>
+<p>Returning to the notion of a coherent risk measure we show the lemma, that VaR is not a coherent risk measure.</p>
+<blockquote class="lem">
+<p><strong>Lemma.</strong> Consider the risk measure VaR (Value-at-Risk) given as above. The VaR is not a coherent risk measure.</p>
+</blockquote>
+<details>
+<summary>
+<strong>Proof.</strong>
+</summary>
+<p><em>Translation invariance:</em> Consider that for all <span class="math inline">\(a\in\mathbb R\)</span> we have</p>
+<p><span class="math display">\[
+F_{L+ar}(\ell)=\mathbb P(L+a\le \ell)=\mathbb P(L\le\ell - a)=F_L(\ell-a).
+\]</span></p>
+<p>Hence we have
+<span class="math display">\[\begin{align*}
+\text{VaR}_\alpha(L+a)&amp;=\inf\left\{ \ell\in\mathbb{R}\ :\ F_{L+\alpha}(\ell)\ge \alpha \right\}\\
+&amp;=\inf\left\{ \ell\in\mathbb{R}\ :\ F_{L}(\ell-a)\ge \alpha \right\}\\
+&amp;=\inf\left\{ m\in\mathbb{R}\ :\ F_{L}(m)\ge \alpha \right\}+a\\
+&amp;=\text{VaR}_\alpha(L)+a,
+\end{align*}\]</span>
+So VaR adhere to translation.</p>
+<p><em>Subadditivity:</em></p>
+<p><em>Positive homogeneity:</em></p>
+<p><em>Monotonicity:</em></p>
+</details>
 
 </div>
 </div>
