@@ -254,13 +254,13 @@ ii. Compute the variance of <span class="math inline">\(X(T)\)</span> for <span 
 <summary>
 <strong>Solution (a).</strong>
 </summary>
-<p>We have from Ito’s formula that the stochastic process <span class="math inline">\(M(t)=e^{-bX(t)}=f_b(t,X(t))\)</span> with <span class="math inline">\(f_b(t,x)=e^{-bx}\)</span> has dynamics</p>
-<p><span class="math display">\[\begin{align*}
+<p>We have from Ito’s formula that the stochastic process <span class="math inline">\(M(t)=e^{-bX(t)}=f_b(t,X(t))\)</span> with <span class="math inline">\(f_b(t,x)=e^{-bx}\)</span> has dynamics
+<span class="math display">\[\begin{align*}
 dM(t)&amp;=df(t,X(t))\\
 &amp;=0\ dt-bM(t)\ dX(t)+\frac{1}{2}b^2M(t)\ (dX(t))^2\\
 &amp;=-bM(t)\mu X(t)\ dt-bM(t)\sigma \sqrt{X(t)}\ dW(t)+\frac{1}{2}b^2M(t)\sigma^2 X(t)\ dt.
-\end{align*}\]</span></p>
-<p>and so it clearly follow that <span class="math inline">\(M\)</span> is a martingale if</p>
+\end{align*}\]</span>
+and so it clearly follow that <span class="math inline">\(M\)</span> is a martingale if</p>
 <p><span class="math display">\[
 -bM(t)\mu X(t)+\frac{1}{2}b^2M(t)\sigma^2 X(t)=0.
 \]</span></p>
@@ -300,25 +300,25 @@ E[X(T)]=e^{\mu T}
 <p><span class="math display">\[
 \text{Var}[X(T)]=E[X(T)^2]-(E[X(T)])^2=E[X(T)^2]-1.
 \]</span></p>
-<p>We follow along the lines of <em>(i)</em> when computing the second moment of <span class="math inline">\(X(T)\)</span>. We have by Ito’s formula on <span class="math inline">\(Z(t)=X(t)^2=f(t,X(t))\)</span> with <span class="math inline">\(f(t,x)=x^2\)</span>:</p>
-<p><span class="math display">\[\begin{align*}
+<p>We follow along the lines of <em>(i)</em> when computing the second moment of <span class="math inline">\(X(T)\)</span>. We have by Ito’s formula on <span class="math inline">\(Z(t)=X(t)^2=f(t,X(t))\)</span> with <span class="math inline">\(f(t,x)=x^2\)</span>:
+<span class="math display">\[\begin{align*}
 dZ(t)&amp;=df(t,X(t))\\
 &amp;=0\ dt+ 2X(t)\ dX(t)+\frac{1}{2}2\ (dX(t))^2\\
 &amp;=2\mu (X(t))^2 \ dt+\sigma (X(t))^{3/2}\ dW(t)+\sigma^2 X(t)\ dt\\
 &amp;=\left(2\mu Z(t)+\sigma^2 \sqrt{Z(t)}\right)\ dt +\sigma (Z(t))^{3/4}\ dW(t)\\
 &amp;=\sigma^2 \sqrt{Z(t)}\ dt +\sigma (Z(t))^{3/4}\ dW(t)
-\end{align*}\]</span></p>
-<p>This implies that</p>
+\end{align*}\]</span>
+This implies that</p>
 <p><span class="math display">\[
 Z(t)=Z(0)+\int_0^t\sigma^2 \sqrt{Z(s)}\ ds+\int_0^t\sigma (Z(s))^{3/4}\ dW(s).
 \]</span></p>
-<p>Taking expectation and using <span class="math inline">\(Z(0)=X(0)^2=1\)</span>:</p>
-<p><span class="math display">\[\begin{align*}
+<p>Taking expectation and using <span class="math inline">\(Z(0)=X(0)^2=1\)</span>:
+<span class="math display">\[\begin{align*}
 E[Z(t)]&amp;=1+\int_0^t\sigma^2 E\left[\sqrt{Z(s)}\right]\ ds=1+\int_0^t\sigma^2 E\left[X(s)\right]\ ds\\
 &amp;=1+\sigma^2\int_0^t e^{\mu s}\ ds=1+\sigma^2\int_0^t\ ds\\
 &amp;=1+\sigma^2t
-\end{align*}\]</span></p>
-<p>hence we have the varince</p>
+\end{align*}\]</span>
+hence we have the varince</p>
 <p><span class="math display">\[
 \text{Var}[X(T)]=1+\sigma^2T-1=\sigma^2T
 \]</span></p>
@@ -333,20 +333,20 @@ E[Z(t)]&amp;=1+\int_0^t\sigma^2 E\left[\sqrt{Z(s)}\right]\ ds=1+\int_0^t\sigma^2
 <p><span class="math display">\[
 dW(t)=\varphi(t)\ dt+dW^Q(t).
 \]</span></p>
-<p>We futhermore have that <span class="math inline">\(Z(t)=1/Y(t)\)</span> has <span class="math inline">\(P\)</span> dynamics given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>We futhermore have that <span class="math inline">\(Z(t)=1/Y(t)\)</span> has <span class="math inline">\(P\)</span> dynamics given by
+<span class="math display">\[\begin{align*}
 dZ(t)&amp;=d(e^{t/2-W(t)})\\
 &amp;=\frac{1}{2}Z(t)\ dt-Z(t)\ dW(t)+\frac{1}{2}Z(t)\ (dW(t))^2\\
 &amp;=\frac{1}{2}Z(t)\ dt-Z(t)\ dW(t)+\frac{1}{2}Z(t)\ dt\\
 &amp;=Z(t)\ dt-Z(t)\ dW(t)
-\end{align*}\]</span></p>
-<p>and so under <span class="math inline">\(Q\)</span> we have from Girsanov theorem</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+and so under <span class="math inline">\(Q\)</span> we have from Girsanov theorem
+<span class="math display">\[\begin{align*}
 dZ(t)&amp;=Z(t)\ dt-Z(t)\ (\varphi(t)\ dt+dW^Q(t))\\
 &amp;=Z(t)\ dt-Z(t)\varphi(t)\ dt+Z(t)\ dW^Q(t)\\
 &amp;=(1-\varphi(t))Z(t)\ dt+Z(t)\ dW^Q(t)
-\end{align*}\]</span></p>
-<p>and so we see that <span class="math inline">\(\varphi =1\)</span> if <span class="math inline">\(Z\)</span> are to be a martingale under <span class="math inline">\(Q\)</span> i.e. <span class="math inline">\(Q=P\)</span>. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+and so we see that <span class="math inline">\(\varphi =1\)</span> if <span class="math inline">\(Z\)</span> are to be a martingale under <span class="math inline">\(Q\)</span> i.e. <span class="math inline">\(Q=P\)</span>. <span class="math inline">\(\square\)</span></p>
 </details>
 <p>
 ### Problem 2</p>
@@ -441,23 +441,23 @@ rF(t,s)=F_t(t,s)+rsF_s(t,s)+\frac{1}{2}s^2\sigma^2 F_{ss}(t,s)
 <summary>
 <strong>Solution (b).</strong>
 </summary>
-<p><em>(i)</em>: We see that at time <span class="math inline">\(t=T_0\)</span> the payout is a simple claim in that <span class="math inline">\(S(T_0)\)</span> is <span class="math inline">\(\mathcal{F}_{T_0}\)</span>-measurable. Furthermore, we see that the payout is the same as a European put option with strike <span class="math inline">\(K=S(T_0)\)</span>. Such a derivative may be hedged with <span class="math inline">\(S(T_0)\)</span> zero-coupon bonds, one call options with the same strike and a short position in the underlying stock. The price is then, in detail, given as.</p>
-<p><span class="math display">\[\begin{align*}
+<p><em>(i)</em>: We see that at time <span class="math inline">\(t=T_0\)</span> the payout is a simple claim in that <span class="math inline">\(S(T_0)\)</span> is <span class="math inline">\(\mathcal{F}_{T_0}\)</span>-measurable. Furthermore, we see that the payout is the same as a European put option with strike <span class="math inline">\(K=S(T_0)\)</span>. Such a derivative may be hedged with <span class="math inline">\(S(T_0)\)</span> zero-coupon bonds, one call options with the same strike and a short position in the underlying stock. The price is then, in detail, given as.
+<span class="math display">\[\begin{align*}
 \Pi_{T_0}[Y]&amp;=S(T_0)e^{-r(T-T_0)}+c(S(T_0);T_0,T)-S(T_0)\\
 &amp;=S(T_0)\left(e^{-r(T-T_0)}-1\right)+S(T_0)N(d_1(T_0,S(T_0)))-e^{-r(T-T_0)}S(T_0)N(d_2(T_0,S(T_0)))\\
 &amp;=S(T_0)\left\{e^{-r(T-T_0)}-1+N(d_1(T_0,S(T_0)))-e^{-r(T-T_0)}N(d_2(T_0,S(T_0)))\right\}\\
 &amp;=S(T_0)p.
-\end{align*}\]</span></p>
-<p>where we set</p>
+\end{align*}\]</span>
+where we set</p>
 <p><span class="math display">\[
 p=e^{-r(T-T_0)}-1+N(d_1(T_0,S(T_0)))-e^{-r(T-T_0)}N(d_2(T_0,S(T_0))).
 \]</span></p>
-<p>We simply now need to show that this does indeed not depend on <span class="math inline">\(S(T_0)\)</span>. We see that if the components <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> does not depend on <span class="math inline">\(S(T_0)\)</span> we are done. We have</p>
-<p><span class="math display">\[\begin{align*}
+<p>We simply now need to show that this does indeed not depend on <span class="math inline">\(S(T_0)\)</span>. We see that if the components <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> does not depend on <span class="math inline">\(S(T_0)\)</span> we are done. We have
+<span class="math display">\[\begin{align*}
 d_1(T_0,S(T_0))&amp;=\frac{1}{\sigma\sqrt{T-T_0}}\left(\log\left(\frac{S(T_0)}{S(T_0)}\right)+\left(r+\frac{1}{2}\sigma^2\right)(T-T_0)\right)\\
 &amp;=\frac{1}{\sigma\sqrt{T-T_0}}\left(r+\frac{1}{2}\sigma^2\right)(T-T_0).
-\end{align*}\]</span></p>
-<p>and so <span class="math inline">\(d_1\)</span> does not depend on <span class="math inline">\(S(T_0)\)</span>. This by extension means that <span class="math inline">\(d_2\)</span> as well does not depend on <span class="math inline">\(S(T_0)\)</span> as <span class="math inline">\(d_2(t,s)=d_1(t,s)-\sigma\sqrt{T-t}\)</span>. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+and so <span class="math inline">\(d_1\)</span> does not depend on <span class="math inline">\(S(T_0)\)</span>. This by extension means that <span class="math inline">\(d_2\)</span> as well does not depend on <span class="math inline">\(S(T_0)\)</span> as <span class="math inline">\(d_2(t,s)=d_1(t,s)-\sigma\sqrt{T-t}\)</span>. <span class="math inline">\(\square\)</span></p>
 <p><em>(ii)</em>: As <span class="math inline">\(p\)</span> does not depend on <span class="math inline">\(S(T_0)\)</span> we would have that a portfolio consiting og <span class="math inline">\(p\)</span> stocks would have the desired payout at time <span class="math inline">\(t=T_0\)</span> to finance the portfolio on <span class="math inline">\([T_0,T]\)</span>. Hence we have the pricing process on <span class="math inline">\(t&lt;T_0\)</span> given as <span class="math inline">\(\Pi_t[Y]=pS(t)\)</span>. <span class="math inline">\(\square\)</span></p>
 </details>
 
@@ -465,13 +465,13 @@ d_1(T_0,S(T_0))&amp;=\frac{1}{\sigma\sqrt{T-T_0}}\left(\log\left(\frac{S(T_0)}{S
 <summary>
 <strong>Solution (c).</strong>
 </summary>
-<p>We hope that there exists a <span class="math inline">\(\tilde{p}\)</span> such that <span class="math inline">\(\Pi_{T_0}[\widetilde{Y}]=\tilde{p}X\)</span> and <span class="math inline">\(\tilde{p}\)</span> does not depend on <span class="math inline">\(X\)</span>, where <span class="math inline">\(X\)</span> is the payout of a buy-and-hold portfolio. We have that the payout is hedged by a call option with strike <span class="math inline">\(S(T_0)\)</span> on <span class="math inline">\([T_0,T]\)</span> i.e.</p>
-<p><span class="math display">\[\begin{align*}
+<p>We hope that there exists a <span class="math inline">\(\tilde{p}\)</span> such that <span class="math inline">\(\Pi_{T_0}[\widetilde{Y}]=\tilde{p}X\)</span> and <span class="math inline">\(\tilde{p}\)</span> does not depend on <span class="math inline">\(X\)</span>, where <span class="math inline">\(X\)</span> is the payout of a buy-and-hold portfolio. We have that the payout is hedged by a call option with strike <span class="math inline">\(S(T_0)\)</span> on <span class="math inline">\([T_0,T]\)</span> i.e.
+<span class="math display">\[\begin{align*}
 \Pi_{T_0}[\widetilde{Y}]&amp;=S(T_0)N(d_1(T_0,S(T_0)))-e^{-r(T-T_0)}S(T_0)N(d_2(T_0,S(T_0)))\\
 &amp;=S(T_0)\left\{N(d_1(T_0,S(T_0)))-e^{-r(T-T_0)}N(d_2(T_0,S(T_0)))\right\}\\
 &amp;=S(T_0)\tilde{p}.
-\end{align*}\]</span></p>
-<p>for <span class="math inline">\(t\in[T_0,T]\)</span>. Per 2.a we know that <span class="math inline">\(\tilde{p}\)</span> does not depend on <span class="math inline">\(S(T_0)\)</span> and so we have the pricing process <span class="math inline">\(\Pi_t[\widetilde{Y}]=\tilde{p}S(t)\)</span> on <span class="math inline">\(t&lt;T_0\)</span>. Then we simply have</p>
+\end{align*}\]</span>
+for <span class="math inline">\(t\in[T_0,T]\)</span>. Per 2.a we know that <span class="math inline">\(\tilde{p}\)</span> does not depend on <span class="math inline">\(S(T_0)\)</span> and so we have the pricing process <span class="math inline">\(\Pi_t[\widetilde{Y}]=\tilde{p}S(t)\)</span> on <span class="math inline">\(t&lt;T_0\)</span>. Then we simply have</p>
 <p><span class="math display">\[
 \Pi_t[Y]-\Pi_t[\widetilde{Y}]=(p-\tilde{p})S(t)
 \]</span></p>
@@ -495,34 +495,34 @@ g^n(s)=\sum_{i=0}^{n-1}1_{[i\cdot t/n,(i+1)t/n]}(s)(t-t_i).
 <p><span class="math display">\[
 \int_0^t(g^n(s)-(t-s))^2\ ds=\int_0^t \sum_{i=0}^{n-1}1_{[i\cdot t/n,(i+1)t/n]}(s-t_i)^2\ ds=\sum_{i=0}^{n-1}\int_{i\cdot t/n}^{(i+1)\cdot t/n}(s-t_i)^2\ ds\to 0.
 \]</span></p>
-<p>We then define the integral as follows</p>
-<p><span class="math display">\[\begin{align*}
+<p>We then define the integral as follows
+<span class="math display">\[\begin{align*}
 \int_0^t(t-u)\ dW(u)&amp;=\lim_{n\to \infty}\left\{\int_0^tg^n(s)\ dW(s)\right\}\\
 &amp;=\lim_{n\to \infty}\left\{\int_0^t \sum_{i=0}^{n-1}1_{[i\cdot t/n,(i+1)t/n]}(s)(t-t_i)\ dW(s)\right\}\\
 &amp;=\lim_{n\to \infty}\left\{\sum_{i=0}^{n-1}\int_{i\cdot t/n}^{(i+1)\cdot t/n} (t-t_i)\ dW(s)\right\}\\
 &amp;=\lim_{n\to \infty}\left\{\sum_{i=0}^{n-1} (t-t_i)\ \left(W\left(\frac{(i+1)\cdot t}{n}\right)-W\left(\frac{i\cdot t}{n}\right)\right)\right\}\\
 &amp;=t-t\lim_{n\to \infty}\left\{\frac{1}{n}\sum_{i=0}^{n-1} i \left(W\left(\frac{(i+1)\cdot t}{n}\right)-W\left(\frac{i\cdot t}{n}\right)\right)\right\}.
-\end{align*}\]</span></p>
-<p>If we define the random varible inside <span class="math inline">\(\lim\)</span> as <span class="math inline">\(S_n\)</span> we see that</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+If we define the random varible inside <span class="math inline">\(\lim\)</span> as <span class="math inline">\(S_n\)</span> we see that
+<span class="math display">\[\begin{align*}
 E[S_n]&amp;=\frac{1}{n}\sum_{i=0}^{n-1}iE\left(W\left(\frac{(i+1)\cdot t}{n}\right)-W\left(\frac{i\cdot t}{n}\right)\right)\\
 &amp;=\frac{1}{n}\sum_{i=0}^{n-1}i\cdot0=0.
-\end{align*}\]</span></p>
-<p>and</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+and
+<span class="math display">\[\begin{align*}
 E[(S_n)^2]&amp;=\frac{1}{n^2}\sum_{j=0}^{n-1}\sum_{i=0}^{n-1}ijE\left\{\left(W\left(\frac{(i+1)\cdot t}{n}\right)-W\left(\frac{i\cdot t}{n}\right)\right)\left(W\left(\frac{(j+1)\cdot t}{n}\right)-W\left(\frac{j\cdot t}{n}\right)\right)\right\}\\
 &amp;=\frac{1}{n^2}\sum_{i=0}^{n-1}i^2E\left\{\left(W\left(\frac{(i+1)\cdot t}{n}\right)-W\left(\frac{i\cdot t}{n}\right)\right)^2\right\}\\
 &amp;=\frac{1}{n^2}\sum_{i=0}^{n-1}i^2\left\{\frac{(i+1)\cdot t}{n}-\frac{i\cdot t}{n}\right\}\\
 &amp;=\frac{t}{n^3}\sum_{i=0}^{n-1}i^2=\frac{t}{n^3}\frac{1}{6} (n-1) n ( 2 n-1)\\
 &amp;=\frac{t}{6n^2}(n-1) ( 2 n-1)=\frac{t}{6n^2}(2n^2-n-2n+1)\\
 &amp;=\frac{t}{3}-\frac{t}{2n}+\frac{t}{6n^2}\to \frac{t}{3}\\
-\end{align*}\]</span></p>
-<p><strong>END OF TRY.</strong></p>
-<p><em>(i)</em>: We start by calculating the dynamics of <span class="math inline">\(X(u)=(t-u)W(u)\)</span>. We use Ito’s formula</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+<strong>END OF TRY.</strong></p>
+<p><em>(i)</em>: We start by calculating the dynamics of <span class="math inline">\(X(u)=(t-u)W(u)\)</span>. We use Ito’s formula
+<span class="math display">\[\begin{align*}
 dX(u)&amp;=-W(u)\ du+(t-u)\ dW(u)
-\end{align*}\]</span></p>
-<p>and so</p>
+\end{align*}\]</span>
+and so</p>
 <p><span class="math display">\[
 X(t)=0=-\int_0^t W(s)\ ds+\int_0^t(t-s)\ dW(s).
 \]</span></p>
@@ -535,12 +535,12 @@ S(t)=s\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)t - \sigma W^Q(t)\right\}
 <p><span class="math display">\[
 \log S(t)=\log(s)+\left(r-\frac{1}{2}\sigma^2\right)t - \sigma W^Q(t).
 \]</span></p>
-<p>Integrating from <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=T\)</span> gives</p>
-<p><span class="math display">\[\begin{align*}
+<p>Integrating from <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=T\)</span> gives
+<span class="math display">\[\begin{align*}
 \int_0^T \log S(t)\ dt&amp;=\log(s)T+\left(r-\frac{1}{2}\sigma^2\right)\int_0^T t\ dt-\sigma\int_0^T W^Q(t)\ dt\\
 &amp;=\log(s)T+\frac{1}{2}\left(r-\frac{1}{2}\sigma^2\right)T^2-\sigma\int_0^T (T-t)\ dW^Q(t)
-\end{align*}\]</span></p>
-<p>using 2.d(i). We recall that from lemma 4.18 that</p>
+\end{align*}\]</span>
+using 2.d(i). We recall that from lemma 4.18 that</p>
 <p><span class="math display">\[
 \sigma\int_0^T (T-t)\ dW^Q(t)\sim \mathcal{N}\left(0,\sigma^2\int_s^t(T-t)^2\ dt\right).
 \]</span></p>
@@ -548,14 +548,14 @@ S(t)=s\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)t - \sigma W^Q(t)\right\}
 <p><span class="math display">\[
 \int_0^T \log S(t)\ dt\sim\mathcal{N}\left(\log(s)T+\frac{1}{2}\left(r-\frac{1}{2}\sigma^2\right)T^2,\sigma^2\int_s^t(T-t)^2\ dt\right).
 \]</span></p>
-<p>Using the risk neutral valueation formula we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>Using the risk neutral valueation formula we have
+<span class="math display">\[\begin{align*}
 \Pi_0[Z]&amp;=e^{-rT}E^Q\left(\left(\int_0^T \log S(t)\ dt\right)^2\right)\\
 &amp;=e^{-rT}\left(\text{Var}^Q\left(\int_0^T \log S(t)\ dt\right)-E^Q\left(\int_0^T \log S(t)\ dt\right)^2\right)\\
 &amp;=e^{-rT}\left(\sigma^2\int_s^t(T-t)^2\ dt-\log^2(s)T^2-\frac{1}{4}\left(r-\frac{1}{2}\sigma^2\right)^2T^4-\log(s)T\left(r-\frac{1}{2}\sigma^2\right)T^2\right)\\
 &amp;=e^{-rT}\left(\sigma^2\frac{T^3}{3}-\log^2(s)T^2-\frac{1}{4}\left(r-\frac{1}{2}\sigma^2\right)^2T^4-\log(s)T\left(r-\frac{1}{2}\sigma^2\right)T^2\right)
-\end{align*}\]</span></p>
-<p>as desired. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+as desired. <span class="math inline">\(\square\)</span></p>
 </details>
 <p></p>
 </div>
@@ -565,12 +565,12 @@ S(t)=s\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)t - \sigma W^Q(t)\right\}
 <p><span class="math display">\[
 dB(t)=rB(t)\ dt
 \]</span></p>
-<p>with <span class="math inline">\(B(0)=1\)</span> where <span class="math inline">\(r\in\mathbb{R}\)</span> is a constant interest rate. The <span class="math inline">\(P\)</span>-dynamics of <span class="math inline">\(S_1(t)\)</span> and <span class="math inline">\(S_2(t)\)</span> are given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>with <span class="math inline">\(B(0)=1\)</span> where <span class="math inline">\(r\in\mathbb{R}\)</span> is a constant interest rate. The <span class="math inline">\(P\)</span>-dynamics of <span class="math inline">\(S_1(t)\)</span> and <span class="math inline">\(S_2(t)\)</span> are given by
+<span class="math display">\[\begin{align*}
 dS_1(t)&amp;=\mu_1S_1(t)\ dt+\sigma_1 S_1(t)\ dW(t),\\
 dS_2(t)&amp;=\mu_2S_2(t)\ dt+\sigma_2 S_2(t)\ dW(t),
-\end{align*}\]</span></p>
-<p>with <span class="math inline">\(S_1(0)=s_1&gt;0\)</span> and <span class="math inline">\(S_2(0)=s_2&gt;0\)</span> where <span class="math inline">\(\mu_1,\mu_2\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma_1,\sigma_2&gt;0\)</span> are constants and <span class="math inline">\(W(t)\)</span> are a <span class="math inline">\(P\)</span>-Brownian motions. The filtration is the one generated by the Brownian motion. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed (expiry) date.</p>
+\end{align*}\]</span>
+with <span class="math inline">\(S_1(0)=s_1&gt;0\)</span> and <span class="math inline">\(S_2(0)=s_2&gt;0\)</span> where <span class="math inline">\(\mu_1,\mu_2\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma_1,\sigma_2&gt;0\)</span> are constants and <span class="math inline">\(W(t)\)</span> are a <span class="math inline">\(P\)</span>-Brownian motions. The filtration is the one generated by the Brownian motion. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed (expiry) date.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Show that the model is arbitrage free and complete if <span class="math inline">\(\sigma_2(\mu_1-r)=\sigma_1(\mu_2-r)\)</span>.</li>
 </ol>
@@ -604,11 +604,11 @@ r-\mu_1\\
 r-\mu_2
 \end{bmatrix}.
 \]</span></p>
-<p>The linear equation system is then</p>
-<p><span class="math display">\[\begin{align*}
+<p>The linear equation system is then
+<span class="math display">\[\begin{align*}
 \sigma_1\varphi(t)=r-\mu_1,\ \sigma_2\varphi(t)=r-\mu_2
-\end{align*}\]</span></p>
-<p>Hence</p>
+\end{align*}\]</span>
+Hence</p>
 <p><span class="math display">\[
 \varphi=\frac{r-\mu_1}{\sigma_1}=\frac{r-\mu_2}{\sigma_2}.
 \]</span></p>
@@ -623,20 +623,20 @@ r-\mu_2
 <p><span class="math display">\[
 dV_t^h=h_0(t)\ dB(t)+h_1(t)\ dS_1(t)+h_2(t)\ dS_2(t).
 \]</span></p>
-<p>Calculating we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>Calculating we have
+<span class="math display">\[\begin{align*}
 dV^h(t)&amp;=\frac{\sigma_1-\sigma_2}{B(t)}\ dB(t)+\frac{\sigma_2}{S_1(t)}\ dS_1+\frac{S_2(t)-\sigma_1}{S_2(t)}\ dS_2(t)\\
 &amp;=(\sigma_1-\sigma_2)r\ dt+\sigma_2\mu_1\ dt+\sigma_1\sigma_2\ dW(t)+(S_2(t)-\sigma_1)\mu_2\ dt+(S_2(t)-\sigma_1)\sigma_2\ dW(t)\\
 &amp;=(\sigma_1r-\sigma_2r+\sigma_2\mu_1-\sigma_1\mu_2)\ dt+S_2(t)\mu_2\ dt+S_2(t)\sigma_2dW(t)\\
 &amp;=(\underbrace{\sigma_2(\mu_1-r)-\sigma_1(\mu_2-r)}_{=0})\ dt+S_2(t)\mu_2\ dt+S_2(t)\sigma_2dW(t)\\
 &amp;=S_2(t)\mu_2\ dt+S_2(t)\sigma_2dW(t)=dS_2(t)
-\end{align*}\]</span></p>
-<p>Furthermore, we see that</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Furthermore, we see that
+<span class="math display">\[\begin{align*}
 V^h(t)&amp;=\frac{\sigma_1-\sigma_2}{B(t)}\ B(t)+\frac{\sigma_2}{S_1(t)}\ S_1+\frac{S_2(t)-\sigma_1}{S_2(t)}\ S_2(t)\\
 &amp;=\sigma_1-\sigma_2+\sigma_2+S_2(t)-\sigma_1=S_2(t).
-\end{align*}\]</span></p>
-<p>This is consistent with the self-financing condition above as <span class="math inline">\(dV^h(t)=dS_2(t)\)</span>. We conclude that <span class="math inline">\(h\)</span> is self-financing. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+This is consistent with the self-financing condition above as <span class="math inline">\(dV^h(t)=dS_2(t)\)</span>. We conclude that <span class="math inline">\(h\)</span> is self-financing. <span class="math inline">\(\square\)</span></p>
 </details>
 
 <details>
@@ -647,20 +647,20 @@ V^h(t)&amp;=\frac{\sigma_1-\sigma_2}{B(t)}\ B(t)+\frac{\sigma_2}{S_1(t)}\ S_1+\f
 <p><span class="math display">\[
 S_i(t)=s_i\exp\left\{\left(r-\frac{1}{2}\sigma_i^2\right)(T-t)+\sigma_i (W^Q(T)-W^Q(t))\right\}
 \]</span></p>
-<p>for <span class="math inline">\(i=1,2\)</span> under assumption that <span class="math inline">\(S_1(t)=s_1\)</span> and <span class="math inline">\(S_2(t)=s_2\)</span>. Then we have that <span class="math inline">\(X\)</span> pays out</p>
-<p><span class="math display">\[\begin{align*}
+<p>for <span class="math inline">\(i=1,2\)</span> under assumption that <span class="math inline">\(S_1(t)=s_1\)</span> and <span class="math inline">\(S_2(t)=s_2\)</span>. Then we have that <span class="math inline">\(X\)</span> pays out
+<span class="math display">\[\begin{align*}
 X&amp;=\frac{s_1}{s_2}\exp\left\{\frac{1}{2}\left(\sigma_2^2-\sigma_1^2\right)(T-t)+(\sigma_1-\sigma_2) (W^Q(T)-W^Q(t))\right\}.
-\end{align*}\]</span></p>
-<p>Using the risk neutral valueation formula we have the price</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Using the risk neutral valueation formula we have the price
+<span class="math display">\[\begin{align*}
 \Pi_t[X]&amp;=e^{-r(T-t)}E^Q\left[\frac{s_1}{s_2}\exp\left\{\frac{1}{2}\left(\sigma_2^2-\sigma_1^2\right)(T-t)+(\sigma_1-\sigma_2) (W^Q(T)-W^Q(t))\right\}\right]\\
 &amp;=e^{-r(T-t)}\frac{s_1}{s_2}e^{\frac{1}{2}\left(\sigma_2^2-\sigma_1^2\right)(T-t)}E^Q\left[\exp\left\{(\sigma_1-\sigma_2) (W^Q(T)-W^Q(t))\right\}\right]\\
 &amp;=\frac{s_1}{s_2}e^{-r(T-t)+\frac{1}{2}\left(\sigma_2^2-\sigma_1^2\right)(T-t)}e^{\frac{1}{2}(T-t)(\sigma_1-\sigma_2)^2}\\
 &amp;=\frac{s_1}{s_2}e^{-r(T-t)+\frac{1}{2}\left(\sigma_2^2-\sigma_1^2\right)(T-t)+\frac{1}{2}(T-t)(\sigma_1-\sigma_2)^2}\\
 &amp;=\frac{s_1}{s_2}e^{-r(T-t)+\frac{1}{2}\left(2\sigma_2^2-2\sigma_1\sigma_2\right)(T-t)}.
-\end{align*}\]</span></p>
-<p>We now may hedge this derivative with</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+We now may hedge this derivative with
+<span class="math display">\[\begin{align*}
 h_1(t)&amp;=\frac{\partial \Pi_t[Y]}{\partial s_1}(t,S_1(t),S_2(t))\\
 &amp;=\frac{1}{S_2(t)}e^{-r(T-t)+\frac{1}{2}\left(2\sigma_2^2-2\sigma_1\sigma_2\right)(T-t)}\\
 h_2&amp;=\frac{\partial \Pi_t[Y]}{\partial s_2}(t,S_1(t),S_2(t))\\
@@ -668,8 +668,8 @@ h_2&amp;=\frac{\partial \Pi_t[Y]}{\partial s_2}(t,S_1(t),S_2(t))\\
 h_0&amp;=\frac{1}{B(t)}\left(\Pi_t[Y]-S_1(t)h_1(t)-S_2(t)h_2(t)\right)\\
 &amp;=e^{-rt}e^{-r(T-t)+\frac{1}{2}\left(2\sigma_2^2-2\sigma_1\sigma_2\right)(T-t)}\left(\frac{S_1(t)}{S_2(t)}-S_1(t)\frac{1}{S_2(t)}+S_2(t)\frac{S_1(t)}{S_2(t)^2}\right)\\
 &amp;=e^{-rt}e^{-r(T-t)+\frac{1}{2}\left(2\sigma_2^2-2\sigma_1\sigma_2\right)(T-t)}\frac{S_1(t)}{S_2(t)}=e^{-rt}\Pi_t[Y].
-\end{align*}\]</span></p>
-<p>as desired. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+as desired. <span class="math inline">\(\square\)</span></p>
 </details>
 <p>
 </p>

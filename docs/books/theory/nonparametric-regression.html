@@ -485,30 +485,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p><em>where the weight function <span class="math inline">\(w_i\)</span> can depend on <span class="math inline">\(\{X_1, \dots, X_n\}\)</span>.</em></p>
 </blockquote>
-<p><strong>Example.</strong> The k-nearest-neighbor estimator is a linear smoother:
-<span class="math display">\[
+<p><strong>Example.</strong> The k-nearest-neighbor estimator is a linear smoother:</p>
+<p><span class="math display">\[
 \hat m^{knn}(x)= \sum_i^n w_i(x) Y_i,
-\]</span>
-with
-<span class="math display">\[
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
 w_i(x)=\begin{cases}\frac 1 k &amp; X_i \ \text{belongs to the}\  k \ \text{closest points to}\  x \\ 0 &amp; else\end{cases}
-\]</span>
-In the below proposition the definition of Lipschitz continuity is used. We recall that a real-valued function <span class="math inline">\(f:\mathbb R\to\mathbb R\)</span> is <span class="math inline">\(L\)</span>-Lipschitz continuous if and only if</p>
+\]</span></p>
+<p>In the below proposition the definition of Lipschitz continuity is used. We recall that a real-valued function <span class="math inline">\(f:\mathbb R\to\mathbb R\)</span> is <span class="math inline">\(L\)</span>-Lipschitz continuous if and only if</p>
 <p><span class="math display">\[
 f(x_1)-f(x_2)\le L\Vert x_1-x_2\Vert_2
 \]</span></p>
 <p>for all <span class="math inline">\((x_1,x_2)\in\mathbb R^2\)</span>. This in particulat means that <span class="math inline">\(f(x)\in[f(x_1)-L\vert x_1-x\vert,f(x_1)+L\vert x_1-x\vert]\)</span> i.e. does not on any interval grow faster that a linear function with slope <span class="math inline">\(L\)</span>.</p>
 <blockquote class="prop">
-<p><strong>Proposition. (MSE k-nearest-neighbor)</strong> <em>Assume that</em>
-<span class="math display">\[
+<p><strong>Proposition. (MSE k-nearest-neighbor)</strong> <em>Assume that</em></p>
+<p><span class="math display">\[
 E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\ m \ \text{is L-Lipschitz continuous}\},
-\]</span>
-<em>and <span class="math inline">\(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\)</span> Then </em>
-<span class="math display">\[
+\]</span></p>
+<p><em>and <span class="math inline">\(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\)</span> Then </em></p>
+<p><span class="math display">\[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]\leq (cL)^2 \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k.
-\]</span>
-<em>In particular, for <span class="math inline">\(k_n=O_p( n^{2/(2+p)})\)</span>, we get </em>
-<span class="math display">\[
+\]</span></p>
+<p><em>In particular, for <span class="math inline">\(k_n=O_p( n^{2/(2+p)})\)</span>, we get </em></p>
+<p><span class="math display">\[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]=O_p(n^{-2/(2+p)}).
 \]</span></p>
 </blockquote>
@@ -563,8 +563,8 @@ w_i(x)=\frac{K\left(\frac{||x-X_i||}{h}\right)}{\sum_j K\left(\frac{||x-X_j||}{h
 </ol>
 <p>where of course the argument is <span class="math inline">\(z=\vert x-X_{ij}\vert/h\)</span> with <span class="math inline">\(h&gt;0\)</span> being the bandwidth. Notice that the uniform kernel in fact is the Epanechnikov kernel with <span class="math inline">\(a=0\)</span>.</p>
 <blockquote class="prop">
-<p><strong>Proposition. (MSE Kernel Smoother)</strong> <em>Assume that <span class="math inline">\(E[Y|X=x]=m^\ast(x)\in \mathcal G_L\)</span> with</em>
-<span class="math display">\[
+<p><strong>Proposition. (MSE Kernel Smoother)</strong> <em>Assume that <span class="math inline">\(E[Y|X=x]=m^\ast(x)\in \mathcal G_L\)</span> with</em></p>
+<p><span class="math display">\[
 \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\  m \ \text{is L-Lipschitz continuous}\},
 \]</span></p>
 <p><em>and <span class="math inline">\(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\)</span> Then </em></p>

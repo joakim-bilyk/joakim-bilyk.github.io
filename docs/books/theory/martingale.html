@@ -470,13 +470,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">15.3</span> Martingale<a href="martingale.html#martingale" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <blockquote class="def">
 <p><strong>Definition.</strong> <em>Let <span class="math inline">\(M_t\)</span> be a stochastic process defined on a background space <span class="math inline">\((\Omega,\mathcal{F},P)\)</span>. Let <span class="math inline">\((\mathcal{F}_t)_{t\ge 0}\)</span> be a filtration. If <span class="math inline">\(M_t\)</span> is adapted to the filtration <span class="math inline">\(\mathcal{F}_t\)</span>, <span class="math inline">\(E\vert M_t\vert &lt;\infty\)</span> and</em></p>
-<p><span class="math display">\[E[M_t\vert \mathcal{F}_s]=M_s,\hspace{20pt}P-\text{a.s.}\]</span></p>
+<p><span class="math display">\[
+E[M_t\vert \mathcal{F}_s]=M_s,\hspace{20pt}P-\text{a.s.}
+\]</span></p>
 <p><em>holds for any <span class="math inline">\(t&gt;s\)</span> we say that <span class="math inline">\(M_t\)</span> is a martingale (<span class="math inline">\(\mathbf{F}\)</span>-martingale). If the above has <span class="math inline">\(\le\)</span> or <span class="math inline">\(\ge\)</span> we say that <span class="math inline">\(M_t\)</span> is either a <strong>submartingale</strong> or <strong>supermartingale</strong> respectively.</em></p>
 </blockquote>
 <p>Naturally, this defintions may easily be extended to discrete models and we have the trivial equality:</p>
-<p><span class="math display">\[E[M_t-M_s\ \vert\ \mathcal{F}_s]=0.\]</span></p>
+<p><span class="math display">\[
+E[M_t-M_s\ \vert\ \mathcal{F}_s]=0.
+\]</span></p>
 <p>Martingales is useful, when proofing probalistic statements as the posses tractable properties. A useful technique often include the construction of the martingale</p>
-<p><span class="math display">\[M_t=E[X\ \vert\ \mathcal{F}_t].\]</span></p>
+<p><span class="math display">\[
+M_t=E[X\ \vert\ \mathcal{F}_t].
+\]</span></p>
 
 </div>
 <!-- </div> -->

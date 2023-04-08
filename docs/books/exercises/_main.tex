@@ -294,11 +294,15 @@ Let \((W(t))_{t\ge}\) be a Brownian motion (Bjork, Definition 4.1).
 
 By assumption \(W\) is a Brownian motion and so it follows that
 
-\[-W_0=-1\cdot0=0\]
+\[
+-W_0=-1\cdot0=0
+\]
 
 Furthermore, for \(r<s\le t< u\) it holds that \(W_u-W_t\) and \(W_s-W_r\) is independent. By seperate transformations the independence property is preserved and \(-(W_u-W_t)\) and \(-(W_s-W_r)\) is independent. Next, for a normal distributed random variable \(N\sim\mathcal{N}(\mu,\sigma^2)\) it holds, that for a scaler \(c\in\mathbb{R}\) we have \(c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)\). Then obviously;
 
-\[-(W_t)=(-1)W_t\stackrel{d}{=}\mathcal{N}((-1)\cdot0,(-1)^2(t-s))\stackrel{d}{=}\mathcal{N}( 0,t-s).\]
+\[
+-(W_t)=(-1)W_t\stackrel{d}{=}\mathcal{N}((-1)\cdot0,(-1)^2(t-s))\stackrel{d}{=}\mathcal{N}( 0,t-s).
+\]
 
 Lastly, let \(\omega \in \Omega\) and consider the sample path \(s\mapsto (-W_s)(\omega)\). Clearly for two continuous functions \(f\) and \(g\) it holds that \((g\circ f)\) is continuous. Then with \(g(f)=-f\) and \(f(t)=W_t(\omega)"/>\) it follows that \((-W_t)=(g\circ W)(t)\) is also continuous.
 
@@ -308,11 +312,15 @@ Much like the previous exercise we define a new process and show the properties 
 
 First, we let \(t=0\) and see
 
-\[X_0=W(0+s)-W(s)=W(s)-W(s)=0.\]
+\[
+X_0=W(0+s)-W(s)=W(s)-W(s)=0.
+\]
 
 Secondly, we have that for \(r<u\):
 
-\[X_u-X_r=W(u+s)-W(s)-(W(r+s)-W(s))=W(u+s)-W(r+s)\sim \mathcal{N}(0,u+s-(r+s))=\mathcal{N}(0,u-r).\]
+\[
+X_u-X_r=W(u+s)-W(s)-(W(r+s)-W(s))=W(u+s)-W(r+s)\sim \mathcal{N}(0,u+s-(r+s))=\mathcal{N}(0,u-r).
+\]
 
 and since for \(r<u\le k<l\) the translation \(r+s<u+s\le k+s<l+s\) still holds and \(X_l-X_k=W(l+s)-W(k+s)\) and \(X_u-X_r=W(u+s)-W(k+s)\) are independent. Finally since \(W_t(\omega)\) is continuous in \(t\) hence the translation \(W_{t+s}\) is continouos. Adding a constant yields a function that is also continuous, hence \(X_t\) is continuous.
 
@@ -320,19 +328,27 @@ and since for \(r<u\le k<l\) the translation \(r+s<u+s\le k+s<l+s\) still holds 
 
 Let \(c>0\) be given. We show that
 
-\[X_t=cW\left(\frac{t}{c^2}\right)\]
+\[
+X_t=cW\left(\frac{t}{c^2}\right)
+\]
 
 is a Brownian motion. We simply show the four properties. Let \(t=0\) and notice
 
-\[X_0=cW\left(\frac{0}{c^2}\right)=cW(0)=0.\]
+\[
+X_0=cW\left(\frac{0}{c^2}\right)=cW(0)=0.
+\]
 
 The second property follows from seperate transformation and that for \(r<u\le s<t\) we consider
 
-\[X_u-X_r=c\left(W\left(\frac{u}{c^2}\right)-W\left(\frac{r}{c^2}\right)\right)\hspace{20pt}\text{and}\hspace{20pt}X_t-X_s=c\left(W\left(\frac{t}{c^2}\right)-W\left(\frac{s}{c^2}\right)\right)\]
+\[
+X_u-X_r=c\left(W\left(\frac{u}{c^2}\right)-W\left(\frac{r}{c^2}\right)\right)\hspace{20pt}\text{and}\hspace{20pt}X_t-X_s=c\left(W\left(\frac{t}{c^2}\right)-W\left(\frac{s}{c^2}\right)\right)
+\]
 
 and since \(c,r,u,t,s>0\) we have the same order for the scaled version of \(r,u,t,s\) and hence we have two independent RV scaled by \(c\). Then by seperate transformations the variables is still independent. Next for the third property:
 
-\[X_t-X_s=c\left(W\left(\frac{t}{c^2}\right)-W\left(\frac{s}{c^2}\right)\right)\sim\mathcal{N}\left(c\cdot 0,c^2\left(\frac{t}{c^2}-\frac{s}{c^2}\right)\right)=\mathcal{N}(0,t-s).\]
+\[
+X_t-X_s=c\left(W\left(\frac{t}{c^2}\right)-W\left(\frac{s}{c^2}\right)\right)\sim\mathcal{N}\left(c\cdot 0,c^2\left(\frac{t}{c^2}-\frac{s}{c^2}\right)\right)=\mathcal{N}(0,t-s).
+\]
 
 Where we use the properties of scaling a normal distributed random variable i.e.~for \(c>0\) and \(N\sim\mathcal{N}(\mu,\sigma ^2)\) it follows that \(c N\sim\mathcal{N}(c\mu,c^2\sigma ^2)\). Finally, the forth property follows since \(g(f)=cf\) is continuous and \(h(t)=t/c^2\) is continuous, then for any continuous function \(f(s)\) it follows that \((g \circ f\circ h)=g(f(h(t)))\) is continuous.
 
@@ -362,11 +378,15 @@ where \(Z\) is allowed to vary over the class of all square integrable \(\mathca
 
 Let \(X\in L^2(\Omega,\mathcal{F},P)\) be a random variable. Now consider an arbitrary \(Z\in L^2(\Omega,\mathcal{G},P)\). Recall that \(\mathcal{G}\subset \mathcal{F}\) and so \(X\) is also in \(Z\in L^2(\Omega,\mathcal{G},P)\), as it is bothe square integrable and \(\mathcal{G}\)-measurable. Then
 
-\[E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].\]
+\[
+E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].
+\]
 
 Then by using the law of total expectation and secondly that \(Z\) is \(\mathcal{G}\)-measurable we have that
 
-\[E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right].\]
+\[
+E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right].
+\]
 
 Combining the two equations gives the desired result.
 
@@ -374,19 +394,27 @@ Combining the two equations gives the desired result.
 
 Obviously, we have that
 
-\[X-Z=X-Z+E[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])+(E[X\vert\mathcal{G}]-Z).\]
+\[
+X-Z=X-Z+E[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])+(E[X\vert\mathcal{G}]-Z).
+\]
 
 Then squaring the terms gives
 
-\[(X-Z)^2=(X-E[X\vert\mathcal{G}])^2+(E[X\vert\mathcal{G}]-Z)^2+2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\]
+\[
+(X-Z)^2=(X-E[X\vert\mathcal{G}])^2+(E[X\vert\mathcal{G}]-Z)^2+2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)
+\]
 
 Taking expectation on each side and using linearity of the expectation we have that
 
-\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right]+2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right].\]
+\[
+E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right]+2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right].
+\]
 
 We can now use that \(E[X\vert\mathcal{G}]-Z\) is \(\mathcal{G}\)-measurable with the above result on the last term.
 
-\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right].\]
+\[
+E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right].
+\]
 
 Now since \(X\) is given the term \(E\left[(X-E[X\vert\mathcal{G}])^2\right]\) is simply a constant not depending on the choice og \(Z\). The optimal choice of \(Z\) is then \(E[X\vert\mathcal{G}]\) since this minimizes the second term. The statement is then proved.
 
@@ -398,7 +426,9 @@ Let \(X\) be a random variable with distribution function \(F(x)=P(X\le x)\) and
 
 \textbf{Definition.} The moment generating function or Laplace transform of \(X\) is
 
-\[\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)\]
+\[
+\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)
+\]
 
 provided the expectation is finite for \(\vert\lambda\vert<h\) for some \(h>0\).
 
@@ -410,21 +440,23 @@ There is also the following result of independence for Moment generating functio
 
 \textbf{Theorem 1.} \emph{(Independence)} If
 
-\[E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)\]
+\[
+E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)
+\]
 
 for \(\vert\lambda_i\vert<h\) for \(i=1,2\) for some \(h>0\), then \(X\) and \(Y\) are independent random variables.
 
 \textbf{Example.} Recall that the Moment generating function of a normal (Gaussian) distribution is given by
 
-\[\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\exp\left(\lambda \mu + \frac{\lambda^2}{2}\sigma^2\right)\]
+\[
+\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\exp\left(\lambda \mu + \frac{\lambda^2}{2}\sigma^2\right)
+\]
 
 where \(X\) is normally distributed with mean \(\mu\) and variance \(\sigma^2\) and \(\lambda\in\mathbb{R}\) is a constant. Since a Brownian motion \(W(t)\) is normally distributed with zero mean and variance \(t\), we have that
 
-\[E[\exp(\lambda W(t))]=\exp\left(\frac{\lambda^2}{2}t\right).\]
-
-\textbf{Discussion.}
-
-~
+\[
+E[\exp(\lambda W(t))]=\exp\left(\frac{\lambda^2}{2}t\right).
+\]
 
 \textbf{Exercise 4.} \emph{(Bjork, exercise C.8.(a-c))} Let \(W\) be a Brownian motion. Notice that for the natural filtration \(\mathcal{F}_s=\sigma(W_t\vert t\le s)\) \(W_t-W_s\) is independent of \(\mathcal{F}_s\)
 
@@ -443,33 +475,47 @@ where \(X\) is normally distributed with mean \(\mu\) and variance \(\sigma^2\) 
 
 We show that for the natural filtration that \(W_t\) is a martingale. This include showing integrability and the martingale property. For the first we note that for a normal distributed random variable with mean 0 we have
 
-\[E[\vert N\vert]=\int_{-\infty}^\infty \vert x\vert dF_N(x)=2\int_{0}^\infty xdF_N(x)\]
+\[
+E[\vert N\vert]=\int_{-\infty}^\infty \vert x\vert dF_N(x)=2\int_{0}^\infty xdF_N(x)
+\]
 
 since the distribution is symmetric. Substituting the distribution function \(\Phi(x)=P(N\le x)\) in we see that
 
-\[E[\vert N\vert]=2\int_{0}^\infty xd\Phi(x)=2\int_{0}^\infty x\frac{1}{\sqrt{2\pi\sigma^2}}e^{-x^2/(2\sigma^2)}dx=(*)\]
+\[
+E[\vert N\vert]=2\int_{0}^\infty xd\Phi(x)=2\int_{0}^\infty x\frac{1}{\sqrt{2\pi\sigma^2}}e^{-x^2/(2\sigma^2)}dx=(*)
+\]
 
 by substituting \(u=x^2/(2\sigma^2)\) (\(x=\sqrt{2\sigma^2u}\)) we have that
 
-\[\frac{dx}{du}=\frac{1}{2}\sqrt{2\sigma^2u}2\sigma^2=(\sigma^2)^{3/2}\sqrt{2}u\iff dx=(\sigma^2)^{3/2}\sqrt{2}u\ du\]
+\[
+\frac{dx}{du}=\frac{1}{2}\sqrt{2\sigma^2u}2\sigma^2=(\sigma^2)^{3/2}\sqrt{2}u\iff dx=(\sigma^2)^{3/2}\sqrt{2}u\ du
+\]
 
 hence
 
-\[(*)=\frac{2}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{2\sigma^2u}e^{-u}(\sigma^2)^{3/2}\sqrt{2}u\ du=\frac{2\sqrt{2\sigma^2}(\sigma^2)^{3/2}\sqrt{2}}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{u}e^{-u}u\ du.\]
+\[
+(*)=\frac{2}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{2\sigma^2u}e^{-u}(\sigma^2)^{3/2}\sqrt{2}u\ du=\frac{2\sqrt{2\sigma^2}(\sigma^2)^{3/2}\sqrt{2}}{\sqrt{2\pi\sigma^2}}\int_0^{\infty}\sqrt{u}e^{-u}u\ du.
+\]
 
 This then simplify to
 
-\[(*)=\frac{(2\sigma^2)^{3/2}}{\sqrt{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=(2\sigma^2)^{1/2}\sqrt{\frac{2\sigma^2}{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=\sqrt{\frac{2\sigma^2}{\pi}}<\infty.\]
+\[
+(*)=\frac{(2\sigma^2)^{3/2}}{\sqrt{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=(2\sigma^2)^{1/2}\sqrt{\frac{2\sigma^2}{\pi}}\int_0^{\infty}u^{3/2}e^{-u}\ du=\sqrt{\frac{2\sigma^2}{\pi}}<\infty.
+\]
 
 (Obviously the above is not derived correctly, but the end expression is valid, source: \href{https://arxiv.org/pdf/1402.3559.pdf}{link}) However since
 
-\[W_t=W_t-0=W_t-W_0\sim\mathcal{N}(0,t)\]
+\[
+W_t=W_t-0=W_t-W_0\sim\mathcal{N}(0,t)
+\]
 
 we have that \(E\vert W_t\vert<\infty\) as desired.
 
 Next, we have that
 
-\[E[W_t\vert \mathcal{F}_s]=E[W_t-W_s\vert\mathcal{F}_s]+W_s=0+W_s=W_s.\]
+\[
+E[W_t\vert \mathcal{F}_s]=E[W_t-W_s\vert\mathcal{F}_s]+W_s=0+W_s=W_s.
+\]
 
 In the above we used that \(W_t-W_s\) is \(\mathcal{F}_s\)-measurable with mean 0. Then it follows that \(W_t\) is a martingale.
 
@@ -477,19 +523,27 @@ In the above we used that \(W_t-W_s\) is \(\mathcal{F}_s\)-measurable with mean 
 
 Let \(M_t=W_t^2-t\). First, we observe that two measurable functions composed is still a measurable function. Hence we know that \(M_t\) is measurable wrt. the filtration since \(W_t\) is measurable and \(w\mapsto w^2+t\) is measurable. Secondly, we have that
 
-\[E[\vert W_t^2-t\vert]\le E\vert W_t^2\vert +E\vert t\vert=t+t=2t<\infty\]
+\[
+E[\vert W_t^2-t\vert]\le E\vert W_t^2\vert +E\vert t\vert=t+t=2t<\infty
+\]
 
 where we use the triangle inequality. Thirdly, for the martingale property we have that for \(t>s\):
 
-\[E[M_t\vert \mathcal{F}_s]=E[W_t^2-t\vert \mathcal{F}_s]=E[W_t^2+W_s^2-2W_tW_s-W_s^2+2W_tW_s-t\vert \mathcal{F}_s]\]
+\[
+E[M_t\vert \mathcal{F}_s]=E[W_t^2-t\vert \mathcal{F}_s]=E[W_t^2+W_s^2-2W_tW_s-W_s^2+2W_tW_s-t\vert \mathcal{F}_s]
+\]
 
 which by linearity and independence of increments to the filtration gives
 
-\[E[M_t\vert \mathcal{F}_s]=E[(W_t-W_s)^2-W_s^2+2W_tW_s-t\vert \mathcal{F}_s]=t-s-t+E[2W_tW_s-W_s^2\vert \mathcal{F}_s]\]
+\[
+E[M_t\vert \mathcal{F}_s]=E[(W_t-W_s)^2-W_s^2+2W_tW_s-t\vert \mathcal{F}_s]=t-s-t+E[2W_tW_s-W_s^2\vert \mathcal{F}_s]
+\]
 
 However since \(W_s\) is measurable wrt. the filtration at time \(s\) the above is
 
-\[E[M_t\vert \mathcal{F}_s]=2W_sE[W_t\vert \mathcal{F}_s]-W_s^2-s=2W_s^2-W_s^2-s=W_s^2-s=M_s.\]
+\[
+E[M_t\vert \mathcal{F}_s]=2W_sE[W_t\vert \mathcal{F}_s]-W_s^2-s=2W_s^2-W_s^2-s=W_s^2-s=M_s.
+\]
 
 Since from (a) we know that \(W_t\) is a martingale. Then we arrive at the desired result.
 
@@ -497,22 +551,26 @@ Since from (a) we know that \(W_t\) is a martingale. Then we arrive at the desir
 
 Let \(M_t=\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\). First, by composition of measurable functions \(M_t\) is \(\mathcal{F}_t\)-measurable. Secondly, we have using the MGF for a normal distributed random variable:
 
-\[E\vert M_t=E\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\le E\left(\exp\left(\lambda W_t\right)\right)=\exp\left(\frac{\lambda^2}{2}t\right)<\infty.\]
+\[
+E\vert M_t=E\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\le E\left(\exp\left(\lambda W_t\right)\right)=\exp\left(\frac{\lambda^2}{2}t\right)<\infty.
+\]
 
 Thirdly, we consider
 
-\[E[M_t\vert\mathcal{F}_s]=E\left.\left[\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(-\frac{\lambda^2}{2}t\right)E\left.\left[\left(\exp\left(\lambda W_t\right)\right)\right\vert\mathcal{F}_s\right].\]
+\[
+E[M_t\vert\mathcal{F}_s]=E\left.\left[\left(\exp\left(\lambda W_t-\frac{\lambda^2}{2}t\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(-\frac{\lambda^2}{2}t\right)E\left.\left[\left(\exp\left(\lambda W_t\right)\right)\right\vert\mathcal{F}_s\right].
+\]
 
 By adding and subtracting \(W_s\) in the exponent we get
-
 \begin{align*}
 E[M_t\vert\mathcal{F}_s]&=\exp\left(-\frac{\lambda^2}{2}t\right)E\left.\left[\left(\exp\left(\lambda (W_t-W_s)+\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]\\
 &=\exp\left(-\frac{\lambda^2}{2}t\right)\exp\left(\frac{\lambda^2}{2}(t-s)\right)E\left.\left[\left(\exp\left(\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right].
 \end{align*}
-
 Using that \(E\left.\left[\left(\exp\left(\lambda W_s\right)\right)\right\vert\mathcal{F}_s\right]=\exp\left(\lambda W_s\right)\) and combining the exponents gives the desired:
 
-\[E[M_t\vert\mathcal{F}_s]=\exp\left(\lambda W_s-\frac{\lambda^2}{2}s\right)=M_s.\]
+\[
+E[M_t\vert\mathcal{F}_s]=\exp\left(\lambda W_s-\frac{\lambda^2}{2}s\right)=M_s.
+\]
 
 \hypertarget{week-2}{%
 \section{Week 2}\label{week-2}}
@@ -581,13 +639,11 @@ Let \(Z_t=e^{\alpha W_t}\). Then we may set \(X_t=W_t\) and we then have \(\mu_t
 \]
 
 Then the dynamics of \(Z_t\) is as follows
-
 \begin{align*}
 dZ_t&=\left(0+0+\frac{1}{2}1^2\alpha^2e^{\alpha X_t}\right)\ dt + 1\alpha e^{\alpha X_t}\ dW_t\\
 &=\frac{\alpha^2}{2}e^{\alpha X_t}\ dt +\alpha e^{\alpha X_t}\ dW_t\\
 &=\frac{\alpha^2}{2}Z_t\ dt +\alpha Z_t\ dW_t.
 \end{align*}
-
 As desired. \(\square\).
 
 \textbf{Solution (d).}
@@ -599,13 +655,11 @@ Let \(Z_t=e^{\alpha X_t}\), where \(X\) has stochastic differential \(dX_t=\mu\ 
 \]
 
 We may now derive the dynamics of \(Z_t\):
-
 \begin{align*}
 dZ_t&=\left(0+\mu \alpha e^{\alpha X_t}+\frac{1}{2} \sigma^2\alpha^2 e^{\alpha X_t}\right)\ dt+\sigma \alpha e^{\alpha X_t}\ dW_t\\
 &=\left(\mu+\frac{1}{2}\sigma^2\alpha\right)\alpha e^{\alpha X_t}\ dt+\sigma \alpha e^{\alpha X_t}\ dW_t\\
 &=\left(\mu+\frac{1}{2}\sigma^2\alpha\right)\alpha Z_t\ dt+\sigma \alpha Z_t\ dW_t.
 \end{align*}
-
 As desired. \(\square\).
 
 \textbf{Solution (e).}
@@ -617,13 +671,11 @@ Let \(Z_t=X_t^2\), where \(X\) has stochastic differential \(dX_t=\alpha X_t\ dt
 \]
 
 Given this we have the dynamics of \(Z_t\) as follows
-
 \begin{align*}
 dZ_t&=\left(0 + \alpha X_t2X_t+\frac{1}{2}(\sigma X_t)^22\right)\ dt+\sigma X_t 2 X_t\ dW_t\\
 &=\left(2\alpha +\sigma^2\right) X_t^2\ dt + 2\sigma X_t^2\ dW_t\\
 &=\left(2\alpha +\sigma^2\right) Z_t\ dt + 2\sigma Z_t\ dW_t.
 \end{align*}
-
 As desired. \(\square\).
 
 \textbf{Exercise 2} \emph{(Bjork 4.2)} Compute the stochastic differential for \(Z\) when \(Z_t=(X_t)^{-1}\) and \(X\) has the stochastic differential
@@ -643,13 +695,11 @@ We see that \(f(t,x)=1/x\) and so the relevant derivatives is
 \]
 
 Then we by Ito's formula we have
-
 \begin{align*}
 dZ_t&=\left(0-\alpha X_t\frac{1}{X_t^2}+\frac{1}{2} \sigma^2 X_t^2\frac{2}{X_t^3}\right)\ dt-\sigma X_t\frac{1}{X_t^2}\ dW_t\\
 &=\left(-\alpha \frac{1}{X_t}+ \sigma^2 \frac{1}{X_t}\right)\ dt-\sigma \frac{1}{X_t}\ dW_t\\
 &=(\sigma^2-\alpha)Z_t\ dt-\sigma Z_t\ dW_t.
 \end{align*}
-
 We also notice that
 
 \[
@@ -796,14 +846,12 @@ X_t-X_s=\int_s^t\mu_u\ du+\int_s^t\sigma_u\ dW_u.
 \]
 
 We then have
-
 \begin{align*}
 E[X_t\ \vert\ \mathcal{F}_s]-X_s&=E[X_t-X_s\ \vert\ \mathcal{F}_s]\\
 &=E\left[\left.\int_s^t\mu_u\ du+\int_s^t\sigma_u\ dW_u\ \right\vert\ \mathcal{F}_s\right]\\
 &=E\left[\left.\int_s^t\mu_u\ du\ \right\vert\ \mathcal{F}_s\right]+E\left[\left.\int_s^t\sigma_u\ dW_u\ \right\vert\ \mathcal{F}_s\right]\\
 &=E\left[\left.\int_s^t\mu_u\ du\ \right\vert\ \mathcal{F}_s\right]\ge 0.
 \end{align*}
-
 Then adding \(X_s\) to the above inequality yields the result. \(\square\)
 
 \textbf{Exercise 6} \emph{(Bjork 4.7)} The objective of this exercise is to give an argument for the formal identity
@@ -848,13 +896,11 @@ Var[Q_n]=E[Q_n^2]-E[Q_n]^2,
 hence if \(Q_n\) has mean 0, then showing convergence in \(L^2\) is equivalent to showing variance going to 0. Let us start by showing the mean is 0.
 
 We have that
-
 \begin{align*}
 Q_n&=\sum_{k=1}^n \Delta W_1(t_k)\cdot \Delta W_2(t_k)\\
 &=\sum_{k=1}^n(W_1(t_k)-W_1(t_{k-1}))\cdot (W_2(t_k)-W_2(t_{k-1}))\\
 &\stackrel{\mathcal{D}}{=}\sum_{k=1}^nXY,
 \end{align*}
-
 where \(X,Y\sim\mathcal{N}(0,t_k-t_{k-1})=\mathcal{N}(0,1/n)\) and independent random variable. This is justified since the increments of the Brownian motion has mean 0 and variance equal to the increment size. Now this implies, that we need to show that \(E[XY]=0\) and that \(Var[XY]\) is sufficiently small in terms of \(n\) such that it is summable. We see that
 
 \[
@@ -868,22 +914,18 @@ E[Q_n]=\sum_{k=1}^nE[XY]=0.
 \]
 
 We know from basic properties of variance that
-
 \begin{align*}
 Var(Q_n)&=\sum_{k=1}^n Var(XY)=\sum_{k=1}^n E[(XY)^2]\\
 &=\sum_{k=1}^n\frac{1}{n^2}=\frac{1}{n^2}n\\
 &=\frac{1}{n}\to0,\ n\to\infty.
 \end{align*}
-
 And so the result follows. \(\square\)
 
 \textbf{Exercise 7} \emph{(Bjork 4.8)} Let \(X\) and \(Y\) be given as the solutions to the following system of stochastic differential equations.
-
 \begin{align*}
 &dX_t=\alpha X_t\ dt-Y_t\ dW_t,\ &X_0=x_0,\\
 &dY_t=\alpha Y_t\ dt + X_t\ dW_t,\ &Y_0=y_0.
 \end{align*}
-
 Note that the initial values \(x_0\) and \(y_0\) are deterministic constants.
 
 \begin{enumerate}
@@ -922,14 +964,12 @@ d(Y_t^2)=\left(\alpha Y_t2Y_t+X_t^22\right)\ dt+X_t2Y_t\ dW_t=2(\alpha Y_t^2+X_t
 \]
 
 Combining we get the dynamics
-
 \begin{align*}
 dR_t&=2(\alpha X_t^2+Y_t^2)\ dt-2X_tY_t\ dW_t\\
 &+2(\alpha Y_t^2+X_t^2)\ dt+2X_tY_t\ dW_t\\
 &=(2\alpha +1)(X_t^2 + Y_t^2)\ dt\\
 &=(2\alpha +1)R_t\ dt
 \end{align*}
-
 Hence \(R_t\) has deterministic derivative and therefore a deterministic process. In fact, the solution to above is
 
 \[
@@ -996,13 +1036,11 @@ X_t=\underbrace{x_0e^{\alpha t}}_{:=Y_t}+\underbrace{\sigma e^{\alpha t}}_{:=Z_t
 \]
 
 We furthermore see easily that the dynamics of the processes individually has dynamics
-
 \begin{align*}
 d Y_t&=\alpha x_0e^{\alpha t}\ dt=\alpha Y_t\ dt,\ &Y_0=x_0,\\
 d Z_t&=\alpha \sigma^{\alpha t}\ dt=\alpha Z_t\ dt,\ &Z_0=\sigma,\\
 d R_t&=e^{-\alpha t}\ dW_s,\ &R_0=0.
 \end{align*}
-
 We then have the following function
 
 \[
@@ -1022,7 +1060,6 @@ C=\sigma \sigma^\top =\begin{bmatrix}0 &0  &0 \\ 0 & 0 &0 \\ 0 & 0 & e^{-\alpha 
 \]
 
 That is \(X_t=f(t,M_t)\). We can then use the multidimensional version of Ito's formula.
-
 \begin{align*}
 dX_t&=df(t,M_t)\\
 &=\left(\frac{\partial f}{\partial t}(t,M_t)+\sum_{i=1}^3\mu_i \frac{\partial f}{\partial x^i}(t,M_t)+\frac{1}{2}\sum_{i,j=1}^3 C^{ij}_t\frac{\partial^2 f}{\partial x^i\partial x^j}(t,M_t)\right)\ dt + \sum_{i=1}^3 \frac{\partial f}{\partial x^i}(t,M_t) \sigma^i_t\ dW_t\\
@@ -1031,7 +1068,6 @@ dX_t&=df(t,M_t)\\
 &=\left(\alpha x_0e^{\alpha t}+\alpha \sigma  \int_0^t e^{(t-s)\alpha }\ dW_s\right)\ dt + \sigma \ dW_t\\
 &=\alpha X_t\ dt + \sigma \ dW_t.
 \end{align*}
-
 Then this solution does in fact satisfies the differential form. We furthermore have that \(X_0=x_0\) and the desired result follows. \(\square\)
 
 \textbf{Exercise 2.} \emph{(Bjork 5.5)} Suppose that \(X\) satisfies the SDE
@@ -1051,7 +1087,6 @@ If we set \(f(t,x)=x^\beta\), we have the relevant derivatives as follows
 \]
 
 Then by applying Ito's formula we have
-
 \begin{align*}
 dY_t&=df(t,X_t)\\
 &=\left(0 + \beta X_t^{\beta -1}\alpha X_t+\frac{1}{2}\sigma ^2X_t^2\beta (\beta -1) X_t^{\beta -2}\right)\ dt+\sigma X_t\beta X_t^{\beta -1} \ dW_t\\
@@ -1059,7 +1094,6 @@ dY_t&=df(t,X_t)\\
 &=\left(\alpha \beta+\frac{1}{2}\sigma ^2\beta (\beta -1)\right) Y_t\ dt+\sigma \beta Y_t \ dW_t\\
 &= \alpha^Y Y_t\ dt + \sigma^Y Y_t\ dW_t,
 \end{align*}
-
 where \(\alpha^Y=\left(\alpha \beta+\frac{1}{2}\sigma ^2\beta (\beta -1)\right)\) and \(\sigma^Y =\sigma \beta\). Futhermore \(Y_0=y_0=x_0^\beta\). Then by definition of GBM we have that \(Y_t\) is a GBM as desired. \(\square\)
 
 \textbf{Exercise 3.} \emph{(Bjork 5.6)} Suppose that \(X\) satisfies the SDE
@@ -1079,7 +1113,6 @@ where \(V\) is a Brownian motion which is independent of \(W\). Define \(Z=X/Y\)
 \textbf{Solution.}
 
 We have that for the function \(f(t,x,y)=x/y\) and wish to determine the derivative of the stochastic process \(Z_t=f(t,X_t,Y_t)\). We do this by applying Ito's formula in the multidimensional case. That is
-
 \begin{align*}
 df(t,X_t,Y_t)&=\frac{\partial f}{\partial t}(t,X_t,Y_t)\ dt + \frac{\partial f}{\partial x}(t,X_t,Y_t)\ dX_t + \frac{\partial f}{\partial y}(t,X_t,Y_t)\ dY_t\\
 &+\frac{1}{2}\frac{\partial^2 f}{\partial x^2}(t,X_t,Y_t)(dX_t)^2 + \frac{1}{2}\frac{\partial^2 f}{\partial y^2}(t,X_t,Y_t)(dY_t)^2\\
@@ -1087,9 +1120,7 @@ df(t,X_t,Y_t)&=\frac{\partial f}{\partial t}(t,X_t,Y_t)\ dt + \frac{\partial f}{
 &=\frac{1}{Y_t}(\alpha X_t\ dt + \sigma X_t\ dW_t)-\frac{X_t}{Y_t^2}(\gamma Y_t\ dt+\delta Y_t\ dV_t)+\frac{1}{2}2\frac{X_t}{Y_t^3}(\gamma Y_t\ dt+\delta Y_t\ dV_t)^2\\
 &-\frac{1}{2}\frac{1}{Y_t^2}(\gamma Y_t\ dt+\delta Y_t\ dV_t)(\alpha X_t\ dt + \sigma X_t\ dW_t)
 \end{align*}
-
 Calculating further gives
-
 \begin{align*}
 (dY_t)^2&=\gamma^2 Y_t^2 (dt)^2+\delta^2Y_t^2 (dV_t)^2+2\gamma Y_t\delta Y_t\ dt\cdot dV_t\\
 &=0 +\delta^2Y_t^2 dt + 0=\delta^2Y_t^2 dt\\
@@ -1098,16 +1129,13 @@ Calculating further gives
 &+\delta Y_t \alpha X_t\ dt\cdot dV_t+\gamma Y_t\sigma X_t\ (dW_t)(dV_t)\\
 &=0+0+0+0=0
 \end{align*}
-
 Hence we conclude that
-
 \begin{align*}
 df(t,X_t,Y_t)&=\alpha\frac{X_t}{Y_t}\ dt + \sigma \frac{X_t}{Y_t}\ dW_t-\gamma \frac{X_tY_t}{Y_t^2}\ dt+\delta \frac{X_tY_t}{Y_t^2}\ dV_t\\
 &+\frac{1}{2}2\frac{X_t}{Y_t^3}\delta^2Y_t^2 dt\\
 &=\left(\alpha Z_t-\gamma Z_t+Z_t\delta^2\right)\ dt+ \sigma Z_t\ dW_t+\delta Z_t\ dV_t\\
 &=\left(\alpha -\gamma +\delta^2\right)Z_t\ dt+ \sigma Z_t\ dW_t+\delta Z_t\ dV_t.
 \end{align*}
-
 As desired the above is the SDE for the process \(Z_t\). \(\square\)
 
 \textbf{Exercise 4.} \emph{(Bjork 5.9)} Use a stochastic representation result in order to solve the following boundary value problem in the domain \([0,T]\times\mathbb{R}\).
@@ -1145,14 +1173,12 @@ X_T=x\exp\left\{\left(\mu - \frac{1}{2}\sigma^2\right)(T-t)+\sigma(W_T-W_t)\righ
 \]
 
 Inserting this we find that
-
 \begin{align*}
 F(t,x)&=E\left.\left[\log(x^2\exp\left\{\left(2\mu - \sigma^2\right)(T-t)+2\sigma(W_T-W_t)\right\})\ \right\vert\ X_t=x\right]\\
 &=E\left.\left[\log(x^2)+\left(2\mu - \sigma^2\right)(T-t)+2\sigma(W_T-W_t)\ \right\vert\ X_t=x\right]\\
 &=2\log(x)+\left(2\mu - \sigma^2\right)(T-t)+2\sigma E\left.\left[W_T-W_t\ \right\vert\ X_t=x\right]\\
 &=2\log(x)+\left(2\mu - \sigma^2\right)(T-t).
 \end{align*}
-
 Using that the Brownian motion has increments with mean 0. \(\square\)
 
 \textbf{Exercise 5.} \emph{(Bjork 5.13)} Solve the boundary value problem
@@ -1172,7 +1198,6 @@ We see if this problem fit into the context of Feymann-Kac's multi-dimensional p
 \]
 
 for \(i=1,2\) representing the assets \(X_t\) and \(Y_t\). We furthermore have the matrix \(C\)
-
 \begin{align*}
 C&=\sigma(t,X_t,Y_t)\sigma(t,X_t,Y_t)^\top\\
 &=
@@ -1189,14 +1214,11 @@ C&=\sigma(t,X_t,Y_t)\sigma(t,X_t,Y_t)^\top\\
 \sigma_{1,1}\sigma_{2,1}+\sigma_{2,2}\sigma_{1,2} & \sigma_{2,2}^2+\sigma_{2,1}^2
 \end{bmatrix}
 \end{align*}
-
 Where we have that the only none-zero entrances is the diagonal with
-
 \begin{align*}
 C_{1,1}&=\sigma_{1,1}^2+\sigma_{1,2}^2 = \sigma^2,\\
 C_{2,2}&=\sigma_{2,2}^2+\sigma_{2,1}^2=\delta^2.
 \end{align*}
-
 and obviously \(r=0\) and \(\Phi(x,y)=xy\). From proposition 5.8 we then have that \(F\) has stochastic representation:
 
 \[
@@ -1317,14 +1339,12 @@ Y_0=0.
 \]
 
 Hence by the multidimensional Ito's formula we have the dynamics of \(M\) given by
-
 \begin{align*}
 dM^{(\lambda)}_t&=g_t\ dt+g_x\ dX_t+g_y\ dY_t+\frac{1}{2}g_{yy}\ (dY_t)^2+\frac{1}{2}g_{xx}\ (dX_t)^2 +f_{xy}(dX_t)(dY_t)\\
 &=0+\lambda g\ dX_t-\frac{\lambda^2}{2}g\ dY_t+0+\frac{1}{2}\lambda ^2g\ (dX_t)^2+0\\
 &=\lambda M_t^{(\lambda)} f(t)\ dW_t-\frac{1}{2}\lambda^2M_t^{(\lambda)} f^2(t)\ dt+\frac{1}{2}\lambda M_t^{(\lambda)} f^2(t)\ dt\\
 &=\lambda f(t)M_t^{(\lambda)}\ dW_t,
 \end{align*}
-
 And so we see that \(M\) is a martingale as it only has dynamics wrt. the Brownian motion \(W\) (assuming \(\lambda f_tM_t^{(\lambda)}\in\mathcal{L}^2\)). Furthermore we have that
 
 \[
@@ -1336,14 +1356,12 @@ and so we have \(E[M_t^{(\lambda)}]=M_0^{(\lambda)}=1\) as desired. \(\square\)
 \textbf{Solution (b).}
 
 \emph{``(i)''} We have from the previous exercise
-
 \begin{align*}
 &\frac{M^{(\lambda_1)}_sM^{(\lambda_2)}_t}{M^{(\lambda_2)}_s}\\
 &=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du\right\}\exp\left\{\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t f^2(u)\ du\right\}\exp\left\{\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\ du-\lambda_2 X_s\right\}\\
 &=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du+\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t f^2(u)\ du+\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\ du-\lambda_2 X_s\right\}\\
 &=\exp\left\{\lambda_1 X_s+\lambda_2 (X_t-X_s)-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du-\frac{1}{2}\lambda_2^2\int_s^t f^2(u)\ du\right\}
 \end{align*}
-
 and so the conclusion follows. \(\square\)
 
 \emph{``(ii)''} We have that from lemma 4.18 that
@@ -1436,27 +1454,21 @@ and so the conclusion is that \(X_s\) and \(X_t-X_s\) are independent. \(\square
 \textbf{Solution (a).}
 
 First we have that the dynamics of \(S\) and \(B\) are given by
-
 \begin{align*}
 dS_t&=\mu S_t\ dt + \sigma S_t\ dW_t,\\
 dB_t&=rB_t\ dt.
 \end{align*}
-
 We know that \(\Pi_t[X]=F(t,S_t)\) for some smooth function \(F\) hence by Ito's formula we have
-
 \begin{align*}
 d\Pi_t&=\frac{\partial F}{\partial t}(t,S_t)\ dt +\frac{\partial F}{\partial s}(t,S_t)\ dS_t+\frac{1}{2}\frac{\partial^2 F}{\partial s^2}(t,S_t)\ (dS_t)^2\\
 &=F_t\ dt+F_s(r S_t\ dt + \sigma S_t\ dW^Q_t)+\frac{1}{2}F_{ss}(r S_t\ dt + \sigma S_t\ dW^Q_t)^2\\
 &=(F_t+r S_t F_s)\ dt+F_s\sigma S_t\ dW^Q_t+\frac{1}{2}F_{ss}\sigma ^2S_t^2\ dt\\
 &=(F_t+r S_tF_s+\frac{1}{2}F_{ss}\sigma ^2S_t^2)\ dt+F_s\sigma S_t\ dW^   Q_t.
 \end{align*}
-
 By setting \(g_t=F_s\sigma S_t\) and restating the Black-Scholes equation we have
-
 \begin{align*}
 rF=F_t+rsF_s+\frac{1}{2}F_{ss}\sigma ^2 s^2
 \end{align*}
-
 hence
 
 \[
@@ -1468,7 +1480,6 @@ as desired. \(\square\)
 \textbf{Solution (b).}
 
 Consider the stochastic process \(Z_t=F(t,\Pi_t,B_t)\) given by \(F(t,\pi,b)=\frac{\pi}{b}\). Then by Ito's formula we have the dynamics of \(Z\) as
-
 \begin{align*}
 dZ_t&=F_t\ dt+F_\pi\ d\Pi_t+F_b\ dB_t+\frac{1}{2}F_{\pi\pi}\ (d\Pi_t)^2+\frac{1}{2}F_{bb}\ (dB_t)^2+F_{b\pi}\ (d\Pi_t)(dB_t)\\
 &=0+\frac{1}{B_t}\ d\Pi_t-\frac{\Pi_t}{B_t^2}\ dB_t+\frac{1}{2}0g_t\ dt+\frac{\Pi_t}{B_t^3}0-\frac{1}{B_t^2}0\\
@@ -1476,7 +1487,6 @@ dZ_t&=F_t\ dt+F_\pi\ d\Pi_t+F_b\ dB_t+\frac{1}{2}F_{\pi\pi}\ (d\Pi_t)^2+\frac{1}
 &=\frac{1}{B_t}(r\Pi_t\ dt-r\Pi_t\ dt+g_t\ dW_t^Q)\\
 &=\frac{1}{B_t}g_t\ dW_t^Q.
 \end{align*}
-
 hence we have that \(Z_t\) is a \(Q\)-martingale since it only has dynamics in terms of the Brownian motion \(W^Q\). Additionally we may represent the process as
 
 \[
@@ -1519,19 +1529,15 @@ d(\log(S_t))=d f(t,S_t)=f_t\ dt+f_s\ dS_t+\frac{1}{2}f_{ss}(dS_t)^2.
 \]
 
 Since \(f_t=0\) and \(f_s=1/s\) and \(f_{ss}=-1/s^2\) we have
-
 \begin{align*}
 d(\log(S_t))&=\frac{1}{S_t}(rS_t\ dt+\sigma S_t\ dW_t^Q)-\frac{1}{2}\sigma^2S_t^2\frac{1}{S_t^2}\ dt\\
 &=\left(r-\frac{1}{2}\sigma^2\right)\ dt+\sigma \ dW_t^Q.
 \end{align*}
-
 Then given that \(S_t=s\) we have
-
 \begin{align*}
 \log(S_u)&=\log s+\int_t^ur-\frac{1}{2}\sigma^2\ dv+\sigma\int_t^u dW_v^Q\\
 &=\log s+\left(r-\frac{1}{2}\sigma^2\right)(u-t)+\sigma(W_u^Q-W_t^Q)
 \end{align*}
-
 Taking expectation we then have
 
 \[
@@ -1569,12 +1575,10 @@ S_T^\beta=s^\beta\cdot\exp\left\{\beta\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\b
 \]
 
 Evaluating the price process then becomes
-
 \begin{align*}
 \Pi_t&=e^{-r(T-t)}E^Q\left[s^\beta\cdot\exp\left\{\beta\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\beta\sigma  (W_T^Q-W_t^Q)\right\}\right]\\
 &=e^{-r(T-t)}s^\beta e^{\beta\left(r-\frac{1}{2}\sigma^2\right)(T-t)}E^Q\left[e^{\beta\sigma(W_T^Q-W_t^Q)}\right].
 \end{align*}
-
 Evaluating the expectation may be done by calculating the MGF of a \(\mathcal{N}(0,T-t)\) variable i.e.
 
 \[
@@ -1619,7 +1623,6 @@ S_T=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma ^2\right)(T-t)+\sigma\left(W_T^Q
 \]
 
 Then
-
 \begin{align*}
 (*)&=Q(S_T\le b\ \vert\ S_t=s)-Q(S_T<a\ \vert\ S_t=s)\\
 &=Q(S_T\le b\ \vert\ S_t=s)-Q(S_T\le a\ \vert\ S_t=s)\\
@@ -1631,7 +1634,6 @@ Then
 &-N\left(\frac{1}{\sigma\sqrt{T-t}}\left\{\log a-\log s+\left(\frac{1}{2}\sigma ^2-r\right)(T-t)\right\}\right)\\
 &=N(d_b)-N(d_a),
 \end{align*}
-
 as \(W_T^Q-W_t^Q\) is \(\mathcal{N}(0,T-t)\) distributed under the \(Q\)-measure. The function \(d_c\) is defined as
 
 \[
@@ -1651,15 +1653,12 @@ as desired. \(\square\)
 \textbf{Solution.}
 
 Firstly, we may use that \(S\) is a GBM. Setting \(S_t=s\) we have that
-
 \begin{align*}
 X&=\frac{S_{T_1}}{S_{T_0}}=\frac{s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-t) +\sigma\left(W_{T_1}^Q-W_t^Q\right)\right\}}{s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_0-t) +\sigma\left(W_{T_0}^Q-W_t^Q\right)\right\}}\\
 &=\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-t-T_0+t) +\sigma\left(W_{T_1}^Q-W_t^Q-W_{T_0}^Q+W_t^Q\right)\right\}\\
 &=\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-T_0) +\sigma\left(W_{T_1}^Q-W_{T_0}^Q\right)\right\}.
 \end{align*}
-
 Then it follows from proposition 7.11 that the price process is given by
-
 \begin{align*}
 \Pi_t&=e^{-r(T_1-t)}E^Q_{t,s}[X]\\
 &=e^{-r(T_1-t)}E^Q\left[\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-T_0) +\sigma\left(W_{T_1}^Q-W_{T_0}^Q\right)\right\}\right]\\
@@ -1668,7 +1667,6 @@ Then it follows from proposition 7.11 that the price process is given by
 &=\exp\left\{-r(T_1-t)+r(T_1-T_0)\right\}\\
 &=\exp\left\{-r(T_1+T_0-T_1-t)\right\}=\exp\left\{-r(T_0-t)\right\}
 \end{align*}
-
 as desired. \(\square\)
 
 \textbf{Exercise 6.} \emph{(Exam 2017/18, problem 2, question (c)-(d))} Consider a standard Black-Scholes model, that is, a model consisting of a bank account \(B_t\) with \(P\)-dynamics given by
@@ -1686,6 +1684,7 @@ dS_t=\alpha S_t\ dt+\sigma S_t\ d\overline{W}_t,\ S_0=s>0
 where \(r,\alpha\in\mathbb{R}\) and \(\sigma >0\) are constants and \(\overline{W}_t\) is a \(P\)-Brownian motion. Let \(T>0\) be a given and fixed date.
 
 Consider the derivative that at time \(T\) pays
+
 \[
 X=\max\left\{\min\left\{S_T,K_2\right\},K_1\right\},
 \]
@@ -1756,12 +1755,10 @@ Y=
 \]
 
 hence the payout is \(Y=S_T^2-K^2=\Phi(S_T)\) where \(\Phi(s)=s^2-K^2\). That is \(Y\) is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that
-
 \begin{align*}
 \Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
 &=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
 \end{align*}
-
 Recall that under the martingale measure \(Q\) we have that \(S_t\) is a GBM hence
 
 \[
@@ -1775,7 +1772,6 @@ S_T^2=s^2\cdot \exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(
 \]
 
 Inserting this into the risk neutral valuation formula we get
-
 \begin{align*}
 \Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
 &=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)} E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
@@ -1783,11 +1779,9 @@ Inserting this into the risk neutral valuation formula we get
 &=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
 &=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
 \end{align*}
-
 The arbitrage free price of the derivative is then given above. \(\square\)
 
 \emph{(ii)}: From theorem 8.5 we can determine a hedging portfolio with weightings
-
 \begin{align*}
 w_t^B&=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
 &=1-\frac{S_t2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}}{e^{-r(T-t)}\left(S_t^2e^{(2r+\sigma^2)(T-t)}-K^2\right)}\\
@@ -1795,16 +1789,13 @@ w_t^B&=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
 &=1-\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}\\
 w_t^S&=\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}.
 \end{align*}
-
 In absolute terms we will hold the portfolio
-
 \begin{align*}
 h_t^S&=2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}\\
 h_t^B&=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{B_t}\\
 &=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{e^{rt}}\\
 &=e^{-rT}s^2e^{(2r+\sigma^2)(T-t)}-e^{-rT}K^2-e^{-rt}S_th_t^S.
 \end{align*}
-
 The portfolio above will hedge \(Y\) with probability one. \(\square\)
 
 \textbf{Solution (c).}
@@ -1832,14 +1823,11 @@ dV_t^h=df(h_0(t),B_t)+df(h_1(t),S_t).
 \]
 
 Using Ito's formula on each term we have
-
 \begin{align*}
 df(h_0(t),B_t)&=B_t\ dh_0(t)+h_0(t)\ dB_t+(dB_t)(dh_0(t)),\\
 df(h_1(t),S_t)&=S_t\ dh_1(t)+h_1(t)\ dS_t+(dS_t)(dh_1(t)),\\
 \end{align*}
-
 since of cause \(f_{xx}=f_{yy}=0\). We can the determine the dynamics of the portfolio by
-
 \begin{align*}
 dh_0(t)&=-(-2t-\sigma^2)S_t^2e^{r(T-2t)+\sigma^2(T-t)}\ dt\\
 &-2S_te^{r(T-2t)+\sigma^2(T-t)}\ dS_t\\
@@ -1847,18 +1835,14 @@ dh_0(t)&=-(-2t-\sigma^2)S_t^2e^{r(T-2t)+\sigma^2(T-t)}\ dt\\
 &=(-2t-\sigma^2)h_0(t)\ dt+\frac{2}{S_t}h_0(t)\ (\mu S_t\ dt+\sigma S_t\ dW_t)+\frac{1}{S_t^2}h_0(t) \sigma^2S_t^2\ dt\\
 &=(\mu-1)2h_0(t)\ dt+2\sigma h_0(t)\ dW_t
 \end{align*}
-
 and
-
 \begin{align*}
 dh_1(t)&=(-r-\sigma^2)2e^{(r+\sigma^2)(T-t)}S_t\ dt\\
 &+2e^{(r+\sigma^2)(T-t)}\ dS_t+0\\
 &=(-r-\sigma^2)h_1(t)\ dt+\frac{1}{S_t}h_1(t)(\mu S_t\ dt+\sigma S_t\ dW_t)\\
 &=(-r-\sigma^2+\mu)h_1(t)\ dt+h_1(t)\sigma \ dW_t\\
 \end{align*}
-
 And so in total
-
 \begin{align*}
 dV_t^h(t)&=df(h_0(t),B_t)+df(h_1(t),S_t)\\
 &=B_t\ dh_0(t)+h_0(t)\ dB_t+(dB_t)(dh_0(t))\\
@@ -1875,13 +1859,11 @@ dV_t^h(t)&=df(h_0(t),B_t)+df(h_1(t),S_t)\\
 \textbf{Solution (d).}
 
 We compute \(V_T^h\) easily by inserting \(h_0\) and \(h_1\) below
-
 \begin{align*}
 V_T^h&=B_Th_0(T)+S_Th_1(T)\\
 &=B_T\left(-e^{r(T-2T)+\sigma^2(T-T)}S_T^2\right)+S_T\left(2e^{(r+\sigma^2)(T-T)}S_T\right)\\
 &=-S_T^2+2S_T^2=S_T^2.
 \end{align*}
-
 and so \(h\) hedge the payout \(\Phi(S_T)=S_T^2\). \(\square\)
 
 \textbf{Solution.}
@@ -1950,13 +1932,11 @@ V^h_T=
 \]
 
 Then the portfolio give the desired payout. Given the price process for the call option and the zero-coupon bond we have that the value process is given by
-
 \begin{align*}
 V_t^h&=Ke^{-r(T-t)}+c(K+A;t,T)-c(A;t,T)\\
 &=e^{-r(T-t)}\left\{K+(K+A)N(d_2(K+A;t,S_t)-AN(d_2(A;t,S_t))\right\}\\
 &+S_t\left\{N(d_1(K+A;t,S_t))-N(d_1(A;t,S_t))\right\}
 \end{align*}
-
 with \(d_1\) and \(d_2\) as given in the Black-Scholes formula. The price of the portfolio is given by the above value process. \(\square\)
 
 \textbf{Exercise 2.} \emph{(Bjork 10.2)} The setup is the same as the previous exercise. Here the contract is a so-called \textbf{straddle}, defined by
@@ -2133,12 +2113,10 @@ Y=
 \]
 
 hence the payout is \(Y=S_T^2-K^2=\Phi(S_T)\) where \(\Phi(s)=s^2-K^2\). That is \(Y\) is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that
-
 \begin{align*}
 \Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
 &=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
 \end{align*}
-
 Recall that under the martingale measure \(Q\) we have that \(S_t\) is a GBM hence
 
 \[
@@ -2152,7 +2130,6 @@ S_T^2=s^2\cdot \exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(
 \]
 
 Inserting this into the risk neutral valuation formula we get
-
 \begin{align*}
 \Pi_t[Y]&=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
 &=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)} E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
@@ -2160,11 +2137,9 @@ Inserting this into the risk neutral valuation formula we get
 &=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
 &=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
 \end{align*}
-
 The arbitrage free price of the derivative is then given above. \(\square\)
 
 \emph{(ii)}: From theorem 8.5 we can determine a hedging portfolio with weightings
-
 \begin{align*}
 w_t^B&=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
 &=1-\frac{S_t2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}}{e^{-r(T-t)}\left(S_t^2e^{(2r+\sigma^2)(T-t)}-K^2\right)}\\
@@ -2172,16 +2147,13 @@ w_t^B&=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
 &=1-\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}\\
 w_t^S&=\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}.
 \end{align*}
-
 In absolute terms we will hold the portfolio
-
 \begin{align*}
 h_t^S&=2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}\\
 h_t^B&=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{B_t}\\
 &=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{e^{rt}}\\
 &=e^{-rT}s^2e^{(2r+\sigma^2)(T-t)}-e^{-rT}K^2-e^{-rt}S_th_t^S.
 \end{align*}
-
 The portfolio above will hedge \(Y\) with probability one. \(\square\)
 
 \textbf{Exercise 5.} \emph{(Exam 2019/20, problem 2)}
@@ -2263,12 +2235,10 @@ dW_t=\lambda f(t)\ dt + d\tilde{W}_t.
 \]
 
 We can then see
-
 \begin{align*}
 E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&=\int M_T^{(\lambda)}\log M_T^{(\lambda)}\ dP=\int M_T^{(\lambda)}\log M_T^{(\lambda)} \frac{1}{M_T^{(\lambda)}}\ d\tilde{P}\\
 &=\int \log M_T^{(\lambda)}\ d\tilde{P}=E^{\tilde{P}}[\log M_T^{(\lambda)}].
 \end{align*}
-
 Then we can evaluate the mean value by seeing the \(X\) has representation wrt. \(\tilde{P}\) by
 
 \[
@@ -2276,7 +2246,6 @@ X_t=\int_0^tf(u)\ (\lambda f(u)\ du + d\tilde{W}_u)=\lambda\int_0^tf^2(u)\ du+\i
 \]
 
 Giving that
-
 \begin{align*}
 E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&=E^{\tilde{P}}[\log M_T^{(\lambda)}]\\
 &=E^{\tilde{P}}\left[ \lambda X_T-\frac{1}{2}\lambda ^2\int_0^T f^2(u)\ du \right]\\
@@ -2285,7 +2254,6 @@ E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&=E^{\tilde{P}}[\log M_T^{(\lambda)}]\\
 &=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du+\lambda E^{\tilde{P}}\left[\int_0^Tf(u)\ d\tilde{W}_u \right]\\
 &=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du
 \end{align*}
-
 Since
 
 \[

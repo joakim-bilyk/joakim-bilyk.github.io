@@ -266,23 +266,23 @@ Determine also the diffusion process <span class="math inline">\(\Sigma_t^Z\)</s
 <summary>
 <strong>Solution (a).</strong>
 </summary>
-<p>First we have that the dynamics of <span class="math inline">\(S\)</span> and <span class="math inline">\(B\)</span> are given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>First we have that the dynamics of <span class="math inline">\(S\)</span> and <span class="math inline">\(B\)</span> are given by
+<span class="math display">\[\begin{align*}
 dS_t&amp;=\mu S_t\ dt + \sigma S_t\ dW_t,\\
 dB_t&amp;=rB_t\ dt.
-\end{align*}\]</span></p>
-<p>We know that <span class="math inline">\(\Pi_t[X]=F(t,S_t)\)</span> for some smooth function <span class="math inline">\(F\)</span> hence by Ito’s formula we have</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+We know that <span class="math inline">\(\Pi_t[X]=F(t,S_t)\)</span> for some smooth function <span class="math inline">\(F\)</span> hence by Ito’s formula we have
+<span class="math display">\[\begin{align*}
 d\Pi_t&amp;=\frac{\partial F}{\partial t}(t,S_t)\ dt +\frac{\partial F}{\partial s}(t,S_t)\ dS_t+\frac{1}{2}\frac{\partial^2 F}{\partial s^2}(t,S_t)\ (dS_t)^2\\
 &amp;=F_t\ dt+F_s(r S_t\ dt + \sigma S_t\ dW^Q_t)+\frac{1}{2}F_{ss}(r S_t\ dt + \sigma S_t\ dW^Q_t)^2\\
 &amp;=(F_t+r S_t F_s)\ dt+F_s\sigma S_t\ dW^Q_t+\frac{1}{2}F_{ss}\sigma ^2S_t^2\ dt\\
 &amp;=(F_t+r S_tF_s+\frac{1}{2}F_{ss}\sigma ^2S_t^2)\ dt+F_s\sigma S_t\ dW^   Q_t.
-\end{align*}\]</span></p>
-<p>By setting <span class="math inline">\(g_t=F_s\sigma S_t\)</span> and restating the Black-Scholes equation we have</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+By setting <span class="math inline">\(g_t=F_s\sigma S_t\)</span> and restating the Black-Scholes equation we have
+<span class="math display">\[\begin{align*}
 rF=F_t+rsF_s+\frac{1}{2}F_{ss}\sigma ^2 s^2
-\end{align*}\]</span></p>
-<p>hence</p>
+\end{align*}\]</span>
+hence</p>
 <p><span class="math display">\[
 d\Pi_t=r F\ dt+g_t\ dW^Q_t
 \]</span></p>
@@ -292,15 +292,15 @@ d\Pi_t=r F\ dt+g_t\ dW^Q_t
 <summary>
 <strong>Solution (b).</strong>
 </summary>
-<p>Consider the stochastic process <span class="math inline">\(Z_t=F(t,\Pi_t,B_t)\)</span> given by <span class="math inline">\(F(t,\pi,b)=\frac{\pi}{b}\)</span>. Then by Ito’s formula we have the dynamics of <span class="math inline">\(Z\)</span> as</p>
-<p><span class="math display">\[\begin{align*}
+<p>Consider the stochastic process <span class="math inline">\(Z_t=F(t,\Pi_t,B_t)\)</span> given by <span class="math inline">\(F(t,\pi,b)=\frac{\pi}{b}\)</span>. Then by Ito’s formula we have the dynamics of <span class="math inline">\(Z\)</span> as
+<span class="math display">\[\begin{align*}
 dZ_t&amp;=F_t\ dt+F_\pi\ d\Pi_t+F_b\ dB_t+\frac{1}{2}F_{\pi\pi}\ (d\Pi_t)^2+\frac{1}{2}F_{bb}\ (dB_t)^2+F_{b\pi}\ (d\Pi_t)(dB_t)\\
 &amp;=0+\frac{1}{B_t}\ d\Pi_t-\frac{\Pi_t}{B_t^2}\ dB_t+\frac{1}{2}0g_t\ dt+\frac{\Pi_t}{B_t^3}0-\frac{1}{B_t^2}0\\
 &amp;=\frac{1}{B_t}(r \Pi_t\ dt + g_t\ dW^Q_t)-\frac{\Pi_t}{B_t^2}(rB_t\ dt)\\
 &amp;=\frac{1}{B_t}(r\Pi_t\ dt-r\Pi_t\ dt+g_t\ dW_t^Q)\\
 &amp;=\frac{1}{B_t}g_t\ dW_t^Q.
-\end{align*}\]</span></p>
-<p>hence we have that <span class="math inline">\(Z_t\)</span> is a <span class="math inline">\(Q\)</span>-martingale since it only has dynamics in terms of the Brownian motion <span class="math inline">\(W^Q\)</span>. Additionally we may represent the process as</p>
+\end{align*}\]</span>
+hence we have that <span class="math inline">\(Z_t\)</span> is a <span class="math inline">\(Q\)</span>-martingale since it only has dynamics in terms of the Brownian motion <span class="math inline">\(W^Q\)</span>. Additionally we may represent the process as</p>
 <p><span class="math display">\[
 Z_t=\Pi_0+\int_0^t\frac{g_s}{B_s}\ dW_s^Q.
 \]</span></p>
@@ -332,17 +332,17 @@ dS_t=rS_t\ dt+\sigma S_t\ dW_t^Q.
 <p><span class="math display">\[
 d(\log(S_t))=d f(t,S_t)=f_t\ dt+f_s\ dS_t+\frac{1}{2}f_{ss}(dS_t)^2.
 \]</span></p>
-<p>Since <span class="math inline">\(f_t=0\)</span> and <span class="math inline">\(f_s=1/s\)</span> and <span class="math inline">\(f_{ss}=-1/s^2\)</span> we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>Since <span class="math inline">\(f_t=0\)</span> and <span class="math inline">\(f_s=1/s\)</span> and <span class="math inline">\(f_{ss}=-1/s^2\)</span> we have
+<span class="math display">\[\begin{align*}
 d(\log(S_t))&amp;=\frac{1}{S_t}(rS_t\ dt+\sigma S_t\ dW_t^Q)-\frac{1}{2}\sigma^2S_t^2\frac{1}{S_t^2}\ dt\\
 &amp;=\left(r-\frac{1}{2}\sigma^2\right)\ dt+\sigma \ dW_t^Q.
-\end{align*}\]</span></p>
-<p>Then given that <span class="math inline">\(S_t=s\)</span> we have</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Then given that <span class="math inline">\(S_t=s\)</span> we have
+<span class="math display">\[\begin{align*}
 \log(S_u)&amp;=\log s+\int_t^ur-\frac{1}{2}\sigma^2\ dv+\sigma\int_t^u dW_v^Q\\
 &amp;=\log s+\left(r-\frac{1}{2}\sigma^2\right)(u-t)+\sigma(W_u^Q-W_t^Q)
-\end{align*}\]</span></p>
-<p>Taking expectation we then have</p>
+\end{align*}\]</span>
+Taking expectation we then have</p>
 <p><span class="math display">\[
 E^Q[\log(S_T)\ \vert\ S_t=s]=\log s+\left(r-\frac{1}{2}\sigma^2\right)(T-t),
 \]</span></p>
@@ -369,12 +369,12 @@ S_T=s\cdot\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma (W_T^Q-W_t^Q
 <p><span class="math display">\[
 S_T^\beta=s^\beta\cdot\exp\left\{\beta\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\beta\sigma  (W_T^Q-W_t^Q)\right\}.
 \]</span></p>
-<p>Evaluating the price process then becomes</p>
-<p><span class="math display">\[\begin{align*}
+<p>Evaluating the price process then becomes
+<span class="math display">\[\begin{align*}
 \Pi_t&amp;=e^{-r(T-t)}E^Q\left[s^\beta\cdot\exp\left\{\beta\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\beta\sigma  (W_T^Q-W_t^Q)\right\}\right]\\
 &amp;=e^{-r(T-t)}s^\beta e^{\beta\left(r-\frac{1}{2}\sigma^2\right)(T-t)}E^Q\left[e^{\beta\sigma(W_T^Q-W_t^Q)}\right].
-\end{align*}\]</span></p>
-<p>Evaluating the expectation may be done by calculating the MGF of a <span class="math inline">\(\mathcal{N}(0,T-t)\)</span> variable i.e.</p>
+\end{align*}\]</span>
+Evaluating the expectation may be done by calculating the MGF of a <span class="math inline">\(\mathcal{N}(0,T-t)\)</span> variable i.e.</p>
 <p><span class="math display">\[
 E^Q\left[e^{\beta\sigma(W_T^Q-W_t^Q)}\right]=e^{0\cdot 1+(T-t)(\beta\sigma)^2/2}=e^{\beta^2\sigma^2\frac{T-t}{2}}.
 \]</span></p>
@@ -406,8 +406,8 @@ E^Q_{t,s}[1_{S_T\in [a,b]}]=Q(S_T\in[a,b]\ \vert\ S_t=s)=(*).
 <p><span class="math display">\[
 S_T=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma ^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}.
 \]</span></p>
-<p>Then</p>
-<p><span class="math display">\[\begin{align*}
+<p>Then
+<span class="math display">\[\begin{align*}
 (*)&amp;=Q(S_T\le b\ \vert\ S_t=s)-Q(S_T&lt;a\ \vert\ S_t=s)\\
 &amp;=Q(S_T\le b\ \vert\ S_t=s)-Q(S_T\le a\ \vert\ S_t=s)\\
 &amp;=Q\left(s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma ^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}\le b\right)\\
@@ -417,8 +417,8 @@ S_T=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma ^2\right)(T-t)+\sigma\left(W_T^Q
 &amp;=N\left(\frac{1}{\sigma\sqrt{T-t}}\left\{\log b-\log s+\left(\frac{1}{2}\sigma ^2-r\right)(T-t)\right\}\right)\\
 &amp;-N\left(\frac{1}{\sigma\sqrt{T-t}}\left\{\log a-\log s+\left(\frac{1}{2}\sigma ^2-r\right)(T-t)\right\}\right)\\
 &amp;=N(d_b)-N(d_a),
-\end{align*}\]</span></p>
-<p>as <span class="math inline">\(W_T^Q-W_t^Q\)</span> is <span class="math inline">\(\mathcal{N}(0,T-t)\)</span> distributed under the <span class="math inline">\(Q\)</span>-measure. The function <span class="math inline">\(d_c\)</span> is defined as</p>
+\end{align*}\]</span>
+as <span class="math inline">\(W_T^Q-W_t^Q\)</span> is <span class="math inline">\(\mathcal{N}(0,T-t)\)</span> distributed under the <span class="math inline">\(Q\)</span>-measure. The function <span class="math inline">\(d_c\)</span> is defined as</p>
 <p><span class="math display">\[
 d_c=\frac{1}{\sigma\sqrt{T-t}}\left\{\log c-\log s+\left(\frac{1}{2}\sigma ^2-r\right)(T-t)\right\},
 \]</span></p>
@@ -433,22 +433,22 @@ d_c=\frac{1}{\sigma\sqrt{T-t}}\left\{\log c-\log s+\left(\frac{1}{2}\sigma ^2-r\
 <summary>
 <strong>Solution.</strong>
 </summary>
-<p>Firstly, we may use that <span class="math inline">\(S\)</span> is a GBM. Setting <span class="math inline">\(S_t=s\)</span> we have that</p>
-<p><span class="math display">\[\begin{align*}
+<p>Firstly, we may use that <span class="math inline">\(S\)</span> is a GBM. Setting <span class="math inline">\(S_t=s\)</span> we have that
+<span class="math display">\[\begin{align*}
 X&amp;=\frac{S_{T_1}}{S_{T_0}}=\frac{s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-t) +\sigma\left(W_{T_1}^Q-W_t^Q\right)\right\}}{s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_0-t) +\sigma\left(W_{T_0}^Q-W_t^Q\right)\right\}}\\
 &amp;=\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-t-T_0+t) +\sigma\left(W_{T_1}^Q-W_t^Q-W_{T_0}^Q+W_t^Q\right)\right\}\\
 &amp;=\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-T_0) +\sigma\left(W_{T_1}^Q-W_{T_0}^Q\right)\right\}.
-\end{align*}\]</span></p>
-<p>Then it follows from proposition 7.11 that the price process is given by</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Then it follows from proposition 7.11 that the price process is given by
+<span class="math display">\[\begin{align*}
 \Pi_t&amp;=e^{-r(T_1-t)}E^Q_{t,s}[X]\\
 &amp;=e^{-r(T_1-t)}E^Q\left[\exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T_1-T_0) +\sigma\left(W_{T_1}^Q-W_{T_0}^Q\right)\right\}\right]\\
 &amp;=\exp\left\{-r(T_1-t)+\left(r-\frac{1}{2}\sigma^2\right)(T_1-T_0)\right\}E^Q\left[\exp\left\{\sigma\left(W_{T_1}^Q-W_{T_0}^Q\right)\right\}\right]\\
 &amp;=\exp\left\{-r(T_1-t)+\left(r-\frac{1}{2}\sigma^2\right)(T_1-T_0)+\frac{1}{2}\sigma^2(T_1-T_0)\right\}\\
 &amp;=\exp\left\{-r(T_1-t)+r(T_1-T_0)\right\}\\
 &amp;=\exp\left\{-r(T_1+T_0-T_1-t)\right\}=\exp\left\{-r(T_0-t)\right\}
-\end{align*}\]</span></p>
-<p>as desired. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+as desired. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 6.</strong> <em>(Exam 2017/18, problem 2, question (c)-(d))</em> Consider a standard Black-Scholes model, that is, a model consisting of a bank account <span class="math inline">\(B_t\)</span> with <span class="math inline">\(P\)</span>-dynamics given by</p>
 <p><span class="math display">\[
@@ -459,8 +459,8 @@ dB_t=rB_t\ dt,\ B_0=1
 dS_t=\alpha S_t\ dt+\sigma S_t\ d\overline{W}_t,\ S_0=s&gt;0
 \]</span></p>
 <p>where <span class="math inline">\(r,\alpha\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma &gt;0\)</span> are constants and <span class="math inline">\(\overline{W}_t\)</span> is a <span class="math inline">\(P\)</span>-Brownian motion. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed date.</p>
-<p>Consider the derivative that at time <span class="math inline">\(T\)</span> pays
-<span class="math display">\[
+<p>Consider the derivative that at time <span class="math inline">\(T\)</span> pays</p>
+<p><span class="math display">\[
 X=\max\left\{\min\left\{S_T,K_2\right\},K_1\right\},
 \]</span></p>
 <p>where <span class="math inline">\(0&lt;K_1&lt;K_2\)</span> are constants.</p>
@@ -502,12 +502,12 @@ Y=
   -(K^2-S_T^2) &amp;\text{if }S_T^2&lt; K^2.
 \end{cases}
 \]</span></p>
-<p>hence the payout is <span class="math inline">\(Y=S_T^2-K^2=\Phi(S_T)\)</span> where <span class="math inline">\(\Phi(s)=s^2-K^2\)</span>. That is <span class="math inline">\(Y\)</span> is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that</p>
-<p><span class="math display">\[\begin{align*}
+<p>hence the payout is <span class="math inline">\(Y=S_T^2-K^2=\Phi(S_T)\)</span> where <span class="math inline">\(\Phi(s)=s^2-K^2\)</span>. That is <span class="math inline">\(Y\)</span> is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that
+<span class="math display">\[\begin{align*}
 \Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
 &amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
-\end{align*}\]</span></p>
-<p>Recall that under the martingale measure <span class="math inline">\(Q\)</span> we have that <span class="math inline">\(S_t\)</span> is a GBM hence</p>
+\end{align*}\]</span>
+Recall that under the martingale measure <span class="math inline">\(Q\)</span> we have that <span class="math inline">\(S_t\)</span> is a GBM hence</p>
 <p><span class="math display">\[
 S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}
 \]</span></p>
@@ -515,31 +515,31 @@ S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-
 <p><span class="math display">\[
 S_T^2=s^2\cdot \exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(W_T^Q-W_t^Q\right)\right\}.
 \]</span></p>
-<p>Inserting this into the risk neutral valuation formula we get</p>
-<p><span class="math display">\[\begin{align*}
+<p>Inserting this into the risk neutral valuation formula we get
+<span class="math display">\[\begin{align*}
 \Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)} E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)}e^{\frac{1}{2}4\sigma^2(T-t)}-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
 &amp;=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
-\end{align*}\]</span></p>
-<p>The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
-<p><em>(ii)</em>: From theorem 8.5 we can determine a hedging portfolio with weightings</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
+<p><em>(ii)</em>: From theorem 8.5 we can determine a hedging portfolio with weightings
+<span class="math display">\[\begin{align*}
 w_t^B&amp;=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
 &amp;=1-\frac{S_t2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}}{e^{-r(T-t)}\left(S_t^2e^{(2r+\sigma^2)(T-t)}-K^2\right)}\\
 &amp;=1-\frac{2S_t^2e^{(2r+\sigma^2)(T-t)}}{S_t^2e^{(2r+\sigma^2)(T-t)}-K^2}\\
 &amp;=1-\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}\\
 w_t^S&amp;=\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}.
-\end{align*}\]</span></p>
-<p>In absolute terms we will hold the portfolio</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+In absolute terms we will hold the portfolio
+<span class="math display">\[\begin{align*}
 h_t^S&amp;=2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}\\
 h_t^B&amp;=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{B_t}\\
 &amp;=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{e^{rt}}\\
 &amp;=e^{-rT}s^2e^{(2r+\sigma^2)(T-t)}-e^{-rT}K^2-e^{-rt}S_th_t^S.
-\end{align*}\]</span></p>
-<p>The portfolio above will hedge <span class="math inline">\(Y\)</span> with probability one. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+The portfolio above will hedge <span class="math inline">\(Y\)</span> with probability one. <span class="math inline">\(\square\)</span></p>
 </details>
 <details>
 <summary>
@@ -559,28 +559,28 @@ V_t^h=h_0(t)B_t+h_1(t)S_t.
 <p><span class="math display">\[
 dV_t^h=df(h_0(t),B_t)+df(h_1(t),S_t).
 \]</span></p>
-<p>Using Ito’s formula on each term we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>Using Ito’s formula on each term we have
+<span class="math display">\[\begin{align*}
 df(h_0(t),B_t)&amp;=B_t\ dh_0(t)+h_0(t)\ dB_t+(dB_t)(dh_0(t)),\\
 df(h_1(t),S_t)&amp;=S_t\ dh_1(t)+h_1(t)\ dS_t+(dS_t)(dh_1(t)),\\
-\end{align*}\]</span></p>
-<p>since of cause <span class="math inline">\(f_{xx}=f_{yy}=0\)</span>. We can the determine the dynamics of the portfolio by</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+since of cause <span class="math inline">\(f_{xx}=f_{yy}=0\)</span>. We can the determine the dynamics of the portfolio by
+<span class="math display">\[\begin{align*}
 dh_0(t)&amp;=-(-2t-\sigma^2)S_t^2e^{r(T-2t)+\sigma^2(T-t)}\ dt\\
 &amp;-2S_te^{r(T-2t)+\sigma^2(T-t)}\ dS_t\\
 &amp;-\frac{1}{2}2e^{r(T-2t)+\sigma^2(T-t)}\ (dS_t)^2\\
 &amp;=(-2t-\sigma^2)h_0(t)\ dt+\frac{2}{S_t}h_0(t)\ (\mu S_t\ dt+\sigma S_t\ dW_t)+\frac{1}{S_t^2}h_0(t) \sigma^2S_t^2\ dt\\
 &amp;=(\mu-1)2h_0(t)\ dt+2\sigma h_0(t)\ dW_t
-\end{align*}\]</span></p>
-<p>and</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+and
+<span class="math display">\[\begin{align*}
 dh_1(t)&amp;=(-r-\sigma^2)2e^{(r+\sigma^2)(T-t)}S_t\ dt\\
 &amp;+2e^{(r+\sigma^2)(T-t)}\ dS_t+0\\
 &amp;=(-r-\sigma^2)h_1(t)\ dt+\frac{1}{S_t}h_1(t)(\mu S_t\ dt+\sigma S_t\ dW_t)\\
 &amp;=(-r-\sigma^2+\mu)h_1(t)\ dt+h_1(t)\sigma \ dW_t\\
-\end{align*}\]</span></p>
-<p>And so in total</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+And so in total
+<span class="math display">\[\begin{align*}
 dV_t^h(t)&amp;=df(h_0(t),B_t)+df(h_1(t),S_t)\\
 &amp;=B_t\ dh_0(t)+h_0(t)\ dB_t+(dB_t)(dh_0(t))\\
 &amp;+S_t\ dh_1(t)+h_1(t)\ dS_t+(dS_t)(dh_1(t))\\
@@ -597,13 +597,13 @@ dV_t^h(t)&amp;=df(h_0(t),B_t)+df(h_1(t),S_t)\\
 <summary>
 <strong>Solution (d).</strong>
 </summary>
-<p>We compute <span class="math inline">\(V_T^h\)</span> easily by inserting <span class="math inline">\(h_0\)</span> and <span class="math inline">\(h_1\)</span> below</p>
-<p><span class="math display">\[\begin{align*}
+<p>We compute <span class="math inline">\(V_T^h\)</span> easily by inserting <span class="math inline">\(h_0\)</span> and <span class="math inline">\(h_1\)</span> below
+<span class="math display">\[\begin{align*}
 V_T^h&amp;=B_Th_0(T)+S_Th_1(T)\\
 &amp;=B_T\left(-e^{r(T-2T)+\sigma^2(T-T)}S_T^2\right)+S_T\left(2e^{(r+\sigma^2)(T-T)}S_T\right)\\
 &amp;=-S_T^2+2S_T^2=S_T^2.
-\end{align*}\]</span></p>
-<p>and so <span class="math inline">\(h\)</span> hedge the payout <span class="math inline">\(\Phi(S_T)=S_T^2\)</span>. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+and so <span class="math inline">\(h\)</span> hedge the payout <span class="math inline">\(\Phi(S_T)=S_T^2\)</span>. <span class="math inline">\(\square\)</span></p>
 </details>
 <details>
 <summary>

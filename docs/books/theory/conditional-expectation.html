@@ -499,29 +499,47 @@ E[X\ \vert\ \sigma(Y)]=E[X\ \vert\ Y],\hspace{20pt}\sigma(Y)=\sigma\left(\left\{
 <p>Below we assume: Let <span class="math inline">\((\Omega,\mathcal{F},P)\)</span> be a probability space and <span class="math inline">\(X,Y\)</span> be random variables in <span class="math inline">\(L^1(\Omega,\mathcal{F},P)\)</span>.</p>
 <blockquote class="prop">
 <p><strong>Proposition B.29.</strong> <strong>(Monotinicity/Linearity of Conditional expectation)</strong> <em>The following holds:</em></p>
-<p><span class="math display">\[X\le Y\ \Rightarrow\ E[X\ \vert\ \mathcal{G}]\le E[Y\ \vert\ \mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.6}\]</span>
-<span class="math display">\[E[\alpha X + \beta Y\ \vert\ \mathcal{G}]=\alpha E[X\ \vert\ \mathcal{G}]+ \beta E[Y\ \vert\ \mathcal{G}],\hspace{20pt}\forall \alpha,\beta\in\mathbb{R}.\tag{B.7}\]</span></p>
+<p><span class="math display">\[
+X\le Y\ \Rightarrow\ E[X\ \vert\ \mathcal{G}]\le E[Y\ \vert\ \mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.6}
+\]</span></p>
+<p><span class="math display">\[
+E[\alpha X + \beta Y\ \vert\ \mathcal{G}]=\alpha E[X\ \vert\ \mathcal{G}]+ \beta E[Y\ \vert\ \mathcal{G}],\hspace{20pt}\forall \alpha,\beta\in\mathbb{R}.\tag{B.7}
+\]</span></p>
 </blockquote>
 <blockquote class="prop">
 <p><strong>Proposition B.30. (Bjork)</strong> <strong>(Tower property)</strong> <em>Assume that it holds that <span class="math inline">\(\mathcal{H}\subseteq\mathcal{G}\subseteq\mathcal{F}\)</span>. Then the following hold:</em></p>
-<p><span class="math display">\[E[E[X\vert \mathcal{G}]\vert\mathcal{H}]=E[X\vert \mathcal{H}],\tag{B.8}\]</span>
-<span class="math display">\[E[X]=E[E[X\vert \mathcal{G}]].\tag{B.9}\]</span></p>
+<p><span class="math display">\[
+E[E[X\vert \mathcal{G}]\vert\mathcal{H}]=E[X\vert \mathcal{H}],\tag{B.8}
+\]</span></p>
+<p><span class="math display">\[
+E[X]=E[E[X\vert \mathcal{G}]].\tag{B.9}
+\]</span></p>
 </blockquote>
 <blockquote class="prop">
 <p><strong>Proposition B.31. (Bjork)</strong> <em>Assume <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal{G}\)</span> and that both <span class="math inline">\(X,Y\)</span> and <span class="math inline">\(XY\)</span> are in <span class="math inline">\(L^1\)</span> (only assuming <span class="math inline">\(Y\)</span> is <span class="math inline">\(\mathcal{F}\)</span>-measurable), then</em></p>
-<p><span class="math display">\[E[X\vert\mathcal{G}]=X,\hspace{20pt}P-\text{a.s.}\tag{B.11}\]</span>
-<span class="math display">\[E[XY\vert\mathcal{G}]=XE[Y\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.12}\]</span></p>
+<p><span class="math display">\[
+E[X\vert\mathcal{G}]=X,\hspace{20pt}P-\text{a.s.}\tag{B.11}
+\]</span></p>
+<p><span class="math display">\[
+E[XY\vert\mathcal{G}]=XE[Y\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.12}
+\]</span></p>
 </blockquote>
 <blockquote class="prop">
 <p><strong>Proposition B.32. (Bjork)</strong> <strong>(Jensen inequality)</strong> <em>Let <span class="math inline">\(f:\mathbb{R}\to\mathbb{R}\)</span> be a convex (measurable) function and assume <span class="math inline">\(f(X)\)</span> is in <span class="math inline">\(L^1\)</span>. Then</em></p>
-<p><span class="math display">\[f(E[X\vert\mathcal{G}])\le E[f(X)\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\]</span></p>
+<p><span class="math display">\[
+f(E[X\vert\mathcal{G}])\le E[f(X)\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}
+\]</span></p>
 </blockquote>
 <blockquote class="prop">
 <p><strong>Proposition B.37. (Bjork)</strong> <em>Let <span class="math inline">\((\Omega,\mathcal{F},P)\)</span> be a given probability space, let <span class="math inline">\(\mathcal{G}\)</span> be a sub-sigma-algebra of <span class="math inline">\(\mathcal{F}\)</span>, and let <span class="math inline">\(X\)</span> be a square integrable random variable.
 Consider the problem of minimizing</em></p>
-<p><span class="math display">\[E\left[(X-Z)^2\right]\]</span></p>
+<p><span class="math display">\[
+E\left[(X-Z)^2\right]
+\]</span></p>
 <p><em>where <span class="math inline">\(Z\)</span> is allowed to vary over the class of all square integrable <span class="math inline">\(\mathcal{G}\)</span> measurable random variables. The optimal solution <span class="math inline">\(\hat{Z}\)</span> is then given by.</em></p>
-<p><span class="math display">\[\hat{Z}=E[X\vert\mathcal{G}].\]</span></p>
+<p><span class="math display">\[
+\hat{Z}=E[X\vert\mathcal{G}].
+\]</span></p>
 </blockquote>
 
 <details>
@@ -529,17 +547,29 @@ Consider the problem of minimizing</em></p>
 <strong>Proof.</strong>
 </summary>
 <p>Let <span class="math inline">\(X\in L^2(\Omega,\mathcal{F},P)\)</span> be a random variable. Now consider an arbitrary <span class="math inline">\(Z\in L^2(\Omega,\mathcal{G},P)\)</span>. Recall that <span class="math inline">\(\mathcal{G}\subset \mathcal{F}\)</span> and so <span class="math inline">\(X\)</span> is also in <span class="math inline">\(Z\in L^2(\Omega,\mathcal{G},P)\)</span>, as it is bothe square integrable and <span class="math inline">\(\mathcal{G}\)</span>-measurable. Then</p>
-<p><span class="math display">\[E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].\]</span></p>
+<p><span class="math display">\[
+E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].
+\]</span></p>
 <p>Then by using the law of total expectation and secondly that <span class="math inline">\(Z\)</span> is <span class="math inline">\(\mathcal{G}\)</span>-measurable we have that</p>
-<p><span class="math display">\[E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right].\]</span></p>
+<p><span class="math display">\[
+E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right].
+\]</span></p>
 <p>Combining the two equations gives the desired result. Obviously, we have that</p>
-<p><span class="math display">\[X-Z=X-Z+E[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])+(E[X\vert\mathcal{G}]-Z).\]</span></p>
+<p><span class="math display">\[
+X-Z=X-Z+E[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])+(E[X\vert\mathcal{G}]-Z).
+\]</span></p>
 <p>Then squaring the terms gives</p>
-<p><span class="math display">\[(X-Z)^2=(X-E[X\vert\mathcal{G}])^2+(E[X\vert\mathcal{G}]-Z)^2+2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\]</span></p>
+<p><span class="math display">\[
+(X-Z)^2=(X-E[X\vert\mathcal{G}])^2+(E[X\vert\mathcal{G}]-Z)^2+2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)
+\]</span></p>
 <p>Taking expectation on each side and using linearity of the expectation we have that</p>
-<p><span class="math display">\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right]+2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right].\]</span></p>
+<p><span class="math display">\[
+E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right]+2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right].
+\]</span></p>
 <p>We can now use that <span class="math inline">\(E[X\vert\mathcal{G}]-Z\)</span> is <span class="math inline">\(\mathcal{G}\)</span>-measurable with the above result on the last term.</p>
-<p><span class="math display">\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right].\]</span></p>
+<p><span class="math display">\[
+E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right].
+\]</span></p>
 <p>Now since <span class="math inline">\(X\)</span> is given the term <span class="math inline">\(E\left[(X-E[X\vert\mathcal{G}])^2\right]\)</span> is simply a constant not depending on the choice og <span class="math inline">\(Z\)</span>. The optimal choice of <span class="math inline">\(Z\)</span> is then <span class="math inline">\(E[X\vert\mathcal{G}]\)</span> since this minimizes the second term. The statement is then proved.</p>
 </details>
 <div style="page-break-after: always;"></div>

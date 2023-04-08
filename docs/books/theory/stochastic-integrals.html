@@ -517,18 +517,16 @@ X_{t+\Delta t}-X_t=\mu(t,X_t)\Delta t+\sigma(t,X_t)Z_t.\tag{4.1}
 \]</span></p>
 <p>In the more general setting we may follow the following approach:</p>
 <ol style="list-style-type: decimal">
-<li>Approximate <span class="math inline">\(X\)</span> with a sequence <span class="math inline">\(\{X^n\}_{n\in\mathbb{N}}\)</span> of simple processes such that the following convergence criteria hold</li>
-</ol>
-<p><span class="math display">\[
+<li>Approximate <span class="math inline">\(X\)</span> with a sequence <span class="math inline">\(\{X^n\}_{n\in\mathbb{N}}\)</span> of simple processes such that the following convergence criteria hold
+<span class="math display">\[
   \int_a^bE[(X_s^n-X_s)^2]\ ds\to 0,\ n\to\infty
-  \]</span></p>
-<ol start="2" style="list-style-type: decimal">
+  \]</span></li>
 <li>For each <span class="math inline">\(n\)</span> the integral <span class="math inline">\(\int_a^b X_s^n\ dW_s:=Z^n\)</span> is well defined and it is possible to prove, using DCT, that a variable <span class="math inline">\(Z\)</span> exists such that <span class="math inline">\(Z^n\to Z\)</span> that is in <span class="math inline">\(L^2\)</span>.</li>
-<li>We now define the stochastic integral by the limit</li>
-</ol>
-<p><span class="math display">\[
+<li>We now define the stochastic integral by the limit
+<span class="math display">\[
   \int_a^b X_s\ dW_s=\lim_{n\to \infty}\int_a^b X_s^n\ dW_s.\tag{4.9}
-  \]</span></p>
+  \]</span></li>
+</ol>
 <p>Obviously the hardest step is finding the processes <span class="math inline">\(X^n\)</span>. This stochastic har some properties we will use.</p>
 <blockquote class="prop">
 <strong>Proposition 4.5. (Bjork)</strong> <em>Let <span class="math inline">\(X_t\in\mathcal{L}^2\)</span>, then</em>

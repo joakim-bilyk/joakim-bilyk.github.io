@@ -471,7 +471,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="one-period-time-models" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> One-period time models<a href="discrete-time-models.html#one-period-time-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The study of this course is the <strong>European call</strong> option (and <em>put</em> option). This financial derivative is an agreement between two parties where the holder of the option has the right to <em>“exercise”</em> the derivative, at a future time <span class="math inline">\(t=T\)</span>. Exercising means buying an asset at a certain agreed opon price-strike <span class="math inline">\(K\)</span>. In the case of the put-option: the holder has the right (but not obligation) to sell the asset at the strike price <span class="math inline">\(K\)</span>. As such the derivative has the payoff</p>
-<p><span class="math display">\[\text{Call}\ \text{option:}\hspace{10pt}\Phi(S_T)=(S_T-K)^+,\hspace{20pt}\text{Put}\ \text{option:}\hspace{10pt}\Phi(S_T)=(K-S_T)^+.\]</span></p>
+<p><span class="math display">\[
+\text{Call}\ \text{option:}\hspace{10pt}\Phi(S_T)=(S_T-K)^+,\hspace{20pt}\text{Put}\ \text{option:}\hspace{10pt}\Phi(S_T)=(K-S_T)^+.
+\]</span></p>
 <p>Our objective is to understand when an arbitrage exist and to find the fair price of these derivative. The strategy in pricing is finding a replicating portfolio with the same payoff as the option (with probability one) and then price the derivative accordingly.</p>
 <div id="model-description" class="section level4 hasAnchor" number="5.1.1.1">
 <h4><span class="header-section-number">5.1.1.1</span> Model description<a href="discrete-time-models.html#model-description" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -497,7 +499,9 @@ Z=u\cdot (I)+d\cdot (1-I),
 <p>Given that we have chosen a portfolio <span class="math inline">\(h\)</span> we may introduce the value process.</p>
 <blockquote class="def">
 <p><strong>Definition 2.1. (Bjork)</strong> <em>The <strong>value process</strong> of the porfolio <span class="math inline">\(h\in\mathbb{R}^2\)</span> is the stochastic process</em></p>
-<p><span class="math display">\[V^h_t=xB_t+yS_t,\ t=0,1.\]</span></p>
+<p><span class="math display">\[
+V^h_t=xB_t+yS_t,\ t=0,1.
+\]</span></p>
 </blockquote>
 <p>Given this notation we may define what an arbitrage is.</p>
 <blockquote class="def">
@@ -506,7 +510,9 @@ Z=u\cdot (I)+d\cdot (1-I),
 <p>That is <span class="math inline">\(h\)</span> is an deterministic money-machine where we at least never loose any money. Granted the bonds give a determinictic non-negative return, but an arbitrage does not require any money out of pocket. With the notion of an arbitrage we will show the first proposition regarding the choice of <span class="math inline">\(R,u,d\)</span> as defined above.</p>
 <blockquote class="prop">
 <p><strong>Proposition 2.3. (Bjork)</strong> <em>The one-period binomial model is arbitrage free if and only if the following inequality hold:</em></p>
-<p><span class="math display">\[d\le (1+R)\le u.\tag{2.1}\]</span></p>
+<p><span class="math display">\[
+d\le (1+R)\le u.\tag{2.1}
+\]</span></p>
 </blockquote>
 
 <details>
@@ -514,18 +520,26 @@ Z=u\cdot (I)+d\cdot (1-I),
 <strong>Proof.</strong>
 </summary>
 <p>The statement is proofed by contradiction. Assume that <span class="math inline">\(d&gt;1+R\)</span> holds. Then by definition <span class="math inline">\(u&gt;d&gt;1+R\)</span>. Notice that any portfolio satisfying <span class="math inline">\(V_0^h=0\)</span> must satisfy</p>
-<p><span class="math display">\[0=xB_0+yS_0=x+ys\iff x=-ys\]</span></p>
+<p><span class="math display">\[
+0=xB_0+yS_0=x+ys\iff x=-ys
+\]</span></p>
 <p>That is for some choice <span class="math inline">\(y\)</span> the only arbitrage candidate is the portfolio <span class="math inline">\(h=(-ys,y)\)</span>. Calculating the value at time <span class="math inline">\(t=1\)</span> we have</p>
-<p><span class="math display">\[V_1^h=-ys\cdot(1+R)+y\cdot s\cdot Z=ys(Z-1-R)\]</span></p>
+<p><span class="math display">\[
+V_1^h=-ys\cdot(1+R)+y\cdot s\cdot Z=ys(Z-1-R)
+\]</span></p>
 <p>However since <span class="math inline">\(Z\ge d\)</span> we have <span class="math inline">\(Z-(1+R)\ge 0\)</span> and therefore an arbitrage (for <span class="math inline">\(y&gt;0\)</span>). The other inequality <span class="math inline">\(1+R&gt;u\)</span> follows analog steps. Simply choose some <span class="math inline">\(y&lt;0\)</span> and the result follows. <span class="math inline">\(\blacksquare\)</span></p>
 </details>
 <p>
 From inequality (2.1) we see that since <span class="math inline">\(1+R\)</span> is between <span class="math inline">\(u\)</span> and <span class="math inline">\(d\)</span> we may find a pair <span class="math inline">\(q_d,q_u\ge 0\)</span> with <span class="math inline">\(q_d+q_u=1\)</span> such that</p>
-<p><span class="math display">\[1+R=q_u\cdot u+q_d\cdot d.\]</span></p>
+<p><span class="math display">\[
+1+R=q_u\cdot u+q_d\cdot d.
+\]</span></p>
 <p>This yields the important risk neutral valuation formula as summed op in the following definition</p>
 <blockquote class="def">
 <p><strong>Definition 2.4. (Bjork)</strong> <em>A probability measure <span class="math inline">\(Q\)</span> is called a <strong>martingale meausre</strong> if the following condition holds:</em></p>
-<p><span class="math display">\[S_0=\frac{1}{1+R}E^Q[S_1].\]</span></p>
+<p><span class="math display">\[
+S_0=\frac{1}{1+R}E^Q[S_1].
+\]</span></p>
 </blockquote>
 <p>The above measure <span class="math inline">\(Q\)</span> is the measure <span class="math inline">\(Q(Z=d)=q_d\)</span> and <span class="math inline">\(Q(Z=u)=q_u\)</span> for the binomial model. This does in fact yield the risk neautral valuation formula:
 <span class="math display">\[\begin{align*}
@@ -538,7 +552,9 @@ where we simply use <span class="math inline">\(1+R=q_d\cdot d+q_u\cdot u\)</spa
 </blockquote>
 <blockquote class="prop">
 <p><strong>Proposition 2.6. (Bjork)</strong> <em>The one-period binomial model has martingale probabilities given by:</em></p>
-<p><span class="math display">\[\left\{\begin{matrix}q_u=\frac{(1+R)-d}{u-d},\\ q_u=\frac{u-(1+R)}{u-d}.\end{matrix}\right.\]</span></p>
+<p><span class="math display">\[
+\left\{\begin{matrix}q_u=\frac{(1+R)-d}{u-d},\\ q_u=\frac{u-(1+R)}{u-d}.\end{matrix}\right.
+\]</span></p>
 </blockquote>
 </div>
 <div id="contingent-claims" class="section level4 hasAnchor" number="5.1.1.3">
@@ -872,7 +888,7 @@ Z_1^N(\omega_M)\end{bmatrix}q_M.\tag{3.3}
 <p><span class="math display">\[
 \forall A\in\mathcal{F}:P(A)=0\iff Q(A)=0,
 \]</span></p>
-<p>or equivalently</p>
+<p><em>or equivalently</em></p>
 <p><span class="math display">\[
 \forall A\in\mathcal{F}:P(A)=1\iff Q(A)=1.
 \]</span></p>

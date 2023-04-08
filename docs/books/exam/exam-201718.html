@@ -252,16 +252,14 @@ M^{(\lambda)}_t=\exp\left\{\lambda X_t-\frac{\lambda^2}{2}\int_0^t f^2(u)\ du\ri
 <p>Let <span class="math inline">\(0&lt;s&lt;t\)</span> and <span class="math inline">\(\lambda_1,\lambda_2\in \mathbb{R}\)</span> be given and fixed.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li><ol style="list-style-type: lower-roman">
-<li>Show that</li>
-</ol>
-<p><span class="math display">\[\begin{align*}
+<li>Show that
+<span class="math display">\[\begin{align*}
 M^{(\lambda_1)}_s&amp;=E\left[\left.\frac{M^{(\lambda_1)}_sM^{(\lambda_2)}_t}{M^{(\lambda_2)}_s} \ \right\vert\ \mathcal{F}_s\right]\\
 &amp;=E\left[\left.\exp\left\{\lambda_1X_s+\lambda_2(X_t-X_s)-\frac{1}{2}\lambda_1^2\int_0^sf^2(u)\ du- \frac{1}{2}\lambda_2^2\int_s^tf^2(u)\ du\right\} \ \right\vert\ \mathcal{F}_s\right]
-\end{align*}\]</span></p>
-<ol start="2" style="list-style-type: lower-roman">
+\end{align*}\]</span></li>
 <li>Show that <span class="math inline">\(X_s\)</span> and <span class="math inline">\(X_t-X_s\)</span> are normally distributed and independent.</li>
 </ol></li>
-<li><p>Compute the mean value of <span class="math inline">\(M^{(\lambda)}_T\log(M^{(\lambda)}_T)\)</span>.</p></li>
+<li>Compute the mean value of <span class="math inline">\(M^{(\lambda)}_T\log(M^{(\lambda)}_T)\)</span>.</li>
 </ol>
 <p></p>
 <details>
@@ -286,14 +284,14 @@ dY_t=f^2(t)\ dt\\
 Y_0=0.
 \end{cases}
 \]</span></p>
-<p>Hence by the multidimensional Ito’s formula we have the dynamics of <span class="math inline">\(M\)</span> given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>Hence by the multidimensional Ito’s formula we have the dynamics of <span class="math inline">\(M\)</span> given by
+<span class="math display">\[\begin{align*}
 dM^{(\lambda)}_t&amp;=g_t\ dt+g_x\ dX_t+g_y\ dY_t+\frac{1}{2}g_{yy}\ (dY_t)^2+\frac{1}{2}g_{xx}\ (dX_t)^2 +f_{xy}(dX_t)(dY_t)\\
 &amp;=0+\lambda g\ dX_t-\frac{\lambda^2}{2}g\ dY_t+0+\frac{1}{2}\lambda ^2g\ (dX_t)^2+0\\
 &amp;=\lambda M_t^{(\lambda)} f(t)\ dW_t-\frac{1}{2}\lambda^2M_t^{(\lambda)} f^2(t)\ dt+\frac{1}{2}\lambda M_t^{(\lambda)} f^2(t)\ dt\\
 &amp;=\lambda f(t)M_t^{(\lambda)}\ dW_t,
-\end{align*}\]</span></p>
-<p>And so we see that <span class="math inline">\(M\)</span> is a martingale as it only has dynamics wrt. the Brownian motion <span class="math inline">\(W\)</span> (assuming <span class="math inline">\(\lambda f_tM_t^{(\lambda)}\in\mathcal{L}^2\)</span>). Furthermore we have that</p>
+\end{align*}\]</span>
+And so we see that <span class="math inline">\(M\)</span> is a martingale as it only has dynamics wrt. the Brownian motion <span class="math inline">\(W\)</span> (assuming <span class="math inline">\(\lambda f_tM_t^{(\lambda)}\in\mathcal{L}^2\)</span>). Furthermore we have that</p>
 <p><span class="math display">\[
 M_0^{(\lambda)}=g(0,X_0,Y_0)=\exp\left\{\lambda X_0-\frac{1}{2}\lambda ^2 Y_0\right\}=e^0=1
 \]</span></p>
@@ -304,14 +302,14 @@ M_0^{(\lambda)}=g(0,X_0,Y_0)=\exp\left\{\lambda X_0-\frac{1}{2}\lambda ^2 Y_0\ri
 <summary>
 <strong>Solution (b).</strong>
 </summary>
-<p><em>“(i)”</em> We have from the previous exercise</p>
-<p><span class="math display">\[\begin{align*}
+<p><em>“(i)”</em> We have from the previous exercise
+<span class="math display">\[\begin{align*}
 &amp;\frac{M^{(\lambda_1)}_sM^{(\lambda_2)}_t}{M^{(\lambda_2)}_s}\\
 &amp;=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du\right\}\exp\left\{\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t f^2(u)\ du\right\}\exp\left\{\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\ du-\lambda_2 X_s\right\}\\
 &amp;=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du+\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t f^2(u)\ du+\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\ du-\lambda_2 X_s\right\}\\
 &amp;=\exp\left\{\lambda_1 X_s+\lambda_2 (X_t-X_s)-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du-\frac{1}{2}\lambda_2^2\int_s^t f^2(u)\ du\right\}
-\end{align*}\]</span></p>
-<p>and so the conclusion follows. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+and so the conclusion follows. <span class="math inline">\(\square\)</span></p>
 <p><em>“(ii)”</em> We have that from lemma 4.18 that</p>
 <p><span class="math display">\[
 X_s=\int_0^sf(u)\ dW_u\sim \mathcal{N}\left(0,\int_0^sf^2(u)\ dW_u\right)
@@ -363,25 +361,25 @@ d\tilde{P}=M_T^{(\lambda)}\ dP
 <p><span class="math display">\[
 dW_t=\lambda f(t)\ dt + d\tilde{W}_t.
 \]</span></p>
-<p>We can then see</p>
-<p><span class="math display">\[\begin{align*}
+<p>We can then see
+<span class="math display">\[\begin{align*}
 E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&amp;=\int M_T^{(\lambda)}\log M_T^{(\lambda)}\ dP=\int M_T^{(\lambda)}\log M_T^{(\lambda)} \frac{1}{M_T^{(\lambda)}}\ d\tilde{P}\\
 &amp;=\int \log M_T^{(\lambda)}\ d\tilde{P}=E^{\tilde{P}}[\log M_T^{(\lambda)}].
-\end{align*}\]</span></p>
-<p>Then we can evaluate the mean value by seeing the <span class="math inline">\(X\)</span> has representation wrt. <span class="math inline">\(\tilde{P}\)</span> by</p>
+\end{align*}\]</span>
+Then we can evaluate the mean value by seeing the <span class="math inline">\(X\)</span> has representation wrt. <span class="math inline">\(\tilde{P}\)</span> by</p>
 <p><span class="math display">\[
 X_t=\int_0^tf(u)\ (\lambda f(u)\ du + d\tilde{W}_u)=\lambda\int_0^tf^2(u)\ du+\int_0^tf(u)\ d\tilde{W}_u.
 \]</span></p>
-<p>Giving that</p>
-<p><span class="math display">\[\begin{align*}
+<p>Giving that
+<span class="math display">\[\begin{align*}
 E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&amp;=E^{\tilde{P}}[\log M_T^{(\lambda)}]\\
 &amp;=E^{\tilde{P}}\left[ \lambda X_T-\frac{1}{2}\lambda ^2\int_0^T f^2(u)\ du \right]\\
 &amp;=E^{\tilde{P}}\left[ \lambda^2\int_0^Tf^2(u)\ du+\lambda\int_0^Tf(u)\ d\tilde{W}_u-\frac{1}{2}\lambda ^2\int_0^T f^2(u)\ du \right]\\
 &amp;=\lambda E^{\tilde{P}}\left[\frac{1}{2} \lambda\int_0^Tf^2(u)\ du+\int_0^Tf(u)\ d\tilde{W}_u \right]\\
 &amp;=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du+\lambda E^{\tilde{P}}\left[\int_0^Tf(u)\ d\tilde{W}_u \right]\\
 &amp;=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du
-\end{align*}\]</span></p>
-<p>Since</p>
+\end{align*}\]</span>
+Since</p>
 <p><span class="math display">\[
 \tilde{X}_T=\int_0^Tf(u)\ d\tilde{W}_u,
 \]</span></p>
@@ -400,8 +398,8 @@ dB_t=rB_t\ dt,\ B_0=1
 dS_t=\alpha S_t\ dt+\sigma S_t\ d\overline{W}_t,\ S_0=s&gt;0
 \]</span></p>
 <p>where <span class="math inline">\(r,\alpha\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma &gt;0\)</span> are constants and <span class="math inline">\(\overline{W}_t\)</span> is a <span class="math inline">\(P\)</span>-Brownian motion. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed date.</p>
-<p>Consider the derivative that at time <span class="math inline">\(T\)</span> pays
-<span class="math display">\[
+<p>Consider the derivative that at time <span class="math inline">\(T\)</span> pays</p>
+<p><span class="math display">\[
 X=\max\left\{\min\left\{S_T,K_2\right\},K_1\right\},
 \]</span></p>
 <p>where <span class="math inline">\(0&lt;K_1&lt;K_2\)</span> are constants.</p>
@@ -463,12 +461,12 @@ Y=
   -(K^2-S_T^2) &amp;\text{if }S_T^2&lt; K^2.
 \end{cases}
 \]</span></p>
-<p>hence the payout is <span class="math inline">\(Y=S_T^2-K^2=\Phi(S_T)\)</span> where <span class="math inline">\(\Phi(s)=s^2-K^2\)</span>. That is <span class="math inline">\(Y\)</span> is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that</p>
-<p><span class="math display">\[\begin{align*}
+<p>hence the payout is <span class="math inline">\(Y=S_T^2-K^2=\Phi(S_T)\)</span> where <span class="math inline">\(\Phi(s)=s^2-K^2\)</span>. That is <span class="math inline">\(Y\)</span> is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that
+<span class="math display">\[\begin{align*}
 \Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
 &amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
-\end{align*}\]</span></p>
-<p>Recall that under the martingale measure <span class="math inline">\(Q\)</span> we have that <span class="math inline">\(S_t\)</span> is a GBM hence</p>
+\end{align*}\]</span>
+Recall that under the martingale measure <span class="math inline">\(Q\)</span> we have that <span class="math inline">\(S_t\)</span> is a GBM hence</p>
 <p><span class="math display">\[
 S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}
 \]</span></p>
@@ -476,31 +474,31 @@ S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-
 <p><span class="math display">\[
 S_T^2=s^2\cdot \exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(W_T^Q-W_t^Q\right)\right\}.
 \]</span></p>
-<p>Inserting this into the risk neutral valuation formula we get</p>
-<p><span class="math display">\[\begin{align*}
+<p>Inserting this into the risk neutral valuation formula we get
+<span class="math display">\[\begin{align*}
 \Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)} E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)}e^{\frac{1}{2}4\sigma^2(T-t)}-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
 &amp;=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
-\end{align*}\]</span></p>
-<p>The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
-<p><em>(ii)</em>: From theorem 8.5 we can determine a hedging portfolio with weightings</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
+<p><em>(ii)</em>: From theorem 8.5 we can determine a hedging portfolio with weightings
+<span class="math display">\[\begin{align*}
 w_t^B&amp;=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
 &amp;=1-\frac{S_t2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}}{e^{-r(T-t)}\left(S_t^2e^{(2r+\sigma^2)(T-t)}-K^2\right)}\\
 &amp;=1-\frac{2S_t^2e^{(2r+\sigma^2)(T-t)}}{S_t^2e^{(2r+\sigma^2)(T-t)}-K^2}\\
 &amp;=1-\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}\\
 w_t^S&amp;=\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}.
-\end{align*}\]</span></p>
-<p>In absolute terms we will hold the portfolio</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+In absolute terms we will hold the portfolio
+<span class="math display">\[\begin{align*}
 h_t^S&amp;=2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}\\
 h_t^B&amp;=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{B_t}\\
 &amp;=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{e^{rt}}\\
 &amp;=e^{-rT}s^2e^{(2r+\sigma^2)(T-t)}-e^{-rT}K^2-e^{-rt}S_th_t^S.
-\end{align*}\]</span></p>
-<p>The portfolio above will hedge <span class="math inline">\(Y\)</span> with probability one. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+The portfolio above will hedge <span class="math inline">\(Y\)</span> with probability one. <span class="math inline">\(\square\)</span></p>
 </details>
 
 <details>
@@ -518,13 +516,13 @@ h_0(t)\ dB_t+h_1(t)\ dS_t=0
 <summary>
 <strong>Solution (d).</strong>
 </summary>
-<p>We compute <span class="math inline">\(V_T^h\)</span> easily by inserting <span class="math inline">\(h_0\)</span> and <span class="math inline">\(h_1\)</span> below</p>
-<p><span class="math display">\[\begin{align*}
+<p>We compute <span class="math inline">\(V_T^h\)</span> easily by inserting <span class="math inline">\(h_0\)</span> and <span class="math inline">\(h_1\)</span> below
+<span class="math display">\[\begin{align*}
 V_T^h&amp;=B_Th_0(T)+S_Th_1(T)\\
 &amp;=B_T\left(-e^{r(T-2T)+\sigma^2(T-T)}S_T^2\right)+S_T\left(2e^{(r+\sigma^2)(T-T)}S_T\right)\\
 &amp;=-S_T^2+2S_T^2=S_T^2.
-\end{align*}\]</span></p>
-<p>and so <span class="math inline">\(h\)</span> hedge the payout <span class="math inline">\(\Phi(S_T)=S_T^2\)</span>. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+and so <span class="math inline">\(h\)</span> hedge the payout <span class="math inline">\(\Phi(S_T)=S_T^2\)</span>. <span class="math inline">\(\square\)</span></p>
 </details>
 <p></p>
 </div>
@@ -534,12 +532,12 @@ V_T^h&amp;=B_Th_0(T)+S_Th_1(T)\\
 <p><span class="math display">\[
 dB_t=rB_t\ dt,\ B_0=1,
 \]</span></p>
-<p>where <span class="math inline">\(r\in\mathbb{R}\)</span> is a constant interest rate. The <span class="math inline">\(P\)</span>-dynamics of <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>where <span class="math inline">\(r\in\mathbb{R}\)</span> is a constant interest rate. The <span class="math inline">\(P\)</span>-dynamics of <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are given by
+<span class="math display">\[\begin{align*}
 dS_1(t)&amp;=\alpha_1S_1(t)\ dt+\sigma_1S_1(t)\ d\overline{W}_1(t),&amp;S_1(0)=s_1&gt;0,\\
 dS_2(t)&amp;=\alpha_2S_2(t)\ dt+\sigma_2S_2(t)\ d\overline{W}_2(t),&amp;S_2(0)=s_2&gt;0,
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(\alpha_1,\alpha_2\in\mathbb{R}\)</span> are constants. Moreover, <span class="math inline">\(\sigma_1&gt;0\)</span> is a constant and <span class="math inline">\(\sigma_2(t)=\sigma_0e^{-\gamma t}\)</span> where <span class="math inline">\(\sigma_0&gt;0\)</span> and <span class="math inline">\(\gamma&gt;0\)</span> are constants and <span class="math inline">\(\overline{W}_1(t)\)</span> and <span class="math inline">\(\overline{W}_2(t)\)</span> are two independent <span class="math inline">\(P\)</span>-Brownian motions. The filtration is the one generated by the two Brownian motions, that is, <span class="math inline">\(\mathcal{F}_t=\sigma(\overline{W}_1(s),\overline{W}_2(s)\ \vert\ 0\le s\le t)\)</span>. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed (expiry) date.</p>
+\end{align*}\]</span>
+where <span class="math inline">\(\alpha_1,\alpha_2\in\mathbb{R}\)</span> are constants. Moreover, <span class="math inline">\(\sigma_1&gt;0\)</span> is a constant and <span class="math inline">\(\sigma_2(t)=\sigma_0e^{-\gamma t}\)</span> where <span class="math inline">\(\sigma_0&gt;0\)</span> and <span class="math inline">\(\gamma&gt;0\)</span> are constants and <span class="math inline">\(\overline{W}_1(t)\)</span> and <span class="math inline">\(\overline{W}_2(t)\)</span> are two independent <span class="math inline">\(P\)</span>-Brownian motions. The filtration is the one generated by the two Brownian motions, that is, <span class="math inline">\(\mathcal{F}_t=\sigma(\overline{W}_1(s),\overline{W}_2(s)\ \vert\ 0\le s\le t)\)</span>. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed (expiry) date.</p>
 <ol style="list-style-type: lower-alpha">
 <li><ol style="list-style-type: lower-roman">
 <li>Is the model arbitrage free?</li>
@@ -619,12 +617,12 @@ E^P\left[e^{\frac{1}{2}\int_0^T\Vert\varphi_t\Vert^2\ dt}\right]=e^{\frac{1}{2}\
 <p><span class="math display">\[
 \Pi_0[X]=E^Q\left[\left.e^{-\int_0^Tr(u)\ du}X\ \right\vert\ \mathcal{F}_0\right]=e^{-rT}E^Q\left[\left. S_1(T)S_2(T)\ \right\vert\ \mathcal{F}_0\right],
 \]</span></p>
-<p>Since we have that <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> have dynamics wrt. two independent Brownian motions we know that the price processes are independent. If we multiply by <span class="math inline">\(B(T)/B(T)\)</span> we obtain two martingale processes under the measure <span class="math inline">\(Q\)</span>:</p>
-<p><span class="math display">\[\begin{align*}
+<p>Since we have that <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> have dynamics wrt. two independent Brownian motions we know that the price processes are independent. If we multiply by <span class="math inline">\(B(T)/B(T)\)</span> we obtain two martingale processes under the measure <span class="math inline">\(Q\)</span>:
+<span class="math display">\[\begin{align*}
 \Pi_0[X]&amp;=e^{-rT}B(T)^2E^Q\left[\left. \frac{S_1(T)}{B(T)}\ \right\vert\ \mathcal{F}_0\right]E^Q\left[\left. \frac{S_2(T)}{B(T)}\ \right\vert\ \mathcal{F}_0\right]\\
 &amp;=e^{-rT}e^{2rT}s_1(0)s_2(0)=e^{rT}s_1(0)s_2(0),
-\end{align*}\]</span></p>
-<p>and so the arbitrage free price is given above. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+and so the arbitrage free price is given above. <span class="math inline">\(\square\)</span></p>
 <p><em>(ii)</em>: We have from Bjork (14.31) that <span class="math inline">\(\Pi\)</span> satisfies the PDE below</p>
 <p><span class="math display">\[
 \begin{cases}
@@ -632,8 +630,8 @@ F_t+\sum_{i=1}^2rs_iF_{s_i}+\frac{1}{2}\text{tr}[\sigma_t^\top D(S)F_{ss}D(S)\si
 F(T,s_1,s_2)=\Phi(s_1,s_2)
 \end{cases}
 \]</span></p>
-<p>The PDE is in detail</p>
-<p><span class="math display">\[\begin{align*}
+<p>The PDE is in detail
+<span class="math display">\[\begin{align*}
 &amp;0+rS_1(t)S_2(t)+rS_2S_1+\frac{1}{2}\text{tr}
 \begin{bmatrix}
 S_1\sigma_1 &amp; 0\\
@@ -662,8 +660,8 @@ S_1\sigma_1 &amp; 0
 S_1S_2\sigma_0\sigma_1e^{-\gamma t} &amp; 0
 \end{bmatrix}-r\Pi_t\\
 &amp;=2rS_1(t)S_2(t)-r\Pi_t=0.
-\end{align*}\]</span></p>
-<p>or</p>
+\end{align*}\]</span>
+or</p>
 <p><span class="math display">\[
 F(t,s_1,s_2)=2s_1s_2,\ F(T,s_1,s_2)=s_1s_2
 \]</span></p>
@@ -682,15 +680,15 @@ F(t,s_1,s_2)=2s_1s_2,\ F(T,s_1,s_2)=s_1s_2
 <p><span class="math display">\[
 d\log(S_2(t))=\left(r-\frac{1}{2}\sigma_0^2e^{-2\gamma t}\right)\ dt+\sigma_0^2e^{-2\gamma t}\ dW^Q_t,
 \]</span></p>
-<p>and so with the knowledge that <span class="math inline">\(S_2(t)=s_2\)</span> we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>and so with the knowledge that <span class="math inline">\(S_2(t)=s_2\)</span> we have
+<span class="math display">\[\begin{align*}
 \Pi_t[Y]&amp;=e^{-r(T-t)}E^Q\left[\left.\log(s_2)+\int_t^T\left(r-\frac{1}{2}\sigma_0^2e^{-2\gamma s}\right)\ ds + \int_t^T \sigma_0^2e^{-2\gamma t}\ dW^Q_t\ \right\vert\ \mathcal{F}_t\right]\\
 &amp;=e^{-r(T-t)}\left[\log(s_2)+\int_t^T\left(r-\frac{1}{2}\sigma_0^2e^{-2\gamma s}\right)\ ds\right]\\
 &amp;=e^{-r(T-t)}\left[\log(s_2)+r(T-t)-\frac{1}{2}\sigma_0^2\int_t^Te^{-2\gamma s}\ ds\right]\\
 &amp;=e^{-r(T-t)}\left[\log(s_2)+r(T-t)+\frac{1}{4\gamma}\sigma_0\left[e^{-2\gamma s}\right]_t^T\right]\\
 &amp;=e^{-r(T-t)}\left[\log(s_2)+r(T-t)+\frac{1}{4\gamma}\sigma_0(e^{-2\gamma T}-e^{-2\gamma t})\right].
-\end{align*}\]</span></p>
-<p>The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
 </details>
 <p>
 </p>

@@ -544,11 +544,11 @@ We see that the risk is minimized for the <span class="math inline">\(m\)</span>
 <p><span class="math display">\[
 \frac{\partial}{\partial m}R(m(X))=2m(X)-2\mathbb E[Y\ \vert\ X]=0
 \]</span></p>
-<p>hence giving that
-<span class="math display">\[
+<p>hence giving that</p>
+<p><span class="math display">\[
 m(X)=\mathbb E[Y\ \vert\ X]
-\]</span>
-as desired. <span class="math inline">\(\blacksquare\)</span></p>
+\]</span></p>
+<p>as desired. <span class="math inline">\(\blacksquare\)</span></p>
 </details>
 <p><strong>Remarks on the <span class="math inline">\(L^2\)</span>-loss.</strong> The loss function <span class="math inline">\(L(y_1,y_2)=(y_1-y_2)^2\)</span> i.e. the <span class="math inline">\(L^2\)</span> loss function gives some nice interpretations. We know that <span class="math inline">\(L\)</span> as a norm on <span class="math inline">\(\mathbb R\)</span> forms a Hilbert Space. This means, for instance, that we have some nice geometric interpretations, but more importantly we have alot of tools from linear algebra. We know that the projection <span class="math inline">\(m^*\)</span> onto the space <span class="math inline">\(\mathcal G\)</span> and so any vector <span class="math inline">\(\hat m(X)-m^*(X)\)</span> is orthogonal to <span class="math inline">\(Y-m^*(X)\)</span>. In particular, this gives that
 <span class="math display">\[\begin{align*}
@@ -557,11 +557,11 @@ r(\hat m(X))&amp;=\mathbb E[L(\hat m(X),Y)]=\mathbb E\left[(\hat m(X)-Y)^2\right
 &amp;\stackrel{(\dagger)}{=}\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+\mathbb E\left[(m^*(X)-Y)^2\right]\\
 &amp;=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+r(m^*(X))
 \end{align*}\]</span>
-Using in <span class="math inline">\((\dagger)\)</span> that <span class="math inline">\(\hat m(X)-m^*(X)\)</span> and <span class="math inline">\(m^*(X)-Y\)</span> are orthogonal with the last equation simply being the definition of risk. Rearringing the above gives
-<span class="math display">\[
+Using in <span class="math inline">\((\dagger)\)</span> that <span class="math inline">\(\hat m(X)-m^*(X)\)</span> and <span class="math inline">\(m^*(X)-Y\)</span> are orthogonal with the last equation simply being the definition of risk. Rearranging the above gives</p>
+<p><span class="math display">\[
 r(\hat m(X))-r(m^*(X))=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]=\text{MSE}(\hat m(x))
-\]</span>
-We can further write out the Mean Squared Error in terms of variance and bias.
+\]</span></p>
+<p>We can further write out the Mean Squared Error in terms of variance and bias.
 <span class="math display">\[\begin{align*}
 \text{MSE}(\hat m(x))&amp;=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]\\
 &amp;=\mathbb E\left[(\hat m(X)-\mathbb E[\hat m(X)\vert X])^2\right]+\mathbb E\left[(\mathbb E[\hat m(X)\vert X]-m^*(X))^2\right]\\

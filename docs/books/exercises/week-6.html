@@ -289,25 +289,25 @@ d\tilde{P}=M_T^{(\lambda)}\ dP
 <p><span class="math display">\[
 dW_t=\lambda f(t)\ dt + d\tilde{W}_t.
 \]</span></p>
-<p>We can then see</p>
-<p><span class="math display">\[\begin{align*}
+<p>We can then see
+<span class="math display">\[\begin{align*}
 E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&amp;=\int M_T^{(\lambda)}\log M_T^{(\lambda)}\ dP=\int M_T^{(\lambda)}\log M_T^{(\lambda)} \frac{1}{M_T^{(\lambda)}}\ d\tilde{P}\\
 &amp;=\int \log M_T^{(\lambda)}\ d\tilde{P}=E^{\tilde{P}}[\log M_T^{(\lambda)}].
-\end{align*}\]</span></p>
-<p>Then we can evaluate the mean value by seeing the <span class="math inline">\(X\)</span> has representation wrt. <span class="math inline">\(\tilde{P}\)</span> by</p>
+\end{align*}\]</span>
+Then we can evaluate the mean value by seeing the <span class="math inline">\(X\)</span> has representation wrt. <span class="math inline">\(\tilde{P}\)</span> by</p>
 <p><span class="math display">\[
 X_t=\int_0^tf(u)\ (\lambda f(u)\ du + d\tilde{W}_u)=\lambda\int_0^tf^2(u)\ du+\int_0^tf(u)\ d\tilde{W}_u.
 \]</span></p>
-<p>Giving that</p>
-<p><span class="math display">\[\begin{align*}
+<p>Giving that
+<span class="math display">\[\begin{align*}
 E^P[M_T^{(\lambda)}\log M_T^{(\lambda)}]&amp;=E^{\tilde{P}}[\log M_T^{(\lambda)}]\\
 &amp;=E^{\tilde{P}}\left[ \lambda X_T-\frac{1}{2}\lambda ^2\int_0^T f^2(u)\ du \right]\\
 &amp;=E^{\tilde{P}}\left[ \lambda^2\int_0^Tf^2(u)\ du+\lambda\int_0^Tf(u)\ d\tilde{W}_u-\frac{1}{2}\lambda ^2\int_0^T f^2(u)\ du \right]\\
 &amp;=\lambda E^{\tilde{P}}\left[\frac{1}{2} \lambda\int_0^Tf^2(u)\ du+\int_0^Tf(u)\ d\tilde{W}_u \right]\\
 &amp;=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du+\lambda E^{\tilde{P}}\left[\int_0^Tf(u)\ d\tilde{W}_u \right]\\
 &amp;=\frac{1}{2} \lambda^2\int_0^Tf^2(u)\ du
-\end{align*}\]</span></p>
-<p>Since</p>
+\end{align*}\]</span>
+Since</p>
 <p><span class="math display">\[
 \tilde{X}_T=\int_0^Tf(u)\ d\tilde{W}_u,
 \]</span></p>

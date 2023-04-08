@@ -290,13 +290,13 @@ V^h_T=
   K + (S_T-K-A)-(S_T-A)=0 &amp; \text{if }S_T &gt; K+ A.
 \end{cases}
 \]</span></p>
-<p>Then the portfolio give the desired payout. Given the price process for the call option and the zero-coupon bond we have that the value process is given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>Then the portfolio give the desired payout. Given the price process for the call option and the zero-coupon bond we have that the value process is given by
+<span class="math display">\[\begin{align*}
 V_t^h&amp;=Ke^{-r(T-t)}+c(K+A;t,T)-c(A;t,T)\\
 &amp;=e^{-r(T-t)}\left\{K+(K+A)N(d_2(K+A;t,S_t)-AN(d_2(A;t,S_t))\right\}\\
 &amp;+S_t\left\{N(d_1(K+A;t,S_t))-N(d_1(A;t,S_t))\right\}
-\end{align*}\]</span></p>
-<p>with <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> as given in the Black-Scholes formula. The price of the portfolio is given by the above value process. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+with <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> as given in the Black-Scholes formula. The price of the portfolio is given by the above value process. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 2.</strong> <em>(Bjork 10.2)</em> The setup is the same as the previous exercise. Here the contract is a so-called <strong>straddle</strong>, defined by</p>
 <p><span class="math display">\[
@@ -426,12 +426,12 @@ Y=
   -(K^2-S_T^2) &amp;\text{if }S_T^2&lt; K^2.
 \end{cases}
 \]</span></p>
-<p>hence the payout is <span class="math inline">\(Y=S_T^2-K^2=\Phi(S_T)\)</span> where <span class="math inline">\(\Phi(s)=s^2-K^2\)</span>. That is <span class="math inline">\(Y\)</span> is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that</p>
-<p><span class="math display">\[\begin{align*}
+<p>hence the payout is <span class="math inline">\(Y=S_T^2-K^2=\Phi(S_T)\)</span> where <span class="math inline">\(\Phi(s)=s^2-K^2\)</span>. That is <span class="math inline">\(Y\)</span> is in fact a simple claim. We have from the risk neutral valueation formula 7.11 that
+<span class="math display">\[\begin{align*}
 \Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2-K^2]\\
 &amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2.
-\end{align*}\]</span></p>
-<p>Recall that under the martingale measure <span class="math inline">\(Q\)</span> we have that <span class="math inline">\(S_t\)</span> is a GBM hence</p>
+\end{align*}\]</span>
+Recall that under the martingale measure <span class="math inline">\(Q\)</span> we have that <span class="math inline">\(S_t\)</span> is a GBM hence</p>
 <p><span class="math display">\[
 S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-W_t^Q\right)\right\}
 \]</span></p>
@@ -439,31 +439,31 @@ S_t=s\cdot \exp\left\{\left(r-\frac{1}{2}\sigma^2\right)(T-t)+\sigma\left(W_T^Q-
 <p><span class="math display">\[
 S_T^2=s^2\cdot \exp\left\{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)+2\sigma\left(W_T^Q-W_t^Q\right)\right\}.
 \]</span></p>
-<p>Inserting this into the risk neutral valuation formula we get</p>
-<p><span class="math display">\[\begin{align*}
+<p>Inserting this into the risk neutral valuation formula we get
+<span class="math display">\[\begin{align*}
 \Pi_t[Y]&amp;=e^{-r(T-t)}E^Q_{t,s}[S_T^2]-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)} E^Q\left[\exp\left\{2\sigma\left(W_T^Q-W_t^Q\right)\right\}\right]-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}s^2e^{2\left(r-\frac{1}{2}\sigma^2\right)(T-t)}e^{\frac{1}{2}4\sigma^2(T-t)}-e^{-r(T-t)}K^2\\
 &amp;=e^{-r(T-t)}\left(s^2e^{(2r-\sigma^2)(T-t)+\frac{1}{2}4\sigma^2(T-t)}-K^2\right)\\
 &amp;=e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right).
-\end{align*}\]</span></p>
-<p>The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
-<p><em>(ii)</em>: From theorem 8.5 we can determine a hedging portfolio with weightings</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+The arbitrage free price of the derivative is then given above. <span class="math inline">\(\square\)</span></p>
+<p><em>(ii)</em>: From theorem 8.5 we can determine a hedging portfolio with weightings
+<span class="math display">\[\begin{align*}
 w_t^B&amp;=\frac{\Pi_t-S_t\frac{\partial\Pi}{\partial s}}{\Pi_t}\\
 &amp;=1-\frac{S_t2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}}{e^{-r(T-t)}\left(S_t^2e^{(2r+\sigma^2)(T-t)}-K^2\right)}\\
 &amp;=1-\frac{2S_t^2e^{(2r+\sigma^2)(T-t)}}{S_t^2e^{(2r+\sigma^2)(T-t)}-K^2}\\
 &amp;=1-\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}\\
 w_t^S&amp;=\frac{2}{1-K^2S_t^{-2}e^{(2r+\sigma^2)(t-T)}}.
-\end{align*}\]</span></p>
-<p>In absolute terms we will hold the portfolio</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+In absolute terms we will hold the portfolio
+<span class="math display">\[\begin{align*}
 h_t^S&amp;=2S_te^{-r(T-t)}e^{(2r+\sigma^2)(T-t)}\\
 h_t^B&amp;=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{B_t}\\
 &amp;=\frac{e^{-r(T-t)}\left(s^2e^{(2r+\sigma^2)(T-t)}-K^2\right)-S_th_t^S}{e^{rt}}\\
 &amp;=e^{-rT}s^2e^{(2r+\sigma^2)(T-t)}-e^{-rT}K^2-e^{-rt}S_th_t^S.
-\end{align*}\]</span></p>
-<p>The portfolio above will hedge <span class="math inline">\(Y\)</span> with probability one. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+The portfolio above will hedge <span class="math inline">\(Y\)</span> with probability one. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 5.</strong> <em>(Exam 2019/20, problem 2)</em></p>
 <details>

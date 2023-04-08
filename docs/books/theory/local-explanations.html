@@ -525,26 +525,25 @@ but they are not interpretable.</p>
 \hat m\left(x_0\right)=\phi_{0}+\sum_{k=1}^{p} \phi_k(x_0),
 \]</span></p>
 <p>where <span class="math inline">\(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\)</span> are constants. Note: the right hand-side is not identified. Local explanations add constraints such that <span class="math inline">\(\phi_k(x_0)\)</span> is uniquely identified and best reflects the local contribution of feature <span class="math inline">\(k\)</span> to <span class="math inline">\(\hat m_n\left(x_0\right)\)</span>.</p>
-<p><strong>Definition.</strong> <em>(Additive Value functions)</em> A value function <span class="math inline">\(v\)</span> assigns a real value
-<span class="math inline">\(v(S)\)</span> to each subset <span class="math inline">\(S \subseteq \{1,\dots p\}\)</span>.</p>
+<p><strong>Definition.</strong> <em>(Additive Value functions)</em> <em>A value function <span class="math inline">\(v\)</span> assigns a real value
+<span class="math inline">\(v(S)\)</span> to each subset <span class="math inline">\(S \subseteq \{1,\dots p\}\)</span>.</em></p>
 <blockquote class="def">
 <p><strong>Definition.</strong> <em>(Shapley Axioms)</em></p>
-<p>Given a vaue function <span class="math inline">\(v_{x_0}\)</span> with <span class="math inline">\(v_{x_0}(\{1,\dots,p\})=m(x_0)\)</span>. The four Shapley axioms are</p>
+<p><em>Given a vaue function <span class="math inline">\(v_{x_0}\)</span> with <span class="math inline">\(v_{x_0}(\{1,\dots,p\})=m(x_0)\)</span>. The four Shapley axioms are</em></p>
 <ol style="list-style-type: decimal">
 <li><strong>Efficiency</strong> <span class="math inline">\(m\left(x_0\right)=\phi_{0}+\sum_{k=1}^{p} \phi_k(x_0)\)</span>, <span class="math inline">\(\phi_{0}=v(\emptyset)\)</span>.</li>
-<li><strong>Symmetry</strong>: Fix any <span class="math inline">\(k,l \in \{1,\dots,p\}, k\neq l\)</span>.
-If <span class="math inline">\(v_{x_0}(S\cup k)=v_{x_0}(S\cup l)\)</span>, for all <span class="math inline">\(S \subseteq \{1,\dots p\}\setminus \{k,l\}\)</span>, then <span class="math inline">\(\phi_k(x_0)=\phi_l(x_0).\)</span></li>
-<li><strong>Dummy</strong> For <span class="math inline">\(k=1,\dots,p\)</span>: If <span class="math inline">\(v_{x_0}(S\cup k)=v_{x_0}(S)\)</span>, for all <span class="math inline">\(S \subseteq \{1,\dots p\}\setminus \{k\}\)</span>, then <span class="math inline">\(\phi_k=0.\)</span></li>
-<li><strong>Linearity</strong> For <span class="math inline">\(k=1,\dots,p\)</span>: If <span class="math inline">\(m(x_0)=m^1(x_0)+m^2(x_0)\)</span>, then <span class="math inline">\(\phi_k(x_0)=\phi^1_k(x_0)+\phi^2_k(x_0)\)</span>, where <span class="math inline">\(\phi^l\)</span> is the explanation corresponding to the function <span class="math inline">\(m^l\)</span>.</li>
+<li><strong>Symmetry</strong>: F_ix any <span class="math inline">\(k,l \in \{1,\dots,p\}, k\neq l\)</span>. If <span class="math inline">\(v_{x_0}(S\cup k)=v_{x_0}(S\cup l)\)</span>, for all <span class="math inline">\(S \subseteq \{1,\dots p\}\setminus \{k,l\}\)</span>, then <span class="math inline">\(\phi_k(x_0)=\phi_l(x_0).\)</span>_</li>
+<li><strong>Dummy</strong> <em>For <span class="math inline">\(k=1,\dots,p\)</span>: If <span class="math inline">\(v_{x_0}(S\cup k)=v_{x_0}(S)\)</span>, for all <span class="math inline">\(S \subseteq \{1,\dots p\}\setminus \{k\}\)</span>, then <span class="math inline">\(\phi_k=0.\)</span></em></li>
+<li><strong>Linearity</strong> <em>For <span class="math inline">\(k=1,\dots,p\)</span>: If <span class="math inline">\(m(x_0)=m^1(x_0)+m^2(x_0)\)</span>, then <span class="math inline">\(\phi_k(x_0)=\phi^1_k(x_0)+\phi^2_k(x_0)\)</span>, where <span class="math inline">\(\phi^l\)</span> is the explanation corresponding to the function <span class="math inline">\(m^l\)</span>.</em></li>
 </ol>
 </blockquote>
 <blockquote class="thm">
-<p><strong>Theorem.</strong> <em>(Shapley Axioms)</em> Given a value function <span class="math inline">\(v_{x_0}\)</span>, there exist unique constants <span class="math inline">\(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\)</span> such that the four Shapley axioms are satisfied. They are given by
+<p><strong>Theorem.</strong> <em>(Shapley Axioms)</em> <em>Given a value function <span class="math inline">\(v_{x_0}\)</span>, there exist unique constants <span class="math inline">\(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\)</span> such that the four Shapley axioms are satisfied. They are given by</em>
 <span class="math display">\[\begin{align}
 \phi_{k}(x_0)&amp;=\frac{1}{p !} \sum_{\pi \in \Pi_p} \Delta_{v_{x_0}}\left(k, \{\pi(1),\dots,\pi(k-1)\}\right)\\
 &amp;=\frac 1 {p!}\sum_{S: S \subseteq \{1,\dots,p\} \setminus\{k\}} {|S| !(p -|S|-1) !}\Delta_{v_{x_0}}(k, S),
 \end{align}\]</span>
-where <span class="math inline">\(\Delta_{v_{x_0}}(k, S)=v_{x_0}(S \cup k)-v_{x_0}(S)\)</span> and <span class="math inline">\(\Pi_p\)</span> is the set of permutations of <span class="math inline">\(\{1,\dots,p\}\)</span>.</p>
+<em>where <span class="math inline">\(\Delta_{v_{x_0}}(k, S)=v_{x_0}(S \cup k)-v_{x_0}(S)\)</span> and <span class="math inline">\(\Pi_p\)</span> is the set of permutations of <span class="math inline">\(\{1,\dots,p\}\)</span>.</em></p>
 </blockquote>
 <details>
 <summary>

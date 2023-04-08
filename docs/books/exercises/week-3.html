@@ -270,13 +270,13 @@ X(t)=e^{\alpha t}x_0+ \sigma\int_0^te^{\alpha(t-s)}\ dW_s,
 <p><span class="math display">\[
 X_t=\underbrace{x_0e^{\alpha t}}_{:=Y_t}+\underbrace{\sigma e^{\alpha t}}_{:=Z_t} \underbrace{\int_0^t e^{-\alpha s}\ dW_s}_{R_t}=Y_t+Z_t\cdot R_t.
 \]</span></p>
-<p>We furthermore see easily that the dynamics of the processes individually has dynamics</p>
-<p><span class="math display">\[\begin{align*}
+<p>We furthermore see easily that the dynamics of the processes individually has dynamics
+<span class="math display">\[\begin{align*}
 d Y_t&amp;=\alpha x_0e^{\alpha t}\ dt=\alpha Y_t\ dt,\ &amp;Y_0=x_0,\\
 d Z_t&amp;=\alpha \sigma^{\alpha t}\ dt=\alpha Z_t\ dt,\ &amp;Z_0=\sigma,\\
 d R_t&amp;=e^{-\alpha t}\ dW_s,\ &amp;R_0=0.
-\end{align*}\]</span></p>
-<p>We then have the following function</p>
+\end{align*}\]</span>
+We then have the following function</p>
 <p><span class="math display">\[
 f\left(t,y,z,r\right)=y+zr.
 \]</span></p>
@@ -288,16 +288,16 @@ dM_t=\begin{bmatrix}\alpha Y_t\\ \alpha Z_t\\ 0\end{bmatrix}dt+\begin{bmatrix}0 
 <p><span class="math display">\[
 C=\sigma \sigma^\top =\begin{bmatrix}0 &amp;0  &amp;0 \\ 0 &amp; 0 &amp;0 \\ 0 &amp; 0 &amp; e^{-\alpha t}\end{bmatrix}^2=\begin{bmatrix}0 &amp;0  &amp;0 \\ 0 &amp; 0 &amp;0 \\ 0 &amp; 0 &amp; e^{-2\alpha t}\end{bmatrix}.
 \]</span></p>
-<p>That is <span class="math inline">\(X_t=f(t,M_t)\)</span>. We can then use the multidimensional version of Ito’s formula.</p>
-<p><span class="math display">\[\begin{align*}
+<p>That is <span class="math inline">\(X_t=f(t,M_t)\)</span>. We can then use the multidimensional version of Ito’s formula.
+<span class="math display">\[\begin{align*}
 dX_t&amp;=df(t,M_t)\\
 &amp;=\left(\frac{\partial f}{\partial t}(t,M_t)+\sum_{i=1}^3\mu_i \frac{\partial f}{\partial x^i}(t,M_t)+\frac{1}{2}\sum_{i,j=1}^3 C^{ij}_t\frac{\partial^2 f}{\partial x^i\partial x^j}(t,M_t)\right)\ dt + \sum_{i=1}^3 \frac{\partial f}{\partial x^i}(t,M_t) \sigma^i_t\ dW_t\\
 &amp;=\left(0+\alpha Y_t+\alpha Z_t R_t\right)\ dt + Z_te^{-\alpha t}\ dW_t\\
 &amp;=\left(\alpha x_0e^{\alpha t}+\alpha \sigma e^{\alpha t} \int_0^t e^{-\alpha \sigma}\ dW_s\right)\ dt + \sigma e^{\alpha t}e^{-\alpha t}\ dW_t\\
 &amp;=\left(\alpha x_0e^{\alpha t}+\alpha \sigma  \int_0^t e^{(t-s)\alpha }\ dW_s\right)\ dt + \sigma \ dW_t\\
 &amp;=\alpha X_t\ dt + \sigma \ dW_t.
-\end{align*}\]</span></p>
-<p>Then this solution does in fact satisfies the differential form. We furthermore have that <span class="math inline">\(X_0=x_0\)</span> and the desired result follows. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+Then this solution does in fact satisfies the differential form. We furthermore have that <span class="math inline">\(X_0=x_0\)</span> and the desired result follows. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 2.</strong> <em>(Bjork 5.5)</em> Suppose that <span class="math inline">\(X\)</span> satisfies the SDE</p>
 <p><span class="math display">\[
@@ -312,15 +312,15 @@ dX_t = \alpha X_t\ dt + \sigma X_t\ dW_t.
 <p><span class="math display">\[
 \frac{\partial f}{\partial t}(t,x)=0,\ \frac{\partial f}{\partial x}(t,x)=\beta x^{\beta -1},\ \frac{\partial^2 f}{\partial x^2}(t,x)=\beta (\beta -1) x^{\beta -2}.
 \]</span></p>
-<p>Then by applying Ito’s formula we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>Then by applying Ito’s formula we have
+<span class="math display">\[\begin{align*}
 dY_t&amp;=df(t,X_t)\\
 &amp;=\left(0 + \beta X_t^{\beta -1}\alpha X_t+\frac{1}{2}\sigma ^2X_t^2\beta (\beta -1) X_t^{\beta -2}\right)\ dt+\sigma X_t\beta X_t^{\beta -1} \ dW_t\\
 &amp;=\left(\alpha \beta+\frac{1}{2}\sigma ^2\beta (\beta -1)\right) X_t^{\beta}\ dt+\sigma \beta X_t^{\beta } \ dW_t\\
 &amp;=\left(\alpha \beta+\frac{1}{2}\sigma ^2\beta (\beta -1)\right) Y_t\ dt+\sigma \beta Y_t \ dW_t\\
 &amp;= \alpha^Y Y_t\ dt + \sigma^Y Y_t\ dW_t,
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(\alpha^Y=\left(\alpha \beta+\frac{1}{2}\sigma ^2\beta (\beta -1)\right)\)</span> and <span class="math inline">\(\sigma^Y =\sigma \beta\)</span>. Futhermore <span class="math inline">\(Y_0=y_0=x_0^\beta\)</span>. Then by definition of GBM we have that <span class="math inline">\(Y_t\)</span> is a GBM as desired. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+where <span class="math inline">\(\alpha^Y=\left(\alpha \beta+\frac{1}{2}\sigma ^2\beta (\beta -1)\right)\)</span> and <span class="math inline">\(\sigma^Y =\sigma \beta\)</span>. Futhermore <span class="math inline">\(Y_0=y_0=x_0^\beta\)</span>. Then by definition of GBM we have that <span class="math inline">\(Y_t\)</span> is a GBM as desired. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 3.</strong> <em>(Bjork 5.6)</em> Suppose that <span class="math inline">\(X\)</span> satisfies the SDE</p>
 <p><span class="math display">\[
@@ -335,31 +335,31 @@ dY_t = \gamma Y_t\ dt+\delta Y_t\ dV_t,
 <summary>
 <strong>Solution.</strong>
 </summary>
-<p>We have that for the function <span class="math inline">\(f(t,x,y)=x/y\)</span> and wish to determine the derivative of the stochastic process <span class="math inline">\(Z_t=f(t,X_t,Y_t)\)</span>. We do this by applying Ito’s formula in the multidimensional case. That is</p>
-<p><span class="math display">\[\begin{align*}
+<p>We have that for the function <span class="math inline">\(f(t,x,y)=x/y\)</span> and wish to determine the derivative of the stochastic process <span class="math inline">\(Z_t=f(t,X_t,Y_t)\)</span>. We do this by applying Ito’s formula in the multidimensional case. That is
+<span class="math display">\[\begin{align*}
 df(t,X_t,Y_t)&amp;=\frac{\partial f}{\partial t}(t,X_t,Y_t)\ dt + \frac{\partial f}{\partial x}(t,X_t,Y_t)\ dX_t + \frac{\partial f}{\partial y}(t,X_t,Y_t)\ dY_t\\
 &amp;+\frac{1}{2}\frac{\partial^2 f}{\partial x^2}(t,X_t,Y_t)(dX_t)^2 + \frac{1}{2}\frac{\partial^2 f}{\partial y^2}(t,X_t,Y_t)(dY_t)^2\\
 &amp;+\frac{1}{2}\frac{\partial^2 f}{\partial x\partial y}(t,X_t,Y_t)(dX_t)(dY_t)\\
 &amp;=\frac{1}{Y_t}(\alpha X_t\ dt + \sigma X_t\ dW_t)-\frac{X_t}{Y_t^2}(\gamma Y_t\ dt+\delta Y_t\ dV_t)+\frac{1}{2}2\frac{X_t}{Y_t^3}(\gamma Y_t\ dt+\delta Y_t\ dV_t)^2\\
 &amp;-\frac{1}{2}\frac{1}{Y_t^2}(\gamma Y_t\ dt+\delta Y_t\ dV_t)(\alpha X_t\ dt + \sigma X_t\ dW_t)
-\end{align*}\]</span></p>
-<p>Calculating further gives</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Calculating further gives
+<span class="math display">\[\begin{align*}
 (dY_t)^2&amp;=\gamma^2 Y_t^2 (dt)^2+\delta^2Y_t^2 (dV_t)^2+2\gamma Y_t\delta Y_t\ dt\cdot dV_t\\
 &amp;=0 +\delta^2Y_t^2 dt + 0=\delta^2Y_t^2 dt\\
 (dX_t)(dY_t)&amp;=(\gamma Y_t\ dt+\delta Y_t\ dV_t)(\alpha X_t\ dt + \sigma X_t\ dW_t)\\
 &amp;=\gamma Y_t \alpha X_t\ (dt)^2 +\gamma Y_t\sigma X_t\ dt\cdot dW_t\\
 &amp;+\delta Y_t \alpha X_t\ dt\cdot dV_t+\gamma Y_t\sigma X_t\ (dW_t)(dV_t)\\
 &amp;=0+0+0+0=0
-\end{align*}\]</span></p>
-<p>Hence we conclude that</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Hence we conclude that
+<span class="math display">\[\begin{align*}
 df(t,X_t,Y_t)&amp;=\alpha\frac{X_t}{Y_t}\ dt + \sigma \frac{X_t}{Y_t}\ dW_t-\gamma \frac{X_tY_t}{Y_t^2}\ dt+\delta \frac{X_tY_t}{Y_t^2}\ dV_t\\
 &amp;+\frac{1}{2}2\frac{X_t}{Y_t^3}\delta^2Y_t^2 dt\\
 &amp;=\left(\alpha Z_t-\gamma Z_t+Z_t\delta^2\right)\ dt+ \sigma Z_t\ dW_t+\delta Z_t\ dV_t\\
 &amp;=\left(\alpha -\gamma +\delta^2\right)Z_t\ dt+ \sigma Z_t\ dW_t+\delta Z_t\ dV_t.
-\end{align*}\]</span></p>
-<p>As desired the above is the SDE for the process <span class="math inline">\(Z_t\)</span>. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+As desired the above is the SDE for the process <span class="math inline">\(Z_t\)</span>. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 4.</strong> <em>(Bjork 5.9)</em> Use a stochastic representation result in order to solve the following boundary value problem in the domain <span class="math inline">\([0,T]\times\mathbb{R}\)</span>.</p>
 <p><span class="math display">\[
@@ -386,14 +386,14 @@ dX_t=\mu X_t\ dt+\sigma X_t\ dW_t,\hspace{20pt} X_t=x.
 <p><span class="math display">\[
 X_T=x\exp\left\{\left(\mu - \frac{1}{2}\sigma^2\right)(T-t)+\sigma(W_T-W_t)\right\}.
 \]</span></p>
-<p>Inserting this we find that</p>
-<p><span class="math display">\[\begin{align*}
+<p>Inserting this we find that
+<span class="math display">\[\begin{align*}
 F(t,x)&amp;=E\left.\left[\log(x^2\exp\left\{\left(2\mu - \sigma^2\right)(T-t)+2\sigma(W_T-W_t)\right\})\ \right\vert\ X_t=x\right]\\
 &amp;=E\left.\left[\log(x^2)+\left(2\mu - \sigma^2\right)(T-t)+2\sigma(W_T-W_t)\ \right\vert\ X_t=x\right]\\
 &amp;=2\log(x)+\left(2\mu - \sigma^2\right)(T-t)+2\sigma E\left.\left[W_T-W_t\ \right\vert\ X_t=x\right]\\
 &amp;=2\log(x)+\left(2\mu - \sigma^2\right)(T-t).
-\end{align*}\]</span></p>
-<p>Using that the Brownian motion has increments with mean 0. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+Using that the Brownian motion has increments with mean 0. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 5.</strong> <em>(Bjork 5.13)</em> Solve the boundary value problem</p>
 <p><span class="math display">\[
@@ -408,8 +408,8 @@ F(t,x)&amp;=E\left.\left[\log(x^2\exp\left\{\left(2\mu - \sigma^2\right)(T-t)+2\
 <p><span class="math display">\[
 \mu_i(t,X_t,Y_t)=0
 \]</span></p>
-<p>for <span class="math inline">\(i=1,2\)</span> representing the assets <span class="math inline">\(X_t\)</span> and <span class="math inline">\(Y_t\)</span>. We furthermore have the matrix <span class="math inline">\(C\)</span></p>
-<p><span class="math display">\[\begin{align*}
+<p>for <span class="math inline">\(i=1,2\)</span> representing the assets <span class="math inline">\(X_t\)</span> and <span class="math inline">\(Y_t\)</span>. We furthermore have the matrix <span class="math inline">\(C\)</span>
+<span class="math display">\[\begin{align*}
 C&amp;=\sigma(t,X_t,Y_t)\sigma(t,X_t,Y_t)^\top\\
 &amp;=
 \begin{bmatrix}
@@ -424,13 +424,13 @@ C&amp;=\sigma(t,X_t,Y_t)\sigma(t,X_t,Y_t)^\top\\
 \sigma_{1,1}^2+\sigma_{1,2}^2 &amp; \sigma_{1,1}\sigma_{2,1}+\sigma_{2,2}\sigma_{1,2}\\
 \sigma_{1,1}\sigma_{2,1}+\sigma_{2,2}\sigma_{1,2} &amp; \sigma_{2,2}^2+\sigma_{2,1}^2
 \end{bmatrix}
-\end{align*}\]</span></p>
-<p>Where we have that the only none-zero entrances is the diagonal with</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Where we have that the only none-zero entrances is the diagonal with
+<span class="math display">\[\begin{align*}
 C_{1,1}&amp;=\sigma_{1,1}^2+\sigma_{1,2}^2 = \sigma^2,\\
 C_{2,2}&amp;=\sigma_{2,2}^2+\sigma_{2,1}^2=\delta^2.
-\end{align*}\]</span></p>
-<p>and obviously <span class="math inline">\(r=0\)</span> and <span class="math inline">\(\Phi(x,y)=xy\)</span>. From proposition 5.8 we then have that <span class="math inline">\(F\)</span> has stochastic representation:</p>
+\end{align*}\]</span>
+and obviously <span class="math inline">\(r=0\)</span> and <span class="math inline">\(\Phi(x,y)=xy\)</span>. From proposition 5.8 we then have that <span class="math inline">\(F\)</span> has stochastic representation:</p>
 <p><span class="math display">\[
 F(t,x,y)=e^{-r(T-t)}E^Q[\Phi(X_T,Y_T)\ \vert\ X_t=x,Y_t=y]\\
 =E^Q[X_TY_T\ \vert\ X_t=x,Y_t=y]
@@ -513,14 +513,14 @@ dY_t=f^2(t)\ dt\\
 Y_0=0.
 \end{cases}
 \]</span></p>
-<p>Hence by the multidimensional Ito’s formula we have the dynamics of <span class="math inline">\(M\)</span> given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>Hence by the multidimensional Ito’s formula we have the dynamics of <span class="math inline">\(M\)</span> given by
+<span class="math display">\[\begin{align*}
 dM^{(\lambda)}_t&amp;=g_t\ dt+g_x\ dX_t+g_y\ dY_t+\frac{1}{2}g_{yy}\ (dY_t)^2+\frac{1}{2}g_{xx}\ (dX_t)^2 +f_{xy}(dX_t)(dY_t)\\
 &amp;=0+\lambda g\ dX_t-\frac{\lambda^2}{2}g\ dY_t+0+\frac{1}{2}\lambda ^2g\ (dX_t)^2+0\\
 &amp;=\lambda M_t^{(\lambda)} f(t)\ dW_t-\frac{1}{2}\lambda^2M_t^{(\lambda)} f^2(t)\ dt+\frac{1}{2}\lambda M_t^{(\lambda)} f^2(t)\ dt\\
 &amp;=\lambda f(t)M_t^{(\lambda)}\ dW_t,
-\end{align*}\]</span></p>
-<p>And so we see that <span class="math inline">\(M\)</span> is a martingale as it only has dynamics wrt. the Brownian motion <span class="math inline">\(W\)</span> (assuming <span class="math inline">\(\lambda f_tM_t^{(\lambda)}\in\mathcal{L}^2\)</span>). Furthermore we have that</p>
+\end{align*}\]</span>
+And so we see that <span class="math inline">\(M\)</span> is a martingale as it only has dynamics wrt. the Brownian motion <span class="math inline">\(W\)</span> (assuming <span class="math inline">\(\lambda f_tM_t^{(\lambda)}\in\mathcal{L}^2\)</span>). Furthermore we have that</p>
 <p><span class="math display">\[
 M_0^{(\lambda)}=g(0,X_0,Y_0)=\exp\left\{\lambda X_0-\frac{1}{2}\lambda ^2 Y_0\right\}=e^0=1
 \]</span></p>
@@ -530,14 +530,14 @@ M_0^{(\lambda)}=g(0,X_0,Y_0)=\exp\left\{\lambda X_0-\frac{1}{2}\lambda ^2 Y_0\ri
 <summary>
 <strong>Solution (b).</strong>
 </summary>
-<p><em>“(i)”</em> We have from the previous exercise</p>
-<p><span class="math display">\[\begin{align*}
+<p><em>“(i)”</em> We have from the previous exercise
+<span class="math display">\[\begin{align*}
 &amp;\frac{M^{(\lambda_1)}_sM^{(\lambda_2)}_t}{M^{(\lambda_2)}_s}\\
 &amp;=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du\right\}\exp\left\{\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t f^2(u)\ du\right\}\exp\left\{\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\ du-\lambda_2 X_s\right\}\\
 &amp;=\exp\left\{\lambda_1 X_s-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du+\lambda_2 X_t-\frac{1}{2}\lambda_2^2\int_0^t f^2(u)\ du+\frac{1}{2}\lambda_2^2\int_0^s f^2(u)\ du-\lambda_2 X_s\right\}\\
 &amp;=\exp\left\{\lambda_1 X_s+\lambda_2 (X_t-X_s)-\frac{1}{2}\lambda_1^2\int_0^s f^2(u)\ du-\frac{1}{2}\lambda_2^2\int_s^t f^2(u)\ du\right\}
-\end{align*}\]</span></p>
-<p>and so the conclusion follows. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+and so the conclusion follows. <span class="math inline">\(\square\)</span></p>
 <p><em>“(ii)”</em> We have that from lemma 4.18 that</p>
 <p><span class="math display">\[
 X_s=\int_0^sf(u)\ dW_u\sim \mathcal{N}\left(0,\int_0^sf^2(u)\ dW_u\right)

@@ -510,7 +510,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-functional-decomposition" class="section level3 hasAnchor" number="9.11.3">
 <h3><span class="header-section-number">9.11.3</span> A functional decomposition<a href="local-and-global-explanations.html#a-functional-decomposition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Assume a data set with <span class="math inline">\(p\)</span> features. Also assume that we can approximate the regression function <span class="math inline">\(m\)</span> by a <span class="math inline">\(q-th\)</span> order functional decomposition:</p>
-<p><span class="math display">\[m(x) \approx  m_0+\sum_{k=1}^p  m_k(x_{k}) + \sum_{k_1&lt;k_2}  m_{k_1k_2}(x_{k_1},x_{k_2}) + \cdots +\sum_{k_1&lt;\cdots &lt;k_q}  m_{k_1,\dots,k_q} (x_{k_1},\dots,x_{k_q}).\]</span></p>
+<p><span class="math display">\[
+m(x) \approx  m_0+\sum_{k=1}^p  m_k(x_{k}) + \sum_{k_1&lt;k_2}  m_{k_1k_2}(x_{k_1},x_{k_2}) + \cdots +\sum_{k_1&lt;\cdots &lt;k_q}  m_{k_1,\dots,k_q} (x_{k_1},\dots,x_{k_q}).
+\]</span></p>
 <p>Optimal rates of convergence under the assumption that <span class="math inline">\(m\)</span> has
 two continuous partial derivatives:</p>
 <table>
@@ -573,8 +575,8 @@ two continuous partial derivatives:</p>
 <li><span class="math inline">\(w=\prod p_j\)</span> Assumes that features are independent</li>
 </ul>
 <blockquote class="def">
-<p><strong>Definition.</strong> <em>(Marginal Identification)</em> For every <span class="math inline">\(S\subseteq \{1,\dots,d\}\)</span>,
-<span class="math display">\[
+<p><strong>Definition.</strong> <em>(Marginal Identification)</em> For every <span class="math inline">\(S\subseteq \{1,\dots,d\}\)</span>,</p>
+<p><span class="math display">\[
 \sum_{T: T \cap S \neq \emptyset} \int  \hat m_T(x_T)  p_{S}(x_{S}) \mathrm dx_S=0.
 \]</span></p>
 </blockquote>
@@ -593,8 +595,10 @@ The functions are given by</p>
 <li>Interventional SHAP values</li>
 <li>Fairness/ discrimination-free pricing</li>
 </ul>
-<p>Remember: partial dependence plot, <span class="math inline">\(\xi_S\)</span>, is defined as
-<span class="math display">\[\xi_k(x_S)= \int \hat m(x) p_{-S}(x_{-S})\mathrm dx_{-S}.\]</span></p>
+<p>Remember: partial dependence plot, <span class="math inline">\(\xi_S\)</span>, is defined as</p>
+<p><span class="math display">\[
+\xi_k(x_S)= \int \hat m(x) p_{-S}(x_{-S})\mathrm dx_{-S}.
+\]</span></p>
 <blockquote class="prop">
 <p><strong>Corollary.</strong> If <span class="math inline">\(\hat m^{\ast}\)</span> satisfies the marginal identification, then</p>
 <p><span class="math display">\[

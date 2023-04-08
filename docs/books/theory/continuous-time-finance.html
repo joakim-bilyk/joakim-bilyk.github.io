@@ -469,7 +469,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="continuous-time-finance" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Continuous Time Finance<a href="continuous-time-finance.html#continuous-time-finance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This topic revolves around the theory of the Brownian motion and martingale processes. Other main topics are the binomial model and an introduction to financial derivatives. Financial derivatives is contingent on the outcome of a stochastic process at some future time <span class="math inline">\(t=T\)</span> and often is a function <span class="math inline">\(\Phi\)</span> of some assets price <span class="math inline">\(S_t\)</span>. As such the derivative will give a stochastic payout, at time <span class="math inline">\(t=T\)</span> of the size <span class="math inline">\(X_T=\Phi(S_T)\)</span>. Naturally we want to say something about the <em>fair</em> price of the derivative in the form of</p>
-<p><span class="math display">\[\Pi_t(X_T)=\mathbb{E}\left[\Phi(S_T)\ \vert\ \mathcal{F}_t\right],\]</span></p>
+<p><span class="math display">\[
+\Pi_t(X_T)=\mathbb{E}\left[\Phi(S_T)\ \vert\ \mathcal{F}_t\right],
+\]</span></p>
 <p>where <span class="math inline">\(\mathcal{F}_t\subset\mathcal{F}\)</span> is the available information at time <span class="math inline">\(t\)</span>. We will by defualt intepret the times <span class="math inline">\(t=0\)</span> as <em>today</em> and <span class="math inline">\(t=T\)</span> as <em>tomorrow</em>. This indeed require some fundamental understanding of the behaviour of the asset price <span class="math inline">\(S_t\)</span>. This lead us over to discussing the process in center of the <em>Black-Scholes</em> model: the Brownian motion.</p>
 </div>
             </section>

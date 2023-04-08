@@ -555,11 +555,13 @@ X_j:=f_j\left(pa(j), N_j\right), \quad j=1, \ldots, p,
 X_k = \tilde f(\tilde {pa}(k), \tilde N_k).
 \]</span>
 The resulting entailed distribution of the new SCM is called interventional distribution.
-We write short:
-<span class="math display">\[
+We write short:</p></li>
+</ul>
+<p><span class="math display">\[
 do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k)), \quad P_X^{\tilde {\mathfrak C}}=P^{\mathfrak C, do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k))}_X
-\]</span></p></li>
-<li><p>An intervention can also simply assign a fixed value <span class="math inline">\(a\)</span> (i.e., <span class="math inline">\(\tilde N_k=a\)</span> (deterministic) and the set of parents is empty).</p>
+\]</span></p>
+<ul>
+<li>An intervention can also simply assign a fixed value <span class="math inline">\(a\)</span> (i.e., <span class="math inline">\(\tilde N_k=a\)</span> (deterministic) and the set of parents is empty).
 <ul>
 <li>This is called an atomic or deterministic intervention and can be denoted by <span class="math inline">\(do(X_k = a)\)</span>.</li>
 </ul></li>
@@ -630,11 +632,12 @@ p({x})=p\left(x_1, \ldots, x_d\right)=\prod_{j=1}^d p\left(x_j \mid {pa}(j)\righ
 \tilde p (y|z)&amp;= \tilde p (y|x,z)= p (y|x,z) \\
 \tilde p(z)&amp;= p(z)
 \end{align}\]</span>
-Hence,
-<span class="math display">\[
+Hence,</p>
+<p><span class="math display">\[
 p(y|do(X=x))= \tilde p(y)= \int \tilde p(y|z) \tilde p(z) \mathrm dz = \int  p(y|x,z)  p(z) \mathrm dz
-\]</span>
-- For the backdoor adjustment, let <span class="math inline">\(Z\)</span> fulfill (i) and (ii) and let <span class="math inline">\(S=pa(X)\)</span>. We have
+\]</span></p>
+<ul>
+<li>For the backdoor adjustment, let <span class="math inline">\(Z\)</span> fulfill (i) and (ii) and let <span class="math inline">\(S=pa(X)\)</span>. We have
 <span class="math display">\[\begin{align}
 p(y|do(X=x))&amp;\stackrel{\text{parent adjustment}}{=} \int  p(y|x,s)  p(s) \mathrm ds\\
 &amp;=\int p(s)\int   p(y,z|x,s) \mathrm ds \mathrm dz \\
@@ -642,7 +645,8 @@ p(y|do(X=x))&amp;\stackrel{\text{parent adjustment}}{=} \int  p(y|x,s)  p(s) \ma
 &amp;\stackrel{\text{(ii):} Y {\perp\!\!\!\!\perp } {S}| {X,Z}}{=}\int p(s)\int   p(y|x,z) p(z|x,s) \mathrm ds \mathrm dz \\
 &amp;\stackrel{\text{(i):} X {\perp\!\!\!\!\perp } {Z}| {S}}{=}\int p(s)\int   p(y|x,z) p(z|s) \mathrm ds \mathrm dz \\
 &amp;\stackrel{p(z)= \int p(s)p(z|s) \mathrm ds}{=}\int   p(y|x,z)   \mathrm dz
-\end{align}\]</span></p>
+\end{align}\]</span></li>
+</ul>
 </details>
 <p>Intuition behind backdoor criterion: Backdoor paths carry spurious associations from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span>. Blocking all backdoor paths ensures that measured assoziation is causal. We don’t include descendants of <span class="math inline">\(𝑋\)</span> that are also ancestors of <span class="math inline">\(𝑌\)</span> because this would block a causal path. We don’t include descendants of <span class="math inline">\(𝑋\)</span> that are also descendants of <span class="math inline">\(𝑌\)</span> because this would introduce collider bias.</p>
 <p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>

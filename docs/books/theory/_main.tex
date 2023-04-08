@@ -434,7 +434,7 @@ f_i(t)=\exp\left(-\int_s^t \mu_i(u)\ du\right)\mu_i(t).
 \frac{\partial}{\partial s}\mathbf{P}(s,t)=-\mathbf{M}(s)\mathbf{P}(s,t)
 \]
 
-and
+\emph{and}
 
 \[
 \frac{\partial}{\partial t}\mathbf{P}(s,t)=\mathbf{P}(s,t)\mathbf{M}(t).
@@ -457,8 +457,6 @@ and
 \[
 \mathbf{P}(t)=\exp(\mathbf{M}t).
 \]
-
-\textbf{Proof.}
 
 We may subdivide the interval \([s,t]\) into \([s,u]\) and \([u,t]\) and use theorem 1.5 from the chapter on Product Integrals to obtain the Chapman-Kolmogorov's\index{Chapman-Kolmogorov's} equation
 
@@ -550,8 +548,6 @@ By assumption we have \(P(X_0=p+1)=0\) and so \(\sum_{i=1}^p\pi_i=1\) and \(\mat
 f(x)&=\mathbf{\pi}\prod_0^x(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{t}(x),\\
 F(x)&=1-\mathbf{\pi}\prod_0^x(\mathbf{I}+\mathbf{T}(u)\ du)\mathbf{e}.
 \end{align*}
-
-\textbf{Proof.}
 
 \textbf{Theorem 2.13. (Bladt)} \emph{If \(\tau \sim IPH(\mathbf{\pi},\mathbf{T}(t))\) then}
 
@@ -1150,7 +1146,7 @@ One may achieve the above integration result by differentiating the function \(h
 r(t)e^{bt}-r(0)&=\int_0^tdh=\int_0^tbe^{bs}r(s)+e^{bs}(a-br(s))\ ds+\int_0^te^{bs}\sigma\ dW^{\mathbb Q}(s)\\
 &=\frac{a}{b}(e^{bt}-1)+\sigma\int_0^te^{bs}\ dW^{\mathbb Q}(s)
 \end{align*}
-where simpel isolation gives the equation.
+where simple isolation gives the equation.
 
 \hypertarget{estimation-of-ph-bond-models}{%
 \subsection{Estimation of PH bond models}\label{estimation-of-ph-bond-models}}
@@ -1324,7 +1320,7 @@ where we simply use the above definition and the definition of the product integ
 \mathbf F(t,s)=\mathbf q(t,s)^{-1}\mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\mathbf M(s)\right\vert \mathcal F (t)\right)
 \]
 
-with
+\emph{with}
 
 \[
 \mathbf q(t,s) = \mathbb E^{\mathbb Q}\left(\left.\mathbf P(t,s)\right\vert \mathcal F (t)\right).
@@ -1466,8 +1462,6 @@ For simplicity we simply for \(k=1\) write \(\mathbf m^{(1)}(s,t) = \mathbf m(s,
 \end{pmatrix}
 \]
 
-\textbf{Proof.}
-
 \hypertarget{transform-of-rewards-and-higher-order-moments}{%
 \subsection{Transform of rewards and higher order moments}\label{transform-of-rewards-and-higher-order-moments}}
 
@@ -1539,13 +1533,14 @@ The following theorem gives a way of calculating the object \(\hat{\mathbf F}(\t
 \hat{\mathbf F}(\theta; s,t)=\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du).
 \]
 
-\textbf{Proof.}
-
 By the above theorem we see that
+
 \[
 \mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=i\right] =e_i^\top\hat{\mathbf F}(\theta; s,t)e = e_i^\top\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e,
 \]
+
 in particular
+
 \[
 \prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e=
 \begin{pmatrix}
@@ -1555,7 +1550,9 @@ in particular
 \mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=p\right]
 \end{pmatrix}.
 \]
+
 Furthermore, we have from the property above that
+
 \[
 \left.\frac{\partial^k}{\partial \theta^k}\left(e_i^\top\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e\right)\right\vert_{\theta = 0}=m^{(k)}_{i}(s,t).
 \]
@@ -1626,6 +1623,7 @@ Using this result we can make a powerful statement regarding how one could calcu
 \]
 
 For ease of notation we define the Toeplitz matrix as
+
 \[
 \mathcal T(\mathbf A_1,\mathbf A_2,...,\mathbf A_n)=
 \begin{bmatrix}
@@ -1636,11 +1634,15 @@ For ease of notation we define the Toeplitz matrix as
 \mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf 0 & \mathbf A_1
 \end{bmatrix}.
 \]
+
 And hence we could write:
+
 \[
 \mathbf F^{(k)}(x)=\mathcal T(\mathbf \Lambda(x), \mathbf R(x) , \mathbf C^{(2)}_r(x) , ... , \mathbf C^{(k-1)}_r(x), \mathbf C^{(k)}_r(x)),
 \]
+
 and
+
 \[
 \mathbf H^{(k)}(x)=\mathcal T(\mathbf P(s,t) , \mathbf m_r^{(1)}(s,t) , \mathbf m_r^{(2)}(s,t), ...,\mathbf m_r^{(k-1)}(s,t) , \mathbf m_r^{(k)}(s,t)).
 \]
@@ -1649,24 +1651,33 @@ and
 \subsection{Markovian interest rates}\label{markovian-interest-rates}}
 
 We now study how we may calculate the moments of the reserves in the case with rates. To this we start by assuming the Markov-jump interest model in sync with the Markov-jump process for the policy holder. Obviously, we in practice would assume that these two processes are independent, but for generality we will not insist on this for now. We therefore define the process
+
 \[
 \mathbf r(t)=\{r_i(t)\}_{i\in E_r}
 \]
+
 and the two Markov jump processes
+
 \[
 X_r=\{X_r(t)\}_{t\ge 0}\in E_r=\{1,...,p\},\qquad X_b(t)=\{X_b(t)\}_{t\ge 0}\in E_b=\{1,...,q\},
 \]
+
 and naturally we at time \(t\) have the interest rate \(r_{X_r(t)}(t)\) and \(X_v(t)\) governs the state of the policy holder. Using this we define the combined Markov jump process as
+
 \[
 X(t)=\{X_r(t),X_b(t)\}_{t\ge 0}\in E_r\times E_b.
 \]
+
 The processes \(X_b\) and \(X_r\) may or may not be independent, and the payment processes likewise may or may not be independent of \(X_r\). In the independent case the processes \(X_b\) and \(X_r\) are defined on each their state--space, and the common state--space will be the product set of the two. If the processes are sharing states, with the possibility of having simultaneous jumps, then we obtain dependency of the processes. Such a case could, e.g.~be a rise in the interest rate causing an increased intensity of jumping to surrender or free--policy states.
 
 In the case where we have independence we have that the transition intensities of \(X\) is given by
+
 \[
 \mathbf \Lambda(t)=\mathbf \Lambda_b(t)\oplus \mathbf\Lambda_r(t)=\mathbf \Lambda_b(t)\otimes \mathbf I_p+\mathbf I_p \otimes \mathbf \Lambda_r(t)=\{\lambda_{ij}\}_{i,j=1,...,pq},
 \]
+
 where \(\oplus\) is the Kronecker sum and \(\otimes\) is the Kronecker product given by
+
 \[
 \mathbf A\otimes \mathbf B=\{a_{ij}\mathbf B\}=\begin{bmatrix}
 a_{1,1}\mathbf B & \cdots & a_{1,n}\mathbf B\\
@@ -1684,16 +1695,21 @@ We now consider the valuation of the payment process \(B\). Introduce the matrix
 V_{ij}(s,t)&=\mathbb E\left[\left.1\{X(t)=j\}\int_s^te^{-\int_s^xr_{X(u)}(u)\ du}\ dB(x) \ \right\vert\ X(s)=i\right].
 \end{align*}
 From the Markov-jump representation we recall that we defines \(d_{ij}(s,t)\) by
+
 \[
 d_{ij}(s,t)=\mathbb E\left[\left.1\{X(t)=j\}\exp\left\{-\int_s^tr_{X(u)}(u)\ du\right\} \ \right\vert\ X(s)=i\right],
 \]
+
 and that the matrix \(\mathbf D(s,t)=\{d_{ij}(s,t)\}\) has representation
+
 \[
 \mathbf D(s,t)=\prod_s^t\Big(\mathbf I+[\mathbf \Lambda(u)-\mathbf\Delta (r(u))]\ du\Big).
 \]
+
 Using this we have the theorem.
 
 \textbf{Theorem 5.10. (Bladt)} \emph{The matrix of partial state-wise prospective reserves \(\mathbf V(s,t)\) has the following integral representation}
+
 \[
 \mathbf V(s,t)=\int_s^t\mathbf D(s,x)\mathbf R(x)\mathbf P(x,t)\ dx.
 \]
@@ -1701,6 +1717,7 @@ Using this we have the theorem.
 Using Van loans formula we can avoid the integration and calculate the product integral from below.
 
 \textbf{Corollary 5.11. (Bladt)} \emph{The matrix of partial state-wise prospective reserves \(\mathbf V(s,t)\) has the following product integral representation}
+
 \[
 \prod_s^t\left(\mathbf I+
 \begin{pmatrix}
@@ -1713,18 +1730,21 @@ Using Van loans formula we can avoid the integration and calculate the product i
 \end{pmatrix}.
 \]
 
-Finally, we state and prove Thiele's differential equations for partial reserves with stochastic interest
-rates.
+Finally, we state and prove Thiele's differential equations for partial reserves with stochastic interest rates.
 
 \textbf{Theorem 5.12. (Bladt)} \emph{The state-wise reserves satisfies the differential equations}
+
 \[
 \frac{\partial}{\partial s}\mathbf V(s,t)=-[\mathbf \Lambda(s) - \mathbf\Delta(r(s))]\mathbf V(s,t) - \mathbf R(s)\mathbf P(s,t)
 \]
+
 \emph{where \(\mathbf V(t,t)=0\). For the conventional state-wise prospective reserves \(\mathbf V^{Th}(t)=\mathbf V(t,T)\mathbf e\), this has the form}
+
 \[
 \frac{\partial}{\partial s}\mathbf V^{Th}(t)=-[\mathbf \Lambda(t) - \mathbf\Delta(r(t)]\mathbf V^{Th}(t) - \mathbf R(t)\mathbf e,
 \]
-where \(\mathbf V^{Th}(T)=\mathbf 0\).
+
+\emph{where \(\mathbf V^{Th}(T)=\mathbf 0\).}
 
 \hypertarget{higher-order-moments}{%
 \subsection{Higher order moments}\label{higher-order-moments}}
@@ -1735,13 +1755,17 @@ Consider the matrix of partial state-wise higher order moments of future payment
 V_{ij}^{(k)}(t,T)&=\mathbb E\left[\left.1\{X(T)=j\}\left(\int_s^te^{-\int_s^xr_{X(u)}(u)\ du}\ dB(x)\right)^k \ \right\vert\ X(s)=i\right],
 \end{align*}
 and introduce what we shall term the \emph{reduced} partial state-wise higher order moments:
+
 \[
 \mathbf V_r^{(k)}(t,T)=\frac{\mathbf V^{(k)}(t,T)}{k!}
 \]
+
 and denoting
+
 \[
 \mathbf D^{(m)}(s,t)=\prod_s^t\Big(\mathbf I + [\mathbf\Lambda(u)-m\mathbf\Delta(r(u))]\ du\Big),\qquad m\in\mathbb N,
 \]
+
 we then obtain the following version of Hattendorff's theorem for partial reserves with stochastic interest rate.
 
 \textbf{Theorem 5.13. (Bladt)} \emph{The matrix of reduced partial state-wise higher order moments satisfies the integral equation, for \(k\in\mathbb N_0\),}
@@ -1751,6 +1775,7 @@ we then obtain the following version of Hattendorff's theorem for partial reserv
 \end{align*}
 
 Using Van loan we can define the following matrix
+
 \[
 \mathbf F_U^{(k)}(x)=
 \begin{bmatrix}
@@ -1761,7 +1786,9 @@ Using Van loan we can define the following matrix
 \mathbf 0 & \mathbf 0 & \mathbf 0 & \cdots & \mathbf 0 & \mathbf \Lambda(x)
 \end{bmatrix},
 \]
+
 then we get the usefull product integral
+
 \[
 \prod_t^T\Big(\mathbf I + \mathbf F_U^{(k)}(x)\ dx\Big)=
 \begin{bmatrix}
@@ -1774,26 +1801,34 @@ then we get the usefull product integral
 * & * & * & * & \cdots &* & \mathbf P(t,T)
 \end{bmatrix}.
 \]
+
 Then by differentiating we obtain the classical differential equations below.
 
 \textbf{Theorem 5.14. (Bladt)} \emph{The matrix of reduced partial state-wise higher order moments satisfies the system of differential equations, for \(k\in \mathbb N_0\),}
+
 \[
 \frac{\partial}{\partial t}\mathbf V_r^{(k)}(t,T)=\Big(k\mathbf\Delta(r(t)) - \mathbf \Lambda(t)\Big)\mathbf V_r^{(k)}(t,T)-\mathbf R(t)\mathbf V_r^{(k-1)}(t,T)-\sum_{i=2}^k\mathbf C_r^{(i)}(t)\mathbf V_r^{(k-i)}(t,T),
 \]
+
 \emph{with terminal condition \(\mathbf V_r^{(k)}(T,T)=1_{(k=0)}\mathbf I\).}
 
 \hypertarget{equivalence-premium}{%
 \subsection{Equivalence premium}\label{equivalence-premium}}
 
 We assume that a policy has payments determined and fixed and that we want to adjust one or more payments such that \(V^{Th}\) satisfies the equivalence principle i.e.~\(V_{X(0)}^{Th}(0)=0\). To this define \(\mathbf R(t)=\mathbf R(t;\theta)\) for some payment \(\theta\). Notice that \(\theta\) is rather general and may be thought of as either a single transition payment or payment rate. This in particular gives the mapping \(\theta \mapsto \mathbf V(t;\theta)\) given by
+
 \[
 \mathbf V(t;\theta) = \int_t^T\prod_t^u\Big(\mathbf I +[\mathbf\Lambda(s)-\mathbf\Delta(r(s))]\ ds\Big)\mathbf R(u;\theta)\prod_u^T\Big(\mathbf I +\mathbf \Lambda(s)\ ds\Big)\ du,
 \]
+
 hence if \(\mathbf R(t;\theta)\) is continuously differentiable and \(\mathbf \Lambda\) and \(\mathbf r\) are continuous we have
+
 \[
 \frac{\partial}{\partial \theta}\mathbf V(t;\theta) = \int_t^T\prod_t^u\Big(\mathbf I +[\mathbf\Lambda(s)-\mathbf\Delta(r(s))]\ ds\Big)\frac{\partial}{\partial \theta}\mathbf R(u;\theta)\prod_u^T\Big(\mathbf I +\mathbf \Lambda(s)\ ds\Big)\ du.
 \]
+
 and then by Van loan formula
+
 \[
 \prod_t^T\left(\mathbf I+
 \begin{pmatrix}
@@ -1806,13 +1841,17 @@ and then by Van loan formula
 \mathbf 0 & \mathbf P(t,T)
 \end{pmatrix}.
 \]
+
 Using this framework we can make establish the pricing corollary below.
 
 \textbf{Corollary.} \emph{(Equivalence premium)\index{Equivalence premium} Assume that \(\mathbf R(t)=\mathbf R(t;\theta)\) for \(\theta\in\Theta\). Let \(\tilde\theta\) b the equivalence premium i.e.~\(\tilde \theta\) solves \(V^{Th}_{X(0)}(0;\tilde\theta)=0\), then the sequence \(\{\theta_n\}_{n\in \mathbb N_0}\) defined by}
+
 \[
 \theta_0\in\Theta,\qquad \theta_{n+1}=\theta_{n}-\frac{\mathbf e_{X(0)}^\top\mathbf V(0;\theta_n)\mathbf e}{\mathbf e_{X(0)}^\top\mathbf V_\theta(0;\theta_n)\mathbf e},
 \]
+
 \emph{converges to \(\tilde\theta\). In the above \(\mathbf V_\theta(0;\theta)\) denote the first derivative in \(\theta\). In case \(V^{Th}_{X(0)}(0;\tilde\theta)\) is linear in \(\theta\) then the above converges for \(n=1\) and}
+
 \[
 \tilde\theta = -\frac{\mathbf e_{X(0)}^\top\mathbf V(0;0)\mathbf e}{\mathbf e_{X(0)}^\top\mathbf V_\theta(0;0)\mathbf e}.
 \]
@@ -1830,36 +1869,48 @@ dS(t)&=\mu(t)S(t)\ dt+\sigma(t) S(t)\ dW(t)\\
 &=r(t)S(t)\ dt + \sigma(t)S(t)\ dW^{\mathbb Q}(t),
 \end{align*}
 for adapted processes \(r\), \(\mu\) and \(\sigma\). Note that we for now consider the deterministic and constant case with
+
 \[
 r(t)=r,\quad\mu(t)=\mu, \quad\sigma(t)=\sigma.
 \]
+
 We furthermore there exist a equivalent martingale measure \(\mathbb Q\sim \mathbb P\) which as usual is given by the Radon-Nikodym derivative in the Girsanov theorem where
+
 \[
 \frac{d\mathbb Q}{d\mathbb P}(t)=\phi(t)=\frac{r(t)-\mu(t)}{\sigma},
 \]
+
 i.e.~\(W^{\mathbb Q}\) is a \(\mathbb Q\)-martingale with \(\mathbb P\)-dynamics
+
 \[
 dW^{\mathbb Q}(t)=dW(t)-\phi(t)\ dt.
 \]
+
 By the risk neutral valuation formula we have for the simple claim \(\Phi(S(T))\) the arbitrage free price is given by
+
 \[
 \Pi(t)=\mathbb E^{\mathbb Q}\left[\left.e^{-\int_t^Tr(u)\ du}\Phi(S(T))\ \right\vert\ \mathcal F(t)\right]
 \]
+
 remember \(\mathbb Q\) is not necessarily unique if we only assume that the market is arbitrage free. If we want uniqueness the market \((S^0,S)\) need to be complete. This happens to hold in the Black-Scholes model even if \(r\), \(\mu\) and \(\sigma\) are not constant.
 
 \hypertarget{payment-streams}{%
 \subsection{Payment Streams}\label{payment-streams}}
 
 Using the notation from the above section we consider a contract that pays in accordance to the pricing function of the risky asset \(S\). We let \(B\) denote the accumulated payments on the interval \([0,t]\) and assume that \(B\) has dynamics
+
 \[
 dB(t)=b(t,S(t))\ dt+\Delta B(t,S(t)),
 \]
+
 where \(b(t,s)\) denotes a continuous payment at time \(t\) priced according til the price of the asset: \(s\). Likewise, \(\Delta B(t,s)\) is lump sums payed at time \(t\) according to the price \(s\).
 
 We know that \(\mathbb Q\) exist and is unique in the Black-Scholes model so we may define the prospective reserve by
+
 \[
 V(t,s)=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-\int_t^vr(u)\ du}dB(v)\ \right\vert\ S(t)=s\right]=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-(v-t)r}dB(v)\ \right\vert\ S(t)=s\right].
 \]
+
 Notice that we can decompose into discrete and continuous payments by
 \begin{align*}
 V(t,s)&=\mathbb E^{\mathbb Q}\left[\left.\int_t^Te^{-(v-t)r}b(v,S(v))\ dv\ \right\vert\ S(t)=s\right]\\
@@ -1873,6 +1924,7 @@ V_t(t,s)&=rV(t,s)-b(t,s)-V_s(t,s)rs-\frac{1}{2}V_{ss}(t,s)\sigma^2s^2,\\
 V(T,s)&=0.
 \end{align*}
 \emph{On the events \(t\in \{\Delta B(t,s)\ne 0\}\) we have the jumps}
+
 \[
 V(t-,s)=V(t,s)+\Delta B(t,s).
 \]
@@ -1880,9 +1932,11 @@ V(t-,s)=V(t,s)+\Delta B(t,s).
 \textbf{Proof.}
 
 Consider the martingale
+
 \[
 m(t)=\mathbb E^{\mathbb Q}\left[\left. \int_0^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right].
 \]
+
 Then we can decompose into
 \begin{align*}
 m(t)&=\int_0^te^{-ru}\ dB(u)+\mathbb E^{\mathbb Q}\left[\left. \int_t^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right]\\
@@ -1906,13 +1960,17 @@ Then since \(m\) is a martingale we must have a zero drift i.e.
 &+\frac{1}{2}V_{yy}(t,S(t))\sigma^2S^2(t)
 \end{align*}
 Hence we have
+
 \[
 V_t(t,S(t))=rV(t,S(t))-b(t,S(t))-V_y(t,S(t))rS(t)-\frac{1}{2}V_{yy}(t,S(t))\sigma^2S^2(t)
 \]
+
 and on discontinuity points
+
 \[
 V(t-,S(t))=V(t,S(t))+\Delta B(t,S(t))
 \]
+
 as desired. \(\blacksquare\)
 
 We also have the reverse statement:
@@ -1920,9 +1978,11 @@ We also have the reverse statement:
 \textbf{Proposition 2.2. (Asmussen)} \emph{Assume that a function \(V\) exist that solve proposition 2.1's PDE with the gluing condition, then this functions defines the reserve.}
 
 From finance mathematics we certainly can find a hedging strategy for this portfolio. This is simply done by choosing the portfolio \(h(t)=(h^0(t),h^1(t))\) in accordance to the scheme
+
 \[
 h^1(t)=V_s(t,S(t)),\qquad h^0(t)=\frac{V(t,S(t))-V_s(t,S(t))S(t)}{S^0(t)}.
 \]
+
 Normally we would adjust the model such that \(S^0(t)=1\) (by dividing by \(S^0\)) and so we see we simply hold the amount \(V(t,S(t))-h^1(t)S(t)\) in the bank account/risk free asset.
 
 We can list a few common contracts used in practice:
@@ -1982,9 +2042,11 @@ d\Big(V^{Z(t)}(t)\Big)&=rV^{Z(t)}(t)\ dt-b^{Z(t)}(t)\ dt -\Delta B^{Z(t)}(t)\\
 \textbf{Proof.}
 
 Split the proof into two parts. The first part we show the representation
+
 \[
 V^j(t)=\int_t^Te^{-\int_t^ur(v)\ dv}\ dC^j(t)
 \]
+
 then we give two profs for Thieles differential equation. The first is direct on the above and the other is an indirect martingale approach.
 
 \emph{``(Part i)''} We assume that \(r\) is deterministic. This is rather important, although if stochastic we could ease the computations with assuming \(Z\) and \(r\) are independent. If \(r\) is deterministic it holds that
@@ -1995,9 +2057,11 @@ V^j(t)&=\int_t^Te^{-\int_t^ur(v)\ dv}\mathbb E\left[\left.dB(u) \ \right\vert\ Z
 &+\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k:k\ne Z(u-)}\mathbb E\left[\left. b^{Z(u-)k}(u)\ dN^k(u) \ \right\vert\ Z(t)= j\right]\tag{2}
 \end{align*}
 where we for ease of notation use \(dB^{Z(u)}(u)=b^{Z(u)}(u)\ dt+\Delta B^{Z(u)}(u)\). Then we can work on (1) and (2) independently. For (1) we simply have
+
 \[
 \mathbb E\left[\left. dB^{Z(u)}(u) \ \right\vert\ Z(t)= j\right]=\sum_{k\in E}p_{jk}(t,u)d B^k(u),
 \]
+
 since we need only the transition \(j\to u\) on \([t,u]\) which happens with probability \(p_{jk}(t,u)\) if \(Z(t)=j\). For (2) we do an additional conditioning and obtain
 \begin{align*}
 \sum_{k:k\ne Z(u-)}\mathbb E&\left[\left. b^{Z(u-)k}(u)\ dN^k(u) \ \right\vert\ Z(t)= j\right]\\
@@ -2014,9 +2078,11 @@ where we in \((\dagger_1)\) used that \(b^{Z(u-)k}(u)\) is \(Z(u-)\)-measurable,
 N^k(t)=M^k(t)+\int_0^t\lambda_k(s)\ ds\Rightarrow dN^k(t)=dM^k(t)+\lambda_k(t)\ dt
 \end{align*}
 hence
+
 \[
 \mathbb E[dN^k(t) \ \vert\ Z(t-)]=\lambda_{Z(t-)k}(t)\ dt.
 \]
+
 The last step is simply a re indexing wich we use in the below
 \begin{align*}
 V^j(t)&=\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)d B^k(u)\\
@@ -2026,13 +2092,16 @@ V^j(t)&=\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{k\in E}p_{jk}(t,u)d B^k(u)\\
 which gives the desired result.
 
 \emph{``Part 2''} We proceed as follows. By the change of variables formula the dynamics in general is given by
+
 \[
 d\Big(V^{Z(t)}(t)\Big)=V_t^{Z(t)}(t)\ dt+\sum_{k: k\ne Z(t)}\Big(V^k(t)-V^{Z(t-)}(t)\Big)\ dN^k(t)
 \]
+
 where
 \[
 \frac{d}{dt}V^{Z(t)}(t)=V_t^{Z(t)}(t).
 \]
+
 Hence we want to study the \(V_t^{Z(t)}(t)\) term. We give a proof of the structure of this term with two approaches.
 
 \emph{``Part 2.a''} \emph{(Direct approach)} Using the above we have
@@ -2057,13 +2126,17 @@ V_t^{Z(t)}(t)&=r(t)e^{\int_0^tr(v)\ dv}\int_t^Te^{-\int_0^ur(v)\ dv}\sum_{k\in E
 &-\sum_{k\in E}\int_t^Te^{-\int_t^ur(v)\ dv}\sum_{i:i\ne k}\lambda_{ji}(t)p_{ik}(t,u)\left(d B^k(u)+\sum_{\ell :\ell \ne k}  b^{k\ell }(u)\lambda_{k\ell }(u)\ du\right)
 \end{align*}
 using that
+
 \[
 \frac{d}{dt}\int_t^s g(t,u)\ du=-g(t,t)+\int_t^s\frac{d}{dt}g(t,u)\ du
 \]
+
 and Kolmogorov differential equation
+
 \[
 \frac{d}{dt}p_{jk}(t,u)=\lambda_{j}(t)p_{jk}(t,u)-\sum_{i:i\ne k}\lambda_{ji}(t)p_{ik}(t,u).
 \]
+
 We notice that the second term is \(\lambda_jV^j(t)\) and the second is a sum over \(\lambda_{ji}(t)V^i(t)\) hence
 \begin{align*}
 V_t^{Z(t)}(t)&=r(t)V^{Z(t)}(t)-b^j(t)-\sum_{k :k \ne j}  b^{jk}(t)\lambda_{jk }(t)\\
@@ -2164,31 +2237,40 @@ dB^{Z(t)}(t,X(t-))&=b^{Z(t)}(t,X(t))\ dt + \Delta B^{Z(t)}(t,X(t-)).
 where we see that the payments depend on the state transitions in \(Z\) and the state of the reserve \(X\) at time \(t\).
 
 We want to evaluate the value of the future payment to present value i.e.~the integral
+
 \[
 \int_t^Te^{-\int_t^u r(v)\ dv}dB(u),
 \]
 
 which depends on the the process \(Z\) and \(X\), where \(X\) fundamentally is a process dependent on both \(X\) and \(S\). In financial markets we know how to evaluate derivative by finding an equivalent martingale measure \(\mathbb Q\), but in regard to the transition risk in \(Z\) it is natural to adhere to the objective measure \(\mathbb P\). This is why we choose to evaluate the payment stream wrt. the product measure \(\mathbb P\otimes \mathbb Q\). Recall that we have have two probability spaces \((\Omega, \mathcal F,\mathbb P)\) and \((\Omega, \mathcal F,\mathbb Q)\) where we simply denote
+
 \[
 \sigma(\Omega\times\Omega)=\mathcal F \otimes \mathcal F:=\mathcal F^{\otimes2}
 \]
+
 and measure a set \(A\in \mathcal F^{\otimes2}\) in accordance to \(\mathbb P\otimes \mathbb Q\) \emph{simply} by defining
 \begin{align*}
 \mathbb P\otimes \mathbb Q(A):&=\int_\Omega \mathbb P(\{\omega_1 \in \Omega\ \vert\ (\omega_1,\omega_2) \in A\})\ d\mathbb Q(\omega_2)\\
 &=\int_\Omega \mathbb Q(\{\omega_2 \in \Omega\ \vert\ (\omega_1,\omega_2) \in A\})\ d\mathbb P(\omega_1)
 \end{align*}
 In the case \(A=A_1\times A_2\) with \(A_1,A_2\in \Omega\) then the above is
+
 \[
 \mathbb P\otimes \mathbb Q(A)=\mathbb P(A_1)\mathbb Q(A_2)=\mathbb P(A_2)\mathbb Q(A_1).
 \]
+
 This is not essential to understand for the discussion but we are in simple terms trying to separating the market risk and life risk. We define the reserve under this new measure:
+
 \[
 V^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\int_t^u r(v)\ dv}\ dB(u)\ \right\vert\ X(t),Z(t)\right].
 \]
+
 Here the intensities \(\mathbf \Lambda\) for \(Z\) does not change but the dynamics of \(S\) is transformed by the \(\mathbb Q\)-dynamics of \(W^\mathbb Q\)
+
 \[
 dW^\mathbb Q(t)=dW(t)-\frac{r-\mu}{\sigma}dt.
 \]
+
 The dynamics of the \(X\)-reserve under \(\mathbb P\otimes \mathbb Q\) then becomes
 \begin{align*}
 dX(t)&=r(t)X(t)\ dt+\sigma(t)\pi(t,X(t))X(t)dW^\mathbb Q(t)\\
@@ -2204,14 +2286,19 @@ V^t(t-,x)&=\Delta B^j(t,x)+V^j(t,x-\Delta A^j(t,x)),\\
 V^j(T,x)&=0,
 \end{align*}
 \emph{where \(\mathcal D_x\) is the operator}
+
 \[
 \mathcal D_xV^j(t,x)=V_x^j(t,x)\left(rx-a^j(t,x)-\sum_{k:k\ne j}\lambda_{jk}(t)\varrho^{jk}(t,x)\right)+\frac{1}{2}V^j_{xx}(t,x)\pi^2(t,x)\sigma^2x^2
 \]
+
 \emph{and}
+
 \[
 R^{jk}(t,x)=b^{jk}(t,x)+V^k(t,\chi^k(t,x))-V^j(t,x).
 \]
+
 \emph{Conversely, if there exist a set of functions \(V^j(t,x)\) such that the above holds, then \(V^{Z(t)}(t,X(t))\) is the reserved defined as}
+
 \[
 V^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\int_t^u r(v)\ dv}\ dB(u)\ \right\vert\ X(t),Z(t)\right].
 \]
@@ -2219,9 +2306,11 @@ V^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\
 \textbf{Proof.}
 
 \emph{``Existence''} Consider the martingale
+
 \[
 m(t)=\mathbb E^{\mathbb Q}\left[\left. \int_0^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right].
 \]
+
 Then we can decompose into
 \begin{align*}
 m(t)&=\int_0^te^{-ru}\ dB(u)+\mathbb E^{\mathbb Q}\left[\left. \int_t^Te^{-ru}\ dB(u)\ \right\vert\ \mathcal F(t)\right]\\
@@ -2254,9 +2343,11 @@ e^{rt}\frac{d}{dt}m(t)&=-rV^{Z(t)}(t,X(t))+b^{Z(t)}(t,X(t-))+\sum_{k:k\ne Z(t-)}
 &+\sum_{k:k\ne Z(t-)}\left(V^{k}(t,\chi^k(t,X(t-)))-V^{Z(t-)}(t-,X(t-))\right)\lambda_{Z(t-)k}(t)
 \end{align*}
 Giving the desired PDE when setting equal to zero and rearranging. On discontinuity points where \(Z\) does not jump we have the gluing condition
+
 \[
 V^{Z(t)}(t,X(t))=V^{Z(t)}(t,X(t-)+\Delta A^{Z(t)}(t,X(t-))=\Delta B^{Z(t)}(t,X(t-))+V^{Z(t-)}(t,X(t-))
 \]
+
 as desired.
 
 \emph{``Uniqueness''} Assume that \(f^{Z(t)}(t,X(t))\) satisfies the PDE with gluing and terminal condition. Then it holds that
@@ -2306,9 +2397,11 @@ f^{Z(t)}(t,X(t))&=\int_t^Te^{-r(u-t)}\ dB(u)\\
 &-\int_t^Te^{-r(u-t)}\sum_{k:k\ne Z(u-)}\left(R^{Z(u-)k}(u,X(u-))-b^{Z(u-)k}(u,X(u-))\right)dM^k(u)
 \end{align*}
 Taking expectation wrt. to \(\mathbb P\otimes \mathbb Q\) gives
+
 \[
 f^{Z(t)}(t,X(t))=\mathbb E^{\mathbb P \otimes \mathbb Q}\left[\left.\int_t^Te^{-r(u-t)}\ dB(u)\ \right\vert\ Z(t),X(t) \right]
 \]
+
 since \(W^\mathbb Q\) is a martingale wrt. \(\mathbb Q\) and \(M^k\) is a martingale wrt. \(\mathbb P\). \(\blacksquare\)
 
 \hypertarget{with-profit-insurance-and-the-dynamics-of-the-surplus}{%
@@ -2828,7 +2921,9 @@ V^{(j,p)}(t-)&=V^{(j,p)}(t)+\Delta B^{(j,p)}(t).
 
 This topic revolves around the theory of the Brownian motion and martingale processes. Other main topics are the binomial model and an introduction to financial derivatives. Financial derivatives is contingent on the outcome of a stochastic process at some future time \(t=T\) and often is a function \(\Phi\) of some assets price \(S_t\). As such the derivative will give a stochastic payout, at time \(t=T\) of the size \(X_T=\Phi(S_T)\). Naturally we want to say something about the \emph{fair} price of the derivative in the form of
 
-\[\Pi_t(X_T)=\mathbb{E}\left[\Phi(S_T)\ \vert\ \mathcal{F}_t\right],\]
+\[
+\Pi_t(X_T)=\mathbb{E}\left[\Phi(S_T)\ \vert\ \mathcal{F}_t\right],
+\]
 
 where \(\mathcal{F}_t\subset\mathcal{F}\) is the available information at time \(t\). We will by defualt intepret the times \(t=0\) as \emph{today} and \(t=T\) as \emph{tomorrow}. This indeed require some fundamental understanding of the behaviour of the asset price \(S_t\). This lead us over to discussing the process in center of the \emph{Black-Scholes} model: the Brownian motion.
 
@@ -2840,7 +2935,9 @@ where \(\mathcal{F}_t\subset\mathcal{F}\) is the available information at time \
 
 The study of this course is the \textbf{European call} option\index{European call option} (and \emph{put} option). This financial derivative\index{financial derivative} is an agreement between two parties where the holder of the option has the right to \emph{``exercise''} the derivative, at a future time \(t=T\). Exercising means buying an asset at a certain agreed opon price-strike \(K\). In the case of the put-option: the holder has the right (but not obligation) to sell the asset at the strike price \(K\). As such the derivative has the payoff
 
-\[\text{Call}\ \text{option:}\hspace{10pt}\Phi(S_T)=(S_T-K)^+,\hspace{20pt}\text{Put}\ \text{option:}\hspace{10pt}\Phi(S_T)=(K-S_T)^+.\]
+\[
+\text{Call}\ \text{option:}\hspace{10pt}\Phi(S_T)=(S_T-K)^+,\hspace{20pt}\text{Put}\ \text{option:}\hspace{10pt}\Phi(S_T)=(K-S_T)^+.
+\]
 
 Our objective is to understand when an arbitrage exist and to find the fair price of these derivative. The strategy in pricing is finding a replicating portfolio with the same payoff as the option (with probability one) and then price the derivative accordingly.
 
@@ -2882,7 +2979,9 @@ Given that we have chosen a portfolio \(h\) we may introduce the value process.
 
 \textbf{Definition 2.1. (Bjork)} \emph{The \textbf{value process}\index{value process} of the porfolio \(h\in\mathbb{R}^2\) is the stochastic process}
 
-\[V^h_t=xB_t+yS_t,\ t=0,1.\]
+\[
+V^h_t=xB_t+yS_t,\ t=0,1.
+\]
 
 Given this notation we may define what an arbitrage is.
 
@@ -2892,7 +2991,9 @@ That is \(h\) is an deterministic money-machine where we at least never loose an
 
 \textbf{Proposition 2.3. (Bjork)} \emph{The one-period binomial model\index{one-period binomial model} is arbitrage free if and only if the following inequality hold:}
 
-\[d\le (1+R)\le u.\tag{2.1}\]
+\[
+d\le (1+R)\le u.\tag{2.1}
+\]
 
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 
@@ -2900,24 +3001,32 @@ That is \(h\) is an deterministic money-machine where we at least never loose an
 
 The statement is proofed by contradiction. Assume that \(d>1+R\) holds. Then by definition \(u>d>1+R\). Notice that any portfolio satisfying \(V_0^h=0\) must satisfy
 
-\[0=xB_0+yS_0=x+ys\iff x=-ys\]
+\[
+0=xB_0+yS_0=x+ys\iff x=-ys
+\]
 
 That is for some choice \(y\) the only arbitrage candidate is the portfolio \(h=(-ys,y)\). Calculating the value at time \(t=1\) we have
 
-\[V_1^h=-ys\cdot(1+R)+y\cdot s\cdot Z=ys(Z-1-R)\]
+\[
+V_1^h=-ys\cdot(1+R)+y\cdot s\cdot Z=ys(Z-1-R)
+\]
 
 However since \(Z\ge d\) we have \(Z-(1+R)\ge 0\) and therefore an arbitrage (for \(y>0\)). The other inequality \(1+R>u\) follows analog steps. Simply choose some \(y<0\) and the result follows. \(\blacksquare\)
 
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 From inequality (2.1) we see that since \(1+R\) is between \(u\) and \(d\) we may find a pair \(q_d,q_u\ge 0\) with \(q_d+q_u=1\) such that
 
-\[1+R=q_u\cdot u+q_d\cdot d.\]
+\[
+1+R=q_u\cdot u+q_d\cdot d.
+\]
 
 This yields the important risk neutral valuation formula as summed op in the following definition
 
 \textbf{Definition 2.4. (Bjork)} \emph{A probability measure \(Q\) is called a \textbf{martingale meausre}\index{martingale meausre} if the following condition holds:}
 
-\[S_0=\frac{1}{1+R}E^Q[S_1].\]
+\[
+S_0=\frac{1}{1+R}E^Q[S_1].
+\]
 
 The above measure \(Q\) is the measure \(Q(Z=d)=q_d\) and \(Q(Z=u)=q_u\) for the binomial model. This does in fact yield the risk neautral valuation formula:
 \begin{align*}
@@ -2930,7 +3039,9 @@ where we simply use \(1+R=q_d\cdot d+q_u\cdot u\). We call this the risk neautra
 
 \textbf{Proposition 2.6. (Bjork)} \emph{The one-period binomial model has martingale probabilities given by:}
 
-\[\left\{\begin{matrix}q_u=\frac{(1+R)-d}{u-d},\\ q_u=\frac{u-(1+R)}{u-d}.\end{matrix}\right.\]
+\[
+\left\{\begin{matrix}q_u=\frac{(1+R)-d}{u-d},\\ q_u=\frac{u-(1+R)}{u-d}.\end{matrix}\right.
+\]
 
 \hypertarget{contingent-claims}{%
 \subsubsection{Contingent Claims}\label{contingent-claims}}
@@ -3298,7 +3409,7 @@ Z_1^N(\omega_M)\end{bmatrix}q_M.\tag{3.3}
 \forall A\in\mathcal{F}:P(A)=0\iff Q(A)=0,
 \]
 
-or equivalently
+\emph{or equivalently}
 
 \[
 \forall A\in\mathcal{F}:P(A)=1\iff Q(A)=1.
@@ -4411,19 +4522,25 @@ L_t=\frac{dQ}{dP},\ on\ \mathcal{F}_t.\tag{11.48}
 \subsection{Summary}\label{summary}}
 
 \textbf{Theorem 11.24. (Bjork)} \textbf{(First Fundamental Theorem)} \emph{The market model is free of arbitrage if and only if there exists a \textbf{martingale measure}, i.e.~a measure \(Q\sim P\) such that the processes}
+
 \[
 \frac{S_t^0}{S_t^0},\frac{S_t^1}{S_t^0},...,\frac{S_t^N}{S_t^0}
 \]
+
 \emph{are (local) martingales under \(Q\).}
 
 \textbf{Proposition 11.25. (Bjork)} \emph{If the numeraire \(S^0\) is the money account, i.e.}
+
 \[
 S^0_t=e^{\int_0^t r(s)\ ds},
 \]
+
 \emph{where \(r\) is the (possibly stochastic) short rate, and if we assume that all processes are Brownian driven, then a measure \(Q\sim P\) is a martingale measure if and only if all assets \(S^0,S^1,...,S^N\) have the short rate as their local rates of return, i.e.~if the \(Q\)-dynamics are of the form}
+
 \[
 dS_t^i=S_t^ir_t\ dt+S_t^i \sigma_t^i\ dW_t^Q,\tag{11.54}
 \]
+
 \emph{where \(W^Q\) is a (multidimensional) \(Q\)-Brownian motion.}
 
 \textbf{Theorem 11.26. (Bjork)} \textbf{(Second Fundamental Theorem)} \emph{Assuming absence of arbitrage, the market model is complete if and only if the martingale measure \(Q\) is unique.}
@@ -5084,9 +5201,11 @@ We see that the risk is minimized for the \(m\) that minimizes \(m(X)^2-2m(X)\ma
 \]
 
 hence giving that
+
 \[
 m(X)=\mathbb E[Y\ \vert\ X]
 \]
+
 as desired. \(\blacksquare\)
 
 \textbf{Remarks on the \(L^2\)-loss.} The loss function \(L(y_1,y_2)=(y_1-y_2)^2\) i.e.~the \(L^2\) loss function gives some nice interpretations. We know that \(L\) as a norm on \(\mathbb R\) forms a Hilbert Space. This means, for instance, that we have some nice geometric interpretations, but more importantly we have alot of tools from linear algebra. We know that the projection \(m^*\) onto the space \(\mathcal G\) and so any vector \(\hat m(X)-m^*(X)\) is orthogonal to \(Y-m^*(X)\). In particular, this gives that
@@ -5096,10 +5215,12 @@ r(\hat m(X))&=\mathbb E[L(\hat m(X),Y)]=\mathbb E\left[(\hat m(X)-Y)^2\right]\\
 &\stackrel{(\dagger)}{=}\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+\mathbb E\left[(m^*(X)-Y)^2\right]\\
 &=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]+r(m^*(X))
 \end{align*}
-Using in \((\dagger)\) that \(\hat m(X)-m^*(X)\) and \(m^*(X)-Y\) are orthogonal with the last equation simply being the definition of risk. Rearringing the above gives
+Using in \((\dagger)\) that \(\hat m(X)-m^*(X)\) and \(m^*(X)-Y\) are orthogonal with the last equation simply being the definition of risk. Rearranging the above gives
+
 \[
 r(\hat m(X))-r(m^*(X))=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]=\text{MSE}(\hat m(x))
 \]
+
 We can further write out the Mean Squared Error in terms of variance and bias.
 \begin{align*}
 \text{MSE}(\hat m(x))&=\mathbb E\left[(\hat m(X)-m^*(X))^2\right]\\
@@ -5849,13 +5970,17 @@ Linear models are quite restrictive and one may ask how one can achieve more fle
 \emph{where the weight function \(w_i\) can depend on \(\{X_1, \dots, X_n\}\).}
 
 \textbf{Example.} The k-nearest-neighbor estimator is a linear smoother:
+
 \[
 \hat m^{knn}(x)= \sum_i^n w_i(x) Y_i,
 \]
+
 with
+
 \[
 w_i(x)=\begin{cases}\frac 1 k & X_i \ \text{belongs to the}\  k \ \text{closest points to}\  x \\ 0 & else\end{cases}
 \]
+
 In the below proposition the definition of Lipschitz continuity is used. We recall that a real-valued function \(f:\mathbb R\to\mathbb R\) is \(L\)-Lipschitz continuous if and only if
 
 \[
@@ -5865,14 +5990,19 @@ f(x_1)-f(x_2)\le L\Vert x_1-x_2\Vert_2
 for all \((x_1,x_2)\in\mathbb R^2\). This in particulat means that \(f(x)\in[f(x_1)-L\vert x_1-x\vert,f(x_1)+L\vert x_1-x\vert]\) i.e.~does not on any interval grow faster that a linear function with slope \(L\).
 
 \textbf{Proposition. (MSE k-nearest-neighbor)} \emph{Assume that}
+
 \[
 E[Y|X=x]=m^\ast(x)\in \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\ m \ \text{is L-Lipschitz continuous}\},
 \]
+
 \emph{and \(\textrm{Var}(Y|X=x)=\sigma^2(x)\leq \sigma^2.\) Then }
+
 \[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]\leq (cL)^2 \left(\frac k n \right)^{2/p}+\frac {\sigma^2}k.
 \]
+
 \emph{In particular, for \(k_n=O_p( n^{2/(2+p)})\), we get }
+
 \[
 \mathbb E[(\hat m^{knn}(x)-m^\ast(x))^2]=O_p(n^{-2/(2+p)}).
 \]
@@ -5950,6 +6080,7 @@ The general idea is to fit a smooth function to the data points \((X,Y)\) such t
 where of course the argument is \(z=\vert x-X_{ij}\vert/h\) with \(h>0\) being the bandwidth. Notice that the uniform kernel in fact is the Epanechnikov kernel with \(a=0\).
 
 \textbf{Proposition. (MSE Kernel Smoother)} \emph{Assume that \(E[Y|X=x]=m^\ast(x)\in \mathcal G_L\) with}
+
 \[
 \mathcal G_L = \{m: \mathbb R^p \mapsto \mathbb R\ |\  m \ \text{is L-Lipschitz continuous}\},
 \]
@@ -6546,6 +6677,7 @@ v_{jb}=-\frac{\sum_{i: X_i \in R_{jb}} g_i }{\sum_{i: X_i \in R_{jb}} h_i+\lambd
 \]
 
 This leads to the objective function
+
 \[
 -\frac 1 2\sum_{j=1}^{J_b} \frac {(\sum_{i: X_i \in R_{jb}}g_i)^2}{\sum_{i: X_i \in R_{jb}}h_i+\lambda}+\gamma J_b
 \]
@@ -6685,6 +6817,7 @@ The minimzer is given by
 \]
 
 Which has the same minimizer as when minimizing the empirical risk of the Poisson Deviance
+
 \[
 \hat R_n(\lambda E_i)=\sum_{i=1}^n 2\left(Y_i\log {\frac {Y_i}{\lambda E_i }}-Y_i+\lambda E_i \right).
 \]
@@ -6943,12 +7076,12 @@ but they are not interpretable.
 
 where \(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\) are constants. Note: the right hand-side is not identified. Local explanations add constraints such that \(\phi_k(x_0)\) is uniquely identified and best reflects the local contribution of feature \(k\) to \(\hat m_n\left(x_0\right)\).
 
-\textbf{Definition.} \emph{(Additive Value functions)} A value function \(v\) assigns a real value
-\(v(S)\) to each subset \(S \subseteq \{1,\dots p\}\).
+\textbf{Definition.} \emph{(Additive Value functions)} \emph{A value function \(v\) assigns a real value
+\(v(S)\) to each subset \(S \subseteq \{1,\dots p\}\).}
 
 \textbf{Definition.} \emph{(Shapley Axioms)}
 
-Given a vaue function \(v_{x_0}\) with \(v_{x_0}(\{1,\dots,p\})=m(x_0)\). The four Shapley axioms are
+\emph{Given a vaue function \(v_{x_0}\) with \(v_{x_0}(\{1,\dots,p\})=m(x_0)\). The four Shapley axioms are}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -6956,20 +7089,19 @@ Given a vaue function \(v_{x_0}\) with \(v_{x_0}(\{1,\dots,p\})=m(x_0)\). The fo
 \item
   \textbf{Efficiency} \(m\left(x_0\right)=\phi_{0}+\sum_{k=1}^{p} \phi_k(x_0)\), \(\phi_{0}=v(\emptyset)\).
 \item
-  \textbf{Symmetry}: Fix any \(k,l \in \{1,\dots,p\}, k\neq l\).
-  If \(v_{x_0}(S\cup k)=v_{x_0}(S\cup l)\), for all \(S \subseteq \{1,\dots p\}\setminus \{k,l\}\), then \(\phi_k(x_0)=\phi_l(x_0).\)
+  \textbf{Symmetry}: F\_ix any \(k,l \in \{1,\dots,p\}, k\neq l\). If \(v_{x_0}(S\cup k)=v_{x_0}(S\cup l)\), for all \(S \subseteq \{1,\dots p\}\setminus \{k,l\}\), then \(\phi_k(x_0)=\phi_l(x_0).\)\_
 \item
-  \textbf{Dummy} For \(k=1,\dots,p\): If \(v_{x_0}(S\cup k)=v_{x_0}(S)\), for all \(S \subseteq \{1,\dots p\}\setminus \{k\}\), then \(\phi_k=0.\)
+  \textbf{Dummy} \emph{For \(k=1,\dots,p\): If \(v_{x_0}(S\cup k)=v_{x_0}(S)\), for all \(S \subseteq \{1,\dots p\}\setminus \{k\}\), then \(\phi_k=0.\)}
 \item
-  \textbf{Linearity} For \(k=1,\dots,p\): If \(m(x_0)=m^1(x_0)+m^2(x_0)\), then \(\phi_k(x_0)=\phi^1_k(x_0)+\phi^2_k(x_0)\), where \(\phi^l\) is the explanation corresponding to the function \(m^l\).
+  \textbf{Linearity} \emph{For \(k=1,\dots,p\): If \(m(x_0)=m^1(x_0)+m^2(x_0)\), then \(\phi_k(x_0)=\phi^1_k(x_0)+\phi^2_k(x_0)\), where \(\phi^l\) is the explanation corresponding to the function \(m^l\).}
 \end{enumerate}
 
-\textbf{Theorem.} \emph{(Shapley Axioms)} Given a value function \(v_{x_0}\), there exist unique constants \(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\) such that the four Shapley axioms are satisfied. They are given by
+\textbf{Theorem.} \emph{(Shapley Axioms)} \emph{Given a value function \(v_{x_0}\), there exist unique constants \(\phi_0,\phi_1(x_0),\dots,\phi_p(x_0)\) such that the four Shapley axioms are satisfied. They are given by}
 \begin{align}
 \phi_{k}(x_0)&=\frac{1}{p !} \sum_{\pi \in \Pi_p} \Delta_{v_{x_0}}\left(k, \{\pi(1),\dots,\pi(k-1)\}\right)\\
 &=\frac 1 {p!}\sum_{S: S \subseteq \{1,\dots,p\} \setminus\{k\}} {|S| !(p -|S|-1) !}\Delta_{v_{x_0}}(k, S),
 \end{align}
-where \(\Delta_{v_{x_0}}(k, S)=v_{x_0}(S \cup k)-v_{x_0}(S)\) and \(\Pi_p\) is the set of permutations of \(\{1,\dots,p\}\).
+\emph{where \(\Delta_{v_{x_0}}(k, S)=v_{x_0}(S \cup k)-v_{x_0}(S)\) and \(\Pi_p\) is the set of permutations of \(\{1,\dots,p\}\).}
 
 \textbf{Proof.}
 
@@ -7380,9 +7512,14 @@ Note: An SCM \(\mathfrak{C}\) defines a unique graph \(G\) and a unique distribu
   \]
   The resulting entailed distribution of the new SCM is called interventional distribution.
   We write short:
-  \[
-  do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k)), \quad P_X^{\tilde {\mathfrak C}}=P^{\mathfrak C, do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k))}_X
-  \]
+\end{itemize}
+
+\[
+do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k)), \quad P_X^{\tilde {\mathfrak C}}=P^{\mathfrak C, do(X_k = \tilde f(\tilde {pa}(k), \tilde N_k))}_X
+\]
+
+\begin{itemize}
+\tightlist
 \item
   An intervention can also simply assign a fixed value \(a\) (i.e., \(\tilde N_k=a\) (deterministic) and the set of parents is empty).
 
@@ -7484,18 +7621,24 @@ For the parent adjustment, \(Z=pa(X)\), note that\\
 \tilde p(z)&= p(z)
 \end{align}
 Hence,
+
 \[
 p(y|do(X=x))= \tilde p(y)= \int \tilde p(y|z) \tilde p(z) \mathrm dz = \int  p(y|x,z)  p(z) \mathrm dz
 \]
-- For the backdoor adjustment, let \(Z\) fulfill (i) and (ii) and let \(S=pa(X)\). We have
-\begin{align}
-p(y|do(X=x))&\stackrel{\text{parent adjustment}}{=} \int  p(y|x,s)  p(s) \mathrm ds\\
-&=\int p(s)\int   p(y,z|x,s) \mathrm ds \mathrm dz \\
-&\stackrel{\text{Bayes formula}}{=}\int p(s)\int   p(y|x,s,z) p(z|x,s) \mathrm ds \mathrm dz \\
-&\stackrel{\text{(ii):} Y {\perp\!\!\!\!\perp } {S}| {X,Z}}{=}\int p(s)\int   p(y|x,z) p(z|x,s) \mathrm ds \mathrm dz \\
-&\stackrel{\text{(i):} X {\perp\!\!\!\!\perp } {Z}| {S}}{=}\int p(s)\int   p(y|x,z) p(z|s) \mathrm ds \mathrm dz \\
-&\stackrel{p(z)= \int p(s)p(z|s) \mathrm ds}{=}\int   p(y|x,z)   \mathrm dz 
-\end{align}
+
+\begin{itemize}
+\tightlist
+\item
+  For the backdoor adjustment, let \(Z\) fulfill (i) and (ii) and let \(S=pa(X)\). We have
+  \begin{align}
+  p(y|do(X=x))&\stackrel{\text{parent adjustment}}{=} \int  p(y|x,s)  p(s) \mathrm ds\\
+  &=\int p(s)\int   p(y,z|x,s) \mathrm ds \mathrm dz \\
+  &\stackrel{\text{Bayes formula}}{=}\int p(s)\int   p(y|x,s,z) p(z|x,s) \mathrm ds \mathrm dz \\
+  &\stackrel{\text{(ii):} Y {\perp\!\!\!\!\perp } {S}| {X,Z}}{=}\int p(s)\int   p(y|x,z) p(z|x,s) \mathrm ds \mathrm dz \\
+  &\stackrel{\text{(i):} X {\perp\!\!\!\!\perp } {Z}| {S}}{=}\int p(s)\int   p(y|x,z) p(z|s) \mathrm ds \mathrm dz \\
+  &\stackrel{p(z)= \int p(s)p(z|s) \mathrm ds}{=}\int   p(y|x,z)   \mathrm dz 
+  \end{align}
+\end{itemize}
 
 Intuition behind backdoor criterion: Backdoor paths carry spurious associations from \(X\) to \(Y\). Blocking all backdoor paths ensures that measured assoziation is causal. We don't include descendants of \(𝑋\) that are also ancestors of \(𝑌\) because this would block a causal path. We don't include descendants of \(𝑋\) that are also descendants of \(𝑌\) because this would introduce collider bias.
 
@@ -7599,7 +7742,9 @@ Partial dependence can be misleading because they ignore interaction effects. Ap
 
 Assume a data set with \(p\) features. Also assume that we can approximate the regression function \(m\) by a \(q-th\) order functional decomposition:
 
-\[m(x) \approx  m_0+\sum_{k=1}^p  m_k(x_{k}) + \sum_{k_1<k_2}  m_{k_1k_2}(x_{k_1},x_{k_2}) + \cdots +\sum_{k_1<\cdots <k_q}  m_{k_1,\dots,k_q} (x_{k_1},\dots,x_{k_q}).\]
+\[
+m(x) \approx  m_0+\sum_{k=1}^p  m_k(x_{k}) + \sum_{k_1<k_2}  m_{k_1k_2}(x_{k_1},x_{k_2}) + \cdots +\sum_{k_1<\cdots <k_q}  m_{k_1,\dots,k_q} (x_{k_1},\dots,x_{k_q}).
+\]
 
 Optimal rates of convergence under the assumption that \(m\) has
 two continuous partial derivatives:
@@ -7661,6 +7806,7 @@ Generalized ANOVA, however, has drawbacks for interpretability
 \end{itemize}
 
 \textbf{Definition.} \emph{(Marginal Identification)} For every \(S\subseteq \{1,\dots,d\}\),
+
 \[
 \sum_{T: T \cap S \neq \emptyset} \int  \hat m_T(x_T)  p_{S}(x_{S}) \mathrm dx_S=0.
 \]
@@ -7688,7 +7834,10 @@ The are three reasons why the marginal identification is particularly interestin
 \end{itemize}
 
 Remember: partial dependence plot, \(\xi_S\), is defined as
-\[\xi_k(x_S)= \int \hat m(x) p_{-S}(x_{-S})\mathrm dx_{-S}.\]
+
+\[
+\xi_k(x_S)= \int \hat m(x) p_{-S}(x_{-S})\mathrm dx_{-S}.
+\]
 
 \textbf{Corollary.} If \(\hat m^{\ast}\) satisfies the marginal identification, then
 
@@ -8091,9 +8240,11 @@ P(A)=\frac{\#A}{\#\Omega}
 \]
 
 \emph{(Binomialfordelingen)} Lad \(\Omega=\{0,1,2,...,n\}\) og \(\mathcal{A}=2^\Omega\). Givet et \(q\in[0,1]\) defineres binomialfordelingen ved
+
 \[
 p_k={n\choose k}q^k(1-q)^{n-k},\ k\in\Omega
 \]
+
 \emph{(Geometriske fordeling)} Lad \(\Omega=\mathbb{N}_0=\{0,1,2,...\}\) og \(\mathcal{A}=2^{\mathbb{N}_0}\). Givet et \(q\in[0,1]\) er den geometriske fordeling givet ved
 
 \[
@@ -8710,31 +8861,52 @@ Below we assume: Let \((\Omega,\mathcal{F},P)\) be a probability space and \(X,Y
 
 \textbf{Proposition B.29.} \textbf{(Monotinicity/Linearity of Conditional expectation)} \emph{The following holds:}
 
-\[X\le Y\ \Rightarrow\ E[X\ \vert\ \mathcal{G}]\le E[Y\ \vert\ \mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.6}\]
-\[E[\alpha X + \beta Y\ \vert\ \mathcal{G}]=\alpha E[X\ \vert\ \mathcal{G}]+ \beta E[Y\ \vert\ \mathcal{G}],\hspace{20pt}\forall \alpha,\beta\in\mathbb{R}.\tag{B.7}\]
+\[
+X\le Y\ \Rightarrow\ E[X\ \vert\ \mathcal{G}]\le E[Y\ \vert\ \mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.6}
+\]
+
+\[
+E[\alpha X + \beta Y\ \vert\ \mathcal{G}]=\alpha E[X\ \vert\ \mathcal{G}]+ \beta E[Y\ \vert\ \mathcal{G}],\hspace{20pt}\forall \alpha,\beta\in\mathbb{R}.\tag{B.7}
+\]
 
 \textbf{Proposition B.30. (Bjork)} \textbf{(Tower property)} \emph{Assume that it holds that \(\mathcal{H}\subseteq\mathcal{G}\subseteq\mathcal{F}\). Then the following hold:}
 
-\[E[E[X\vert \mathcal{G}]\vert\mathcal{H}]=E[X\vert \mathcal{H}],\tag{B.8}\]
-\[E[X]=E[E[X\vert \mathcal{G}]].\tag{B.9}\]
+\[
+E[E[X\vert \mathcal{G}]\vert\mathcal{H}]=E[X\vert \mathcal{H}],\tag{B.8}
+\]
+
+\[
+E[X]=E[E[X\vert \mathcal{G}]].\tag{B.9}
+\]
 
 \textbf{Proposition B.31. (Bjork)} \emph{Assume \(X\) is \(\mathcal{G}\) and that both \(X,Y\) and \(XY\) are in \(L^1\) (only assuming \(Y\) is \(\mathcal{F}\)-measurable), then}
 
-\[E[X\vert\mathcal{G}]=X,\hspace{20pt}P-\text{a.s.}\tag{B.11}\]
-\[E[XY\vert\mathcal{G}]=XE[Y\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.12}\]
+\[
+E[X\vert\mathcal{G}]=X,\hspace{20pt}P-\text{a.s.}\tag{B.11}
+\]
+
+\[
+E[XY\vert\mathcal{G}]=XE[Y\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\tag{B.12}
+\]
 
 \textbf{Proposition B.32. (Bjork)} \textbf{(Jensen inequality)} \emph{Let \(f:\mathbb{R}\to\mathbb{R}\) be a convex (measurable) function and assume \(f(X)\) is in \(L^1\). Then}
 
-\[f(E[X\vert\mathcal{G}])\le E[f(X)\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}\]
+\[
+f(E[X\vert\mathcal{G}])\le E[f(X)\vert\mathcal{G}],\hspace{20pt}P-\text{a.s.}
+\]
 
 \textbf{Proposition B.37. (Bjork)} \emph{Let \((\Omega,\mathcal{F},P)\) be a given probability space, let \(\mathcal{G}\) be a sub-sigma-algebra of \(\mathcal{F}\), and let \(X\) be a square integrable random variable.
 Consider the problem of minimizing}
 
-\[E\left[(X-Z)^2\right]\]
+\[
+E\left[(X-Z)^2\right]
+\]
 
 \emph{where \(Z\) is allowed to vary over the class of all square integrable \(\mathcal{G}\) measurable random variables. The optimal solution \(\hat{Z}\) is then given by.}
 
-\[\hat{Z}=E[X\vert\mathcal{G}].\]
+\[
+\hat{Z}=E[X\vert\mathcal{G}].
+\]
 
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 
@@ -8742,27 +8914,39 @@ Consider the problem of minimizing}
 
 Let \(X\in L^2(\Omega,\mathcal{F},P)\) be a random variable. Now consider an arbitrary \(Z\in L^2(\Omega,\mathcal{G},P)\). Recall that \(\mathcal{G}\subset \mathcal{F}\) and so \(X\) is also in \(Z\in L^2(\Omega,\mathcal{G},P)\), as it is bothe square integrable and \(\mathcal{G}\)-measurable. Then
 
-\[E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].\]
+\[
+E\left[Z\cdot(X-E[X\vert\mathcal{G}])\right]=E\left[Z\cdot X\right]-E\left[Z\cdot E[X\vert\mathcal{G}]\right].
+\]
 
 Then by using the law of total expectation and secondly that \(Z\) is \(\mathcal{G}\)-measurable we have that
 
-\[E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right].\]
+\[
+E\left[Z\cdot X\right]=E\left[E[Z\cdot X\vert\mathcal{G}]\right]=E\left[Z\cdot E[ X\vert\mathcal{G}]\right].
+\]
 
 Combining the two equations gives the desired result. Obviously, we have that
 
-\[X-Z=X-Z+E[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])+(E[X\vert\mathcal{G}]-Z).\]
+\[
+X-Z=X-Z+E[X\vert\mathcal{G}]-E[X\vert\mathcal{G}]=(X-E[X\vert\mathcal{G}])+(E[X\vert\mathcal{G}]-Z).
+\]
 
 Then squaring the terms gives
 
-\[(X-Z)^2=(X-E[X\vert\mathcal{G}])^2+(E[X\vert\mathcal{G}]-Z)^2+2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\]
+\[
+(X-Z)^2=(X-E[X\vert\mathcal{G}])^2+(E[X\vert\mathcal{G}]-Z)^2+2(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)
+\]
 
 Taking expectation on each side and using linearity of the expectation we have that
 
-\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right]+2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right].\]
+\[
+E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right]+2E\left[(X-E[X\vert\mathcal{G}])(E[X\vert\mathcal{G}]-Z)\right].
+\]
 
 We can now use that \(E[X\vert\mathcal{G}]-Z\) is \(\mathcal{G}\)-measurable with the above result on the last term.
 
-\[E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right].\]
+\[
+E[(X-Z)^2]=E\left[(X-E[X\vert\mathcal{G}])^2\right]+E\left[(E[X\vert\mathcal{G}]-Z)^2\right].
+\]
 
 Now since \(X\) is given the term \(E\left[(X-E[X\vert\mathcal{G}])^2\right]\) is simply a constant not depending on the choice og \(Z\). The optimal choice of \(Z\) is then \(E[X\vert\mathcal{G}]\) since this minimizes the second term. The statement is then proved.
 
@@ -8903,7 +9087,9 @@ Let \(X\) be a random variable with distribution function \(F(x)=P(X\le x)\) and
 
 \textbf{Definition. (Ex. FinKont)} \emph{The moment generating function or Laplace transform of \(X\) is}
 
-\[\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)\]
+\[
+\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)
+\]
 
 \emph{provided the expectation is finite for \(\vert\lambda\vert<h\) for some \(h>0\).}
 
@@ -8915,7 +9101,9 @@ There is also the following result of independence for Moment generating functio
 
 \textbf{Theorem. (Ex. FinKont)} \textbf{(Independence)} \emph{If}
 
-\[E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)\]
+\[
+E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)
+\]
 
 \emph{for \(\vert\lambda_i\vert<h\) for \(i=1,2\) for some \(h>0\), then \(X\) and \(Y\) are independent random variables.}
 
@@ -10153,11 +10341,15 @@ Filtrations\index{Filtration} is widely used in stochastic processes, as they al
 
 \textbf{Definition B.17. (Bjork)} \textbf{(Adapted process)}\index{Adapted process} \emph{Let \((\mathcal{F}_t)_{t\ge 0}\) be a filtration on the probability space \((\mathcal{F}_t)_{t\ge 0}\). Furthermore, let \((X_t)_{t\ge 0}\) be a stochastic process on the same space. We say that \(X_t\) is adapted to the filtration \(\mathbf{F}\) if}
 
-\[X_t\ \text{ is }\ \mathcal{F}_t-\text{measurable},\hspace{20pt}\forall t\ge 0.\]
+\[
+X_t\ \text{ is }\ \mathcal{F}_t-\text{measurable},\hspace{20pt}\forall t\ge 0.
+\]
 
 Obviously, we may introduce the \textbf{natural filtration}\index{natural filtration} \(\mathcal{F}^X_t\) given by the tragetory of the process \(X_t\):
 
-\[\mathcal{F}^X_t=\sigma(\{X_s,\ s\le t\}).\]
+\[
+\mathcal{F}^X_t=\sigma(\{X_s,\ s\le t\}).
+\]
 
 Indeed, \(X_t\) is adapted to this filtration.
 
@@ -10168,17 +10360,23 @@ Indeed, \(X_t\) is adapted to this filtration.
 
 \textbf{Definition.} \emph{Let \(M_t\) be a stochastic process defined on a background space \((\Omega,\mathcal{F},P)\). Let \((\mathcal{F}_t)_{t\ge 0}\) be a filtration. If \(M_t\) is adapted to the filtration \(\mathcal{F}_t\), \(E\vert M_t\vert <\infty\) and}
 
-\[E[M_t\vert \mathcal{F}_s]=M_s,\hspace{20pt}P-\text{a.s.}\]
+\[
+E[M_t\vert \mathcal{F}_s]=M_s,\hspace{20pt}P-\text{a.s.}
+\]
 
 \emph{holds for any \(t>s\) we say that \(M_t\) is a martingale\index{martingale} (\(\mathbf{F}\)-martingale). If the above has \(\le\) or \(\ge\) we say that \(M_t\) is either a \textbf{submartingale}\index{submartingale} or \textbf{supermartingale}\index{supermartingale} respectively.}
 
 Naturally, this defintions may easily be extended to discrete models and we have the trivial equality:
 
-\[E[M_t-M_s\ \vert\ \mathcal{F}_s]=0.\]
+\[
+E[M_t-M_s\ \vert\ \mathcal{F}_s]=0.
+\]
 
 Martingales is useful, when proofing probalistic statements as the posses tractable properties. A useful technique often include the construction of the martingale
 
-\[M_t=E[X\ \vert\ \mathcal{F}_t].\]
+\[
+M_t=E[X\ \vert\ \mathcal{F}_t].
+\]
 
 \hypertarget{stochastic-calculus}{%
 \chapter{Stochastic calculus}\label{stochastic-calculus}}
@@ -10258,25 +10456,17 @@ In the more general setting we may follow the following approach:
 \tightlist
 \item
   Approximate \(X\) with a sequence \(\{X^n\}_{n\in\mathbb{N}}\) of simple processes such that the following convergence criteria hold
-\end{enumerate}
-
-\[
-  \int_a^bE[(X_s^n-X_s)^2]\ ds\to 0,\ n\to\infty
-  \]
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
+  \[
+    \int_a^bE[(X_s^n-X_s)^2]\ ds\to 0,\ n\to\infty
+    \]
 \item
   For each \(n\) the integral \(\int_a^b X_s^n\ dW_s:=Z^n\) is well defined and it is possible to prove, using DCT, that a variable \(Z\) exists such that \(Z^n\to Z\) that is in \(L^2\).
 \item
   We now define the stochastic integral by the limit
+  \[
+    \int_a^b X_s\ dW_s=\lim_{n\to \infty}\int_a^b X_s^n\ dW_s.\tag{4.9}
+    \]
 \end{enumerate}
-
-\[
-  \int_a^b X_s\ dW_s=\lim_{n\to \infty}\int_a^b X_s^n\ dW_s.\tag{4.9}
-  \]
 
 Obviously the hardest step is finding the processes \(X^n\). This stochastic har some properties we will use.
 

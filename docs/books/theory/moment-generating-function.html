@@ -471,7 +471,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let <span class="math inline">\(X\)</span> be a random variable with distribution function <span class="math inline">\(F(x)=P(X\le x)\)</span> and <span class="math inline">\(Y\)</span> be a random variable with distribution function <span class="math inline">\(G(y)=P(Y\le y)\)</span>.</p>
 <blockquote class="def">
 <p><strong>Definition. (Ex. FinKont)</strong> <em>The moment generating function or Laplace transform of <span class="math inline">\(X\)</span> is</em></p>
-<p><span class="math display">\[\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)\]</span></p>
+<p><span class="math display">\[
+\psi_X(\lambda)=E\left[e^{\lambda X}\right]=\int_{-\infty}^\infty e^{\lambda x}dF(x)
+\]</span></p>
 <p><em>provided the expectation is finite for <span class="math inline">\(\vert\lambda\vert&lt;h\)</span> for some <span class="math inline">\(h&gt;0\)</span>.</em></p>
 </blockquote>
 <p>The MGF uniquely determine the distribution of a random variable, due to the following result.</p>
@@ -481,7 +483,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There is also the following result of independence for Moment generating functions.</p>
 <blockquote class="thm">
 <p><strong>Theorem. (Ex. FinKont)</strong> <strong>(Independence)</strong> <em>If</em></p>
-<p><span class="math display">\[E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)\]</span></p>
+<p><span class="math display">\[
+E\left[e^{\lambda_1X+\lambda_2Y}\right]=\psi_X(\lambda_1)\psi_Y(\lambda_2)
+\]</span></p>
 <p><em>for <span class="math inline">\(\vert\lambda_i\vert&lt;h\)</span> for <span class="math inline">\(i=1,2\)</span> for some <span class="math inline">\(h&gt;0\)</span>, then <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent random variables.</em></p>
 </blockquote>
 <div style="page-break-after: always;"></div>

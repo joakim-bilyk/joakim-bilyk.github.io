@@ -238,12 +238,12 @@ $(function() {
 \mathcal{F}_t=\mathcal{F}_t^W=\sigma(\{W_s\ \vert\ 0\le s\le t\}).
 \]</span></p>
 <p>Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed time.</p>
-<p>Consider the partial differential equation</p>
-<p><span class="math display">\[\begin{align*}
+<p>Consider the partial differential equation
+<span class="math display">\[\begin{align*}
 &amp;F_t(t,x)+\mu F_x(t,x)+\frac{1}{2}\sigma^2 F_{xx}(t,x)=0,\\
 &amp;F(T,x)=e^{\lambda x}
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(\mu\in\mathbb{R}\)</span>, <span class="math inline">\(\sigma&gt;0\)</span> and <span class="math inline">\(\lambda \in \mathbb{R}\)</span> are constants.</p>
+\end{align*}\]</span>
+where <span class="math inline">\(\mu\in\mathbb{R}\)</span>, <span class="math inline">\(\sigma&gt;0\)</span> and <span class="math inline">\(\lambda \in \mathbb{R}\)</span> are constants.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Find the solution of the partial differential equation.</li>
 </ol>
@@ -281,34 +281,34 @@ F(t,x)=e^{-r(T-t)}E_{t,x}[e^{\lambda X(T)}],
 <p><span class="math display">\[
 dX(t)=\mu\ ds+\sigma\ dW(s),
 \]</span></p>
-<p>where <span class="math inline">\(W\)</span> is a Brownian motion. The dynamics of <span class="math inline">\(Z(t)=e^{\lambda X(t)}=f(t,X(t))\)</span> for <span class="math inline">\(f(t,x)=e^{\lambda x}\)</span> is given by Ito’s formula:</p>
-<p><span class="math display">\[\begin{align*}
+<p>where <span class="math inline">\(W\)</span> is a Brownian motion. The dynamics of <span class="math inline">\(Z(t)=e^{\lambda X(t)}=f(t,X(t))\)</span> for <span class="math inline">\(f(t,x)=e^{\lambda x}\)</span> is given by Ito’s formula:
+<span class="math display">\[\begin{align*}
 dZ(t)&amp;=0\ dt+\lambda Z(t)\ dX(t)+\frac{1}{2}\lambda^2Z(t)\ (dX(t))^2\\
 &amp;=\lambda \mu Z(t)\ dt + \lambda \sigma Z(t)\ dW(t)+\frac{1}{2}\lambda^2\sigma^2\ dt\\
 &amp;=\left(\lambda\mu+\frac{1}{2}\lambda^2\mu^2\right)Z(t)\ dt + \lambda\sigma Z(t)\ dW(t).
-\end{align*}\]</span></p>
-<p>That is, <span class="math inline">\(Z\)</span> is a GBM. Under assumption <span class="math inline">\(X(t)=x\)</span> we therefore have</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+That is, <span class="math inline">\(Z\)</span> is a GBM. Under assumption <span class="math inline">\(X(t)=x\)</span> we therefore have
+<span class="math display">\[\begin{align*}
 Z(T)&amp;=Z(t)\exp\left\{\left(\lambda\mu+\frac{1}{2}\lambda^2\mu^2-\frac{1}{2}\lambda^2\mu^2\right)(T-t)+\lambda \sigma(W(T)-W(t))\right\}\\
 &amp;=e^{\lambda x}\exp\left\{\lambda\mu(T-t)+\lambda \sigma(W(T)-W(t))\right\}.
-\end{align*}\]</span></p>
-<p>Therefore the solution to the PDE is</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Therefore the solution to the PDE is
+<span class="math display">\[\begin{align*}
 F(t,x)&amp;=e^{-r(T-t)}E_{t,x}[e^{\lambda X(T)}]\\
 &amp;=E\left[e^{\lambda x}\exp\left\{\lambda\mu(T-t)+\lambda \sigma(W(T)-W(t))\right\}\right]\\
 &amp;=e^{\lambda x+\lambda\mu(T-t)}E\left[\exp\left\{\lambda \sigma(W(T)-W(t))\right\}\right]\\
 &amp;=e^{\lambda x+\lambda\mu(T-t)}e^{\frac{1}{2}(T-t)\lambda^2\sigma^2}\\
 &amp;=e^{\lambda x+\left(\lambda\mu+\frac{1}{2}\lambda^2\sigma^2\right)(T-t)}.
-\end{align*}\]</span></p>
-<p>As desired. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+As desired. <span class="math inline">\(\square\)</span></p>
 </details>
 
 <details>
 <summary>
 <strong>Solution (b).</strong>
 </summary>
-<p><em>(i)</em>: We start by setting <span class="math inline">\(Z(t)=X(t)+\sqrt{1+X^2(t)}\)</span> and see that <span class="math inline">\(Z\)</span> has dynamics from Ito’s formula</p>
-<p><span class="math display">\[\begin{align*}
+<p><em>(i)</em>: We start by setting <span class="math inline">\(Z(t)=X(t)+\sqrt{1+X^2(t)}\)</span> and see that <span class="math inline">\(Z\)</span> has dynamics from Ito’s formula
+<span class="math display">\[\begin{align*}
 dZ(t)&amp;=\left(1+X(t)\frac{1}{\sqrt{1+X^2(t)}}\right)\ dX(t)+\frac{1}{2}\left(\frac{\sqrt{1+X^2(t)}-X^2(t)\frac{1}{\sqrt{1+X^2(t)}}}{1+X^2(t)}\right)\ (dX(t))^2\\
 &amp;=\left(1+X(t)\frac{1}{\sqrt{1+X^2(t)}}\right)\left(\frac{1}{2}X(t)+\sqrt{1+X^2(t)}\right)\ dt + \left(1+X(t)\frac{1}{\sqrt{1+X^2(t)}}\right)\sqrt{1+X^2(t)}\ dW(t)\\
 &amp;+\frac{1}{2}\left(\sqrt{1+X^2(t)}-X^2(t)\frac{1}{\sqrt{1+X^2(t)}}\right)\ dt\\
@@ -316,14 +316,14 @@ dZ(t)&amp;=\left(1+X(t)\frac{1}{\sqrt{1+X^2(t)}}\right)\ dX(t)+\frac{1}{2}\left(
 &amp;+\frac{1}{2}\left(\sqrt{1+X^2(t)}-X^2(t)\frac{1}{\sqrt{1+X^2(t)}}\right)\ dt\\
 &amp;=\left(\frac{3}{2}X(t)+\frac{3}{2}\sqrt{1+X^2(t)}\right)\ dt + Z(t)\ dW(t)\\
 &amp;=\frac{3}{2}Z(t)\ dt+Z(t)\ dW(t).
-\end{align*}\]</span></p>
-<p>Hence we have <span class="math inline">\(Y(t)=\log(Z(t))\)</span> with dynamics</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Hence we have <span class="math inline">\(Y(t)=\log(Z(t))\)</span> with dynamics
+<span class="math display">\[\begin{align*}
 dY(t)&amp;=\frac{1}{Z(t)}\ dZ(t)-\frac{1}{2}\frac{1}{Z^2(t)}\ (dZ(t))^2\\
 &amp;=\frac{3}{2}\ dt+ dW(t)-\frac{1}{2}\ dt\\
 &amp;=dt+dW(t).
-\end{align*}\]</span></p>
-<p>as desired. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+as desired. <span class="math inline">\(\square\)</span></p>
 <p><em>(ii)</em>: From above we have that</p>
 <p><span class="math display">\[
 Y(t)=Y(0)+t+\int_0^tdW(s)=\log(X(0)+\sqrt{1+X^2(0)})+t+\int_0^tdW(s)=t+\int_0^t dW(s).
@@ -343,40 +343,40 @@ X(t)=\text{sinh}(Y(t))=\frac{1}{2}(e^{Y(t)}-e^{-Y(t)})=\frac{1}{2}(e^{t}e^{\int_
 <p><span class="math display">\[
 \frac{d}{dt}(\text{cos}^2(t))=2\text{cos}(t)\frac{d}{dt}(\text{cos}(t))=2\text{cos}(t)(-\text{sin}(t))=-2\text{cos}(t)\text{sin}(t)
 \]</span></p>
-<p>and</p>
-<p><span class="math display">\[\begin{align*}
+<p>and
+<span class="math display">\[\begin{align*}
 \frac{d^2}{dt^2}(\text{cos}^2(t))&amp;=-2\left[-\text{sin}^2(t)+\text{cos}^2(t)\right]=2(\text{sin}^2(t)-\text{cos}^2(t))\\
 &amp;=2(\text{sin}^2(t)-\text{cos}^2(t)+\text{cos}^2(t)-\text{cos}^2(t))\\
 &amp;=2(1-\text{cos}^2(t)-\text{cos}^2(t))\\
 &amp;=2-4\text{cos}^2(t).
-\end{align*}\]</span></p>
-<p>Therefore by Ito’s formula we have</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Therefore by Ito’s formula we have
+<span class="math display">\[\begin{align*}
 dX(t)&amp;=2X(t)\ dt\\
 dY(t)&amp;=-2\text{cos}(W(t))\text{sin}(W(t))\ dW(t)+\frac{1}{2}(2-4\text{cos}^2(t))\ (dW(t))^2\\
 &amp;=(1-2\text{cos}^2(t))\ dt-2\text{cos}(W(t))\text{sin}(W(t))\ dW(t)\\
 &amp;=-2\left(\text{cos}^2(t)-\frac{1}{2}\right)\ dt-2\text{cos}(W(t))\text{sin}(W(t))\ dW(t)\\
 &amp;=-2Y(t)\ dt-2\text{cos}(W(t))\text{sin}(W(t))\ dW(t).
-\end{align*}\]</span></p>
-<p>Then we have the dynamics of <span class="math inline">\(M\)</span> given by</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Then we have the dynamics of <span class="math inline">\(M\)</span> given by
+<span class="math display">\[\begin{align*}
 dM(t)&amp;=Y(t)\ dX(t)+X(t)\ dY(t)+\frac{1}{2}(dX(t))(dY(t))\\
 &amp;=2Y(t)X(t)\ dt-2X(t)Y(t)\ dt-2X(t)\text{cos}(W(t))\text{sin}(W(t))\ dW(t)\\
 &amp;=-2X(t)\text{cos}(W(t))\text{sin}(W(t))\ dW(t).
-\end{align*}\]</span></p>
-<p>Hence <span class="math inline">\(M\)</span> is a martingale per corollary 4.9. <span class="math inline">\(\square\)</span></p>
-<p><em>(ii)</em>: We have from the above that</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Hence <span class="math inline">\(M\)</span> is a martingale per corollary 4.9. <span class="math inline">\(\square\)</span></p>
+<p><em>(ii)</em>: We have from the above that
+<span class="math display">\[\begin{align*}
 M(T)&amp;=M(0)+\int_0^T-2X(t)\text{cos}(W(t))\text{sin}(W(t))\ dW(t)\\
 &amp;=\frac{1}{2}+\int_0^T-2e^{2t}\text{cos}(W(t))\text{sin}(W(t))\ dW(t)\\
 &amp;=e^{2T}\left(\text{cos}^2(W(T))-\frac{1}{2}\right).
-\end{align*}\]</span></p>
-<p>We can then rewrite as</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+We can then rewrite as
+<span class="math display">\[\begin{align*}
 \text{cos}^2(W(T))&amp;=e^{-2T}M(T)+\frac{1}{2}\\
 &amp;=\frac{1+e^{-2T}}{2}+\int_0^T-2e^{-2(T-t)}\text{cos}(W(t))\text{sin}(W(t))\ dW(t)
-\end{align*}\]</span></p>
-<p>hence we have <span class="math inline">\(z=\frac{1+e^{-2T}}{2}\)</span> and <span class="math inline">\(h(t)=-2e^{-2(T-t)}\text{cos}(W(t))\text{sin}(W(t))\)</span>. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+hence we have <span class="math inline">\(z=\frac{1+e^{-2T}}{2}\)</span> and <span class="math inline">\(h(t)=-2e^{-2(T-t)}\text{cos}(W(t))\text{sin}(W(t))\)</span>. <span class="math inline">\(\square\)</span></p>
 </details>
 <p></p>
 </div>
@@ -387,12 +387,12 @@ M(T)&amp;=M(0)+\int_0^T-2X(t)\text{cos}(W(t))\text{sin}(W(t))\ dW(t)\\
 <p><span class="math display">\[
 dB(t)=rB(t)\ dt,
 \]</span></p>
-<p>with <span class="math inline">\(B(0)=1\)</span> and <span class="math inline">\(r\in\mathbb{R}\)</span> is a constant interest rate. The <span class="math inline">\(P\)</span>-dynamics of <span class="math inline">\(S_1(t)\)</span> and <span class="math inline">\(S_2(t)\)</span> are given by</p>
-<p><span class="math display">\[\begin{align*}
+<p>with <span class="math inline">\(B(0)=1\)</span> and <span class="math inline">\(r\in\mathbb{R}\)</span> is a constant interest rate. The <span class="math inline">\(P\)</span>-dynamics of <span class="math inline">\(S_1(t)\)</span> and <span class="math inline">\(S_2(t)\)</span> are given by
+<span class="math display">\[\begin{align*}
 dS_1(t)&amp;=\mu_1S_1(t)\ dt+\sigma_1 S_1(t)\ dW_1(t),\\
 dS_1(t)&amp;=\mu_2S_2(t)\ dt+\sigma_2 S_2(t)\ dW_2(t),
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(\mu_1,\mu_2\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma_1,\sigma_2&gt;0\)</span> are constants. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed expiry date.</p>
+\end{align*}\]</span>
+where <span class="math inline">\(\mu_1,\mu_2\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma_1,\sigma_2&gt;0\)</span> are constants. Let <span class="math inline">\(T&gt;0\)</span> be a given and fixed expiry date.</p>
 <p>Let <span class="math inline">\(h(t)=(h_0(t),h_1(t),h_2(t))\)</span> denote a portfolio where <span class="math inline">\(h_0(t)\)</span> is the number of units of the bank account at time <span class="math inline">\(t\)</span>, <span class="math inline">\(h_1(t)\)</span> is the number of shares in stock <span class="math inline">\(S_1(t)\)</span> at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(h_2(t)\)</span> is the number of shares in stock <span class="math inline">\(S_2(t)\)</span> at time <span class="math inline">\(t.\)</span> Let <span class="math inline">\(V^h(t)\)</span> denote the associated value process.</p>
 <p>Consider the portfolio <span class="math inline">\(h(t)=(h_0(t),h_1(t),h_2(t))\)</span> given by</p>
 <p><span class="math display">\[
@@ -454,13 +454,13 @@ dS_3(t)=\mu_3 S_3(t)\ dt+\sigma_3 S_3(t)\ dW_2(t),
 <p><span class="math display">\[
 dV^h(t)=h_0(t)\ dB(t)+h_1(t)\ dS_1(t)+h_2(t)\ dS_2(t)=(*).
 \]</span></p>
-<p>We see by inserting <span class="math inline">\(h\)</span> and the dynamics of the price processes that</p>
-<p><span class="math display">\[\begin{align*}
+<p>We see by inserting <span class="math inline">\(h\)</span> and the dynamics of the price processes that
+<span class="math display">\[\begin{align*}
 (*)&amp;=\frac{S_2(t)-1}{B(t)}\ dB(t)+0\ dS_1(t)+\frac{1}{S_2(t)}\ dS_2(t)\\
 &amp;=(S_2(t)-1)r\ dt+\mu_2\ dt+\sigma_2\ dW_2(t)\\
 &amp;=\left(S_2(t)r-r+\mu_2\right)\ dt+\sigma_2 dW_2(t).
-\end{align*}\]</span></p>
-<p>We calculate the dynamics of the value process by seeing that</p>
+\end{align*}\]</span>
+We calculate the dynamics of the value process by seeing that</p>
 <p><span class="math display">\[
 V^h(t)=\frac{S_2(t)-1}{B(t)}B(t)+0S_1(t)+\frac{1}{S_2(t)}S_2(t)=S_2(t)-1+1=S_2(t).
 \]</span></p>
@@ -475,33 +475,33 @@ dV^h(t)=dS_2(t)\ne(*)
 <summary>
 <strong>Solution (b).</strong>
 </summary>
-<p>By assumption we have that <span class="math inline">\(h\)</span> is self-financing. That means per lemma 6.12 that</p>
-<p><span class="math display">\[\begin{align*}
+<p>By assumption we have that <span class="math inline">\(h\)</span> is self-financing. That means per lemma 6.12 that
+<span class="math display">\[\begin{align*}
 dV^h(t)&amp;=h_0(t)\ dB(t)+h_1(t)\ dS_1(t)+h_2(t)\ dS_2(t)\\
 &amp;=(1-u)\frac{1}{S_1(t)}V^h(t)\ dS_1(t)+u\frac{1}{S_2(t)}V^h(t)\ dS_2(t)\\
 &amp;=(1-u)V^h(t)\ (\mu_1 \ dt+\sigma_1\ dW_1(t))+uV^h(t)\ \ (\mu_2 \ dt+\sigma_2\ dW_2(t))\\
 &amp;=V^h(t)\left((1-u)\mu_1+u\mu_2\right)\ dt+V^h(t)\left((1-u)\sigma_1\ dW_1(t)+u\sigma_2\ dW_2(t)\right)
-\end{align*}\]</span></p>
-<p>Then we know that <span class="math inline">\(V^h\)</span> is the following solution</p>
-<p>Then we have by Ito’s formula that</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Then we know that <span class="math inline">\(V^h\)</span> is the following solution</p>
+<p>Then we have by Ito’s formula that
+<span class="math display">\[\begin{align*}
 d\left(\frac{S_1(t)}{V^h(t)}\right)&amp;=\frac{1}{V^h(t)}\ dS_1(t)-\frac{S_1(t)}{V^h(t)^2}\ dV^h(t)-\frac{1}{V^h(t)^2}(dS_1(t))(dV^h(t))+\frac{1}{2}2\frac{S_1(t)}{V^h(t)^3}\ (dV^h(t))^2\\
 &amp;=\mu_1\frac{S_1(t)}{V^h(t)}\ dt+\sigma_1 \frac{S_1(t)}{V^h(t)}\ dW_1(t)-\frac{S_1(t)}{V^h(t)}((1-u)\mu_1+u\mu_2)\ dt\\
 &amp;-\frac{S_1(t)}{V^h(t)}(1-u)\sigma_1\ dW_1(t)+\frac{S_1(t)}{V^h(t)}u\sigma_2\ dW_2(t)\\
 &amp;-\frac{S_1(t)}{V^h(t)}(1-u)\sigma_1^2\ dt+\frac{S_1(t)}{V^h(t)}(1-u)^2\sigma_1^2\ dt+\frac{S_1(t)}{V^h(t)}u^2\sigma_2^2\ dt
-\end{align*}\]</span></p>
-<p>As we need the process to have zero local drift i.e. zero <span class="math inline">\(dt\)</span>-term we thus HAVE the relevant equation:</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+As we need the process to have zero local drift i.e. zero <span class="math inline">\(dt\)</span>-term we thus HAVE the relevant equation:
+<span class="math display">\[\begin{align*}
 0&amp;=\frac{S_1(t)}{V^h(t)}\left\{\mu_1-(1-u)\mu_1-u\mu_2-(1-u)\sigma_1^2+(1-u)^2\sigma_1^2+u^2\sigma_2^2\right\}
-\end{align*}\]</span></p>
-<p>or equivalently</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+or equivalently
+<span class="math display">\[\begin{align*}
 0&amp;=\mu_1-(1-u)\mu_1-u\mu_2-(1-u)\sigma_1^2+(1-u)^2\sigma_1^2+u^2\sigma_2^2\\
 &amp;=\mu_1-\mu_1+u\mu_1-u\mu_2-\sigma_1^2+u\sigma_1^2+\sigma_1^2+u^2\sigma_1^2-2u\sigma_1^2+u^2\sigma_2^2\\
 &amp;=u\mu_1-u\mu_2-u\sigma_1^2+u^2\sigma_1^2+u^2\sigma_2^2\\
 &amp;=u(\mu_1-\mu_2-\sigma_1^2+u\sigma_1^2+u\sigma_2^2)
-\end{align*}\]</span></p>
-<p>hence</p>
+\end{align*}\]</span>
+hence</p>
 <p><span class="math display">\[
 u=\begin{cases}
 0,\\
@@ -534,16 +534,16 @@ u=\begin{cases}
 <summary>
 <strong>Solution (d).</strong>
 </summary>
-<p><em>(i)</em>: We have that the derivative must satisfy the PDE,</p>
-<p><span class="math display">\[\begin{align*}
+<p><em>(i)</em>: We have that the derivative must satisfy the PDE,
+<span class="math display">\[\begin{align*}
 rF(t,s_2)&amp;=F_t(t,s_2)+rs_2F_{s_2}(t,s_2)+\frac{1}{2}\sigma_2^2s_2^2F_{s_2s_2}(t,s_2)\\
 F(T,s_2)&amp;=\Phi(s_2)=(\sqrt{s_2}-K)^+.
-\end{align*}\]</span></p>
-<p><em>(ii)</em>: In the Black-Scholes we have that the price is given by the risk neutral valuation formula.</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+<em>(ii)</em>: In the Black-Scholes we have that the price is given by the risk neutral valuation formula.
+<span class="math display">\[\begin{align*}
 F(t,s_2)&amp;=e^{-r(T-t)}E^Q_{t,s_2}\left[\Phi(S_2(T))\right]=e^{-r(T-t)}E^Q_{t,s_2}\left[\left(\sqrt{S_2(T)}-K\right)^+\right].
-\end{align*}\]</span></p>
-<p>Under the measure <span class="math inline">\(Q\)</span> with initial condition <span class="math inline">\(S_2(t)=s_2\)</span> we have that <span class="math inline">\(S_2\)</span> is a GBM i.e.</p>
+\end{align*}\]</span>
+Under the measure <span class="math inline">\(Q\)</span> with initial condition <span class="math inline">\(S_2(t)=s_2\)</span> we have that <span class="math inline">\(S_2\)</span> is a GBM i.e.</p>
 <p><span class="math display">\[
 S_2(T)=s_2\exp\left\{\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)+\sigma_2(W_2^Q(T)-W_2^Q(t))\right\}
 \]</span></p>
@@ -551,58 +551,58 @@ S_2(T)=s_2\exp\left\{\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)+\sigma_2(W_2^Q(T)
 <p><span class="math display">\[
 \sqrt{S_2(T)}=\sqrt{s_2}\exp\left\{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)+\frac{1}{2}\sigma_2(W_2^Q(T)-W_2^Q(t))\right\}.
 \]</span></p>
-<p>We then have</p>
-<p><span class="math display">\[\begin{align*}
+<p>We then have
+<span class="math display">\[\begin{align*}
 F(t,s_2)&amp;=e^{-r(T-t)}E^Q\left[\left(\sqrt{s_2}\exp\left\{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)+\frac{1}{2}\sigma_2(W_2^Q(T)-W_2^Q(t))\right\}-K\right)^+\right]\\
 &amp;=e^{-r(T-t)}E^Q\left[\left(\sqrt{s_2}\exp\left\{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)+\frac{1}{2}\sigma_2(W_2^Q(T)-W_2^Q(t))\right\}-K\right)1_{\sqrt{S_2(T)}\ge K}\right]\\
 &amp;=e^{-r(T-t)}E^Q\left[\sqrt{s_2}\exp\left\{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)+\frac{1}{2}\sigma_2(W_2^Q(T)-W_2^Q(t))\right\}1_{\sqrt{S_2(T)}\ge K}\right]\\
 &amp;-e^{-r(T-t)}KE^Q\left[1_{\sqrt{S_2(T)}\ge K}\right]
-\end{align*}\]</span></p>
-<p>The event <span class="math inline">\((\sqrt{S_2(T)}\ge K)\)</span> is in terms of the increments of the <span class="math inline">\(Q\)</span>-Brownian motion given as</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+The event <span class="math inline">\((\sqrt{S_2(T)}\ge K)\)</span> is in terms of the increments of the <span class="math inline">\(Q\)</span>-Brownian motion given as
+<span class="math display">\[\begin{align*}
 \sqrt{s_2}\exp\left\{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)+\frac{1}{2}\sigma_2(W_2^Q(T)-W_2^Q(t))\right\}&amp;\ge K\\
 d_1(t,T):=\frac{1}{\sigma_2\sqrt{T-t}}\left(1\log(K)-\log(s_2)-\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)\right)&amp;\le \frac{1}{\sqrt{T-t}}\left(W_2^Q(T)-W_2^Q(t)\right)
-\end{align*}\]</span></p>
-<p>Then the above pricing function is given in terms of the above</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Then the above pricing function is given in terms of the above
+<span class="math display">\[\begin{align*}
 F(t,s_2)&amp;=e^{-r(T-t)}\sqrt{s_2}e^{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)}E^Q\left[\exp\left\{\frac{1}{2}\sigma_2(W_2^Q(T)-W_2^Q(t))\right\}1_{d_1(t,T)\le \frac{1}{\sqrt{T-t}}\left(W_2^Q(T)-W_2^Q(t)\right)}\right]\\
 &amp;-e^{-r(T-t)}KE^Q\left[1_{d_1(t,T)\le X}\right]\\
 &amp;=e^{-r(T-t)}\sqrt{s_2}e^{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)}E^Q\left[e^{\frac{1}{2}\sigma_2\sqrt{T-t}X}1_{d_1(t,T)\le X}\right]\\
 &amp;-e^{-r(T-t)X}KP\left(X\le d_1(t,T)\right),
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(X\sim\mathcal{N}(0,1)\)</span>. Recall from <em>“remark on Black-Scholes formula”</em> we have that</p>
+\end{align*}\]</span>
+where <span class="math inline">\(X\sim\mathcal{N}(0,1)\)</span>. Recall from <em>“remark on Black-Scholes formula”</em> we have that</p>
 <p><span class="math display">\[
 E^Q\left[e^{\frac{1}{2}\sigma_2\sqrt{T-t}X}1_{d_1(t,T)\le X}\right]=e^{\frac{1}{8}\sigma_2^2(T-t)}N\left[\frac{1}{2}\sigma_2-d_1(t,T)\right]
 \]</span></p>
-<p>where <span class="math inline">\(N\)</span> is the distribution of a standard normal random variabel. Hence we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>where <span class="math inline">\(N\)</span> is the distribution of a standard normal random variabel. Hence we have
+<span class="math display">\[\begin{align*}
 F(t,s_2)&amp;=e^{-r(T-t)}\sqrt{s_2}e^{\frac{1}{2}\left(r-\frac{1}{2}\sigma_2^2\right)(T-t)}e^{\frac{1}{8}\sigma_2^2(T-t)}N\left[\frac{1}{2}\sigma_2-d_1(t,T)\right]\\
 &amp;-e^{-r(T-t)X}KN\left[-d_1(t,T)\right]\\
 &amp;=\sqrt{s_2}e^{\left(-\frac{1}{2}r-\frac{1}{8}\sigma_2^2\right)(T-t)}N\left[\frac{1}{2}\sigma_2-d_1(t,T)\right]e^{-r(T-t)X}KN\left[-d_1(t,T)\right]
-\end{align*}\]</span></p>
-<p>The arbitrage free price og the derivative is then <span class="math inline">\(\Pi_t[Y]=f(t,S_2(t))\)</span>. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+The arbitrage free price og the derivative is then <span class="math inline">\(\Pi_t[Y]=f(t,S_2(t))\)</span>. <span class="math inline">\(\square\)</span></p>
 </details>
 
 <details>
 <summary>
 <strong>Solution (e).</strong>
 </summary>
-<p>We have using Fubini for conditional expectation</p>
-<p><span class="math display">\[\begin{align*}
+<p>We have using Fubini for conditional expectation
+<span class="math display">\[\begin{align*}
 E^Q_{t,s_1,s_2}\left[Z\right]&amp;=E^Q\left[\left.\int_{T_0}^T(S_1(t)-S_2(T_0))\ ds \ \right\vert\ S_1(t)=s_1,S_2(t)=s_2\right]\\
 &amp;=\int_{T_0}^TE^Q\left[\left.S_1(t)-S_2(T_0) \ \right\vert\ S_1(t)=s_1,S_2(t)=s_2\right]\ ds\\
 &amp;=\int_{T_0}^T s_1e^{\left(r-\frac{1}{2}\sigma_1^2\right)(s-t)} -s_2e^{\left(r-\frac{1}{2}\sigma^2\right)(T_0-t)} \ ds\\
 &amp;=s_1e^{-\left(r-\frac{1}{2}\sigma_1^2\right)t}\int_{T_0}^T e^{\left(r-\frac{1}{2}\sigma_1^2\right)s}\ ds-s_2(T-T_0)e^{\left(r-\frac{1}{2}\sigma^2\right)(T_0-t)}\\
 &amp;=s_1\frac{e^{-\left(r-\frac{1}{2}\sigma_1^2\right)t}}{r-\frac{1}{2}\sigma_1^2}\left( e^{\left(r-\frac{1}{2}\sigma_1^2\right)T}- e^{\left(r-\frac{1}{2}\sigma_1^2\right)T_0}\right)-s_2(T-T_0)e^{\left(r-\frac{1}{2}\sigma^2\right)(T_0-t)}\\
 &amp;=s_1\left(r-\frac{1}{2}\sigma_1^2\right)^{-1}\left( e^{\left(r-\frac{1}{2}\sigma_1^2\right)(T-t)}- e^{\left(r-\frac{1}{2}\sigma_1^2\right)(T_0-t)}\right)-s_2(T-T_0)e^{\left(r-\frac{1}{2}\sigma^2\right)(T_0-t)}.
-\end{align*}\]</span></p>
-<p>Then using the risk neutral valuation formula we have</p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+Then using the risk neutral valuation formula we have
+<span class="math display">\[\begin{align*}
 \Pi_t[Z]&amp;=F(t,S_1(t),S_2(t))\\
 &amp;=e^{-r(T-t)}S_1(t)\left(r-\frac{1}{2}\sigma_1^2\right)^{-1}\left( e^{\left(r-\frac{1}{2}\sigma_1^2\right)(T-t)}- e^{\left(r-\frac{1}{2}\sigma_1^2\right)(T_0-t)}\right)\\
 &amp;-e^{-r(T-t)}S_2(t)(T-T_0)e^{\left(r-\frac{1}{2}\sigma^2\right)(T_0-t)}.
-\end{align*}\]</span></p>
-<p>As desired. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+As desired. <span class="math inline">\(\square\)</span></p>
 </details>
 
 <details>

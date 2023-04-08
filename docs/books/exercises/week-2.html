@@ -297,13 +297,13 @@ dZ_t=\left(0+0+\frac{1}{2}g_t\cdot 0\right)\ dt + g_t\cdot 1\ dW_t=g_t\ dW_t,
 <p><span class="math display">\[
 \frac{\partial f}{\partial t}(t,x)=0,\hspace{10pt}\frac{\partial f}{\partial x}(t,x) =\alpha e^{\alpha x},\hspace{10pt}\frac{\partial f}{\partial x^2}(t,x) =\alpha^2 e^{\alpha x}.
 \]</span></p>
-<p>Then the dynamics of <span class="math inline">\(Z_t\)</span> is as follows</p>
-<p><span class="math display">\[\begin{align*}
+<p>Then the dynamics of <span class="math inline">\(Z_t\)</span> is as follows
+<span class="math display">\[\begin{align*}
 dZ_t&amp;=\left(0+0+\frac{1}{2}1^2\alpha^2e^{\alpha X_t}\right)\ dt + 1\alpha e^{\alpha X_t}\ dW_t\\
 &amp;=\frac{\alpha^2}{2}e^{\alpha X_t}\ dt +\alpha e^{\alpha X_t}\ dW_t\\
 &amp;=\frac{\alpha^2}{2}Z_t\ dt +\alpha Z_t\ dW_t.
-\end{align*}\]</span></p>
-<p>As desired. <span class="math inline">\(\square\)</span>.</p>
+\end{align*}\]</span>
+As desired. <span class="math inline">\(\square\)</span>.</p>
 </details>
 <details>
 <summary>
@@ -313,13 +313,13 @@ dZ_t&amp;=\left(0+0+\frac{1}{2}1^2\alpha^2e^{\alpha X_t}\right)\ dt + 1\alpha e^
 <p><span class="math display">\[
 \frac{\partial f}{\partial t}(t,x)=0,\hspace{10pt}\frac{\partial f}{\partial x}(t,x) =\alpha e^{\alpha x},\hspace{10pt}\frac{\partial f}{\partial x^2}(t,x) =\alpha^2 e^{\alpha x}.
 \]</span></p>
-<p>We may now derive the dynamics of <span class="math inline">\(Z_t\)</span>:</p>
-<p><span class="math display">\[\begin{align*}
+<p>We may now derive the dynamics of <span class="math inline">\(Z_t\)</span>:
+<span class="math display">\[\begin{align*}
 dZ_t&amp;=\left(0+\mu \alpha e^{\alpha X_t}+\frac{1}{2} \sigma^2\alpha^2 e^{\alpha X_t}\right)\ dt+\sigma \alpha e^{\alpha X_t}\ dW_t\\
 &amp;=\left(\mu+\frac{1}{2}\sigma^2\alpha\right)\alpha e^{\alpha X_t}\ dt+\sigma \alpha e^{\alpha X_t}\ dW_t\\
 &amp;=\left(\mu+\frac{1}{2}\sigma^2\alpha\right)\alpha Z_t\ dt+\sigma \alpha Z_t\ dW_t.
-\end{align*}\]</span></p>
-<p>As desired. <span class="math inline">\(\square\)</span>.</p>
+\end{align*}\]</span>
+As desired. <span class="math inline">\(\square\)</span>.</p>
 </details>
 <details>
 <summary>
@@ -329,13 +329,13 @@ dZ_t&amp;=\left(0+\mu \alpha e^{\alpha X_t}+\frac{1}{2} \sigma^2\alpha^2 e^{\alp
 <p><span class="math display">\[
 \frac{\partial f}{\partial t}(t,x)=0,\hspace{10pt}\frac{\partial f}{\partial x}(t,x) =2x,\hspace{10pt}\frac{\partial f}{\partial x^2}(t,x) =2.
 \]</span></p>
-<p>Given this we have the dynamics of <span class="math inline">\(Z_t\)</span> as follows</p>
-<p><span class="math display">\[\begin{align*}
+<p>Given this we have the dynamics of <span class="math inline">\(Z_t\)</span> as follows
+<span class="math display">\[\begin{align*}
 dZ_t&amp;=\left(0 + \alpha X_t2X_t+\frac{1}{2}(\sigma X_t)^22\right)\ dt+\sigma X_t 2 X_t\ dW_t\\
 &amp;=\left(2\alpha +\sigma^2\right) X_t^2\ dt + 2\sigma X_t^2\ dW_t\\
 &amp;=\left(2\alpha +\sigma^2\right) Z_t\ dt + 2\sigma Z_t\ dW_t.
-\end{align*}\]</span></p>
-<p>As desired. <span class="math inline">\(\square\)</span>.</p>
+\end{align*}\]</span>
+As desired. <span class="math inline">\(\square\)</span>.</p>
 </details>
 <p><strong>Exercise 2</strong> <em>(Bjork 4.2)</em> Compute the stochastic differential for <span class="math inline">\(Z\)</span> when <span class="math inline">\(Z_t=(X_t)^{-1}\)</span> and <span class="math inline">\(X\)</span> has the stochastic differential</p>
 <p><span class="math display">\[
@@ -350,13 +350,13 @@ dX_t=\alpha X_t\ dt + \sigma X_t\ dW_t.
 <p><span class="math display">\[
 \frac{\partial f}{\partial t}(t,x)=0,\hspace{10pt}\frac{\partial f}{\partial x}(t,x) =-\frac{1}{x^2},\hspace{10pt}\frac{\partial f}{\partial x^2}(t,x) =\frac{2}{x^3}.
 \]</span></p>
-<p>Then we by Ito’s formula we have</p>
-<p><span class="math display">\[\begin{align*}
+<p>Then we by Ito’s formula we have
+<span class="math display">\[\begin{align*}
 dZ_t&amp;=\left(0-\alpha X_t\frac{1}{X_t^2}+\frac{1}{2} \sigma^2 X_t^2\frac{2}{X_t^3}\right)\ dt-\sigma X_t\frac{1}{X_t^2}\ dW_t\\
 &amp;=\left(-\alpha \frac{1}{X_t}+ \sigma^2 \frac{1}{X_t}\right)\ dt-\sigma \frac{1}{X_t}\ dW_t\\
 &amp;=(\sigma^2-\alpha)Z_t\ dt-\sigma Z_t\ dW_t.
-\end{align*}\]</span></p>
-<p>We also notice that</p>
+\end{align*}\]</span>
+We also notice that</p>
 <p><span class="math display">\[
 Z_t=\frac{1}{X_t}\Rightarrow dZ_t=d\left(\frac{1}{X_t}\right)=-\left(\frac{1}{X_t}\right)^2\ dX_t=-Z_t^2(\alpha X_t\ dt+\sigma X_t\ dW_t)
 \]</span></p>
@@ -458,14 +458,14 @@ X_t=x_0+\int_0^t\mu_s\ ds+\int_0^t\sigma_s\ dW_s.
 <p><span class="math display">\[
 X_t-X_s=\int_s^t\mu_u\ du+\int_s^t\sigma_u\ dW_u.
 \]</span></p>
-<p>We then have</p>
-<p><span class="math display">\[\begin{align*}
+<p>We then have
+<span class="math display">\[\begin{align*}
 E[X_t\ \vert\ \mathcal{F}_s]-X_s&amp;=E[X_t-X_s\ \vert\ \mathcal{F}_s]\\
 &amp;=E\left[\left.\int_s^t\mu_u\ du+\int_s^t\sigma_u\ dW_u\ \right\vert\ \mathcal{F}_s\right]\\
 &amp;=E\left[\left.\int_s^t\mu_u\ du\ \right\vert\ \mathcal{F}_s\right]+E\left[\left.\int_s^t\sigma_u\ dW_u\ \right\vert\ \mathcal{F}_s\right]\\
 &amp;=E\left[\left.\int_s^t\mu_u\ du\ \right\vert\ \mathcal{F}_s\right]\ge 0.
-\end{align*}\]</span></p>
-<p>Then adding <span class="math inline">\(X_s\)</span> to the above inequality yields the result. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+Then adding <span class="math inline">\(X_s\)</span> to the above inequality yields the result. <span class="math inline">\(\square\)</span></p>
 </details>
 <p><strong>Exercise 6</strong> <em>(Bjork 4.7)</em> The objective of this exercise is to give an argument for the formal identity</p>
 <p><span class="math display">\[
@@ -497,13 +497,13 @@ E[(Q_n-0)^2]=E[Q_n^2]\to 0,
 Var[Q_n]=E[Q_n^2]-E[Q_n]^2,
 \]</span></p>
 <p>hence if <span class="math inline">\(Q_n\)</span> has mean 0, then showing convergence in <span class="math inline">\(L^2\)</span> is equivalent to showing variance going to 0. Let us start by showing the mean is 0.</p>
-<p>We have that</p>
-<p><span class="math display">\[\begin{align*}
+<p>We have that
+<span class="math display">\[\begin{align*}
 Q_n&amp;=\sum_{k=1}^n \Delta W_1(t_k)\cdot \Delta W_2(t_k)\\
 &amp;=\sum_{k=1}^n(W_1(t_k)-W_1(t_{k-1}))\cdot (W_2(t_k)-W_2(t_{k-1}))\\
 &amp;\stackrel{\mathcal{D}}{=}\sum_{k=1}^nXY,
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(X,Y\sim\mathcal{N}(0,t_k-t_{k-1})=\mathcal{N}(0,1/n)\)</span> and independent random variable. This is justified since the increments of the Brownian motion has mean 0 and variance equal to the increment size. Now this implies, that we need to show that <span class="math inline">\(E[XY]=0\)</span> and that <span class="math inline">\(Var[XY]\)</span> is sufficiently small in terms of <span class="math inline">\(n\)</span> such that it is summable. We see that</p>
+\end{align*}\]</span>
+where <span class="math inline">\(X,Y\sim\mathcal{N}(0,t_k-t_{k-1})=\mathcal{N}(0,1/n)\)</span> and independent random variable. This is justified since the increments of the Brownian motion has mean 0 and variance equal to the increment size. Now this implies, that we need to show that <span class="math inline">\(E[XY]=0\)</span> and that <span class="math inline">\(Var[XY]\)</span> is sufficiently small in terms of <span class="math inline">\(n\)</span> such that it is summable. We see that</p>
 <p><span class="math display">\[
 E[XY]=E[X]E[Y]=0^2=0.
 \]</span></p>
@@ -511,20 +511,20 @@ E[XY]=E[X]E[Y]=0^2=0.
 <p><span class="math display">\[
 E[Q_n]=\sum_{k=1}^nE[XY]=0.
 \]</span></p>
-<p>We know from basic properties of variance that</p>
-<p><span class="math display">\[\begin{align*}
+<p>We know from basic properties of variance that
+<span class="math display">\[\begin{align*}
 Var(Q_n)&amp;=\sum_{k=1}^n Var(XY)=\sum_{k=1}^n E[(XY)^2]\\
 &amp;=\sum_{k=1}^n\frac{1}{n^2}=\frac{1}{n^2}n\\
 &amp;=\frac{1}{n}\to0,\ n\to\infty.
-\end{align*}\]</span></p>
-<p>And so the result follows. <span class="math inline">\(\square\)</span></p>
+\end{align*}\]</span>
+And so the result follows. <span class="math inline">\(\square\)</span></p>
 </details>
-<p><strong>Exercise 7</strong> <em>(Bjork 4.8)</em> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be given as the solutions to the following system of stochastic differential equations.</p>
-<p><span class="math display">\[\begin{align*}
+<p><strong>Exercise 7</strong> <em>(Bjork 4.8)</em> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be given as the solutions to the following system of stochastic differential equations.
+<span class="math display">\[\begin{align*}
 &amp;dX_t=\alpha X_t\ dt-Y_t\ dW_t,\ &amp;X_0=x_0,\\
 &amp;dY_t=\alpha Y_t\ dt + X_t\ dW_t,\ &amp;Y_0=y_0.
-\end{align*}\]</span></p>
-<p>Note that the initial values <span class="math inline">\(x_0\)</span> and <span class="math inline">\(y_0\)</span> are deterministic constants.</p>
+\end{align*}\]</span>
+Note that the initial values <span class="math inline">\(x_0\)</span> and <span class="math inline">\(y_0\)</span> are deterministic constants.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Prove that the process <span class="math inline">\(R\)</span> defined by <span class="math inline">\(R_t=X_t^2+Y_t^2\)</span> is deterministic.</li>
 <li>Compute <span class="math inline">\(E[X_t]\)</span>.</li>
@@ -549,14 +549,14 @@ d(X_t^2)=\left(\alpha X_t2X_t+Y_t^22\right)\ dt-Y_t2X_t\ dW_t=2(\alpha X_t^2+Y_t
 <p><span class="math display">\[
 d(Y_t^2)=\left(\alpha Y_t2Y_t+X_t^22\right)\ dt+X_t2Y_t\ dW_t=2(\alpha Y_t^2+X_t^2)\ dt+2X_tY_t\ dW_t.
 \]</span></p>
-<p>Combining we get the dynamics</p>
-<p><span class="math display">\[\begin{align*}
+<p>Combining we get the dynamics
+<span class="math display">\[\begin{align*}
 dR_t&amp;=2(\alpha X_t^2+Y_t^2)\ dt-2X_tY_t\ dW_t\\
 &amp;+2(\alpha Y_t^2+X_t^2)\ dt+2X_tY_t\ dW_t\\
 &amp;=(2\alpha +1)(X_t^2 + Y_t^2)\ dt\\
 &amp;=(2\alpha +1)R_t\ dt
-\end{align*}\]</span></p>
-<p>Hence <span class="math inline">\(R_t\)</span> has deterministic derivative and therefore a deterministic process. In fact, the solution to above is</p>
+\end{align*}\]</span>
+Hence <span class="math inline">\(R_t\)</span> has deterministic derivative and therefore a deterministic process. In fact, the solution to above is</p>
 <p><span class="math display">\[
 R_t=R_0\exp\left\{(2\alpha + 1)t\right\}=(x_0^2+y_0^2)e^{(2\alpha + 1)t},
 \]</span></p>

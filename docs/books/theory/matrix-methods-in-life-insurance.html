@@ -532,11 +532,6 @@ m_{ij}^{(k)}(s,t)=\mathbb E\left.\Big[1_{X(t)=j}U^0(s,t)^k\right\vert X(s)=i\Big
 \end{pmatrix}
 \]</span></p>
 </blockquote>
-<details>
-<summary>
-<strong>Proof.</strong>
-</summary>
-</details>
 </div>
 <div id="transform-of-rewards-and-higher-order-moments" class="section level3 hasAnchor" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> Transform of rewards and higher order moments<a href="matrix-methods-in-life-insurance.html#transform-of-rewards-and-higher-order-moments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -587,17 +582,12 @@ F_{ij}(x; s,t)=\mathbb P(X(t)=j,U^0(s,t)\le x\ \vert\ X(s)=i)
 \hat{\mathbf F}(\theta; s,t)=\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du).
 \]</span>
 </blockquote>
-<details>
-<summary>
-<strong>Proof.</strong>
-</summary>
-</details>
-<p>By the above theorem we see that
-<span class="math display">\[
+<p>By the above theorem we see that</p>
+<p><span class="math display">\[
 \mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=i\right] =e_i^\top\hat{\mathbf F}(\theta; s,t)e = e_i^\top\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e,
-\]</span>
-in particular
-<span class="math display">\[
+\]</span></p>
+<p>in particular</p>
+<p><span class="math display">\[
 \prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e=
 \begin{pmatrix}
 \mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=1\right]\\
@@ -605,9 +595,9 @@ in particular
 \vdots\\
 \mathbb E\left[\left.e^{\theta U^0(s,t)}\ \right\vert\ X(s)=p\right]
 \end{pmatrix}.
-\]</span>
-Furthermore, we have from the property above that
-<span class="math display">\[
+\]</span></p>
+<p>Furthermore, we have from the property above that</p>
+<p><span class="math display">\[
 \left.\frac{\partial^k}{\partial \theta^k}\left(e_i^\top\prod_s^t(\mathbf I + \mathbf A(\theta; u)\ du)e\right)\right\vert_{\theta = 0}=m^{(k)}_{i}(s,t).
 \]</span></p>
 <blockquote class="lem">
@@ -665,8 +655,8 @@ Furthermore, we have from the property above that
 \prod_s^t(\mathbf I + \mathbf F^{(k)}(x)\ dx)=\mathbf H^{(k)}(s,t).
 \]</span></p>
 </blockquote>
-<p>For ease of notation we define the Toeplitz matrix as
-<span class="math display">\[
+<p>For ease of notation we define the Toeplitz matrix as</p>
+<p><span class="math display">\[
 \mathcal T(\mathbf A_1,\mathbf A_2,...,\mathbf A_n)=
 \begin{bmatrix}
 \mathbf A_1 &amp; \mathbf A_2 &amp; \mathbf A_3 &amp; \cdots &amp; \mathbf A_{n-1} &amp; \mathbf A_n\\
@@ -675,37 +665,37 @@ Furthermore, we have from the property above that
 \mathbf 0 &amp; \mathbf 0 &amp; \mathbf 0 &amp; \cdots &amp; \mathbf A_1 &amp; \mathbf A_2\\
 \mathbf 0 &amp; \mathbf 0 &amp; \mathbf 0 &amp; \cdots &amp; \mathbf 0 &amp; \mathbf A_1
 \end{bmatrix}.
-\]</span>
-And hence we could write:
-<span class="math display">\[
+\]</span></p>
+<p>And hence we could write:</p>
+<p><span class="math display">\[
 \mathbf F^{(k)}(x)=\mathcal T(\mathbf \Lambda(x), \mathbf R(x) , \mathbf C^{(2)}_r(x) , ... , \mathbf C^{(k-1)}_r(x), \mathbf C^{(k)}_r(x)),
-\]</span>
-and
-<span class="math display">\[
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
 \mathbf H^{(k)}(x)=\mathcal T(\mathbf P(s,t) , \mathbf m_r^{(1)}(s,t) , \mathbf m_r^{(2)}(s,t), ...,\mathbf m_r^{(k-1)}(s,t) , \mathbf m_r^{(k)}(s,t)).
 \]</span></p>
 </div>
 <div id="markovian-interest-rates" class="section level3 hasAnchor" number="4.5.4">
 <h3><span class="header-section-number">4.5.4</span> Markovian interest rates<a href="matrix-methods-in-life-insurance.html#markovian-interest-rates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We now study how we may calculate the moments of the reserves in the case with rates. To this we start by assuming the Markov-jump interest model in sync with the Markov-jump process for the policy holder. Obviously, we in practice would assume that these two processes are independent, but for generality we will not insist on this for now. We therefore define the process
-<span class="math display">\[
+<p>We now study how we may calculate the moments of the reserves in the case with rates. To this we start by assuming the Markov-jump interest model in sync with the Markov-jump process for the policy holder. Obviously, we in practice would assume that these two processes are independent, but for generality we will not insist on this for now. We therefore define the process</p>
+<p><span class="math display">\[
 \mathbf r(t)=\{r_i(t)\}_{i\in E_r}
-\]</span>
-and the two Markov jump processes
-<span class="math display">\[
+\]</span></p>
+<p>and the two Markov jump processes</p>
+<p><span class="math display">\[
 X_r=\{X_r(t)\}_{t\ge 0}\in E_r=\{1,...,p\},\qquad X_b(t)=\{X_b(t)\}_{t\ge 0}\in E_b=\{1,...,q\},
-\]</span>
-and naturally we at time <span class="math inline">\(t\)</span> have the interest rate <span class="math inline">\(r_{X_r(t)}(t)\)</span> and <span class="math inline">\(X_v(t)\)</span> governs the state of the policy holder. Using this we define the combined Markov jump process as
-<span class="math display">\[
+\]</span></p>
+<p>and naturally we at time <span class="math inline">\(t\)</span> have the interest rate <span class="math inline">\(r_{X_r(t)}(t)\)</span> and <span class="math inline">\(X_v(t)\)</span> governs the state of the policy holder. Using this we define the combined Markov jump process as</p>
+<p><span class="math display">\[
 X(t)=\{X_r(t),X_b(t)\}_{t\ge 0}\in E_r\times E_b.
-\]</span>
-The processes <span class="math inline">\(X_b\)</span> and <span class="math inline">\(X_r\)</span> may or may not be independent, and the payment processes likewise may or may not be independent of <span class="math inline">\(X_r\)</span>. In the independent case the processes <span class="math inline">\(X_b\)</span> and <span class="math inline">\(X_r\)</span> are defined on each their state–space, and the common state–space will be the product set of the two. If the processes are sharing states, with the possibility of having simultaneous jumps, then we obtain dependency of the processes. Such a case could, e.g. be a rise in the interest rate causing an increased intensity of jumping to surrender or free–policy states.</p>
-<p>In the case where we have independence we have that the transition intensities of <span class="math inline">\(X\)</span> is given by
-<span class="math display">\[
+\]</span></p>
+<p>The processes <span class="math inline">\(X_b\)</span> and <span class="math inline">\(X_r\)</span> may or may not be independent, and the payment processes likewise may or may not be independent of <span class="math inline">\(X_r\)</span>. In the independent case the processes <span class="math inline">\(X_b\)</span> and <span class="math inline">\(X_r\)</span> are defined on each their state–space, and the common state–space will be the product set of the two. If the processes are sharing states, with the possibility of having simultaneous jumps, then we obtain dependency of the processes. Such a case could, e.g. be a rise in the interest rate causing an increased intensity of jumping to surrender or free–policy states.</p>
+<p>In the case where we have independence we have that the transition intensities of <span class="math inline">\(X\)</span> is given by</p>
+<p><span class="math display">\[
 \mathbf \Lambda(t)=\mathbf \Lambda_b(t)\oplus \mathbf\Lambda_r(t)=\mathbf \Lambda_b(t)\otimes \mathbf I_p+\mathbf I_p \otimes \mathbf \Lambda_r(t)=\{\lambda_{ij}\}_{i,j=1,...,pq},
-\]</span>
-where <span class="math inline">\(\oplus\)</span> is the Kronecker sum and <span class="math inline">\(\otimes\)</span> is the Kronecker product given by
-<span class="math display">\[
+\]</span></p>
+<p>where <span class="math inline">\(\oplus\)</span> is the Kronecker sum and <span class="math inline">\(\otimes\)</span> is the Kronecker product given by</p>
+<p><span class="math display">\[
 \mathbf A\otimes \mathbf B=\{a_{ij}\mathbf B\}=\begin{bmatrix}
 a_{1,1}\mathbf B &amp; \cdots &amp; a_{1,n}\mathbf B\\
 \vdots &amp; \ddots &amp; \vdots\\
@@ -715,29 +705,29 @@ a_{n,1}\mathbf B &amp; \cdots &amp; a_{n,n}\mathbf B
 </div>
 <div id="reserves" class="section level3 hasAnchor" number="4.5.5">
 <h3><span class="header-section-number">4.5.5</span> Reserves<a href="matrix-methods-in-life-insurance.html#reserves" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-We now consider the valuation of the payment process <span class="math inline">\(B\)</span>. Introduce the matrix of partial state–wise prospective reserves,
+<p>We now consider the valuation of the payment process <span class="math inline">\(B\)</span>. Introduce the matrix of partial state–wise prospective reserves,
 <span class="math display">\[\begin{align*}
 \mathbf V(s,t)&amp;=\{V_{ij}(s,t)\}_{i,j\in E_b},\\
 V_{ij}(s,t)&amp;=\mathbb E\left[\left.1\{X(t)=j\}\int_s^te^{-\int_s^xr_{X(u)}(u)\ du}\ dB(x) \ \right\vert\ X(s)=i\right].
 \end{align*}\]</span>
-From the Markov-jump representation we recall that we defines <span class="math inline">\(d_{ij}(s,t)\)</span> by
-<span class="math display">\[
+From the Markov-jump representation we recall that we defines <span class="math inline">\(d_{ij}(s,t)\)</span> by</p>
+<p><span class="math display">\[
 d_{ij}(s,t)=\mathbb E\left[\left.1\{X(t)=j\}\exp\left\{-\int_s^tr_{X(u)}(u)\ du\right\} \ \right\vert\ X(s)=i\right],
-\]</span>
-and that the matrix <span class="math inline">\(\mathbf D(s,t)=\{d_{ij}(s,t)\}\)</span> has representation
-<span class="math display">\[
+\]</span></p>
+<p>and that the matrix <span class="math inline">\(\mathbf D(s,t)=\{d_{ij}(s,t)\}\)</span> has representation</p>
+<p><span class="math display">\[
 \mathbf D(s,t)=\prod_s^t\Big(\mathbf I+[\mathbf \Lambda(u)-\mathbf\Delta (r(u))]\ du\Big).
-\]</span>
-Using this we have the theorem.
+\]</span></p>
+<p>Using this we have the theorem.</p>
 <blockquote class="thm">
-<strong>Theorem 5.10. (Bladt)</strong> <em>The matrix of partial state-wise prospective reserves <span class="math inline">\(\mathbf V(s,t)\)</span> has the following integral representation</em>
+<p><strong>Theorem 5.10. (Bladt)</strong> <em>The matrix of partial state-wise prospective reserves <span class="math inline">\(\mathbf V(s,t)\)</span> has the following integral representation</em></p>
 <span class="math display">\[
 \mathbf V(s,t)=\int_s^t\mathbf D(s,x)\mathbf R(x)\mathbf P(x,t)\ dx.
 \]</span>
 </blockquote>
-Using Van loans formula we can avoid the integration and calculate the product integral from below.
+<p>Using Van loans formula we can avoid the integration and calculate the product integral from below.</p>
 <blockquote class="prop">
-<strong>Corollary 5.11. (Bladt)</strong> <em>The matrix of partial state-wise prospective reserves <span class="math inline">\(\mathbf V(s,t)\)</span> has the following product integral representation</em>
+<p><strong>Corollary 5.11. (Bladt)</strong> <em>The matrix of partial state-wise prospective reserves <span class="math inline">\(\mathbf V(s,t)\)</span> has the following product integral representation</em></p>
 <span class="math display">\[
 \prod_s^t\left(\mathbf I+
 \begin{pmatrix}
@@ -750,36 +740,35 @@ Using Van loans formula we can avoid the integration and calculate the product i
 \end{pmatrix}.
 \]</span>
 </blockquote>
-Finally, we state and prove Thiele’s differential equations for partial reserves with stochastic interest
-rates.
+<p>Finally, we state and prove Thiele’s differential equations for partial reserves with stochastic interest rates.</p>
 <blockquote class="thm">
-<strong>Theorem 5.12. (Bladt)</strong> <em>The state-wise reserves satisfies the differential equations</em>
-<span class="math display">\[
+<p><strong>Theorem 5.12. (Bladt)</strong> <em>The state-wise reserves satisfies the differential equations</em></p>
+<p><span class="math display">\[
 \frac{\partial}{\partial s}\mathbf V(s,t)=-[\mathbf \Lambda(s) - \mathbf\Delta(r(s))]\mathbf V(s,t) - \mathbf R(s)\mathbf P(s,t)
-\]</span>
-<em>where <span class="math inline">\(\mathbf V(t,t)=0\)</span>. For the conventional state-wise prospective reserves <span class="math inline">\(\mathbf V^{Th}(t)=\mathbf V(t,T)\mathbf e\)</span>, this has the form</em>
-<span class="math display">\[
+\]</span></p>
+<p><em>where <span class="math inline">\(\mathbf V(t,t)=0\)</span>. For the conventional state-wise prospective reserves <span class="math inline">\(\mathbf V^{Th}(t)=\mathbf V(t,T)\mathbf e\)</span>, this has the form</em></p>
+<p><span class="math display">\[
 \frac{\partial}{\partial s}\mathbf V^{Th}(t)=-[\mathbf \Lambda(t) - \mathbf\Delta(r(t)]\mathbf V^{Th}(t) - \mathbf R(t)\mathbf e,
-\]</span>
-where <span class="math inline">\(\mathbf V^{Th}(T)=\mathbf 0\)</span>.
+\]</span></p>
+<p><em>where <span class="math inline">\(\mathbf V^{Th}(T)=\mathbf 0\)</span>.</em></p>
 </blockquote>
 </div>
 <div id="higher-order-moments" class="section level3 hasAnchor" number="4.5.6">
 <h3><span class="header-section-number">4.5.6</span> Higher order moments<a href="matrix-methods-in-life-insurance.html#higher-order-moments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-Consider the matrix of partial state-wise higher order moments of future payments, given by, for <span class="math inline">\(k\in\mathbb N\)</span>,
+<p>Consider the matrix of partial state-wise higher order moments of future payments, given by, for <span class="math inline">\(k\in\mathbb N\)</span>,
 <span class="math display">\[\begin{align*}
 \mathbf V^{(k)}(t,T)&amp;=\Big\{V_{ij}^{(k)}(t,T)\Big\}_{i,j\in E}\\
 V_{ij}^{(k)}(t,T)&amp;=\mathbb E\left[\left.1\{X(T)=j\}\left(\int_s^te^{-\int_s^xr_{X(u)}(u)\ du}\ dB(x)\right)^k \ \right\vert\ X(s)=i\right],
 \end{align*}\]</span>
-and introduce what we shall term the <em>reduced</em> partial state-wise higher order moments:
-<span class="math display">\[
+and introduce what we shall term the <em>reduced</em> partial state-wise higher order moments:</p>
+<p><span class="math display">\[
 \mathbf V_r^{(k)}(t,T)=\frac{\mathbf V^{(k)}(t,T)}{k!}
-\]</span>
-and denoting
-<span class="math display">\[
+\]</span></p>
+<p>and denoting</p>
+<p><span class="math display">\[
 \mathbf D^{(m)}(s,t)=\prod_s^t\Big(\mathbf I + [\mathbf\Lambda(u)-m\mathbf\Delta(r(u))]\ du\Big),\qquad m\in\mathbb N,
-\]</span>
-we then obtain the following version of Hattendorff’s theorem for partial reserves with stochastic interest rate.
+\]</span></p>
+<p>we then obtain the following version of Hattendorff’s theorem for partial reserves with stochastic interest rate.</p>
 <blockquote class="thm">
 <strong>Theorem 5.13. (Bladt)</strong> <em>The matrix of reduced partial state-wise higher order moments satisfies the integral equation, for <span class="math inline">\(k\in\mathbb N_0\)</span>,</em>
 <span class="math display">\[\begin{align*}
@@ -787,8 +776,8 @@ we then obtain the following version of Hattendorff’s theorem for partial rese
 &amp;=\int_t^T\mathbf D^{(k)}(t,x)\mathbf R(x)\mathbf V^{(k-1)}_r(x,T)\ dx+\sum_{m=2}^k\int_t^T\mathbf D^{(k)}(t,x)\mathbf C^{(m)}_r(x)\mathbf V^{(k-m)}_r(x,T)\ dx.
 \end{align*}\]</span>
 </blockquote>
-Using Van loan we can define the following matrix
-<span class="math display">\[
+<p>Using Van loan we can define the following matrix</p>
+<p><span class="math display">\[
 \mathbf F_U^{(k)}(x)=
 \begin{bmatrix}
 \mathbf \Lambda(x)-k\mathbf \Delta(r(x)) &amp; \mathbf R(x) &amp; \mathbf C^{(2)}_r(x) &amp; \cdots &amp; \mathbf C_r^{(k-1)}(x) &amp; \mathbf C_r^{(k)}(x)\\
@@ -797,9 +786,9 @@ Using Van loan we can define the following matrix
 \mathbf 0 &amp; \mathbf 0 &amp; \mathbf 0 &amp; \cdots &amp; \mathbf \Lambda(x)-\mathbf \Delta(r(x)) &amp; \mathbf R(x)\\
 \mathbf 0 &amp; \mathbf 0 &amp; \mathbf 0 &amp; \cdots &amp; \mathbf 0 &amp; \mathbf \Lambda(x)
 \end{bmatrix},
-\]</span>
-then we get the usefull product integral
-<span class="math display">\[
+\]</span></p>
+<p>then we get the usefull product integral</p>
+<p><span class="math display">\[
 \prod_t^T\Big(\mathbf I + \mathbf F_U^{(k)}(x)\ dx\Big)=
 \begin{bmatrix}
 * &amp; * &amp; * &amp; * &amp; \cdots &amp;* &amp; \mathbf V_r^{(k)}(t)\\
@@ -810,28 +799,28 @@ then we get the usefull product integral
 * &amp; * &amp; * &amp; * &amp; \cdots &amp;* &amp; \mathbf V(t)\\
 * &amp; * &amp; * &amp; * &amp; \cdots &amp;* &amp; \mathbf P(t,T)
 \end{bmatrix}.
-\]</span>
-Then by differentiating we obtain the classical differential equations below.
+\]</span></p>
+<p>Then by differentiating we obtain the classical differential equations below.</p>
 <blockquote class="thm">
-<strong>Theorem 5.14. (Bladt)</strong> <em>The matrix of reduced partial state-wise higher order moments satisfies the system of differential equations, for <span class="math inline">\(k\in \mathbb N_0\)</span>,</em>
-<span class="math display">\[
+<p><strong>Theorem 5.14. (Bladt)</strong> <em>The matrix of reduced partial state-wise higher order moments satisfies the system of differential equations, for <span class="math inline">\(k\in \mathbb N_0\)</span>,</em></p>
+<p><span class="math display">\[
 \frac{\partial}{\partial t}\mathbf V_r^{(k)}(t,T)=\Big(k\mathbf\Delta(r(t)) - \mathbf \Lambda(t)\Big)\mathbf V_r^{(k)}(t,T)-\mathbf R(t)\mathbf V_r^{(k-1)}(t,T)-\sum_{i=2}^k\mathbf C_r^{(i)}(t)\mathbf V_r^{(k-i)}(t,T),
-\]</span>
+\]</span></p>
 <em>with terminal condition <span class="math inline">\(\mathbf V_r^{(k)}(T,T)=1_{(k=0)}\mathbf I\)</span>.</em>
 </blockquote>
 </div>
 <div id="equivalence-premium" class="section level3 hasAnchor" number="4.5.7">
 <h3><span class="header-section-number">4.5.7</span> Equivalence premium<a href="matrix-methods-in-life-insurance.html#equivalence-premium" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We assume that a policy has payments determined and fixed and that we want to adjust one or more payments such that <span class="math inline">\(V^{Th}\)</span> satisfies the equivalence principle i.e. <span class="math inline">\(V_{X(0)}^{Th}(0)=0\)</span>. To this define <span class="math inline">\(\mathbf R(t)=\mathbf R(t;\theta)\)</span> for some payment <span class="math inline">\(\theta\)</span>. Notice that <span class="math inline">\(\theta\)</span> is rather general and may be thought of as either a single transition payment or payment rate. This in particular gives the mapping <span class="math inline">\(\theta \mapsto \mathbf V(t;\theta)\)</span> given by
-<span class="math display">\[
+<p>We assume that a policy has payments determined and fixed and that we want to adjust one or more payments such that <span class="math inline">\(V^{Th}\)</span> satisfies the equivalence principle i.e. <span class="math inline">\(V_{X(0)}^{Th}(0)=0\)</span>. To this define <span class="math inline">\(\mathbf R(t)=\mathbf R(t;\theta)\)</span> for some payment <span class="math inline">\(\theta\)</span>. Notice that <span class="math inline">\(\theta\)</span> is rather general and may be thought of as either a single transition payment or payment rate. This in particular gives the mapping <span class="math inline">\(\theta \mapsto \mathbf V(t;\theta)\)</span> given by</p>
+<p><span class="math display">\[
 \mathbf V(t;\theta) = \int_t^T\prod_t^u\Big(\mathbf I +[\mathbf\Lambda(s)-\mathbf\Delta(r(s))]\ ds\Big)\mathbf R(u;\theta)\prod_u^T\Big(\mathbf I +\mathbf \Lambda(s)\ ds\Big)\ du,
-\]</span>
-hence if <span class="math inline">\(\mathbf R(t;\theta)\)</span> is continuously differentiable and <span class="math inline">\(\mathbf \Lambda\)</span> and <span class="math inline">\(\mathbf r\)</span> are continuous we have
-<span class="math display">\[
+\]</span></p>
+<p>hence if <span class="math inline">\(\mathbf R(t;\theta)\)</span> is continuously differentiable and <span class="math inline">\(\mathbf \Lambda\)</span> and <span class="math inline">\(\mathbf r\)</span> are continuous we have</p>
+<p><span class="math display">\[
 \frac{\partial}{\partial \theta}\mathbf V(t;\theta) = \int_t^T\prod_t^u\Big(\mathbf I +[\mathbf\Lambda(s)-\mathbf\Delta(r(s))]\ ds\Big)\frac{\partial}{\partial \theta}\mathbf R(u;\theta)\prod_u^T\Big(\mathbf I +\mathbf \Lambda(s)\ ds\Big)\ du.
-\]</span>
-and then by Van loan formula
-<span class="math display">\[
+\]</span></p>
+<p>and then by Van loan formula</p>
+<p><span class="math display">\[
 \prod_t^T\left(\mathbf I+
 \begin{pmatrix}
 \mathbf \Lambda(u)-\mathbf \Delta(r(u)) &amp; \frac{\partial}{\partial \theta}\mathbf R(u;\theta)\\
@@ -842,17 +831,17 @@ and then by Van loan formula
 \mathbf D(t,T) &amp; \frac{\partial}{\partial \theta}\mathbf V(t;\theta)\\
 \mathbf 0 &amp; \mathbf P(t,T)
 \end{pmatrix}.
-\]</span>
-Using this framework we can make establish the pricing corollary below.</p>
+\]</span></p>
+<p>Using this framework we can make establish the pricing corollary below.</p>
 <blockquote class="prop">
-<strong>Corollary.</strong> <em>(Equivalence premium) Assume that <span class="math inline">\(\mathbf R(t)=\mathbf R(t;\theta)\)</span> for <span class="math inline">\(\theta\in\Theta\)</span>. Let <span class="math inline">\(\tilde\theta\)</span> b the equivalence premium i.e. <span class="math inline">\(\tilde \theta\)</span> solves <span class="math inline">\(V^{Th}_{X(0)}(0;\tilde\theta)=0\)</span>, then the sequence <span class="math inline">\(\{\theta_n\}_{n\in \mathbb N_0}\)</span> defined by</em>
-<span class="math display">\[
+<p><strong>Corollary.</strong> <em>(Equivalence premium) Assume that <span class="math inline">\(\mathbf R(t)=\mathbf R(t;\theta)\)</span> for <span class="math inline">\(\theta\in\Theta\)</span>. Let <span class="math inline">\(\tilde\theta\)</span> b the equivalence premium i.e. <span class="math inline">\(\tilde \theta\)</span> solves <span class="math inline">\(V^{Th}_{X(0)}(0;\tilde\theta)=0\)</span>, then the sequence <span class="math inline">\(\{\theta_n\}_{n\in \mathbb N_0}\)</span> defined by</em></p>
+<p><span class="math display">\[
 \theta_0\in\Theta,\qquad \theta_{n+1}=\theta_{n}-\frac{\mathbf e_{X(0)}^\top\mathbf V(0;\theta_n)\mathbf e}{\mathbf e_{X(0)}^\top\mathbf V_\theta(0;\theta_n)\mathbf e},
-\]</span>
-<em>converges to <span class="math inline">\(\tilde\theta\)</span>. In the above <span class="math inline">\(\mathbf V_\theta(0;\theta)\)</span> denote the first derivative in <span class="math inline">\(\theta\)</span>. In case <span class="math inline">\(V^{Th}_{X(0)}(0;\tilde\theta)\)</span> is linear in <span class="math inline">\(\theta\)</span> then the above converges for <span class="math inline">\(n=1\)</span> and</em>
-<span class="math display">\[
+\]</span></p>
+<p><em>converges to <span class="math inline">\(\tilde\theta\)</span>. In the above <span class="math inline">\(\mathbf V_\theta(0;\theta)\)</span> denote the first derivative in <span class="math inline">\(\theta\)</span>. In case <span class="math inline">\(V^{Th}_{X(0)}(0;\tilde\theta)\)</span> is linear in <span class="math inline">\(\theta\)</span> then the above converges for <span class="math inline">\(n=1\)</span> and</em></p>
+<p><span class="math display">\[
 \tilde\theta = -\frac{\mathbf e_{X(0)}^\top\mathbf V(0;0)\mathbf e}{\mathbf e_{X(0)}^\top\mathbf V_\theta(0;0)\mathbf e}.
-\]</span>
+\]</span></p>
 </blockquote>
 </div>
 </div>
