@@ -248,7 +248,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6.6" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-cash-dividends"><i class="fa fa-check"></i><b>4.6.6</b> The Pure Case of Cash Dividends</a></li>
 <li class="chapter" data-level="4.6.7" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#bonus-payments-and-market-reserve"><i class="fa fa-check"></i><b>4.6.7</b> Bonus Payments and Market Reserve</a></li>
 <li class="chapter" data-level="4.6.8" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-bonus-payments"><i class="fa fa-check"></i><b>4.6.8</b> The Pure Case of Bonus Payments</a></li>
-<li class="chapter" data-level="4.6.9" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#comparison-of-products"><i class="fa fa-check"></i><b>4.6.9</b> Comparison of Products</a></li>
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="special-studies-in-life-insurance.html"><a href="special-studies-in-life-insurance.html"><i class="fa fa-check"></i><b>4.7</b> Special Studies in Life Insurance</a>
 <ul>
@@ -1053,21 +1052,21 @@ dX(t)&amp;=r(t)X(t)\ dt + \sigma\pi(t,X(t)) X(t)\ dW^\mathbb Q(t)\\
 \end{align*}\]</span>
 Then if we set <span class="math inline">\(A=D-C\)</span>, <span class="math inline">\(\varrho=0\)</span> and <span class="math inline">\(\chi = X\)</span> then we obtain the with-profit surplus. This in particular gives us the following proposition for free.
 <blockquote class="prop">
-<strong>Proposition 5.1. (Asmussen)</strong> <em>Assuming that <span class="math inline">\(V^j(t,x)\)</span> is sufficiently differentiable, the following set of PDE’s is fulfilled:</em>
+<p><strong>Proposition 5.1. (Asmussen)</strong> <em>Assuming that <span class="math inline">\(V^j(t,x)\)</span> is sufficiently differentiable, the following set of PDE’s is fulfilled:</em>
 <span class="math display">\[\begin{align*}
 V_t^j(t,y)&amp;=rV^j(t,y)-b^j(t,y)-\delta^j(t,y)-\sum_{k:k\ne j}\lambda_{jk}(t)R^{jk}(t,y)-\mathcal D_y V^j(t,y),\\
 V^t(t-,y)&amp;=\Delta B^j(t,y)+\Delta D^j(t,y)+V^j(t,y-\Delta D^j(t,y)),\\
 V^j(T,y)&amp;=0,
 \end{align*}\]</span>
-<em>where <span class="math inline">\(\mathcal D_y\)</span> is the operator</em>
-<span class="math display">\[
+<em>where <span class="math inline">\(\mathcal D_y\)</span> is the operator</em></p>
+<p><span class="math display">\[
 \mathcal D_yV^j(t,y)=V_y^j(t,y)\left(ry+c^j(t,y)-\delta^j(t,y)\right)+\frac{1}{2}V^j_{yy}(t,y)\pi^2(t,y)\sigma^2y^2
-\]</span>
-<em>and</em>
-<span class="math display">\[
+\]</span></p>
+<p><em>and</em></p>
+<p><span class="math display">\[
 R^{jk}(t,y)=b^{jk}(t)+V^k(t,y)-V^j(t,y).
-\]</span>
-<em>Conversely, if there exist a set of functions <span class="math inline">\(V^j(t,y)\)</span> such that the above holds, then <span class="math inline">\(V^{Z(t)}(t,Y(t))\)</span> is the reserved defined as</em>
+\]</span></p>
+<p><em>Conversely, if there exist a set of functions <span class="math inline">\(V^j(t,y)\)</span> such that the above holds, then <span class="math inline">\(V^{Z(t)}(t,Y(t))\)</span> is the reserved defined as</em></p>
 <span class="math display">\[
 V^{Z(t)}(t,Y(t))=\mathbb E^{\mathbb P\otimes\mathbb Q}\left[\left. \int_t^Te^{-\int_t^u r(v)\ dv}\ d(B+D)(u)\ \right\vert\ Z(t),Y(t)\right].
 \]</span>
@@ -1130,12 +1129,164 @@ V_D^j(t,y)=V_C^j(t)+y.
 </div>
 <div id="bonus-payments-and-market-reserve" class="section level3 hasAnchor" number="4.6.7">
 <h3><span class="header-section-number">4.6.7</span> Bonus Payments and Market Reserve<a href="financial-mathematics-in-life-insurance.html#bonus-payments-and-market-reserve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We consider a contract where we decompose the payment stream <span class="math inline">\(B\)</span> into <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span> where <span class="math inline">\(B_1\)</span> is increasing (premiums) and <span class="math inline">\(B_2\)</span> is decreasing (benefits). We define <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span> as usual</p>
+<p><span class="math display">\[
+dB_i(t)=b_i^{Z(t)}(t)\ dt + \Delta B_i^{Z(t)}+\sum_{k:k\ne Z(t-)}b_i^{Z(t-)k}(t)dN^k(t),
+\]</span></p>
+<p>for <span class="math inline">\(i=1,2\)</span>. The payments are deterministic and determined under the first order basis <span class="math inline">\((r^*,\lambda^*)\)</span> under the equivalence principle:</p>
+<p><span class="math display">\[
+V^{Z(0)*}_1(0-)+V_2^{Z(0)*}(0-)=0,
+\]</span></p>
+<p>with <span class="math inline">\(V_i^{j*}\)</span> refering to the technical reserve for the payment stream <span class="math inline">\(B_i\)</span>. The dividends is split into a cash payment <span class="math inline">\(D_1\)</span> and a dividend payment used to buy a unit of the payment stream <span class="math inline">\(B_2\)</span>. That is we decompose <span class="math inline">\(D=D_1+D_2\)</span>. Where we assume that we have infitisimal payments in <span class="math inline">\(D_2\)</span> and the rest in <span class="math inline">\(D_1\)</span>, that is</p>
+<p><span class="math display">\[
+dD(t)=\delta_1^{Z(t)}(t)\ dt+\Delta D_1^{Z(t)}(t)+ \delta_2^{Z(t)}(t)\ dt+\sum_{k:k\ne Z(t-)}\delta^{Z(t-)k}(t)\ dN^k(t)
+\]</span></p>
+<p>We know that one unit of future payments <span class="math inline">\(B_2\)</span> cost at time <span class="math inline">\(t\)</span> <span class="math inline">\(V_2^{Z(t)*}(t)\)</span> and so if we assume that we have accumulate an <span class="math inline">\(1-Q(t)\)</span> additional <span class="math inline">\(B_2\)</span> payments at time <span class="math inline">\(t\)</span>. In pratice we will have that <span class="math inline">\(Q(0-)=1\)</span> and increasing in time. We must have that</p>
+<p><span class="math display">\[
+dD_2(t)=V^{Z(t)*}_2(t)dQ(t)
+\]</span></p>
+<p>and so</p>
+<p><span class="math display">\[
+dQ(t)=\frac{\delta_2^{Z(t)}(t)}{V_2^{Z(t)*}(t)}\ dt,\quad Q(0-)=1.
+\]</span></p>
+<p>In total the insured receive the payment stream</p>
+<p><span class="math display">\[
+dB(t)=dB_1(t)+Q(t-)dB_2(t)
+\]</span></p>
+<p>and the cash dividends <span class="math inline">\(dD_1(t)\)</span>. Using this setup we can determine the technical reserve with the <span class="math inline">\(Q(t)\)</span> units of <span class="math inline">\(B_2\)</span> as</p>
+<p><span class="math display">\[
+X^{Z(t)}(t)=V_1^{Z(t)*}(t)+Q(t)V_2^{Z(t)*}(t)
+\]</span>
+hence we also have</p>
+<p><span class="math display">\[
+Q(t)=\frac{X^{Z(t)}(t)-V_1^{Z(t)*}(t)}{V_2^{Z(t)*}(t)}.
+\]</span></p>
+<p>Returning to the payment stream we have that
+<span class="math display">\[\begin{align*}
+dB^j(t,x)&amp;=dB_1^j(t)+Q(t-,x)\ dB_2^j(t)\\
+&amp;=dB_1^j(t)+\frac{x-V_1^{Z(t)*}(t-)}{V_2^{Z(t)*}(t-)}\ dB_2^j(t)\\
+&amp;=\Big(b_1^j(t)+b_2^j(t,x)\Big)\ dt+\Delta B_1^j(t)+\Delta B^j_2(t,x)\\
+&amp;+\sum_{k:k\ne j}\Big(b_1^{jk}(t)+b_2^{jk}(t,x)\Big)\ dN^k(t)\\
+&amp;=dB^{j}(t,x)+\sum_{k:k\ne j}b^{jk}(t,x)\ dN^k(t)
+\end{align*}\]</span>
+Recall that by construction we have <span class="math inline">\(V_i^{j*}(T-)=\Delta B_i^j(T)\)</span> hence
+<span class="math display">\[\begin{align*}
+\Delta B^j(T,x)&amp;=\Delta B_1^j(T)+\frac{x-V_1^{Z(t)*}(T-)}{V_2^{Z(t)*}(T-)}\Delta B^j_2(T)\\
+&amp;=\Delta B_1^j(T)+\frac{x-\Delta B_1^j(T)}{\Delta B_2^j(T)}\Delta B^j_2(T)\\
+&amp;=x
+\end{align*}\]</span>
+that is the reserve is payed out at termination. We can from Thiele derive the dynamics of <span class="math inline">\(X\)</span> by
+<span class="math display">\[\begin{align*}
+dX(t)&amp;=d\Big(V_1^{Z(t)}(t)\Big)+Q(t)\ d\Big(V_2^{Z(t)}(t)\Big)+V_2^{Z(t)}(t)\ d\Big(Q(t)\Big)\\
+&amp;=V_2^{Z(t)}(t)\ d\Big(Q(t)\Big)+r^*\Big(V_1^{Z(t)}(t)+Q(t)V_2^{Z(t)}(t)\Big)\ dt\\
+&amp;-dB^{Z(t)}_1(t)-Q(t)dB^{Z(t)}_2(t)\\
+&amp;-\sum_{k:k\ne Z(t-)}\lambda^{Z(t-)k}(t)\left(b^{Z(t-)k}_1(t)+Q(t)b^{Z(t-)k}_2(t)\right)\ dt\\
+&amp;-\sum_{k:k\ne Z(t-)}\lambda^{Z(t-)k}(t)\left(V^{k}_1(t)+Q(t)V^{k}_2(t)-V^{Z(t-)}_1(t)-Q(t)V^{Z(t-)}_2(t)\right)\ dt\\
+&amp;+\sum_{k:k\ne Z(t-)}\left(V^{k}_1(t)+Q(t)V^{k}_2(t)-V^{Z(t-)}_1(t)-Q(t)V^{Z(t-)}_2(t)\right)\ dN^k(t)
+\end{align*}\]</span>
+If we define <span class="math inline">\(\chi^{Z(t-)k}(t,X(t-))=V^{k}_1(t)+Q(t)V^{k}_2(t)\)</span> and use the dynamics of the accumulator <span class="math inline">\(Q\)</span> we have
+<span class="math display">\[\begin{align*}
+dX(t)&amp;=V_2^{Z(t)}(t)\frac{\delta_2^{Z(t)}(t)}{V_2^{Z(t)*}(t)}\ dt+r^*X(t)\ dt\\
+&amp;-dB^{Z(t)}(t,X(t))\\
+&amp;-\sum_{k:k\ne Z(t)}\lambda^{Z(t)k}(t)\left(b^{Z(t)k}_1(t,X(t))+\chi^{Z(t)k}(t,X(t))-X(t)\right)\ dt\\
+&amp;+\sum_{k:k\ne Z(t-)}\left(\chi^{Z(t-)k}(t,X(t-))-X(t-)\right)\ dN^k(t)\\
+&amp;=r^*X(t)\ dt+\delta_2^{Z(t)}(t)\ dt-dB^{Z(t)}(t,X(t))\\
+&amp;-\sum_{k:k\ne Z(t)}\lambda^{Z(t)k}(t)R^{Z(t)k*}(t,X(t))\ dt\\
+&amp;+\sum_{k:k\ne Z(t-)}\left(\chi^{Z(t-)k}(t,X(t-))-X(t-)\right)\ dN^k(t)
+\end{align*}\]</span>
+Where we recall that <span class="math inline">\(dD_2(t)=\delta_2^{Z(t)}(t)\ dt\)</span>. We also used that <span class="math inline">\(Q\)</span> is continuous.</p>
+<p>If we use a decomposition of the assets <span class="math inline">\(Y_0(t)=Y(t)+X(t)\)</span> with <span class="math inline">\(Y_0\)</span> defined as</p>
+<p><span class="math display">\[
+Y_0(t)=-\int_0^t\frac{G(t)}{G(u)}d(B+D_1)(u)
+\]</span></p>
+<p>hence the surplus <span class="math inline">\(Y\)</span> has dynamics</p>
+<p><span class="math display">\[
+dY(t)=dY_0(t)-dX(t).
+\]</span></p>
+<p>If we as usual assume that an amount <span class="math inline">\(q(t)=\pi(t,X(t-))Y(t)/Y_0(t)\)</span> is invested in the risky asset we see that <span class="math inline">\(G\)</span> has dynamics</p>
+<p><span class="math display">\[
+dG(t)=rG(t)\ dt + \sigma q(t) G(t)\ dW^{\mathbb Q}(t)
+\]</span></p>
+<p>giving that the dynamics of <span class="math inline">\(Y\)</span> is
+<span class="math display">\[\begin{align*}
+dY(t)&amp;=d\left(G(t)\int_0^t\frac{1}{G(s)}d(-B-D_1)(s)\right)-dX(t)\\
+&amp;=\left(\int_0^t\frac{1}{G(s)}d(-B-D_1)(s)\right)dG(t)+G(t)\frac{1}{G(t)}d(-B-D_1)(t)-dX(t)\\
+&amp;=\frac{Y(t)+X(t)}{G(t)}dG(t)+d(-B-D_1)(t)-dX(t)
+\end{align*}\]</span>
+writing out gives
+<span class="math display">\[\begin{align*}
+dY(t)&amp;=r(Y(t)+X(t))\ dt + \sigma \pi(t,X(t-))\frac{Y(t)}{Y(t)+X(t)} (Y(t)+X(t))\ dW^{\mathbb Q}(t)\\
+&amp;-d(B+D_1)(t)-r^*X(t)\ dt-\delta_2^{Z(t)}(t)\ dt+dB^{Z(t)}(t,X(t))\\
+&amp;+\sum_{k:k\ne Z(t)}\lambda^{Z(t)k}(t)R^{Z(t)k*}(t,X(t))\ dt\\
+&amp;-\sum_{k:k\ne Z(t-)}\left(\chi^{Z(t-)k}(t,X(t-))-X(t-)\right)\ dN^k(t)\\
+&amp;=rY(t)\ dt+\sigma \pi(t,X(t-))Y(t)\ dW^{\mathbb Q}(t)-d(D_1+D_2)(t)\\
+&amp;+(r-r^*)X(t)\ dt\\
+&amp;+\sum_{k:k\ne Z(t)}\left(\lambda^{Z(t)k*}(t)-\lambda^{Z(t)k}(t)\right)R^{Z(t-)k*}(t,X(t-))\ dt\\
+&amp;-\sum_{k:k\ne Z(t-)}R^{Z(t-)k*}(t,X(t-))\ dM^k(t)
+\end{align*}\]</span>
+If we throw away the martingale term <span class="math inline">\(M^k\)</span>. We may define the contributions as</p>
+<p><span class="math display">\[
+c^{Z(t)}(t)=(r-r^*)X(t) +\sum_{k:k\ne Z(t)}\left(\lambda^{Z(t)k*}(t)-\lambda^{Z(t)k}(t)\right)R^{Z(t)k*}(t,X(t))
+\]</span></p>
+<p>with <span class="math inline">\(dC(t)=c^{Z(t)}(t)\ dt\)</span>. Then the dynamics of <span class="math inline">\(Y\)</span> boils down to</p>
+<p><span class="math display">\[
+dY(t)=rY(t)\ dt+\sigma \pi(t,X(t-))Y(t)\ dW^{\mathbb Q}(t)+d(C-D)(t).
+\]</span></p>
+<p>If we only allow lumpsums at termination and assume <span class="math inline">\(\delta_1\)</span>, <span class="math inline">\(\delta_2\)</span> and <span class="math inline">\(\Delta D_2\)</span> is chosen based on the states of <span class="math inline">\(Z\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> we can formalize the dividends as
+<span class="math display">\[\begin{align*}
+dD(t)&amp;=dD_1(t,X(t),Y(t))+dD_2(t,X(t),Y(t))\\
+dD_1(t,X(t),Y(t))&amp;=\delta_1^{Z(t)}(t,X(t),Y(t))\ dt+\Delta D_1^{Z(t)}(t,X(t-),Y(t-))d1_{\{T\}(t)}\\
+dD_2(t,X(t),Y(t))&amp;=\delta_2^{Z(t)}(t,X(t),Y(t))\ dt
+\end{align*}\]</span>
+and the market reserve as
+<span class="math display">\[\begin{align*}
+V^{Z(t)}(t,X(t),Y(t))&amp;=\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^ur(v)\ dv}d(B+D_1)(u)\ \right\vert\ Z(t),X(t),Y(t)\right]
+\end{align*}\]</span>
+We can derive a PDE for the family <span class="math inline">\(V^j\)</span> for <span class="math inline">\(j\in E\)</span> using similar techniques as previous PDE’s.</p>
+<blockquote class="prop">
+<p><strong>Proposition 7.1. (Asmussen)</strong> <em>Assuming that there exist <span class="math inline">\(V^j(t,x,y)\)</span> that is sufficiently differentiable and furfulls the following set of PDE’s:</em>
+<span class="math display">\[\begin{align*}
+V_t^j(t,x,y)&amp;=rV^j(t,x,y)-b^j(t,x)-\delta_1^j(t,x,y)\\
+&amp;-\sum_{k:k\ne j}\lambda_{jk}(t)R^{jk}(t,x)-\mathcal D_x V^j(t,x,y)-\mathcal D_yV^j(t,x,y),\\
+V^t(t-,x,y)&amp;=\Delta B^j(t,x)+\Delta D_1^j(t,x,y)+V^j(t,x-\Delta B^j(t,x),y-\Delta D_1^j(t,x,y)),\\
+V^j(T,x,y)&amp;=0,
+\end{align*}\]</span>
+<em>where <span class="math inline">\(\mathcal D_x\)</span> and <span class="math inline">\(\mathcal D_y\)</span> is the operators</em>
+<span class="math display">\[\begin{align*}
+\mathcal D_xV^j(t,x,y)&amp;=V_x^j(t,x,y)\left(r^*x-b^j(t,x)+\delta_2^j(t,x,y)-\sum_{k:k\ne j}\lambda_{jk}(t)R^{jk*}(t,x)\right),\\
+\mathcal D_yV^j(t,x,y)&amp;=V_y^j(t,x,y)\left(rx+c^j(t,x)-\delta_1^j(t,x,y)-\delta_2^j(t,x,y)\right)\\
+&amp;+\frac{1}{2}V_{yy}^j(t,x,y)\sigma^2 \pi^2(t,y)y^2,
+\end{align*}\]</span>
+<em>and</em>
+<span class="math display">\[\begin{align*}
+R^{jk*}(t,x)&amp;=b^{jk}(t,x)+\chi^{jk}(t,x)-x,\\
+R^{jk}(t,x,y)&amp;=b^{jk}(t,x)+V^k(t,\chi^{jk}(t,x),y)-V^j(t,x,y),
+\end{align*}\]</span>
+<em>Then <span class="math inline">\(V^{Z(t)}(t,X(t),Y(t))\)</span> is the reserved defined as</em></p>
+<span class="math display">\[
+V^{Z(t)}(t,X(t),Y(t))=\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^ur(v)\ dv}d(B+D_1)(u)\ \right\vert\ Z(t),X(t),Y(t)\right].
+\]</span>
+</blockquote>
 </div>
 <div id="the-pure-case-of-bonus-payments" class="section level3 hasAnchor" number="4.6.8">
 <h3><span class="header-section-number">4.6.8</span> The Pure Case of Bonus Payments<a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-bonus-payments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="comparison-of-products" class="section level3 hasAnchor" number="4.6.9">
-<h3><span class="header-section-number">4.6.9</span> Comparison of Products<a href="financial-mathematics-in-life-insurance.html#comparison-of-products" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the case where the surplus is emptied at the time of termination i.e.</p>
+<p><span class="math display">\[
+dD_1(T,x,y)=y
+\]</span></p>
+<p>then we can show that</p>
+<p><span class="math display">\[
+V^j(t,x,y)=x+y.
+\]</span></p>
+<p>This is evidend by inserting the derivatives and seeing that <span class="math inline">\(x+y\)</span> does indeed satisfiy proposition 7.1. Furthermore, we have that the entire assets is payed out at terminiation since we from the previous section learned that <span class="math inline">\(\Delta B^j(T,x)=x\)</span> hence</p>
+<p><span class="math display">\[
+\Delta B^j(T,x)+dD_1(T,x,y)=x+y=V^j(T-,x,y).
+\]</span></p>
+<p>By evaluating the guaranteed benefits <span class="math inline">\(V_B^j(t)\)</span> as usual (the market value of the payment <span class="math inline">\(B=B_1+Q(t)B_2\)</span>) we can see that the future discretionary benefits are</p>
+<p><span class="math display">\[
+V^j(t,x,y)-V^j_B(t)=x+y-V_B^j(t),
+\]</span></p>
+<p>hence the difficult part is to evaluate GB which is simply the solution to Thieles differential equation.</p>
 </div>
 </div>
             </section>

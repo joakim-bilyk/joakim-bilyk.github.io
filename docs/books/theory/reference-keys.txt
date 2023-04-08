@@ -37,7 +37,6 @@ cash-dividends-and-market-reserve
 the-pure-case-of-cash-dividends
 bonus-payments-and-market-reserve
 the-pure-case-of-bonus-payments
-comparison-of-products
 special-studies-in-life-insurance
 survival-probabilities-and-forward-mortality-rates-1
 dependent-interest-and-mortality-rates
