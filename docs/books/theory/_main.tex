@@ -2717,23 +2717,111 @@ V^j(t,x,y)-V^j_B(t)=x+y-V_B^j(t),
 
 hence the difficult part is to evaluate GB which is simply the solution to Thieles differential equation.
 
-\hypertarget{special-studies-in-life-insurance}{%
-\section{Special Studies in Life Insurance}\label{special-studies-in-life-insurance}}
-
-\hypertarget{survival-probabilities-and-forward-mortality-rates-1}{%
-\subsection{Survival Probabilities and Forward Mortality Rates}\label{survival-probabilities-and-forward-mortality-rates-1}}
-
-\hypertarget{dependent-interest-and-mortality-rates}{%
-\subsection{Dependent Interest and Mortality Rates}\label{dependent-interest-and-mortality-rates}}
-
-\hypertarget{stochastic-interest-and-mortality-rate-models}{%
-\subsection{Stochastic Interest and Mortality Rate Models}\label{stochastic-interest-and-mortality-rate-models}}
-
-\hypertarget{reserves-revisited-1}{%
-\subsection{Reserves Revisited}\label{reserves-revisited-1}}
-
 \hypertarget{incidental-policy-holder-behavior}{%
 \subsection{Incidental Policy Holder Behavior}\label{incidental-policy-holder-behavior}}
+
+Policy holder behavior is a study of what drives the policy holder to either prematurely stop the insurance contract or decide not to pay premiums. We say that if the policy holder terminates the contract the contract \emph{surrender} (a so-called use of the \emph{surrender option}) and if the policy holder decide to stop paying premiums the policy becomes a \emph{free-policy} or \emph{paid-up policy} (again call the \emph{free-policy} or \emph{paid-up} option). The insurance company and the insured should in advance know the consequences of such choices.
+
+I an insurance contract, the insurance company has a debt to the policy holder and so the insurance company is willing to pay out some amount to the contract holder. In the case where the holder stops paying premiums we would have to recalculate the benefits the holder can receive since the premiums has not been payed to completion. We formalize the setup as follows.
+
+\emph{\textbf{The model framwork:}} Consider as usual that the markov state process is defined on some finite state space \(E=\{0,1,...,p\}\). Now we add the option to surrender the contract and so we add an additional absorbing state to \(E\) say the state \(p+1\). In this state the contract is terminated and so the contract holder receives \(b^{Z(t-),p+1}(t)\) upon a transition at time \(t\). Furthermore, we add the free policy option by extending \(E\) including \(p+1\) with a copy of all states but without any premiums. In particular, we define a markov process \(Z\) on
+
+\[
+\widetilde E=\{(0,p),(1,p),...,(p,p),(p+1,p),(0,f),(1,f),...,(p,f),(p+1,f)\},
+\]
+
+where \(p\) correspond to a premium paying state and \(f\) refers to a free policy state. For ease of notation we explicit state that
+
+\[
+E=\{0,1,2,...,p,p+1\}.
+\]
+
+We here assumes the \emph{incidental policy behavior model}, that is there exist continuous function \(\widetilde\lambda^{jk}(t)\) for \(j=(\ell,p)\) and \(k=(m,f)\) for \(\ell, m\in\{0,1,...,p-1\}\) such that the transition probabilities
+
+\[
+\widetilde p_{jk}(t,s)=\mathbb P(Z(s)=k\ \vert\ Z(t)=j)
+\]
+
+has dynamics obey \(\widetilde p_{jk}(t,t+dt)=\widetilde \lambda^{jk}(t)\ dt\). This in particular means that the policy holder surrender or transition to a free policy state at random. Notice that we excluded the dead state \(p\) and the surrender state \(p+1\). Of cause one can construct \(\widetilde {\mathbf \Lambda}(t)=\left\{\widetilde \lambda^{jk}(t)\right\}_{j,k\in \widetilde E}\) such that some transitions are not possible, say from a benefit receiving premium paying state to the sister free policy state (for instance disabled). And so if \(j\) is a state with no possibility of turning to a free policy we simply have
+
+\[
+\left\{\widetilde {\mathbf \Lambda}(t)\right\}_{j,\cdot}=
+\begin{pmatrix}
+\widetilde\lambda^{j,(0,p)}(t)\\
+\vdots\\
+\widetilde\lambda^{j,(p+1,p)}(t)\\
+\widetilde\lambda^{j,(0,f)}(t)\\
+\vdots\\
+\widetilde\lambda^{k,(p+1,f)}(t)
+\end{pmatrix}^\top=
+\begin{pmatrix}
+\lambda^{j,0}(t)\\
+\vdots\\
+\lambda^{j,p+1}(t)\\
+0\\
+\vdots\\
+0
+\end{pmatrix}^\top,
+\]
+
+where the non-tilde rates refer to the model without the free policy option. Note that we in particular we could make the model more elaborate for instance restricting to \(\widetilde \lambda^{(j,p),(k,f)}(t)\ne 0\) if and only if \(j=k\) i.e.~one cannot use make use of the free policy option at the same time of a transition only during a visit in a state. In total we would in general assume:
+
+\begin{itemize}
+\tightlist
+\item
+  Transitions such as \((j,p)\to (k,f)\) is only possible for \(j=k\),
+\item
+  If \((j,p)\) is a benefit receiving state then \(\lambda^{(j,p),(k,f)}(t)=0\) for all \(k\) and
+\item
+  For all states \((j,f)\) and \((k,p)\) we have \(\lambda^{(j,f),(k,p)}(t)=0\) (a free-policy stays a free-policy).
+\end{itemize}
+
+\emph{\textbf{The payments:}} With the model framework with \(Z\) being a markov jump process on \(\widetilde E\) with now four absorbing states \((p,p)\), \((p+1,p)\), \((p,f)\) and \((p+1,f)\). The payment process is then as usual given by
+
+\[
+dB(t)=b^{Z(t)}(t)\ dt+\Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\ dN^k(t)
+\]
+
+We construct the payments in the free policy states by defining the transition time from premium paying to free policy by
+
+\[
+\tau=\inf\{s\ge 0:Z(s)=(j,f)\text{ for some }j\in E\}.
+\]
+
+Of cause if \(\{s\ge 0:Z(s)=(j,f)\text{ for some }j\in E\}=\emptyset\) then \(\tau =\infty\). We then translate all benefits from the state \((j,f)\) via the free policy factor \(f(\tau)\in[0,1]\) and set
+
+\[
+dB^{(j,f)}(t)=f(\tau)dB^{(j,p)}_2(t),\qquad b^{(j,f),(k,f)}(t)=f(\tau)b^{(j,p),(k,p)}_2(t)
+\]
+
+where the subscript refer to only benefits. Of cause upon transition to a free policy we have \(t=\tau + u\) and so
+
+\[
+dB^{(j,f)}(t)=f(t-u)dB^{(j,p)}_2(t),\qquad b^{(j,f),(k,f)}(t)=f(t-u)b^{(j,p),(k,p)}_2(t).
+\]
+
+\emph{\textbf{Market valuation:}} We construct two sets of PDE's for the market reserve of the incidental behavior model: One for the value process of the premium states and one for the free policy states. Let us start with the free policy state. We know that the reserve is defined as
+\begin{align*}
+V^{(j,f)}(t,u)&=\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^sr(v)\ dv}dB(s)\ \right\vert\ Z(t)=(j,f),U(t)=u\right]\\
+&=\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^sr(v)\ dv}f(t-u)dB_2(s)\ \right\vert\ Z(t)=(j,f),U(t)=u\right]\\
+&=f(t-u)\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^sr(v)\ dv}dB_2(s)\ \right\vert\ Z(t)=(j,f)\right]\\
+&=f(t-u)V^{j}_2(t)
+\end{align*}
+where we simply have defined \(V_2^j\) in accordance to the above. From the state duration models we know that \(V{(j,f)}\) satisfies the PDE
+\begin{align*}
+V^{(j,f)}_t(t,u)+V^{(j,f)}_u(t,u)&=rV^{(j,f)}(t,u)-f(t-u)b_2^{(j,p)}(t)\\
+&-\sum_{k:k\ne j}\widetilde \lambda^{(j,f),(k,f)}(t)\left(f(t-u)b^{(j,p),(k,p)}_2(t)+V^{(k,f)}(t,u)-V^{(j,f)}(t,u)\right)\\
+V^{(j,f)}(t-,u)&=V^{(j,f)}(t,u)+f(t-u)\Delta B_2^{(j,p)}(t)
+\end{align*}
+We can evaluate the reserve by calculating \(V^{j}_2(t)\) using Thiele. In fact, by guessing that \(V^{(j,f)}(t,u)=f(t-u)g(t)\) one can establish differential equations for \(g\) that represent the reserve according to the payments \(B_2\).
+
+In the case of the market valuation during the premium paying state we get the usual PDE
+\begin{align*}
+V^{(j,p)}_t(t)&=rV^{(j,p)}(t)-b^{(j,p)}(t)\\
+&-\sum_{k:k\ne j}\widetilde \lambda^{(j,p),(k,p)}(t)\left(b^{(j,p),(k,p)}(t)+V^{(k,p)}(t)-V^{(j,p)}(t)\right)\\
+&-\widetilde\lambda^{(j,p),(j,f)}(t)\left(V^{(j,f)}(t,0)-V^{(j,p)}(t)\right)\\
+V^{(j,p)}(t-)&=V^{(j,p)}(t)+\Delta B^{(j,p)}(t).
+\end{align*}
 
 \hypertarget{continuous-time-finance}{%
 \chapter{Continuous Time Finance}\label{continuous-time-finance}}

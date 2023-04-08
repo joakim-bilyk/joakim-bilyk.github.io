@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="matrix-methods-in-life-insurance.html"/>
-<link rel="next" href="special-studies-in-life-insurance.html"/>
+<link rel="next" href="continuous-time-finance.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -248,14 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6.6" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-cash-dividends"><i class="fa fa-check"></i><b>4.6.6</b> The Pure Case of Cash Dividends</a></li>
 <li class="chapter" data-level="4.6.7" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#bonus-payments-and-market-reserve"><i class="fa fa-check"></i><b>4.6.7</b> Bonus Payments and Market Reserve</a></li>
 <li class="chapter" data-level="4.6.8" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#the-pure-case-of-bonus-payments"><i class="fa fa-check"></i><b>4.6.8</b> The Pure Case of Bonus Payments</a></li>
-</ul></li>
-<li class="chapter" data-level="4.7" data-path="special-studies-in-life-insurance.html"><a href="special-studies-in-life-insurance.html"><i class="fa fa-check"></i><b>4.7</b> Special Studies in Life Insurance</a>
-<ul>
-<li class="chapter" data-level="4.7.1" data-path="special-studies-in-life-insurance.html"><a href="special-studies-in-life-insurance.html#survival-probabilities-and-forward-mortality-rates-1"><i class="fa fa-check"></i><b>4.7.1</b> Survival Probabilities and Forward Mortality Rates</a></li>
-<li class="chapter" data-level="4.7.2" data-path="special-studies-in-life-insurance.html"><a href="special-studies-in-life-insurance.html#dependent-interest-and-mortality-rates"><i class="fa fa-check"></i><b>4.7.2</b> Dependent Interest and Mortality Rates</a></li>
-<li class="chapter" data-level="4.7.3" data-path="special-studies-in-life-insurance.html"><a href="special-studies-in-life-insurance.html#stochastic-interest-and-mortality-rate-models"><i class="fa fa-check"></i><b>4.7.3</b> Stochastic Interest and Mortality Rate Models</a></li>
-<li class="chapter" data-level="4.7.4" data-path="special-studies-in-life-insurance.html"><a href="special-studies-in-life-insurance.html#reserves-revisited-1"><i class="fa fa-check"></i><b>4.7.4</b> Reserves Revisited</a></li>
-<li class="chapter" data-level="4.7.5" data-path="special-studies-in-life-insurance.html"><a href="special-studies-in-life-insurance.html#incidental-policy-holder-behavior"><i class="fa fa-check"></i><b>4.7.5</b> Incidental Policy Holder Behavior</a></li>
+<li class="chapter" data-level="4.6.9" data-path="financial-mathematics-in-life-insurance.html"><a href="financial-mathematics-in-life-insurance.html#incidental-policy-holder-behavior"><i class="fa fa-check"></i><b>4.6.9</b> Incidental Policy Holder Behavior</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="continuous-time-finance.html"><a href="continuous-time-finance.html"><i class="fa fa-check"></i><b>5</b> Continuous Time Finance</a>
@@ -1288,14 +1281,96 @@ V^j(t,x,y)-V^j_B(t)=x+y-V_B^j(t),
 \]</span></p>
 <p>hence the difficult part is to evaluate GB which is simply the solution to Thieles differential equation.</p>
 </div>
+<div id="incidental-policy-holder-behavior" class="section level3 hasAnchor" number="4.6.9">
+<h3><span class="header-section-number">4.6.9</span> Incidental Policy Holder Behavior<a href="financial-mathematics-in-life-insurance.html#incidental-policy-holder-behavior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Policy holder behavior is a study of what drives the policy holder to either prematurely stop the insurance contract or decide not to pay premiums. We say that if the policy holder terminates the contract the contract <em>surrender</em> (a so-called use of the <em>surrender option</em>) and if the policy holder decide to stop paying premiums the policy becomes a <em>free-policy</em> or <em>paid-up policy</em> (again call the <em>free-policy</em> or <em>paid-up</em> option). The insurance company and the insured should in advance know the consequences of such choices.</p>
+<p>I an insurance contract, the insurance company has a debt to the policy holder and so the insurance company is willing to pay out some amount to the contract holder. In the case where the holder stops paying premiums we would have to recalculate the benefits the holder can receive since the premiums has not been payed to completion. We formalize the setup as follows.</p>
+<p><em><strong>The model framwork:</strong></em> Consider as usual that the markov state process is defined on some finite state space <span class="math inline">\(E=\{0,1,...,p\}\)</span>. Now we add the option to surrender the contract and so we add an additional absorbing state to <span class="math inline">\(E\)</span> say the state <span class="math inline">\(p+1\)</span>. In this state the contract is terminated and so the contract holder receives <span class="math inline">\(b^{Z(t-),p+1}(t)\)</span> upon a transition at time <span class="math inline">\(t\)</span>. Furthermore, we add the free policy option by extending <span class="math inline">\(E\)</span> including <span class="math inline">\(p+1\)</span> with a copy of all states but without any premiums. In particular, we define a markov process <span class="math inline">\(Z\)</span> on</p>
+<p><span class="math display">\[
+\widetilde E=\{(0,p),(1,p),...,(p,p),(p+1,p),(0,f),(1,f),...,(p,f),(p+1,f)\},
+\]</span></p>
+<p>where <span class="math inline">\(p\)</span> correspond to a premium paying state and <span class="math inline">\(f\)</span> refers to a free policy state. For ease of notation we explicit state that</p>
+<p><span class="math display">\[
+E=\{0,1,2,...,p,p+1\}.
+\]</span></p>
+<p>We here assumes the <em>incidental policy behavior model</em>, that is there exist continuous function <span class="math inline">\(\widetilde\lambda^{jk}(t)\)</span> for <span class="math inline">\(j=(\ell,p)\)</span> and <span class="math inline">\(k=(m,f)\)</span> for <span class="math inline">\(\ell, m\in\{0,1,...,p-1\}\)</span> such that the transition probabilities</p>
+<p><span class="math display">\[
+\widetilde p_{jk}(t,s)=\mathbb P(Z(s)=k\ \vert\ Z(t)=j)
+\]</span></p>
+<p>has dynamics obey <span class="math inline">\(\widetilde p_{jk}(t,t+dt)=\widetilde \lambda^{jk}(t)\ dt\)</span>. This in particular means that the policy holder surrender or transition to a free policy state at random. Notice that we excluded the dead state <span class="math inline">\(p\)</span> and the surrender state <span class="math inline">\(p+1\)</span>. Of cause one can construct <span class="math inline">\(\widetilde {\mathbf \Lambda}(t)=\left\{\widetilde \lambda^{jk}(t)\right\}_{j,k\in \widetilde E}\)</span> such that some transitions are not possible, say from a benefit receiving premium paying state to the sister free policy state (for instance disabled). And so if <span class="math inline">\(j\)</span> is a state with no possibility of turning to a free policy we simply have</p>
+<p><span class="math display">\[
+\left\{\widetilde {\mathbf \Lambda}(t)\right\}_{j,\cdot}=
+\begin{pmatrix}
+\widetilde\lambda^{j,(0,p)}(t)\\
+\vdots\\
+\widetilde\lambda^{j,(p+1,p)}(t)\\
+\widetilde\lambda^{j,(0,f)}(t)\\
+\vdots\\
+\widetilde\lambda^{k,(p+1,f)}(t)
+\end{pmatrix}^\top=
+\begin{pmatrix}
+\lambda^{j,0}(t)\\
+\vdots\\
+\lambda^{j,p+1}(t)\\
+0\\
+\vdots\\
+0
+\end{pmatrix}^\top,
+\]</span></p>
+<p>where the non-tilde rates refer to the model without the free policy option. Note that we in particular we could make the model more elaborate for instance restricting to <span class="math inline">\(\widetilde \lambda^{(j,p),(k,f)}(t)\ne 0\)</span> if and only if <span class="math inline">\(j=k\)</span> i.e. one cannot use make use of the free policy option at the same time of a transition only during a visit in a state. In total we would in general assume:</p>
+<ul>
+<li>Transitions such as <span class="math inline">\((j,p)\to (k,f)\)</span> is only possible for <span class="math inline">\(j=k\)</span>,</li>
+<li>If <span class="math inline">\((j,p)\)</span> is a benefit receiving state then <span class="math inline">\(\lambda^{(j,p),(k,f)}(t)=0\)</span> for all <span class="math inline">\(k\)</span> and</li>
+<li>For all states <span class="math inline">\((j,f)\)</span> and <span class="math inline">\((k,p)\)</span> we have <span class="math inline">\(\lambda^{(j,f),(k,p)}(t)=0\)</span> (a free-policy stays a free-policy).</li>
+</ul>
+<p><em><strong>The payments:</strong></em> With the model framework with <span class="math inline">\(Z\)</span> being a markov jump process on <span class="math inline">\(\widetilde E\)</span> with now four absorbing states <span class="math inline">\((p,p)\)</span>, <span class="math inline">\((p+1,p)\)</span>, <span class="math inline">\((p,f)\)</span> and <span class="math inline">\((p+1,f)\)</span>. The payment process is then as usual given by</p>
+<p><span class="math display">\[
+dB(t)=b^{Z(t)}(t)\ dt+\Delta B^{Z(t)}(t)+\sum_{k:k\ne Z(t-)}b^{Z(t-)k}(t)\ dN^k(t)
+\]</span></p>
+<p>We construct the payments in the free policy states by defining the transition time from premium paying to free policy by</p>
+<p><span class="math display">\[
+\tau=\inf\{s\ge 0:Z(s)=(j,f)\text{ for some }j\in E\}.
+\]</span></p>
+<p>Of cause if <span class="math inline">\(\{s\ge 0:Z(s)=(j,f)\text{ for some }j\in E\}=\emptyset\)</span> then <span class="math inline">\(\tau =\infty\)</span>. We then translate all benefits from the state <span class="math inline">\((j,f)\)</span> via the free policy factor <span class="math inline">\(f(\tau)\in[0,1]\)</span> and set</p>
+<p><span class="math display">\[
+dB^{(j,f)}(t)=f(\tau)dB^{(j,p)}_2(t),\qquad b^{(j,f),(k,f)}(t)=f(\tau)b^{(j,p),(k,p)}_2(t)
+\]</span></p>
+<p>where the subscript refer to only benefits. Of cause upon transition to a free policy we have <span class="math inline">\(t=\tau + u\)</span> and so</p>
+<p><span class="math display">\[
+dB^{(j,f)}(t)=f(t-u)dB^{(j,p)}_2(t),\qquad b^{(j,f),(k,f)}(t)=f(t-u)b^{(j,p),(k,p)}_2(t).
+\]</span></p>
+<p><em><strong>Market valuation:</strong></em> We construct two sets of PDE’s for the market reserve of the incidental behavior model: One for the value process of the premium states and one for the free policy states. Let us start with the free policy state. We know that the reserve is defined as
+<span class="math display">\[\begin{align*}
+V^{(j,f)}(t,u)&amp;=\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^sr(v)\ dv}dB(s)\ \right\vert\ Z(t)=(j,f),U(t)=u\right]\\
+&amp;=\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^sr(v)\ dv}f(t-u)dB_2(s)\ \right\vert\ Z(t)=(j,f),U(t)=u\right]\\
+&amp;=f(t-u)\mathbb E^\mathbb Q\left[\left.\int_t^Te^{-\int_t^sr(v)\ dv}dB_2(s)\ \right\vert\ Z(t)=(j,f)\right]\\
+&amp;=f(t-u)V^{j}_2(t)
+\end{align*}\]</span>
+where we simply have defined <span class="math inline">\(V_2^j\)</span> in accordance to the above. From the state duration models we know that <span class="math inline">\(V{(j,f)}\)</span> satisfies the PDE
+<span class="math display">\[\begin{align*}
+V^{(j,f)}_t(t,u)+V^{(j,f)}_u(t,u)&amp;=rV^{(j,f)}(t,u)-f(t-u)b_2^{(j,p)}(t)\\
+&amp;-\sum_{k:k\ne j}\widetilde \lambda^{(j,f),(k,f)}(t)\left(f(t-u)b^{(j,p),(k,p)}_2(t)+V^{(k,f)}(t,u)-V^{(j,f)}(t,u)\right)\\
+V^{(j,f)}(t-,u)&amp;=V^{(j,f)}(t,u)+f(t-u)\Delta B_2^{(j,p)}(t)
+\end{align*}\]</span>
+We can evaluate the reserve by calculating <span class="math inline">\(V^{j}_2(t)\)</span> using Thiele. In fact, by guessing that <span class="math inline">\(V^{(j,f)}(t,u)=f(t-u)g(t)\)</span> one can establish differential equations for <span class="math inline">\(g\)</span> that represent the reserve according to the payments <span class="math inline">\(B_2\)</span>.</p>
+<p>In the case of the market valuation during the premium paying state we get the usual PDE
+<span class="math display">\[\begin{align*}
+V^{(j,p)}_t(t)&amp;=rV^{(j,p)}(t)-b^{(j,p)}(t)\\
+&amp;-\sum_{k:k\ne j}\widetilde \lambda^{(j,p),(k,p)}(t)\left(b^{(j,p),(k,p)}(t)+V^{(k,p)}(t)-V^{(j,p)}(t)\right)\\
+&amp;-\widetilde\lambda^{(j,p),(j,f)}(t)\left(V^{(j,f)}(t,0)-V^{(j,p)}(t)\right)\\
+V^{(j,p)}(t-)&amp;=V^{(j,p)}(t)+\Delta B^{(j,p)}(t).
+\end{align*}\]</span></p>
+
 </div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="matrix-methods-in-life-insurance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="special-studies-in-life-insurance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="continuous-time-finance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

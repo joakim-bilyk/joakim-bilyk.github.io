@@ -37,11 +37,6 @@ cash-dividends-and-market-reserve
 the-pure-case-of-cash-dividends
 bonus-payments-and-market-reserve
 the-pure-case-of-bonus-payments
-special-studies-in-life-insurance
-survival-probabilities-and-forward-mortality-rates-1
-dependent-interest-and-mortality-rates
-stochastic-interest-and-mortality-rate-models
-reserves-revisited-1
 incidental-policy-holder-behavior
 continuous-time-finance
 discrete-time-models
