@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-04-08" />
+<meta name="date" content="2023-04-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -649,7 +649,7 @@ p(y|do(X=x))&amp;\stackrel{\text{parent adjustment}}{=} \int  p(y|x,s)  p(s) \ma
 </ul>
 </details>
 <p>Intuition behind backdoor criterion: Backdoor paths carry spurious associations from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span>. Blocking all backdoor paths ensures that measured assoziation is causal. We don’t include descendants of <span class="math inline">\(𝑋\)</span> that are also ancestors of <span class="math inline">\(𝑌\)</span> because this would block a causal path. We don’t include descendants of <span class="math inline">\(𝑋\)</span> that are also descendants of <span class="math inline">\(𝑌\)</span> because this would introduce collider bias.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="theory_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p><strong>Questions.</strong></p>
 <ol style="list-style-type: lower-alpha">
 <li>Do we need to observe <span class="math inline">\(Z_1\)</span> to be able to calculate <span class="math inline">\(P(Y|do(X=x))\)</span>?</li>
@@ -718,7 +718,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": ["theory.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

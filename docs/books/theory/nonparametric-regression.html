@@ -23,7 +23,7 @@
 <meta name="author" content="Joakim Bilyk" />
 
 
-<meta name="date" content="2023-04-08" />
+<meta name="date" content="2023-04-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -595,40 +595,22 @@ e.g. an additive structure <span class="math inline">\(m(x)=m_1(x_1)+m_2(x_2)\)
 <h3><span class="header-section-number">9.4.3</span> Splines<a href="nonparametric-regression.html#splines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We want to establish a framework to estimate additive regression functions. To this end, assume <span class="math inline">\(p=1\)</span> until further notice.</p>
 <blockquote class="def">
-<p><strong>Definition. (Splines)</strong> <em>A <span class="math inline">\(k\)</span>th-order spline with <span class="math inline">\(l\)</span> knotpoints <span class="math inline">\(x_1 &lt;\dots&lt;x_l\)</span></em></p>
-<ul>
-<li><em>is a polynomial of degree <span class="math inline">\(k\)</span> on each interval <span class="math inline">\((-\infty,x_1],[x_1,x_2]\dots,[x_l,\infty)\)</span></em></li>
-<li><em>has continuous derivatives of orders <span class="math inline">\(0,...,k-1\)</span> on the knotpoints <span class="math inline">\(x_1 &lt;\dots&lt;x_l\)</span></em></li>
-</ul>
+<p><strong>Definition. (Splines)</strong> <em>Consider a function <span class="math inline">\(S : \mathbb R\to \mathbb R\)</span>. If</em></p>
+<p><span class="math display">\[
+S(t)=\sum_{i=1}^\ell 1_{[t_{i-1},t_i)}(t)P_i(t),
+\]</span></p>
+<p><em>for a family of polynomial functions <span class="math inline">\(\{P_i\}_{i=1,...,\ell}\)</span> of at most order <span class="math inline">\(k\)</span>. If <span class="math inline">\(S(t)\)</span> is <span class="math inline">\(C^n\)</span> (<span class="math inline">\(n\ge 1\)</span>) we say that <span class="math inline">\(S\)</span> is a <span class="math inline">\(k\)</span>th-order spline with <span class="math inline">\(\ell\)</span> knotpoints and smoothness <span class="math inline">\(n\)</span>. We call <span class="math inline">\(t_0&lt;t_1&lt;\cdots &lt;t_\ell\)</span> for knotpoints.</em></p>
 </blockquote>
-<p><strong>Example.</strong> A <span class="math inline">\(k\)</span>th-order spline <span class="math inline">\(m\)</span> with <span class="math inline">\(l\)</span> knotpoints can an be uniquely written as</p>
+<p><strong>Example. (Truncated Power Basis)</strong> A <span class="math inline">\(k\)</span>th-order spline <span class="math inline">\(m\)</span> with <span class="math inline">\(l\)</span> knotpoints can an be uniquely written as</p>
 <p><span class="math display">\[
 m(x)=\sum_{j=1}^{k+1+l}\theta_jg_j(x)
 \]</span></p>
-<ul>
-<li>truncated power basis
-<ul>
-<li>For <span class="math inline">\(j=1,\dots, k+1\)</span>: <span class="math inline">\(g_{j}=x^{j-1}\)</span></li>
-<li>For <span class="math inline">\(j=1,\dots,l:\)</span> <span class="math inline">\(g_{k+1+j}=(x-x_j)^k_+\)</span>
-<ul>
-<li><span class="math inline">\((x)_+:= \max(x,0)\)</span></li>
-</ul></li>
-</ul></li>
-<li>B-splines
-<ul>
-<li>more complicated, but computationally more robust and faster to compute.</li>
-</ul></li>
-</ul>
+<p>For <span class="math inline">\(j=1,\dots, k+1\)</span>: <span class="math inline">\(g_{j}=x^{j-1}\)</span> and for <span class="math inline">\(j=1,\dots,l:\)</span> <span class="math inline">\(g_{k+1+j}=(x-x_j)^k_+\)</span>. We call this the truncated power basis. Note that <span class="math inline">\(\theta_j\)</span> is some indicator function.</p>
 <p>Splines have high variance at the boundaries. Solution: Let the piecewise polynomial function have a lower degree at <span class="math inline">\((-\infty,x_1],[x_l,\infty)\)</span>.</p>
 <blockquote class="def">
-<p><strong>Definition. (Natural Splines)</strong> <em>A <span class="math inline">\(k\)</span>th-order natural spline (<span class="math inline">\(k=\)</span> odd number) with knotpoints <span class="math inline">\(x_1 &lt;\dots&lt;x_l\)</span></em></p>
-<ul>
-<li><em>is a polynomial of degree <span class="math inline">\(k\)</span> on the intervals <span class="math inline">\([x_1,x_2]\dots,[x_{l-1},x_l)\)</span></em></li>
-<li><em>is a polynomial of degree <span class="math inline">\((k-1)/2\)</span> on <span class="math inline">\((-\infty,x_1],[x_l,\infty)\)</span></em></li>
-<li><em>has continuous derivatives of orders <span class="math inline">\(0,...,k-1\)</span> on the knotpoints <span class="math inline">\(x_1 &lt;\dots&lt;x_l\)</span></em></li>
-</ul>
+<p><strong>Definition. (Natural Splines)</strong> <em>Consider a <span class="math inline">\(k\)</span>th order spline <span class="math inline">\(S\)</span>, <span class="math inline">\(k\)</span> odd, with smoothness <span class="math inline">\(k-1\)</span> defined for the knotpoints <span class="math inline">\(t_0,...,t_\ell\)</span>. We say that <span class="math inline">\(S\)</span> is a natural spline of order <span class="math inline">\(k\)</span> if <span class="math inline">\(S\)</span> is a <span class="math inline">\(C^{(k-1)/2}\)</span> on <span class="math inline">\((-\infty,t_0)\cup (t_\ell,\infty)\)</span>.</em></p>
 </blockquote>
-<p>Note that natural splines have dimension <span class="math inline">\(l\)</span> which is in particular independent of the order <span class="math inline">\(k\)</span> (compare to dimension <span class="math inline">\(k+l\)</span> for splines). There is also a truncated power basis and a B-splines basis for natural splines.</p>
+<p>Note that natural splines have dimension <span class="math inline">\(l\)</span> which is in particular independent of the order <span class="math inline">\(k\)</span> (compare to dimension <span class="math inline">\(k+l\)</span> for splines). There is also a truncated power basis and a B-splines basis for natural splines. An example is the cubic spline which is a 3rd order natural spline. One can find a unique <a href="https://random-walks.org/content/misc/ncs/ncs.html">solution</a> to the problem of fitting a natural cubic spline to a dataset <span class="math inline">\(\{(x_i,y_i)\}_{i=1,...,n}\)</span>. Furthermore, this interpolated function minimizes <span class="math inline">\(\int_{x_0}^{x_n} (f&#39;&#39;(x))^2\ dx\)</span>. Which makes this interpolation tractable.</p>
 </div>
 <div id="linear-regression-with-splines." class="section level3 hasAnchor" number="9.4.4">
 <h3><span class="header-section-number">9.4.4</span> Linear regression with splines.<a href="nonparametric-regression.html#linear-regression-with-splines." class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -637,7 +619,7 @@ m(x)=\sum_{j=1}^{k+1+l}\theta_jg_j(x)
 \hat \beta = {\arg \min }_\beta \sum_i (Y_i - { G_i^T}\beta )^2= (\mathbf G^T\mathbf  G)^{-1}\mathbf  G^T\mathbf Y
 \]</span></p>
 <p>where <span class="math inline">\(G_i^T=(g_1(X_i), \dots, g_l(X_i))\)</span>, the rows of <span class="math inline">\(\mathbf G\)</span>. Problem: How do we choose the number of knotpoints <span class="math inline">\(l\)</span> and their position? First thought: Cross validation. But that would be quite expensive to run.</p>
-<p>Let’s look at the following minimization problem:</p>
+<p>Let us look at the following minimization problem:</p>
 <p><span class="math display">\[
 \hat m= \arg\min_{m} \sum_i (Y_i-m(X_i))^2+\lambda\int_a^b m&#39;&#39;(x)^2\mathrm dx,
 \]</span></p>
@@ -653,22 +635,59 @@ m(x)=\sum_{j=1}^{k+1+l}\theta_jg_j(x)
 <summary>
 <strong>Proof.</strong>
 </summary>
-<p>Given a minimizer <span class="math inline">\(\tilde m\)</span>, we construct the unique natural cubic spline <span class="math inline">\(m\)</span> on <span class="math inline">\([a,b]\)</span> with knotpoints <span class="math inline">\(X_1,\dots, X_n\)</span> and <span class="math inline">\(m(X_i)=\tilde m(X_i)\)</span>. We will show that <span class="math inline">\(\tilde m=m\)</span>. Define <span class="math inline">\(h=\tilde m-m\)</span>. Note that <span class="math inline">\(h(X_j)=0 (j=1,\dots,n)\)</span>, <span class="math inline">\(m&#39;&#39;&#39;(x)=0\)</span> for <span class="math inline">\(x&lt;X_1\)</span> and <span class="math inline">\(x&gt;X_n\)</span> as well as <span class="math inline">\(m^{(4)}=0\)</span>. Hence by applying integration by parts twice we get
+<p>Consider a dataset <span class="math inline">\(\mathcal D_n=\left\{(X_i,Y_i)\right\}_{i=1,..,n}\)</span> orderet such that <span class="math inline">\(X_1\le X_2\le \cdots \le X_n\)</span>. Let <span class="math inline">\(m^*\)</span> be the minimizer to the minimization problem</p>
+<p><span class="math display">\[
+m^*=\underset{m\in\mathcal G}{\text{arg min}}\left\{\sum_i (Y_i-m(X_i))^2+\lambda\int_a^b m&#39;&#39;(x)^2\mathrm dx\right\},
+\]</span></p>
+<p>for <span class="math inline">\(\mathcal G\)</span> being the class of <span class="math inline">\(C^2\)</span> functions and <span class="math inline">\(\lambda\ge 0\)</span> be given. We know from <a href="https://random-walks.org/content/misc/ncs/ncs.html">earlier</a> that the cubic spline does indeed minimize the integral above and so if <span class="math inline">\(m(X_i)=Y_i\)</span> for all <span class="math inline">\(i\)</span> then we will have a minimizer. Let us for good measure show that the cubic spline fitted to the dataset <span class="math inline">\(\mathcal D_n\)</span>, call it <span class="math inline">\(\tilde m\)</span>, is indeed the minimizer.</p>
+<p>Let <span class="math inline">\(\tilde m\)</span> be the unique natural cubic spline interpolated to the points <span class="math inline">\(\mathcal D_n\)</span>. This in particular gives that <span class="math inline">\(X_1,...,X_n\)</span> are knotpoints for <span class="math inline">\(\tilde m\)</span> and so we have</p>
+<p><span class="math display">\[
+m(X_i)=Y_i,\quad m^{(3)}(X_i)=0,\quad \forall x\notin [X_1,X_n]:m&#39;&#39;(x)=0.
+\]</span></p>
+<p>Assume that <span class="math inline">\([X_1,X_n]\subset [a,b]\)</span>. By now we already have</p>
+<p><span class="math display">\[
+\sum_i(Y_i-\tilde m(X_i))^2=0\le \sum_i(Y_i-m^*(X_i))^2,
+\]</span></p>
+<p>and so if we show that</p>
+<p><span class="math display">\[
+\int_a^b(\tilde m&#39;&#39;(x))^2\ dx\le \int_a^b({m^*}&#39;&#39;(x))^2\ dx,
+\]</span></p>
+<p>then <span class="math inline">\(\tilde m=m^*\)</span>. In particular we have to show that</p>
+<p><span class="math display">\[
+0\le  \int_a^b({m^*}&#39;&#39;(x))^2\ dx-\int_a^b(\tilde m&#39;&#39;(x))^2\ dx.
+\]</span></p>
+<p>We start by seeing that</p>
+<p><span class="math display">\[
+(a-b)^2=a^2+b^2-2ab=a^2+2b^2-2ab-b^2=a^2-2(a-b)b-b^2
+\]</span></p>
+<p>hence</p>
+<p><span class="math display">\[
+\int_a^b\left({m^*}&#39;&#39;(x)-\tilde m&#39;&#39;(x)\right)^2\ dx=\int_a^b({m^*}&#39;&#39;(x))^2\ dx-\int_a^b(\tilde m&#39;&#39;(x))^2\ dx-2\int_a^b\tilde m&#39;&#39;(x)({m^*}&#39;&#39;(x)-\tilde m&#39;&#39;(x))\ dx
+\]</span></p>
+<p>and so if the last term is zero, then we would trivially have</p>
+<p><span class="math display">\[
+\int_a^b({m^*}&#39;&#39;(x))^2\ dx-\int_a^b(\tilde m&#39;&#39;(x))^2\ dx=\int_a^b\left({m^*}&#39;&#39;(x)-\tilde m&#39;&#39;(x)\right)^2\ dx\ge 0
+\]</span></p>
+<p>as desired. Define <span class="math inline">\(h=m^*-\tilde m\)</span> then we have</p>
+<p><span class="math display">\[
+\int_a^b\tilde m&#39;&#39;(x)({m^*}&#39;&#39;(x)-\tilde m&#39;&#39;(x))\ dx=\int_a^b\tilde m&#39;&#39;(x)h&#39;&#39;(x)\ dx.
+\]</span></p>
+<p>Since <span class="math inline">\(\tilde m&#39;&#39;=0\)</span> for all <span class="math inline">\(x\notin [X_1,X_n]\)</span>, the bound can be moved in and so by using integration by parts we have
 <span class="math display">\[\begin{align*}
-\int_a^b m&#39;&#39;(x)h&#39;&#39;(x)\mathrm dx
-&amp;= -\int_{X_1}^{X_n}m&#39;&#39;&#39;(x)h&#39;(x)\mathrm dx \\
-&amp;= -\sum_{j=1}^{n-1}m&#39;&#39;&#39;(x)h(x)\Big|_{X_j}^{X_{j+1}} \\
-&amp;=0
+\int_a^b\tilde m&#39;&#39;(x)h&#39;&#39;(x)\ dx
+&amp;=\sum_{i=1}^{n-1}\int_{X_i}^{X_{i+1}}\tilde m&#39;&#39;(x)h&#39;&#39;(x)\ dx \\
+&amp;=\sum_{i=1}^{n-1}\left[\tilde m&#39;&#39;(x)h&#39;(x)\right]_{X_i}^{X_{i+1}}-\int_{X_i}^{X_{i+1}}\tilde m&#39;&#39;&#39;(x)h&#39;(x)\ dx \\
+&amp;\stackrel{(\dagger_1)}{=} -\sum_{i=1}^{n-1}\int_{X_i}^{X_{i+1}}\tilde m&#39;&#39;&#39;(x)h&#39;(x)\ dx\\
+&amp;\stackrel{(\dagger_2)}{=} -\sum_{i=1}^{n-1}\tilde m&#39;&#39;&#39;(X_i)\int_{X_i}^{X_{i+1}}h&#39;(x)\ dx\\
+&amp;=-\sum_{i=1}^{n-1}\tilde m&#39;&#39;&#39;(X_i)\left[h(x)\right]_{X_i}^{X_{i+1}}\\
+&amp;=-\sum_{i=1}^{n-1}\tilde m&#39;&#39;&#39;(X_i)(m^*(X_{i+1})-\tilde m(X_{i+1})-m^*(X_i)+\tilde m(X_i))\\
+&amp;\stackrel{(\dagger_1)}{=}0
 \end{align*}\]</span>
-This implies</p>
+where we used that <span class="math inline">\(h=0\)</span> on <span class="math inline">\(x\in\{X_i\}_{i=1,...,n}\)</span> (<span class="math inline">\(\dagger_1\)</span>) twice and that <span class="math inline">\(m&#39;&#39;&#39;\)</span> is constant (<span class="math inline">\(\dagger_2\)</span>). Then we have shown the desired equality hence</p>
 <p><span class="math display">\[
-\int_a^b \tilde m&#39;&#39;(x)^2\mathrm dx= \int_a^b \{m&#39;&#39;(x)+h(x)\}^2\mathrm dx=\int_a^b m&#39;&#39;(x)^2+h(x)^2\mathrm dx.
+\int_a^b(\tilde m&#39;&#39;(x))^2\ dx\le \int_a^b({m^*}&#39;&#39;(x))^2\ dx
 \]</span></p>
-<p>meaning</p>
-<p><span class="math display">\[
-\int_a^b m&#39;&#39;(x)^2\mathrm dx \leq \int_a^b \tilde m&#39;&#39;(x)^2\mathrm dx.
-\]</span></p>
-<p>with equality only for <span class="math inline">\(h&#39;&#39;=0\)</span>, i.e, <span class="math inline">\(h\)</span> linear. Since <span class="math inline">\(h(X_i)=0 (i=1,\dots n)\)</span>, we have <span class="math inline">\(h=0\)</span> and so <span class="math inline">\(\tilde m=m\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+<p>as desired. <span class="math inline">\(\blacksquare\)</span></p>
 </details>
 <p>We can conclude the following:</p>
 <ul>
@@ -677,13 +696,9 @@ This implies</p>
 <li><span class="math inline">\(\{g_j\}_{j=1,\dots,l}\)</span> is a basis for natural cubic splines.</li>
 </ul></li>
 <li>Define
-<span class="math display">\[
-  \hat \beta  = \arg\min_{\beta} \sum_i (Y_i- G_i^T\beta)^2+\lambda\int_0^1 \left\{{\sum_j \beta_jg_j&#39;&#39;}(x)\right\}^2\mathrm dx.
-  \]</span>
+<span class="math display">\[\hat \beta  = \arg\min_{\beta} \sum_i (Y_i- G_i^T\beta)^2+\lambda\int_0^1 \left\{{\sum_j \beta_jg_j&#39;&#39;}(x)\right\}^2\mathrm dx.\]</span>
 Then,
-<span class="math display">\[
-  \sum_j \hat \beta_j g_j=\arg\min_{m} \sum_i (Y_i-m(X_i))^2+\lambda\int_0^1 m&#39;&#39;(x)^2\mathrm dx.
-  \]</span></li>
+<span class="math display">\[\sum_j \hat \beta_j g_j=\arg\min_{m} \sum_i (Y_i-m(X_i))^2+\lambda\int_0^1 m&#39;&#39;(x)^2\mathrm dx.\]</span></li>
 </ul>
 <p>Smoothing splines can be seen as a special case of generalized ridge regression:</p>
 <ul>
@@ -769,7 +784,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": ["theory.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
