@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.5 Trees and forests | Mathematics of the Actuarial Sciences</title>
+  <title>2.1 Payments, interest and mortality | Mathematics of the Actuarial Sciences</title>
   <meta name="description" content="This is a description of the document." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.5 Trees and forests | Mathematics of the Actuarial Sciences" />
+  <meta property="og:title" content="2.1 Payments, interest and mortality | Mathematics of the Actuarial Sciences" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a description of the document." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.5 Trees and forests | Mathematics of the Actuarial Sciences" />
+  <meta name="twitter:title" content="2.1 Payments, interest and mortality | Mathematics of the Actuarial Sciences" />
   
   <meta name="twitter:description" content="This is a description of the document." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="nonparametric-regression.html"/>
-<link rel="next" href="boosting-and-additive-trees.html"/>
+<link rel="prev" href="basic-life-insurance-mathematics.html"/>
+<link rel="next" href="insurance-of-a-single-life.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -499,160 +499,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="trees-and-forests" class="section level2 hasAnchor" number="10.5">
-<h2><span class="header-section-number">10.5</span> Trees and forests<a href="trees-and-forests.html#trees-and-forests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this chapter we will look at the nonparametric regression problem with squared loss <span class="math inline">\(L(y_1,y_2)=(y_1-y_2)^2\)</span> and also the classification problem with Binary loss function <span class="math inline">\(L(y_1,y_2)= 1(y_1\neq y_2)\)</span> or squared loss.</p>
-<p>We already know that the Bayes-rule is</p>
+<div id="payments-interest-and-mortality" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Payments, interest and mortality<a href="payments-interest-and-mortality.html#payments-interest-and-mortality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="payments" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Payments<a href="payments-interest-and-mortality.html#payments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will give precise mathematical content to the notion of payment streams and, referring to Appendix A, we deal only with their properties as functions of time and do not venture to discuss their possible stochastic properties for the time being.</p>
+<p>To fix ideas and terminology, consider a financial contract commencing at time 0 and terminating at a later time <span class="math inline">\(n\)</span> <span class="math inline">\((\le \infty)\)</span>, say, and denote by At the total amount paid in respect of the contract during the time interval <span class="math inline">\([0, t]\)</span>. The payment function <span class="math inline">\(\{A_t\}_{t\ge 0}\)</span> is assumed to be the difference of two non-decreasing, finite-valued functions representing incomes and outgoes, respectively, and is thus of finite variation (FV). Furthermore, the payment function is assumed to be right-continuous (RC). From a practical point of view this assumption is just a matter of convention, stating that the balance of the account changes at the time of any deposit or withdrawal. From a mathematical point of view it is convenient, since payment functions can then serve as integrators. In fact, we shall restrict attention to payment functions that are piece-wise differentiable (PD):</p>
 <p><span class="math display">\[
-m^\ast(x)=\mathbb E[Y|X=x]
+A_t=A_0+\int_0^ta_\tau d\tau+\sum_{0\le \tau\ le}\Delta A_\tau,\tag{1}
 \]</span></p>
-<p>for the squared loss and</p>
+<p>where <span class="math inline">\(\Delta A_\tau=A_\tau-A_{\tau-}\)</span>. The integral adds up payments that fall due continuously, and the sum adds up lump sum payments. In differential form this
+reads</p>
 <p><span class="math display">\[
-m^\ast(x)=\underset{k=1,\dots,K}{\operatorname{argmax}}\ \mathbb P(Y=k|X=x)
+dA_t=a(t)\ dt+\Delta A(t).\tag{2}
 \]</span></p>
-<p>for the binary loss.</p>
-<blockquote class="def">
-<p><strong>Definition. (Decision trees)</strong> <em>A decision tree is an estimator, that partition the feature space <span class="math inline">\(\mathcal X\)</span> into sections <span class="math inline">\(T=\{R_1,R_2,...,R_k\}\)</span> such that <span class="math inline">\(R_i\cap R_j=\emptyset\)</span> (pairwise disjoint) for all <span class="math inline">\(i\ne j\)</span> with <span class="math inline">\(1\le i,j\le k\)</span> and</em></p>
-<p><span class="math display">\[
-\bigcup_{i=1}^kR_i=\mathcal X
-\]</span></p>
-<p><em>The algorithm associated with the decision tree is then</em></p>
-<p><span class="math display">\[
-m(T)(x)=\sum_{i=1}^k m_i 1_{R_i}(x).
-\]</span></p>
-</blockquote>
-<p>From the above we notice that the tree estimate is a piecewise constant function. We call the constant areas of the tree estimate <em>leaves</em> or <em>terminal nodes</em>. The leaves partition the feature space <span class="math inline">\(\mathcal X\)</span>.</p>
-<p>Given the data <span class="math inline">\(\mathcal D_n\)</span> the value within a leave is given by averaging the responses (regression with <span class="math inline">\(L_2\)</span> loss) or majority vote (classification with binary loss). In particular we have</p>
-<p><span class="math display">\[
-m_i=\left(\sum_{j=1}^n1_{R_i}(X_j)\right)^{-1}\left(\sum_{j=1}^n1_{R_i}(X_j)X_j\right),\qquad (\text{continuous case})
-\]</span></p>
-<p>i.e. the simple estimated conditional mean <span class="math inline">\(\mathbb {\hat E}[Y\ \vert\ X\in R_i]\)</span> and</p>
-<p><span class="math display">\[
-m_i=\underset{y\in \mathcal Y}{\operatorname{argmax}}\left\{\sum_{j=1}^n1_{R_i}(X_j)1_{y}(Y_j)\right\}.\qquad (\text{discrete case})
-\]</span></p>
-<p>i.e. the mode.</p>
-<p>Decision trees are popular because the decision making (estimate) is nicely visualizable/interpretable if not too deep. One can easily draw out the subsetting tree starting with the entire feature space <span class="math inline">\(\mathcal X\)</span> and then spitting in two all the way down to the terminal notes. The interior edges on this representation are called nodes and can also be interpreted as subset of <span class="math inline">\(\mathcal X\)</span>.</p>
-<p>Decision trees can be quite efficient in classification tasks where we are interested in 0-1 (binary) decisions. This is the case in many application but is often not the case in insurance since it is impossible and frankly not usefull having a 0/1 estimate of whether a claim may arrive. Instead the insurance company is interested in the probability that a claim may arrive during a timespan.</p>
-<div id="cart" class="section level3 hasAnchor" number="10.5.1">
-<h3><span class="header-section-number">10.5.1</span> CART<a href="trees-and-forests.html#cart" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A decision tree is uniquely defined by its leaves. Given a tree <span class="math inline">\(T\)</span>, we write <span class="math inline">\(m(T)\)</span> for the corresponding regression or classification function. The naive approach of looking for leaves <span class="math inline">\(R_1,\dots, R_l\)</span> that minimize a certain loss is practically not feasible because of the computational cost. Instead: top-down greedy approach, called CART (classification and regression trees). We now describe how to construct nodes via the CART algorithm.</p>
-<blockquote class="def">
-<p><strong>Definition. (CART)</strong> <em>Start with <span class="math inline">\(\mathcal X\)</span> as initial node for splitting. Follow the process below for all subnotes made from splitting.</em></p>
-<ol style="list-style-type: decimal">
-<li><em>Let <span class="math inline">\(R\subseteq \mathcal X\)</span> be the input note. (In initial run <span class="math inline">\(R=\mathcal X\)</span>)</em></li>
-<li><em>For every dimension <span class="math inline">\(j=1,\dots,p\)</span> and every point <span class="math inline">\(s_j\in R(j)\)</span> where</em>
-<span class="math display">\[R(j)= \{x_j\ |\     \exists\ x_1,\dots,x_{j-1},x_{j+1},\dots,x_p\ \text{with}\ (x_1,\dots,x_p)\in R\}\]</span>
-<em>i.e. the support of <span class="math inline">\(x_j\)</span> under the node <span class="math inline">\(R\)</span>. We define the following:</em>
-<span class="math display">\[R_1(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j \leq s_j\}, \quad R_2(j,s_j)=\{(x_1,\dots,x_p)\in R| \ x_j &gt; s_j\}.\]</span>
-<em>being a subdivision of <span class="math inline">\(R=R_1(j,s_j)\cup R_2(j,s_j)\)</span> since <span class="math inline">\(R_1(j,s_j)\cap R_2(j,s_j)=\emptyset\)</span>. Notice that one intepret <span class="math inline">\(R_1(j,s_j)\)</span> is the lower section of <span class="math inline">\(R\)</span> through the splitter <span class="math inline">\(s_j\)</span> in dimension <span class="math inline">\(j\)</span> and <span class="math inline">\(R_2(j,s_j)\)</span> being the upper section of the note.</em></li>
-<li><em>We pick the following minimizer</em>
-<span class="math display">\[(j^\ast,s^\ast)= \arg\min_{j,s} Q_n(R_1(j,s_j)) + Q_n(R_2(j,s_j))\]</span>
-<em>and split the note <span class="math inline">\(R\)</span> into <span class="math inline">\(R_1(j^*,s^*)\)</span> and <span class="math inline">\(R_1(j^*,s^*)\)</span>.</em></li>
-<li><em>If either of <span class="math inline">\(R_1(j^*,s^*)\)</span> and <span class="math inline">\(R_1(j^*,s^*)\)</span> satisfy some predertermined stopping criterion the note is no longer splittet. If not it is further split as long as stopping criterion does not apply.</em></li>
-</ol>
-</blockquote>
-<blockquote class="def">
-<p><strong>Definition. (CART loss)</strong> <em>For regression the most common loss function is the squared loss:</em></p>
-<p><span class="math display">\[
-Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2
-\]</span></p>
-<p><em>with</em></p>
-<p><span class="math display">\[
-\overline Y_i(R_l)= \frac 1 {|R_l|}\sum_{i: X_i \in R_l}Y_i\ \text{and}\ |R_j|=\#\{i: X_i\in R_j\}
-\]</span></p>
-<p><em>In the classification case, define</em></p>
-<p><span class="math display">\[
-\hat p_{lk}= \frac 1 {|R_l|} \sum_{i: X_i \in R_l}   1(Y_i=k)
-\]</span></p>
-<p><em>i.e. the proportion of class <span class="math inline">\(k\)</span> observation in <span class="math inline">\(R_l\)</span>.</em></p>
-</blockquote>
-<p>Other commom loss functions include:</p>
-<ul>
-<li>Brier score: <span class="math inline">\(Q_n(R_l)= \sum_{i: X_i \in R_l} (Y_i - \overline Y_i(R_l))^2\)</span> (=squared loss)</li>
-<li>Misclassification error: <span class="math inline">\(Q_n(R_l)= 1 - \max_{k}\hat p_{lk}\)</span></li>
-<li>Gini index: <span class="math inline">\(Q_n(R_l)= \sum_{k=1}^K \hat p_{lk}(1-\hat p_{lk})\)</span></li>
-<li>Entropy : <span class="math inline">\(Q_n(R_l)=-\sum_{k=1}^K \hat p_{lk}\log\hat p_{lk}\)</span></li>
-</ul>
-<p>Note: In classification, even if binary loss is the ultimate goal, Gini index and entropy might be the better choices for splitting.</p>
-<p>The most common stopping criterion is specifying a min-node size, i.e. stop if <span class="math inline">\(|R_j|&lt;c\)</span>. A common choice is <span class="math inline">\(c=5\)</span>. An alternative stopping criteria is the depth of <span class="math inline">\(R_j\)</span>, i.e., the number of parent nodes of <span class="math inline">\(R_j\)</span>.</p>
-<p>The process described so far will probably lead to an overfit. One may think that one way out is to stop growing the tree early enough.n This is not advisable because stopping the growing early because the current split does not lead to great improvement in the loss does not mean that a split afterwards might not turn very effective.</p>
+<p>It seems natural to count incomes as positive and outgoes as negative. Sometimes, and in particular in the context of insurance, it is convenient to work with outgoes less incomes, and to avoid ugly minus signs we introduce <span class="math inline">\(B = -A\)</span>.</p>
 </div>
-<div id="pruning" class="section level3 hasAnchor" number="10.5.2">
-<h3><span class="header-section-number">10.5.2</span> Pruning<a href="trees-and-forests.html#pruning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The idea of pruning is to let a tree grow very deep first (= small min node size) and then select a subtree (pruning) as final fit. Idea: We can compare different subtrees via a penalized loss.</p>
-<blockquote class="def">
-<p><strong>Definition. (Subtree)</strong> <em>We call <span class="math inline">\(T&#39;\)</span> a subtree of <span class="math inline">\(T\)</span> if the nodes of <span class="math inline">\(T&#39;\)</span> is a subset of the nodes of <span class="math inline">\(T\)</span>. <span class="math inline">\(T&#39;\)</span> and <span class="math inline">\(T\)</span> have the same root. If <span class="math inline">\(T&#39;\)</span> is a subtree of <span class="math inline">\(T\)</span>, we also write <span class="math inline">\(T&#39;\subseteq T\)</span>.</em></p>
-</blockquote>
-<p>We can derive a subtree, by pruning a tree at any non-terminal node (i.e. by deleting all descendants of that node)</p>
-<blockquote class="def">
-<p><strong>Definition. (<span class="math inline">\(\alpha\)</span>-pruned tree)</strong> <em>Consider a tree <span class="math inline">\(\hat T_n\)</span> with corresponding estimator <span class="math inline">\(\hat m_n(\hat T_n)\)</span>. Given a parameter <span class="math inline">\(\alpha&gt;0\)</span>, the <span class="math inline">\(\alpha\)</span>-pruned tree is</em></p>
+<div id="interests" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Interests<a href="payments-interest-and-mortality.html#interests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose money is currently invested on (or borrowed from) an account that bears interest. This means that a unit deposited on the account at time s gives the account holder the right to cash, at any other time <span class="math inline">\(t\)</span>, a certain amount <span class="math inline">\(S(s,t)\)</span>, typically different from 1. The function <span class="math inline">\(S\)</span> must be strictly positive, and we shall argue that it must satisfy the functional relationship</p>
 <p><span class="math display">\[
-\hat T_{n,\alpha} := \arg \min_{T\subseteq \hat T_n}\{\hat R_n(\hat m_n) + \alpha |T|\},
+S(s, u) = S(s, t) S(t, u) ,\tag{3}
 \]</span></p>
-<p><em>where <span class="math inline">\(|T|\)</span> is the number of leaves of <span class="math inline">\(T\)</span>.</em></p>
-</blockquote>
-<p>How do we find an optimal <span class="math inline">\(\alpha\)</span> (and also the optimal subtree for a fixed <span class="math inline">\(\alpha\)</span>)? Brute force cross-validation will be too computationally intensive even if we know the answer to the second question. The answer to both questions is the weakest link algorithm.</p>
-<blockquote class="prop">
-<p><strong>Proposition (weakest link)</strong> <em>The <span class="math inline">\(\alpha\)</span>-pruned tree <span class="math inline">\(\hat T_{n,\alpha}\)</span> is unique. Furthermore, there exist (unique) trees <span class="math inline">\(T_0\supset \cdots\supset T_l\)</span> with <span class="math inline">\(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha&gt;0\}:=\hat{ \mathbb T}_n\)</span>; in particular the set <span class="math inline">\(\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span> is finite.</em></p>
-<p><em>(Weakest link algorith): Let <span class="math inline">\(\widetilde Q_n\)</span> be the loss function corresponding to <span class="math inline">\(\hat R_n\)</span>. The trees <span class="math inline">\(T_0,\dots, T_l\)</span> can be found with the following algorithm</em></p>
-<ol style="list-style-type: decimal">
-<li><em>Let <span class="math inline">\(t_L,t_R\)</span> be any two terminal nodes in <span class="math inline">\(\hat T_n\)</span> resulting from a split of the immediate ancestor node t. If <span class="math inline">\(\widetilde Q_n(t) = \widetilde Q_n(t_L)+\widetilde Q_n(t_R)\)</span>, prune off <span class="math inline">\(t_L\)</span> and <span class="math inline">\(t_R\)</span>. Continue this process until no more pruning is possible. The resulting tree is <span class="math inline">\(T_0\)</span>.</em></li>
-<li><span class="math inline">\(k=0\)</span></li>
-<li><em>Go through all non-terminal nodes <span class="math inline">\(t\)</span> of <span class="math inline">\(T_k\)</span> and calculate </em>
-<span class="math display">\[g(t)=\frac{\widetilde Q_n(t)-\widetilde Q_n(T_t)}{|T_t|-1},\]</span>
-<em>where <span class="math inline">\(T_t\)</span> is the tree (branch) with root <span class="math inline">\(t\)</span> and nodes consisting of <span class="math inline">\(t\)</span> and the descendants of <span class="math inline">\(t\)</span> in <span class="math inline">\(T_k\)</span>. Furthermore <span class="math inline">\(\widetilde Q_n(T_t)=\sum_{t \ \text{leaf of}\  T_t} \widetilde Q_n(t)\)</span>.</em></li>
-<li><span class="math inline">\(\alpha= \min_{t \ \text{ non-terminal node of} \ T_k}g(t)\)</span>.</li>
-<li><em>From top to bottom in <span class="math inline">\(T_k\)</span> prune all non-terminal nodes with <span class="math inline">\(g(t)=\alpha\)</span> and call the resulting tree <span class="math inline">\(T_{k+1}\)</span>.</em></li>
-<li><em>If <span class="math inline">\(T_{k+1}\)</span> has more than one node, set <span class="math inline">\(k \leftarrow k+1\)</span> and go to step 3.</em></li>
-</ol>
-</blockquote>
-<p>The above proposition gives a surprising result, that for all <span class="math inline">\(\alpha\in \mathbb R_+\)</span> the mapping <span class="math inline">\(\alpha \mapsto\hat T_{n,\alpha}\in\hat{ \mathbb T}_n\)</span> is well defined and the set <span class="math inline">\(\hat{ \mathbb T}_n\)</span> is finite. Intuitively one can come to this conclusion by pre-assuming that the mapping before is unique and considering that the mapping <span class="math inline">\(f : \alpha \mapsto \vert \hat T_{n,\alpha}\vert\)</span> is monotonic and that <span class="math inline">\(f(\alpha)\to \vert \hat T_n\vert\)</span> for <span class="math inline">\(\alpha \to 0_+\)</span> and <span class="math inline">\(f(\alpha)\to 1\)</span> for <span class="math inline">\(\alpha \to \infty\)</span>. In particular, the tree is pruned more and more harshly for larger <span class="math inline">\(\alpha\)</span> and for sufficiently large <span class="math inline">\(\alpha\)</span> the tree <span class="math inline">\(\hat T_{n,\alpha}\to\mathcal X\)</span> for <span class="math inline">\(\alpha \to \infty\)</span>.</p>
-<p>Given <span class="math inline">\(l\)</span> trees <span class="math inline">\(\{T_0,\dots, T_l\}=\{\hat T_{n,\alpha} : \alpha&gt;0\}\)</span>, we can pick the optimal tree via cross validation.</p>
-<p><strong>Problem with decision trees.</strong> There are (at least) two major problems with decision trees</p>
-<ul>
-<li>Instability: Small variations in the data can lead to a very different tree</li>
-<li>Performance: The performance (measured via test error) is usually much weaker compared to other learning algorithms</li>
-</ul>
+<p>implying, of course, that <span class="math inline">\(S(t,t) = 1\)</span> (put <span class="math inline">\(s = t = u\)</span> and use strict positivity): If the account holder invests 1 at time <span class="math inline">\(s\)</span>, he may cash the amount on the left of (3) at time <span class="math inline">\(u\)</span>. If he instead withdraws the value <span class="math inline">\(S(s,t)\)</span> at time <span class="math inline">\(t\)</span> and immediately reinvests it again, he will obtain the amount on the right of (3) at time <span class="math inline">\(u\)</span>. To avoid arbitrary gains, so-called arbitrage, the two strategies must give the same result.</p>
+<p>It is easy to verify that the function <span class="math inline">\(S(s,t)\)</span> satisfies (3) if and only if it is of the form</p>
+<p><span class="math display">\[
+S(s,t)=\frac{S_t}{S_s},\tag{4}
+\]</span></p>
+<p>for some strictly positive function <span class="math inline">\(S_t\)</span> (allowing an abuse of notation), which can be taken to satisfy</p>
+<p><span class="math display">\[
+S_0=1.
+\]</span></p>
+<p>Then <span class="math inline">\(S_t\)</span> must be the value at time <span class="math inline">\(t\)</span> of a unit deposited at time 0, and we call it the <em>accumulation function</em>. Correspondingly, <span class="math inline">\(S_t^{-1}\)</span> is the value at time 0 of a unit withdrawn at time <span class="math inline">\(t\)</span>, and we call it the <em>discount function</em>.</p>
+<p>We will henceforth assume that <span class="math inline">\(S_t\)</span> is of the form</p>
+<p><span class="math display">\[
+S_t=e^{\int_0^t r},\qquad S_t^{-1}=e^{-\int_0^t r},\tag{5}
+\]</span></p>
+<p>where we suppress the integrant i.e. <span class="math inline">\(e^{\int_0^t r}=e^{\int_0^t r_u\ du}\)</span> Here <span class="math inline">\(r_t\)</span> is some piece-wise continuous function, usually positive. Accumulation factors of this form are invariably used in basic banking operations (loans and savings) and also for bonds issued by governments and corporations.</p>
+<p>Under the rule (5) the dynamics of accumulation and discounting are given by</p>
+<p><span class="math display">\[
+dS_t=r(t)S(t)\ dt.\tag{6}
+\]</span></p>
+<p>The relation (6) says that the interest earned in a small time interval is proportional to the length of the interval and to the current amount on deposit. The proportionality factor <span class="math inline">\(r_t\)</span> is called the <em>force of interest</em> or the <em>(instantaneous) interest rate</em> at time <span class="math inline">\(t\)</span>. In integral form (6) reads.</p>
+<p><span class="math display">\[
+S_t=S_0+\int_0^tr_uS_u\ du,\tag{7}
+\]</span></p>
+<p>We will be working with the expressions</p>
+<p><span class="math display">\[
+S(s,t)=e^{-\int_s^tr}\tag{8}
+\]</span></p>
+<p>for the <em>general discount factor</em> when <span class="math inline">\(t \le s\)</span> and</p>
+<p><span class="math display">\[
+S(t,u)=e^{\int_u^tr}\tag{9}
+\]</span></p>
+<p>for the <em>general accumulation factor</em> when <span class="math inline">\(t\le u\)</span>.</p>
 </div>
-<div id="bagging" class="section level3 hasAnchor" number="10.5.3">
-<h3><span class="header-section-number">10.5.3</span> Bagging<a href="trees-and-forests.html#bagging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Bagging stands for Bootstrap aggregation. Idea: Generate artificial data via bootstrap, build a decision tree for each data-set and average. Hope: It reduces the variance of decision trees. In the following recall that Bootstrap sampling involves drawing <span class="math inline">\(m\)</span> samples <span class="math inline">\((\tilde X_i,\tilde Y_i)\)</span> from the original dataset with replacement. This gives a new dataset <span class="math inline">\(\tilde {\mathcal D}_m\)</span> of new data which may be analised. The process of drawing alot of dataset will reduce the variance by simply averaging over all boostrap samples <span class="math inline">\(\tilde {\mathcal D}_m^{(1)},...,\tilde {\mathcal D}_m^{(B)}\)</span>.</p>
-<blockquote class="def">
-<p><strong>Definition.</strong> <em>(Bagging)</em> <em>Given data <span class="math inline">\({(X_1,Y_1),\dots, (X_n,Y_n)}\)</span>, draw <span class="math inline">\(B\)</span> bootstrap samples <span class="math inline">\(\tilde {\mathcal D}^{(b)}_n={(\tilde X^{(b)}_1,\tilde Y^{(b)}_1),\dots, (\tilde X^{(b)}_n,\tilde Y^{(b)}_n)}\)</span>, for <span class="math inline">\(b=1,\dots, B\)</span>, i.e., <span class="math inline">\(\tilde {\mathcal D}^{(b)}_n\)</span> arises from <span class="math inline">\(\mathcal D_n\)</span> by drawing <span class="math inline">\(n\)</span> times with replacement. The bagging estimator is defined as the following. In the squared loss case (average):</em></p>
+<div id="valuation-of-paymentstreams" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Valuation of paymentstreams<a href="payments-interest-and-mortality.html#valuation-of-paymentstreams" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For a account bearing the instantaneous interest rate <span class="math inline">\(r_t\)</span> and payment function <span class="math inline">\(A\)</span> we accumulate the interest <span class="math inline">\(e^{\int_s^t r}\)</span> of a payment at time <span class="math inline">\(s\)</span> up untill the time <span class="math inline">\(t\)</span>. That is summing over all payments on <span class="math inline">\([0,t]\)</span> we have</p>
 <p><span class="math display">\[
-\hat m^{bagg}_n=\frac 1 B \sum_{b=1}^B \hat m_n(\tilde {\mathcal D}^{(b)}_n)
+U_t=e^{\int_0^tr}A_0+\int_0^te^{\int_s^tr}a_s\ ds+\sum_{0\le s\le t}e^{\int_s^tr}\Delta A(s),\tag{10}
 \]</span></p>
-<p><em>and in the binary loss case (majority vote):</em></p>
+<p>being the account value at time <span class="math inline">\(t\ge 0\)</span>. We can also on integral form write</p>
 <p><span class="math display">\[
-\hat m^{bagg}_n(x)=\arg \max_{k\in {1,\dots K}} \#\{b: m_n(\tilde {\mathcal D}^{(b)}_n) (x)=k\}
+U_t=e^{\int_0^tr}A_0+\int_0^te^{\int_s^tr}dA(s),\tag{11}
 \]</span></p>
-</blockquote>
-<p>Note that <span class="math inline">\(\hat m^{bagg}_n\)</span> is a stochastic estimator, even given <span class="math inline">\(\mathcal D_n\)</span>. Note: Usually, bagging is applied on non-pruned trees. (See it as an alternative way to reduce variance)</p>
-<p>While bagging improves performance of decision trees, interpretability is worsened. If interpretability is not a concern, then bagging is still inferior compared to other learning techniques. Random forests are a modification on bagging estimators.</p>
+<p>Similarly if one has promised the payments <span class="math inline">\(B\)</span> (<span class="math inline">\(B=-A\)</span>) to a party in the future we have that each payment at time <span class="math inline">\(s\ge t\)</span> will be discounted with the factor <span class="math inline">\(e^{-\int_t^s r}\)</span> hence the value of the payment stream <span class="math inline">\(B\)</span> at time <span class="math inline">\(t\)</span> is</p>
+<p><span class="math display">\[
+V_t=\int_t^Te^{-\int_t^sr}dB(s),\tag{12}
+\]</span></p>
+<p>where <span class="math inline">\(dB(s)=0\)</span> for all <span class="math inline">\(s&gt;T\)</span> i.e. <span class="math inline">\(B\)</span> terminates at time <span class="math inline">\(T\)</span>. Notice we do not include a initial or terminate amount <span class="math inline">\(B_T\)</span> since this is included in the jump term in <span class="math inline">\(dB\)</span> at time <span class="math inline">\(T\)</span>.</p>
+<p>Typically, the financial contract will lay down that incomes and outgoes be equivalent in the sense that</p>
+<p><span class="math display">\[
+U_T =0\qquad \text{and/or}\qquad V_{0-}=0,\tag{13}
+\]</span></p>
+<p>that is the account is emptied at termination and we do not owe anything upon the creation of the contract.</p>
 </div>
-<div id="random-forests" class="section level3 hasAnchor" number="10.5.4">
-<h3><span class="header-section-number">10.5.4</span> Random Forests<a href="trees-and-forests.html#random-forests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p> As bagging random forest are an ensemble of decision trees. They add the following modification to bagging:
-- <span class="math inline">\(\texttt{mtry}\)</span>: Each time a node is split it is only done on a subset of size <span class="math inline">\(\texttt{mtry}\)</span> of viable variables. I.e., each time you want to split a node, turn on a random generator and draw <span class="math inline">\(1\leq\texttt{mtry}&lt;p\)</span> viable variables from <span class="math inline">\(\{1,\dots,p\}\)</span>. Only those variables drawn are allowed to be considered for the next split.
-- We denote the random forest estimator by <span class="math inline">\(\hat m^{rf}_n\)</span>. Note that <span class="math inline">\(\hat m^{rf}_n\)</span>, as <span class="math inline">\(\hat m^{bagg}_n\)</span>, is a stochastic estimator, even given <span class="math inline">\(\mathcal D_n\)</span>.</p>
-<p>Why is <span class="math inline">\(\texttt{mtry}\)</span> so useful? Assume that we are given <span class="math inline">\(l\)</span> estimators <span class="math inline">\(m_n(\mathcal D_n, U_1), \dots m_n(\mathcal D_n, U_l)\)</span>. Here, <span class="math inline">\(U_1,\dots, U_l\)</span> are iid variables inducing the additional stochasticity of the estimators (e.g. through random forest or bagging). Assume that <span class="math inline">\(\hat m_n(\mathcal D_n, U_1), \dots \hat m_n(\mathcal D_n, U_l)\)</span> have pairwise correlation <span class="math inline">\(\rho\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. We get
-<span class="math display">\[\begin{align*}
-\textrm{Var}\left (\frac 1 l \sum_{j=1}^l \hat m_n(\mathcal D_n, U_j)\right)&amp;= \frac 1 {l^2} \sum_{jk} \textrm{Cov}(m_n(\mathcal D_n, U_j),m_n(\mathcal D_n, U_k))\\&amp;=\frac 1 {l^2} \left( l\sigma^2+ (l^2-l)\rho\sigma^2\right)\\&amp;= \rho \sigma^2 + \frac{1-\rho}{l}\sigma^2
-\end{align*}\]</span>
-Meaning: Variance of an ensemble of trees is small the smaller the correlation between the trees. The <span class="math inline">\(\texttt{mtry}\)</span> parameter aims to make trees less alike and hence more uncorrelated.</p>
-<p>Random forest are competitive to many state of the art learners. While not having “best performance” in terms off accuracy they are not too far behind. Advantages of random forests are</p>
-<ul>
-<li>Default hyperparameters already lead to very strong results (i.e. without tuning hyperparameter)
-<ul>
-<li><span class="math inline">\(\texttt {mtry}=\lfloor \sqrt{p}\rfloor\)</span></li>
-<li>min node size= 1 for classification, 5 for regression</li>
-</ul></li>
-<li>Can be implemented (and is implemented) very fast</li>
-</ul>
-<p>Random forest (and also trees) don’t perform well for additive functions</p>
-<p>Decision trees are not good with additive functions (example). Consider <span class="math inline">\(m^\ast(x) = \sum_j^p 1(x_j \leq 0)\)</span> for large <span class="math inline">\(p\)</span>. For a perfect fit, a tree algorithm would have to grow a tree with depth <span class="math inline">\(p\)</span>,
-where each leaf is the result of splitting once with respect to each covariate. Hence, we end up with <span class="math inline">\(2^p\)</span> leaves, which on average contain <span class="math inline">\(n/(2^p)\)</span> data points. Even if all splits are optimal for <span class="math inline">\(2^p&gt;n\)</span>, the tree will not be able to lead to a perfect decision rule.</p>
-<p>While predictions of random forests are relatively smooth, they are not monotonic. e.g. in car insurance, if everything else is the same, more mileage should lead to higher insurance price. Random forests deal well with sparsity, i.e., when the number of features <span class="math inline">\(p\)</span> is large, but the number of relevant features is rather small: <span class="math inline">\(s&lt;&lt;p\)</span>.</p>
+<div id="mortality" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Mortality<a href="payments-interest-and-mortality.html#mortality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider an aggregate of individuals, e.g. the population of a nation, the persons covered under an insurance scheme, or a certain species of animals. The individuals need not be animate beings; for instance, in engineering applications one is often interested in studying the worklife until failure of technical components or systems. Having demographic and actuarial problems in mind, we shall, however, be speaking of persons and life lengths until death.</p>
+<p>Due to differences in inheritance and living conditions and also due to events of a more or less purely random nature, like accidents, diseases, etc., the life lengths vary among individuals. Therefore, the life length of a randomly selected new-born can suitably be represented by a non-negative random variable <span class="math inline">\(T\)</span> with a cumulative distribution function</p>
+<p><span class="math display">\[
+F(t)=\mathbb P[T\le t].\tag{1}
+\]</span></p>
+<p>In survival analysis it is convenient to work with the <em>survival function</em></p>
+<p><span class="math display">\[
+\overline F(t)=1 -\mathbb P[T\le t]=\mathbb P[T&gt; t].\tag{2}
+\]</span></p>
+<p>We assume that <span class="math inline">\(F\)</span> is absolutely continuous and denote the density by <span class="math inline">\(f\)</span>;</p>
+<p><span class="math display">\[
+dF(t)=f(t)\ dt=-d\overline F(t),\tag{3}
+\]</span></p>
+<p>for some non-negative continuous function <span class="math inline">\(f\)</span> s.t. <span class="math inline">\(F(t)\to 1\)</span> assuming <span class="math inline">\(F(0)=0\)</span>.</p>
+<p>When dealing with non-negative random variables representing life lengths, it is convenient to work with the derivative of <span class="math inline">\(-\log \overline F\)</span>,</p>
+<p><span class="math display">\[
+\mu(t)=-\frac{d}{dt}\Big(\log \overline F(t)\Big)=-\left(-f(t)\frac{1}{\overline F(t)}\right)=\frac{f(t)}{\overline F(t)},\tag{4}
+\]</span></p>
+<p>which is well defined for all <span class="math inline">\(t\)</span> such that <span class="math inline">\(\overline F(t) &gt; 0\)</span>. For small, positive <span class="math inline">\(dt\)</span> we have</p>
+<p><span class="math display">\[
+\mu(t)\ dt=\frac{f(t)\ dt}{\overline F(t)}=\frac{\mathbb P(t&lt; T\le t+dt)}{\mathbb P(T&gt; t)}=\mathbb P(T\le t+dt\ \vert\ T&gt; t).\tag{5}
+\]</span></p>
+<p>Thus, for a person aged <span class="math inline">\(t\)</span>, the probability of dying within <span class="math inline">\(dt\)</span> years is (approximately) proportional to the length of the time interval, <span class="math inline">\(dt\)</span>. The proportionality factor <span class="math inline">\(\mu (t)\)</span> depends on the attained age, and is called the <em>force of mortality</em> at age <span class="math inline">\(t\)</span>. It is also called the <em>mortality intensity</em> or <em>hazard rate</em> at age <span class="math inline">\(t\)</span>, the latter expression stemming from reliability theory, which is concerned with the durability of technical devices.</p>
+<p>Integrating (4) from 0 to <span class="math inline">\(t\)</span> and using <span class="math inline">\(\overline F(0) = 1\)</span>, we obtain</p>
+<p><span class="math display">\[
+\overline F(t)=e^{-\int_0^t\mu}\tag{6}
+\]</span></p>
+<p>also (4) may be written as</p>
+<p><span class="math display">\[
+f(t)=\overline F(t)\mu(t)=e^{-\int_0^t\mu}\mu(t).\tag{7}
+\]</span>
+which says that the probability <span class="math inline">\(f (t)\ dt\)</span> of dying in the age interval <span class="math inline">\((t, t + dt)\)</span> is the product of the probability <span class="math inline">\(\overline F(t)\)</span> of survival to <span class="math inline">\(t\)</span> and the conditional probability <span class="math inline">\(\mu(t)\ dt\)</span> of then dying before age <span class="math inline">\(t + dt\)</span>.</p>
+<p>The functions <span class="math inline">\(F,\overline F, f\)</span>, and <span class="math inline">\(\mu\)</span> are equivalent representations of the mortality law; each of them corresponds one-to-one to any one of the others.</p>
+<p>Since <span class="math inline">\(\overline F(\infty) = 0\)</span>, we must have <span class="math inline">\(\int_0^\infty \mu=\infty\)</span>. Thus, if there is a finite highest attainable age <span class="math inline">\(\omega\)</span> such that <span class="math inline">\(\overline F(\omega) = 0\)</span> and <span class="math inline">\(\overline F(t) &gt; 0\)</span> for <span class="math inline">\(t &lt; \omega\)</span>, then <span class="math inline">\(\int_0^t\mu\nearrow\infty\)</span> as <span class="math inline">\(t\nearrow \omega\)</span>. If moreover, <span class="math inline">\(\mu\)</span> is non-decreasing, we must also have <span class="math inline">\(\lim_{t\nearrow \omega}\mu(t)=\infty\)</span>.</p>
 </div>
 </div>
             </section>
@@ -660,8 +618,8 @@ where each leaf is the result of splitting once with respect to each covariate. 
           </div>
         </div>
       </div>
-<a href="nonparametric-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="boosting-and-additive-trees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="basic-life-insurance-mathematics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="insurance-of-a-single-life.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
